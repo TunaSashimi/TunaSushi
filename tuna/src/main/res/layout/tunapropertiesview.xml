@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:id="@+id/text_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff" />
+
+        <EditText
+            android:id="@+id/edit_width"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_display"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits=".0123456789"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_width"
+            android:layout_toLeftOf="@id/edit_width"
+            android:text="Width"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_width"
+            android:layout_toRightOf="@id/edit_width"
+            android:text="dp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_width_pius"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/text_width"
+            android:layout_toRightOf="@id/text_width"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_width_minus"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/btn_width_pius"
+            android:layout_toRightOf="@id/btn_width_pius"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/edit_height"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_width"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits=".0123456789"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_height"
+            android:layout_toLeftOf="@id/edit_height"
+            android:text="Height"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_height"
+            android:layout_toRightOf="@id/edit_height"
+            android:text="dp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_height_pius"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/text_height"
+            android:layout_toRightOf="@id/text_height"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_height_minus"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/btn_height_pius"
+            android:layout_toRightOf="@id/btn_height_pius"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/edit_backgroundNormal"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_height"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789abcdefABCDEF"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/edit_backgroundNormal"
+            android:layout_toLeftOf="@id/edit_backgroundNormal"
+            android:gravity="center_horizontal"
+            android:text="Background\nNormal"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_backgroundNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_backgroundNormal"
+            android:layout_toRightOf="@id/edit_backgroundNormal"
+            android:text="ARGB"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_backgroundNormal"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@id/text_backgroundNormal"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_backgroundNormal" />
+
+        <EditText
+            android:id="@+id/edit_backgroundPress"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_backgroundNormal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="10dp"
+            android:digits="0123456789abcdefABCDEF"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/edit_backgroundPress"
+            android:layout_toLeftOf="@id/edit_backgroundPress"
+            android:gravity="center_horizontal"
+            android:text="Background\nPress"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_backgroundPress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_backgroundPress"
+            android:layout_toRightOf="@id/edit_backgroundPress"
+            android:text="ARGB"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_backgroundPress"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@id/text_backgroundPress"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_backgroundPress" />
+
+        <EditText
+            android:id="@+id/edit_backgroundSelect"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_backgroundPress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789abcdefABCDEF"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/edit_backgroundSelect"
+            android:layout_toLeftOf="@id/edit_backgroundSelect"
+            android:gravity="center_horizontal"
+            android:text="Background\nSelect"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_backgroundSetect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_backgroundSelect"
+            android:layout_toRightOf="@id/edit_backgroundSelect"
+            android:text="ARGB"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_backgroundSelect"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@id/text_backgroundSetect"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_backgroundSetect" />
+
+        <EditText
+            android:id="@+id/edit_textSize"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_backgroundSelect"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_textSize"
+            android:layout_toLeftOf="@id/edit_textSize"
+            android:text="TextSize"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_textSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_textSize"
+            android:layout_toRightOf="@id/edit_textSize"
+            android:text="dp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_textSize_pius"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/text_textSize"
+            android:layout_toRightOf="@id/text_textSize"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_textSize_minus"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/btn_textSize_pius"
+            android:layout_toRightOf="@id/btn_textSize_pius"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/edit_textColorNormal"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_textSize"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789abcdefABCDEF"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/edit_textColorNormal"
+            android:layout_toLeftOf="@id/edit_textColorNormal"
+            android:gravity="center_horizontal"
+            android:text="TextColor\nNormal"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_textColorNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_textColorNormal"
+            android:layout_toRightOf="@id/edit_textColorNormal"
+            android:text="ARGB"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_textColorNormal"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@id/text_textColorNormal"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_textColorNormal" />
+
+        <EditText
+            android:id="@+id/edit_strokeWidth"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_textColorNormal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_strokeWidth"
+            android:layout_toLeftOf="@id/edit_strokeWidth"
+            android:text="StrokeWidth"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_strokeWidth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_strokeWidth"
+            android:layout_toRightOf="@id/edit_strokeWidth"
+            android:text="dp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_strokeWidth_pius"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/text_strokeWidth"
+            android:layout_toRightOf="@id/text_strokeWidth"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_strokeWidth_minus"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/btn_strokeWidth_pius"
+            android:layout_toRightOf="@id/btn_strokeWidth_pius"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/edit_strokeColor"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_strokeWidth"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:digits="0123456789abcdefABCDEF"
+            android:gravity="center"
+            android:textColor="#3cc6f4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_strokeColor"
+            android:layout_toLeftOf="@id/edit_strokeColor"
+            android:text="StrokeColor"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_strokeColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_strokeColor"
+            android:layout_toRightOf="@id/edit_strokeColor"
+            android:text="ARGB"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_strokeColor"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@id/text_strokeColor"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/text_strokeColor" />
+
+        <ToggleButton
+            android:id="@+id/toogle_mark"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_strokeColor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_mark"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/toogle_mark"
+            android:text="Mark"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_mark"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/toogle_mark"
+            android:text="false"
+            android:textColor="#ffffff" />
+
+        <ToggleButton
+            android:id="@+id/toogle_thisHardwareAccelerated"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toogle_mark"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:enabled="false"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_thisHardwareAccelerated"
+            android:layout_toLeftOf="@id/toogle_thisHardwareAccelerated"
+            android:text="ThisHardware\nAccelerated"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_thisHardwareAccelerated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_thisHardwareAccelerated"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/toogle_thisHardwareAccelerated"
+            android:text="false"
+            android:textColor="#ffffff" />
+
+        <ToggleButton
+            android:id="@+id/toogle_canvasHardwareAccelerated"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toogle_thisHardwareAccelerated"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:enabled="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_canvasHardwareAccelerated"
+            android:layout_toLeftOf="@id/toogle_canvasHardwareAccelerated"
+            android:text="CanvasHardware\nAccelerated"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/text_canvasHardwareAccelerated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/toogle_canvasHardwareAccelerated"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/toogle_canvasHardwareAccelerated"
+            android:text="false"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+</ScrollView>

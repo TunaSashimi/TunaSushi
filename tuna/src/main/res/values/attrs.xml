@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Attributes that can be used with {@link com.tunajslibs.tuna.TunaView} or any of its subclasses. -->
-    <declare-styleable name="tunaView">
+    <declare-styleable name="TunaView">
 
         <!-- edge and always means you can touch ,the difference is edge not available out of the edge when you move out of time-->
         <attr name="tunaTouchType">

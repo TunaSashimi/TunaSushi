@@ -1,3 +1,88 @@
 <resources>
     <string name="app_name">Tuna</string>
+
+    <!-- Exclusive TunaView or any of its subclasses use -->
+
+
+    <!-- Other use -->
+
+
+    <string name="display_dimen">宽度区间 0&#8211;360dp , 使用默认values文件夹配置</string>
+
+    <string name="lockscreen_access_pattern_start">"开始绘制图案"</string>
+    <string name="lockscreen_access_pattern_cleared">"图案已清除"</string>
+    <string name="lockscreen_access_pattern_cell_added">"已添加单元格"</string>
+    <string name="lockscreen_access_pattern_detected">"图案绘制完成"</string>
+    <string name="lockpattern_retry_button_text">"重试"</string>
+    <string name="lockpattern_continue_button_text">"继续"</string>
+    <string name="lockpattern_confirm_button_text">"确认"</string>
+    <string name="lockpattern_recording_intro_header">"绘制解锁图案"</string>
+    <string name="lockpattern_settings_help_how_to_record">"如何绘制解锁图案"</string>
+    <string name="lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="lockpattern_pattern_entered_header">"图案已记录"</string>
+    <string name="lockpattern_need_to_confirm">"请再次绘制解锁图案"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"与上次输入不一致，请重试"</string>
+    <string name="lockpattern_pattern_confirmed_header">"确认保存新解锁图案"</string>
+    <string name="lockpattern_recording_inprogress">"完成后松开手指"</string>
+    <string name="gesture_password_guide_text">你可以创建一个解锁图案，这样他人在借用你的手机时，将无法打开应用。</string>
+    <string name="gesture_password_guide_creat_btn">创建手势密码</string>
+    <string name="getting_location">正在获取经纬度&#8230;</string>
+    <string name="cannot_get_location">无法获取经纬度</string>
+    <string name="cannot_get_sensor">未获取到方向传感器</string>
+    <string name="location_north">北纬 %s</string>
+    <string name="location_south">南纬 %sS</string>
+    <string name="location_east">东经 %s</string>
+    <string name="location_west">西经 %s</string>
+    <string name="title_activity_navigation">控制面板</string>
+    <string name="title_activity_help_main">智能救援</string>
+    <string name="title_activity_diagnosis_index">在线诊断</string>
+    <string name="listen_main_title">音乐休闲</string>
+    <string name="title_activity_main">预定酒店</string>
+    <string name="title_activity_golf_index">户外运动</string>
+    <string name="title_activity_shopping_main">大众商城</string>
+    <string name="title_activity_tj_main">今日推荐</string>
+    <string name="title_activity_qidai_main">我的助理</string>
+    <string name="app_news">日前，主题为“关注校车安全，关爱孩子成长”的首届中国校车发展研讨会暨国际校车展览会在北京国家会议中心举办，为中国校车未来发展献计献策。与此同时，国务院主持的《校车安全条例》（草案征求意见稿）也正在听取意见阶段，校车新国标已经进入报批程序。</string>
+
+    <!-- MultiTagLayoutTestNews -->
+    <string name="title_news_category_tops">头条</string>
+    <string name="title_news_category_sport">体育</string>
+    <string name="title_news_category_play">娱乐</string>
+    <string name="title_news_category_finance">财经</string>
+    <string name="title_news_category_science">科技</string>
+    <string name="title_news_category_more">更多</string>
+    <string name="news_top_left_text">新闻</string>
+    <string name="topic_top_left_text">话题</string>
+    <string name="picture_top_left_text">图片</string>
+    <string name="follow_top_left_text">跟帖</string>
+    <string name="vote_top_left_text">投票</string>
+
+    <!-- TunaHome -->
+
+    <string name="tunahome_tunaview_top">订车</string>
+
+    <string name="tunahome_tunaview_left">接机</string>
+    <string name="tunahome_tunaview_middle">送机</string>
+    <string name="tunahome_tunaview_right">包车</string>
+    <string name="tunahome_tunaview_add">增加</string>
+
+    <string name="tunahome_textview_middle">现在用车</string>
+
+
+    <!-- TunaWelcome -->
+    <string name="tunawelcome_textview">善 待 自 己 在 每 一 条 路 上</string>
+    <string name="tunawelcome_tunaview_skip">跳过</string>
+    <string name="tunawelcome_tunaview_login">登陆</string>
+
+    <!-- UserLoginTest -->
+    <string name="userlogin_scan_account">扫描账户</string>
+    <string name="userlogin_remember_password">记住密码</string>
+    <string name="userlogin_forget_password">忘记密码</string>
+    <string name="userlogin_login">登 录</string>
+    <string name="userlogin_cancel">取 消</string>
+    <string name="userlogin_enter_password">请输入登录密码</string>
+    <string name="userlogin_enter_account">请输入登录账户</string>
+
+    <string name="tunasashimi">金枪鱼刺身</string>
+    <string name="technology_development_tunasashimi">技术开发: 金枪鱼刺身</string>
 </resources>

@@ -8,4 +8,199 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Tuna_Anchor">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="Tuna_Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tuna_title_height</item>
+        <item name="android:layout_marginTop">@dimen/tuna_title_marginTop</item>
+        <item name="android:layout_marginLeft">@dimen/tuna_title_marginLeft</item>
+        <item name="android:layout_marginRight">@dimen/tuna_title_marginRight</item>
+    </style>
+
+    <style name="Tuna_Title_Button">
+        <item name="android:layout_width">@dimen/tuna_title_button_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radiusLarge</item>
+        <item name="tunaTextMarkColor">#ff8200</item>
+        <item name="tunaTextMark">true</item>
+    </style>
+
+    <style name="Tuna_Dialog_NoTitle" parent="android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Tuna_Layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/tuna_layout_marginTop</item>
+        <item name="android:layout_marginLeft">@dimen/tuna_layout_marginLeft</item>
+        <item name="android:layout_marginRight">@dimen/tuna_layout_marginRight</item>
+    </style>
+
+    <!-- Exclusive TunaView or any of its subclasses use -->
+
+    <style name="TunaView_Button" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tuna_button_height</item>
+        <item name="tunaTextSize">@dimen/tuna_button_textSize</item>
+        <item name="tunaRadius">@dimen/tuna_radius</item>
+    </style>
+
+    <style name="TunaView_TextMark_Red_Horizontal" parent="TunaView_Button">
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radius</item>
+        <item name="tunaTextMarkColor">#ff0000</item>
+        <item name="tunaTextMark">true</item>
+    </style>
+
+    <style name="TunaView_TextMark_Red_Top" parent="TunaView_Button">
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radius</item>
+        <item name="tunaTextMarkColor">#ff0000</item>
+        <item name="tunaTextMarkDy">-2dp</item>
+        <item name="tunaTextMark">true</item>
+    </style>
+
+    <style name="TunaView_Text">
+        <item name="android:layout_width">84dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="tunaTextSize">@dimen/tuna_text_textSize</item>
+    </style>
+
+    <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
+    <style name="TunaView_RadioGroup_DrackBrown">
+        <item name="android:layerType">software</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="tunaBackgroundNormal">#ffffff</item>
+        <item name="tunaBackgroundPress">#bc7955</item>
+        <item name="tunaBackgroundSelect">#592d2d</item>
+        <item name="tunaStrokeWidthNormal">@dimen/tuna_stroke_width</item>
+        <item name="tunaStrokeColorNormal">#592d2d</item>
+        <item name="tunaTextColorNormal">#592d2d</item>
+        <item name="tunaTextColorPress">#ffffff</item>
+        <item name="tunaTextColorSelect">#ffffff</item>
+        <item name="tunaTextSize">16dp</item>
+        <item name="tunaSelectType">same</item>
+    </style>
+
+    <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
+    <style name="TunaView_RadioGroup_LightGray">
+        <item name="android:layerType">software</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="tunaBackgroundNormal">#ffffff</item>
+        <item name="tunaBackgroundPress">#9c9c9c</item>
+        <item name="tunaBackgroundSelect">#574d4c</item>
+        <item name="tunaStrokeWidthNormal">@dimen/tuna_stroke_width</item>
+        <item name="tunaStrokeColorNormal">#574d4c</item>
+        <item name="tunaTextColorNormal">#574d4c</item>
+        <item name="tunaTextColorPress">#ffffff</item>
+        <item name="tunaTextColorSelect">#ffffff</item>
+        <item name="tunaTextSize">16dp</item>
+        <item name="tunaSelectType">same</item>
+    </style>
+
+    <style name="TunaView_RadioGroup_DrackBrown_Left" parent="TunaView_RadioGroup_DrackBrown">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">@dimen/tuna_stroke_mask</item>
+        <item name="tunaRadiusLeftTop">@dimen/tuna_radius</item>
+        <item name="tunaRadiusLeftBottom">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightTop">0dp</item>
+        <item name="tunaRadiusRightBottom">0dp</item>
+    </style>
+
+    <style name="TunaView_RadioGroup_DrackBrown_Right" parent="TunaView_RadioGroup_DrackBrown">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/tuna_stroke_mask</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="tunaRadiusLeftTop">0dp</item>
+        <item name="tunaRadiusLeftBottom">0dp</item>
+        <item name="tunaRadiusRightTop">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightBottom">@dimen/tuna_radius</item>
+    </style>
+
+    <style name="TunaView_RadioGroup_LightGray_Left" parent="TunaView_RadioGroup_LightGray">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">@dimen/tuna_stroke_mask</item>
+        <item name="tunaRadiusLeftTop">@dimen/tuna_radius</item>
+        <item name="tunaRadiusLeftBottom">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightTop">0dp</item>
+        <item name="tunaRadiusRightBottom">0dp</item>
+
+        <!--  -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="tunaTextMarkColor">#ff0000</item>
+        <item name="tunaTextMarkDy">-3dp</item>
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radius</item>
+
+
+    </style>
+
+    <style name="TunaView_RadioGroup_LightGray_Right" parent="TunaView_RadioGroup_LightGray">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/tuna_stroke_mask</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="tunaRadiusLeftBottom">0dp</item>
+        <item name="tunaRadiusLeftTop">0dp</item>
+        <item name="tunaRadiusRightBottom">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightTop">@dimen/tuna_radius</item>
+
+        <!--  -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="tunaTextMarkColor">#ff0000</item>
+        <item name="tunaTextMarkDy">-3dp</item>
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radius</item>
+
+    </style>
+
+    <style name="TunaView_RadioGroup_LightGray_Horizontal" parent="TunaView_RadioGroup_LightGray">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="tunaRadiusLeftTop">0dp</item>
+        <item name="tunaRadiusLeftBottom">0dp</item>
+        <item name="tunaRadiusRightTop">0dp</item>
+        <item name="tunaRadiusRightBottom">0dp</item>
+
+        <!--  -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="tunaTextMarkColor">#ff0000</item>
+        <item name="tunaTextMarkDy">-3dp</item>
+        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radius</item>
+
+    </style>
+
+    <style name="TunaView_RadioGroup_LightGray_Whole" parent="TunaView_RadioGroup_LightGray">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="tunaRadiusLeftTop">@dimen/tuna_radius</item>
+        <item name="tunaRadiusLeftBottom">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightTop">@dimen/tuna_radius</item>
+        <item name="tunaRadiusRightBottom">@dimen/tuna_radius</item>
+
+    </style>
+
+
 </resources>

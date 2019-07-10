@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="mainentrytest_titleArray">
+        <item>登陆</item>
+        <item>环节</item>
+        <item>布局</item>
+        <item>图表</item>
+        <item>功能</item>
+        <item>控件</item>
+        <item>商业</item>
+    </string-array>
+
+    <string-array name="loginentrytest_titleArray">
+        <item>竖屏登录布局</item>
+        <item>横屏登录布局</item>
+    </string-array>
+
+    <string-array name="welcomeentrytest_titleArray">
+        <item>用途说明示例</item>
+        <item>图案加载示例</item>
+        <item>镂空加载示例</item>
+        <item>九宫解锁示例</item>
+    </string-array>
+
+    <string-array name="tunadrag_textValueArray">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="tunadialog_textValueArray_choice">
+        <item>@string/confirm</item>
+        <item>@string/cancel</item>
+    </string-array>
+
+    <item name="confirm" type="string">确定</item>
+    <item name="cancel" type="string">取消</item>
+
+    <string-array name="tunadialog_textValueArray_confirm">
+        <item>确定</item>
+    </string-array>
+
+    <string-array name="layoutentrytest_titleArray">
+        <item>循环背景布局</item>
+        <item>分布小块布局</item>
+        <item>日历翻转布局</item>
+        <item>瀑布流式布局</item>
+        <item>单侧滑栏布局</item>
+        <item>双侧滑栏布局</item>
+        <item>拖动块状布局</item>
+        <item>拨号盘式布局</item>
+        <item>立体旋转布局</item>
+        <item>底部按钮布局</item>
+        <item>顶层标签布局</item>
+        <item>多层标签布局</item>
+        <item>循环旋转布局</item>
+        <item>循环倒影布局</item>
+    </string-array>
+
+    <string-array name="businessentrytest_titleArray">
+        <item>自定义美食</item>
+        <item>自定义彩票</item>
+        <item>自定义线程</item>
+        <item>自定义效果</item>
+    </string-array>
+
+    <string-array name="formsecuritiycheckviewhelper_unit">
+        <item>合肥车辆段</item>
+        <item>车辆处</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_examiner">
+        <item>徐明龙</item>
+        <item>洪小明</item>
+        <item>于国滨</item>
+        <item>郭兴群</item>
+        <item>李传翔</item>
+        <item>朱晓东</item>
+        <item>解兵</item>
+        <item>尹上才</item>
+        <item>高军</item>
+        <item>周福红</item>
+        <item>彭涛</item>
+        <item>张焰红</item>
+        <item>杨李</item>
+        <item>丰继燕</item>
+        <item>王克驭</item>
+        <item>张伟</item>
+        <item>李翻有</item>
+        <item>方前民</item>
+        <item>吕中建</item>
+        <item>刘振兴</item>
+        <item>刘保平</item>
+        <item>陆激燕</item>
+        <item>张建开</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_checkUnit">
+        <item>合肥车辆段</item>
+        <item>南京东车辆段</item>
+        <item>上海动车客车段</item>
+        <item>杭州北车辆段</item>
+        <item>车辆公司</item>
+        <item>金温公司</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_checkWorkShop">
+        <item>装卸车间</item>
+        <item>检修车间</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_workPlace">
+        <item>徐州</item>
+        <item>武昌</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_existenceProblem">
+        <item>不符合要求</item>
+        <item>未提供规程</item>
+    </string-array>
+    <string-array name="formsecuritiycheckviewhelper_correctSituation">
+        <item>现场解决整改</item>
+        <item>车辆段整改</item>
+        <item>上报协调整改</item>
+    </string-array>
+
+</resources>
