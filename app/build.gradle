@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.tunasushi"
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"

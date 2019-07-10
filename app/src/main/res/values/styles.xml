@@ -14,37 +14,6 @@
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 
-    <style name="Tuna_Title">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/tuna_title_height</item>
-        <item name="android:layout_marginTop">@dimen/tuna_title_marginTop</item>
-        <item name="android:layout_marginLeft">@dimen/tuna_title_marginLeft</item>
-        <item name="android:layout_marginRight">@dimen/tuna_title_marginRight</item>
-    </style>
-
-    <style name="Tuna_Title_Button">
-        <item name="android:layout_width">@dimen/tuna_title_button_width</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="tunaTextMarkRadius">@dimen/tunaview_tunaTextMark_radiusLarge</item>
-        <item name="tunaTextMarkColor">#ff8200</item>
-        <item name="tunaTextMark">true</item>
-    </style>
-
-    <style name="Tuna_Dialog_NoTitle" parent="android:style/Theme.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
-    <style name="Tuna_Layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginTop">@dimen/tuna_layout_marginTop</item>
-        <item name="android:layout_marginLeft">@dimen/tuna_layout_marginLeft</item>
-        <item name="android:layout_marginRight">@dimen/tuna_layout_marginRight</item>
-    </style>
-
     <!-- Exclusive TunaView or any of its subclasses use -->
 
     <style name="TunaView_Button" >
