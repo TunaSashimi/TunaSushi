@@ -3,82 +3,67 @@
 
     <!-- Attributes that can be used with {@link com.tunajslibs.tuna.TunaView} or any of its subclasses. -->
     <declare-styleable name="TView">
-
         <!-- edge and always means you can touch ,the difference is edge not available out of the edge when you move out of time-->
-        <attr name="tunaTouchType">
+        <attr name="touchType">
             <enum name="edge" value="0" />
             <enum name="always" value="1" />
             <enum name="none" value="2" />
         </attr>
-
-        <attr name="tunaTouchIntercept" format="boolean" />
-
-        <attr name="tunaPress" format="boolean" />
-        <attr name="tunaSelect" format="boolean" />
-
-        <attr name="tunaSelectType">
+        <attr name="touchIntercept" format="boolean" />
+        <attr name="press" format="boolean" />
+        <attr name="select" format="boolean" />
+        <attr name="selectType">
             <enum name="none" value="0" />
             <enum name="reverse" value="2" />
             <enum name="same" value="1" />
         </attr>
+        <attr name="rotate" format="integer" />
+        <attr name="animationable" format="boolean" />
+        <attr name="backgroundNormal" format="reference|color" />
+        <attr name="backgroundPress" format="reference|color" />
+        <attr name="backgroundSelect" format="reference|color" />
+        <attr name="foregroundNormal" format="reference|color" />
+        <attr name="foregroundPress" format="reference|color" />
+        <attr name="foregroundSelect" format="reference|color" />
+        <attr name="backgroundNormalAngle" format="integer" />
+        <attr name="backgroundPressAngle" format="integer" />
+        <attr name="backgroundSelectAngle" format="integer" />
+        <attr name="backgroundNormalGradientStart" format="reference|color" />
+        <attr name="backgroundNormalGradientEnd" format="reference|color" />
+        <attr name="backgroundPressGradientStart" format="reference|color" />
+        <attr name="backgroundPressGradientEnd" format="reference|color" />
+        <attr name="backgroundSelectGradientStart" format="reference|color" />
+        <attr name="backgroundSelectGradientEnd" format="reference|color" />
+        <attr name="backgroundNormalShadowRadius" format="dimension" />
+        <attr name="backgroundNormalShadowColor" format="reference|color" />
+        <attr name="backgroundNormalShadowDx" format="dimension" />
+        <attr name="backgroundNormalShadowDy" format="dimension" />
+        <attr name="backgroundPressShadowRadius" format="dimension" />
+        <attr name="backgroundPressShadowColor" format="reference|color" />
+        <attr name="backgroundPressShadowDx" format="dimension" />
+        <attr name="backgroundPressShadowDy" format="dimension" />
+        <attr name="backgroundSelectShadowRadius" format="dimension" />
+        <attr name="backgroundSelectShadowColor" format="reference|color" />
+        <attr name="backgroundSelectShadowDx" format="dimension" />
+        <attr name="backgroundSelectShadowDy" format="dimension" />
 
-        <attr name="tunaRotate" format="integer" />
+        <attr name="srcNormal" format="reference" />
+        <attr name="srcPress" format="reference" />
+        <attr name="srcSelect" format="reference" />
 
-        <attr name="tunaAnimationable" format="boolean" />
+        <attr name="srcNormalShadowRadius" format="dimension" />
+        <attr name="srcNormalShadowDx" format="dimension" />
+        <attr name="srcNormalShadowDy" format="dimension" />
 
-        <attr name="tunaBackgroundNormal" format="reference|color" />
-        <attr name="tunaBackgroundPress" format="reference|color" />
-        <attr name="tunaBackgroundSelect" format="reference|color" />
+        <attr name="srcPressShadowRadius" format="dimension" />
+        <attr name="srcPressShadowDx" format="dimension" />
+        <attr name="srcPressShadowDy" format="dimension" />
 
-        <attr name="tunaForegroundNormal" format="reference|color" />
-        <attr name="tunaForegroundPress" format="reference|color" />
-        <attr name="tunaForegroundSelect" format="reference|color" />
+        <attr name="srcSelectShadowRadius" format="dimension" />
+        <attr name="srcSelectShadowDx" format="dimension" />
+        <attr name="srcSelectShadowDy" format="dimension" />
 
-        <attr name="tunaBackgroundNormalAngle" format="integer" />
-        <attr name="tunaBackgroundPressAngle" format="integer" />
-        <attr name="tunaBackgroundSelectAngle" format="integer" />
-
-        <attr name="tunaBackgroundNormalGradientStart" format="reference|color" />
-        <attr name="tunaBackgroundNormalGradientEnd" format="reference|color" />
-
-        <attr name="tunaBackgroundPressGradientStart" format="reference|color" />
-        <attr name="tunaBackgroundPressGradientEnd" format="reference|color" />
-
-        <attr name="tunaBackgroundSelectGradientStart" format="reference|color" />
-        <attr name="tunaBackgroundSelectGradientEnd" format="reference|color" />
-
-        <attr name="tunaBackgroundNormalShadowRadius" format="dimension" />
-        <attr name="tunaBackgroundNormalShadowColor" format="reference|color" />
-        <attr name="tunaBackgroundNormalShadowDx" format="dimension" />
-        <attr name="tunaBackgroundNormalShadowDy" format="dimension" />
-
-        <attr name="tunaBackgroundPressShadowRadius" format="dimension" />
-        <attr name="tunaBackgroundPressShadowColor" format="reference|color" />
-        <attr name="tunaBackgroundPressShadowDx" format="dimension" />
-        <attr name="tunaBackgroundPressShadowDy" format="dimension" />
-
-        <attr name="tunaBackgroundSelectShadowRadius" format="dimension" />
-        <attr name="tunaBackgroundSelectShadowColor" format="reference|color" />
-        <attr name="tunaBackgroundSelectShadowDx" format="dimension" />
-        <attr name="tunaBackgroundSelectShadowDy" format="dimension" />
-
-        <attr name="tunaSrcNormal" format="reference" />
-        <attr name="tunaSrcPress" format="reference" />
-        <attr name="tunaSrcSelect" format="reference" />
-
-        <attr name="tunaSrcNormalShadowRadius" format="dimension" />
-        <attr name="tunaSrcNormalShadowDx" format="dimension" />
-        <attr name="tunaSrcNormalShadowDy" format="dimension" />
-
-        <attr name="tunaSrcPressShadowRadius" format="dimension" />
-        <attr name="tunaSrcPressShadowDx" format="dimension" />
-        <attr name="tunaSrcPressShadowDy" format="dimension" />
-
-        <attr name="tunaSrcSelectShadowRadius" format="dimension" />
-        <attr name="tunaSrcSelectShadowDx" format="dimension" />
-        <attr name="tunaSrcSelectShadowDy" format="dimension" />
-
-        <attr name="tunaSrcAnchorGravity">
+        <attr name="srcAnchorGravity">
             <flag name="left" value="0x00" />
             <flag name="center_horizontal" value="0x01" />
             <flag name="right" value="0x02" />
@@ -88,156 +73,156 @@
             <flag name="center" value="0x05" />
         </attr>
 
-        <attr name="tunaSrcAnchorNormal" format="reference" />
-        <attr name="tunaSrcAnchorNormalWidth" format="dimension" />
-        <attr name="tunaSrcAnchorNormalHeight" format="dimension" />
-        <attr name="tunaSrcAnchorNormalDx" format="dimension" />
-        <attr name="tunaSrcAnchorNormalDy" format="dimension" />
+        <attr name="srcAnchorNormal" format="reference" />
+        <attr name="srcAnchorNormalWidth" format="dimension" />
+        <attr name="srcAnchorNormalHeight" format="dimension" />
+        <attr name="srcAnchorNormalDx" format="dimension" />
+        <attr name="srcAnchorNormalDy" format="dimension" />
 
-        <attr name="tunaSrcAnchorPress" format="reference" />
-        <attr name="tunaSrcAnchorPressWidth" format="dimension" />
-        <attr name="tunaSrcAnchorPressHeight" format="dimension" />
-        <attr name="tunaSrcAnchorPressDx" format="dimension" />
-        <attr name="tunaSrcAnchorPressDy" format="dimension" />
+        <attr name="srcAnchorPress" format="reference" />
+        <attr name="srcAnchorPressWidth" format="dimension" />
+        <attr name="srcAnchorPressHeight" format="dimension" />
+        <attr name="srcAnchorPressDx" format="dimension" />
+        <attr name="srcAnchorPressDy" format="dimension" />
 
-        <attr name="tunaSrcAnchorSelect" format="reference" />
-        <attr name="tunaSrcAnchorSelectWidth" format="dimension" />
-        <attr name="tunaSrcAnchorSelectHeight" format="dimension" />
-        <attr name="tunaSrcAnchorSelectDx" format="dimension" />
-        <attr name="tunaSrcAnchorSelectDy" format="dimension" />
+        <attr name="srcAnchorSelect" format="reference" />
+        <attr name="srcAnchorSelectWidth" format="dimension" />
+        <attr name="srcAnchorSelectHeight" format="dimension" />
+        <attr name="srcAnchorSelectDx" format="dimension" />
+        <attr name="srcAnchorSelectDy" format="dimension" />
 
-        <attr name="tunaStrokeWidthNormal" format="dimension" />
-        <attr name="tunaStrokeColorNormal" format="reference|color" />
+        <attr name="strokeWidthNormal" format="dimension" />
+        <attr name="strokeColorNormal" format="reference|color" />
 
-        <attr name="tunaStrokeWidthPress" format="dimension" />
-        <attr name="tunaStrokeColorPress" format="reference|color" />
+        <attr name="strokeWidthPress" format="dimension" />
+        <attr name="strokeColorPress" format="reference|color" />
 
-        <attr name="tunaStrokeWidthSelect" format="dimension" />
-        <attr name="tunaStrokeColorSelect" format="reference|color" />
+        <attr name="strokeWidthSelect" format="dimension" />
+        <attr name="strokeColorSelect" format="reference|color" />
 
-        <attr name="tunaRadius" format="dimension" />
-        <attr name="tunaRadiusLeftTop" format="dimension" />
-        <attr name="tunaRadiusLeftBottom" format="dimension" />
-        <attr name="tunaRadiusRightTop" format="dimension" />
-        <attr name="tunaRadiusRightBottom" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="radiusLeftTop" format="dimension" />
+        <attr name="radiusLeftBottom" format="dimension" />
+        <attr name="radiusRightTop" format="dimension" />
+        <attr name="radiusRightBottom" format="dimension" />
 
-        <attr name="tunaTextValue" format="string" />
-        <attr name="tunaTextSize" format="dimension" />
-        <attr name="tunaTextColorNormal" format="reference|color" />
-        <attr name="tunaTextColorPress" format="reference|color" />
-        <attr name="tunaTextColorSelect" format="reference|color" />
-        <attr name="tunaTextPaddingLeft" format="dimension" />
-        <attr name="tunaTextPaddingRight" format="dimension" />
-        <attr name="tunaTextRowSpaceRatio" format="fraction" />
-        <attr name="tunaTextGravity">
+        <attr name="textValue" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColorNormal" format="reference|color" />
+        <attr name="textColorPress" format="reference|color" />
+        <attr name="textColorSelect" format="reference|color" />
+        <attr name="textPaddingLeft" format="dimension" />
+        <attr name="textPaddingRight" format="dimension" />
+        <attr name="textRowSpaceRatio" format="fraction" />
+        <attr name="textGravity">
             <enum name="all_center" value="0" />
             <enum name="all_left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>
-        <attr name="tunaTextTypeFace">
+        <attr name="textTypeFace">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
 
-        <attr name="tunaTextDx" format="dimension" />
-        <attr name="tunaTextDy" format="dimension" />
-        <attr name="tunaTextFractionDx" format="fraction" />
-        <attr name="tunaTextFractionDy" format="fraction" />
+        <attr name="textDx" format="dimension" />
+        <attr name="textDy" format="dimension" />
+        <attr name="textFractionDx" format="fraction" />
+        <attr name="textFractionDy" format="fraction" />
 
-        <attr name="tunaTextShadowRadius" format="dimension" />
-        <attr name="tunaTextShadowColor" format="reference|color" />
-        <attr name="tunaTextShadowDx" format="dimension" />
-        <attr name="tunaTextShadowDy" format="dimension" />
+        <attr name="textShadowRadius" format="dimension" />
+        <attr name="textShadowColor" format="reference|color" />
+        <attr name="textShadowDx" format="dimension" />
+        <attr name="textShadowDy" format="dimension" />
 
-        <attr name="tunaTextMark" format="boolean" />
-        <attr name="tunaTextMarkTouchable" format="boolean" />
-        <attr name="tunaTextMarkRadius" format="dimension" />
-        <attr name="tunaTextMarkColor" format="reference|color" />
-        <attr name="tunaTextMarkTextValue" format="string" />
-        <attr name="tunaTextMarkTextSize" format="dimension" />
-        <attr name="tunaTextMarkTextColor" format="reference|color" />
-        <attr name="tunaTextMarkDx" format="dimension" />
-        <attr name="tunaTextMarkDy" format="dimension" />
-        <attr name="tunaTextMarkFractionDx" format="fraction" />
-        <attr name="tunaTextMarkFractionDy" format="fraction" />
+        <attr name="textMark" format="boolean" />
+        <attr name="textMarkTouchable" format="boolean" />
+        <attr name="textMarkRadius" format="dimension" />
+        <attr name="textMarkColor" format="reference|color" />
+        <attr name="textMarkTextValue" format="string" />
+        <attr name="textMarkTextSize" format="dimension" />
+        <attr name="textMarkTextColor" format="reference|color" />
+        <attr name="textMarkDx" format="dimension" />
+        <attr name="textMarkDy" format="dimension" />
+        <attr name="textMarkFractionDx" format="fraction" />
+        <attr name="textMarkFractionDy" format="fraction" />
 
-        <attr name="tunaContentValue" format="string" />
-        <attr name="tunaContentSize" format="dimension" />
-        <attr name="tunaContentColorNormal" format="reference|color" />
-        <attr name="tunaContentColorPress" format="reference|color" />
-        <attr name="tunaContentColorSelect" format="reference|color" />
-        <attr name="tunaContentPaddingLeft" format="dimension" />
-        <attr name="tunaContentPaddingRight" format="dimension" />
-        <attr name="tunaContentRowSpaceRatio" format="fraction" />
-        <attr name="tunaContentGravity">
+        <attr name="contentValue" format="string" />
+        <attr name="contentSize" format="dimension" />
+        <attr name="contentColorNormal" format="reference|color" />
+        <attr name="contentColorPress" format="reference|color" />
+        <attr name="contentColorSelect" format="reference|color" />
+        <attr name="contentPaddingLeft" format="dimension" />
+        <attr name="contentPaddingRight" format="dimension" />
+        <attr name="contentRowSpaceRatio" format="fraction" />
+        <attr name="contentGravity">
             <enum name="all_center" value="0" />
             <enum name="all_left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>
-        <attr name="tunaContentTypeFace">
+        <attr name="contentTypeFace">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
 
-        <attr name="tunaContentDx" format="dimension" />
-        <attr name="tunaContentDy" format="dimension" />
-        <attr name="tunaContentFractionDx" format="fraction" />
-        <attr name="tunaContentFractionDy" format="fraction" />
+        <attr name="contentDx" format="dimension" />
+        <attr name="contentDy" format="dimension" />
+        <attr name="contentFractionDx" format="fraction" />
+        <attr name="contentFractionDy" format="fraction" />
 
-        <attr name="tunaContentShadowRadius" format="dimension" />
-        <attr name="tunaContentShadowColor" format="reference|color" />
-        <attr name="tunaContentShadowDx" format="dimension" />
-        <attr name="tunaContentShadowDy" format="dimension" />
+        <attr name="contentShadowRadius" format="dimension" />
+        <attr name="contentShadowColor" format="reference|color" />
+        <attr name="contentShadowDx" format="dimension" />
+        <attr name="contentShadowDy" format="dimension" />
 
-        <attr name="tunaContentMark" format="boolean" />
-        <attr name="tunaContentMarkTouchable" format="boolean" />
-        <attr name="tunaContentMarkRadius" format="dimension" />
-        <attr name="tunaContentMarkColor" format="reference|color" />
-        <attr name="tunaContentMarkTextValue" format="string" />
-        <attr name="tunaContentMarkTextSize" format="dimension" />
-        <attr name="tunaContentMarkTextColor" format="reference|color" />
-        <attr name="tunaContentMarkDx" format="dimension" />
-        <attr name="tunaContentMarkDy" format="dimension" />
-        <attr name="tunaContentMarkFractionDx" format="fraction" />
-        <attr name="tunaContentMarkFractionDy" format="fraction" />
+        <attr name="contentMark" format="boolean" />
+        <attr name="contentMarkTouchable" format="boolean" />
+        <attr name="contentMarkRadius" format="dimension" />
+        <attr name="contentMarkColor" format="reference|color" />
+        <attr name="contentMarkTextValue" format="string" />
+        <attr name="contentMarkTextSize" format="dimension" />
+        <attr name="contentMarkTextColor" format="reference|color" />
+        <attr name="contentMarkDx" format="dimension" />
+        <attr name="contentMarkDy" format="dimension" />
+        <attr name="contentMarkFractionDx" format="fraction" />
+        <attr name="contentMarkFractionDy" format="fraction" />
 
-        <attr name="tunaSrcLeft" format="reference" />
-        <attr name="tunaSrcLeftWidth" format="dimension" />
-        <attr name="tunaSrcLeftHeight" format="dimension" />
+        <attr name="srcLeft" format="reference" />
+        <attr name="srcLeftWidth" format="dimension" />
+        <attr name="srcLeftHeight" format="dimension" />
 
         <!-- tunaTextPaddingLeft means distance between tunaSrcLeft and The leftmost,note about the tunaSrcLeftPadding -->
-        <attr name="tunaSrcLeftPadding" format="dimension" />
-        <attr name="tunaSrcLeftDx" format="dimension" />
-        <attr name="tunaSrcLeftDy" format="dimension" />
+        <attr name="srcLeftPadding" format="dimension" />
+        <attr name="srcLeftDx" format="dimension" />
+        <attr name="srcLeftDy" format="dimension" />
 
-        <attr name="tunaSrcRight" format="reference" />
-        <attr name="tunaSrcRightWidth" format="dimension" />
-        <attr name="tunaSrcRightHeight" format="dimension" />
+        <attr name="srcRight" format="reference" />
+        <attr name="srcRightWidth" format="dimension" />
+        <attr name="srcRightHeight" format="dimension" />
 
         <!-- tunaTextPaddingRight means distance between tunaSrcRight and The leftmost,note about the tunaSrcRightPadding -->
-        <attr name="tunaSrcRightPadding" format="dimension" />
-        <attr name="tunaSrcRightDx" format="dimension" />
-        <attr name="tunaSrcRightDy" format="dimension" />
+        <attr name="srcRightPadding" format="dimension" />
+        <attr name="srcRightDx" format="dimension" />
+        <attr name="srcRightDy" format="dimension" />
 
-        <attr name="tunaPorterDuffXfermode">
+        <attr name="porterDuffXfermode">
             <enum name="src_in" value="0" />
             <enum name="src_out" value="1" />
         </attr>
 
-        <attr name="tunaMaterial">
+        <attr name="material">
             <enum name="spread" value="0" />
             <enum name="trans" value="1" />
         </attr>
-        <attr name="tunaMaterialMove" format="boolean" />
-        <attr name="tunaMaterialDuraction" format="integer" />
+        <attr name="materialMove" format="boolean" />
+        <attr name="materialDuraction" format="integer" />
 
-        <attr name="tunaMaterialTimeInterpolator">
+        <attr name="materialTimeInterpolator">
             <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
             <enum name="accelerateDecelerateInterpolator" value="0" />
             <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
@@ -261,489 +246,14 @@
     </declare-styleable>
 
 
-    <declare-styleable name="TunaAnimateCircle">
-        <attr name="tunaAnimateCircleTotal" format="integer" />
-        <attr name="tunaAnimateCircleStrokeWidth" format="dimension" />
-        <attr name="tunaAnimateCircleStrokeColor" format="reference|color" />
-        <attr name="tunaAnimateCircleRadiusBefore" format="dimension" />
-        <attr name="tunaAnimateCircleRadiusAfter" format="dimension" />
-        <attr name="tunaAnimateCircleNormalDeviation" format="dimension" />
-        <attr name="tunaAnimateCircleSpreadColorBefore" format="reference|color" />
-        <attr name="tunaAnimateCircleSpreadColorAfter" format="reference|color" />
-        <attr name="tunaAnimateCircleSpreadDeciation" format="dimension" />
-        <attr name="tunaAnimateCircleSpreadable" format="boolean" />
-        <attr name="tunaAnimateCircleDx" format="dimension" />
-        <attr name="tunaAnimateCircleDy" format="dimension" />
-        <attr name="tunaAnimateCircleDelay" format="integer" />
-        <attr name="tunaAnimateCircleAlign">
-            <enum name="center" value="0" />
-            <enum name="top" value="1" />
-            <enum name="bottom" value="2" />
-            <enum name="left" value="3" />
-            <enum name="right" value="4" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaAnimateTransfer">
-        <attr name="tunaAnimateTransferTotal" format="integer" />
-        <attr name="tunaAnimateTransferBitmapSrc" format="reference" />
-        <attr name="tunaAnimateTransferItemWidth" format="dimension" />
-        <attr name="tunaAnimateTransferItemHeight" format="dimension" />
-        <attr name="tunaAnimateTransferBefore" format="dimension" />
-        <attr name="tunaAnimateTransferAfter" format="dimension" />
-        <attr name="tunaAnimateTransferDeviation" format="dimension" />
-        <attr name="tunaAnimateTransferDelay" format="integer" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaBubble">
-        <attr name="tunaBubbleBackground" format="reference|color" />
-        <attr name="tunaBubbleRadius" format="dimension" />
-        <attr name="tunaBubbleEdgeWidth" format="dimension" />
-        <attr name="tunaBubbleEdgeHeight" format="dimension" />
-        <attr name="tunaBubbleTextValue" format="string" />
-        <attr name="tunaBubbleTextSize" format="dimension" />
-        <attr name="tunaBubbleTextColorNormal" format="reference|color" />
-        <attr name="tunaBubbleTextPadding" format="dimension" />
-
-        <attr name="tunaBubbleTowardType">
-            <enum name="left" value="0" />
-            <enum name="top" value="1" />
-            <enum name="right" value="2" />
-            <enum name="bottom" value="3" />
-        </attr>
-        <attr name="tunaBubbleLocationType">
-            <enum name="low" value="0" />
-            <enum name="middle" value="1" />
-            <enum name="high" value="2" />
-        </attr>
-
-        <attr name="tunaBubbleOffset" format="dimension" />
-        <attr name="tunaBubbleStrokeColor" format="reference|color" />
-        <attr name="tunaBubbleStrokeWidth" format="dimension" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaButton">
-        <attr name="tunaButtonBackgroundNormal" format="reference|color" />
-        <attr name="tunaButtonBackgroundPress" format="reference|color" />
-        <attr name="tunaButtonForegroundNormal" format="reference|color" />
-        <attr name="tunaButtonForegroundPress" format="reference|color" />
-        <attr name="tunaButtonBitmapSrcNormal" format="reference" />
-        <attr name="tunaButtonBitmapSrcPress" format="reference" />
-        <attr name="tunaButtonBitmapFractionTop" format="fraction" />
-        <attr name="tunaButtonBitmapFractionBottom" format="fraction" />
-        <attr name="tunaButtonTextValue" format="string" />
-        <attr name="tunaButtonTextSize" format="dimension" />
-        <attr name="tunaButtonTextColorNormal" format="reference|color" />
-        <attr name="tunaButtonTextFractionTop" format="fraction" />
-        <attr name="tunaButtonTextFractionBottom" format="fraction" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaDialog">
-        <attr name="tunaDialogBackgroundNormal" format="reference|color" />
-        <attr name="tunaDialogRadius" format="dimension" />
-
-        <attr name="tunaDialogStrokeWidth" format="dimension" />
-        <attr name="tunaDialogStrokeColor" format="reference|color" />
-
-        <attr name="tunaDialogTitleTextValue" format="string" />
-        <attr name="tunaDialogTitleTextSize" format="dimension" />
-        <attr name="tunaDialogTitleTextColor" format="reference|color" />
-        <attr name="tunaDialogTitleTextDy" format="dimension" />
-
-        <attr name="tunaDialogContentTextValue" format="string" />
-        <attr name="tunaDialogContentTextSize" format="dimension" />
-        <attr name="tunaDialogContentTextColor" format="reference|color" />
-        <attr name="tunaDialogContentTextPaddingLeft" format="dimension" />
-        <attr name="tunaDialogContentTextPaddingRight" format="dimension" />
-
-        <attr name="tunaDialogContentTextDy" format="dimension" />
-
-        <attr name="tunaDialogChoiceBackgroundNormal" format="reference|color" />
-        <attr name="tunaDialogChoiceBackgroundPress" format="reference|color" />
-        <attr name="tunaDialogChoiceHeight" format="dimension" />
-        <attr name="tunaDialogChoiceStrokeWidth" format="dimension" />
-        <attr name="tunaDialogChoiceStrokeColor" format="reference|color" />
-
-        <attr name="tunaDialogChoiceTextValueArray" format="reference" />
-        <attr name="tunaDialogChoiceTextSize" format="dimension" />
-        <attr name="tunaDialogChoiceTextColorNormal" format="reference|color" />
-        <attr name="tunaDialogChoiceTextColorPress" format="reference|color" />
-
-        <attr name="tunaDialogChoiceCurrentIndex" format="integer" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaDownload">
-        <attr name="tunaDownloadCacheFolder" format="string" />
-        <attr name="tunaDownloadCacheCheck" format="boolean" />
-        <attr name="tunaDownloadBackgroundNormal" format="reference|color" />
-
-        <attr name="tunaDownloadGraphicsSrcFill" format="reference" />
-        <attr name="tunaDownloadGraphicsSrcFillFractionTop" format="fraction" />
-        <attr name="tunaDownloadGraphicsSrcFillFractionBottom" format="fraction" />
-        <attr name="tunaDownloadGraphicsSrcFront" format="reference" />
-        <attr name="tunaDownloadGraphicsSrcFrontFractionTop" format="fraction" />
-        <attr name="tunaDownloadGraphicsSrcFrontFractionBottom" format="fraction" />
-        <attr name="tunaDownloadGraphicsSrcBack" format="reference" />
-
-        <attr name="tunaDownloadMark" format="boolean" />
-        <attr name="tunaDownloadMarkGraphicsSrc" format="reference" />
-        <attr name="tunaDownloadMarkGraphicsSrcWidth" format="dimension" />
-        <attr name="tunaDownloadMarkGravity">
-            <flag name="left" value="0x00" />
-            <flag name="center_horizontal" value="0x01" />
-            <flag name="right" value="0x02" />
-            <flag name="top" value="0x00" />
-            <flag name="center_vertical" value="0x04" />
-            <flag name="bottom" value="0x08" />
-            <flag name="center" value="0x05" />
-        </attr>
-
-        <attr name="tunaDownloadTitleTextValue" format="string" />
-        <attr name="tunaDownloadTitleTextSize" format="dimension" />
-        <attr name="tunaDownloadTitleTextColorNormal" format="reference|color" />
-        <attr name="tunaDownloadTitleFractionVertical" format="fraction" />
-
-        <attr name="tunaDownloadContentTextValue" format="string" />
-        <attr name="tunaDownloadContentTextSize" format="dimension" />
-        <attr name="tunaDownloadContentTextColorNormal" format="reference|color" />
-        <attr name="tunaDownloadContentFractionVertical" format="fraction" />
-
-        <attr name="tunaDownloadContentMarkBackgroundNormal" format="reference|color" />
-        <attr name="tunaDownloadContentMarkStrokeWidth" format="dimension" />
-        <attr name="tunaDownloadContentMarkTextValue" format="string" />
-        <attr name="tunaDownloadContentMarkTextSize" format="dimension" />
-        <attr name="tunaDownloadContentMarkTextColorNormal" format="reference|color" />
-        <attr name="tunaDownloadContentMarkFractionVertical" format="fraction" />
-        <attr name="tunaDownloadContentMarkRadius" format="dimension" />
-
-        <attr name="tunaDownloadGraphicsSrcURLRequestWidth" format="integer" />
-        <attr name="tunaDownloadGraphicsSrcURLRequestHeight" format="integer" />
-        <attr name="tunaDownloadType">
-            <enum name="tensile" value="0" />
-            <enum name="original" value="1" />
-        </attr>
-
-        <attr name="tunaDownloadRadius" format="dimension" />
-        <attr name="tunaDownloadRadiusLeftTop" format="dimension" />
-        <attr name="tunaDownloadRadiusLeftBottom" format="dimension" />
-        <attr name="tunaDownloadRadiusRightTop" format="dimension" />
-        <attr name="tunaDownloadRadiusRightBottom" format="dimension" />
-
-        <attr name="tunaDownloadPorterDuffXfermode">
-            <enum name="src_in" value="0" />
-            <enum name="src_out" value="1" />
-        </attr>
-
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaDrag">
-        <attr name="tunaDragStrokeWidth" format="dimension" />
-        <attr name="tunaDragStrokeColor" format="reference|color" />
-        <attr name="tunaDragTextSize" format="dimension" />
-        <attr name="tunaDragTextColorNormal" format="reference|color" />
-        <attr name="tunaDragTextValueArray" format="reference" />
-        <attr name="tunaDragAngle" format="integer" />
-        <attr name="tunaDragFillColor" format="reference|color" />
-        <attr name="tunaDragCurrentIndex" format="integer" />
-        <attr name="tunaDragBallTextColor" format="reference|color" />
-        <attr name="tunaDragBallStrokeWidth" format="dimension" />
-        <attr name="tunaDragBallStrokeColorNormal" format="reference|color" />
-        <attr name="tunaDragBallStrokeColorPress" format="reference|color" />
-        <attr name="tunaDragBallBackgroundNormal" format="reference|color" />
-        <attr name="tunaDragBallBackgroundPress" format="reference|color" />
-        <attr name="tunaDragBallRadiusNormal" format="dimension" />
-        <attr name="tunaDragBallRadiusPress" format="dimension" />
-        <attr name="tunaDragBallBitmapSrcPress" format="reference" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaDumbbell">
-        <attr name="tunaDumbbellRectColor" format="reference|color" />
-        <attr name="tunaDumbbellRectWidth" format="dimension" />
-        <attr name="tunaDumbbellRectHeight" format="dimension" />
-        <attr name="tunaDumbbellRectMargin" format="dimension" />
-        <attr name="tunaDumbbellRectStrokeWidth" format="dimension" />
-        <attr name="tunaDumbbellCircleRadius" format="dimension" />
-        <attr name="tunaDumbbellCircleMargin" format="dimension" />
-        <attr name="tunaDumbbellCircleStrokeWidth" format="dimension" />
-        <attr name="tunaDumbbellCircleColorBefore" format="reference|color" />
-        <attr name="tunaDumbbellCircleColorAfter" format="reference|color" />
-        <attr name="tunaDumbbellTextSize" format="dimension" />
-        <attr name="tunaDumbbellTextStrokeWidth" format="dimension" />
-        <attr name="tunaDumbbellTextValueBefore" format="string" />
-        <attr name="tunaDumbbellTextValueAfter" format="string" />
-        <attr name="tunaDumbbellDirection">
-            <enum name="horizontal" value="0" />
-            <enum name="vertical" value="1" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaGif">
-        <attr name="tunaGifGraphicsSrc" format="reference" />
-        <attr name="tunaGifGraphicsSrcURLRequestWidth" format="integer" />
-        <attr name="tunaGifGraphicsSrcURLRequestHeight" format="integer" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaHollow">
-        <attr name="tunaHollowBitmap" format="reference" />
-        <attr name="tunaHollowTextValue" format="string" />
-        <attr name="tunaHollowTextSize" format="dimension" />
-        <attr name="tunaHollowTextFractionVertical" format="fraction" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaImage">
-        <attr name="tunaImageSrc" format="reference" />
-        <attr name="tunaImageRadius" format="dimension" />
-        <attr name="tunaImageAlpha" format="fraction" />
-        <attr name="tunaImageSepia" format="boolean" />
-        <attr name="tunaImageEmboss" format="boolean" />
-        <attr name="tunaImageBacksheet" format="boolean" />
-        <attr name="tunaImageSketch" format="boolean" />
-        <attr name="tunaImageSunshineFractionX" format="fraction" />
-        <attr name="tunaImageSunshineFractionY" format="fraction" />
-
-        <attr name="tunaImageBright" format="dimension" />
-        <attr name="tunaImageHue" format="dimension" />
-        <attr name="tunaImageSaturation" format="dimension" />
-
-        <attr name="tunaImageReverse">
-            <enum name="horizontal" value="0" />
-            <enum name="vertical" value="1" />
-        </attr>
-    </declare-styleable>
-
-    <declare-styleable name="TunaIrregular">
-        <attr name="tunaIrregularBitmapSrcNormal" format="reference|color" />
-        <attr name="tunaIrregularBitmapSrcSelect" format="reference|color" />
-    </declare-styleable>
-
-    <declare-styleable name="TunaLayout">
-        <attr name="tunaLayoutBackgroundNormal" format="reference|color" />
-        <attr name="tunaLayoutBackgroundNormalAngle" format="integer" />
-        <attr name="tunaLayoutBackgroundNormalGradientStart" format="reference|color" />
-        <attr name="tunaLayoutBackgroundNormalGradientEnd" format="reference|color" />
-        <attr name="tunaLayoutBackgroundNormalShadowRadius" format="dimension" />
-        <attr name="tunaLayoutBackgroundNormalShadowColor" format="reference|color" />
-        <attr name="tunaLayoutBackgroundNormalShadowDx" format="dimension" />
-        <attr name="tunaLayoutBackgroundNormalShadowDy" format="dimension" />
-
-        <attr name="tunaLayoutSrcNormal" format="reference" />
-        <attr name="tunaLayoutSrcNormalShadowRadius" format="dimension" />
-        <attr name="tunaLayoutSrcNormalShadowDx" format="dimension" />
-        <attr name="tunaLayoutSrcNormalShadowDy" format="dimension" />
-
-        <attr name="tunaLayoutPorterDuffXfermode">
-            <enum name="layout_src_in" value="0" />
-            <enum name="layout_src_out" value="1" />
-        </attr>
-
-        <attr name="tunaLayoutStrokeWidthNormal" format="dimension" />
-        <attr name="tunaLayoutStrokeColorNormal" format="reference|color" />
-
-        <attr name="tunaLayoutRadius" format="dimension" />
-        <attr name="tunaLayoutRadiusLeftTop" format="dimension" />
-        <attr name="tunaLayoutRadiusLeftBottom" format="dimension" />
-        <attr name="tunaLayoutRadiusRightTop" format="dimension" />
-        <attr name="tunaLayoutRadiusRightBottom" format="dimension" />
-
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaLine">
-        <attr name="tunaLineBackgroundNormal" format="reference|color" />
-        <attr name="tunaLineArrowWidth" format="dimension" />
-        <attr name="tunaLineArrowHeight" format="dimension" />
-        <attr name="tunaLineArrowStrokeWidth" format="dimension" />
-        <attr name="tunaLineArrowStrokeColor" format="reference|color" />
-        <attr name="tunaLineArrowColor" format="reference|color" />
-        <attr name="tunaLineTowardType">
-            <enum name="top" value="0" />
-            <enum name="bottom" value="1" />
-        </attr>
-        <attr name="tunaLineCurrentX" format="dimension" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaMove">
-        <attr name="tunaMoveBitmap" format="reference" />
-        <attr name="tunaMoveDistance" format="dimension" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaPainting">
-        <attr name="tunaPaintingColor" format="reference|color" />
-        <attr name="tunaPaintingWidth" format="dimension" />
-        <attr name="tunaPaintingSrc" format="reference" />
-        <attr name="tunaPaintingType">
-            <enum name="circle" value="0" />
-            <enum name="star" value="1" />
-            <enum name="heart" value="2" />
-            <enum name="flower" value="3" />
-            <enum name="pentagon" value="4" />
-            <enum name="sixteenedge" value="5" />
-            <enum name="fortyedge" value="6" />
-            <enum name="snail" value="7" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaProgress">
-        <attr name="tunaProgressArcBackgroundNormal" format="reference|color" />
-        <attr name="tunaProgressBoundBackgroundNormal" format="reference|color" />
-        <attr name="tunaProgressBitmapSrcBack" format="reference" />
-        <attr name="tunaProgressBitmapSrcFront" format="reference" />
-        <attr name="tunaProgressShapeType">
-            <enum name="custom" value="0" />
-            <enum name="circle" value="1" />
-        </attr>
-        <attr name="tunaProgressPromoteType">
-            <enum name="clockWise" value="0" />
-            <enum name="upWard" value="1" />
-            <enum name="upDown" value="2" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaRepeat">
-        <attr name="tunaRepeatTotal" format="integer" />
-        <attr name="tunaRepeatItemFractionTop" format="fraction" />
-        <attr name="tunaRepeatItemFractionBottom" format="fraction" />
-        <attr name="tunaRepeatItemTextFractionTop" format="fraction" />
-        <attr name="tunaRepeatItemTextFractionBottom" format="fraction" />
-        <attr name="tunaRepeatItemTextSize" format="dimension" />
-        <attr name="tunaRepeatItemTextColorNormal" format="reference|color" />
-        <attr name="tunaRepeatItemTextColorSelect" format="reference|color" />
-        <attr name="tunaRepeatItemBackgroundNormal" format="reference|color" />
-        <attr name="tunaRepeatItemBackgroundSelect" format="reference|color" />
-        <attr name="tunaRepeatItemStrokeWidth" format="dimension" />
-        <attr name="tunaRepeatItemStrokeColorNormal" format="reference|color" />
-        <attr name="tunaRepeatItemStrokeColorSelect" format="reference|color" />
-        <attr name="tunaRepeatSelectType">
-            <enum name="connect" value="0" />
-            <enum name="current" value="1" />
-        </attr>
-        <attr name="tunaRepeatShapeType">
-            <enum name="custom" value="0" />
-            <enum name="circle" value="1" />
-        </attr>
-        <attr name="tunaRepeatBitmapSrcNormal" format="reference" />
-        <attr name="tunaRepeatBitmapSrcSelect" format="reference" />
-        <attr name="tunaRepeatCurrentIndex" format="integer" />
-        <attr name="tunaRepeatItemTextValueArray" format="reference" />
-
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaRipple">
-        <attr name="tunaRippleInnerCircleRadius" format="dimension" />
-        <attr name="tunaRippleInnerCircleColor" format="reference|color" />
-        <attr name="tunaRippleOuterCircleColor" format="reference|color" />
-        <attr name="tunaRippleTextSize" format="dimension" />
-        <attr name="tunaRippleTextColor" format="reference|color" />
-        <attr name="tunaRippleTextValue" format="string" />
-        <attr name="tunaRippleTextDx" format="dimension" />
-        <attr name="tunaRippleTextDy" format="dimension" />
-        <attr name="tunaRippleTextFractionDx" format="fraction" />
-        <attr name="tunaRippleTextFractionDy" format="fraction" />
-        <attr name="tunaRippleDuraction" format="integer" />
-        <attr name="tunaRippleInnerCircleAngle" format="integer" />
-        <attr name="tunaRippleOuterCircleAngle" format="integer" />
-        <attr name="tunaRippleInnerCircleColorGradientStart" format="reference|color" />
-        <attr name="tunaRippleInnerCircleColorGradientEnd" format="reference|color" />
-        <attr name="tunaRippleOuterCircleColorGradientStart" format="reference|color" />
-        <attr name="tunaRippleOuterCircleColorGradientEnd" format="reference|color" />
-        <attr name="tunaRippleTimeInterpolator">
-            <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
-            <enum name="accelerateDecelerateInterpolator" value="0" />
-            <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
-            <enum name="accelerateInterpolator" value="1" />
-            <!-- Initially thrown forward and then backward -->
-            <enum name="anticipateInterpolator" value="2" />
-            <!-- At the beginning of the return value after a certain value thrown forward and then backward -->
-            <enum name="anticipateOvershootInterpolator" value="3" />
-            <!-- When the animation ends bounce -->
-            <enum name="bounceInterpolator" value="4" />
-            <!-- The number of times a particular animation loop, velocity change along a sine curve -->
-            <enum name="cycleInterpolator" value="5" />
-            <!-- Fast and slow at the beginning of the local animation -->
-            <enum name="decelerateInterpolator" value="6" />
-            <!-- In a constant rate of change -->
-            <enum name="linearInterpolator" value="7" />
-            <!-- Thrown forward certain value and then return to its original position -->
-            <enum name="overshootInterpolator" value="8" />
-        </attr>
-
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaRow">
-        <attr name="tunaRowBackgroundNormal" format="reference|color" />
-        <attr name="tunaRowDuraction" format="integer" />
-        <attr name="tunaRowDirection">
-            <enum name="top" value="0" />
-            <enum name="bottom" value="1" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaScale">
-        <attr name="tunaScaleBitmap" format="reference" />
-        <attr name="tunaScaleType">
-            <enum name="width_top" value="0" />
-            <enum name="width_center" value="1" />
-            <enum name="width_bottom" value="2" />
-        </attr>
-        <attr name="tunaScaleTouchRectangleable" format="boolean" />
-        <attr name="tunaScaleTouchRectangleFractionTop" format="fraction" />
-        <attr name="tunaScaleTouchRectangleFractionLeft" format="fraction" />
-        <attr name="tunaScaleTouchRectangleFractionRight" format="fraction" />
-        <attr name="tunaScaleTouchRectangleFractionBottom" format="fraction" />
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaScratch">
-        <attr name="tunaScratchSrc" format="reference" />
-        <attr name="tunaScratchRadius" format="dimension" />
-        <attr name="tunaScratchCoverColor" format="color" />
-        <attr name="tunaScratchCoverStrokeWidth" format="dimension" />
-        <attr name="tunaScratchText" format="string" />
-        <attr name="tunaScratchTextColor" format="color" />
-        <attr name="tunaScratchTextSize" format="dimension" />
-    </declare-styleable>
-
-    <declare-styleable name="TunaSVG">
-        <attr name="tunaSVGSrc" format="reference" />
-        <attr name="tunaSVGType">
-            <enum name="circle" value="0" />
-            <enum name="star" value="1" />
-            <enum name="heart" value="2" />
-            <enum name="flower" value="3" />
-            <enum name="pentagon" value="4" />
-            <enum name="sixteenedge" value="5" />
-            <enum name="fortyedge" value="6" />
-            <enum name="snail" value="7" />
-            <enum name="fish" value="8" />
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="TunaTrangle">
-        <attr name="tunaTrangleBackgroundNormal" format="reference|color" />
-        <attr name="tunaTrangleBackgroundPress" format="reference|color" />
-        <attr name="tunaTrangleBackgroundSelect" format="reference|color" />
-        <attr name="tunaTrangleStrokeWidth" format="dimension" />
-        <attr name="tunaTrangleStrokeColor" format="reference|color" />
-        <attr name="tunaTrangleHideEdge" format="boolean" />
-        <attr name="tunaTrangleTowardType">
+    <declare-styleable name="TTrangle">
+        <attr name="trangleBackgroundNormal" format="reference|color" />
+        <attr name="trangleBackgroundPress" format="reference|color" />
+        <attr name="trangleBackgroundSelect" format="reference|color" />
+        <attr name="trangleStrokeWidth" format="dimension" />
+        <attr name="trangleStrokeColor" format="reference|color" />
+        <attr name="trangleHideEdge" format="boolean" />
+        <attr name="trangleTowardType">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="left" value="2" />
@@ -751,31 +261,31 @@
         </attr>
     </declare-styleable>
 
-    <!--Default Two Options-->
-    <declare-styleable name="TunaTrapezoid">
-        <attr name="tunaTrapezoidBackgroundNormal" format="reference|color" />
-        <attr name="tunaTrapezoidBackgroundSelect" format="reference|color" />
-        <attr name="tunaTrapezoidTextNormalValue" format="string" />
-        <attr name="tunaTrapezoidTextSelectValue" format="string" />
-        <attr name="tunaTrapezoidTextSize" format="dimension" />
-        <attr name="tunaTrapezoidTextColorNormal" format="reference|color" />
-        <attr name="tunaTrapezoidTextColorSelect" format="reference|color" />
-    </declare-styleable>
+    <declare-styleable name="TBubble">
+        <attr name="bubbleBackground" format="reference|color" />
+        <attr name="bubbleRadius" format="dimension" />
+        <attr name="bubbleEdgeWidth" format="dimension" />
+        <attr name="bubbleEdgeHeight" format="dimension" />
+        <attr name="bubbleTextValue" format="string" />
+        <attr name="bubbleTextSize" format="dimension" />
+        <attr name="bubbleTextColorNormal" format="reference|color" />
+        <attr name="bubbleTextPadding" format="dimension" />
 
+        <attr name="bubbleTowardType">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="bubbleLocationType">
+            <enum name="low" value="0" />
+            <enum name="middle" value="1" />
+            <enum name="high" value="2" />
+        </attr>
 
-    <declare-styleable name="TunaWrap">
-        <attr name="tunaWrapLineSpacing" format="dimension" />
-        <attr name="tunaWrapRowSpacing" format="dimension" />
-        <attr name="tunaWrapRadius" format="dimension" />
-        <attr name="tunaWrapBackgroundNormal" format="reference|color" />
-        <attr name="tunaWrapBackgroundSelect" format="reference|color" />
-        <attr name="tunaWrapStrokeWidth" format="dimension" />
-        <attr name="tunaWrapStrokeColorNormal" format="reference|color" />
-        <attr name="tunaWrapStrokeColorSelect" format="reference|color" />
-        <attr name="tunaWrapTextSize" format="dimension" />
-        <attr name="tunaWrapTextColorNormal" format="reference|color" />
-        <attr name="tunaWrapTextColorSelect" format="reference|color" />
-        <attr name="tunaWrapItemTextValueArray" format="reference" />
+        <attr name="bubbleOffset" format="dimension" />
+        <attr name="bubbleStrokeColor" format="reference|color" />
+        <attr name="bubbleStrokeWidth" format="dimension" />
     </declare-styleable>
 
 </resources>
