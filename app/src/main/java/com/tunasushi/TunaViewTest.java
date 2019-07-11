@@ -9,15 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tuna.TunaView;
-import com.tuna.TunaView.DeviceInfo;
-import com.tuna.TunaView.TunaTouchUpListener;
+import com.tuna.TView;
+import com.tuna.TView.DeviceInfo;
+import com.tuna.TView.TunaTouchUpListener;
 
 import java.util.Arrays;
 
 public class TunaViewTest extends Activity {
 
-    private TunaView
+    private TView
 
         tunaRectClassic01, tunaMainButton01, tunaMainButton02,
         tunaView_RadioGroup_DrackBrown_Left, tunaView_RadioGroup_DrackBrown_Right;
@@ -45,7 +45,7 @@ public class TunaViewTest extends Activity {
         setContentView(R.layout.tunaviewtest);
 
         //
-        DeviceInfo deviceInfo = TunaView.getDeviceInfo(this);
+        DeviceInfo deviceInfo = TView.getDeviceInfo(this);
         TextView textDeviceInfo = findViewById(R.id.textDeviceInfo);
         textDeviceInfo.setText(deviceInfo.toString());
 
@@ -113,7 +113,7 @@ public class TunaViewTest extends Activity {
         //	TunaView.tunaAssociate(new TunaView[]{tunaView_RadioGroup_DrackBrown_Left, tunaView_RadioGroup_DrackBrown_Right});
 
         //or  can be placed on a list of incoming associate method
-        TunaView.tunaAssociate(Arrays.asList(tunaView_RadioGroup_DrackBrown_Left, tunaView_RadioGroup_DrackBrown_Right));
+        TView.tunaAssociate(Arrays.asList(tunaView_RadioGroup_DrackBrown_Left, tunaView_RadioGroup_DrackBrown_Right));
 
         //
         String radioGroupTitleArray[] = {
@@ -127,13 +127,13 @@ public class TunaViewTest extends Activity {
         TunaTouchUpListener tunaTouchUpListener = new TunaTouchUpListener() {
             @Override
             public void tunaTouchUp(View v) {
-                Toast.makeText(TunaViewTest.this, ((TunaView) v).getTunaTextValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TunaViewTest.this, ((TView) v).getTunaTextValue(), Toast.LENGTH_SHORT).show();
             }
         };
 
         //Activity activity, String[] titleArray, int index(下标默认0), TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        TunaView.tunaDynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
+        TView.tunaDynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
             R.style.TunaView_RadioGroup_LightGray_Left,
             R.style.TunaView_RadioGroup_LightGray_Right,
             R.style.TunaView_RadioGroup_LightGray_Horizontal,

@@ -97,7 +97,7 @@ import java.util.Locale;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TunaView extends View {
+public class TView extends View {
 
     public static int bitmapMaxSize = 1536;
     public static TelephonyManager telephonyManager;
@@ -2370,7 +2370,7 @@ public class TunaView extends View {
     }
 
     //
-    public static void tunaAssociate(final TunaView[] tunaViewArray) {
+    public static void tunaAssociate(final TView[] tunaViewArray) {
         if (tunaViewArray == null) {
             return;
         }
@@ -2414,7 +2414,7 @@ public class TunaView extends View {
     }
 
     //
-    public static void tunaAssociate(final List<TunaView> tunaViewList) {
+    public static void tunaAssociate(final List<TView> tunaViewList) {
         if (tunaViewList == null) {
             return;
         }
@@ -2515,13 +2515,13 @@ public class TunaView extends View {
 //		int margin = context.getResources().getDimensionPixelOffset(R.dimen.tuna_stroke_mask);
         int margin = -2;    //-2px
 
-        List<TunaView> tunaViewList = new ArrayList<TunaView>();
+        List<TView> tunaViewList = new ArrayList<TView>();
 
         if (titleArray.length <= 0) {
             return;
         } else if (titleArray.length == 1) {
 
-            TunaView tunaView = new TunaView(context, null, wholeStyle);
+            TView tunaView = new TView(context, null, wholeStyle);
 
             tunaView.setTunaTextValue(titleArray[0]);
             tunaView.setTunaTouchUpListener(tunaTouchUpListener);
@@ -2529,7 +2529,7 @@ public class TunaView extends View {
         } else {
 
             for (int i = 0; i < titleArray.length; i++) {
-                TunaView tunaView = new TunaView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
+                TView tunaView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
                 tunaView.setTunaTextValue(titleArray[i]);
                 if (i == index) {
                     tunaView.setTunaSelect(true);
@@ -2547,7 +2547,7 @@ public class TunaView extends View {
                     setViewMargins(tunaView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
                 }
             }
-            TunaView.tunaAssociate(tunaViewList);
+            TView.tunaAssociate(tunaViewList);
         }
     }
 
@@ -2560,48 +2560,48 @@ public class TunaView extends View {
 
         tunaPropertiesView = initTunaLayoutInflater().inflate(R.layout.tunapropertiesview, null);
 
-        final TextView text_display = (TextView) tunaPropertiesView.findViewById(R.id.text_display);
+        final TextView text_display =  tunaPropertiesView.findViewById(R.id.text_display);
 
-        final EditText edit_width = (EditText) tunaPropertiesView.findViewById(R.id.edit_width);
-        final EditText edit_height = (EditText) tunaPropertiesView.findViewById(R.id.edit_height);
+        final EditText edit_width =  tunaPropertiesView.findViewById(R.id.edit_width);
+        final EditText edit_height =  tunaPropertiesView.findViewById(R.id.edit_height);
 
-        final EditText edit_backgroundNormal = (EditText) tunaPropertiesView.findViewById(R.id.edit_backgroundNormal);
-        final EditText edit_backgroundPress = (EditText) tunaPropertiesView.findViewById(R.id.edit_backgroundPress);
-        final EditText edit_backgroundSelect = (EditText) tunaPropertiesView.findViewById(R.id.edit_backgroundSelect);
+        final EditText edit_backgroundNormal =  tunaPropertiesView.findViewById(R.id.edit_backgroundNormal);
+        final EditText edit_backgroundPress =  tunaPropertiesView.findViewById(R.id.edit_backgroundPress);
+        final EditText edit_backgroundSelect =  tunaPropertiesView.findViewById(R.id.edit_backgroundSelect);
 
-        final EditText edit_textSize = (EditText) tunaPropertiesView.findViewById(R.id.edit_textSize);
-        final EditText edit_textColorNormal = (EditText) tunaPropertiesView.findViewById(R.id.edit_textColorNormal);
+        final EditText edit_textSize =  tunaPropertiesView.findViewById(R.id.edit_textSize);
+        final EditText edit_textColorNormal =  tunaPropertiesView.findViewById(R.id.edit_textColorNormal);
 
-        final EditText edit_strokeWidth = (EditText) tunaPropertiesView.findViewById(R.id.edit_strokeWidth);
-        final EditText edit_strokeColor = (EditText) tunaPropertiesView.findViewById(R.id.edit_strokeColor);
+        final EditText edit_strokeWidth =  tunaPropertiesView.findViewById(R.id.edit_strokeWidth);
+        final EditText edit_strokeColor =  tunaPropertiesView.findViewById(R.id.edit_strokeColor);
 
-        final Button btn_width_pius = (Button) tunaPropertiesView.findViewById(R.id.btn_width_pius);
-        final Button btn_width_minus = (Button) tunaPropertiesView.findViewById(R.id.btn_width_minus);
-        final Button btn_height_pius = (Button) tunaPropertiesView.findViewById(R.id.btn_height_pius);
-        final Button btn_height_minus = (Button) tunaPropertiesView.findViewById(R.id.btn_height_minus);
+        final Button btn_width_pius =  tunaPropertiesView.findViewById(R.id.btn_width_pius);
+        final Button btn_width_minus =  tunaPropertiesView.findViewById(R.id.btn_width_minus);
+        final Button btn_height_pius =  tunaPropertiesView.findViewById(R.id.btn_height_pius);
+        final Button btn_height_minus =  tunaPropertiesView.findViewById(R.id.btn_height_minus);
 
-        final Button btn_textSize_pius = (Button) tunaPropertiesView.findViewById(R.id.btn_textSize_pius);
-        final Button btn_textSize_minus = (Button) tunaPropertiesView.findViewById(R.id.btn_textSize_minus);
+        final Button btn_textSize_pius =  tunaPropertiesView.findViewById(R.id.btn_textSize_pius);
+        final Button btn_textSize_minus =  tunaPropertiesView.findViewById(R.id.btn_textSize_minus);
 
-        final Button btn_strokeWidth_pius = (Button) tunaPropertiesView.findViewById(R.id.btn_strokeWidth_pius);
-        final Button btn_strokeWidth_minus = (Button) tunaPropertiesView.findViewById(R.id.btn_strokeWidth_minus);
+        final Button btn_strokeWidth_pius =  tunaPropertiesView.findViewById(R.id.btn_strokeWidth_pius);
+        final Button btn_strokeWidth_minus =  tunaPropertiesView.findViewById(R.id.btn_strokeWidth_minus);
 
-        final Button btn_backgroundNormal = (Button) tunaPropertiesView.findViewById(R.id.btn_backgroundNormal);
-        final Button btn_backgroundPress = (Button) tunaPropertiesView.findViewById(R.id.btn_backgroundPress);
-        final Button btn_backgroundSelect = (Button) tunaPropertiesView.findViewById(R.id.btn_backgroundSelect);
+        final Button btn_backgroundNormal =  tunaPropertiesView.findViewById(R.id.btn_backgroundNormal);
+        final Button btn_backgroundPress =  tunaPropertiesView.findViewById(R.id.btn_backgroundPress);
+        final Button btn_backgroundSelect =  tunaPropertiesView.findViewById(R.id.btn_backgroundSelect);
 
-        final Button btn_textColorNormal = (Button) tunaPropertiesView.findViewById(R.id.btn_textColorNormal);
+        final Button btn_textColorNormal =  tunaPropertiesView.findViewById(R.id.btn_textColorNormal);
 
-        final Button btn_strokeColor = (Button) tunaPropertiesView.findViewById(R.id.btn_strokeColor);
+        final Button btn_strokeColor =  tunaPropertiesView.findViewById(R.id.btn_strokeColor);
 
-        final ToggleButton toogle_mark = (ToggleButton) tunaPropertiesView.findViewById(R.id.toogle_mark);
-        final TextView text_mark = (TextView) tunaPropertiesView.findViewById(R.id.text_mark);
+        final ToggleButton toogle_mark =  tunaPropertiesView.findViewById(R.id.toogle_mark);
+        final TextView text_mark =  tunaPropertiesView.findViewById(R.id.text_mark);
 
-        final ToggleButton toogle_thisHardwareAccelerated = (ToggleButton) tunaPropertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
-        final TextView text_thisHardwareAccelerated = (TextView) tunaPropertiesView.findViewById(R.id.text_thisHardwareAccelerated);
+        final ToggleButton toogle_thisHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
+        final TextView text_thisHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.text_thisHardwareAccelerated);
 
-        final ToggleButton toogle_canvasHardwareAccelerated = (ToggleButton) tunaPropertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
-        final TextView text_canvasHardwareAccelerated = (TextView) tunaPropertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
+        final ToggleButton toogle_canvasHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
+        final TextView text_canvasHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
 
         text_display.setText(tunaStringBuffer);
 
@@ -5903,41 +5903,41 @@ public class TunaView extends View {
     }
 
     //
-    private Property<TunaView, Float> tunaMaterialRadiusProperty = new Property<TunaView, Float>(Float.class, "tunaMaterialRadius") {
+    private Property<TView, Float> tunaMaterialRadiusProperty = new Property<TView, Float>(Float.class, "tunaMaterialRadius") {
         @Override
-        public Float get(TunaView tunaview) {
+        public Float get(TView tunaview) {
             return tunaview.tunaMaterialRadius;
         }
 
         @Override
-        public void set(TunaView tunaview, Float value) {
+        public void set(TView tunaview, Float value) {
             tunaview.tunaMaterialRadius = value;
             invalidate();
         }
     };
 
     //
-    private Property<TunaView, Float> tunaMaterialPaintXProperty = new Property<TunaView, Float>(Float.class, "tunaMaterialPaintX") {
+    private Property<TView, Float> tunaMaterialPaintXProperty = new Property<TView, Float>(Float.class, "tunaMaterialPaintX") {
         @Override
-        public Float get(TunaView tunaview) {
+        public Float get(TView tunaview) {
             return tunaview.tunaTouchDownEventX;
         }
 
         @Override
-        public void set(TunaView tunaview, Float value) {
+        public void set(TView tunaview, Float value) {
             tunaview.tunaTouchDownEventX = value;
         }
     };
 
     //
-    private Property<TunaView, Float> tunaMaterialPaintYProperty = new Property<TunaView, Float>(Float.class, "tunaMaterialPaintY") {
+    private Property<TView, Float> tunaMaterialPaintYProperty = new Property<TView, Float>(Float.class, "tunaMaterialPaintY") {
         @Override
-        public Float get(TunaView tunaview) {
+        public Float get(TView tunaview) {
             return tunaview.tunaTouchDownEventY;
         }
 
         @Override
-        public void set(TunaView tunaview, Float value) {
+        public void set(TView tunaview, Float value) {
             tunaview.tunaTouchDownEventY = value;
         }
     };
@@ -5968,169 +5968,169 @@ public class TunaView extends View {
     // eachtimes
     private static final int SHOW_PROPERTY_MAX_TIME_MILLIS = 200 * TOUCH_DOWN_TIMES;
 
-    public TunaView(Context context) {
+    public TView(Context context) {
         this(context, null);
     }
 
-    public TunaView(Context context, AttributeSet attrs) {
+    public TView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TunaView(Context context, AttributeSet attrs, int defStyle) {
+    public TView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TunaView.class.getSimpleName();
+        tunaTag = TView.class.getSimpleName();
 
         //
         tunaDebugable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
         //
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TunaView, 0, defStyle);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
         // tunaTouchType default edge
-        int tunaTouchTypeIndex = typedArray.getInt(R.styleable.TunaView_tunaTouchType, 0);
+        int tunaTouchTypeIndex = typedArray.getInt(R.styleable.TView_tunaTouchType, 0);
         tunaTouchType = tunaTouchTypeArray[tunaTouchTypeIndex];
 
-        tunaTouchIntercept = typedArray.getBoolean(R.styleable.TunaView_tunaTouchIntercept, false);
+        tunaTouchIntercept = typedArray.getBoolean(R.styleable.TView_tunaTouchIntercept, false);
 
-        tunaPress = typedArray.getBoolean(R.styleable.TunaView_tunaPress, false);
-        tunaSelect = typedArray.getBoolean(R.styleable.TunaView_tunaSelect, false);
+        tunaPress = typedArray.getBoolean(R.styleable.TView_tunaPress, false);
+        tunaSelect = typedArray.getBoolean(R.styleable.TView_tunaSelect, false);
 
         // tunaSelectType default none
-        int tunaSelectTypeIndex = typedArray.getInt(R.styleable.TunaView_tunaSelectType, 0);
+        int tunaSelectTypeIndex = typedArray.getInt(R.styleable.TView_tunaSelectType, 0);
         tunaSelectType = tunaSelectTypeArray[tunaSelectTypeIndex];
 
-        tunaAnimationable = typedArray.getBoolean(R.styleable.TunaView_tunaAnimationable, false);
-        tunaRotate = typedArray.getInt(R.styleable.TunaView_tunaRotate, 0);
+        tunaAnimationable = typedArray.getBoolean(R.styleable.TView_tunaAnimationable, false);
+        tunaRotate = typedArray.getInt(R.styleable.TView_tunaRotate, 0);
 
         // tunaXfermodeIndex default PorterDuff.Mode.SRC_IN
-        int tunaXfermodeIndex = typedArray.getInt(R.styleable.TunaView_tunaPorterDuffXfermode, 0);
+        int tunaXfermodeIndex = typedArray.getInt(R.styleable.TView_tunaPorterDuffXfermode, 0);
         tunaPorterDuffXfermode = new PorterDuffXfermode(tunaPorterDuffXfermodeArray[tunaXfermodeIndex]);
 
-        tunaSuper = TunaView.class == this.getClass();
+        tunaSuper = TView.class == this.getClass();
 
         if (tunaSuper) {
             // note that the use of default values ​​can be defined,tunaBackgroundNormal to the default white to achieve clip tunaBitmap results!
 
-            tunaBackgroundNormal = typedArray.getColor(R.styleable.TunaView_tunaBackgroundNormal, Color.TRANSPARENT);
-            tunaBackgroundPress = typedArray.getColor(R.styleable.TunaView_tunaBackgroundPress, tunaBackgroundNormal);
-            tunaBackgroundSelect = typedArray.getColor(R.styleable.TunaView_tunaBackgroundSelect, tunaBackgroundNormal);
+            tunaBackgroundNormal = typedArray.getColor(R.styleable.TView_tunaBackgroundNormal, Color.TRANSPARENT);
+            tunaBackgroundPress = typedArray.getColor(R.styleable.TView_tunaBackgroundPress, tunaBackgroundNormal);
+            tunaBackgroundSelect = typedArray.getColor(R.styleable.TView_tunaBackgroundSelect, tunaBackgroundNormal);
 
-            tunaForegroundNormal = typedArray.getColor(R.styleable.TunaView_tunaForegroundNormal, Color.TRANSPARENT);
-            tunaForegroundPress = typedArray.getColor(R.styleable.TunaView_tunaForegroundPress, tunaForegroundNormal);
-            tunaForegroundSelect = typedArray.getColor(R.styleable.TunaView_tunaForegroundSelect, tunaForegroundNormal);
+            tunaForegroundNormal = typedArray.getColor(R.styleable.TView_tunaForegroundNormal, Color.TRANSPARENT);
+            tunaForegroundPress = typedArray.getColor(R.styleable.TView_tunaForegroundPress, tunaForegroundNormal);
+            tunaForegroundSelect = typedArray.getColor(R.styleable.TView_tunaForegroundSelect, tunaForegroundNormal);
 
             //
-            tunaBackgroundNormalAngle = typedArray.getInt(R.styleable.TunaView_tunaBackgroundNormalAngle, Integer.MAX_VALUE);
+            tunaBackgroundNormalAngle = typedArray.getInt(R.styleable.TView_tunaBackgroundNormalAngle, Integer.MAX_VALUE);
             if (tunaBackgroundNormalAngle != Integer.MAX_VALUE) {
-                tunaBackgroundNormalGradientStart = typedArray.getColor(R.styleable.TunaView_tunaBackgroundNormalGradientStart, tunaBackgroundNormal);
-                tunaBackgroundNormalGradientEnd = typedArray.getColor(R.styleable.TunaView_tunaBackgroundNormalGradientEnd, tunaBackgroundNormal);
+                tunaBackgroundNormalGradientStart = typedArray.getColor(R.styleable.TView_tunaBackgroundNormalGradientStart, tunaBackgroundNormal);
+                tunaBackgroundNormalGradientEnd = typedArray.getColor(R.styleable.TView_tunaBackgroundNormalGradientEnd, tunaBackgroundNormal);
             }
 
-            tunaBackgroundPressAngle = typedArray.getInt(R.styleable.TunaView_tunaBackgroundPressAngle, Integer.MAX_VALUE);
+            tunaBackgroundPressAngle = typedArray.getInt(R.styleable.TView_tunaBackgroundPressAngle, Integer.MAX_VALUE);
             if (tunaBackgroundPressAngle != Integer.MAX_VALUE) {
-                tunaBackgroundPressGradientStart = typedArray.getColor(R.styleable.TunaView_tunaBackgroundPressGradientStart, tunaBackgroundPress);
-                tunaBackgroundPressGradientEnd = typedArray.getColor(R.styleable.TunaView_tunaBackgroundPressGradientEnd, tunaBackgroundPress);
+                tunaBackgroundPressGradientStart = typedArray.getColor(R.styleable.TView_tunaBackgroundPressGradientStart, tunaBackgroundPress);
+                tunaBackgroundPressGradientEnd = typedArray.getColor(R.styleable.TView_tunaBackgroundPressGradientEnd, tunaBackgroundPress);
             }
 
-            tunaBackgroundSelectAngle = typedArray.getInt(R.styleable.TunaView_tunaBackgroundSelectAngle, Integer.MAX_VALUE);
+            tunaBackgroundSelectAngle = typedArray.getInt(R.styleable.TView_tunaBackgroundSelectAngle, Integer.MAX_VALUE);
             if (tunaBackgroundSelectAngle != Integer.MAX_VALUE) {
-                tunaBackgroundSelectGradientStart = typedArray.getColor(R.styleable.TunaView_tunaBackgroundSelectGradientStart, tunaBackgroundSelect);
-                tunaBackgroundSelectGradientEnd = typedArray.getColor(R.styleable.TunaView_tunaBackgroundSelectGradientEnd, tunaBackgroundSelect);
+                tunaBackgroundSelectGradientStart = typedArray.getColor(R.styleable.TView_tunaBackgroundSelectGradientStart, tunaBackgroundSelect);
+                tunaBackgroundSelectGradientEnd = typedArray.getColor(R.styleable.TView_tunaBackgroundSelectGradientEnd, tunaBackgroundSelect);
             }
 
             //Note tuna Background Normal ShadowRadius and tunaSrcNormal ShadowRadius are two values!
-            tunaBackgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundNormalShadowRadius, 0);
+            tunaBackgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TView_tunaBackgroundNormalShadowRadius, 0);
             if (tunaBackgroundNormalShadowRadius > 0) {
-                tunaBackgroundNormalShadowColor = typedArray.getColor(R.styleable.TunaView_tunaBackgroundNormalShadowColor, Color.TRANSPARENT);
-                tunaBackgroundNormalShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundNormalShadowDx, 0);
-                tunaBackgroundNormalShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundNormalShadowDy, 0);
+                tunaBackgroundNormalShadowColor = typedArray.getColor(R.styleable.TView_tunaBackgroundNormalShadowColor, Color.TRANSPARENT);
+                tunaBackgroundNormalShadowDx = typedArray.getDimension(R.styleable.TView_tunaBackgroundNormalShadowDx, 0);
+                tunaBackgroundNormalShadowDy = typedArray.getDimension(R.styleable.TView_tunaBackgroundNormalShadowDy, 0);
             }
 
             //
-            tunaBackgroundPressShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundPressShadowRadius, tunaBackgroundNormalShadowRadius);
+            tunaBackgroundPressShadowRadius = typedArray.getDimension(R.styleable.TView_tunaBackgroundPressShadowRadius, tunaBackgroundNormalShadowRadius);
             if (tunaBackgroundPressShadowRadius > 0) {
-                tunaBackgroundPressShadowColor = typedArray.getColor(R.styleable.TunaView_tunaBackgroundPressShadowColor, tunaBackgroundNormalShadowColor);
-                tunaBackgroundPressShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundPressShadowDx, tunaBackgroundNormalShadowDx);
-                tunaBackgroundPressShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundPressShadowDy, tunaBackgroundNormalShadowDy);
+                tunaBackgroundPressShadowColor = typedArray.getColor(R.styleable.TView_tunaBackgroundPressShadowColor, tunaBackgroundNormalShadowColor);
+                tunaBackgroundPressShadowDx = typedArray.getDimension(R.styleable.TView_tunaBackgroundPressShadowDx, tunaBackgroundNormalShadowDx);
+                tunaBackgroundPressShadowDy = typedArray.getDimension(R.styleable.TView_tunaBackgroundPressShadowDy, tunaBackgroundNormalShadowDy);
             }
 
             //
-            tunaBackgroundSelectShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundSelectShadowRadius, tunaBackgroundNormalShadowRadius);
+            tunaBackgroundSelectShadowRadius = typedArray.getDimension(R.styleable.TView_tunaBackgroundSelectShadowRadius, tunaBackgroundNormalShadowRadius);
             if (tunaBackgroundSelectShadowRadius > 0) {
-                tunaBackgroundSelectShadowColor = typedArray.getColor(R.styleable.TunaView_tunaBackgroundSelectShadowColor, tunaBackgroundNormalShadowColor);
-                tunaBackgroundSelectShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundSelectShadowDx, tunaBackgroundNormalShadowDx);
-                tunaBackgroundSelectShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaBackgroundSelectShadowDy, tunaBackgroundNormalShadowDy);
+                tunaBackgroundSelectShadowColor = typedArray.getColor(R.styleable.TView_tunaBackgroundSelectShadowColor, tunaBackgroundNormalShadowColor);
+                tunaBackgroundSelectShadowDx = typedArray.getDimension(R.styleable.TView_tunaBackgroundSelectShadowDx, tunaBackgroundNormalShadowDx);
+                tunaBackgroundSelectShadowDy = typedArray.getDimension(R.styleable.TView_tunaBackgroundSelectShadowDy, tunaBackgroundNormalShadowDy);
             }
 
             //
-            int tunaSrcNormalId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcNormal, -1);
+            int tunaSrcNormalId = typedArray.getResourceId(R.styleable.TView_tunaSrcNormal, -1);
             if (tunaSrcNormalId != -1) {
 
                 tunaSrcNormal = BitmapFactory.decodeResource(getResources(), tunaSrcNormalId);
 
                 //
-                int tunaSrcPressId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcPress, -1);
+                int tunaSrcPressId = typedArray.getResourceId(R.styleable.TView_tunaSrcPress, -1);
                 if (tunaSrcPressId != -1) {
                     tunaSrcPress = BitmapFactory.decodeResource(getResources(), tunaSrcPressId);
                 } else {
                     tunaSrcPress = tunaSrcNormal;
                 }
                 //
-                int tunaSrcSelectId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcPress, -1);
+                int tunaSrcSelectId = typedArray.getResourceId(R.styleable.TView_tunaSrcPress, -1);
                 if (tunaSrcSelectId != -1) {
                     tunaSrcSelect = BitmapFactory.decodeResource(getResources(), tunaSrcSelectId);
                 } else {
                     tunaSrcSelect = tunaSrcNormal;
                 }
 
-                tunaSrcNormalShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaSrcNormalShadowRadius, 0);
+                tunaSrcNormalShadowRadius = typedArray.getDimension(R.styleable.TView_tunaSrcNormalShadowRadius, 0);
                 if (tunaSrcNormalShadowRadius > 0) {
-                    tunaSrcNormalShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcNormalShadowDx, 0);
-                    tunaSrcNormalShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcNormalShadowDy, 0);
+                    tunaSrcNormalShadowDx = typedArray.getDimension(R.styleable.TView_tunaSrcNormalShadowDx, 0);
+                    tunaSrcNormalShadowDy = typedArray.getDimension(R.styleable.TView_tunaSrcNormalShadowDy, 0);
                 }
                 //
-                tunaSrcPressShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaSrcPressShadowRadius, tunaSrcNormalShadowRadius);
+                tunaSrcPressShadowRadius = typedArray.getDimension(R.styleable.TView_tunaSrcPressShadowRadius, tunaSrcNormalShadowRadius);
                 if (tunaSrcPressShadowRadius > 0) {
-                    tunaSrcPressShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcPressShadowDx, tunaSrcNormalShadowDx);
-                    tunaSrcPressShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcPressShadowDy, tunaSrcNormalShadowDy);
+                    tunaSrcPressShadowDx = typedArray.getDimension(R.styleable.TView_tunaSrcPressShadowDx, tunaSrcNormalShadowDx);
+                    tunaSrcPressShadowDy = typedArray.getDimension(R.styleable.TView_tunaSrcPressShadowDy, tunaSrcNormalShadowDy);
                 }
                 //
-                tunaSrcSelectShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaSrcSelectShadowRadius, tunaSrcNormalShadowRadius);
+                tunaSrcSelectShadowRadius = typedArray.getDimension(R.styleable.TView_tunaSrcSelectShadowRadius, tunaSrcNormalShadowRadius);
                 if (tunaSrcSelectShadowRadius > 0) {
-                    tunaSrcSelectShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcSelectShadowDx, tunaSrcNormalShadowDx);
-                    tunaSrcSelectShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcSelectShadowDy, tunaSrcNormalShadowDy);
+                    tunaSrcSelectShadowDx = typedArray.getDimension(R.styleable.TView_tunaSrcSelectShadowDx, tunaSrcNormalShadowDx);
+                    tunaSrcSelectShadowDy = typedArray.getDimension(R.styleable.TView_tunaSrcSelectShadowDy, tunaSrcNormalShadowDy);
                 }
             }
             //
-            int tunaSrcAnchorNormalId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcAnchorNormal, -1);
+            int tunaSrcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_tunaSrcAnchorNormal, -1);
             if (tunaSrcAnchorNormalId != -1) {
 
                 //
                 tunaSrcAnchorNormal = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorNormalId);
-                tunaSrcAnchorNormalWidth = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorNormalWidth, 0);
-                tunaSrcAnchorNormalHeight = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorNormalHeight, 0);
-                tunaSrcAnchorNormalDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorNormalDx, 0);
-                tunaSrcAnchorNormalDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorNormalDy, 0);
+                tunaSrcAnchorNormalWidth = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorNormalWidth, 0);
+                tunaSrcAnchorNormalHeight = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorNormalHeight, 0);
+                tunaSrcAnchorNormalDx = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorNormalDx, 0);
+                tunaSrcAnchorNormalDy = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorNormalDy, 0);
                 //
-                tunaSrcAnchorPressWidth = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorPressWidth, tunaSrcAnchorNormalWidth);
-                tunaSrcAnchorPressHeight = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorPressHeight, tunaSrcAnchorNormalHeight);
-                tunaSrcAnchorPressDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorPressDx, tunaSrcAnchorNormalDx);
-                tunaSrcAnchorPressDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorPressDy, tunaSrcAnchorNormalDy);
+                tunaSrcAnchorPressWidth = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorPressWidth, tunaSrcAnchorNormalWidth);
+                tunaSrcAnchorPressHeight = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorPressHeight, tunaSrcAnchorNormalHeight);
+                tunaSrcAnchorPressDx = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorPressDx, tunaSrcAnchorNormalDx);
+                tunaSrcAnchorPressDy = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorPressDy, tunaSrcAnchorNormalDy);
                 //
-                tunaSrcAnchorSelectWidth = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorSelectWidth, tunaSrcAnchorNormalWidth);
-                tunaSrcAnchorSelectHeight = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorSelectHeight, tunaSrcAnchorNormalHeight);
-                tunaSrcAnchorSelectDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorSelectDx, tunaSrcAnchorNormalDx);
-                tunaSrcAnchorSelectDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcAnchorSelectDy, tunaSrcAnchorNormalDy);
+                tunaSrcAnchorSelectWidth = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorSelectWidth, tunaSrcAnchorNormalWidth);
+                tunaSrcAnchorSelectHeight = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorSelectHeight, tunaSrcAnchorNormalHeight);
+                tunaSrcAnchorSelectDx = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorSelectDx, tunaSrcAnchorNormalDx);
+                tunaSrcAnchorSelectDy = typedArray.getDimension(R.styleable.TView_tunaSrcAnchorSelectDy, tunaSrcAnchorNormalDy);
 
                 //
-                int tunaSrcAnchorPressId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcAnchorPress, -1);
+                int tunaSrcAnchorPressId = typedArray.getResourceId(R.styleable.TView_tunaSrcAnchorPress, -1);
                 if (tunaSrcAnchorPressId != -1) {
                     tunaSrcAnchorPress = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorPressId);
                 } else {
                     tunaSrcAnchorPress = tunaSrcAnchorNormal;
                 }
                 //
-                int tunaSrcAnchorSelectId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcAnchorSelect, -1);
+                int tunaSrcAnchorSelectId = typedArray.getResourceId(R.styleable.TView_tunaSrcAnchorSelect, -1);
                 if (tunaSrcAnchorSelectId != -1) {
                     tunaSrcAnchorSelect = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorSelectId);
                 } else {
@@ -6138,18 +6138,18 @@ public class TunaView extends View {
                 }
 
                 //
-                tunaSrcAnchorGravity = typedArray.getInt(R.styleable.TunaView_tunaSrcAnchorGravity, 0);
+                tunaSrcAnchorGravity = typedArray.getInt(R.styleable.TView_tunaSrcAnchorGravity, 0);
             }
 
             //
-            int tunaSrcLeftId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcLeft, -1);
+            int tunaSrcLeftId = typedArray.getResourceId(R.styleable.TView_tunaSrcLeft, -1);
             if (tunaSrcLeftId != -1) {
                 tunaSrcLeft = BitmapFactory.decodeResource(getResources(), tunaSrcLeftId);
-                tunaSrcLeftWidth = typedArray.getDimension(R.styleable.TunaView_tunaSrcLeftWidth, 0);
-                tunaSrcLeftHeight = typedArray.getDimension(R.styleable.TunaView_tunaSrcLeftHeight, 0);
-                tunaSrcLeftPadding = typedArray.getDimension(R.styleable.TunaView_tunaSrcLeftPadding, 0);
-                tunaSrcLeftDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcLeftDx, 0);
-                tunaSrcLeftDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcLeftDy, 0);
+                tunaSrcLeftWidth = typedArray.getDimension(R.styleable.TView_tunaSrcLeftWidth, 0);
+                tunaSrcLeftHeight = typedArray.getDimension(R.styleable.TView_tunaSrcLeftHeight, 0);
+                tunaSrcLeftPadding = typedArray.getDimension(R.styleable.TView_tunaSrcLeftPadding, 0);
+                tunaSrcLeftDx = typedArray.getDimension(R.styleable.TView_tunaSrcLeftDx, 0);
+                tunaSrcLeftDy = typedArray.getDimension(R.styleable.TView_tunaSrcLeftDy, 0);
 
                 if (tunaSrcLeftWidth == 0 || tunaSrcLeftHeight == 0) {
                     throw new IllegalArgumentException("The content attribute require property named tunaSrcLeftWidth and tunaSrcLeftHeight");
@@ -6157,14 +6157,14 @@ public class TunaView extends View {
             }
 
             //
-            int tunaSrcRightId = typedArray.getResourceId(R.styleable.TunaView_tunaSrcRight, -1);
+            int tunaSrcRightId = typedArray.getResourceId(R.styleable.TView_tunaSrcRight, -1);
             if (tunaSrcRightId != -1) {
                 tunaSrcRight = BitmapFactory.decodeResource(getResources(), tunaSrcRightId);
-                tunaSrcRightWidth = typedArray.getDimension(R.styleable.TunaView_tunaSrcRightWidth, 0);
-                tunaSrcRightHeight = typedArray.getDimension(R.styleable.TunaView_tunaSrcRightHeight, 0);
-                tunaSrcRightPadding = typedArray.getDimension(R.styleable.TunaView_tunaSrcRightPadding, 0);
-                tunaSrcRightDx = typedArray.getDimension(R.styleable.TunaView_tunaSrcRightDx, 0);
-                tunaSrcRightDy = typedArray.getDimension(R.styleable.TunaView_tunaSrcRightDy, 0);
+                tunaSrcRightWidth = typedArray.getDimension(R.styleable.TView_tunaSrcRightWidth, 0);
+                tunaSrcRightHeight = typedArray.getDimension(R.styleable.TView_tunaSrcRightHeight, 0);
+                tunaSrcRightPadding = typedArray.getDimension(R.styleable.TView_tunaSrcRightPadding, 0);
+                tunaSrcRightDx = typedArray.getDimension(R.styleable.TView_tunaSrcRightDx, 0);
+                tunaSrcRightDy = typedArray.getDimension(R.styleable.TView_tunaSrcRightDy, 0);
 
                 if (tunaSrcRightWidth == 0 || tunaSrcRightHeight == 0) {
                     throw new IllegalArgumentException("The content attribute require property named tunaSrcRightWidth and tunaSrcRightHeight");
@@ -6172,121 +6172,121 @@ public class TunaView extends View {
             }
 
             //
-            tunaTextMark = typedArray.getBoolean(R.styleable.TunaView_tunaTextMark, false);
-            tunaTextMarkTouchable = typedArray.getBoolean(R.styleable.TunaView_tunaTextMarkTouchable, false);
-            tunaTextMarkRadius = typedArray.getDimension(R.styleable.TunaView_tunaTextMarkRadius, 0);
-            tunaTextMarkColor = typedArray.getColor(R.styleable.TunaView_tunaTextMarkColor, Color.TRANSPARENT);
-            tunaTextMarkTextValue = typedArray.getString(R.styleable.TunaView_tunaTextMarkTextValue);
-            tunaTextMarkTextSize = typedArray.getDimension(R.styleable.TunaView_tunaTextMarkTextSize, 0);
-            tunaTextMarkTextColor = typedArray.getColor(R.styleable.TunaView_tunaTextMarkTextColor, Color.TRANSPARENT);
+            tunaTextMark = typedArray.getBoolean(R.styleable.TView_tunaTextMark, false);
+            tunaTextMarkTouchable = typedArray.getBoolean(R.styleable.TView_tunaTextMarkTouchable, false);
+            tunaTextMarkRadius = typedArray.getDimension(R.styleable.TView_tunaTextMarkRadius, 0);
+            tunaTextMarkColor = typedArray.getColor(R.styleable.TView_tunaTextMarkColor, Color.TRANSPARENT);
+            tunaTextMarkTextValue = typedArray.getString(R.styleable.TView_tunaTextMarkTextValue);
+            tunaTextMarkTextSize = typedArray.getDimension(R.styleable.TView_tunaTextMarkTextSize, 0);
+            tunaTextMarkTextColor = typedArray.getColor(R.styleable.TView_tunaTextMarkTextColor, Color.TRANSPARENT);
 
             //
-            tunaContentMark = typedArray.getBoolean(R.styleable.TunaView_tunaContentMark, false);
-            tunaContentMarkTouchable = typedArray.getBoolean(R.styleable.TunaView_tunaContentMarkTouchable, false);
-            tunaContentMarkRadius = typedArray.getDimension(R.styleable.TunaView_tunaContentMarkRadius, 0);
-            tunaContentMarkColor = typedArray.getColor(R.styleable.TunaView_tunaContentMarkColor, Color.TRANSPARENT);
-            tunaContentMarkTextValue = typedArray.getString(R.styleable.TunaView_tunaContentMarkTextValue);
-            tunaContentMarkTextSize = typedArray.getDimension(R.styleable.TunaView_tunaContentMarkTextSize, 0);
-            tunaContentMarkTextColor = typedArray.getColor(R.styleable.TunaView_tunaContentMarkTextColor, Color.TRANSPARENT);
+            tunaContentMark = typedArray.getBoolean(R.styleable.TView_tunaContentMark, false);
+            tunaContentMarkTouchable = typedArray.getBoolean(R.styleable.TView_tunaContentMarkTouchable, false);
+            tunaContentMarkRadius = typedArray.getDimension(R.styleable.TView_tunaContentMarkRadius, 0);
+            tunaContentMarkColor = typedArray.getColor(R.styleable.TView_tunaContentMarkColor, Color.TRANSPARENT);
+            tunaContentMarkTextValue = typedArray.getString(R.styleable.TView_tunaContentMarkTextValue);
+            tunaContentMarkTextSize = typedArray.getDimension(R.styleable.TView_tunaContentMarkTextSize, 0);
+            tunaContentMarkTextColor = typedArray.getColor(R.styleable.TView_tunaContentMarkTextColor, Color.TRANSPARENT);
 
             //
-            tunaStrokeWidthNormal = typedArray.getDimension(R.styleable.TunaView_tunaStrokeWidthNormal, 0);
-            tunaStrokeColorNormal = typedArray.getColor(R.styleable.TunaView_tunaStrokeColorNormal, Color.TRANSPARENT);
-            tunaStrokeWidthPress = typedArray.getDimension(R.styleable.TunaView_tunaStrokeWidthPress, tunaStrokeWidthNormal);
-            tunaStrokeColorPress = typedArray.getColor(R.styleable.TunaView_tunaStrokeColorPress, tunaStrokeColorNormal);
-            tunaStrokeWidthSelect = typedArray.getDimension(R.styleable.TunaView_tunaStrokeWidthSelect, tunaStrokeWidthNormal);
-            tunaStrokeColorSelect = typedArray.getColor(R.styleable.TunaView_tunaStrokeColorSelect, tunaStrokeColorNormal);
+            tunaStrokeWidthNormal = typedArray.getDimension(R.styleable.TView_tunaStrokeWidthNormal, 0);
+            tunaStrokeColorNormal = typedArray.getColor(R.styleable.TView_tunaStrokeColorNormal, Color.TRANSPARENT);
+            tunaStrokeWidthPress = typedArray.getDimension(R.styleable.TView_tunaStrokeWidthPress, tunaStrokeWidthNormal);
+            tunaStrokeColorPress = typedArray.getColor(R.styleable.TView_tunaStrokeColorPress, tunaStrokeColorNormal);
+            tunaStrokeWidthSelect = typedArray.getDimension(R.styleable.TView_tunaStrokeWidthSelect, tunaStrokeWidthNormal);
+            tunaStrokeColorSelect = typedArray.getColor(R.styleable.TView_tunaStrokeColorSelect, tunaStrokeColorNormal);
 
             //
-            tunaRadius = typedArray.getDimension(R.styleable.TunaView_tunaRadius, 0);
-            tunaRadiusLeftTop = typedArray.getDimension(R.styleable.TunaView_tunaRadiusLeftTop, tunaRadius);
-            tunaRadiusLeftBottom = typedArray.getDimension(R.styleable.TunaView_tunaRadiusLeftBottom, tunaRadius);
-            tunaRadiusRightTop = typedArray.getDimension(R.styleable.TunaView_tunaRadiusRightTop, tunaRadius);
-            tunaRadiusRightBottom = typedArray.getDimension(R.styleable.TunaView_tunaRadiusRightBottom, tunaRadius);
+            tunaRadius = typedArray.getDimension(R.styleable.TView_tunaRadius, 0);
+            tunaRadiusLeftTop = typedArray.getDimension(R.styleable.TView_tunaRadiusLeftTop, tunaRadius);
+            tunaRadiusLeftBottom = typedArray.getDimension(R.styleable.TView_tunaRadiusLeftBottom, tunaRadius);
+            tunaRadiusRightTop = typedArray.getDimension(R.styleable.TView_tunaRadiusRightTop, tunaRadius);
+            tunaRadiusRightBottom = typedArray.getDimension(R.styleable.TView_tunaRadiusRightBottom, tunaRadius);
 
             tunaClassic = (tunaRadius == tunaRadiusLeftTop && tunaRadiusLeftTop == tunaRadiusLeftBottom && tunaRadiusLeftBottom == tunaRadiusRightTop && tunaRadiusRightTop == tunaRadiusRightBottom);
 
             //
-            tunaTextValue = typedArray.getString(R.styleable.TunaView_tunaTextValue);
-            tunaTextSize = typedArray.getDimension(R.styleable.TunaView_tunaTextSize, 0);
+            tunaTextValue = typedArray.getString(R.styleable.TView_tunaTextValue);
+            tunaTextSize = typedArray.getDimension(R.styleable.TView_tunaTextSize, 0);
 
-            tunaTextColorNormal = typedArray.getColor(R.styleable.TunaView_tunaTextColorNormal, Color.TRANSPARENT);
-            tunaTextColorPress = typedArray.getColor(R.styleable.TunaView_tunaTextColorPress, tunaTextColorNormal);
-            tunaTextColorSelect = typedArray.getColor(R.styleable.TunaView_tunaTextColorSelect, tunaTextColorNormal);
+            tunaTextColorNormal = typedArray.getColor(R.styleable.TView_tunaTextColorNormal, Color.TRANSPARENT);
+            tunaTextColorPress = typedArray.getColor(R.styleable.TView_tunaTextColorPress, tunaTextColorNormal);
+            tunaTextColorSelect = typedArray.getColor(R.styleable.TView_tunaTextColorSelect, tunaTextColorNormal);
 
-            tunaTextPaddingLeft = typedArray.getDimension(R.styleable.TunaView_tunaTextPaddingLeft, 0);
-            tunaTextPaddingRight = typedArray.getDimension(R.styleable.TunaView_tunaTextPaddingRight, 0);
-            tunaTextRowSpaceRatio = typedArray.getFraction(R.styleable.TunaView_tunaTextRowSpaceRatio, 1, 1, 1);
+            tunaTextPaddingLeft = typedArray.getDimension(R.styleable.TView_tunaTextPaddingLeft, 0);
+            tunaTextPaddingRight = typedArray.getDimension(R.styleable.TView_tunaTextPaddingRight, 0);
+            tunaTextRowSpaceRatio = typedArray.getFraction(R.styleable.TView_tunaTextRowSpaceRatio, 1, 1, 1);
 
             //
-            int tunaTextGravityIndex = typedArray.getInt(R.styleable.TunaView_tunaTextGravity, 0);
+            int tunaTextGravityIndex = typedArray.getInt(R.styleable.TView_tunaTextGravity, 0);
             if (tunaTextGravityIndex >= 0) {
                 tunaTextGravity = tunaTextGravityArray[tunaTextGravityIndex];
             }
 
             //
-            int tunaTextTypeFaceIndex = typedArray.getInt(R.styleable.TunaView_tunaTextTypeFace, 0);
+            int tunaTextTypeFaceIndex = typedArray.getInt(R.styleable.TView_tunaTextTypeFace, 0);
             if (tunaTextTypeFaceIndex >= 0) {
                 tunaTextTypeFace = Typeface.create(Typeface.DEFAULT, tunaTextTypeFaceArray[tunaTextTypeFaceIndex]);
             }
 
-            tunaTextDx = typedArray.getDimension(R.styleable.TunaView_tunaTextDx, 0);
-            tunaTextDy = typedArray.getDimension(R.styleable.TunaView_tunaTextDy, 0);
-            tunaTextFractionDx = typedArray.getFraction(R.styleable.TunaView_tunaTextFractionDx, 1, 1, 0);
-            tunaTextFractionDy = typedArray.getFraction(R.styleable.TunaView_tunaTextFractionDy, 1, 1, 0);
+            tunaTextDx = typedArray.getDimension(R.styleable.TView_tunaTextDx, 0);
+            tunaTextDy = typedArray.getDimension(R.styleable.TView_tunaTextDy, 0);
+            tunaTextFractionDx = typedArray.getFraction(R.styleable.TView_tunaTextFractionDx, 1, 1, 0);
+            tunaTextFractionDy = typedArray.getFraction(R.styleable.TView_tunaTextFractionDy, 1, 1, 0);
 
             //
-            tunaTextShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaTextShadowRadius, 0);
+            tunaTextShadowRadius = typedArray.getDimension(R.styleable.TView_tunaTextShadowRadius, 0);
             if (tunaTextShadowRadius > 0) {
-                tunaTextShadowColor = typedArray.getColor(R.styleable.TunaView_tunaTextShadowColor, Color.TRANSPARENT);
-                tunaTextShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaTextShadowDx, 0);
-                tunaTextShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaTextShadowDy, 0);
+                tunaTextShadowColor = typedArray.getColor(R.styleable.TView_tunaTextShadowColor, Color.TRANSPARENT);
+                tunaTextShadowDx = typedArray.getDimension(R.styleable.TView_tunaTextShadowDx, 0);
+                tunaTextShadowDy = typedArray.getDimension(R.styleable.TView_tunaTextShadowDy, 0);
             }
 
             //
-            tunaContentValue = typedArray.getString(R.styleable.TunaView_tunaContentValue);
-            tunaContentSize = typedArray.getDimension(R.styleable.TunaView_tunaContentSize, 0);
+            tunaContentValue = typedArray.getString(R.styleable.TView_tunaContentValue);
+            tunaContentSize = typedArray.getDimension(R.styleable.TView_tunaContentSize, 0);
 
-            tunaContentColorNormal = typedArray.getColor(R.styleable.TunaView_tunaContentColorNormal, Color.TRANSPARENT);
-            tunaContentColorPress = typedArray.getColor(R.styleable.TunaView_tunaContentColorPress, tunaContentColorNormal);
-            tunaContentColorSelect = typedArray.getColor(R.styleable.TunaView_tunaContentColorSelect, tunaContentColorNormal);
+            tunaContentColorNormal = typedArray.getColor(R.styleable.TView_tunaContentColorNormal, Color.TRANSPARENT);
+            tunaContentColorPress = typedArray.getColor(R.styleable.TView_tunaContentColorPress, tunaContentColorNormal);
+            tunaContentColorSelect = typedArray.getColor(R.styleable.TView_tunaContentColorSelect, tunaContentColorNormal);
 
-            tunaContentPaddingLeft = typedArray.getDimension(R.styleable.TunaView_tunaContentPaddingLeft, 0);
-            tunaContentPaddingRight = typedArray.getDimension(R.styleable.TunaView_tunaContentPaddingRight, 0);
-            tunaContentRowSpaceRatio = typedArray.getFraction(R.styleable.TunaView_tunaContentRowSpaceRatio, 1, 1, 1);
+            tunaContentPaddingLeft = typedArray.getDimension(R.styleable.TView_tunaContentPaddingLeft, 0);
+            tunaContentPaddingRight = typedArray.getDimension(R.styleable.TView_tunaContentPaddingRight, 0);
+            tunaContentRowSpaceRatio = typedArray.getFraction(R.styleable.TView_tunaContentRowSpaceRatio, 1, 1, 1);
 
             //
-            int tunaContentGravityIndex = typedArray.getInt(R.styleable.TunaView_tunaContentGravity, 0);
+            int tunaContentGravityIndex = typedArray.getInt(R.styleable.TView_tunaContentGravity, 0);
             if (tunaContentGravityIndex >= 0) {
                 tunaContentGravity = tunaContentGravityArray[tunaContentGravityIndex];
             }
 
-            int tunaContentTypeFaceIndex = typedArray.getInt(R.styleable.TunaView_tunaContentTypeFace, 0);
+            int tunaContentTypeFaceIndex = typedArray.getInt(R.styleable.TView_tunaContentTypeFace, 0);
             if (tunaContentTypeFaceIndex >= 0) {
                 tunaContentTypeFace = Typeface.create(Typeface.DEFAULT, tunaContentTypeFaceArray[tunaContentTypeFaceIndex]);
             }
 
-            tunaContentDx = typedArray.getDimension(R.styleable.TunaView_tunaContentDx, 0);
-            tunaContentDy = typedArray.getDimension(R.styleable.TunaView_tunaContentDy, 0);
-            tunaContentFractionDx = typedArray.getFraction(R.styleable.TunaView_tunaContentFractionDx, 1, 1, 0);
-            tunaContentFractionDy = typedArray.getFraction(R.styleable.TunaView_tunaContentFractionDy, 1, 1, 0);
+            tunaContentDx = typedArray.getDimension(R.styleable.TView_tunaContentDx, 0);
+            tunaContentDy = typedArray.getDimension(R.styleable.TView_tunaContentDy, 0);
+            tunaContentFractionDx = typedArray.getFraction(R.styleable.TView_tunaContentFractionDx, 1, 1, 0);
+            tunaContentFractionDy = typedArray.getFraction(R.styleable.TView_tunaContentFractionDy, 1, 1, 0);
 
             //
-            tunaContentShadowRadius = typedArray.getDimension(R.styleable.TunaView_tunaContentShadowRadius, 0);
+            tunaContentShadowRadius = typedArray.getDimension(R.styleable.TView_tunaContentShadowRadius, 0);
             if (tunaContentShadowRadius > 0) {
-                tunaContentShadowColor = typedArray.getColor(R.styleable.TunaView_tunaContentShadowColor, Color.TRANSPARENT);
-                tunaContentShadowDx = typedArray.getDimension(R.styleable.TunaView_tunaContentShadowDx, 0);
-                tunaContentShadowDy = typedArray.getDimension(R.styleable.TunaView_tunaContentShadowDy, 0);
+                tunaContentShadowColor = typedArray.getColor(R.styleable.TView_tunaContentShadowColor, Color.TRANSPARENT);
+                tunaContentShadowDx = typedArray.getDimension(R.styleable.TView_tunaContentShadowDx, 0);
+                tunaContentShadowDy = typedArray.getDimension(R.styleable.TView_tunaContentShadowDy, 0);
             }
 
             //
-            tunaTextMarkDx = typedArray.getDimension(R.styleable.TunaView_tunaTextMarkDx, 0);
-            tunaTextMarkDy = typedArray.getDimension(R.styleable.TunaView_tunaTextMarkDy, 0);
-            tunaTextMarkFractionDx = typedArray.getFraction(R.styleable.TunaView_tunaTextMarkFractionDx, 1, 1, 0);
-            tunaTextMarkFractionDy = typedArray.getFraction(R.styleable.TunaView_tunaTextMarkFractionDy, 1, 1, 0);
+            tunaTextMarkDx = typedArray.getDimension(R.styleable.TView_tunaTextMarkDx, 0);
+            tunaTextMarkDy = typedArray.getDimension(R.styleable.TView_tunaTextMarkDy, 0);
+            tunaTextMarkFractionDx = typedArray.getFraction(R.styleable.TView_tunaTextMarkFractionDx, 1, 1, 0);
+            tunaTextMarkFractionDy = typedArray.getFraction(R.styleable.TView_tunaTextMarkFractionDy, 1, 1, 0);
 
             // tunaMaterialIndex default -1
-            int tunaMaterialIndex = typedArray.getInt(R.styleable.TunaView_tunaMaterial, -1);
+            int tunaMaterialIndex = typedArray.getInt(R.styleable.TView_tunaMaterial, -1);
             if (tunaMaterialIndex > -1) {
                 tunaMaterial = tunaMaterialArray[tunaMaterialIndex];
             }
