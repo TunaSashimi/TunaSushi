@@ -10,9 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <activity
-            android:name=".EntryAct"
+            android:name=".EntryActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TViewTest" />
-        <activity android:name=".TTrangleTest" />
-        <activity android:name=".TBubbleTest" />
+        <activity android:name=".TViewActivity" />
+        <activity android:name=".TTrangleActivity" />
+        <activity android:name=".TBubbleActivity" />
 
     </application>
 

@@ -24,13 +24,13 @@
     </style>
 
     <style name="TView_TextMark_Red_Horizontal" parent="TView_Button">
-        <item name="textMarkRadius">@dimen/tuna_textMark_radius</item>
+        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMark">true</item>
     </style>
 
     <style name="TView_TextMark_Red_Top" parent="TView_Button">
-        <item name="textMarkRadius">@dimen/tuna_textMark_radius</item>
+        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-2dp</item>
         <item name="textMark">true</item>
@@ -114,7 +114,7 @@
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textMark_radius</item>
+        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
 
 
     </style>
@@ -135,7 +135,7 @@
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textMark_radius</item>
+        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
 
     </style>
 
@@ -155,7 +155,7 @@
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textMark_radius</item>
+        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
 
     </style>
 

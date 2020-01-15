@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.tuna.TView;
 
-public class TTrangleTest extends Activity {
+public class TTrangleActivity extends Activity {
 
     private TView TViewButton, TViewDialog;
 
@@ -14,7 +14,7 @@ public class TTrangleTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.ttrangletest);
+        setContentView(R.layout.activity_ttrangle);
 
         TViewButton = findViewById(R.id.viewButton);
         TViewDialog = findViewById(R.id.viewDialog);

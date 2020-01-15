@@ -19,8 +19,7 @@ import android.view.View;
  * @Description
  */
 
-//ColorPickerDialog
-public class TCPDialog extends Dialog {
+public class ColorPickerDialog extends Dialog {
 
     private int initialColor;
     private TunaColorSelectListener tunaColorSelectListener;
@@ -29,7 +28,7 @@ public class TCPDialog extends Dialog {
         void tunaColorSelect(int color);
     }
 
-    public TCPDialog(Context context, int initialColor, TunaColorSelectListener tunaColorSelectListener) {
+    public ColorPickerDialog(Context context, int initialColor, TunaColorSelectListener tunaColorSelectListener) {
         super(context);
 
         this.initialColor = initialColor;
@@ -43,7 +42,7 @@ public class TCPDialog extends Dialog {
         //Add a layer inside the listener and Add to contentview
         TunaColorSelectListener tunaColorSelectListener = new TunaColorSelectListener() {
             public void tunaColorSelect(int color) {
-                TCPDialog.this.tunaColorSelectListener.tunaColorSelect(color);
+                ColorPickerDialog.this.tunaColorSelectListener.tunaColorSelect(color);
                 dismiss();
             }
         };
@@ -104,7 +103,7 @@ public class TCPDialog extends Dialog {
 
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            setMeasuredDimension((int)CENTER_X * 2, (int)CENTER_Y * 2);
+            setMeasuredDimension((int) CENTER_X * 2, (int) CENTER_Y * 2);
         }
 
 

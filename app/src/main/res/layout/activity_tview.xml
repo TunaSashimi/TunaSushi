@@ -141,7 +141,7 @@
                 android:layout_toLeftOf="@id/viewRadioGroupDrackBrownAnchor"
                 app:select="true"
                 app:textMarkColor="#ff0000"
-                app:textMarkRadius="@dimen/tuna_textMark_radius"
+                app:textMarkRadius="@dimen/tuna_textmark_radius"
                 app:textValue="金枪鱼刺身" />
 
             <com.tuna.TView
@@ -150,7 +150,7 @@
                 android:layout_toRightOf="@id/viewRadioGroupDrackBrownAnchor"
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
-                app:textMarkRadius="@dimen/tuna_textMark_radius"
+                app:textMarkRadius="@dimen/tuna_textmark_radius"
                 app:textValue="TunaSashimi" />
         </RelativeLayout>
 
@@ -186,9 +186,9 @@
             app:textGravity="center_left"
             app:textMark="true"
             app:textMarkColor="#ff0000"
-            app:textMarkRadius="@dimen/tuna_textMark_tipsRadius"
+            app:textMarkRadius="@dimen/tuna_textmark_tipsRadius"
             app:textMarkTextColor="#ffffff"
-            app:textMarkTextSize="@dimen/tuna_textMark_textSize"
+            app:textMarkTextSize="@dimen/tuna_textmark_textSize"
             app:textMarkTextValue="1"
             app:textPaddingLeft="4dp"
             app:textPaddingRight="4dp"
@@ -224,7 +224,6 @@
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="字体#592d2d背景#fae500描边#ac9696背景阴影颜色#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
 
-
         <com.tuna.TView
             android:id="@+id/shadowButton03"
             android:layout_width="match_parent"
@@ -243,7 +242,6 @@
             app:textPaddingRight="8dp"
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="字体#ffffff背景#0000ff背景阴影颜色#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
-
 
         <TextView
             android:id="@+id/textGradientButton"
@@ -482,9 +480,9 @@
             app:textGravity="all_left"
             app:textMark="true"
             app:textMarkColor="#ff0000"
-            app:textMarkRadius="@dimen/tuna_textMark_tipsRadius"
+            app:textMarkRadius="@dimen/tuna_textmark_tipsRadius"
             app:textMarkTextColor="#ffffff"
-            app:textMarkTextSize="@dimen/tuna_textMark_textSize"
+            app:textMarkTextSize="@dimen/tuna_textmark_textSize"
             app:textMarkTextValue="1"
             app:textPaddingLeft="18dp"
             app:textPaddingRight="18dp"

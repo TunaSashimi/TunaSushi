@@ -11,15 +11,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntryAct extends Activity {
-    private String[] s = {"TViewTest", "TTrangleTest", "TBubbleTest",};
+public class EntryActivity extends Activity {
+    private String[] s = {"TViewActivity", "TTrangleActivity", "TBubbleActivity",};
 
-    private Class<?>[] c = {TViewTest.class, TTrangleTest.class, TBubbleTest.class,};
+    private Class<?>[] c = {TViewActivity.class, TTrangleActivity.class, TBubbleActivity.class,};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.entryact);
+        setContentView(R.layout.activity_entry);
 
         ListView lv = findViewById(R.id.roottt);
         List<String> list = new ArrayList<String>();
@@ -27,11 +27,16 @@ public class EntryAct extends Activity {
             list.add(s[i]);
         }
 
-        lv.setAdapter(new ArrayAdapter(this, R.layout.entryactitem, list));
+        lv.setAdapter(new ArrayAdapter(this, R.layout.activity_entryitem, list));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                startActivity(new Intent(EntryAct.this, c[arg2]));
+                startActivity(new Intent(EntryActivity.this, c[arg2]));
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }

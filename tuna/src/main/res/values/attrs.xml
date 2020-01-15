@@ -245,7 +245,6 @@
 
     </declare-styleable>
 
-
     <declare-styleable name="TTrangle">
         <attr name="trangleBackgroundNormal" format="reference|color" />
         <attr name="trangleBackgroundPress" format="reference|color" />

@@ -37,9 +37,9 @@
 
     <!-- Exclusive TunaView or any of its subclasses use -->
 
-    <dimen name="tuna_textMark_radius">4dp</dimen>
-    <dimen name="tuna_textMark_tipsRadius">10dp</dimen>
-    <dimen name="tuna_textMark_textSize">10dp</dimen>
+    <dimen name="tuna_textmark_radius">4dp</dimen>
+    <dimen name="tuna_textmark_tipsRadius">10dp</dimen>
+    <dimen name="tuna_textmark_textSize">10dp</dimen>
 
     <!-- Other use -->
 

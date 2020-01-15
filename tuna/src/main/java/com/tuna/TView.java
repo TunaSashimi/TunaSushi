@@ -6,22 +6,15 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Movie;
 import android.graphics.Paint;
@@ -38,29 +31,14 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
-import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Property;
 import android.util.TypedValue;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
@@ -75,21 +53,22 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.tool.DeviceTool;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
+import static com.tool.DeviceTool.applyDimension;
+import static com.tool.DeviceTool.convertToPX;
+import static com.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tool.ViewTool.getLinearGradient;
+import static com.tool.ViewTool.setViewMargins;
 
 /**
  * @author Tunasashimi
@@ -98,1299 +77,7 @@ import java.util.Locale;
  * @Description
  */
 public class TView extends View {
-
     public static int bitmapMaxSize = 1536;
-    public static TelephonyManager telephonyManager;
-
-    public static class DeviceInfo {
-        public String deviceId;//863077025146139
-        public String deviceMac;//f8:a4:5f:50:a6:a3
-        public String deviceManufacturer;//Xiaomi
-        public String deviceModel;//MI 2S
-        public String deviceRelease;//4.1.1
-        public String deviceSDK;//16
-        public int deviceWidth;//720
-        public int deviceHeight;//1280
-        public float deviceDensity;//2.0
-        public float deviceScaledDensity;//2.0
-        public float deviceXdpi;//345.0566
-        public float deviceYdpi;//342.23157
-        public String IMSI;//460010783794229
-        public String operators;//中国联通
-        public String line1Number;//
-        public String networkOperatorName;//China Unicom
-        public String networkOperator;//46001
-        public String networkCountryIso;//cn
-        public String simCountryIso;//cn
-        public String simOperator;//46001
-        public String simOperatorName;//
-        public String simSerialNumber;//89860114733102699519
-        public String subscriberId;//460010783794229
-        public List neighboringCellInfo;//[[116@-84]]
-        public int phoneType;//1
-        public String networkType;//WIFI
-
-        @Override
-        public String toString() {
-            StringBuffer sb = new StringBuffer();
-            sb
-                .append("DeviceInfo[")//
-                .append("\ndeviceId[").append(deviceId + "]")//
-                .append("\ndeviceMac[").append(deviceMac + "]")//
-                .append("\ndeviceManufacturer[").append(deviceManufacturer + "]")//
-                .append("\ndeviceModel[").append(deviceModel + "]")//
-                .append("\ndeviceRelease[").append(deviceRelease + "]")//
-                .append("\ndeviceSDK[").append(deviceSDK + "]")//
-                .append("\ndeviceWidth[").append(deviceWidth + "]")//
-                .append("\ndeviceHeight[").append(deviceHeight + "]")//
-                .append("\ndeviceDensity[").append(deviceDensity + "]")//
-                .append("\ndeviceScaledDensity[").append(deviceScaledDensity + "]")//
-                .append("\ndeviceXdpi[").append(deviceXdpi + "]")//
-                .append("\ndeviceYdpi[").append(deviceYdpi + "]")//
-                .append("\nIMSI[").append(IMSI + "]")//
-                .append("\noperators[").append(operators + "]")//
-                .append("\nline1Number[").append(line1Number + "]")//
-                .append("\nnetworkOperatorName[").append(networkOperatorName + "]")//
-                .append("\nnetworkOperator[").append(networkOperator + "]")//
-                .append("\nnetworkCountryIso[").append(networkCountryIso + "]")//
-                .append("\nsimCountryIso[").append(simCountryIso + "]")//
-                .append("\nsimOperator[").append(simOperator + "]")//
-                .append("\nsimOperatorName[").append(simOperatorName + "]")//
-                .append("\nsimSerialNumber[").append(simSerialNumber + "]")//
-                .append("\nsubscriberId[").append(subscriberId + "]")//
-                .append("\nneighboringCellInfo[").append(neighboringCellInfo + "]")//
-                .append("\nphoneType[").append(phoneType + "]")//
-                .append("\nnetworkType[").append(networkType + "]")//
-            ;
-            return sb.toString();
-        }
-    }
-
-    public static DeviceInfo getDeviceInfo(Context context) {
-        DeviceInfo deviceInfo = new DeviceInfo();
-
-        deviceInfo.deviceId = getDeviceId(context);
-        deviceInfo.deviceMac = getDeviceMac(context);
-        deviceInfo.deviceManufacturer = getDeviceManufacturer(context);
-        deviceInfo.deviceModel = getDeviceModel();
-        deviceInfo.deviceRelease = getDeviceRelease();
-        deviceInfo.deviceSDK = getDeviceSDK();
-        deviceInfo.deviceWidth = getDeviceWidth(context);
-        deviceInfo.deviceHeight = getDeviceHeight(context);
-        deviceInfo.deviceDensity = getDeviceDensity(context);
-        deviceInfo.deviceScaledDensity = getDeviceScaledDensity(context);
-        deviceInfo.deviceXdpi = getDeviceXdpi(context);
-        deviceInfo.deviceYdpi = getDeviceYdpi(context);
-        deviceInfo.IMSI = getIMSI(context);
-        deviceInfo.operators = getOperators(deviceInfo.IMSI);
-        deviceInfo.line1Number = getLine1Number(context);
-        deviceInfo.networkOperatorName = getNetworkOperatorName(context);
-        deviceInfo.networkOperator = getNetworkOperator(context);
-        deviceInfo.networkCountryIso = getNetworkCountryIso(context);
-        deviceInfo.simCountryIso = getSimCountryIso(context);
-        deviceInfo.simOperator = getSimOperator(context);
-        deviceInfo.simOperatorName = getSimOperatorName(context);
-        deviceInfo.simSerialNumber = getSimSerialNumber(context);
-        deviceInfo.subscriberId = getSubscriberId(context);
-        deviceInfo.neighboringCellInfo = getNeighboringCellInfo(context);
-        deviceInfo.phoneType = getPhoneType(context);
-        deviceInfo.networkType = getNetworkType(context);
-
-        return deviceInfo;
-    }
-
-    //getDeviceId , Requires android.permission.READ_PHONE_STATE.
-    public static String getDeviceId(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        String deviceId = telephonyManager.getDeviceId();
-        String deviceId = "";
-        if (TextUtils.isEmpty(deviceId)) {
-            deviceId = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
-        }
-        return deviceId;
-    }
-
-    //getDeviceMac , Requires android.permission.ACCESS_WIFI_STATE.
-    public static String getDeviceMac(Context context) {
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        return wifi.getConnectionInfo().getMacAddress();
-    }
-
-    //getDeviceManufacturer
-    public static String getDeviceManufacturer(Context context) {
-        return android.os.Build.MANUFACTURER;
-    }
-
-    //getDeviceModel
-    public static String getDeviceModel() {
-        return Build.MODEL;
-    }
-
-    //getDeviceRelease
-    public static String getDeviceRelease() {
-        return Build.VERSION.RELEASE;
-    }
-
-    //getDeviceReSDK
-    public static String getDeviceSDK() {
-        return Build.VERSION.SDK;
-    }
-
-    //getDeviceWidth
-    public static int getDeviceWidth(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.widthPixels;
-    }
-
-    //getDeviceHeight
-    public static int getDeviceHeight(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.heightPixels;
-    }
-
-    //getDeviceDensity
-    public static float getDeviceDensity(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.density;
-    }
-
-    //getDeviceScaledDensity
-    public static float getDeviceScaledDensity(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.scaledDensity;
-    }
-
-    //getDeviceXdpi
-    public static float getDeviceXdpi(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.xdpi;
-    }
-
-    //getDeviceYdpi
-    public static float getDeviceYdpi(Context context) {
-        if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
-        }
-        return displayMetrics.ydpi;
-    }
-
-    //getIMSI
-    public static String getIMSI(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        return telephonyManager.getSubscriberId();
-        return "";
-    }
-
-    //getOperators
-    public static String getOperators(String string) {
-        if (string != null) {
-            if (string.startsWith("46000") || string.startsWith("46002")) {
-                //Because the mobile network under the IMSI number 46,000 has been exhausted, so a virtual number 46002, 134/159 number section uses this number
-                return "中国移动";
-            } else if (string.startsWith("46001")) {
-                return "中国联通";
-            } else if (string.startsWith("46003")) {
-                return "中国电信";
-            }
-        }
-        return null;
-    }
-
-    //getLine1Number
-    public static String getLine1Number(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        return telephonyManager.getLine1Number();
-        return "";
-    }
-
-    //getNetworkOperatorName
-    public static String getNetworkOperatorName(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getNetworkOperatorName();
-    }
-
-    //getNetworkOperator
-    public static String getNetworkOperator(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getNetworkOperator();
-    }
-
-    //getNetworkCountryIso
-    public static String getNetworkCountryIso(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getNetworkCountryIso();
-    }
-
-    //getSimCountryIso
-    public static String getSimCountryIso(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getSimCountryIso();
-    }
-
-    //getSimOperator
-    public static String getSimOperator(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getSimOperator();
-    }
-
-    //getSimOperatorName
-    public static String getSimOperatorName(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getSimOperatorName();
-    }
-
-    //getSimSerialNumber
-    public static String getSimSerialNumber(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        return telephonyManager.getSimSerialNumber();
-        return "";
-    }
-
-    //getSubscriberId
-    public static String getSubscriberId(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        return telephonyManager.getSubscriberId();
-        return "";
-    }
-
-    //getNeighboringCellInfo
-    public static List getNeighboringCellInfo(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-//        return telephonyManager.getNeighboringCellInfo();
-        return new ArrayList();
-    }
-
-    //phoneType
-    public static int getPhoneType(Context context) {
-        if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        }
-        return telephonyManager.getPhoneType();
-    }
-
-    //getNetworkType
-    public static String getNetworkType(Context context) {
-        String strNetworkType = "null";
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                strNetworkType = "WIFI";
-            } else if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                String subTypeName = networkInfo.getSubtypeName();
-                // TD-SCDMA networkType is 17
-                int networkType = networkInfo.getSubtype();
-                switch (networkType) {
-                    case TelephonyManager.NETWORK_TYPE_GPRS:
-                    case TelephonyManager.NETWORK_TYPE_EDGE:
-                    case TelephonyManager.NETWORK_TYPE_CDMA:
-                    case TelephonyManager.NETWORK_TYPE_1xRTT:
-                    case TelephonyManager.NETWORK_TYPE_IDEN: // api < 8 : replace by 11
-                        strNetworkType = "2G";
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_UMTS:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_0:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
-                    case TelephonyManager.NETWORK_TYPE_HSDPA:
-                    case TelephonyManager.NETWORK_TYPE_HSUPA:
-                    case TelephonyManager.NETWORK_TYPE_HSPA:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_B: // api < 9 :  replace by 14
-                    case TelephonyManager.NETWORK_TYPE_EHRPD: // api < 11 : replace by 12
-                    case TelephonyManager.NETWORK_TYPE_HSPAP: // api < 13 : replace by 15
-                        strNetworkType = "3G";
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_LTE: // api < 11 : replace by 13
-                        strNetworkType = "4G";
-                        break;
-                    default:
-                        if (subTypeName.equalsIgnoreCase("TD-SCDMA") || subTypeName.equalsIgnoreCase("WCDMA") || subTypeName.equalsIgnoreCase("CDMA2000")) {
-                            strNetworkType = "3G";
-                        } else {
-                            strNetworkType = subTypeName;
-                        }
-                        break;
-                }
-            }
-        }
-        return strNetworkType;
-    }
-
-    //getMemory
-    public static String getMemoryInfo() {
-        String str1 = "/proc/meminfo";
-        String str2 = "";
-        StringBuffer stringBuffer = new StringBuffer(28);
-        try {
-            FileReader fr = new FileReader(str1);
-            BufferedReader localBufferedReader = new BufferedReader(fr, 8192);
-            while ((str2 = localBufferedReader.readLine()) != null) {
-                stringBuffer.append(str2 + "\n");
-            }
-            localBufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuffer.toString();
-    }
-
-    //getRAM
-    public static long getAvailMemory(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        am.getMemoryInfo(mi);
-        return mi.availMem;
-    }
-
-    public static long getTotalInternalStorgeSize() {
-        File path = Environment.getDataDirectory();
-        StatFs mStatFs = new StatFs(path.getPath());
-        long blockSize = mStatFs.getBlockSize();
-        long totalBlocks = mStatFs.getBlockCount();
-        return totalBlocks * blockSize;
-    }
-
-    public static long getAvailableInternalStorgeSize() {
-        File path = Environment.getDataDirectory();
-        StatFs mStatFs = new StatFs(path.getPath());
-        long blockSize = mStatFs.getBlockSize();
-        long availableBlocks = mStatFs.getAvailableBlocks();
-        return availableBlocks * blockSize;
-    }
-
-    public static boolean getExternalMemoryAvailable() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
-
-    public static long getTotalExternalStorgeSize() {
-        if (getExternalMemoryAvailable()) {
-            File path = Environment.getExternalStorageDirectory();
-            StatFs mStatFs = new StatFs(path.getPath());
-            long blockSize = mStatFs.getBlockSize();
-            long totalBlocks = mStatFs.getBlockCount();
-            return totalBlocks * blockSize;
-        }
-        return 0;
-    }
-
-    public static long getAvailableExternalStorgeSize() {
-        if (getExternalMemoryAvailable()) {
-            File path = Environment.getExternalStorageDirectory();
-            StatFs mStatFs = new StatFs(path.getPath());
-            long blockSize = mStatFs.getBlockSize();
-            long availableBlocks = mStatFs.getAvailableBlocks();
-            return availableBlocks * blockSize;
-        }
-        return 0;
-    }
-
-    /**
-     * These are public static methods
-     */
-
-    public static float convertToPX(float value, Activity activity) {
-        return convertToPX(value, TypedValue.COMPLEX_UNIT_DIP, activity);
-    }
-
-    public static float convertToPX(float value, int unit, Activity activity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return applyDimension(unit, value, dm);
-    }
-
-    public static float convertToPX(float value, View view) {
-        return convertToPX(value, TypedValue.COMPLEX_UNIT_DIP, view);
-    }
-
-    public static float convertToPX(float value, int unit, View view) {
-        return applyDimension(unit, value, getViewDisplayMetrics(view));
-    }
-
-    public static float applyDimension(int unit, float value, DisplayMetrics metrics) {
-        switch (unit) {
-            case TypedValue.COMPLEX_UNIT_PX:
-                return value;
-            case TypedValue.COMPLEX_UNIT_DIP:
-                return value * metrics.density;
-            case TypedValue.COMPLEX_UNIT_SP:
-                return value * metrics.scaledDensity;
-            case TypedValue.COMPLEX_UNIT_PT:
-                return value * metrics.xdpi * (1.0f / 72);
-            case TypedValue.COMPLEX_UNIT_IN:
-                return value * metrics.xdpi;
-            case TypedValue.COMPLEX_UNIT_MM:
-                return value * metrics.xdpi * (1.0f / 25.4f);
-        }
-        return 0;
-    }
-
-    //
-    public static Resources getViewResources(View view) {
-        Resources resources;
-        Context context = view.getContext();
-        if (context == null) {
-            resources = Resources.getSystem();
-        } else {
-            resources = context.getResources();
-        }
-        return resources;
-    }
-
-    //
-    public static DisplayMetrics getViewDisplayMetrics(View view) {
-        return getViewResources(view).getDisplayMetrics();
-    }
-
-    //
-    public static void setViewMargins(View view, int left, int top, int right, int bottom) {
-        setViewMargins(view, TypedValue.COMPLEX_UNIT_DIP, left, top, right, bottom);
-    }
-
-    //
-    public static void setViewMargins(View view, int unit, int left, int top, int right, int bottom) {
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(view);
-
-        setViewMarginsRaw(view, (int) applyDimension(unit, left, displayMetrics), (int) applyDimension(unit, top, displayMetrics),
-            (int) applyDimension(unit, right, displayMetrics), (int) applyDimension(unit, bottom, displayMetrics));
-    }
-
-    //
-    private static void setViewMarginsRaw(View v, int left, int top, int right, int bottom) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(left, top, right, bottom);
-            v.requestLayout();
-        }
-    }
-
-    public static int getScreenWidth(Activity activity) {
-        WindowManager windowManager = activity.getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        return display.getWidth();
-    }
-
-    public static int getScreenHeight(Activity activity) {
-        WindowManager windowManager = activity.getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        return display.getHeight();
-    }
-
-    public static float getScreenDensity(Context context) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        displayMetrics = context.getResources().getDisplayMetrics();
-        return displayMetrics.density;
-    }
-
-    // The upper left corner of the view coordinate into an array, in hiding the status bar / title bar case, their height calculated by 0.
-    public static int getLocationOnScreenX(View view) {
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        return location[0];
-    }
-
-    public static int getLocationOnScreenY(View view) {
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        return location[1];
-    }
-
-    // The common activity, y coordinates as the visible state bar height +
-    // visible on the upper left corner of the title bar of view height to the
-    // title bar at the bottom of the distance.
-    public static int getLocationInWindowX(View view) {
-        int[] location = new int[2];
-        view.getLocationInWindow(location);
-        return location[0];
-    }
-
-    public static int getLocationInWindowY(View view) {
-        int[] location = new int[2];
-        view.getLocationInWindow(location);
-        return location[1];
-    }
-
-    public static int getStatusBarHeight(Activity activity) {
-        Rect frame = new Rect();
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        return frame.top;
-    }
-
-    public static int getTitleBarHeight(Activity activity) {
-        int contentTop = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
-        return contentTop - getStatusBarHeight(activity);
-    }
-
-    //
-    public static void setLayoutByWidth(View view, float width) {
-        setLayoutByWidth(view, TypedValue.COMPLEX_UNIT_DIP, width);
-    }
-
-    public static void setLayoutByWidth(View view, int unit, float width) {
-        setLayoutByWidthRaw(view, applyDimension(unit, width, getViewDisplayMetrics(view)));
-    }
-
-    public static void setLayoutByWidthRaw(View view, float width) {
-        LayoutParams params = view.getLayoutParams();
-        params.width = (int) (width);
-        view.setLayoutParams(params);
-    }
-
-    //
-    public static void setLayoutByHeight(View view, float height) {
-        setLayoutByHeight(view, TypedValue.COMPLEX_UNIT_DIP, height);
-    }
-
-    public static void setLayoutByHeight(View view, int unit, float height) {
-        setLayoutByHeightRaw(view, applyDimension(unit, height, getViewDisplayMetrics(view)));
-    }
-
-    public static void setLayoutByHeightRaw(View view, float height) {
-        LayoutParams params = view.getLayoutParams();
-        params.height = (int) (height);
-        view.setLayoutParams(params);
-    }
-
-    //
-    public static void setLayout(View view, float width, float height) {
-        setLayout(view, TypedValue.COMPLEX_UNIT_DIP, width, height);
-    }
-
-    public static void setLayout(View view, int unit, float width, float height) {
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(view);
-        setLayoutRaw(view, applyDimension(unit, width, displayMetrics), applyDimension(unit, height, displayMetrics));
-    }
-
-    private static void setLayoutRaw(View view, float width, float height) {
-        LayoutParams params = view.getLayoutParams();
-        params.width = (int) (width);
-        params.height = (int) (height);
-        view.setLayoutParams(params);
-    }
-
-    public static void adjustViewHeightByWidth(final View view, final float ratio) {
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //
-                LayoutParams params = view.getLayoutParams();
-                int width = view.getWidth();
-                params.height = (int) (width / ratio);
-                view.setLayoutParams(params);
-            }
-        });
-    }
-
-    public static void adjustViewWidthByHeight(final View view, final float ratio) {
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //
-
-                LayoutParams params = view.getLayoutParams();
-                int height = view.getHeight();
-                params.width = (int) (height * ratio);
-                view.setLayoutParams(params);
-            }
-        });
-    }
-
-    //
-    public static void adjustViewWidthByView(final View view01, final View view02) {
-        ViewTreeObserver viewTreeObserver = view02.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view02.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //
-                int width = view02.getWidth();
-                LayoutParams params = view01.getLayoutParams();
-
-                params.width = width;
-                view01.setLayoutParams(params);
-            }
-        });
-    }
-
-    //
-    public static void adjustViewHeightByView(final View view01, final View view02) {
-        ViewTreeObserver viewTreeObserver = view02.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view02.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //
-                int height = view02.getHeight();
-                LayoutParams params = view01.getLayoutParams();
-
-                params.height = height;
-                view01.setLayoutParams(params);
-            }
-        });
-    }
-
-    //
-    public static void adjustViewByView(final View view01, final View view02) {
-        ViewTreeObserver viewTreeObserver = view02.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view02.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //
-                int width = view02.getWidth();
-                int height = view02.getHeight();
-                LayoutParams params = view01.getLayoutParams();
-
-                params.width = width;
-                params.height = height;
-                view01.setLayoutParams(params);
-            }
-        });
-    }
-
-    public static void adaptViewAutomatic(View view, int screenWidth, int screenHeight, float ratio) {
-        LayoutParams params = view.getLayoutParams();
-        if (screenWidth * 1f / screenHeight >= ratio) {
-            params.height = screenHeight;
-            params.width = (int) (screenHeight * ratio);
-        } else {
-            params.width = screenWidth;
-            params.height = (int) (screenWidth / ratio);
-        }
-        view.setLayoutParams(params);
-    }
-
-    public static void fillViewAutomatic(View view, int screenWidth, int screenHeight, float ratio) {
-        LayoutParams params = view.getLayoutParams();
-        if (screenWidth * 1f / screenHeight >= ratio) {
-            params.width = screenWidth;
-            params.height = (int) (screenWidth / ratio);
-        } else {
-            params.height = screenHeight;
-            params.width = (int) (screenHeight * ratio);
-        }
-        view.setLayoutParams(params);
-    }
-
-    public static void keepListViewLocation(ListView listView) {
-        int index = listView.getFirstVisiblePosition();
-        View view = listView.getChildAt(0);
-        int top = (view == null) ? 0 : view.getTop();
-        listView.setSelectionFromTop(index + 1, top);
-    }
-
-    public static LinearGradient getLinearGradient(int width, int height, int angle, int gradientStart, int gradientEnd) {
-        if (angle % 45 != 0) {
-            throw new IndexOutOfBoundsException("Angle value must be a multiple of 45");
-        }
-        LinearGradient linearGradient = null;
-        int quotient = angle / 45;
-        int remainder = quotient % 8;
-        if (remainder < 0) {
-            remainder += 8;
-        }
-        switch (remainder) {
-            case 0:
-                linearGradient = new LinearGradient(0, 0, width, 0, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 1:
-                linearGradient = new LinearGradient(0, height, width, 0, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 2:
-                linearGradient = new LinearGradient(0, height, 0, 0, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 3:
-                linearGradient = new LinearGradient(width, height, 0, 0, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 4:
-                linearGradient = new LinearGradient(width, 0, 0, 0, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 5:
-                linearGradient = new LinearGradient(width, 0, 0, height, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 6:
-                linearGradient = new LinearGradient(0, 0, 0, height, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            case 7:
-                linearGradient = new LinearGradient(0, 0, width, height, gradientStart, gradientEnd, Shader.TileMode.CLAMP);
-                break;
-            default:
-                break;
-        }
-        return linearGradient;
-    }
-
-    //
-    public static Bitmap getCustomRoundBitmap(Bitmap sourceBitmap, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-        Bitmap roundCustomBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Config.ARGB_8888);
-        Canvas canvas = new Canvas(roundCustomBitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-
-        Rect rect = new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
-        RectF rectF = new RectF(rect);
-
-        Path path = new Path();
-        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
-        path.addRoundRect(rectF, radii, Path.Direction.CW);
-
-        canvas.drawPath(path, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-        canvas.drawBitmap(sourceBitmap, rect, rect, paint);
-        return roundCustomBitmap;
-    }
-
-    //
-    public static Bitmap getClassicRoundBitmap(Bitmap sourceBitmap, float radius) {
-        Bitmap classicRoundBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Config.ARGB_8888);
-        Canvas canvas = new Canvas(classicRoundBitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-
-        Rect rect = new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
-        RectF rectF = new RectF(rect);
-
-        canvas.drawRoundRect(rectF, radius, radius, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-        canvas.drawBitmap(sourceBitmap, rect, rect, paint);
-        return classicRoundBitmap;
-    }
-
-    public static Bitmap getCircleBitmap(int radius) {
-        Bitmap bitmap = Bitmap.createBitmap(radius, radius, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLACK);
-        canvas.drawCircle(radius >> 1, radius >> 1, radius >> 1, paint);
-        return bitmap;
-    }
-
-    // SVG
-    public static Bitmap getSVGBitmap(Context context, int width, int height, int svgResourceId) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLACK);
-
-//        if (svgResourceId > 0) {
-//            SVG svg = SVGParser.getSVGFromInputStream(
-//                context.getResources().openRawResource(svgResourceId), width, height);
-//            canvas.drawPicture(svg.getPicture());
-//        } else {
-//            canvas.drawRect(new RectF(0.0f, 0.0f, width, height), paint);
-//        }
-
-        return bitmap;
-    }
-
-    //
-    public static Bitmap getScaleBitmap(Bitmap sourceBitmap, float scale) {
-        Matrix matrix = new Matrix();
-        matrix.setScale(scale, scale);
-        Bitmap bitmap = Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight(), matrix, false);
-        return bitmap;
-    }
-
-    //
-    public static Bitmap getAlphaBitmap(Bitmap sourceBitmap, float fraction) {
-        int[] argb = new int[sourceBitmap.getWidth() * sourceBitmap.getHeight()];
-
-        sourceBitmap.getPixels(argb, 0, sourceBitmap.getWidth(), 0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
-
-        int number = (int) (fraction * 255);
-        for (int i = 0; i < argb.length; i++) {
-            if (argb[i] != 0) {
-                argb[i] = (number << 24) | (argb[i] & 0x00FFFFFF);
-            } else {
-                argb[i] = 0x00000000;
-            }
-        }
-        sourceBitmap = Bitmap.createBitmap(argb, sourceBitmap.getWidth(), sourceBitmap.getHeight(), Config.ARGB_8888);
-        return sourceBitmap;
-    }
-
-    // 图片旋转
-    public static Bitmap getRotateBitamp(Bitmap sourceBitmap, float degree) {
-        // 获得Bitmap的高和宽
-        int sourceBitmapWidth = sourceBitmap.getWidth();
-        int sourceBitmapHeight = sourceBitmap.getHeight();
-        // 产生resize后的Bitmap对象
-        Matrix matrix = new Matrix();
-        matrix.setRotate(degree, sourceBitmapWidth >> 1, sourceBitmapHeight >> 1);  //要旋转的角度
-        Bitmap resizeBmp = Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmapWidth, sourceBitmapHeight, matrix, true);
-        return resizeBmp;
-    }
-
-    // 图片翻转
-    public static Bitmap getReverseBitmap(Bitmap sourceBitmap, int flag) {
-        float[] floats = null;
-        switch (flag) {
-            case 0: // 水平反转
-                floats = new float[]{-1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f};
-                break;
-            case 1: // 垂直反转
-                floats = new float[]{1f, 0f, 0f, 0f, -1f, 0f, 0f, 0f, 1f};
-                break;
-        }
-
-        if (floats != null) {
-            Matrix matrix = new Matrix();
-            matrix.setValues(floats);
-            return Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight(), matrix, true);
-        }
-
-        return sourceBitmap;
-    }
-
-    // 怀旧效果
-    public static Bitmap getSepiaBitmap(Bitmap sourceBitmap) {
-        int width = sourceBitmap.getWidth();
-        int height = sourceBitmap.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        int pixColor = 0;
-        int pixR = 0;
-        int pixG = 0;
-        int pixB = 0;
-        int newR = 0;
-        int newG = 0;
-        int newB = 0;
-        int[] pixels = new int[width * height];
-        sourceBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        for (int i = 0; i < height; i++) {
-            for (int k = 0; k < width; k++) {
-                pixColor = pixels[width * i + k];
-                pixR = Color.red(pixColor);
-                pixG = Color.green(pixColor);
-                pixB = Color.blue(pixColor);
-                newR = (int) (0.393 * pixR + 0.769 * pixG + 0.189 * pixB);
-                newG = (int) (0.349 * pixR + 0.686 * pixG + 0.168 * pixB);
-                newB = (int) (0.272 * pixR + 0.534 * pixG + 0.131 * pixB);
-                int newColor = Color.argb(255, newR > 255 ? 255 : newR, newG > 255 ? 255 : newG, newB > 255 ? 255 : newB);
-                pixels[width * i + k] = newColor;
-            }
-        }
-
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    // 浮雕效果
-    public static Bitmap getEmbossBitmap(Bitmap sourceBitmap) {
-        int width = sourceBitmap.getWidth();
-        int height = sourceBitmap.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        int pixR = 0;
-        int pixG = 0;
-        int pixB = 0;
-        int pixColor = 0;
-        int newR = 0;
-        int newG = 0;
-        int newB = 0;
-        int[] pixels = new int[width * height];
-        sourceBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        int pos = 0;
-        for (int i = 1, length = height - 1; i < length; i++) {
-            for (int k = 1, len = width - 1; k < len; k++) {
-                pos = i * width + k;
-                pixColor = pixels[pos];
-                pixR = Color.red(pixColor);
-                pixG = Color.green(pixColor);
-                pixB = Color.blue(pixColor);
-                pixColor = pixels[pos + 1];
-                newR = Color.red(pixColor) - pixR + 127;
-                newG = Color.green(pixColor) - pixG + 127;
-                newB = Color.blue(pixColor) - pixB + 127;
-                newR = Math.min(255, Math.max(0, newR));
-                newG = Math.min(255, Math.max(0, newG));
-                newB = Math.min(255, Math.max(0, newB));
-                pixels[pos] = Color.argb(255, newR, newG, newB);
-            }
-        }
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    // 底片效果
-    public static Bitmap getBacksheetBitmap(Bitmap sourceBitmap) {
-        // RGBA的最大值
-        final int MAX_VALUE = 255;
-        int width = sourceBitmap.getWidth();
-        int height = sourceBitmap.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        int pixR = 0;
-        int pixG = 0;
-        int pixB = 0;
-        int pixColor = 0;
-        int newR = 0;
-        int newG = 0;
-        int newB = 0;
-        int[] pixels = new int[width * height];
-        sourceBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        int pos = 0;
-        for (int i = 1, length = height - 1; i < length; i++) {
-            for (int k = 1, len = width - 1; k < len; k++) {
-                pos = i * width + k;
-                pixColor = pixels[pos];
-
-                pixR = Color.red(pixColor);
-                pixG = Color.green(pixColor);
-                pixB = Color.blue(pixColor);
-
-                newR = MAX_VALUE - pixR;
-                newG = MAX_VALUE - pixG;
-                newB = MAX_VALUE - pixB;
-
-                newR = Math.min(MAX_VALUE, Math.max(0, newR));
-                newG = Math.min(MAX_VALUE, Math.max(0, newG));
-                newB = Math.min(MAX_VALUE, Math.max(0, newB));
-
-                pixels[pos] = Color.argb(MAX_VALUE, newR, newG, newB);
-            }
-        }
-
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    //光照效果,光照中心要坐标
-    public static Bitmap getSunshineBitmap(Bitmap sourceBitmap, float centerX, float centerY) {
-        final int width = sourceBitmap.getWidth();
-        final int height = sourceBitmap.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        int pixR = 0;
-        int pixG = 0;
-        int pixB = 0;
-        int pixColor = 0;
-        int newR = 0;
-        int newG = 0;
-        int newB = 0;
-        float radius = Math.min(centerX, centerY);
-        final float strength = 150F; // 光照强度 100~150
-        int[] pixels = new int[width * height];
-        sourceBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        int pos = 0;
-        for (int i = 1, length = height - 1; i < length; i++) {
-            for (int k = 1, len = width - 1; k < len; k++) {
-                pos = i * width + k;
-                pixColor = pixels[pos];
-                pixR = Color.red(pixColor);
-                pixG = Color.green(pixColor);
-                pixB = Color.blue(pixColor);
-                newR = pixR;
-                newG = pixG;
-                newB = pixB;
-                // 计算当前点到光照中心的距离，平面座标系中求两点之间的距离
-                int distance = (int) (Math.pow((centerY - i), 2) + Math.pow(centerX - k, 2));
-                if (distance < radius * radius) {
-                    // 按照距离大小计算增加的光照值
-                    int result = (int) (strength * (1.0 - Math.sqrt(distance) / radius));
-                    newR = pixR + result;
-                    newG = pixG + result;
-                    newB = pixB + result;
-                }
-                newR = Math.min(255, Math.max(0, newR));
-                newG = Math.min(255, Math.max(0, newG));
-                newB = Math.min(255, Math.max(0, newB));
-
-                pixels[pos] = Color.argb(255, newR, newG, newB);
-            }
-        }
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    public static Bitmap getSketchBitmap(Bitmap sourceBitmap) {
-        int pos, row, col, clr;
-        int width = sourceBitmap.getWidth();
-        int height = sourceBitmap.getHeight();
-        int[] pixSrc = new int[width * height];
-        int[] pixNvt = new int[width * height];
-        // 先对图象的像素处理成灰度颜色后再取反
-        sourceBitmap.getPixels(pixSrc, 0, width, 0, 0, width, height);
-        for (row = 0; row < height; row++) {
-            for (col = 0; col < width; col++) {
-                pos = row * width + col;
-                pixSrc[pos] = (Color.red(pixSrc[pos]) + Color.green(pixSrc[pos]) + Color.blue(pixSrc[pos])) / 3;
-                pixNvt[pos] = 255 - pixSrc[pos];
-            }
-        }
-        // 对取反的像素进行高斯模糊, 强度可以设置，暂定为5.0
-        gaussGray(pixNvt, 5.0, 5.0, width, height);
-        // 灰度颜色和模糊后像素进行差值运算
-        for (row = 0; row < height; row++) {
-            for (col = 0; col < width; col++) {
-                pos = row * width + col;
-
-                clr = pixSrc[pos] << 8;
-                clr /= 256 - pixNvt[pos];
-                clr = Math.min(clr, 255);
-
-                pixSrc[pos] = Color.rgb(clr, clr, clr);
-            }
-        }
-        Bitmap createBitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        createBitmap.setPixels(pixSrc, 0, width, 0, 0, width, height);
-        return createBitmap;
-    }
-
-    private static int gaussGray(int[] psrc, double horz, double vert, int width, int height) {
-        int[] dst, src;
-        double[] n_p, n_m, d_p, d_m, bd_p, bd_m;
-        double[] val_p, val_m;
-        int i, j, t, k, row, col, terms;
-        int[] initial_p, initial_m;
-        double std_dev;
-        int row_stride = width;
-        int max_len = Math.max(width, height);
-        int sp_p_idx, sp_m_idx, vp_idx, vm_idx;
-
-        val_p = new double[max_len];
-        val_m = new double[max_len];
-
-        n_p = new double[5];
-        n_m = new double[5];
-        d_p = new double[5];
-        d_m = new double[5];
-        bd_p = new double[5];
-        bd_m = new double[5];
-
-        src = new int[max_len];
-        dst = new int[max_len];
-
-        initial_p = new int[4];
-        initial_m = new int[4];
-
-        // 垂直方向
-        if (vert > 0.0) {
-            vert = Math.abs(vert) + 1.0;
-            std_dev = Math.sqrt(-(vert * vert) / (2 * Math.log(1.0 / 255.0)));
-            // 初试化常量
-            findConstants(n_p, n_m, d_p, d_m, bd_p, bd_m, std_dev);
-
-            for (col = 0; col < width; col++) {
-                for (k = 0; k < max_len; k++) {
-                    val_m[k] = val_p[k] = 0;
-                }
-                for (t = 0; t < height; t++) {
-                    src[t] = psrc[t * row_stride + col];
-                }
-                sp_p_idx = 0;
-                sp_m_idx = height - 1;
-                vp_idx = 0;
-                vm_idx = height - 1;
-
-                initial_p[0] = src[0];
-                initial_m[0] = src[height - 1];
-                for (row = 0; row < height; row++) {
-                    terms = (row < 4) ? row : 4;
-                    for (i = 0; i <= terms; i++) {
-                        val_p[vp_idx] += n_p[i] * src[sp_p_idx - i] - d_p[i] * val_p[vp_idx - i];
-                        val_m[vm_idx] += n_m[i] * src[sp_m_idx + i] - d_m[i] * val_m[vm_idx + i];
-                    }
-                    for (j = i; j <= 4; j++) {
-                        val_p[vp_idx] += (n_p[j] - bd_p[j]) * initial_p[0];
-                        val_m[vm_idx] += (n_m[j] - bd_m[j]) * initial_m[0];
-                    }
-                    sp_p_idx++;
-                    sp_m_idx--;
-                    vp_idx++;
-                    vm_idx--;
-                }
-                transferGaussPixels(val_p, val_m, dst, 1, height);
-                for (t = 0; t < height; t++) {
-                    psrc[t * row_stride + col] = dst[t];
-                }
-            }
-        }
-
-        // 水平方向
-        if (horz > 0.0) {
-            horz = Math.abs(horz) + 1.0;
-            if (horz != vert) {
-                std_dev = Math.sqrt(-(horz * horz) / (2 * Math.log(1.0 / 255.0)));
-                // 初试化常量
-                findConstants(n_p, n_m, d_p, d_m, bd_p, bd_m, std_dev);
-            }
-            for (row = 0; row < height; row++) {
-                for (k = 0; k < max_len; k++) {
-                    val_m[k] = val_p[k] = 0;
-                }
-                for (t = 0; t < width; t++) {
-                    src[t] = psrc[row * row_stride + t];
-                }
-                sp_p_idx = 0;
-                sp_m_idx = width - 1;
-                vp_idx = 0;
-                vm_idx = width - 1;
-                initial_p[0] = src[0];
-                initial_m[0] = src[width - 1];
-                for (col = 0; col < width; col++) {
-                    terms = (col < 4) ? col : 4;
-                    for (i = 0; i <= terms; i++) {
-                        val_p[vp_idx] += n_p[i] * src[sp_p_idx - i] - d_p[i] * val_p[vp_idx - i];
-                        val_m[vm_idx] += n_m[i] * src[sp_m_idx + i] - d_m[i] * val_m[vm_idx + i];
-                    }
-                    for (j = i; j <= 4; j++) {
-                        val_p[vp_idx] += (n_p[j] - bd_p[j]) * initial_p[0];
-                        val_m[vm_idx] += (n_m[j] - bd_m[j]) * initial_m[0];
-                    }
-                    sp_p_idx++;
-                    sp_m_idx--;
-                    vp_idx++;
-                    vm_idx--;
-                }
-                transferGaussPixels(val_p, val_m, dst, 1, width);
-                for (t = 0; t < width; t++) {
-                    psrc[row * row_stride + t] = dst[t];
-                }
-            }
-        }
-        return 0;
-    }
-
-    private static void findConstants(double[] n_p, double[] n_m, double[] d_p, double[] d_m, double[] bd_p, double[] bd_m, double std_dev) {
-        double div = Math.sqrt(2 * 3.141593) * std_dev;
-        double x0 = -1.783 / std_dev;
-        double x1 = -1.723 / std_dev;
-        double x2 = 0.6318 / std_dev;
-        double x3 = 1.997 / std_dev;
-        double x4 = 1.6803 / div;
-        double x5 = 3.735 / div;
-        double x6 = -0.6803 / div;
-        double x7 = -0.2598 / div;
-        int i;
-        n_p[0] = x4 + x6;
-        n_p[1] = (Math.exp(x1) * (x7 * Math.sin(x3) - (x6 + 2 * x4) * Math.cos(x3)) + Math.exp(x0) * (x5 * Math.sin(x2) - (2 * x6 + x4) * Math.cos(x2)));
-        n_p[2] = (2 * Math.exp(x0 + x1) * ((x4 + x6) * Math.cos(x3) * Math.cos(x2) - x5 * Math.cos(x3) * Math.sin(x2) - x7 * Math.cos(x2) * Math.sin(x3)) + x6 * Math.exp(2 * x0) + x4
-            * Math.exp(2 * x1));
-        n_p[3] = (Math.exp(x1 + 2 * x0) * (x7 * Math.sin(x3) - x6 * Math.cos(x3)) + Math.exp(x0 + 2 * x1) * (x5 * Math.sin(x2) - x4 * Math.cos(x2)));
-        n_p[4] = 0.0;
-        d_p[0] = 0.0;
-        d_p[1] = -2 * Math.exp(x1) * Math.cos(x3) - 2 * Math.exp(x0) * Math.cos(x2);
-        d_p[2] = 4 * Math.cos(x3) * Math.cos(x2) * Math.exp(x0 + x1) + Math.exp(2 * x1) + Math.exp(2 * x0);
-        d_p[3] = -2 * Math.cos(x2) * Math.exp(x0 + 2 * x1) - 2 * Math.cos(x3) * Math.exp(x1 + 2 * x0);
-        d_p[4] = Math.exp(2 * x0 + 2 * x1);
-        for (i = 0; i <= 4; i++) {
-            d_m[i] = d_p[i];
-        }
-        n_m[0] = 0.0;
-        for (i = 1; i <= 4; i++) {
-            n_m[i] = n_p[i] - d_p[i] * n_p[0];
-        }
-        double sum_n_p, sum_n_m, sum_d;
-        double a, b;
-        sum_n_p = 0.0;
-        sum_n_m = 0.0;
-        sum_d = 0.0;
-        for (i = 0; i <= 4; i++) {
-            sum_n_p += n_p[i];
-            sum_n_m += n_m[i];
-            sum_d += d_p[i];
-        }
-        a = sum_n_p / (1.0 + sum_d);
-        b = sum_n_m / (1.0 + sum_d);
-        for (i = 0; i <= 4; i++) {
-            bd_p[i] = d_p[i] * a;
-            bd_m[i] = d_m[i] * b;
-        }
-    }
-
-    private static void transferGaussPixels(double[] src1, double[] src2, int[] dest, int bytes, int width) {
-        int i, j, k, b;
-        int bend = bytes * width;
-        double sum;
-        i = j = k = 0;
-        for (b = 0; b < bend; b++) {
-            sum = src1[i++] + src2[j++];
-            if (sum > 255)
-                sum = 255;
-            else if (sum < 0)
-                sum = 0;
-            dest[k++] = (int) sum;
-        }
-    }
-
-    //
-    public static Bitmap processBitmap(Bitmap sourceBitmap, float brightValue, float hueValue, float saturationValue) {
-        Bitmap createBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
-
-        //亮度
-        ColorMatrix colorMatrixBright = new ColorMatrix();
-        colorMatrixBright.reset();
-
-        //色相
-        ColorMatrix colorMatrixHue = new ColorMatrix();
-        colorMatrixHue.reset();
-
-        //饱和度
-        ColorMatrix colorMatrixSaturation = new ColorMatrix();
-        colorMatrixSaturation.reset();
-
-        //叠加
-        ColorMatrix colorMatrixAll = new ColorMatrix();
-        colorMatrixAll.reset();
-
-        colorMatrixBright.setRotate(0, hueValue); // 控制红色区在色轮上旋转的角度
-        colorMatrixBright.setRotate(1, hueValue); // 控制绿色区在色轮上旋转的角度
-        colorMatrixBright.setRotate(2, hueValue); // 控制蓝色区在色轮上旋转的角度
-
-        // hueColor就是色轮旋转的角度,正值表示顺时针旋转,负值表示逆时针旋转,红、绿、蓝三分量按相同的比例,最后一个参数1表示透明度不做变化
-        colorMatrixHue.setScale(brightValue, brightValue, brightValue, 1);
-
-        // saturation 饱和度值，最小可设为0，此时对应的是灰度图(也就是俗话的“黑白图”),为1表示饱和度不变，设置大于1，就显示过饱和
-        colorMatrixSaturation.setSaturation(saturationValue);
-
-        colorMatrixAll.postConcat(colorMatrixBright); // 效果叠加
-        colorMatrixAll.postConcat(colorMatrixHue);
-        colorMatrixAll.postConcat(colorMatrixSaturation); // 效果叠加
-
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-
-        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrixAll));// 设置颜色变换效果
-        canvas.drawBitmap(sourceBitmap, 0, 0, paint); // 将颜色变化后的图片输出到新创建的位图区
-        // 返回新的位图，也即调色处理后的图片
-        return createBitmap;
-    }
 
     //
     public static final String GRAPHICSTYPE_UNKNOWN = "UNKNOWN";
@@ -1689,9 +376,6 @@ public class TView extends View {
     protected float tunaPercent;
     protected float tunaSurplus, tunaShare;
 
-    //
-    protected static StringBuffer tunaStringBuffer;
-    protected static final int tunaStringBufferCapacity = 288;
 
     protected float[] tunaFloatArray;
     protected String[] tunaStringArray;
@@ -2005,9 +689,6 @@ public class TView extends View {
         return matrix;
     }
 
-    protected static DisplayMetrics displayMetrics;
-    protected static int displayWidth, displayHeight;
-    protected static float displayDensity, displayScaledDensity, displayXdpi, displayYdpi;
 
     protected LayoutInflater initTunaLayoutInflater() {
         if (tunaLayoutInflater == null) {
@@ -2016,27 +697,6 @@ public class TView extends View {
         return tunaLayoutInflater;
     }
 
-    // Parameter need to float for example tunaStroke is float convert the value
-    // to dip or dp px values​​, to ensure constant size
-    protected float pxToDp(float pxValue) {
-        return pxValue / displayDensity;
-    }
-
-    // Parameter need to float for example tunaStroke is float convert the value
-    // to dip or dp px values​​, to ensure constant size
-    protected float pxToSp(float pxValue) {
-        return pxValue / displayScaledDensity;
-    }
-
-    // convert the value px sp values​​, to ensure constant size
-    protected int spToPx(float spValue) {
-        return (int) (spValue * displayScaledDensity + 0.5f);
-    }
-
-    // convert the value to px dp values​​, to ensure constant size
-    protected int dpToPx(float dpValue) {
-        return (int) (dpValue * displayDensity + 0.5f);
-    }
 
     protected void setTunaLayout(int width, int height) {
         if (tunaLayoutParams == null) {
@@ -2048,59 +708,6 @@ public class TView extends View {
         invalidate();
     }
 
-    protected void initDisplayMetrics() {
-        // Android from 3.0 (February 2011 API Level 11) started, when drawing
-        // View supports hardware acceleration,
-        // full use of the GPU, which makes the draw more smooth, but it will
-        // consume some memory.
-
-        if (displayMetrics == null) {
-            displayMetrics = getResources().getDisplayMetrics();
-            displayWidth = displayMetrics.widthPixels;
-            displayHeight = displayMetrics.heightPixels;
-            displayDensity = displayMetrics.density;
-            displayScaledDensity = displayMetrics.scaledDensity;
-            displayXdpi = displayMetrics.xdpi;
-            displayYdpi = displayMetrics.ydpi;
-
-            tunaStringBuffer = new StringBuffer(tunaStringBufferCapacity);
-            tunaStringBuffer.append("设备厂商 : ");
-            tunaStringBuffer.append(Build.BRAND);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("设备型号 : ");
-            tunaStringBuffer.append(Build.MODEL);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("系统版本 : ");
-            tunaStringBuffer.append(Build.VERSION.RELEASE);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("API等级 : ");
-            tunaStringBuffer.append(Build.VERSION.SDK);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("系统语言 : ");
-            tunaStringBuffer.append(Locale.getDefault().getLanguage());
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("屏幕分辨率 : ");
-            tunaStringBuffer.append(displayWidth);
-            tunaStringBuffer.append(" * ");
-            tunaStringBuffer.append(displayHeight);
-            tunaStringBuffer.append(" ( ");
-            tunaStringBuffer.append(displayWidth / displayDensity);
-            tunaStringBuffer.append("dp * ");
-            tunaStringBuffer.append(displayHeight / displayDensity);
-            tunaStringBuffer.append("dp ) ");
-            tunaStringBuffer.append(" , 屏幕密度 : ");
-            tunaStringBuffer.append(displayDensity);
-            tunaStringBuffer.append(" , 伸缩密度 : ");
-            tunaStringBuffer.append(displayScaledDensity);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append(getResources().getString(R.string.display_dimen));
-            tunaStringBuffer.append(" , X维 : ");
-            tunaStringBuffer.append(displayXdpi);
-            tunaStringBuffer.append(" 像素点 / 英寸 , Y维 : ");
-            tunaStringBuffer.append(displayYdpi);
-            tunaStringBuffer.append(" 像素点 / 英寸");
-        }
-    }
 
     //
     protected void initTunaCanvas(Canvas canvas) {
@@ -2115,7 +722,7 @@ public class TView extends View {
                                       float radiusRightTop, float radiusRightBottom) {
 
         drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-            radiusRightBottom);
+                radiusRightBottom);
     }
 
     // 10
@@ -2123,7 +730,7 @@ public class TView extends View {
                                       float radiusRightTop, float radiusRightBottom) {
 
         drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-            radiusRightBottom);
+                radiusRightBottom);
     }
 
     // 10
@@ -2131,7 +738,7 @@ public class TView extends View {
                                       float radiusRightTop, float radiusRightBottom) {
 
         drawTunaRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-            radiusRightTop, radiusRightBottom);
+                radiusRightTop, radiusRightBottom);
     }
 
     // 14
@@ -2139,7 +746,7 @@ public class TView extends View {
                                       int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-            radiusRightTop, radiusRightBottom);
+                radiusRightTop, radiusRightBottom);
     }
 
     // 14
@@ -2147,7 +754,7 @@ public class TView extends View {
                                       int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         drawTunaRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
-            radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                radiusLeftBottom, radiusRightTop, radiusRightBottom);
     }
 
     // 15
@@ -2157,8 +764,8 @@ public class TView extends View {
         float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
         if (strokeWidth > 0) {
             canvas.drawPath(
-                initTunaPathRoundRect(initTunaRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
-                    Path.Direction.CW), initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+                    initTunaPathRoundRect(initTunaRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
+                            Path.Direction.CW), initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
         }
 
         int radiiLength = radii.length;
@@ -2168,10 +775,10 @@ public class TView extends View {
         }
 
         canvas.drawPath(
-            initTunaPathRoundRect(initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
-            shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
-                shadowDy));
+                initTunaPathRoundRect(initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
+                shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                        shadowDy));
     }
 
     // 5
@@ -2224,16 +831,16 @@ public class TView extends View {
 
         if (strokeWidth > 0) {
             canvas.drawRoundRect(initTunaRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
-                initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+                    initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
         }
 
         canvas.drawRoundRect(
-            initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
-            radius,
-            radius,
-            shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
-                shadowDy));
+                initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
+                radius,
+                radius,
+                shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                        shadowDy));
     }
 
     // 6
@@ -2324,15 +931,15 @@ public class TView extends View {
 
     //
     protected void drawTunaTextMark(
-        Canvas canvas,
-        float radius, Paint paint,
-        float markRadius,
-        float markDx, float markDy,
-        float offsetX, float offsetY,
-        String markText,
-        int markTextColor,
-        float markTextSize,
-        List<Integer> valueMeasureList) {
+            Canvas canvas,
+            float radius, Paint paint,
+            float markRadius,
+            float markDx, float markDy,
+            float offsetX, float offsetY,
+            String markText,
+            int markTextColor,
+            float markTextSize,
+            List<Integer> valueMeasureList) {
 
         float cx = (tunaWidth >> 1) + offsetX + markRadius + markDx;
         float cy = (tunaHeight >> 1) + offsetY + markDy;
@@ -2341,8 +948,8 @@ public class TView extends View {
         if (markText != null) {
             // Because, drawText use the same method to clear the cache tunaMeasureRowList
             drawTunaText(canvas, markText, tunaWidth, cx, cy, 0, 0,
-                initTunaTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
-                , 1, valueMeasureList);
+                    initTunaTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
+                    , 1, valueMeasureList);
         }
     }
 
@@ -2503,7 +1110,7 @@ public class TView extends View {
                                    int rightStyle, int horizontalStyle, int wholeStyle) {
 
         tunaDynamicRaw(titleArray, index, tunaTouchUpListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
-            horizontalStyle, wholeStyle);
+                horizontalStyle, wholeStyle);
     }
 
     //
@@ -2558,64 +1165,66 @@ public class TView extends View {
 
     protected void showTunaProperties() {
 
-        tunaPropertiesView = initTunaLayoutInflater().inflate(R.layout.propertiesview, null);
+        tunaPropertiesView = initTunaLayoutInflater().inflate(R.layout.properties, null);
 
-        final TextView text_display =  tunaPropertiesView.findViewById(R.id.text_display);
+        final TextView text_display = tunaPropertiesView.findViewById(R.id.text_display);
 
-        final EditText edit_width =  tunaPropertiesView.findViewById(R.id.edit_width);
-        final EditText edit_height =  tunaPropertiesView.findViewById(R.id.edit_height);
+        final EditText edit_width = tunaPropertiesView.findViewById(R.id.edit_width);
+        final EditText edit_height = tunaPropertiesView.findViewById(R.id.edit_height);
 
-        final EditText edit_backgroundNormal =  tunaPropertiesView.findViewById(R.id.edit_backgroundNormal);
-        final EditText edit_backgroundPress =  tunaPropertiesView.findViewById(R.id.edit_backgroundPress);
-        final EditText edit_backgroundSelect =  tunaPropertiesView.findViewById(R.id.edit_backgroundSelect);
+        final EditText edit_backgroundNormal = tunaPropertiesView.findViewById(R.id.edit_backgroundNormal);
+        final EditText edit_backgroundPress = tunaPropertiesView.findViewById(R.id.edit_backgroundPress);
+        final EditText edit_backgroundSelect = tunaPropertiesView.findViewById(R.id.edit_backgroundSelect);
 
-        final EditText edit_textSize =  tunaPropertiesView.findViewById(R.id.edit_textSize);
-        final EditText edit_textColorNormal =  tunaPropertiesView.findViewById(R.id.edit_textColorNormal);
+        final EditText edit_textSize = tunaPropertiesView.findViewById(R.id.edit_textSize);
+        final EditText edit_textColorNormal = tunaPropertiesView.findViewById(R.id.edit_textColorNormal);
 
-        final EditText edit_strokeWidth =  tunaPropertiesView.findViewById(R.id.edit_strokeWidth);
-        final EditText edit_strokeColor =  tunaPropertiesView.findViewById(R.id.edit_strokeColor);
+        final EditText edit_strokeWidth = tunaPropertiesView.findViewById(R.id.edit_strokeWidth);
+        final EditText edit_strokeColor = tunaPropertiesView.findViewById(R.id.edit_strokeColor);
 
-        final Button btn_width_pius =  tunaPropertiesView.findViewById(R.id.btn_width_pius);
-        final Button btn_width_minus =  tunaPropertiesView.findViewById(R.id.btn_width_minus);
-        final Button btn_height_pius =  tunaPropertiesView.findViewById(R.id.btn_height_pius);
-        final Button btn_height_minus =  tunaPropertiesView.findViewById(R.id.btn_height_minus);
+        final Button btn_width_pius = tunaPropertiesView.findViewById(R.id.btn_width_pius);
+        final Button btn_width_minus = tunaPropertiesView.findViewById(R.id.btn_width_minus);
+        final Button btn_height_pius = tunaPropertiesView.findViewById(R.id.btn_height_pius);
+        final Button btn_height_minus = tunaPropertiesView.findViewById(R.id.btn_height_minus);
 
-        final Button btn_textSize_pius =  tunaPropertiesView.findViewById(R.id.btn_textSize_pius);
-        final Button btn_textSize_minus =  tunaPropertiesView.findViewById(R.id.btn_textSize_minus);
+        final Button btn_textSize_pius = tunaPropertiesView.findViewById(R.id.btn_textSize_pius);
+        final Button btn_textSize_minus = tunaPropertiesView.findViewById(R.id.btn_textSize_minus);
 
-        final Button btn_strokeWidth_pius =  tunaPropertiesView.findViewById(R.id.btn_strokeWidth_pius);
-        final Button btn_strokeWidth_minus =  tunaPropertiesView.findViewById(R.id.btn_strokeWidth_minus);
+        final Button btn_strokeWidth_pius = tunaPropertiesView.findViewById(R.id.btn_strokeWidth_pius);
+        final Button btn_strokeWidth_minus = tunaPropertiesView.findViewById(R.id.btn_strokeWidth_minus);
 
-        final Button btn_backgroundNormal =  tunaPropertiesView.findViewById(R.id.btn_backgroundNormal);
-        final Button btn_backgroundPress =  tunaPropertiesView.findViewById(R.id.btn_backgroundPress);
-        final Button btn_backgroundSelect =  tunaPropertiesView.findViewById(R.id.btn_backgroundSelect);
+        final Button btn_backgroundNormal = tunaPropertiesView.findViewById(R.id.btn_backgroundNormal);
+        final Button btn_backgroundPress = tunaPropertiesView.findViewById(R.id.btn_backgroundPress);
+        final Button btn_backgroundSelect = tunaPropertiesView.findViewById(R.id.btn_backgroundSelect);
 
-        final Button btn_textColorNormal =  tunaPropertiesView.findViewById(R.id.btn_textColorNormal);
+        final Button btn_textColorNormal = tunaPropertiesView.findViewById(R.id.btn_textColorNormal);
 
-        final Button btn_strokeColor =  tunaPropertiesView.findViewById(R.id.btn_strokeColor);
+        final Button btn_strokeColor = tunaPropertiesView.findViewById(R.id.btn_strokeColor);
 
-        final ToggleButton toogle_mark =  tunaPropertiesView.findViewById(R.id.toogle_mark);
-        final TextView text_mark =  tunaPropertiesView.findViewById(R.id.text_mark);
+        final ToggleButton toogle_mark = tunaPropertiesView.findViewById(R.id.toogle_mark);
+        final TextView text_mark = tunaPropertiesView.findViewById(R.id.text_mark);
 
-        final ToggleButton toogle_thisHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
-        final TextView text_thisHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.text_thisHardwareAccelerated);
+        final ToggleButton toogle_thisHardwareAccelerated = tunaPropertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
+        final TextView text_thisHardwareAccelerated = tunaPropertiesView.findViewById(R.id.text_thisHardwareAccelerated);
 
-        final ToggleButton toogle_canvasHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
-        final TextView text_canvasHardwareAccelerated =  tunaPropertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
+        final ToggleButton toogle_canvasHardwareAccelerated = tunaPropertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
+        final TextView text_canvasHardwareAccelerated = tunaPropertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
 
-        text_display.setText(tunaStringBuffer);
 
-        edit_width.setText(String.valueOf(pxToDp(tunaWidth)));
-        edit_height.setText(String.valueOf(pxToDp(tunaHeight)));
+        DeviceTool.initDisplayMetrics(getContext());
+        text_display.setText(DeviceTool.tunaStringBuffer);
+
+        edit_width.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaWidth)));
+        edit_height.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaHeight)));
 
         edit_backgroundNormal.setText(tunaBackgroundNormal != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundNormal)) : "00000000");
         edit_backgroundPress.setText(tunaBackgroundPress != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundPress)) : "00000000");
         edit_backgroundSelect.setText(tunaBackgroundSelect != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundSelect)) : "00000000");
 
-        edit_textSize.setText(String.valueOf(pxToDp(tunaTextSize)));
+        edit_textSize.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaTextSize)));
         edit_textColorNormal.setText(tunaTextColorNormal != 0 ? String.valueOf(Integer.toHexString(tunaTextColorNormal)) : "00000000");
 
-        edit_strokeWidth.setText(String.valueOf(pxToDp(tunaStrokeWidthNormal)));
+        edit_strokeWidth.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaStrokeWidthNormal)));
         edit_strokeColor.setText(tunaStrokeColorNormal != 0 ? String.valueOf(Integer.toHexString(tunaStrokeColorNormal)) : "00000000");
 
         //
@@ -2674,7 +1283,7 @@ public class TView extends View {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new TCPDialog(getContext(), tunaBackgroundNormal, new TCPDialog.TunaColorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
@@ -2683,7 +1292,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new TCPDialog(getContext(), tunaBackgroundNormal, new TCPDialog.TunaColorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
@@ -2692,7 +1301,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new TCPDialog(getContext(), tunaBackgroundNormal, new TCPDialog.TunaColorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
@@ -2701,7 +1310,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new TCPDialog(getContext(), tunaStrokeColorNormal, new TCPDialog.TunaColorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.TunaColorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
@@ -2710,7 +1319,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new TCPDialog(getContext(), tunaStrokeColorNormal, new TCPDialog.TunaColorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.TunaColorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);
@@ -2739,25 +1348,26 @@ public class TView extends View {
         btn_strokeColor.setOnClickListener(tunaOnClickListener);
 
         new AlertDialog.Builder(getContext(), android.R.style.Theme_Holo_Light)
-            .setIconAttribute(android.R.attr.alertDialogIcon).setTitle(tunaTag).setView(tunaPropertiesView)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    //
-                    tunaBackgroundNormal = Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim());
-                    tunaBackgroundPress = Color.parseColor("#" + edit_backgroundPress.getText().toString().trim());
-                    tunaBackgroundSelect = Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim());
-                    tunaStrokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
-                    tunaTextColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .setView(tunaPropertiesView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //
+                        tunaBackgroundNormal = Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim());
+                        tunaBackgroundPress = Color.parseColor("#" + edit_backgroundPress.getText().toString().trim());
+                        tunaBackgroundSelect = Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim());
+                        tunaStrokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
+                        tunaTextColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
 
-                    tunaTextSize = dpToPx(Float.parseFloat(edit_textSize.getText().toString().trim()));
+                        tunaTextSize = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_textSize.getText().toString().trim()));
 
-                    tunaStrokeWidthNormal = dpToPx(Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
+                        tunaStrokeWidthNormal = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
 
-                    tunaTextMark = text_mark.getText().toString().trim().equals("true") ? true : false;
+                        tunaTextMark = text_mark.getText().toString().trim().equals("true") ? true : false;
 
-                    setTunaLayout(dpToPx(Float.parseFloat(edit_width.getText().toString().trim())), dpToPx(Float.parseFloat(edit_height.getText().toString().trim())));
-                }
-            }).setNegativeButton("Cancel", null).create().show();
+                        setTunaLayout(DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_width.getText().toString().trim())), DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_height.getText().toString().trim())));
+                    }
+                }).setNegativeButton("Cancel", null).create().show();
     }
 
     // Hardware accelerated this
@@ -4396,7 +3006,7 @@ public class TView extends View {
     public void setTunaTextMark(float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, float tunaTextMarkTextSize, int tunaTextMarkTextColor,
                                 float tunaTextMarkDx, float tunaTextMarkDy) {
         setTunaTextMark(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkRadius, tunaTextMarkColor, tunaTextMarkTextValue, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkTextSize,
-            tunaTextMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDy);
+                tunaTextMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDy);
     }
 
     public void setTunaTextMark(int tunaTextMarkRadiusUnit, float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, int tunaTextMarkTextSizeUnit,
@@ -4405,15 +3015,15 @@ public class TView extends View {
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
         setTunaTextMarkRaw(applyDimension(tunaTextMarkRadiusUnit, tunaTextMarkRadius, displayMetrics), tunaTextMarkColor, tunaTextMarkTextValue,
-            applyDimension(tunaTextMarkTextSizeUnit, tunaTextMarkTextSize, displayMetrics), tunaTextMarkTextColor,
-            applyDimension(tunaTextMarkDxUnit, tunaTextMarkDx, displayMetrics), applyDimension(tunaTextMarkDyUnit, tunaTextMarkDy, displayMetrics));
+                applyDimension(tunaTextMarkTextSizeUnit, tunaTextMarkTextSize, displayMetrics), tunaTextMarkTextColor,
+                applyDimension(tunaTextMarkDxUnit, tunaTextMarkDx, displayMetrics), applyDimension(tunaTextMarkDyUnit, tunaTextMarkDy, displayMetrics));
     }
 
     private void setTunaTextMarkRaw(float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, float tunaTextMarkTextSize, int tunaTextMarkTextColor,
                                     float tunaTextMarkDx, float tunaTextMarkDy) {
         if (this.tunaTextMarkRadius != tunaTextMarkRadius || this.tunaTextMarkColor != tunaTextMarkColor || this.tunaTextMarkTextValue != tunaTextMarkTextValue
-            || this.tunaTextMarkTextSize != tunaTextMarkTextSize || this.tunaTextMarkTextColor != tunaTextMarkTextColor || this.tunaTextMarkDx != tunaTextMarkDx
-            || this.tunaTextMarkDy != tunaTextMarkDy) {
+                || this.tunaTextMarkTextSize != tunaTextMarkTextSize || this.tunaTextMarkTextColor != tunaTextMarkTextColor || this.tunaTextMarkDx != tunaTextMarkDx
+                || this.tunaTextMarkDy != tunaTextMarkDy) {
             this.tunaTextMarkRadius = tunaTextMarkRadius;
             this.tunaTextMarkColor = tunaTextMarkColor;
             this.tunaTextMarkTextValue = tunaTextMarkTextValue;
@@ -5259,7 +3869,7 @@ public class TView extends View {
     public void setTunaContentMark(float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue, float tunaContentMarkTextSize,
                                    int tunaContentMarkTextColor, float tunaContentMarkDx, float tunaContentMarkDy) {
         setTunaContentMark(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkRadius, tunaContentMarkColor, tunaContentMarkTextValue, TypedValue.COMPLEX_UNIT_DIP,
-            tunaContentMarkTextSize, tunaContentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDy);
+                tunaContentMarkTextSize, tunaContentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDy);
     }
 
     public void setTunaContentMark(int tunaContentMarkRadiusUnit, float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue,
@@ -5269,15 +3879,15 @@ public class TView extends View {
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
         setTunaContentMarkRaw(applyDimension(tunaContentMarkRadiusUnit, tunaContentMarkRadius, displayMetrics), tunaContentMarkColor, tunaContentMarkTextValue,
-            applyDimension(tunaContentMarkTextSizeUnit, tunaContentMarkTextSize, displayMetrics), tunaContentMarkTextColor,
-            applyDimension(tunaContentMarkDxUnit, tunaContentMarkDx, displayMetrics), applyDimension(tunaContentMarkDyUnit, tunaContentMarkDy, displayMetrics));
+                applyDimension(tunaContentMarkTextSizeUnit, tunaContentMarkTextSize, displayMetrics), tunaContentMarkTextColor,
+                applyDimension(tunaContentMarkDxUnit, tunaContentMarkDx, displayMetrics), applyDimension(tunaContentMarkDyUnit, tunaContentMarkDy, displayMetrics));
     }
 
     private void setTunaContentMarkRaw(float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue, float tunaContentMarkTextSize,
                                        int tunaContentMarkTextColor, float tunaContentMarkDx, float tunaContentMarkDy) {
         if (this.tunaContentMarkRadius != tunaContentMarkRadius || this.tunaContentMarkColor != tunaContentMarkColor || this.tunaContentMarkTextValue != tunaContentMarkTextValue
-            || this.tunaContentMarkTextSize != tunaContentMarkTextSize || this.tunaContentMarkTextColor != tunaContentMarkTextColor
-            || this.tunaContentMarkDx != tunaContentMarkDx || this.tunaContentMarkDy != tunaContentMarkDy) {
+                || this.tunaContentMarkTextSize != tunaContentMarkTextSize || this.tunaContentMarkTextColor != tunaContentMarkTextColor
+                || this.tunaContentMarkDx != tunaContentMarkDx || this.tunaContentMarkDy != tunaContentMarkDy) {
             this.tunaContentMarkRadius = tunaContentMarkRadius;
             this.tunaContentMarkColor = tunaContentMarkColor;
             this.tunaContentMarkTextValue = tunaContentMarkTextValue;
@@ -5888,8 +4498,8 @@ public class TView extends View {
 
     //
     private static final TimeInterpolator[] tunaMaterialTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(),
-        new AnticipateInterpolator(), new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(),
-        new LinearInterpolator(), new OvershootInterpolator(),};
+            new AnticipateInterpolator(), new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(),
+            new LinearInterpolator(), new OvershootInterpolator(),};
 
     //
     private AnimatorSet tunaMaterialAnimatorSet;
@@ -6293,7 +4903,7 @@ public class TView extends View {
         }
 
         typedArray.recycle();
-        initDisplayMetrics();
+        DeviceTool.initDisplayMetrics(getContext());
     }
 
     @Override
@@ -6335,7 +4945,7 @@ public class TView extends View {
                     } else {
                         float touchDownTimeDistanceX = Math.abs(tunaTouchDownEventX - event.getX());
                         float touchDownTimeDistanceY = Math.abs(tunaTouchDownEventY - event.getY());
-                        if (touchDownTimeDistanceX < SHOW_PROPERTY_MAX_DISTANCE_DP * displayDensity && touchDownTimeDistanceY < SHOW_PROPERTY_MAX_DISTANCE_DP * displayDensity) {
+                        if (touchDownTimeDistanceX < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity && touchDownTimeDistanceY < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity) {
                             touchDownCount++;
                         }
                     }
@@ -6379,8 +4989,8 @@ public class TView extends View {
                             tunaMaterialAnimatorSet = new AnimatorSet();
                             if (tunaMaterialMove) {
                                 tunaMaterialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, tunaMaterialRadiusProperty, startRadius, endRadius),
-                                    ObjectAnimator.ofFloat(this, tunaMaterialPaintXProperty, tunaTouchDownEventX, tunaWidth >> 1),
-                                    ObjectAnimator.ofFloat(this, tunaMaterialPaintYProperty, tunaTouchDownEventY, tunaHeight >> 1));
+                                        ObjectAnimator.ofFloat(this, tunaMaterialPaintXProperty, tunaTouchDownEventX, tunaWidth >> 1),
+                                        ObjectAnimator.ofFloat(this, tunaMaterialPaintYProperty, tunaTouchDownEventY, tunaHeight >> 1));
                             } else {
                                 tunaMaterialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, tunaMaterialRadiusProperty, startRadius, endRadius));
                             }
@@ -6532,12 +5142,12 @@ public class TView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (tunaTextValue != null) {
             tunaTextValueMeasureList = tunaMeasure(widthMeasureSpec, heightMeasureSpec,
-                tunaTextValue, initTunaTextPaint(tunaTextSize), tunaTextPaddingLeft, tunaTextPaddingRight,
-                tunaTextRowSpaceRatio);
+                    tunaTextValue, initTunaTextPaint(tunaTextSize), tunaTextPaddingLeft, tunaTextPaddingRight,
+                    tunaTextRowSpaceRatio);
         } else {
             tunaContentValueMeasureList = tunaMeasure(widthMeasureSpec, heightMeasureSpec,
-                tunaContentValue, initTunaTextPaint(tunaContentSize), tunaTextPaddingLeft, tunaTextPaddingRight,
-                tunaContentRowSpaceRatio);
+                    tunaContentValue, initTunaTextPaint(tunaContentSize), tunaTextPaddingLeft, tunaTextPaddingRight,
+                    tunaContentRowSpaceRatio);
         }
     }
 
@@ -6624,10 +5234,10 @@ public class TView extends View {
         }
 
         if (tunaForegroundNormal != Color.TRANSPARENT || tunaForegroundPress != Color.TRANSPARENT || tunaForegroundSelect != Color.TRANSPARENT || tunaSrcNormal != null
-            || tunaSrcPress != null || tunaSrcSelect != null || tunaSrcNormalShadowRadius > 0 || tunaSrcPressShadowRadius > 0 || tunaSrcSelectShadowRadius > 0
-            || tunaBackgroundNormalShadowRadius > 0 || tunaBackgroundPressShadowRadius > 0 || tunaBackgroundSelectShadowRadius > 0 || tunaBackgroundNormalAngle != Integer.MAX_VALUE
-            || tunaBackgroundPressAngle != Integer.MAX_VALUE || tunaBackgroundSelectAngle != Integer.MAX_VALUE || tunaSrcAnchorNormal != null || tunaSrcAnchorPress != null
-            || tunaSrcAnchorSelect != null
+                || tunaSrcPress != null || tunaSrcSelect != null || tunaSrcNormalShadowRadius > 0 || tunaSrcPressShadowRadius > 0 || tunaSrcSelectShadowRadius > 0
+                || tunaBackgroundNormalShadowRadius > 0 || tunaBackgroundPressShadowRadius > 0 || tunaBackgroundSelectShadowRadius > 0 || tunaBackgroundNormalAngle != Integer.MAX_VALUE
+                || tunaBackgroundPressAngle != Integer.MAX_VALUE || tunaBackgroundSelectAngle != Integer.MAX_VALUE || tunaSrcAnchorNormal != null || tunaSrcAnchorPress != null
+                || tunaSrcAnchorSelect != null
 
         ) {
             // setShadowLayer() is only supported on text when hardware acceleration is on.
@@ -6674,7 +5284,7 @@ public class TView extends View {
             tunaSrcNormalHeightRaw = tunaSrcNormal.getHeight();
 
             initTunaMatrix((tunaWidth - tunaSrcNormalShadowRadius * 2f - tunaBackgroundNormalShadowRadius * 2f - tunaBackgroundNormalShadowDx * 2f) / tunaSrcNormalWidthRaw,
-                (tunaHeight - tunaSrcNormalShadowRadius * 2f - tunaBackgroundNormalShadowRadius * 2f - tunaBackgroundNormalShadowDy * 2f) / tunaSrcNormalHeightRaw);
+                    (tunaHeight - tunaSrcNormalShadowRadius * 2f - tunaBackgroundNormalShadowRadius * 2f - tunaBackgroundNormalShadowDy * 2f) / tunaSrcNormalHeightRaw);
         }
 
         if (tunaSrcPress != null) {
@@ -6688,7 +5298,7 @@ public class TView extends View {
         }
 
         if (tunaSrcNormalWidthRaw != tunaSrcPressWidthRaw || tunaSrcNormalHeightRaw != tunaSrcPressHeightRaw || tunaSrcPressWidthRaw != tunaSrcSelectWidthRaw
-            || tunaSrcPressHeightRaw != tunaSrcSelectHeightRaw) {
+                || tunaSrcPressHeightRaw != tunaSrcSelectHeightRaw) {
             throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaSrcNormal ,tunaSrcPress and tunaSrcSelect needed equal");
         }
 
@@ -6713,7 +5323,7 @@ public class TView extends View {
         }
 
         if (tunaSrcAnchorNormalWidthRaw != tunaSrcAnchorPressWidthRaw || tunaSrcAnchorNormalHeightRaw != tunaSrcAnchorPressHeightRaw
-            || tunaSrcAnchorPressWidthRaw != tunaSrcAnchorSelectWidthRaw || tunaSrcAnchorPressHeightRaw != tunaSrcAnchorSelectHeightRaw) {
+                || tunaSrcAnchorPressWidthRaw != tunaSrcAnchorSelectWidthRaw || tunaSrcAnchorPressHeightRaw != tunaSrcAnchorSelectHeightRaw) {
             throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaSrcAnchorNormal ,tunaSrcAnchorPress and tunaSrcAnchorSelect needed equal");
         }
 
@@ -6762,45 +5372,45 @@ public class TView extends View {
 
             if (tunaMaterialPlay) {
                 drawTunaRectClassic(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                    tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                        - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
-                    tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal, tunaRadius);
+                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
+                                - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
+                        tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal, tunaRadius);
 
                 canvas.drawCircle(tunaTouchDownEventX, tunaTouchDownEventY, tunaMaterialRadius, initTunaPaint(tunaBackgroundPress));
             } else {
                 drawTunaRectClassic(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                    tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                        - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
-                    tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
-                    tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
-                    tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
-                    tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
-                    tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
-                        : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
-                        : tunaStrokeColorNormal, tunaRadius);
+                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
+                                - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
+                        tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
+                        tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
+                        tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
+                        tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
+                        tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
+                                : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
+                                : tunaStrokeColorNormal, tunaRadius);
             }
         } else {
 
             // draw MaterialDesign Effect
             if (tunaMaterialPlay) {
                 drawTunaRectCustom(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                    tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                        - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
-                    tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal,
-                    tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
+                                - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
+                        tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal,
+                        tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
 
                 canvas.drawCircle(tunaTouchDownEventX, tunaTouchDownEventY, tunaMaterialRadius, initTunaPaint(tunaBackgroundPress));
             } else {
                 drawTunaRectCustom(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                    tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                        - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
-                    tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
-                    tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
-                    tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
-                    tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
-                    tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
-                        : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
-                        : tunaStrokeColorNormal, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
+                                - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
+                        tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
+                        tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
+                        tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
+                        tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
+                        tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
+                                : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
+                                : tunaStrokeColorNormal, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
             }
         }
 
@@ -6812,19 +5422,19 @@ public class TView extends View {
             // without moving the bigger picture and the need to set the width and height
 
             canvas.translate(tunaSelect ? tunaBackgroundSelectShadowDx * 2f + tunaSrcSelectShadowRadius - tunaSrcSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx * 2f
-                    + tunaSrcPressShadowRadius - tunaSrcPressShadowDx : tunaBackgroundNormalShadowDx * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDx,
-                tunaSelect ? tunaBackgroundSelectShadowDy * 2f + tunaSrcSelectShadowRadius - tunaSrcSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy * 2f
-                    + tunaSrcPressShadowRadius - tunaSrcPressShadowDy : tunaBackgroundNormalShadowDy * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDy);
+                            + tunaSrcPressShadowRadius - tunaSrcPressShadowDx : tunaBackgroundNormalShadowDx * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDx,
+                    tunaSelect ? tunaBackgroundSelectShadowDy * 2f + tunaSrcSelectShadowRadius - tunaSrcSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy * 2f
+                            + tunaSrcPressShadowRadius - tunaSrcPressShadowDy : tunaBackgroundNormalShadowDy * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDy);
             canvas.drawBitmap(
-                tunaSelect ? tunaSrcSelect : tunaPress ? tunaSrcPress : tunaSrcNormal,
-                tunaMatrix,
-                initTunaPaint(tunaPaint, tunaSelect ? tunaSrcSelectShadowRadius : tunaPress ? tunaSrcPressShadowRadius : tunaSrcNormalShadowRadius,
-                    tunaSelect ? tunaSrcSelectShadowDx : tunaPress ? tunaSrcPressShadowDx : tunaSrcNormalShadowDx, tunaSelect ? tunaSrcSelectShadowDy
-                        : tunaPress ? tunaSrcPressShadowDy : tunaSrcNormalShadowDy));
+                    tunaSelect ? tunaSrcSelect : tunaPress ? tunaSrcPress : tunaSrcNormal,
+                    tunaMatrix,
+                    initTunaPaint(tunaPaint, tunaSelect ? tunaSrcSelectShadowRadius : tunaPress ? tunaSrcPressShadowRadius : tunaSrcNormalShadowRadius,
+                            tunaSelect ? tunaSrcSelectShadowDx : tunaPress ? tunaSrcPressShadowDx : tunaSrcNormalShadowDx, tunaSelect ? tunaSrcSelectShadowDy
+                                    : tunaPress ? tunaSrcPressShadowDy : tunaSrcNormalShadowDy));
             canvas.translate(tunaSelect ? -tunaBackgroundSelectShadowDx * 2f - tunaSrcSelectShadowRadius + tunaSrcSelectShadowDx : tunaPress ? -tunaBackgroundPressShadowDx * 2f
-                    - tunaSrcPressShadowRadius + tunaSrcPressShadowDx : -tunaBackgroundNormalShadowDx * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDx,
-                tunaSelect ? -tunaBackgroundSelectShadowDy * 2f - tunaSrcSelectShadowRadius + tunaSrcSelectShadowDy : tunaPress ? -tunaBackgroundPressShadowDy * 2f
-                    - tunaSrcPressShadowRadius + tunaSrcPressShadowDy : -tunaBackgroundNormalShadowDy * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDy);
+                            - tunaSrcPressShadowRadius + tunaSrcPressShadowDx : -tunaBackgroundNormalShadowDx * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDx,
+                    tunaSelect ? -tunaBackgroundSelectShadowDy * 2f - tunaSrcSelectShadowRadius + tunaSrcSelectShadowDy : tunaPress ? -tunaBackgroundPressShadowDy * 2f
+                            - tunaSrcPressShadowRadius + tunaSrcPressShadowDy : -tunaBackgroundNormalShadowDy * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDy);
 
             tunaPaint.setXfermode(null);
 
@@ -6871,30 +5481,30 @@ public class TView extends View {
             }
 
             canvas.translate(anchorDx + (tunaSelect ? tunaSrcAnchorSelectDx : tunaPress ? tunaSrcAnchorPressDx : tunaSrcAnchorNormalDx), anchorDy
-                + (tunaSelect ? tunaSrcAnchorSelectDy : tunaPress ? tunaSrcAnchorPressDy : tunaSrcAnchorNormalDy));
+                    + (tunaSelect ? tunaSrcAnchorSelectDy : tunaPress ? tunaSrcAnchorPressDy : tunaSrcAnchorNormalDy));
 
             canvas.drawBitmap(tunaSelect ? tunaSrcAnchorSelect : tunaPress ? tunaSrcAnchorPress : tunaSrcAnchorNormal, tunaAnchorMatrix, tunaPaint);
 
             canvas.translate(-anchorDx + (tunaSelect ? -tunaSrcAnchorSelectDx : tunaPress ? -tunaSrcAnchorPressDx : -tunaSrcAnchorNormalDx), -anchorDy
-                + (tunaSelect ? -tunaSrcAnchorSelectDy : tunaPress ? -tunaSrcAnchorPressDy : -tunaSrcAnchorNormalDy));
+                    + (tunaSelect ? -tunaSrcAnchorSelectDy : tunaPress ? -tunaSrcAnchorPressDy : -tunaSrcAnchorNormalDy));
         }
 
         // draw tunaText
         if (tunaTextValue != null) {
             float f[] = drawTunaText(
-                canvas,
-                tunaTextValue,
-                tunaWidth,
-                (tunaWidth >> 1) + tunaTextDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
-                (tunaHeight >> 1) + tunaTextDy,
-                tunaTextPaddingLeft + tunaSrcLeftWidth,
-                tunaTextPaddingRight + tunaSrcRightWidth,
-                initTunaTextPaint(Paint.Style.FILL,
-                    tunaMaterialPlay ? tunaTextColorPress : tunaSelect ? tunaTextColorSelect : tunaPress ? tunaTextColorPress : tunaTextColorNormal, tunaTextSize,
-                    tunaTextShadowRadius, tunaTextShadowColor, tunaTextShadowDx, tunaTextShadowDy, tunaTextTypeFace, Paint.Align.CENTER),
-                tunaTextGravity,
-                tunaTextRowSpaceRatio,
-                tunaTextValueMeasureList);
+                    canvas,
+                    tunaTextValue,
+                    tunaWidth,
+                    (tunaWidth >> 1) + tunaTextDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
+                    (tunaHeight >> 1) + tunaTextDy,
+                    tunaTextPaddingLeft + tunaSrcLeftWidth,
+                    tunaTextPaddingRight + tunaSrcRightWidth,
+                    initTunaTextPaint(Paint.Style.FILL,
+                            tunaMaterialPlay ? tunaTextColorPress : tunaSelect ? tunaTextColorSelect : tunaPress ? tunaTextColorPress : tunaTextColorNormal, tunaTextSize,
+                            tunaTextShadowRadius, tunaTextShadowColor, tunaTextShadowDx, tunaTextShadowDy, tunaTextTypeFace, Paint.Align.CENTER),
+                    tunaTextGravity,
+                    tunaTextRowSpaceRatio,
+                    tunaTextValueMeasureList);
 
             tunaTextDrawWidth = f[0];
             tunaTextEndOffsetCenterX = f[1];
@@ -6907,19 +5517,19 @@ public class TView extends View {
             TunaTextGravity tunaTextGravityFromContent = tunaTextGravityArray[tunaContentGravity.nativeInt];
 
             float f[] = drawTunaText(
-                canvas,
-                tunaContentValue,
-                tunaWidth,
-                (tunaWidth >> 1) + tunaContentDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
-                (tunaHeight >> 1) + tunaContentDy,
-                tunaContentPaddingLeft + tunaSrcLeftWidth,
-                tunaContentPaddingRight + tunaSrcRightWidth,
-                initTunaTextPaint(Paint.Style.FILL,
-                    tunaMaterialPlay ? tunaContentColorPress : tunaSelect ? tunaContentColorSelect : tunaPress ? tunaContentColorPress : tunaContentColorNormal, tunaContentSize,
-                    tunaContentShadowRadius, tunaContentShadowColor, tunaContentShadowDx, tunaContentShadowDy, tunaContentTypeFace, Paint.Align.CENTER),
-                tunaTextGravityFromContent,
-                tunaContentRowSpaceRatio,
-                tunaContentValueMeasureList);
+                    canvas,
+                    tunaContentValue,
+                    tunaWidth,
+                    (tunaWidth >> 1) + tunaContentDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
+                    (tunaHeight >> 1) + tunaContentDy,
+                    tunaContentPaddingLeft + tunaSrcLeftWidth,
+                    tunaContentPaddingRight + tunaSrcRightWidth,
+                    initTunaTextPaint(Paint.Style.FILL,
+                            tunaMaterialPlay ? tunaContentColorPress : tunaSelect ? tunaContentColorSelect : tunaPress ? tunaContentColorPress : tunaContentColorNormal, tunaContentSize,
+                            tunaContentShadowRadius, tunaContentShadowColor, tunaContentShadowDx, tunaContentShadowDy, tunaContentTypeFace, Paint.Align.CENTER),
+                    tunaTextGravityFromContent,
+                    tunaContentRowSpaceRatio,
+                    tunaContentValueMeasureList);
 
             tunaContentDrawWidth = f[0];
             tunaContentEndOffsetCenterX = f[1];
@@ -6950,29 +5560,29 @@ public class TView extends View {
         // draw tunaTextMark
         if (tunaTextMark) {
             drawTunaTextMark(canvas, tunaTextMarkRadius,
-                initTunaPaint(tunaTextMarkColor),
-                tunaTextMarkRadius,
-                tunaTextMarkDx, tunaTextMarkDy,
-                tunaTextDx + tunaTextEndOffsetCenterX + tunaTextMarkDx,
-                tunaTextDy + tunaTextEndOffsetCenterY + tunaTextMarkDy,
-                tunaTextMarkTextValue,
-                tunaTextMarkTextColor,
-                tunaTextMarkTextSize,
-                tunaTextMarkTextValueMeasureList);
+                    initTunaPaint(tunaTextMarkColor),
+                    tunaTextMarkRadius,
+                    tunaTextMarkDx, tunaTextMarkDy,
+                    tunaTextDx + tunaTextEndOffsetCenterX + tunaTextMarkDx,
+                    tunaTextDy + tunaTextEndOffsetCenterY + tunaTextMarkDy,
+                    tunaTextMarkTextValue,
+                    tunaTextMarkTextColor,
+                    tunaTextMarkTextSize,
+                    tunaTextMarkTextValueMeasureList);
         }
 
         // draw tunaContentMark
         if (tunaContentMark) {
             drawTunaTextMark(canvas, tunaContentMarkRadius,
-                initTunaPaint(tunaContentMarkColor),
-                tunaContentMarkRadius,
-                tunaContentMarkDx, tunaContentMarkDy,
-                tunaContentDx + tunaContentEndOffsetCenterX + tunaContentMarkDx,
-                tunaContentDy + tunaContentEndOffsetCenterY + tunaContentMarkDy,
-                tunaContentMarkTextValue,
-                tunaContentMarkTextColor,
-                tunaContentMarkTextSize,
-                tunaContentMarkTextValueMeasureList);
+                    initTunaPaint(tunaContentMarkColor),
+                    tunaContentMarkRadius,
+                    tunaContentMarkDx, tunaContentMarkDy,
+                    tunaContentDx + tunaContentEndOffsetCenterX + tunaContentMarkDx,
+                    tunaContentDy + tunaContentEndOffsetCenterY + tunaContentMarkDy,
+                    tunaContentMarkTextValue,
+                    tunaContentMarkTextColor,
+                    tunaContentMarkTextSize,
+                    tunaContentMarkTextValueMeasureList);
         }
 
         // draw tunaForeground

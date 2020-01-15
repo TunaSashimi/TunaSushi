@@ -190,8 +190,6 @@ public class TBubble extends TView {
     public TBubble(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TBubble.class.getSimpleName();
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubble);
 
         tunaBubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
