@@ -14,7 +14,7 @@ import java.util.List;
 public class EntryActivity extends Activity {
     private String[] s = {"TViewActivity", "TTrangleActivity", "TBubbleActivity",};
 
-    private Class<?>[] c = {TViewActivity.class, TTrangleActivity.class, TBubbleActivity.class,};
+    private Class<?>[] c = {TViewActivity.class, TTrangleViewActivity.class, TBubbleViewActivity.class,};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

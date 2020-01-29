@@ -245,7 +245,7 @@
 
     </declare-styleable>
 
-    <declare-styleable name="TTrangle">
+    <declare-styleable name="TTrangleView">
         <attr name="trangleBackgroundNormal" format="reference|color" />
         <attr name="trangleBackgroundPress" format="reference|color" />
         <attr name="trangleBackgroundSelect" format="reference|color" />
@@ -260,7 +260,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="TBubble">
+    <declare-styleable name="TBubbleView">
         <attr name="bubbleBackground" format="reference|color" />
         <attr name="bubbleRadius" format="dimension" />
         <attr name="bubbleEdgeWidth" format="dimension" />

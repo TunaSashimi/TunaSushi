@@ -1,1 +1,1 @@
-include ':app', ':tuna'
+include ':app', ':tunasushi'

@@ -13,7 +13,7 @@ import android.util.AttributeSet;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TTrangle extends TView {
+public class TTrangleView extends TView {
 
     //tunaTrangleStrokeWidth default 0
     private float tunaTrangleStrokeWidth;
@@ -54,36 +54,36 @@ public class TTrangle extends TView {
     private float bottomCornerInternalDirectionDistance;
     private float boundaryLineInterceptionDistance;
 
-    public TTrangle(Context context) {
+    public TTrangleView(Context context) {
         this(context, null);
     }
 
-    public TTrangle(Context context, AttributeSet attrs) {
+    public TTrangleView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TTrangle(Context context, AttributeSet attrs, int defStyle) {
+    public TTrangleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TTrangle.class.getSimpleName();
+        tunaTag = TTrangleView.class.getSimpleName();
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangle);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangleView);
 
-        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangle_trangleTowardType, -1);
+        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangleView_trangleTowardType, -1);
         if (tunaTrangleTowardTypeIndex >= 0) {
             tunaTrangleTowardType = tunaTowardTypeArray[tunaTrangleTowardTypeIndex];
         } else {
             throw new IllegalArgumentException("The content attribute tunaTrangleTowardType type must be given");
         }
 
-        tunaTrangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundNormal, Color.TRANSPARENT);
-        tunaTrangleBackgroundPress = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundPress, tunaTrangleBackgroundNormal);
-        tunaTrangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundSelect, tunaTrangleBackgroundNormal);
+        tunaTrangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundNormal, Color.TRANSPARENT);
+        tunaTrangleBackgroundPress = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundPress, tunaTrangleBackgroundNormal);
+        tunaTrangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundSelect, tunaTrangleBackgroundNormal);
 
-        tunaTrangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangle_trangleStrokeWidth, 0);
-        tunaTrangleStrokeColor = typedArray.getColor(R.styleable.TTrangle_trangleStrokeColor, Color.TRANSPARENT);
+        tunaTrangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangleView_trangleStrokeWidth, 0);
+        tunaTrangleStrokeColor = typedArray.getColor(R.styleable.TTrangleView_trangleStrokeColor, Color.TRANSPARENT);
 
-        tunaTrangleHideEdge = typedArray.getBoolean(R.styleable.TTrangle_trangleHideEdge, false);
+        tunaTrangleHideEdge = typedArray.getBoolean(R.styleable.TTrangleView_trangleHideEdge, false);
 
         typedArray.recycle();
     }

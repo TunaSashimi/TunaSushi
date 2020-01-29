@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 
 /**
  * @author Tunasashimi
@@ -29,6 +30,8 @@ import java.io.ByteArrayOutputStream;
  */
 public class BitmapTool {
 
+    public static int bitmapMaxSize = 1536;
+    public static HashMap<String, Object> tunaGraphicsMap = new HashMap<String, Object>();
 
     //
     public static Bitmap getCustomRoundBitmap(Bitmap sourceBitmap, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
@@ -68,6 +71,7 @@ public class BitmapTool {
         return classicRoundBitmap;
     }
 
+    //
     public static Bitmap getCircleBitmap(int radius) {
         Bitmap bitmap = Bitmap.createBitmap(radius, radius, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -121,7 +125,7 @@ public class BitmapTool {
         return sourceBitmap;
     }
 
-    // 图片旋转
+    // 旋转
     public static Bitmap getRotateBitamp(Bitmap sourceBitmap, float degree) {
         // 获得Bitmap的高和宽
         int sourceBitmapWidth = sourceBitmap.getWidth();
@@ -133,7 +137,7 @@ public class BitmapTool {
         return resizeBmp;
     }
 
-    // 图片翻转
+    // 翻转
     public static Bitmap getReverseBitmap(Bitmap sourceBitmap, int flag) {
         float[] floats = null;
         switch (flag) {
@@ -154,7 +158,7 @@ public class BitmapTool {
         return sourceBitmap;
     }
 
-    // 怀旧效果
+    // 怀旧
     public static Bitmap getSepiaBitmap(Bitmap sourceBitmap) {
         int width = sourceBitmap.getWidth();
         int height = sourceBitmap.getHeight();
@@ -186,7 +190,7 @@ public class BitmapTool {
         return bitmap;
     }
 
-    // 浮雕效果
+    // 浮雕
     public static Bitmap getEmbossBitmap(Bitmap sourceBitmap) {
         int width = sourceBitmap.getWidth();
         int height = sourceBitmap.getHeight();
@@ -222,7 +226,7 @@ public class BitmapTool {
         return bitmap;
     }
 
-    // 底片效果
+    // 底片
     public static Bitmap getBacksheetBitmap(Bitmap sourceBitmap) {
         // RGBA的最大值
         final int MAX_VALUE = 255;
@@ -264,7 +268,7 @@ public class BitmapTool {
         return bitmap;
     }
 
-    //光照效果,光照中心要坐标
+    //光照,光照中心要坐标
     public static Bitmap getSunshineBitmap(Bitmap sourceBitmap, float centerX, float centerY) {
         final int width = sourceBitmap.getWidth();
         final int height = sourceBitmap.getHeight();

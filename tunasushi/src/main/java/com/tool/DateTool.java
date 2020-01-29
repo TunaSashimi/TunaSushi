@@ -67,7 +67,7 @@ public class DateTool {
      *
      * @param strFormat 格式定义 如：yyyy-MM-dd HH:mm:ss
      * @param date      日期字符串
-     * @return
+     * @return String
      */
     public static String dateToString(String strFormat, Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(strFormat);
@@ -76,9 +76,29 @@ public class DateTool {
 
 
     /**
-     * 获取当日
+     * 获取当前年.
      *
-     * @return
+     * @return String
+     */
+    public static String getCurrYear() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy");// 设置日期格式
+        return df.format(new Date());
+    }
+
+    /**
+     * 获取当月.
+     *
+     * @return String
+     */
+    public static int getCurrMonth() {
+        Calendar c = Calendar.getInstance();
+        return c.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * 获取当日.
+     *
+     * @return String
      */
     public static int getCurrDay() {
 
@@ -88,21 +108,9 @@ public class DateTool {
     }
 
     /**
-     * 获取当前yue
+     * 获取当前时.
      *
-     * @return
-     */
-    public static int getCurrMonth() {
-
-        Calendar c = Calendar.getInstance();
-
-        return c.get(Calendar.MONTH) + 1;
-    }
-
-    /**
-     * 获取当前yue
-     *
-     * @return
+     * @return String
      */
     public static int getCurrHour() {
         Calendar c = Calendar.getInstance();
@@ -110,9 +118,9 @@ public class DateTool {
     }
 
     /**
-     * 获取当前分钟
+     * 获取当前分.
      *
-     * @return
+     * @return String
      */
     public static int getCurrMin() {
 
@@ -120,16 +128,6 @@ public class DateTool {
         return c.get(Calendar.MINUTE);
     }
 
-    /**
-     * 获取当前年
-     *
-     * @return
-     */
-    public static String getCurrYear() {
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy");// 设置日期格式
-        return df.format(new Date());
-    }
 
     /**
      * 获得当前时间的毫秒数
@@ -320,7 +318,7 @@ public class DateTool {
     }
 
     /**
-     * 根据传入的年份和月份,判断当前月有多少天
+     * 根据传入的年份和月份,判断当前月有多少天.
      *
      * @param year
      * @param month
@@ -353,7 +351,7 @@ public class DateTool {
     }
 
     /**
-     * 判断是否为闰年
+     * 判断是否为闰年.
      *
      * @param year
      * @return
@@ -366,7 +364,7 @@ public class DateTool {
     }
 
     /**
-     * 根据传入的年份和月份，获取当前月份的日历分布
+     * 根据传入的年份和月份，获取当前月份的日历分布.
      *
      * @param year
      * @param month
@@ -403,7 +401,7 @@ public class DateTool {
     }
 
     /**
-     * 根据传入的年份和月份，判断上一个月有多少天
+     * 根据传入的年份和月份，判断上一个月有多少天.
      *
      * @param year
      * @param month

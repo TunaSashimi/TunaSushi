@@ -6,7 +6,7 @@
     android:background="#ffffff"
     android:layerType="software">
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
 
         android:id="@+id/bubbleLowLeft"
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="left" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleLowTop"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -42,7 +42,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleLowRight"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -59,7 +59,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleLowBottom"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -76,7 +76,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleLowBottom"
@@ -93,7 +93,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleMiddleLeft"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -109,7 +109,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="left" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleMiddleTop"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -126,7 +126,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleMiddleRight"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -143,7 +143,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleMiddleBottom"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -160,7 +160,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleMiddleBottom"
@@ -177,7 +177,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleHighLeft"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -194,7 +194,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="left" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleHighTop"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -211,7 +211,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleHighRight"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -228,7 +228,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:id="@+id/bubbleHighBottom"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -245,7 +245,7 @@
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
 
-    <com.tuna.TBubble
+    <com.tuna.TBubbleView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleHighBottom"

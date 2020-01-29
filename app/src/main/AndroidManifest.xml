@@ -20,8 +20,8 @@
         </activity>
 
         <activity android:name=".TViewActivity" />
-        <activity android:name=".TTrangleActivity" />
-        <activity android:name=".TBubbleActivity" />
+        <activity android:name=".TTrangleViewActivity" />
+        <activity android:name=".TBubbleViewActivity" />
 
     </application>
 

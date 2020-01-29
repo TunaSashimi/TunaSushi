@@ -64,6 +64,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.tool.BitmapTool.bitmapMaxSize;
+import static com.tool.BitmapTool.tunaGraphicsMap;
 import static com.tool.DeviceTool.applyDimension;
 import static com.tool.DeviceTool.convertToPX;
 import static com.tool.DeviceTool.getViewDisplayMetrics;
@@ -77,83 +79,6 @@ import static com.tool.ViewTool.setViewMargins;
  * @Description
  */
 public class TView extends View {
-    public static int bitmapMaxSize = 1536;
-
-    //
-    public static final String GRAPHICSTYPE_UNKNOWN = "UNKNOWN";
-    public static final String GRAPHICSTYPE_GIF = "GIF";
-    public static final String GRAPHICSTYPE_PNG = "PNG";
-    public static final String GRAPHICSTYPE_JPG = "JPG";
-
-    public static String getGraphicsType(File file) {
-        String type = GRAPHICSTYPE_UNKNOWN;
-        FileInputStream graphicsFile = null;
-        byte[] b = new byte[10];
-        int l = -1;
-        try {
-            graphicsFile = new FileInputStream(file);
-            l = graphicsFile.read(b);
-            graphicsFile.close();
-        } catch (Exception e) {
-            return type;
-        }
-        if (l == 10) {
-            byte b0 = b[0];
-            byte b1 = b[1];
-            byte b2 = b[2];
-            byte b3 = b[3];
-            byte b6 = b[6];
-            byte b7 = b[7];
-            byte b8 = b[8];
-            byte b9 = b[9];
-            // GIF
-            if (b0 == (byte) 'G' && b1 == (byte) 'I' && b2 == (byte) 'F') {
-                type = GRAPHICSTYPE_GIF;
-                // PNG
-            } else if (b1 == (byte) 'P' && b2 == (byte) 'N' && b3 == (byte) 'G') {
-                type = GRAPHICSTYPE_PNG;
-                // JPG
-            } else if (b6 == (byte) 'J' && b7 == (byte) 'F' && b8 == (byte) 'I' && b9 == (byte) 'F') {
-                type = GRAPHICSTYPE_JPG;
-            }
-        }
-        return type;
-    }
-
-    public static String getGraphicsType(String path) {
-        String type = GRAPHICSTYPE_UNKNOWN;
-        FileInputStream graphicsFile = null;
-        byte[] b = new byte[10];
-        int l = -1;
-        try {
-            graphicsFile = new FileInputStream(path);
-            l = graphicsFile.read(b);
-            graphicsFile.close();
-        } catch (Exception e) {
-            return type;
-        }
-        if (l == 10) {
-            byte b0 = b[0];
-            byte b1 = b[1];
-            byte b2 = b[2];
-            byte b3 = b[3];
-            byte b6 = b[6];
-            byte b7 = b[7];
-            byte b8 = b[8];
-            byte b9 = b[9];
-            // GIF
-            if (b0 == (byte) 'G' && b1 == (byte) 'I' && b2 == (byte) 'F') {
-                type = GRAPHICSTYPE_GIF;
-                // PNG
-            } else if (b1 == (byte) 'P' && b2 == (byte) 'N' && b3 == (byte) 'G') {
-                type = GRAPHICSTYPE_PNG;
-                // JPG
-            } else if (b6 == (byte) 'J' && b7 == (byte) 'F' && b8 == (byte) 'I' && b9 == (byte) 'F') {
-                type = GRAPHICSTYPE_JPG;
-            }
-        }
-        return type;
-    }
 
     public Bitmap decodeBitmapResource(int id) {
         return decodeBitmapResource(id, 1);
@@ -179,6 +104,7 @@ public class TView extends View {
         tunaGraphicsMap.put(stringId, bitmap);
         return bitmap;
     }
+
 
     //
     public Movie decodeGifResource(int id) {
@@ -365,7 +291,7 @@ public class TView extends View {
     protected int tunaTotal;
 
     protected Bitmap tunaSrcBitmap;
-    protected HashMap<String, Object> tunaGraphicsMap = new HashMap<String, Object>();
+
 
     protected float tunaSrcWidthScale, tunaSrcHeightScale;
 
@@ -1283,7 +1209,7 @@ public class TView extends View {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
+                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
@@ -1292,7 +1218,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
+                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
@@ -1301,7 +1227,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.TunaColorSelectListener() {
+                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
@@ -1310,7 +1236,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.TunaColorSelectListener() {
+                    new TColorPickerDialog(getContext(), tunaStrokeColorNormal, new TColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
@@ -1319,7 +1245,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.TunaColorSelectListener() {
+                    new TColorPickerDialog(getContext(), tunaStrokeColorNormal, new TColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);

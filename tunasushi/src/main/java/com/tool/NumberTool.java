@@ -12,7 +12,7 @@ public class NumberTool {
 
     /*** 小数点后一位*/
     public static final String PATTERN_0_0 = "##0.0";
-    /***  小数点后二位*/
+    /*** 小数点后二位*/
     public static final String PATTERN_0_00 = "##0.00";
     /*** 小数点后三位*/
     public static final String PATTERN_0_000 = "##0.000";
