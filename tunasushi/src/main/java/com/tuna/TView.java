@@ -65,6 +65,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.tool.BitmapTool.bitmapMaxSize;
+import static com.tool.BitmapTool.computeSampleSize;
 import static com.tool.BitmapTool.tunaGraphicsMap;
 import static com.tool.DeviceTool.applyDimension;
 import static com.tool.DeviceTool.convertToPX;
@@ -80,6 +81,7 @@ import static com.tool.ViewTool.setViewMargins;
  */
 public class TView extends View {
 
+    //
     public Bitmap decodeBitmapResource(int id) {
         return decodeBitmapResource(id, 1);
     }
@@ -226,38 +228,7 @@ public class TView extends View {
         }
     }
 
-    //
-    public int computeSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int initialSize = computeInitialSampleSize(options, reqWidth, reqHeight);
-        int inSampleSize;
-        if (initialSize <= 8) {
-            inSampleSize = 1;
-            while (inSampleSize < initialSize) {
-                inSampleSize <<= 1;
-            }
-        } else {
-            inSampleSize = (initialSize + 7) / 8 * 8;
-        }
-        return inSampleSize;
-    }
 
-    private int computeInitialSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        double w = options.outWidth;
-        double h = options.outHeight;
-        int lowerBound = (reqHeight == -1) ? 1 : (int) Math.ceil(Math.sqrt(w * h / reqHeight));
-        int upperBound = (reqWidth == -1) ? 128 : (int) Math.min(Math.floor(w / reqWidth), Math.floor(h / reqWidth));
-        if (upperBound < lowerBound) {
-            // return the larger one when there is no overlapping zone.
-            return lowerBound;
-        }
-        if ((reqHeight == -1) && (reqWidth == -1)) {
-            return 1;
-        } else if (reqWidth == -1) {
-            return lowerBound;
-        } else {
-            return upperBound;
-        }
-    }
 
     public Bitmap createImageThumbnail(String filePath) {
         Bitmap bitmap = null;
