@@ -80,12 +80,12 @@
             app:backgroundSelect="#000000"
             app:radius="@dimen/tuna_radius"
             app:selectType="same"
-            app:srcAnchorNormal="@drawable/tviewtest_tuna_select01"
+            app:srcAnchorNormal="@drawable/iv_select01_bg"
             app:srcAnchorNormalDx="5dp"
             app:srcAnchorNormalDy="5dp"
             app:srcAnchorNormalHeight="7dp"
             app:srcAnchorNormalWidth="10dp"
-            app:srcAnchorSelect="@drawable/tviewtest_tuna_select02"
+            app:srcAnchorSelect="@drawable/iv_select01_bg"
             app:strokeColorSelect="#dedede"
             app:strokeWidthSelect="@dimen/tuna_stroke_width"
             app:textColorNormal="#dedede"
@@ -104,10 +104,10 @@
             app:radius="@dimen/tuna_radius"
             app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
-            app:srcAnchorNormal="@drawable/tviewtest_tuna_select01"
+            app:srcAnchorNormal="@drawable/iv_select01_bg"
             app:srcAnchorNormalHeight="7dp"
             app:srcAnchorNormalWidth="10dp"
-            app:srcAnchorSelect="@drawable/tviewtest_tuna_select02"
+            app:srcAnchorSelect="@drawable/iv_select02_bg"
             app:strokeColorSelect="#dedede"
             app:strokeWidthSelect="@dimen/tuna_stroke_width"
             app:textColorNormal="#dedede"
@@ -364,8 +364,8 @@
             android:layout_toLeftOf="@id/viewAnchorSecondaryButton02"
             app:radiusLeftBottom="@dimen/tuna_radius"
             app:radiusLeftTop="@dimen/tuna_radius"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure01"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure02"
+            app:srcNormal="@drawable/iv_clippitcure01_bg"
+            app:srcPress="@drawable/iv_clippitcure02_bg"
             app:textColorNormal="#ffffff"
             app:textGravity="all_center"
             app:textValue="tunaMark=true&amp;textGravity=center" />
@@ -378,8 +378,8 @@
             android:layout_toRightOf="@id/viewAnchorSecondaryButton02"
             app:radiusRightBottom="@dimen/tuna_radius"
             app:radiusRightTop="@dimen/tuna_radius"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure01"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure02"
+            app:srcNormal="@drawable/iv_clippitcure01_bg"
+            app:srcPress="@drawable/iv_clippitcure02_bg"
             app:textColorNormal="#ffffff"
             app:textGravity="all_left"
             app:textRowSpaceRatio="200%"
@@ -393,8 +393,8 @@
             android:layout_marginLeft="@dimen/tuna_button_marginLeft"
             android:layout_marginTop="@dimen/tuna_button_marginTop"
             android:layout_marginRight="@dimen/tuna_button_marginBetween"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure03"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure04" />
+            app:srcNormal="@drawable/iv_clippitcure03_bg"
+            app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <com.tuna.TView
             android:id="@+id/secondaryButton06"
@@ -404,8 +404,8 @@
             android:layout_marginRight="@dimen/tuna_button_marginBetween"
             android:layout_toRightOf="@id/secondaryButton05"
             app:radius="24dp"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure03"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure04" />
+            app:srcNormal="@drawable/iv_clippitcure03_bg"
+            app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <com.tuna.TView
             android:layout_width="@dimen/tuna_spinner_width"
@@ -414,8 +414,8 @@
             android:layout_toRightOf="@id/secondaryButton06"
             app:porterDuffXfermode="src_out"
             app:radius="24dp"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure03"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure04" />
+            app:srcNormal="@drawable/iv_clippitcure03_bg"
+            app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <TextView
             android:id="@+id/textTunaShadow"
@@ -434,9 +434,9 @@
             android:layout_marginLeft="@dimen/tuna_button_marginLeft"
             android:layout_marginRight="@dimen/tuna_button_marginBetween"
             app:backgroundNormal="#c1eaee"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure03"
+            app:srcNormal="@drawable/iv_clippitcure03_bg"
             app:srcNormalShadowRadius="4dp"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure04" />
+            app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <com.tuna.TView
             android:layout_width="@dimen/tuna_spinner_width"
@@ -447,8 +447,8 @@
             app:backgroundNormalShadowDx="2dp"
             app:backgroundNormalShadowDy="2dp"
             app:backgroundNormalShadowRadius="2dp"
-            app:srcNormal="@drawable/tviewtest_tuna_clippitcure03"
-            app:srcPress="@drawable/tviewtest_tuna_clippitcure04" />
+            app:srcNormal="@drawable/iv_clippitcure03_bg"
+            app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <TextView
             android:id="@+id/textTunaContext"
@@ -507,7 +507,7 @@
             android:layout_marginRight="@dimen/tuna_button_marginRight"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcLeft="@drawable/tviewtest_tuna_rmb_mark"
+            app:srcLeft="@drawable/iv_rmb_mark_bg"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftWidth="9dp"
@@ -525,7 +525,7 @@
             android:layout_toRightOf="@id/srcLeft"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcLeft="@drawable/tviewtest_tuna_rmb_mark"
+            app:srcLeft="@drawable/iv_rmb_mark_bg"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftPadding="8dp"
@@ -554,7 +554,7 @@
             android:layout_margin="@dimen/tuna_button_marginLeft"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcRight="@drawable/tviewtest_tuna_rmb_mark"
+            app:srcRight="@drawable/iv_rmb_mark_bg"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"
             app:srcRightWidth="9dp"
@@ -572,7 +572,7 @@
             android:layout_toRightOf="@id/srcRight"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcRight="@drawable/tviewtest_tuna_rmb_mark"
+            app:srcRight="@drawable/iv_rmb_mark_bg"
             app:srcRightDx="8dp"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"
