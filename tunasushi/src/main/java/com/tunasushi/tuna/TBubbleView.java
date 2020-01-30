@@ -1,4 +1,4 @@
-package com.tuna;
+package com.tunasushi.tuna;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Region.Op;
+import android.os.Build;
 import android.util.AttributeSet;
+
+import com.tuna.R;
+
+import androidx.annotation.RequiresApi;
+
+import static com.tunasushi.tool.PaintTool.initTunaPaint;
+import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
 
 /**
  * @author Tunasashimi
@@ -190,6 +198,8 @@ public class TBubbleView extends TView {
     public TBubbleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        tunaTag = TBubbleView.class.getSimpleName();
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubbleView);
 
         tunaBubbleBackground = typedArray.getColor(R.styleable.TBubbleView_bubbleBackground, Color.TRANSPARENT);
@@ -247,6 +257,7 @@ public class TBubbleView extends TView {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

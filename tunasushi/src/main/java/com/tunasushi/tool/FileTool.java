@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 import java.io.File;
 import java.io.FileInputStream;

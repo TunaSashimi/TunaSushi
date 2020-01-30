@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 import android.app.Activity;
 import android.app.ActivityManager;

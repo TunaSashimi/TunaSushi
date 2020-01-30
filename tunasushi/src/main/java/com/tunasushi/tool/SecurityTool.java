@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 /**
  * @author Tunasashimi
@@ -6,5 +6,5 @@ package com.tool;
  * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
-public class ZipTool {
+public class SecurityTool {
 }

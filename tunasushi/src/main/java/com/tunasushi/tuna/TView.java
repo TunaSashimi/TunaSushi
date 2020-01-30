@@ -1,4 +1,4 @@
-package com.tuna;
+package com.tunasushi.tuna;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -16,7 +16,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Movie;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetricsInt;
@@ -31,6 +30,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Property;
@@ -56,22 +56,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.tool.DeviceTool;
+import com.tunasushi.tool.DeviceTool;
+import com.tuna.R;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.tool.BitmapTool.bitmapMaxSize;
-import static com.tool.BitmapTool.computeSampleSize;
-import static com.tool.BitmapTool.tunaGraphicsMap;
-import static com.tool.DeviceTool.applyDimension;
-import static com.tool.DeviceTool.convertToPX;
-import static com.tool.DeviceTool.getViewDisplayMetrics;
-import static com.tool.ViewTool.getLinearGradient;
-import static com.tool.ViewTool.setViewMargins;
+import androidx.annotation.RequiresApi;
+
+import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
+import static com.tunasushi.tool.DeviceTool.applyDimension;
+import static com.tunasushi.tool.DeviceTool.convertToPX;
+import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.PaintTool.initTunaPaint;
+import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
+import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.ViewTool.getLinearGradient;
+import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
  * @author Tunasashimi
@@ -80,181 +81,13 @@ import static com.tool.ViewTool.setViewMargins;
  * @Description
  */
 public class TView extends View {
-
-    //
-    public Bitmap decodeBitmapResource(int id) {
-        return decodeBitmapResource(id, 1);
-    }
-
-    //
-    public Bitmap decodeBitmapResource(int id, int inSampleSize) {
-        String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
-            if (object != null && object instanceof Bitmap) {
-                return (Bitmap) object;
-            }
-        }
-        Bitmap bitmap;
-        if (inSampleSize > 1) {
-            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
-            bitmapFactoryOptions.inSampleSize = inSampleSize;
-            bitmap = BitmapFactory.decodeResource(getResources(), id, bitmapFactoryOptions);
-        } else {
-            bitmap = BitmapFactory.decodeResource(getResources(), id);
-        }
-        tunaGraphicsMap.put(stringId, bitmap);
-        return bitmap;
-    }
-
-
-    //
-    public Movie decodeGifResource(int id) {
-        String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
-            if (object != null && object instanceof Movie) {
-                return (Movie) object;
-            }
-        }
-        return Movie.decodeStream(getResources().openRawResource(id));
-    }
-
-    //
-    public Object decodeGraphicsResource(int id) {
-        return decodeGraphicsResource(id, 1);
-    }
-
-    //
-    public Object decodeGraphicsResource(int id, int inSampleSize) {
-        String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
-            if (object != null) {
-                return object;
-            }
-        }
-        Movie movie = decodeGifResource(id);
-        if (movie != null) {
-            return movie;
-        } else {
-            return decodeBitmapResource(id, inSampleSize);
-        }
-    }
-
-    //
-    public Bitmap decodeBitmapFile(String path) {
-        return decodeBitmapFile(path, 0, 0);
-    }
-
-    //
-    public Bitmap decodeBitmapFile(String path, int reqWidth, int reqHeight) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
-            if (object != null && object instanceof Bitmap) {
-                return (Bitmap) object;
-            }
-        }
-        Bitmap bitmap;
-        if (reqWidth == 0 || reqHeight == 0) {
-
-            //Without image parameters to avoid OOM situation arising
-            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
-            bitmapFactoryOptions.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(path, bitmapFactoryOptions);
-
-            int bitmapSize = bitmapFactoryOptions.outWidth * bitmapFactoryOptions.outHeight;
-            if (bitmapSize > bitmapMaxSize) {
-                bitmapFactoryOptions.inSampleSize = (int) Math.ceil(bitmapSize / bitmapMaxSize);
-                bitmapFactoryOptions.inJustDecodeBounds = false;
-                bitmap = BitmapFactory.decodeFile(path, bitmapFactoryOptions);
-            } else {
-                bitmap = BitmapFactory.decodeFile(path);
-            }
-        } else {
-            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
-
-            bitmapFactoryOptions.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(path, bitmapFactoryOptions);
-            bitmapFactoryOptions.inSampleSize = computeSampleSize(bitmapFactoryOptions, -1, reqWidth * reqHeight);
-            bitmapFactoryOptions.inJustDecodeBounds = false;
-            bitmap = BitmapFactory.decodeFile(path, bitmapFactoryOptions);
-        }
-        tunaGraphicsMap.put(path, bitmap);
-        return bitmap;
-    }
-
-    //
-    public Movie decodeGifFile(String path) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
-            if (object != null && object instanceof Movie) {
-                return (Movie) object;
-            }
-        }
-        return Movie.decodeFile(path);
-    }
-
-    //
-    public Object decodeGraphicsFile(String path) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
-            if (object != null) {
-                return object;
-            }
-        }
-        Movie movie = Movie.decodeFile(path);
-        if (movie != null) {
-            return movie;
-        } else {
-            return decodeBitmapFile(path);
-        }
-    }
-
-    //
-    public Object decodeGraphicsFile(String path, int reqWidth, int reqHeight) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
-            if (object != null) {
-                return object;
-            }
-        }
-
-        Movie movie = Movie.decodeFile(path);
-        if (movie != null) {
-            return movie;
-        } else {
-            return decodeBitmapFile(path, reqWidth, reqHeight);
-        }
-    }
-
-
-
-    public Bitmap createImageThumbnail(String filePath) {
-        Bitmap bitmap = null;
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, opts);
-
-        opts.inSampleSize = computeSampleSize(opts, -1, 128 * 128);
-        opts.inJustDecodeBounds = false;
-
-        try {
-            bitmap = BitmapFactory.decodeFile(filePath, opts);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
     /**
      * The following fields and methods of the parent class and subclass can always use
      */
-
-    // as the mark of tunaView species
+    // as the mark of TView species
     protected String tunaTag;
 
-    // the width and height of the tunaView(put together to save the number of rows)
+    // the width and height of the TView(put together to save the number of rows)
     protected int tunaWidth, tunaHeight;
 
     //
@@ -276,168 +109,6 @@ public class TView extends View {
 
     protected float[] tunaFloatArray;
     protected String[] tunaStringArray;
-
-    protected Paint tunaPaint;
-
-    public Paint getTunaPaint() {
-        return tunaPaint;
-    }
-
-    public void setTunaPaint(Paint tunaPaint) {
-        this.tunaPaint = tunaPaint;
-    }
-
-    // 0
-    protected Paint initTunaPaint() {
-        if (tunaPaint == null) {
-            return tunaPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        } else {
-            tunaPaint.reset();
-            tunaPaint.clearShadowLayer();
-            tunaPaint.setAntiAlias(true);
-        }
-        return tunaPaint;
-    }
-
-    // 1
-    protected Paint initTunaPaint(int colorValue) {
-        return initTunaPaint(Style.FILL, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
-    }
-
-    // 2
-    protected Paint initTunaPaint(Style style, int colorValue) {
-        return initTunaPaint(style, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
-    }
-
-    // 2
-    protected Paint initTunaPaint(Style style, Shader shader) {
-        return initTunaPaint(style, 0, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, -1);
-    }
-
-    // 3
-    protected Paint initTunaPaint(Style style, int colorValue, float strokeWidth) {
-        return initTunaPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
-    }
-
-    // 3
-    protected Paint initTunaPaint(Style style, int colorValue, Shader shader) {
-        return initTunaPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, -1);
-    }
-
-    // 3
-    protected Paint initTunaPaint(Style style, Shader shader, int alpha) {
-        return initTunaPaint(style, 0, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
-    }
-
-    // 4
-    protected Paint initTunaPaint(Style style, int colorValue, Shader shader, int alpha) {
-        return initTunaPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
-    }
-
-    // 4
-    protected Paint initTunaPaint(Style style, int colorValue, float strokeWidth, int alpha) {
-        return initTunaPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, alpha);
-    }
-
-    // 6
-    protected Paint initTunaPaint(Style style, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
-        return initTunaPaint(style, 0, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
-    }
-
-    // 6
-    protected Paint initTunaPaint(Style style, int colorValue, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
-        return initTunaPaint(style, 0, colorValue, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
-    }
-
-    // 9
-    protected Paint initTunaPaint(Style style, float strokeWidth, int colorValue, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
-        //
-        initTunaPaint();
-        //
-        if (style != null) {
-            tunaPaint.setStyle(style);
-        }
-        if (strokeWidth != 0) {
-            tunaPaint.setStrokeWidth(strokeWidth);
-        }
-
-        // When the shadow color can not be set to transparent, but can not set
-        if (shader == null) {
-            tunaPaint.setColor(colorValue);
-        } else {
-            tunaPaint.setShader(shader);
-        }
-
-        if (shadowRadius != 0) {
-            tunaPaint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
-        }
-        if (alpha != -1) {
-            tunaPaint.setAlpha(alpha);
-        }
-        return tunaPaint;
-    }
-
-    // 1
-    protected Paint initTunaTextPaint(float textSize) {
-        return initTunaTextPaint(null, Color.WHITE, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
-    }
-
-    // 2
-    protected Paint initTunaTextPaint(int textColor, float textSize) {
-        return initTunaTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
-    }
-
-    // 3
-    protected Paint initTunaTextPaint(int textColor, float textSize, Align align) {
-        return initTunaTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
-    }
-
-    // 4
-    protected Paint initTunaTextPaint(Style style, int textColor, float textSize, Align align) {
-        return initTunaTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
-    }
-
-    // 5
-    protected Paint initTunaTextPaint(Style style, int textColor, float textSize, Typeface typeFace, Align align) {
-        return initTunaTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, typeFace, align);
-    }
-
-    // 8
-    protected Paint initTunaTextPaint(Style style, int colorValue, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Align align) {
-        //
-        initTunaPaint();
-        //
-        if (style != null) {
-            tunaPaint.setStyle(style);
-        }
-
-        tunaPaint.setColor(colorValue);
-
-        if (textSize != 0) {
-            tunaPaint.setTextSize(textSize);
-        }
-        if (shadowRadius != 0) {
-            tunaPaint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
-        }
-        if (align != null) {
-            tunaPaint.setTextAlign(align);
-        }
-
-        if (typeFace != null) {
-            tunaPaint.setTypeface(typeFace);
-        }
-
-        return tunaPaint;
-    }
-
-    // 4
-    protected Paint initTunaPaint(Paint paint, float shadowRadius, float shadowDx, float shadowDy) {
-        paint.clearShadowLayer();
-        if (shadowRadius > 0) {
-            paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, Color.WHITE);
-        }
-        return paint;
-    }
 
     //
     protected Path tunaPath;
@@ -874,40 +545,40 @@ public class TView extends View {
     }
 
     //
-    public static void tunaAssociate(final TView[] tunaViewArray) {
-        if (tunaViewArray == null) {
+    public static void tunaAssociate(final TView[] TViewArray) {
+        if (TViewArray == null) {
             return;
         }
-        final int arraySize = tunaViewArray.length;
+        final int arraySize = TViewArray.length;
         for (int i = 0; i < arraySize; i++) {
             final int finalI = i;
-            tunaViewArray[i].setTunaAssociateListener(new TunaAssociateListener() {
+            TViewArray[i].setTunaAssociateListener(new TunaAssociateListener() {
                 @Override
                 public void tunaAssociate(View v) {
                     for (int j = 0; j < arraySize; j++) {
                         if (j != finalI) {
-                            tunaViewArray[j].setTunaStatius(false, false, false);
+                            TViewArray[j].setTunaStatius(false, false, false);
                         }
                     }
                 }
             });
-            tunaViewArray[i].setTunaTouchCancelListener(new TunaTouchCancelListener() {
+            TViewArray[i].setTunaTouchCancelListener(new TunaTouchCancelListener() {
                 @Override
                 public void tunaTouchCancel(View v) {
                     for (int j = 0; j < arraySize; j++) {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    tunaViewArray[j].setTunaStatius(false, true, false);
+                                    TViewArray[j].setTunaStatius(false, true, false);
                                 } else if (j > finalI + 1) {
-                                    tunaViewArray[j].setTunaStatius(false, false, false);
+                                    TViewArray[j].setTunaStatius(false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    tunaViewArray[j].setTunaStatius(false, true, false);
+                                    TViewArray[j].setTunaStatius(false, true, false);
                                 } else if (j < finalI - 1) {
-                                    tunaViewArray[j].setTunaStatius(false, false, false);
+                                    TViewArray[j].setTunaStatius(false, false, false);
                                 }
                                 break;
                         }
@@ -918,40 +589,40 @@ public class TView extends View {
     }
 
     //
-    public static void tunaAssociate(final List<TView> tunaViewList) {
-        if (tunaViewList == null) {
+    public static void tunaAssociate(final List<TView> TViewList) {
+        if (TViewList == null) {
             return;
         }
-        final int listSize = tunaViewList.size();
+        final int listSize = TViewList.size();
         for (int i = 0; i < listSize; i++) {
             final int finalI = i;
-            tunaViewList.get(i).setTunaAssociateListener(new TunaAssociateListener() {
+            TViewList.get(i).setTunaAssociateListener(new TunaAssociateListener() {
                 @Override
                 public void tunaAssociate(View v) {
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
-                            tunaViewList.get(j).setTunaStatius(false, false, false, false);
+                            TViewList.get(j).setTunaStatius(false, false, false, false);
                         }
                     }
                 }
             });
-            tunaViewList.get(i).setTunaTouchCancelListener(new TunaTouchCancelListener() {
+            TViewList.get(i).setTunaTouchCancelListener(new TunaTouchCancelListener() {
                 @Override
                 public void tunaTouchCancel(View v) {
                     for (int j = 0; j < listSize; j++) {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    tunaViewList.get(j).setTunaStatius(false, true, false, false);
+                                    TViewList.get(j).setTunaStatius(false, true, false, false);
                                 } else if (j > finalI + 1) {
-                                    tunaViewList.get(j).setTunaStatius(false, false, false, false);
+                                    TViewList.get(j).setTunaStatius(false, false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    tunaViewList.get(j).setTunaStatius(false, true, false, false);
+                                    TViewList.get(j).setTunaStatius(false, true, false, false);
                                 } else if (j < finalI - 1) {
-                                    tunaViewList.get(j).setTunaStatius(false, false, false, false);
+                                    TViewList.get(j).setTunaStatius(false, false, false, false);
                                 }
                                 break;
                         }
@@ -1019,39 +690,39 @@ public class TView extends View {
 //		int margin = context.getResources().getDimensionPixelOffset(R.dimen.tuna_stroke_mask);
         int margin = -2;    //-2px
 
-        List<TView> tunaViewList = new ArrayList<TView>();
+        List<TView> TViewList = new ArrayList<TView>();
 
         if (titleArray.length <= 0) {
             return;
         } else if (titleArray.length == 1) {
 
-            TView tunaView = new TView(context, null, wholeStyle);
+            TView TView = new TView(context, null, wholeStyle);
 
-            tunaView.setTunaTextValue(titleArray[0]);
-            tunaView.setTunaTouchUpListener(tunaTouchUpListener);
-            linearLayout.addView(tunaView, width, LinearLayout.LayoutParams.MATCH_PARENT);
+            TView.setTunaTextValue(titleArray[0]);
+            TView.setTunaTouchUpListener(tunaTouchUpListener);
+            linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
         } else {
 
             for (int i = 0; i < titleArray.length; i++) {
-                TView tunaView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
-                tunaView.setTunaTextValue(titleArray[i]);
+                TView TView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
+                TView.setTunaTextValue(titleArray[i]);
                 if (i == index) {
-                    tunaView.setTunaSelect(true);
+                    TView.setTunaSelect(true);
                 }
-                tunaView.setTunaTouchUpListener(tunaTouchUpListener);
+                TView.setTunaTouchUpListener(tunaTouchUpListener);
 
-                tunaViewList.add(tunaView);
-                linearLayout.addView(tunaView, width, LinearLayout.LayoutParams.MATCH_PARENT);
+                TViewList.add(TView);
+                linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
 
                 if (i == 0 && titleArray.length == 2) {
-                    setViewMargins(tunaView, TypedValue.COMPLEX_UNIT_PX, 0, 0, margin, 0);
+                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, 0, 0, margin, 0);
                 } else if (i == 1 && titleArray.length == 2) {
-                    setViewMargins(tunaView, TypedValue.COMPLEX_UNIT_PX, margin, 0, 0, 0);
+                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, 0, 0);
                 } else if (i != 0 && i != titleArray.length - 1) {
-                    setViewMargins(tunaView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
+                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
                 }
             }
-            TView.tunaAssociate(tunaViewList);
+            TView.tunaAssociate(TViewList);
         }
     }
 
@@ -1114,15 +785,15 @@ public class TView extends View {
         edit_width.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaWidth)));
         edit_height.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaHeight)));
 
-        edit_backgroundNormal.setText(tunaBackgroundNormal != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundNormal)) : "00000000");
-        edit_backgroundPress.setText(tunaBackgroundPress != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundPress)) : "00000000");
-        edit_backgroundSelect.setText(tunaBackgroundSelect != 0 ? String.valueOf(Integer.toHexString(tunaBackgroundSelect)) : "00000000");
+        edit_backgroundNormal.setText(tunaBackgroundNormal != 0 ? Integer.toHexString(tunaBackgroundNormal) : "00000000");
+        edit_backgroundPress.setText(tunaBackgroundPress != 0 ? Integer.toHexString(tunaBackgroundPress) : "00000000");
+        edit_backgroundSelect.setText(tunaBackgroundSelect != 0 ? Integer.toHexString(tunaBackgroundSelect) : "00000000");
 
         edit_textSize.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaTextSize)));
-        edit_textColorNormal.setText(tunaTextColorNormal != 0 ? String.valueOf(Integer.toHexString(tunaTextColorNormal)) : "00000000");
+        edit_textColorNormal.setText(tunaTextColorNormal != 0 ? Integer.toHexString(tunaTextColorNormal) : "00000000");
 
         edit_strokeWidth.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaStrokeWidthNormal)));
-        edit_strokeColor.setText(tunaStrokeColorNormal != 0 ? String.valueOf(Integer.toHexString(tunaStrokeColorNormal)) : "00000000");
+        edit_strokeColor.setText(tunaStrokeColorNormal != 0 ? Integer.toHexString(tunaStrokeColorNormal) : "00000000");
 
         //
         edit_backgroundNormal.setTextColor(tunaBackgroundNormal);
@@ -1180,7 +851,7 @@ public class TView extends View {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
@@ -1189,7 +860,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
@@ -1198,7 +869,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new TColorPickerDialog(getContext(), tunaBackgroundNormal, new TColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
@@ -1207,7 +878,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new TColorPickerDialog(getContext(), tunaStrokeColorNormal, new TColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
@@ -1216,7 +887,7 @@ public class TView extends View {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new TColorPickerDialog(getContext(), tunaStrokeColorNormal, new TColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
                         public void tunaColorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);
@@ -2098,7 +1769,7 @@ public class TView extends View {
     }
 
     public void setTunaSrcNormal(int id) {
-        setTunaSrcNormal(decodeBitmapResource(id));
+        setTunaSrcNormal(decodeBitmapResource(getContext(), id));
     }
 
     public void setTunaSrcNormal(Bitmap tunaSrcNormal) {
@@ -2114,7 +1785,7 @@ public class TView extends View {
     }
 
     public void setTunaSrcPress(int id) {
-        setTunaSrcPress(decodeBitmapResource(id));
+        setTunaSrcPress(decodeBitmapResource(getContext(), id));
     }
 
     public void setTunaSrcPress(Bitmap tunaSrcPress) {
@@ -2130,7 +1801,7 @@ public class TView extends View {
     }
 
     public void setTunaSrcSelect(int id) {
-        setTunaSrcSelect(decodeBitmapResource(id));
+        setTunaSrcSelect(decodeBitmapResource(getContext(), id));
     }
 
     public void setTunaSrcSelect(Bitmap tunaSrcSelect) {
@@ -4516,8 +4187,8 @@ public class TView extends View {
         tunaSuper = TView.class == this.getClass();
 
         if (tunaSuper) {
-            // note that the use of default values ​​can be defined,tunaBackgroundNormal to the default white to achieve clip tunaBitmap results!
 
+            // note that the use of default values ​​can be defined,tunaBackgroundNormal to the default white to achieve clip tunaBitmap results!
             tunaBackgroundNormal = typedArray.getColor(R.styleable.TView_backgroundNormal, Color.TRANSPARENT);
             tunaBackgroundPress = typedArray.getColor(R.styleable.TView_backgroundPress, tunaBackgroundNormal);
             tunaBackgroundSelect = typedArray.getColor(R.styleable.TView_backgroundSelect, tunaBackgroundNormal);
@@ -4800,6 +4471,8 @@ public class TView extends View {
         }
 
         typedArray.recycle();
+
+        //
         DeviceTool.initDisplayMetrics(getContext());
     }
 
@@ -4810,8 +4483,7 @@ public class TView extends View {
             return super.dispatchTouchEvent(event);
         }
 
-        //This sentence is telling the parent control, my own event handling!
-        // when TunaDrag and other views nested inside the ScroView will be used !
+        //This sentence is telling the parent control, my own event handling! when TunaDrag and other views nested inside the ScroView will be used !
 
         if (tunaTouchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
@@ -5242,6 +4914,7 @@ public class TView extends View {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongConstant")
     @Override
     protected void onDraw(Canvas canvas) {

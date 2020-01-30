@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,8 +14,8 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 
-import static com.tool.DeviceTool.applyDimension;
-import static com.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.DeviceTool.applyDimension;
+import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
 
 /**
  * @author Tunasashimi

@@ -1,11 +1,19 @@
-package com.tuna;
+package com.tunasushi.tuna;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.util.AttributeSet;
+
+import com.tuna.R;
+
+import androidx.annotation.RequiresApi;
+
+import static com.tunasushi.tool.PaintTool.initTunaPaint;
+import static com.tunasushi.tool.PaintTool.tunaPaint;
 
 /**
  * @author Tunasashimi
@@ -107,6 +115,7 @@ public class TTrangleView extends TView {
         boundaryLineInterceptionDistance = (float) (Math.tan(halfTopCornerDadian) * tunaTrangleStrokeWidth);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

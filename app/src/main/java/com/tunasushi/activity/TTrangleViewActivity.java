@@ -1,10 +1,11 @@
-package com.tunasushi;
+package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.tuna.TView;
+import com.tunasushi.R;
+import com.tunasushi.tuna.TView;
 
 public class TTrangleViewActivity extends Activity {
 

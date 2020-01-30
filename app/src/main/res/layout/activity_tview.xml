@@ -17,7 +17,7 @@
             android:color="#434343"
             android:text="backgroundNormal设置常规背景色\ntextTypeFace设置文字字体类型\nrotate设置旋转角度" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/rectClassic01"
             android:layout_width="84dp"
             android:layout_height="40dp"
@@ -29,7 +29,7 @@
             app:textValue="#444444"
             app:touchType="edge" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/rectClassic02"
             android:layout_width="84dp"
             android:layout_height="40dp"
@@ -41,7 +41,7 @@
             app:textTypeFace="bold_italic"
             app:textValue="#444444" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/rectClassic03"
             style="@style/TView_Text"
             android:layout_alignTop="@id/rectClassic02"
@@ -51,7 +51,7 @@
             app:textColorNormal="#ffffff"
             app:textValue="#666666" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             style="@style/TView_Text"
             android:layout_alignTop="@id/rectClassic03"
             android:layout_toRightOf="@id/rectClassic03"
@@ -69,7 +69,7 @@
             android:color="#434343"
             android:text="backgroundPress设置按下背景色\nbackgroundSelect设置选中背景色(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorNormalWidth设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔bottom|right)" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/select01"
             android:layout_width="170dp"
             android:layout_height="@dimen/tuna_button_height"
@@ -92,7 +92,7 @@
             app:textSize="16dp"
             app:textValue="selectType=same" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:layout_width="170dp"
             android:layout_height="@dimen/tuna_button_height"
             android:layout_alignTop="@id/select01"
@@ -135,7 +135,7 @@
                 android:id="@+id/viewRadioGroupDrackBrownAnchor"
                 style="@style/Tuna_Anchor" />
 
-            <com.tuna.TView
+            <com.tunasushi.tuna.TView
                 android:id="@+id/radioGroup_DrackBrown_Left"
                 style="@style/TView_RadioGroup_DrackBrown_Left"
                 android:layout_toLeftOf="@id/viewRadioGroupDrackBrownAnchor"
@@ -144,7 +144,7 @@
                 app:textMarkRadius="@dimen/tuna_textmark_radius"
                 app:textValue="金枪鱼刺身" />
 
-            <com.tuna.TView
+            <com.tunasushi.tuna.TView
                 android:id="@+id/radioGroup_DrackBrown_Right"
                 style="@style/TView_RadioGroup_DrackBrown_Right"
                 android:layout_toRightOf="@id/viewRadioGroupDrackBrownAnchor"
@@ -173,7 +173,7 @@
             android:color="#434343"
             android:text="textShadowRadius设置文字阴影半径\ntextShadowColor设置文字阴影颜色\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\nstrokeWidth设置描边宽度\nstrokeColorNormal设置描边颜色\ntextMarkRadius设置标识半径\ntextMarkColor设置标识颜色\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识颜色\ntextMarkTouchable禁止标识隐藏" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/shadowButton01"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tuna_spinner_height"
@@ -199,7 +199,7 @@
             app:textSize="14dp"
             app:textValue="字体#ffff00背景#e1e1e1描边#999999字体阴影颜色#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/shadowButton02"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tuna_spinner_height"
@@ -224,7 +224,7 @@
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="字体#592d2d背景#fae500描边#ac9696背景阴影颜色#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/shadowButton03"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tuna_spinner_height"
@@ -252,7 +252,7 @@
             android:color="#434343"
             android:text="backgroundGradientDirection设置渐变方向\nbackgroundGradientStart设置渐变开始颜色\nbackgroundGradientEnd设置渐变结束颜色" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/mainButton03"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tuna_spinner_height"
@@ -275,7 +275,7 @@
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="backgroundNormalGradientDirection设置top,backgroundNormalGradientStart设置#ffca00,backgroundNormalGradientEnd设置#592d2d" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/mainButton04"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tuna_layout_height"
@@ -313,7 +313,7 @@
             android:layout_marginTop="@dimen/tuna_button_marginTop"
             android:layout_marginRight="@dimen/tuna_button_marginBetween" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton01"
             style="@style/TView_TextMark_Red_Horizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton01"
@@ -326,7 +326,7 @@
             app:textColorNormal="#ffffff"
             app:textValue="背景按下#d9c700" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             style="@style/TView_TextMark_Red_Top"
             android:layout_alignTop="@id/viewAnchorSecondaryButton01"
             android:layout_marginRight="@dimen/tuna_button_marginRight"
@@ -355,7 +355,7 @@
             style="@style/Tuna_Anchor"
             android:layout_below="@id/clipButton" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton03"
             style="@style/TView_TextMark_Red_Horizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
@@ -370,7 +370,7 @@
             app:textGravity="all_center"
             app:textValue="tunaMark=true&amp;textGravity=center" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             style="@style/TView_TextMark_Red_Horizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
             android:layout_marginLeft="@dimen/tuna_button_marginBetween"
@@ -385,7 +385,7 @@
             app:textRowSpaceRatio="200%"
             app:textValue="tunaMark=true&amp;textGravity=left" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton05"
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_width"
@@ -396,7 +396,7 @@
             app:srcNormal="@drawable/iv_clippitcure03_bg"
             app:srcPress="@drawable/iv_clippitcure04_bg" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton06"
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_width"
@@ -407,7 +407,7 @@
             app:srcNormal="@drawable/iv_clippitcure03_bg"
             app:srcPress="@drawable/iv_clippitcure04_bg" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_width"
             android:layout_alignTop="@id/secondaryButton06"
@@ -426,7 +426,7 @@
             android:color="#434343"
             android:text="srcNormalShadowRadius设置背景图阴影半径,注意设置的时候一定要把父控件的背景色作为backgroundNormal传入\nsrcNormalShadowDx设置背景图阴影横向偏移\nsrcNormalShadowDx设置背景图阴影纵向偏移\n针对backgroundShadow偏移,移动的是背景图上阴影的绘制" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton08"
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_width"
@@ -438,7 +438,7 @@
             app:srcNormalShadowRadius="4dp"
             app:srcPress="@drawable/iv_clippitcure04_bg" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_width"
             android:layout_alignTop="@id/secondaryButton08"
@@ -459,7 +459,7 @@
             android:color="#434343"
             android:text="contentValue和textValue用法相同" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="96dp"
@@ -498,7 +498,7 @@
             android:color="#434343"
             android:text="srcLeft设置文字左边图片\nsrcLeftWidth设置图片宽度\nsrcLeftHeight设置图片高度\nsrcLeftPadding设置图片与文字间距\nsrcLeftDx设置左右偏移\nsrcLeftDy设置上下偏移" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/srcLeft"
             android:layout_width="80dp"
             android:layout_height="@dimen/tuna_button_height"
@@ -517,7 +517,7 @@
             app:textSize="16dp"
             app:textValue="100" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/srcLeftPadding"
             android:layout_width="80dp"
             android:layout_height="@dimen/tuna_button_height"
@@ -546,7 +546,7 @@
             android:color="#434343"
             android:text="srcLeftItemPadding设置8dp(Padding为空余)" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/srcRight"
             android:layout_width="80dp"
             android:layout_height="@dimen/tuna_button_height"
@@ -564,7 +564,7 @@
             app:textSize="16dp"
             app:textValue="100" />
 
-        <com.tuna.TView
+        <com.tunasushi.tuna.TView
             android:id="@+id/srcRightPaddingDx"
             android:layout_width="80dp"
             android:layout_height="@dimen/tuna_button_height"

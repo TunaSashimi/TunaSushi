@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Movie;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -34,6 +35,170 @@ public class BitmapTool {
     public static HashMap<String, Object> tunaGraphicsMap = new HashMap<String, Object>();
 
     //
+    public static Bitmap decodeBitmapResource(Context context, int id) {
+        return decodeBitmapResource(context, id, 1);
+    }
+
+    //
+    public static Bitmap decodeBitmapResource(Context context, int id, int inSampleSize) {
+        String stringId = String.valueOf(id);
+        if (tunaGraphicsMap.containsKey(stringId)) {
+            Object object = tunaGraphicsMap.get(stringId);
+            if (object != null && object instanceof Bitmap) {
+                return (Bitmap) object;
+            }
+        }
+        Bitmap bitmap;
+        if (inSampleSize > 1) {
+            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
+            bitmapFactoryOptions.inSampleSize = inSampleSize;
+            bitmap = BitmapFactory.decodeResource(context.getResources(), id, bitmapFactoryOptions);
+        } else {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), id);
+        }
+        tunaGraphicsMap.put(stringId, bitmap);
+        return bitmap;
+    }
+
+    //
+    public Movie decodeGifResource(Context context, int id) {
+        String stringId = String.valueOf(id);
+        if (tunaGraphicsMap.containsKey(stringId)) {
+            Object object = tunaGraphicsMap.get(stringId);
+            if (object != null && object instanceof Movie) {
+                return (Movie) object;
+            }
+        }
+        return Movie.decodeStream(context.getResources().openRawResource(id));
+    }
+
+    //
+    public Object decodeGraphicsResource(Context context, int id) {
+        return decodeGraphicsResource(context, id, 1);
+    }
+
+    //
+    public Object decodeGraphicsResource(Context context, int id, int inSampleSize) {
+        String stringId = String.valueOf(id);
+        if (tunaGraphicsMap.containsKey(stringId)) {
+            Object object = tunaGraphicsMap.get(stringId);
+            if (object != null) {
+                return object;
+            }
+        }
+        Movie movie = decodeGifResource(context, id);
+        if (movie != null) {
+            return movie;
+        } else {
+            return decodeBitmapResource(context, id, inSampleSize);
+        }
+    }
+
+    //
+    public Bitmap decodeBitmapFile(String path) {
+        return decodeBitmapFile(path, 0, 0);
+    }
+
+    //
+    public Bitmap decodeBitmapFile(String path, int reqWidth, int reqHeight) {
+        if (tunaGraphicsMap.containsKey(path)) {
+            Object object = tunaGraphicsMap.get(path);
+            if (object != null && object instanceof Bitmap) {
+                return (Bitmap) object;
+            }
+        }
+        Bitmap bitmap;
+        if (reqWidth == 0 || reqHeight == 0) {
+
+            //Without image parameters to avoid OOM situation arising
+            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
+            bitmapFactoryOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, bitmapFactoryOptions);
+
+            int bitmapSize = bitmapFactoryOptions.outWidth * bitmapFactoryOptions.outHeight;
+            if (bitmapSize > bitmapMaxSize) {
+                bitmapFactoryOptions.inSampleSize = (int) Math.ceil(bitmapSize / bitmapMaxSize);
+                bitmapFactoryOptions.inJustDecodeBounds = false;
+                bitmap = BitmapFactory.decodeFile(path, bitmapFactoryOptions);
+            } else {
+                bitmap = BitmapFactory.decodeFile(path);
+            }
+        } else {
+            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
+
+            bitmapFactoryOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, bitmapFactoryOptions);
+            bitmapFactoryOptions.inSampleSize = computeSampleSize(bitmapFactoryOptions, -1, reqWidth * reqHeight);
+            bitmapFactoryOptions.inJustDecodeBounds = false;
+            bitmap = BitmapFactory.decodeFile(path, bitmapFactoryOptions);
+        }
+        tunaGraphicsMap.put(path, bitmap);
+        return bitmap;
+    }
+
+    //
+    public Movie decodeGifFile(String path) {
+        if (tunaGraphicsMap.containsKey(path)) {
+            Object object = tunaGraphicsMap.get(path);
+            if (object != null && object instanceof Movie) {
+                return (Movie) object;
+            }
+        }
+        return Movie.decodeFile(path);
+    }
+
+    //
+    public Object decodeGraphicsFile(String path) {
+        if (tunaGraphicsMap.containsKey(path)) {
+            Object object = tunaGraphicsMap.get(path);
+            if (object != null) {
+                return object;
+            }
+        }
+        Movie movie = Movie.decodeFile(path);
+        if (movie != null) {
+            return movie;
+        } else {
+            return decodeBitmapFile(path);
+        }
+    }
+
+    //
+    public Object decodeGraphicsFile(String path, int reqWidth, int reqHeight) {
+        if (tunaGraphicsMap.containsKey(path)) {
+            Object object = tunaGraphicsMap.get(path);
+            if (object != null) {
+                return object;
+            }
+        }
+
+        Movie movie = Movie.decodeFile(path);
+        if (movie != null) {
+            return movie;
+        } else {
+            return decodeBitmapFile(path, reqWidth, reqHeight);
+        }
+    }
+
+    //
+    public Bitmap createImageThumbnail(String filePath) {
+        Bitmap bitmap = null;
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, opts);
+
+        opts.inSampleSize = computeSampleSize(opts, -1, 128 * 128);
+        opts.inJustDecodeBounds = false;
+
+        try {
+            bitmap = BitmapFactory.decodeFile(filePath, opts);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    //
     public static int computeSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         int initialSize = computeInitialSampleSize(options, reqWidth, reqHeight);
         int inSampleSize;
@@ -48,6 +213,7 @@ public class BitmapTool {
         return inSampleSize;
     }
 
+    //
     private static int computeInitialSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         double w = options.outWidth;
         double h = options.outHeight;

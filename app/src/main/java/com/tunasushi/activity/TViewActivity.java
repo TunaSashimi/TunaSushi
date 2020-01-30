@@ -1,4 +1,4 @@
-package com.tunasushi;
+package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -9,9 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tool.DeviceTool;
-import com.tuna.TView;
-import com.tuna.TView.TunaTouchUpListener;
+import com.tunasushi.R;
+import com.tunasushi.tool.DeviceTool;
+import com.tunasushi.tuna.TView;
+import com.tunasushi.tuna.TView.TunaTouchUpListener;
 
 import java.util.Arrays;
 
@@ -53,6 +54,13 @@ public class TViewActivity extends Activity {
             @Override
             public void tunaTouchUp(View v) {
                 Toast.makeText(TViewActivity.this, "TunaTouchUp", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TV_RectClassic01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(TViewActivity.this, "OnClickListener", Toast.LENGTH_SHORT).show();
             }
         });
 

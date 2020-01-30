@@ -1,4 +1,4 @@
-package com.tuna;
+package com.tunasushi.tuna;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,7 +19,7 @@ import android.view.View;
  * @Description
  */
 
-public class TColorPickerDialog extends Dialog {
+public class ColorPickerDialog extends Dialog {
 
     private int initialColor;
     private colorSelectListener colorSelectListener;
@@ -28,7 +28,7 @@ public class TColorPickerDialog extends Dialog {
         void tunaColorSelect(int color);
     }
 
-    public TColorPickerDialog(Context context, int initialColor, colorSelectListener colorSelectListener) {
+    public ColorPickerDialog(Context context, int initialColor, colorSelectListener colorSelectListener) {
         super(context);
 
         this.initialColor = initialColor;
@@ -42,7 +42,7 @@ public class TColorPickerDialog extends Dialog {
         //Add a layer inside the listener and Add to contentview
         colorSelectListener tunaColorSelectListener = new colorSelectListener() {
             public void tunaColorSelect(int color) {
-                TColorPickerDialog.this.colorSelectListener.tunaColorSelect(color);
+                ColorPickerDialog.this.colorSelectListener.tunaColorSelect(color);
                 dismiss();
             }
         };

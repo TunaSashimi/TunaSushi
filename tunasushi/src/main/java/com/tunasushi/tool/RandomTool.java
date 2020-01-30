@@ -1,4 +1,4 @@
-package com.tool;
+package com.tunasushi.tool;
 
 /**
  * @author Tunasashimi

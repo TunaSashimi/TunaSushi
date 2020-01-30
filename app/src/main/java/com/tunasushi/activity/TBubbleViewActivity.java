@@ -1,7 +1,9 @@
-package com.tunasushi;
+package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.tunasushi.R;
 
 public class TBubbleViewActivity extends Activity{
 

@@ -1,20 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.TunaSashimi'
+group = 'com.github.TunaSashimi'
 
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
-
 
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {

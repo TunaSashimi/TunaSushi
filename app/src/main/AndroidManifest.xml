@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".EntryActivity"
+            android:name=".activity.EntryActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +18,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TViewActivity" />
-        <activity android:name=".TTrangleViewActivity" />
-        <activity android:name=".TBubbleViewActivity" />
+        <activity android:name=".activity.TViewActivity" />
+        <activity android:name=".activity.TTrangleViewActivity" />
+        <activity android:name=".activity.TBubbleViewActivity" />
 
     </application>
 
