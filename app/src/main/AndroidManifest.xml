@@ -21,6 +21,10 @@
         <activity android:name=".activity.TViewActivity" />
         <activity android:name=".activity.TTrangleViewActivity" />
         <activity android:name=".activity.TBubbleViewActivity" />
+        <activity android:name=".activity.TAnalysisActivity" />
+        <activity android:name=".activity.TTrackBallActivity" />
+        <activity android:name=".activity.TButtonActivity" />
+        <activity android:name=".activity.TDialogActivity" />
 
     </application>
 

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="tunadialog_textValueArray_choice">
+        <item>@string/confirm</item>
+        <item>@string/cancel</item>
+    </string-array>
+
+    <item name="confirm" type="string">确定</item>
+    <item name="cancel" type="string">取消</item>
+
+    <string-array name="tunadialog_textValueArray_confirm">
+        <item>确定</item>
+    </string-array>
+
 </resources>

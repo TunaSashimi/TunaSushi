@@ -21,6 +21,11 @@
     <dimen name="tuna_spinner_height">60dp</dimen>
     
     <!-- Layout represents the block or complex area -->
+    <dimen name="tuna_layout_marginTop">19dp</dimen>
+    <dimen name="tuna_layout_marginLeft">13dp</dimen>
+    <dimen name="tuna_layout_marginRight">13dp</dimen>
+    <dimen name="tuna_layout_marginBetween">4dp</dimen>
+    <dimen name="tuna_layout_marginTop_Adjust">15dp</dimen>
     <dimen name="tuna_layout_height">160dp</dimen>
 
     <!-- Text represents the unclickable area -->

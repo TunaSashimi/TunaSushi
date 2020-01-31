@@ -80,6 +80,7 @@ import static com.tunasushi.tool.ViewTool.setViewMargins;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
+
 public class TView extends View {
     /**
      * The following fields and methods of the parent class and subclass can always use
@@ -4914,7 +4915,6 @@ public class TView extends View {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongConstant")
     @Override
     protected void onDraw(Canvas canvas) {

@@ -5,12 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.util.AttributeSet;
 
 import com.tuna.R;
-
-import androidx.annotation.RequiresApi;
 
 import static com.tunasushi.tool.PaintTool.initTunaPaint;
 import static com.tunasushi.tool.PaintTool.tunaPaint;
@@ -21,7 +18,7 @@ import static com.tunasushi.tool.PaintTool.tunaPaint;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TTrangleView extends TView {
+public class TTrangle extends TView {
 
     //tunaTrangleStrokeWidth default 0
     private float tunaTrangleStrokeWidth;
@@ -62,36 +59,36 @@ public class TTrangleView extends TView {
     private float bottomCornerInternalDirectionDistance;
     private float boundaryLineInterceptionDistance;
 
-    public TTrangleView(Context context) {
+    public TTrangle(Context context) {
         this(context, null);
     }
 
-    public TTrangleView(Context context, AttributeSet attrs) {
+    public TTrangle(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TTrangleView(Context context, AttributeSet attrs, int defStyle) {
+    public TTrangle(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TTrangleView.class.getSimpleName();
+        tunaTag = TTrangle.class.getSimpleName();
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangleView);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangle);
 
-        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangleView_trangleTowardType, -1);
+        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangle_trangleTowardType, -1);
         if (tunaTrangleTowardTypeIndex >= 0) {
             tunaTrangleTowardType = tunaTowardTypeArray[tunaTrangleTowardTypeIndex];
         } else {
             throw new IllegalArgumentException("The content attribute tunaTrangleTowardType type must be given");
         }
 
-        tunaTrangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundNormal, Color.TRANSPARENT);
-        tunaTrangleBackgroundPress = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundPress, tunaTrangleBackgroundNormal);
-        tunaTrangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangleView_trangleBackgroundSelect, tunaTrangleBackgroundNormal);
+        tunaTrangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundNormal, Color.TRANSPARENT);
+        tunaTrangleBackgroundPress = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundPress, tunaTrangleBackgroundNormal);
+        tunaTrangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundSelect, tunaTrangleBackgroundNormal);
 
-        tunaTrangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangleView_trangleStrokeWidth, 0);
-        tunaTrangleStrokeColor = typedArray.getColor(R.styleable.TTrangleView_trangleStrokeColor, Color.TRANSPARENT);
+        tunaTrangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangle_trangleStrokeWidth, 0);
+        tunaTrangleStrokeColor = typedArray.getColor(R.styleable.TTrangle_trangleStrokeColor, Color.TRANSPARENT);
 
-        tunaTrangleHideEdge = typedArray.getBoolean(R.styleable.TTrangleView_trangleHideEdge, false);
+        tunaTrangleHideEdge = typedArray.getBoolean(R.styleable.TTrangle_trangleHideEdge, false);
 
         typedArray.recycle();
     }
@@ -115,7 +112,6 @@ public class TTrangleView extends TView {
         boundaryLineInterceptionDistance = (float) (Math.tan(halfTopCornerDadian) * tunaTrangleStrokeWidth);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

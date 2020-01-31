@@ -245,7 +245,7 @@
 
     </declare-styleable>
 
-    <declare-styleable name="TTrangleView">
+    <declare-styleable name="TTrangle">
         <attr name="trangleBackgroundNormal" format="reference|color" />
         <attr name="trangleBackgroundPress" format="reference|color" />
         <attr name="trangleBackgroundSelect" format="reference|color" />
@@ -260,7 +260,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="TBubbleView">
+    <declare-styleable name="TBubble">
         <attr name="bubbleBackground" format="reference|color" />
         <attr name="bubbleRadius" format="dimension" />
         <attr name="bubbleEdgeWidth" format="dimension" />
@@ -285,6 +285,56 @@
         <attr name="bubbleOffset" format="dimension" />
         <attr name="bubbleStrokeColor" format="reference|color" />
         <attr name="bubbleStrokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TButton">
+        <attr name="buttonBackgroundNormal" format="reference|color" />
+        <attr name="buttonBackgroundPress" format="reference|color" />
+        <attr name="buttonForegroundNormal" format="reference|color" />
+        <attr name="buttonForegroundPress" format="reference|color" />
+        <attr name="buttonBitmapSrcNormal" format="reference" />
+        <attr name="buttonBitmapSrcPress" format="reference" />
+        <attr name="buttonBitmapFractionTop" format="fraction" />
+        <attr name="buttonBitmapFractionBottom" format="fraction" />
+        <attr name="buttonTextValue" format="string" />
+        <attr name="buttonTextSize" format="dimension" />
+        <attr name="buttonTextColorNormal" format="reference|color" />
+        <attr name="buttonTextFractionTop" format="fraction" />
+        <attr name="buttonTextFractionBottom" format="fraction" />
+    </declare-styleable>
+
+    <declare-styleable name="TDialog">
+        <attr name="dialogBackgroundNormal" format="reference|color" />
+        <attr name="dialogRadius" format="dimension" />
+
+        <attr name="dialogStrokeWidth" format="dimension" />
+        <attr name="dialogStrokeColor" format="reference|color" />
+
+        <attr name="dialogTitleTextValue" format="string" />
+        <attr name="dialogTitleTextSize" format="dimension" />
+        <attr name="dialogTitleTextColor" format="reference|color" />
+        <attr name="dialogTitleTextDy" format="dimension" />
+
+        <attr name="dialogContentTextValue" format="string" />
+        <attr name="dialogContentTextSize" format="dimension" />
+        <attr name="dialogContentTextColor" format="reference|color" />
+        <attr name="dialogContentTextPaddingLeft" format="dimension" />
+        <attr name="dialogContentTextPaddingRight" format="dimension" />
+
+        <attr name="dialogContentTextDy" format="dimension" />
+
+        <attr name="dialogChoiceBackgroundNormal" format="reference|color" />
+        <attr name="dialogChoiceBackgroundPress" format="reference|color" />
+        <attr name="dialogChoiceHeight" format="dimension" />
+        <attr name="dialogChoiceStrokeWidth" format="dimension" />
+        <attr name="dialogChoiceStrokeColor" format="reference|color" />
+
+        <attr name="dialogChoiceTextValueArray" format="reference" />
+        <attr name="dialogChoiceTextSize" format="dimension" />
+        <attr name="dialogChoiceTextColorNormal" format="reference|color" />
+        <attr name="dialogChoiceTextColorPress" format="reference|color" />
+
+        <attr name="dialogChoiceCurrentIndex" format="integer" />
     </declare-styleable>
 
 </resources>

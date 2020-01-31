@@ -15,7 +15,7 @@ public class TTrangleViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_ttrangleview);
+        setContentView(R.layout.activity_ttrangle);
 
         TViewButton = findViewById(R.id.viewButton);
         TViewDialog = findViewById(R.id.viewDialog);

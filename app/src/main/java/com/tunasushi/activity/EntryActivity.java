@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryActivity extends Activity {
-    private String[] s = {"TViewActivity", "TTrangleActivity", "TBubbleActivity",};
+    private Class<?>[] c = {TViewActivity.class, TTrangleViewActivity.class, TBubbleViewActivity.class, TAnalysisActivity.class,
+            TTrackBallActivity.class, TButtonActivity.class, TDialogActivity.class,
 
-    private Class<?>[] c = {TViewActivity.class, TTrangleViewActivity.class, TBubbleViewActivity.class,};
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,20 +26,17 @@ public class EntryActivity extends Activity {
 
         ListView lv = findViewById(R.id.roottt);
         List<String> list = new ArrayList<String>();
-        for (int i = 0; i < s.length; i++) {
-            list.add(s[i]);
+
+        for (int i = 0; i < c.length; i++) {
+            list.add(c[i].getSimpleName());
         }
 
         lv.setAdapter(new ArrayAdapter(this, R.layout.activity_entryitem, list));
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 startActivity(new Intent(EntryActivity.this, c[arg2]));
             }
         });
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 }

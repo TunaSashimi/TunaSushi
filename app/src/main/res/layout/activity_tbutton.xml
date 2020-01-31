@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:orientation="horizontal">
+
+            <com.tunasushi.tuna.button
+                android:id="@+id/tunaButton01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:buttonBackgroundNormal="#ffffff"
+                app:buttonBitmapFractionBottom="63%"
+                app:buttonBitmapFractionTop="13%"
+                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_now_bg"
+                app:buttonForegroundPress="#18000000"
+                app:buttonTextColorNormal="#4a4a4a"
+                app:buttonTextFractionBottom="86%"
+                app:buttonTextFractionTop="72%"
+                app:buttonTextSize="14dp"
+                app:buttonTextValue="马上用车" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#dedede" />
+
+            <com.tunasushi.tuna.button
+                android:id="@+id/tunaButton02"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:buttonBackgroundNormal="#ffffff"
+                app:buttonBitmapFractionBottom="63%"
+                app:buttonBitmapFractionTop="13%"
+                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_preordain_bg"
+                app:buttonForegroundPress="#18000000"
+                app:buttonTextColorNormal="#4a4a4a"
+                app:buttonTextFractionBottom="86%"
+                app:buttonTextFractionTop="72%"
+                app:buttonTextSize="14dp"
+                app:buttonTextValue="预约用车" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#dedede" />
+
+            <com.tunasushi.tuna.button
+                android:id="@+id/tunaButton03"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:buttonBackgroundNormal="#ffffff"
+                app:buttonBitmapFractionBottom="63%"
+                app:buttonBitmapFractionTop="13%"
+                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_picksend_bg"
+                app:buttonForegroundPress="#18000000"
+                app:buttonTextColorNormal="#4a4a4a"
+                app:buttonTextFractionBottom="86%"
+                app:buttonTextFractionTop="72%"
+                app:buttonTextSize="14dp"
+                app:buttonTextValue="接机送机" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleTop"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -17,7 +17,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="top" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleRight"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -30,7 +30,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="right" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleBottom"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -45,7 +45,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="bottom" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/trangleBottom"
@@ -72,7 +72,7 @@
         app:textSize="10dp"
         app:textValue="TunaSashimi" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleDialog"
         android:layout_width="22dp"
         android:layout_height="16dp"
@@ -85,7 +85,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="bottom" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleTopHide"
         android:layout_width="22dp"
         android:layout_height="16dp"
@@ -99,7 +99,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="top" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:id="@+id/trangleBottomHide"
         android:layout_width="22dp"
         android:layout_height="16dp"
@@ -113,7 +113,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="bottom" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:layout_width="22dp"
         android:layout_height="16dp"
         android:layout_alignTop="@id/trangleTopHide"
@@ -125,7 +125,7 @@
         app:trangleStrokeWidth="2dp"
         app:trangleTowardType="left" />
 
-    <com.tunasushi.tuna.TTrangleView
+    <com.tunasushi.tuna.TTrangle
         android:layout_width="22dp"
         android:layout_height="16dp"
         android:layout_alignTop="@id/trangleBottomHide"

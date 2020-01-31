@@ -5,13 +5,13 @@ import android.os.Bundle;
 
 import com.tunasushi.R;
 
-public class TBubbleViewActivity extends Activity{
 
+public class TTrackBallActivity extends Activity {
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_tbubble);
-
+		
+		setContentView(R.layout.activity_ttrackball);
 	}
 }

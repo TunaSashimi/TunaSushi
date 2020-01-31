@@ -6,12 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Region.Op;
-import android.os.Build;
 import android.util.AttributeSet;
 
 import com.tuna.R;
-
-import androidx.annotation.RequiresApi;
 
 import static com.tunasushi.tool.PaintTool.initTunaPaint;
 import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
@@ -22,7 +19,7 @@ import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TBubbleView extends TView {
+public class TBubble extends TView {
 
     private int tunaBubbleBackground;
 
@@ -187,49 +184,49 @@ public class TBubbleView extends TView {
         this.tunaBubbleStrokeWidth = tunaBubbleStrokeWidth;
     }
 
-    public TBubbleView(Context context) {
+    public TBubble(Context context) {
         this(context, null);
     }
 
-    public TBubbleView(Context context, AttributeSet attrs) {
+    public TBubble(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TBubbleView(Context context, AttributeSet attrs, int defStyle) {
+    public TBubble(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TBubbleView.class.getSimpleName();
+        tunaTag = TBubble.class.getSimpleName();
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubbleView);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubble);
 
-        tunaBubbleBackground = typedArray.getColor(R.styleable.TBubbleView_bubbleBackground, Color.TRANSPARENT);
-        tunaBubbleRadius = typedArray.getDimension(R.styleable.TBubbleView_bubbleRadius, 0);
+        tunaBubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
+        tunaBubbleRadius = typedArray.getDimension(R.styleable.TBubble_bubbleRadius, 0);
 
-        tunaBubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubbleView_bubbleEdgeWidth, 0);
-        tunaBubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubbleView_bubbleEdgeHeight, 0);
+        tunaBubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeWidth, 0);
+        tunaBubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
 
-        tunaBubbleTextValue = typedArray.getString(R.styleable.TBubbleView_bubbleTextValue);
-        tunaBubbleTextSize = typedArray.getDimension(R.styleable.TBubbleView_bubbleTextSize, 0);
-        tunaBubbleTextColorNormal = typedArray.getColor(R.styleable.TBubbleView_bubbleTextColorNormal, Color.TRANSPARENT);
-        tunaBubbleTextPadding = typedArray.getDimension(R.styleable.TBubbleView_bubbleTextPadding, 0);
+        tunaBubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
+        tunaBubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, 0);
+        tunaBubbleTextColorNormal = typedArray.getColor(R.styleable.TBubble_bubbleTextColorNormal, Color.TRANSPARENT);
+        tunaBubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
-        int tunaBubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubbleView_bubbleTowardType, 0);
+        int tunaBubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);
         if (tunaBubbleTowardTypeIndex >= 0) {
             tunaBubbleTowardType = tunaBubbleTowardTypeArray[tunaBubbleTowardTypeIndex];
         } else {
             throw new IndexOutOfBoundsException("The content attribute tunaBubbleTowardType type it does not conform to the rules");
         }
 
-        int tunaBubbleLocationTypeIndex = typedArray.getInt(R.styleable.TBubbleView_bubbleLocationType, 0);
+        int tunaBubbleLocationTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleLocationType, 0);
         if (tunaBubbleLocationTypeIndex >= 0) {
             tunaBubbleLocationType = tunaBubbleLocationTypeArray[tunaBubbleLocationTypeIndex];
         } else {
             throw new IndexOutOfBoundsException("The content attribute tunaBubbleLocationType type it does not conform to the rules");
         }
 
-        tunaBubbleOffset = typedArray.getDimension(R.styleable.TBubbleView_bubbleOffset, 0);
-        tunaBubbleStrokeColor = typedArray.getColor(R.styleable.TBubbleView_bubbleStrokeColor, tunaBubbleBackground);
-        tunaBubbleStrokeWidth = typedArray.getDimension(R.styleable.TBubbleView_bubbleStrokeWidth, 0);
+        tunaBubbleOffset = typedArray.getDimension(R.styleable.TBubble_bubbleOffset, 0);
+        tunaBubbleStrokeColor = typedArray.getColor(R.styleable.TBubble_bubbleStrokeColor, tunaBubbleBackground);
+        tunaBubbleStrokeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleStrokeWidth, 0);
 
         typedArray.recycle();
     }
@@ -257,7 +254,6 @@ public class TBubbleView extends TView {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
