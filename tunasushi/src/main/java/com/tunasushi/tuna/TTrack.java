@@ -13,7 +13,7 @@ import android.view.MotionEvent;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TTrackBall extends TView {
+public class TTrack extends TView {
     private float currentX, currentY;
     private float distanceX, distanceY;
     private float intervalX, intervalY;
@@ -23,18 +23,18 @@ public class TTrackBall extends TView {
 
     private Paint p;
 
-    public TTrackBall(Context context) {
+    public TTrack(Context context) {
         this(context, null);
     }
 
-    public TTrackBall(Context context, AttributeSet attrs) {
+    public TTrack(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TTrackBall(Context context, AttributeSet attrs, int defStyle) {
+    public TTrack(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TTrackBall.class.getSimpleName();
+        tunaTag = TTrack.class.getSimpleName();
 
         p = new Paint();
         p.setColor(Color.CYAN);

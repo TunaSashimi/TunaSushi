@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play" />
+
+        <Button
+            android:id="@+id/buttonChange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonPlay"
+            android:text="Change" />
+
+
+        <com.tunasushi.tuna.TRipple
+            android:id="@+id/tRipple01"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/buttonChange"
+            app:rippleDuraction="1800"
+            app:rippleInnerCircleColor="#fed136"
+            app:rippleInnerCircleRadius="24dp"
+            app:rippleTextColor="#ffffff"
+            app:rippleTextSize="20dp"
+            app:rippleTextValue="^" />
+
+        <com.tunasushi.tuna.TRipple
+            android:id="@+id/tRipple02"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignTop="@id/tRipple01"
+            android:layout_toRightOf="@id/tRipple01"
+            app:rippleDuraction="1800"
+            app:rippleInnerCircleColor="#fed136"
+            app:rippleInnerCircleRadius="24dp"
+            app:rippleOuterCircleColor="#ff9900"
+            app:rippleTextColor="#ffffff"
+            app:rippleTextSize="20dp"
+            app:rippleTextValue="^"
+            app:rippleTimeInterpolator="accelerateDecelerateInterpolator" />
+
+        <com.tunasushi.tuna.TRipple
+            android:id="@+id/tRipple03"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignTop="@id/tRipple02"
+            android:layout_toRightOf="@id/tRipple02"
+            app:rippleDuraction="1800"
+            app:rippleInnerCircleAngle="270"
+            app:rippleInnerCircleColorGradientEnd="#0000ff"
+            app:rippleInnerCircleColorGradientStart="#ffffff"
+            app:rippleInnerCircleRadius="24dp"
+            app:rippleTextColor="#ffffff"
+            app:rippleTextFractionDx="5%"
+            app:rippleTextSize="20dp"
+            app:rippleTextValue="^"
+            app:rippleTimeInterpolator="accelerateInterpolator" />
+
+        <com.tunasushi.tuna.TRipple
+            android:id="@+id/tRipple04"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignTop="@id/tRipple03"
+            android:layout_toRightOf="@id/tRipple03"
+            app:rippleDuraction="1800"
+            app:rippleInnerCircleAngle="270"
+            app:rippleInnerCircleColorGradientEnd="#0000ff"
+            app:rippleInnerCircleColorGradientStart="#ffffff"
+            app:rippleInnerCircleRadius="24dp"
+            app:rippleOuterCircleColorGradientEnd="#0000ff"
+            app:rippleOuterCircleColorGradientStart="#ff0000"
+            app:rippleTextColor="#ffffff"
+            app:rippleTextDy="10dp"
+            app:rippleTextFractionDx="5%"
+            app:rippleTextSize="20dp"
+            app:rippleTextValue="^"
+            app:rippleTimeInterpolator="anticipateInterpolator" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tRipple01"
+            android:layout_margin="@dimen/tuna_button_margin"
+            android:text="rippleInnerCircleRadius设置内圆半径\nrippleInnerCircleColor设置内圆颜色\nrippleOuterCircleColor设置外圆颜色\nrippleTextValue设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleInnerCircleColorGradientDirection设置内圆渐变方向\nrippleOuterCircleColorGradientDirection设置外圆渐变方向\nrippleInnerCircleColorGradientStart设置内圆渐变开始颜色\nrippleInnerCircleColorGradientEnd设置内圆渐变结束颜色\nrippleOuterCircleColorGradientStart设置外圆渐变开始颜色\nrippleOuterCircleColorGradientEnd设置外圆渐变结束颜色\nrippleDuraction设置持续时间\nrippleTimeInterpolator设置插补器"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+</ScrollView>

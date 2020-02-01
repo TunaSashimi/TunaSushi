@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c1eaee">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tuna_button_margin"
+        android:text="TLayout用法参考TView"
+        android:textColor="#434343" />
+
+    <com.tunasushi.tuna.TLayout
+        android:id="@+id/tLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tuna_layout_height"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginRight="@dimen/tuna_button_marginRight"
+        app:layoutBackgroundNormal="#fae500"
+        app:layoutRadius="@dimen/tuna_radius"
+        app:layoutStrokeColorNormal="#ac9696"
+        app:layoutStrokeWidthNormal="@dimen/tuna_stroke_width">
+
+    </com.tunasushi.tuna.TLayout>
+
+    <com.tunasushi.tuna.TLayout
+        android:id="@+id/tLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tuna_layout_height"
+        android:layout_below="@id/tLayout01"
+        android:layout_margin="@dimen/tuna_button_margin"
+        app:layoutBackgroundNormal="#fae500"
+        app:layoutBackgroundNormalShadowColor="#998383"
+        app:layoutBackgroundNormalShadowDx="1dp"
+        app:layoutBackgroundNormalShadowDy="1dp"
+        app:layoutBackgroundNormalShadowRadius="2dp"
+        app:layoutRadius="@dimen/tuna_radius">
+
+    </com.tunasushi.tuna.TLayout>
+
+    <com.tunasushi.tuna.TLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tuna_layout_height"
+        android:layout_below="@id/tLayout02"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginRight="@dimen/tuna_button_marginRight"
+        app:layoutBackgroundNormalAngle="270"
+        app:layoutBackgroundNormalGradientEnd="#ffca00"
+        app:layoutBackgroundNormalGradientStart="#ffec95"
+        app:layoutRadius="@dimen/tuna_radius">
+
+    </com.tunasushi.tuna.TLayout>
+
+</RelativeLayout>

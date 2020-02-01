@@ -13,6 +13,7 @@
     <dimen name="tuna_button_marginLeft">16dp</dimen>
     <dimen name="tuna_button_marginRight">16dp</dimen>
     <dimen name="tuna_button_marginBetween">6dp</dimen>
+    <dimen name="tuna_button_width">120dp</dimen>
     <dimen name="tuna_button_height">48dp</dimen>
     <dimen name="tuna_button_textSize">14dp</dimen>
 
@@ -47,5 +48,14 @@
     <dimen name="tuna_textmark_textSize">10dp</dimen>
 
     <!-- Other use -->
+    <dimen name="relative_marginBottom_hideHeight">-100dp</dimen>
+    <dimen name="checkbox_textSize">14dp</dimen>
+    <dimen name="checkbox_width">118dp</dimen>
+    <dimen name="multitaglayouttestchain_radiobutton01">0dp</dimen>
+    <dimen name="multitaglayouttestchain_radiobutton02">100dp</dimen>
+    <dimen name="multitaglayouttestchain_radiobutton03">200dp</dimen>
+    <dimen name="multitaglayouttestchain_radiobutton04">300dp</dimen>
+    <dimen name="multitaglayouttestchain_radiobutton05">400dp</dimen>
+    <dimen name="qrcodetest_imageview_width">300dp</dimen>
 
 </resources>

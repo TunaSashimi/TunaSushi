@@ -242,22 +242,6 @@
             <!-- Thrown forward certain value and then return to its original position -->
             <enum name="overshootInterpolator" value="8" />
         </attr>
-
-    </declare-styleable>
-
-    <declare-styleable name="TTrangle">
-        <attr name="trangleBackgroundNormal" format="reference|color" />
-        <attr name="trangleBackgroundPress" format="reference|color" />
-        <attr name="trangleBackgroundSelect" format="reference|color" />
-        <attr name="trangleStrokeWidth" format="dimension" />
-        <attr name="trangleStrokeColor" format="reference|color" />
-        <attr name="trangleHideEdge" format="boolean" />
-        <attr name="trangleTowardType">
-            <enum name="top" value="0" />
-            <enum name="bottom" value="1" />
-            <enum name="left" value="2" />
-            <enum name="right" value="3" />
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="TBubble">
@@ -335,6 +319,308 @@
         <attr name="dialogChoiceTextColorPress" format="reference|color" />
 
         <attr name="dialogChoiceCurrentIndex" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="TDrag">
+        <attr name="dragStrokeWidth" format="dimension" />
+        <attr name="dragStrokeColor" format="reference|color" />
+        <attr name="dragTextSize" format="dimension" />
+        <attr name="dragTextColorNormal" format="reference|color" />
+        <attr name="dragTextValueArray" format="reference" />
+        <attr name="dragAngle" format="integer" />
+        <attr name="dragFillColor" format="reference|color" />
+        <attr name="dragCurrentIndex" format="integer" />
+        <attr name="dragBallTextColor" format="reference|color" />
+        <attr name="dragBallStrokeWidth" format="dimension" />
+        <attr name="dragBallStrokeColorNormal" format="reference|color" />
+        <attr name="dragBallStrokeColorPress" format="reference|color" />
+        <attr name="dragBallBackgroundNormal" format="reference|color" />
+        <attr name="dragBallBackgroundPress" format="reference|color" />
+        <attr name="dragBallRadiusNormal" format="dimension" />
+        <attr name="dragBallRadiusPress" format="dimension" />
+        <attr name="dragBallBitmapSrcPress" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TDraw">
+        <attr name="drawColor" format="reference|color" />
+        <attr name="drawWidth" format="dimension" />
+        <attr name="drawSrc" format="reference" />
+        <attr name="drawType">
+            <enum name="circle" value="0" />
+            <enum name="star" value="1" />
+            <enum name="heart" value="2" />
+            <enum name="flower" value="3" />
+            <enum name="pentagon" value="4" />
+            <enum name="sixteenedge" value="5" />
+            <enum name="fortyedge" value="6" />
+            <enum name="snail" value="7" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="THollow">
+        <attr name="hollowBitmap" format="reference" />
+        <attr name="hollowTextValue" format="string" />
+        <attr name="hollowTextSize" format="dimension" />
+        <attr name="hollowTextFractionVertical" format="fraction" />
+    </declare-styleable>
+
+    <declare-styleable name="TImage">
+        <attr name="imageSrc" format="reference" />
+        <attr name="imageRadius" format="dimension" />
+        <attr name="imageAlpha" format="fraction" />
+        <attr name="imageSepia" format="boolean" />
+        <attr name="imageEmboss" format="boolean" />
+        <attr name="imageBacksheet" format="boolean" />
+        <attr name="imageSketch" format="boolean" />
+        <attr name="imageSunshineFractionX" format="fraction" />
+        <attr name="imageSunshineFractionY" format="fraction" />
+
+        <attr name="imageBright" format="dimension" />
+        <attr name="imageHue" format="dimension" />
+        <attr name="imageSaturation" format="dimension" />
+
+        <attr name="imageReverse">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TIrregular">
+        <attr name="irregularBitmapSrcNormal" format="reference|color" />
+        <attr name="irregularBitmapSrcSelect" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="TLayout">
+        <attr name="layoutBackgroundNormal" format="reference|color" />
+        <attr name="layoutBackgroundNormalAngle" format="integer" />
+        <attr name="layoutBackgroundNormalGradientStart" format="reference|color" />
+        <attr name="layoutBackgroundNormalGradientEnd" format="reference|color" />
+        <attr name="layoutBackgroundNormalShadowRadius" format="dimension" />
+        <attr name="layoutBackgroundNormalShadowColor" format="reference|color" />
+        <attr name="layoutBackgroundNormalShadowDx" format="dimension" />
+        <attr name="layoutBackgroundNormalShadowDy" format="dimension" />
+
+        <attr name="layoutSrcNormal" format="reference" />
+        <attr name="layoutSrcNormalShadowRadius" format="dimension" />
+        <attr name="layoutSrcNormalShadowDx" format="dimension" />
+        <attr name="layoutSrcNormalShadowDy" format="dimension" />
+
+        <attr name="layoutPorterDuffXfermode">
+            <enum name="layout_src_in" value="0" />
+            <enum name="layout_src_out" value="1" />
+        </attr>
+
+        <attr name="layoutStrokeWidthNormal" format="dimension" />
+        <attr name="layoutStrokeColorNormal" format="reference|color" />
+
+        <attr name="layoutRadius" format="dimension" />
+        <attr name="layoutRadiusLeftTop" format="dimension" />
+        <attr name="layoutRadiusLeftBottom" format="dimension" />
+        <attr name="layoutRadiusRightTop" format="dimension" />
+        <attr name="layoutRadiusRightBottom" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TLine">
+        <attr name="lineBackgroundNormal" format="reference|color" />
+        <attr name="lineArrowWidth" format="dimension" />
+        <attr name="lineArrowHeight" format="dimension" />
+        <attr name="lineArrowStrokeWidth" format="dimension" />
+        <attr name="lineArrowStrokeColor" format="reference|color" />
+        <attr name="lineArrowColor" format="reference|color" />
+        <attr name="lineTowardType">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+        </attr>
+        <attr name="lineCurrentX" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TMove">
+        <attr name="moveBitmap" format="reference" />
+        <attr name="moveDistance" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TProgress">
+        <attr name="progressArcBackgroundNormal" format="reference|color" />
+        <attr name="progressBoundBackgroundNormal" format="reference|color" />
+        <attr name="progressBitmapSrcBack" format="reference" />
+        <attr name="progressBitmapSrcFront" format="reference" />
+        <attr name="progressShapeType">
+            <enum name="custom" value="0" />
+            <enum name="circle" value="1" />
+        </attr>
+        <attr name="progressPromoteType">
+            <enum name="clockWise" value="0" />
+            <enum name="upWard" value="1" />
+            <enum name="upDown" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TRepeat">
+        <attr name="repeatTotal" format="integer" />
+        <attr name="repeatItemFractionTop" format="fraction" />
+        <attr name="repeatItemFractionBottom" format="fraction" />
+        <attr name="repeatItemTextFractionTop" format="fraction" />
+        <attr name="repeatItemTextFractionBottom" format="fraction" />
+        <attr name="repeatItemTextSize" format="dimension" />
+        <attr name="repeatItemTextColorNormal" format="reference|color" />
+        <attr name="repeatItemTextColorSelect" format="reference|color" />
+        <attr name="repeatItemBackgroundNormal" format="reference|color" />
+        <attr name="repeatItemBackgroundSelect" format="reference|color" />
+        <attr name="repeatItemStrokeWidth" format="dimension" />
+        <attr name="repeatItemStrokeColorNormal" format="reference|color" />
+        <attr name="repeatItemStrokeColorSelect" format="reference|color" />
+        <attr name="repeatSelectType">
+            <enum name="connect" value="0" />
+            <enum name="current" value="1" />
+        </attr>
+        <attr name="repeatShapeType">
+            <enum name="custom" value="0" />
+            <enum name="circle" value="1" />
+        </attr>
+        <attr name="repeatBitmapSrcNormal" format="reference" />
+        <attr name="repeatBitmapSrcSelect" format="reference" />
+        <attr name="repeatCurrentIndex" format="integer" />
+        <attr name="repeatItemTextValueArray" format="reference" />
+
+    </declare-styleable>
+
+    <declare-styleable name="TRipple">
+        <attr name="rippleInnerCircleRadius" format="dimension" />
+        <attr name="rippleInnerCircleColor" format="reference|color" />
+        <attr name="rippleOuterCircleColor" format="reference|color" />
+        <attr name="rippleTextSize" format="dimension" />
+        <attr name="rippleTextColor" format="reference|color" />
+        <attr name="rippleTextValue" format="string" />
+        <attr name="rippleTextDx" format="dimension" />
+        <attr name="rippleTextDy" format="dimension" />
+        <attr name="rippleTextFractionDx" format="fraction" />
+        <attr name="rippleTextFractionDy" format="fraction" />
+        <attr name="rippleDuraction" format="integer" />
+        <attr name="rippleInnerCircleAngle" format="integer" />
+        <attr name="rippleOuterCircleAngle" format="integer" />
+        <attr name="rippleInnerCircleColorGradientStart" format="reference|color" />
+        <attr name="rippleInnerCircleColorGradientEnd" format="reference|color" />
+        <attr name="rippleOuterCircleColorGradientStart" format="reference|color" />
+        <attr name="rippleOuterCircleColorGradientEnd" format="reference|color" />
+        <attr name="rippleTimeInterpolator">
+            <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
+            <enum name="accelerateDecelerateInterpolator" value="0" />
+            <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
+            <enum name="accelerateInterpolator" value="1" />
+            <!-- Initially thrown forward and then backward -->
+            <enum name="anticipateInterpolator" value="2" />
+            <!-- At the beginning of the return value after a certain value thrown forward and then backward -->
+            <enum name="anticipateOvershootInterpolator" value="3" />
+            <!-- When the animation ends bounce -->
+            <enum name="bounceInterpolator" value="4" />
+            <!-- The number of times a particular animation loop, velocity change along a sine curve -->
+            <enum name="cycleInterpolator" value="5" />
+            <!-- Fast and slow at the beginning of the local animation -->
+            <enum name="decelerateInterpolator" value="6" />
+            <!-- In a constant rate of change -->
+            <enum name="linearInterpolator" value="7" />
+            <!-- Thrown forward certain value and then return to its original position -->
+            <enum name="overshootInterpolator" value="8" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TRow">
+        <attr name="rowBackgroundNormal" format="reference|color" />
+        <attr name="rowDuraction" format="integer" />
+        <attr name="rowDirection">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TScale">
+        <attr name="scaleBitmap" format="reference" />
+        <attr name="scaleType">
+            <enum name="width_top" value="0" />
+            <enum name="width_center" value="1" />
+            <enum name="width_bottom" value="2" />
+        </attr>
+        <attr name="scaleTouchRectangleable" format="boolean" />
+        <attr name="scaleTouchRectangleFractionTop" format="fraction" />
+        <attr name="scaleTouchRectangleFractionLeft" format="fraction" />
+        <attr name="scaleTouchRectangleFractionRight" format="fraction" />
+        <attr name="scaleTouchRectangleFractionBottom" format="fraction" />
+    </declare-styleable>
+
+    <declare-styleable name="TScratch">
+        <attr name="scratchSrc" format="reference" />
+        <attr name="scratchRadius" format="dimension" />
+        <attr name="scratchCoverColor" format="color" />
+        <attr name="scratchCoverStrokeWidth" format="dimension" />
+        <attr name="scratchText" format="string" />
+        <attr name="scratchTextColor" format="color" />
+        <attr name="scratchTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TSign">
+        <attr name="signRectColor" format="reference|color" />
+        <attr name="signRectWidth" format="dimension" />
+        <attr name="signRectHeight" format="dimension" />
+        <attr name="signRectMargin" format="dimension" />
+        <attr name="signRectStrokeWidth" format="dimension" />
+        <attr name="signCircleRadius" format="dimension" />
+        <attr name="signCircleMargin" format="dimension" />
+        <attr name="signCircleStrokeWidth" format="dimension" />
+        <attr name="signCircleColorBefore" format="reference|color" />
+        <attr name="signCircleColorAfter" format="reference|color" />
+        <attr name="signTextSize" format="dimension" />
+        <attr name="signTextStrokeWidth" format="dimension" />
+        <attr name="signTextValueBefore" format="string" />
+        <attr name="signTextValueAfter" format="string" />
+        <attr name="signDirection">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+    
+    <declare-styleable name="TSVG">
+        <attr name="sVGSrc" format="reference" />
+        <attr name="sVGType">
+            <enum name="circle" value="0" />
+            <enum name="star" value="1" />
+            <enum name="heart" value="2" />
+            <enum name="flower" value="3" />
+            <enum name="pentagon" value="4" />
+            <enum name="sixteenedge" value="5" />
+            <enum name="fortyedge" value="6" />
+            <enum name="snail" value="7" />
+            <enum name="fish" value="8" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TTrangle">
+        <attr name="trangleBackgroundNormal" format="reference|color" />
+        <attr name="trangleBackgroundPress" format="reference|color" />
+        <attr name="trangleBackgroundSelect" format="reference|color" />
+        <attr name="trangleStrokeWidth" format="dimension" />
+        <attr name="trangleStrokeColor" format="reference|color" />
+        <attr name="trangleHideEdge" format="boolean" />
+        <attr name="trangleTowardType">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TWrap">
+        <attr name="wrapLineSpacing" format="dimension" />
+        <attr name="wrapRowSpacing" format="dimension" />
+        <attr name="wrapRadius" format="dimension" />
+        <attr name="wrapBackgroundNormal" format="reference|color" />
+        <attr name="wrapBackgroundSelect" format="reference|color" />
+        <attr name="wrapStrokeWidth" format="dimension" />
+        <attr name="wrapStrokeColorNormal" format="reference|color" />
+        <attr name="wrapStrokeColorSelect" format="reference|color" />
+        <attr name="wrapTextSize" format="dimension" />
+        <attr name="wrapTextColorNormal" format="reference|color" />
+        <attr name="wrapTextColorSelect" format="reference|color" />
+        <attr name="wrapItemTextValueArray" format="reference" />
     </declare-styleable>
 
 </resources>

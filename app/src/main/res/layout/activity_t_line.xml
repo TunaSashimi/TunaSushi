@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tuna_button_margin"
+        android:text="lineArrowWidth设置箭头宽度\nlineArrowHeight设置箭头高度\nlineArrowStrokeWidth设置箭头粗细\nlineArrowStrokeColor设置箭头颜色\nlineTowardType设置箭头方向\nlineBackgroundNormal设置填充背景\nlineCurrentX设置箭头位置"
+        android:textColor="#434343" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="16dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/text"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginRight="@dimen/tuna_button_marginLeft"
+        android:background="#f0eff5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/view"
+        android:layout_toRightOf="@id/view"
+        android:text="xml中设置lineCurrentX=View宽度\n\n或者\n\nActivity中setLineCurrentX为View宽度"
+        android:textColor="#434343" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineAlign"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/view"
+        android:layout_margin="@dimen/tuna_button_margin"
+        app:lineArrowHeight="12dp"
+        app:lineArrowStrokeColor="#dedede"
+        app:lineArrowStrokeWidth="2px"
+        app:lineArrowWidth="22dp"
+        app:lineCurrentX="@dimen/tuna_button_width"
+        app:lineTowardType="top" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineBG"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/tLineAlign"
+        android:layout_marginLeft="@dimen/tuna_button_margin"
+        android:layout_marginRight="@dimen/tuna_button_margin"
+        app:lineArrowHeight="12dp"
+        app:lineArrowStrokeColor="#dedede"
+        app:lineArrowStrokeWidth="2px"
+        app:lineArrowWidth="22dp"
+        app:lineBackgroundNormal="#f0eff5"
+        app:lineCurrentX="@dimen/tuna_button_width"
+        app:lineTowardType="top" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineAC"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/tLineBG"
+        android:layout_margin="@dimen/tuna_button_margin"
+        app:lineArrowColor="#f0eff5"
+        app:lineArrowHeight="12dp"
+        app:lineArrowStrokeColor="#dedede"
+        app:lineArrowStrokeWidth="2px"
+        app:lineArrowWidth="22dp"
+        app:lineTowardType="bottom" />
+
+    <Button
+        android:id="@+id/buttonCenterAC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tLineAC"
+        android:layout_marginLeft="@dimen/tuna_button_margin"
+        android:layout_marginRight="@dimen/tuna_button_margin"
+        android:text="居中" />
+
+    <Button
+        android:id="@+id/buttonHiddenAC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/buttonCenterAC"
+        android:layout_toRightOf="@id/buttonCenterAC"
+        android:text="隐藏" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineMove"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/buttonCenterAC"
+        android:layout_margin="@dimen/tuna_button_margin"
+        app:lineArrowHeight="12dp"
+        app:lineArrowStrokeColor="#dedede"
+        app:lineArrowStrokeWidth="2px"
+        app:lineArrowWidth="22dp"
+        app:lineTowardType="bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tLineMove"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginRight="@dimen/tuna_button_marginRight"
+        android:text="setLineCurrentX为TouchEventX触控反馈"
+        android:textColor="#434343" />
+
+</RelativeLayout>

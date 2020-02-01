@@ -17,11 +17,11 @@ public class TButtonActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tbutton);
+        setContentView(R.layout.activity_t_button);
 
-        tunaButton01 = findViewById(R.id.tunaButton01);
-        tunaButton02 = findViewById(R.id.tunaButton02);
-        tunaButton03 = findViewById(R.id.tunaButton03);
+        tunaButton01 = findViewById(R.id.tButton01);
+        tunaButton02 = findViewById(R.id.tButton02);
+        tunaButton03 = findViewById(R.id.tButton03);
 
         tunaButton01.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
             @Override

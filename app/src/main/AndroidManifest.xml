@@ -19,12 +19,44 @@
         </activity>
 
         <activity android:name=".activity.TViewActivity" />
-        <activity android:name=".activity.TTrangleViewActivity" />
-        <activity android:name=".activity.TBubbleViewActivity" />
+
+        <!--        -->
         <activity android:name=".activity.TAnalysisActivity" />
-        <activity android:name=".activity.TTrackBallActivity" />
+
+        <activity android:name=".activity.TBubbleViewActivity" />
         <activity android:name=".activity.TButtonActivity" />
+
         <activity android:name=".activity.TDialogActivity" />
+        <activity android:name=".activity.TDragActivity" />
+        <activity android:name=".activity.TDrawActivity" />
+
+        <activity android:name=".activity.THollowActivity" />
+
+        <activity android:name=".activity.TImageActivity" />
+        <activity android:name=".activity.TIrregularActivity" />
+
+        <activity android:name=".activity.TLayoutActivity" />
+        <activity android:name=".activity.TLineActivity" />
+
+        <activity android:name=".activity.TMaterialActivity" />
+        <activity android:name=".activity.TMoveActivity" />
+
+        <activity android:name=".activity.TProgressActivity" />
+
+        <activity android:name=".activity.TRepeatActivity" />
+        <activity android:name=".activity.TRippleActivity" />
+        <activity android:name=".activity.TRowActivity" />
+
+        <activity android:name=".activity.TScaleActivity" />
+        <activity android:name=".activity.TScratchActivity" />
+        <activity android:name=".activity.TSignActivity" />
+        <activity android:name=".activity.TSVGActivity" />
+
+        <activity android:name=".activity.TTrackActivity" />
+        <activity android:name=".activity.TTrangleActivity" />
+
+        <activity android:name=".activity.TWaveActivity" />
+        <activity android:name=".activity.TWrapActivity" />
 
     </application>
 

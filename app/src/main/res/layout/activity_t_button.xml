@@ -14,15 +14,15 @@
             android:layout_height="108dp"
             android:orientation="horizontal">
 
-            <com.tunasushi.tuna.button
-                android:id="@+id/tunaButton01"
+            <com.tunasushi.tuna.TButton
+                android:id="@+id/tButton01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:buttonBackgroundNormal="#ffffff"
                 app:buttonBitmapFractionBottom="63%"
                 app:buttonBitmapFractionTop="13%"
-                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_now_bg"
+                app:buttonBitmapSrcNormal="@drawable/iv_button_now_bg"
                 app:buttonForegroundPress="#18000000"
                 app:buttonTextColorNormal="#4a4a4a"
                 app:buttonTextFractionBottom="86%"
@@ -35,15 +35,15 @@
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 
-            <com.tunasushi.tuna.button
-                android:id="@+id/tunaButton02"
+            <com.tunasushi.tuna.TButton
+                android:id="@+id/tButton02"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:buttonBackgroundNormal="#ffffff"
                 app:buttonBitmapFractionBottom="63%"
                 app:buttonBitmapFractionTop="13%"
-                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_preordain_bg"
+                app:buttonBitmapSrcNormal="@drawable/iv_button_preordain_bg"
                 app:buttonForegroundPress="#18000000"
                 app:buttonTextColorNormal="#4a4a4a"
                 app:buttonTextFractionBottom="86%"
@@ -56,15 +56,15 @@
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 
-            <com.tunasushi.tuna.button
-                android:id="@+id/tunaButton03"
+            <com.tunasushi.tuna.TButton
+                android:id="@+id/tButton03"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:buttonBackgroundNormal="#ffffff"
                 app:buttonBitmapFractionBottom="63%"
                 app:buttonBitmapFractionTop="13%"
-                app:buttonBitmapSrcNormal="@drawable/iv_tbutton_picksend_bg"
+                app:buttonBitmapSrcNormal="@drawable/iv_button_picksend_bg"
                 app:buttonForegroundPress="#18000000"
                 app:buttonTextColorNormal="#4a4a4a"
                 app:buttonTextFractionBottom="86%"

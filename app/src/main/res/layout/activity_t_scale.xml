@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.tunasushi.tuna.TScale
+            android:id="@+id/tScaleWidthTop"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_margin="10dp"
+            app:scaleBitmap="@drawable/viewpagertest_imageview_resource01"
+            app:scaleType="width_top" />
+
+        <com.tunasushi.tuna.TScale
+            android:id="@+id/tScaleWidthCenter"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_below="@id/tScaleWidthTop"
+            android:layout_marginLeft="10dp"
+            app:scaleBitmap="@drawable/viewpagertest_imageview_resource01"
+            app:scaleType="width_center" />
+
+        <com.tunasushi.tuna.TScale
+            android:id="@+id/tScaleWidthBottom"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_below="@id/tScaleWidthCenter"
+            android:layout_margin="10dp"
+            app:scaleBitmap="@drawable/viewpagertest_imageview_resource01"
+            app:scaleType="width_bottom" />
+
+        <com.tunasushi.tuna.TScale
+            android:id="@+id/tScaleBitmapSetBitmap"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_below="@id/tScaleWidthBottom"
+            android:layout_margin="10dp"
+            app:scaleType="width_center" />
+    </RelativeLayout>
+
+</ScrollView>

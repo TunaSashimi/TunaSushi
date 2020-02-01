@@ -7,7 +7,7 @@ import android.view.View;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 
-public class TTrangleViewActivity extends Activity {
+public class TTrangleActivity extends Activity {
 
     private TView TViewButton, TViewDialog;
 
@@ -15,10 +15,10 @@ public class TTrangleViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_ttrangle);
+        setContentView(R.layout.activity_t_trangle);
 
-        TViewButton = findViewById(R.id.viewButton);
-        TViewDialog = findViewById(R.id.viewDialog);
+        TViewButton = findViewById(R.id.tViewButton);
+        TViewDialog = findViewById(R.id.tViewDialog);
 
         TViewButton.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
             @Override

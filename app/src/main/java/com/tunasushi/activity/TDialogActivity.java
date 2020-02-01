@@ -17,10 +17,10 @@ public class TDialogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tdialog);
+        setContentView(R.layout.activity_t_dialog);
 
-        tunaDialogChoice = findViewById(R.id.tunaDialogChoice);
-        tunaDialogConfirm = findViewById(R.id.tunaDialogConfirm);
+        tunaDialogChoice = findViewById(R.id.tDialogChoice);
+        tunaDialogConfirm = findViewById(R.id.tDialogConfirm);
 
         tunaDialogChoice.setTunaTouchListener(new TView.TunaTouchListener() {
             @Override

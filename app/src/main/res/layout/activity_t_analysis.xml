@@ -5,7 +5,7 @@
     android:background="#ffffff">
 
     <com.tunasushi.tuna.TAnalysis
-        android:id="@+id/tunaanalysis"
+        android:id="@+id/tAnalysis"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_margin="10dp" />
@@ -14,7 +14,7 @@
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tunaanalysis"
+        android:layout_below="@id/tAnalysis"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 

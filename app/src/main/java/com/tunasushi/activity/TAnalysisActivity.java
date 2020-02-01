@@ -17,9 +17,9 @@ public class TAnalysisActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tanalysis);
+        setContentView(R.layout.activity_t_analysis);
 
-        tAnalysisView = findViewById(R.id.tunaanalysis);
+        tAnalysisView = findViewById(R.id.tAnalysis);
         seekbar = findViewById(R.id.seekbar);
 
         seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {

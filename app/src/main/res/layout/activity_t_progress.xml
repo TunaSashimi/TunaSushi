@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="设置android:layerType=software(开启硬件加速影响)" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCircleClockWise"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/text"
+        android:layout_margin="10dp"
+        app:progressArcBackgroundNormal="#ffcb17"
+        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressPromoteType="clockWise"
+        app:progressShapeType="circle" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCircleUpWard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@id/tProgressCircleClockWise"
+        android:layout_toRightOf="@id/tProgressCircleClockWise"
+        app:progressArcBackgroundNormal="#ffcb17"
+        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressPromoteType="upWard"
+        app:progressShapeType="circle" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCircleUpDown"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@id/tProgressCircleClockWise"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tProgressCircleUpWard"
+        app:progressArcBackgroundNormal="#ffcb17"
+        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressPromoteType="upDown"
+        app:progressShapeType="circle" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCustomClockWise"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/tProgressCircleUpDown"
+        android:layout_margin="10dp"
+        app:progressBitmapSrcBack="@drawable/tunaprogressbar_back"
+        app:progressBitmapSrcFront="@drawable/tunaprogressbar_front"
+        app:progressPromoteType="clockWise"
+        app:progressShapeType="custom" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCustomUpWard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@id/tProgressCustomClockWise"
+        android:layout_toRightOf="@id/tProgressCustomClockWise"
+        app:progressBitmapSrcBack="@drawable/tunaprogressbar_back"
+        app:progressBitmapSrcFront="@drawable/tunaprogressbar_front"
+        app:progressPromoteType="upWard"
+        app:progressShapeType="custom" />
+
+    <com.tunasushi.tuna.TProgress
+        android:id="@+id/tProgressCustomUpDown"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@id/tProgressCustomUpWard"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tProgressCustomUpWard"
+        app:progressBitmapSrcBack="@drawable/tunaprogressbar_back"
+        app:progressBitmapSrcFront="@drawable/tunaprogressbar_front"
+        app:progressPromoteType="upDown"
+        app:progressShapeType="custom" />
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tProgressCustomClockWise"
+        android:layout_margin="20dp" />
+
+</RelativeLayout>

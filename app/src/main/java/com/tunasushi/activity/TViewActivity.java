@@ -41,7 +41,7 @@ public class TViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tview);
+        setContentView(R.layout.activity_t_view);
 
         //
         DeviceTool.DeviceInfo deviceInfo = DeviceTool.getDeviceInfo(this);

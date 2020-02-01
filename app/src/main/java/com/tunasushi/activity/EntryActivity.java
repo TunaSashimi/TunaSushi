@@ -14,9 +14,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryActivity extends Activity {
-    private Class<?>[] c = {TViewActivity.class, TTrangleViewActivity.class, TBubbleViewActivity.class, TAnalysisActivity.class,
-            TTrackBallActivity.class, TButtonActivity.class, TDialogActivity.class,
+    private Class<?>[] c = {
 
+            TViewActivity.class,
+
+            //
+            TAnalysisActivity.class,
+
+            TBubbleViewActivity.class,
+            TButtonActivity.class,
+
+            TDialogActivity.class,
+            TDragActivity.class,
+            TDrawActivity.class,
+
+            THollowActivity.class,
+
+            TImageActivity.class,
+            TIrregularActivity.class,
+
+            TLayoutActivity.class,
+            TLineActivity.class,
+
+            TMaterialActivity.class,
+            TMoveActivity.class,
+
+            TProgressActivity.class,
+
+            TRepeatActivity.class,
+            TRippleActivity.class,
+            TRowActivity.class,
+
+            TScaleActivity.class,
+            TScratchActivity.class,
+            TSignActivity.class,
+            TSVGActivity.class,
+
+            TTrackActivity.class,
+            TTrangleActivity.class,
+
+            TWaveActivity.class,
+            TWrapActivity.class,
     };
 
     @Override
@@ -24,7 +62,7 @@ public class EntryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
 
-        ListView lv = findViewById(R.id.roottt);
+        ListView lv = findViewById(R.id.listview);
         List<String> list = new ArrayList<String>();
 
         for (int i = 0; i < c.length; i++) {

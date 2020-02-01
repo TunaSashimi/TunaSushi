@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c1eaee">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textMaterial01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tuna_button_margin"
+            android:text="material设置启用MaterialDesign效果\nmaterialDuraction设置动画时长\nmaterialTimeInterpolator设置插补器\nmaterialSpread设置中心偏移"
+            android:textColor="#434343" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewMaterial01"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tuna_button_height"
+            android:layout_below="@id/textMaterial01"
+            android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+            android:layout_marginRight="@dimen/tuna_button_marginRight"
+            app:backgroundNormal="#ffffff"
+            app:backgroundPress="#bc7955"
+            app:material="spread"
+            app:textColorNormal="#bc7955"
+            app:textColorPress="#ffffff"
+            app:textSize="16dp"
+            app:textValue="materialDuraction=default" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewMaterial02"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tuna_button_height"
+            android:layout_below="@id/tViewMaterial01"
+            android:layout_margin="@dimen/tuna_button_margin"
+            app:backgroundNormal="#ffffff"
+            app:backgroundPress="#bc7955"
+            app:material="spread"
+            app:materialDuraction="2000"
+            app:textColorNormal="#bc7955"
+            app:textColorPress="#ffffff"
+            app:textSize="16dp"
+            app:textValue="materialDuraction=2000" />
+
+        <RelativeLayout
+            android:id="@+id/relativeMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tuna_button_height"
+            android:layout_below="@id/tViewMaterial02"
+            android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+            android:layout_marginRight="@dimen/tuna_button_marginRight">
+
+            <View
+                android:id="@+id/viewRadioGroupDrackBrownAnchor"
+                style="@style/Tuna_Anchor" />
+
+            <com.tunasushi.tuna.TView
+                android:id="@+id/tViewMaterialRadio01"
+                style="@style/TunaView_RadioGroup_DrackBrown_Left"
+                android:layout_toLeftOf="@id/viewRadioGroupDrackBrownAnchor"
+                app:material="spread"
+                app:select="true"
+                app:textMarkColor="#ff0000"
+                app:textMarkRadius="@dimen/tuna_textmark_radius"
+                app:textValue="金枪鱼刺身" />
+
+            <com.tunasushi.tuna.TView
+                android:id="@+id/tViewMaterialRadio02"
+                style="@style/TunaView_RadioGroup_DrackBrown_Right"
+                android:layout_toRightOf="@id/viewRadioGroupDrackBrownAnchor"
+                app:material="spread"
+                app:textMark="true"
+                app:textMarkColor="#ff0000"
+                app:textMarkRadius="@dimen/tuna_textmark_radius"
+                app:textValue="TunaSashimi" />
+        </RelativeLayout>
+
+        <com.tunasushi.tuna.TView
+            android:layout_width="288dp"
+            android:layout_height="288dp"
+            android:layout_below="@id/relativeMaterial"
+            android:layout_margin="@dimen/tuna_button_margin"
+            app:backgroundNormal="#ffffff"
+            app:backgroundPress="#000000"
+            app:material="spread"
+            app:materialMove="true"
+            app:materialTimeInterpolator="accelerateDecelerateInterpolator"
+            app:textColorNormal="#000000"
+            app:textColorPress="#ffffff"
+            app:textSize="16dp"
+            app:textValue="materialSpread=true" />
+    </RelativeLayout>
+
+</ScrollView>

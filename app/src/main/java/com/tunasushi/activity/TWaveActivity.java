@@ -6,12 +6,12 @@ import android.os.Bundle;
 import com.tunasushi.R;
 
 
-public class TTrackBallActivity extends Activity {
-	
+public class TWaveActivity extends Activity{
+
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_ttrackball);
+
+		setContentView(R.layout.activity_t_wave);
 	}
 }
