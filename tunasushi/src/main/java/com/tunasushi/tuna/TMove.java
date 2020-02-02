@@ -19,24 +19,24 @@ import java.util.TimerTask;
 /**
  * @author Tunasashimi
  * @date 11/5/15 15:49
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TMove extends TView {
-    private float tunaMoveDistance;
-    private Bitmap tunaMoveSrcBitmap;
+    private float moveDistance;
+    private Bitmap moveSrcBitmap;
 
-    private int tunaMoveSrcBitmapHeight;
-    private int tunaMoveSrcBitmapStartY;
-    private static final int tunaMoveMsgWhat = 0x123;
+    private int moveSrcBitmapHeight;
+    private int moveSrcBitmapStartY;
+    private static final int moveMsgWhat = 0x123;
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            if (msg.what == tunaMoveMsgWhat) {
-                if (tunaMoveDistance <= 0) {
-                    tunaMoveSrcBitmapStartY = (int) (tunaMoveSrcBitmapHeight - tunaMoveDistance);
+            if (msg.what == moveMsgWhat) {
+                if (moveDistance <= 0) {
+                    moveSrcBitmapStartY = (int) (moveSrcBitmapHeight - moveDistance);
                 } else {
-                    tunaMoveSrcBitmapStartY -= tunaMoveDistance;
+                    moveSrcBitmapStartY -= moveDistance;
                 }
             }
             invalidate();
@@ -55,16 +55,16 @@ public class TMove extends TView {
     public TMove(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TMove.class.getSimpleName();
+        Tag = TMove.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TMove);
 
-        int tunaBitmapId = typedArray.getResourceId(R.styleable.TMove_moveBitmap, -1);
-        if (tunaBitmapId != -1) {
-            tunaSrcBitmap = BitmapFactory.decodeResource(getResources(), tunaBitmapId);
+        int moveBitmapId = typedArray.getResourceId(R.styleable.TMove_moveBitmap, -1);
+        if (moveBitmapId != -1) {
+            srcBitmap = BitmapFactory.decodeResource(getResources(), moveBitmapId);
         }
 
-        tunaMoveDistance = typedArray.getDimension(R.styleable.TMove_moveDistance, 2);
+        moveDistance = typedArray.getDimension(R.styleable.TMove_moveDistance, 2);
 
         typedArray.recycle();
 
@@ -72,7 +72,7 @@ public class TMove extends TView {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.sendEmptyMessage(tunaMoveMsgWhat);
+                handler.sendEmptyMessage(moveMsgWhat);
             }
         }, 0, 50);
     }
@@ -80,17 +80,17 @@ public class TMove extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (tunaSrcBitmap == null) {
+        if (srcBitmap == null) {
             return;
         }
-        int tunaSrcBitmapWidth = tunaSrcBitmap.getWidth();
-        tunaScale = tunaWidth * 1f / tunaSrcBitmapWidth;
+        int srcBitmapWidth = srcBitmap.getWidth();
+        scale = width * 1f / srcBitmapWidth;
 
 
-        tunaMoveSrcBitmap = Bitmap.createBitmap(tunaSrcBitmap, 0, 0, tunaSrcBitmap.getWidth(), tunaSrcBitmap.getHeight(), initTunaMatrix(tunaScale, tunaScale), true);
-        tunaMoveSrcBitmapHeight = tunaMoveSrcBitmap.getHeight();
+        moveSrcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), initMatrix(scale, scale), true);
+        moveSrcBitmapHeight = moveSrcBitmap.getHeight();
 
-        tunaMoveSrcBitmapStartY = tunaMoveSrcBitmapHeight - tunaHeight;
+        moveSrcBitmapStartY = moveSrcBitmapHeight - height;
     }
 
     @Override
@@ -98,6 +98,6 @@ public class TMove extends TView {
         super.onDraw(canvas);
 
         //
-        canvas.drawBitmap(Bitmap.createBitmap(tunaMoveSrcBitmap, 0, tunaMoveSrcBitmapStartY, tunaWidth, tunaHeight), 0, 0, null);
+        canvas.drawBitmap(Bitmap.createBitmap(moveSrcBitmap, 0, moveSrcBitmapStartY, width, height), 0, 0, null);
     }
 }

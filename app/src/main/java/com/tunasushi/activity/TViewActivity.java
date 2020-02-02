@@ -12,18 +12,18 @@ import android.widget.Toast;
 import com.tunasushi.R;
 import com.tunasushi.tool.DeviceTool;
 import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TView.TunaTouchUpListener;
+import com.tunasushi.tuna.TView.TouchUpListener;
 
 import java.util.Arrays;
 
 public class TViewActivity extends Activity {
-    private TView TV_RectClassic01;
-    private TView TV_MainButton01, TV_MainButton02;
-    private TView TV_RadioGroup_DrackBrown_Left, TV_RadioGroup_DrackBrown_Right;
+    private TView TViewRectClassic01;
+    private TView TViewMainButton01, TViewMainButton02;
+    private TView TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right;
 
-    private TunaTouchUpListener tunaTouchUpListener = new TunaTouchUpListener() {
+    private TouchUpListener tunaTouchUpListener = new TouchUpListener() {
         @Override
-        public void tunaTouchUp(View v) {
+        public void touchUp(View v) {
             switch (v.getId()) {
                 case R.id.radioGroup_DrackBrown_Left:
                     Toast.makeText(TViewActivity.this, "金枪鱼刺身", Toast.LENGTH_SHORT).show();
@@ -49,15 +49,15 @@ public class TViewActivity extends Activity {
         textDeviceInfo.setText(deviceInfo.toString());
 
         //
-        TV_RectClassic01 = findViewById(R.id.rectClassic01);
-        TV_RectClassic01.setTunaTouchUpListener(new TunaTouchUpListener() {
+        TViewRectClassic01 = findViewById(R.id.rectClassic01);
+        TViewRectClassic01.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                Toast.makeText(TViewActivity.this, "TunaTouchUp", Toast.LENGTH_SHORT).show();
+            public void touchUp(View v) {
+                Toast.makeText(TViewActivity.this, "TouchUp", Toast.LENGTH_SHORT).show();
             }
         });
 
-        TV_RectClassic01.setOnClickListener(new View.OnClickListener() {
+        TViewRectClassic01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(TViewActivity.this, "OnClickListener", Toast.LENGTH_SHORT).show();
@@ -65,11 +65,11 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TV_MainButton01 = findViewById(R.id.shadowButton01);
-        TV_MainButton01.setTunaTouchUpListener(new TunaTouchUpListener() {
+        TViewMainButton01 = findViewById(R.id.shadowButton01);
+        TViewMainButton01.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                TV_MainButton01.setTunaTextMark(
+            public void touchUp(View v) {
+                TViewMainButton01.setTextMark(
                         4,
                         Color.RED,
                         null,
@@ -82,8 +82,8 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TV_MainButton02 = findViewById(R.id.shadowButton02);
-        TV_MainButton02.setTunaTextMark(
+        TViewMainButton02 = findViewById(R.id.shadowButton02);
+        TViewMainButton02.setTextMark(
                 10,
                 Color.RED,
                 "10",
@@ -92,10 +92,10 @@ public class TViewActivity extends Activity {
                 0,
                 0
         );
-        TV_MainButton02.setTunaTouchUpListener(new TunaTouchUpListener() {
+        TViewMainButton02.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                TV_MainButton02.setTunaTextMark(
+            public void touchUp(View v) {
+                TViewMainButton02.setTextMark(
                         4,
                         Color.RED,
                         null,
@@ -108,18 +108,18 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TV_RadioGroup_DrackBrown_Left = findViewById(R.id.radioGroup_DrackBrown_Left);
-        TV_RadioGroup_DrackBrown_Right = findViewById(R.id.radioGroup_DrackBrown_Right);
+        TViewRadioGroup_DrackBrown_Left = findViewById(R.id.radioGroup_DrackBrown_Left);
+        TViewRadioGroup_DrackBrown_Right = findViewById(R.id.radioGroup_DrackBrown_Right);
 
-        TV_RadioGroup_DrackBrown_Left.setTunaTouchUpListener(tunaTouchUpListener);
-        TV_RadioGroup_DrackBrown_Right.setTunaTouchUpListener(tunaTouchUpListener);
+        TViewRadioGroup_DrackBrown_Left.setTouchUpListener(tunaTouchUpListener);
+        TViewRadioGroup_DrackBrown_Right.setTouchUpListener(tunaTouchUpListener);
 
         //if you want a different TView link, you can put an array of incoming associate methods
 
-        //	TView.tunaAssociate(new TView[]{TV_RadioGroup_DrackBrown_Left, TV_RadioGroup_DrackBrown_Right});
+        //	TView.associate(new TView[]{TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right});
 
         //or  can be placed on a list of incoming associate method
-        TView.tunaAssociate(Arrays.asList(TV_RadioGroup_DrackBrown_Left, TV_RadioGroup_DrackBrown_Right));
+        TView.associate(Arrays.asList(TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right));
 
         //
         String radioGroupTitleArray[] = {
@@ -130,16 +130,16 @@ public class TViewActivity extends Activity {
                 "身"
         };
         LinearLayout linearRadioGroupLightGray = findViewById(R.id.linearRadioGroupLightGray);
-        TunaTouchUpListener tunaTouchUpListener = new TunaTouchUpListener() {
+        TouchUpListener tunaTouchUpListener = new TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                Toast.makeText(TViewActivity.this, ((TView) v).getTunaTextValue(), Toast.LENGTH_SHORT).show();
+            public void touchUp(View v) {
+                Toast.makeText(TViewActivity.this, ((TView) v).getTextValue(), Toast.LENGTH_SHORT).show();
             }
         };
 
-        //Activity activity, String[] titleArray, int index(下标默认0), TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
+        //Activity activity, String[] titleArray, int index(下标默认0), TouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        TView.tunaDynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
+        TView.dynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
                 R.style.TView_RadioGroup_LightGray_Left,
                 R.style.TView_RadioGroup_LightGray_Right,
                 R.style.TView_RadioGroup_LightGray_Horizontal,

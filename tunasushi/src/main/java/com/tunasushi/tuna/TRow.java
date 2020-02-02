@@ -12,72 +12,72 @@ import android.util.Property;
 import android.view.View;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.paint;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:57
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TRow extends TView {
 
-    private int tunaRowBackgroundNormal;
-    public int getTunaRowBackgroundNormal() {
-        return tunaRowBackgroundNormal;
+    private int rowBackgroundNormal;
+    public int getRowBackgroundNormal() {
+        return rowBackgroundNormal;
     }
-    public void setTunaRowBackgroundNormal(int tunaRowBackgroundNormal) {
-        this.tunaRowBackgroundNormal = tunaRowBackgroundNormal;
-    }
-
-    private int tunaRowDuraction;
-    public int getTunaRowDuraction() {
-        return tunaRowDuraction;
-    }
-    public void setTunaRowDuraction(int tunaRowDuraction) {
-        this.tunaRowDuraction = tunaRowDuraction;
+    public void setRowBackgroundNormal(int rowBackgroundNormal) {
+        this.rowBackgroundNormal = rowBackgroundNormal;
     }
 
-    private TunaRowDirection tunaRowDirection;
-    public enum TunaRowDirection {
+    private int rowDuraction;
+    public int getRowDuraction() {
+        return rowDuraction;
+    }
+    public void setRowDuraction(int rowDuraction) {
+        this.rowDuraction = rowDuraction;
+    }
+
+    private RowDirection rowDirection;
+    public enum RowDirection {
         TOP(0),
         BOTTOM(1),;
         final int nativeInt;
 
-        TunaRowDirection(int ni) {
+        RowDirection(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaRowDirection[] tunaRowDirectionArray = {
-            TunaRowDirection.TOP,
-            TunaRowDirection.BOTTOM,
+    private static final RowDirection[] rowDirectionArray = {
+            RowDirection.TOP,
+            RowDirection.BOTTOM,
     };
 
-    private int tunaRowStopY;
+    private int rowStopY;
     //
-    private AnimatorSet tunaRowAnimatorSet;
+    private AnimatorSet rowAnimatorSet;
 
-    public AnimatorSet getTunaRowAnimatorSet() {
-        return tunaRowAnimatorSet;
+    public AnimatorSet getRowAnimatorSet() {
+        return rowAnimatorSet;
     }
 
-    public void setTunaRowAnimatorSet(AnimatorSet tunaRowAnimatorSet) {
-        this.tunaRowAnimatorSet = tunaRowAnimatorSet;
+    public void setRowAnimatorSet(AnimatorSet rowAnimatorSet) {
+        this.rowAnimatorSet = rowAnimatorSet;
     }
 
-    private Property<TRow, Integer> tunaRowStopYProperty = new Property<TRow, Integer>(Integer.class, "tunaRowStopYProperty") {
+    private Property<TRow, Integer> rowStopYProperty = new Property<TRow, Integer>(Integer.class, "rowStopYProperty") {
         @Override
         public Integer get(TRow object) {
-            return object.tunaRowStopY;
+            return object.rowStopY;
         }
 
         @Override
         public void set(TRow object, Integer value) {
-            object.tunaRowStopY = value;
+            object.rowStopY = value;
             invalidate();
         }
     };
@@ -94,16 +94,16 @@ public class TRow extends TView {
     public TRow(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TRow.class.getSimpleName();
+        Tag = TRow.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRow);
 
-        tunaRowBackgroundNormal = typedArray.getColor(R.styleable.TRow_rowBackgroundNormal, Color.TRANSPARENT);
-        tunaRowDuraction = typedArray.getInt(R.styleable.TRow_rowDuraction, 1000);
+        rowBackgroundNormal = typedArray.getColor(R.styleable.TRow_rowBackgroundNormal, Color.TRANSPARENT);
+        rowDuraction = typedArray.getInt(R.styleable.TRow_rowDuraction, 1000);
 
-        int tunaRowDirectionIndex = typedArray.getInt(R.styleable.TRow_rowDirection, 0);
-        if (tunaRowDirectionIndex >= 0) {
-            tunaRowDirection = tunaRowDirectionArray[tunaRowDirectionIndex];
+        int rowDirectionIndex = typedArray.getInt(R.styleable.TRow_rowDirection, 0);
+        if (rowDirectionIndex >= 0) {
+            rowDirection = rowDirectionArray[rowDirectionIndex];
         }
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -114,15 +114,15 @@ public class TRow extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        initTunaPaint(Paint.Style.FILL, tunaRowBackgroundNormal, tunaWidth);
+        PaintTool.initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
 
         //
-        switch (tunaRowDirection) {
+        switch (rowDirection) {
             case TOP:
-                tunaRowStopY = 0;
+                rowStopY = 0;
                 break;
             case BOTTOM:
-                tunaRowStopY = tunaHeight;
+                rowStopY = height;
                 break;
         }
     }
@@ -131,30 +131,30 @@ public class TRow extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //
-        switch (tunaRowDirection) {
+        switch (rowDirection) {
             case TOP:
-                canvas.drawLine(tunaWidth >> 1, 0, tunaWidth >> 1, tunaRowStopY, tunaPaint);
+                canvas.drawLine(width >> 1, 0, width >> 1, rowStopY, paint);
                 break;
             case BOTTOM:
-                canvas.drawLine(tunaWidth >> 1, tunaHeight, tunaWidth >> 1, tunaRowStopY, tunaPaint);
+                canvas.drawLine(width >> 1, height, width >> 1, rowStopY, paint);
                 break;
         }
     }
 
     public void play() {
-        tunaRowAnimatorSet = new AnimatorSet();
-        ObjectAnimator tunaRowStopYObjectAnimator = null;
+        rowAnimatorSet = new AnimatorSet();
+        ObjectAnimator rowStopYObjectAnimator = null;
         //
-        switch (tunaRowDirection) {
+        switch (rowDirection) {
             case TOP:
-                tunaRowStopYObjectAnimator = ObjectAnimator.ofInt(this, tunaRowStopYProperty, 0, tunaHeight);
+                rowStopYObjectAnimator = ObjectAnimator.ofInt(this, rowStopYProperty, 0, height);
                 break;
             case BOTTOM:
-                tunaRowStopYObjectAnimator = ObjectAnimator.ofInt(this, tunaRowStopYProperty, tunaHeight, 0);
+                rowStopYObjectAnimator = ObjectAnimator.ofInt(this, rowStopYProperty, height, 0);
                 break;
         }
-        tunaRowStopYObjectAnimator.setDuration(tunaRowDuraction);
-        tunaRowAnimatorSet.playTogether(tunaRowStopYObjectAnimator);
-        tunaRowAnimatorSet.start();
+        rowStopYObjectAnimator.setDuration(rowDuraction);
+        rowAnimatorSet.playTogether(rowStopYObjectAnimator);
+        rowAnimatorSet.start();
     }
 }

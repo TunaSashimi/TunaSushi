@@ -13,60 +13,60 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:57
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TRepeat extends TView {
 
-    private float tunaRepeatItemFractionTop, tunaRepeatItemFractionBottom;
-    private float tunaRepeatItemTextFractionTop, tunaRepeatItemTextFractionBottom;
+    private float repeatItemFractionTop, repeatItemFractionBottom;
+    private float repeatItemTextFractionTop, repeatItemTextFractionBottom;
 
-    private Bitmap tunaRepeatBitmapSrcNormal, tunaRepeatBitmapSrcSelect;
+    private Bitmap repeatBitmapSrcNormal, repeatBitmapSrcSelect;
 
-    private float tunaRepeatCurrentX;
-    private int tunaRepeatCurrentIndex;
+    private float repeatCurrentX;
+    private int repeatCurrentIndex;
 
-    private float tunaRepeatItemTextSize;
-    private int tunaRepeatItemTextColorNormal, tunaRepeatItemTextColorSelect;
+    private float repeatItemTextSize;
+    private int repeatItemTextColorNormal, repeatItemTextColorSelect;
 
-    private int tunaRepeatItemBackgroundNormal, tunaRepeatItemBackgroundSelect;
+    private int repeatItemBackgroundNormal, repeatItemBackgroundSelect;
 
 
-    private TunaRepeatSelectType tunaRepeatSelectType;
+    private RepeatSelectType repeatSelectType;
 
-    public enum TunaRepeatSelectType {
-        CONNECT(0), CURRENT(1),;
+    public enum RepeatSelectType {
+        CONNECT(0), CURRENT(1),
+        ;
         final int nativeInt;
 
-        TunaRepeatSelectType(int ni) {
+        RepeatSelectType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaRepeatSelectType[] tunaRepeatSelectTypeArray = {TunaRepeatSelectType.CONNECT, TunaRepeatSelectType.CURRENT,};
+    private static final RepeatSelectType[] repeatSelectTypeArray = {RepeatSelectType.CONNECT, RepeatSelectType.CURRENT,};
 
     //
-    private TunaRepeatShapeType tunaRepeatShapeType;
+    private RepeatShapeType repeatShapeType;
 
-    public enum TunaRepeatShapeType {
+    public enum RepeatShapeType {
         CUSTOM(0), CIRCLE(1);
         final int nativeInt;
 
-        TunaRepeatShapeType(int ni) {
+        RepeatShapeType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaRepeatShapeType[] tunaRepeatShapeTypeArray = {TunaRepeatShapeType.CUSTOM, TunaRepeatShapeType.CIRCLE};
+    private static final RepeatShapeType[] repeatShapeTypeArray = {RepeatShapeType.CUSTOM, RepeatShapeType.CIRCLE};
 
     public TRepeat(Context context) {
         this(context, null);
@@ -79,122 +79,122 @@ public class TRepeat extends TView {
     public TRepeat(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TRepeat.class.getSimpleName();
+        Tag = TRepeat.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRepeat);
 
-        tunaTotal = typedArray.getInt(R.styleable.TRepeat_repeatTotal, 0);
+        total = typedArray.getInt(R.styleable.TRepeat_repeatTotal, 0);
 
-        int tunaRepeatItemTextValueArrayId = typedArray.getResourceId(R.styleable.TRepeat_repeatItemTextValueArray, -1);
-        if (tunaRepeatItemTextValueArrayId != -1) {
-            tunaStringArray = typedArray.getResources().getStringArray(tunaRepeatItemTextValueArrayId);
-            if (tunaTotal != tunaStringArray.length) {
-                throw new IndexOutOfBoundsException("These two properties of tunaTotal and tunaRepeatItemTextValueArray must be the same length");
+        int repeatItemTextValueArrayId = typedArray.getResourceId(R.styleable.TRepeat_repeatItemTextValueArray, -1);
+        if (repeatItemTextValueArrayId != -1) {
+            stringArray = typedArray.getResources().getStringArray(repeatItemTextValueArrayId);
+            if (total != stringArray.length) {
+                throw new IndexOutOfBoundsException("These two properties of total and repeatItemTextValueArray must be the same length");
             }
         }
 
-        tunaRepeatItemTextSize = typedArray.getDimension(R.styleable.TRepeat_repeatItemTextSize, 0);
-        tunaRepeatItemTextColorNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorNormal, Color.TRANSPARENT);
-        tunaRepeatItemTextColorSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorSelect, tunaRepeatItemTextColorNormal);
+        repeatItemTextSize = typedArray.getDimension(R.styleable.TRepeat_repeatItemTextSize, 0);
+        repeatItemTextColorNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorNormal, Color.TRANSPARENT);
+        repeatItemTextColorSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorSelect, repeatItemTextColorNormal);
 
-        tunaRepeatItemTextFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionTop, 1, 1, 0);
-        tunaRepeatItemTextFractionBottom = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionBottom, 1, 1, 1);
+        repeatItemTextFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionTop, 1, 1, 0);
+        repeatItemTextFractionBottom = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionBottom, 1, 1, 1);
 
-        if (tunaRepeatItemTextFractionBottom <= tunaRepeatItemTextFractionTop) {
-            throw new IndexOutOfBoundsException("The content attribute tunaRepeatItemTextFractionBottom must be Equal to or greater than tunaRepeatItemTextFractionTop");
+        if (repeatItemTextFractionBottom <= repeatItemTextFractionTop) {
+            throw new IndexOutOfBoundsException("The content attribute repeatItemTextFractionBottom must be Equal to or greater than repeatItemTextFractionTop");
         }
 
-        tunaRepeatItemFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemFractionTop, 1, 1, 0);
-        tunaRepeatItemFractionBottom = typedArray.getFraction(R.styleable.TRepeat_repeatItemFractionBottom, 1, 1, 1);
+        repeatItemFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemFractionTop, 1, 1, 0);
+        repeatItemFractionBottom = typedArray.getFraction(R.styleable.TRepeat_repeatItemFractionBottom, 1, 1, 1);
 
-        if (tunaRepeatItemFractionBottom <= tunaRepeatItemFractionTop) {
-            throw new IndexOutOfBoundsException("The content attribute tunaRepeatItemFractionBottom must be greater than tunaRepeatItemFractionTop");
+        if (repeatItemFractionBottom <= repeatItemFractionTop) {
+            throw new IndexOutOfBoundsException("The content attribute repeatItemFractionBottom must be greater than repeatItemFractionTop");
         }
 
 
-        int tunaRepeatShapeTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatShapeType, -1);
-        if (tunaRepeatShapeTypeIndex >= 0) {
-            tunaRepeatShapeType = tunaRepeatShapeTypeArray[tunaRepeatShapeTypeIndex];
+        int repeatShapeTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatShapeType, -1);
+        if (repeatShapeTypeIndex >= 0) {
+            repeatShapeType = repeatShapeTypeArray[repeatShapeTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaRepeatShapeType");
+            throw new IllegalArgumentException("The content attribute require a property named repeatShapeType");
         }
 
-        if (tunaRepeatShapeType == TunaRepeatShapeType.CUSTOM) {
-            int tunaRepeatBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcNormal, -1);
-            if (tunaRepeatBitmapSrcNormalId != -1) {
-                tunaRepeatBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), tunaRepeatBitmapSrcNormalId);
+        if (repeatShapeType == RepeatShapeType.CUSTOM) {
+            int repeatBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcNormal, -1);
+            if (repeatBitmapSrcNormalId != -1) {
+                repeatBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), repeatBitmapSrcNormalId);
             }
-            int tunaRepeatBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcSelect, -1);
-            if (tunaRepeatBitmapSrcSelectId != -1) {
-                tunaRepeatBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), tunaRepeatBitmapSrcSelectId);
+            int repeatBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcSelect, -1);
+            if (repeatBitmapSrcSelectId != -1) {
+                repeatBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), repeatBitmapSrcSelectId);
             }
-        } else if (tunaRepeatShapeType == TunaRepeatShapeType.CIRCLE) {
-            tunaRepeatItemBackgroundNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundNormal, Color.TRANSPARENT);
-            tunaRepeatItemBackgroundSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundSelect, tunaRepeatItemBackgroundNormal);
+        } else if (repeatShapeType == RepeatShapeType.CIRCLE) {
+            repeatItemBackgroundNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundNormal, Color.TRANSPARENT);
+            repeatItemBackgroundSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundSelect, repeatItemBackgroundNormal);
         }
 
 
-        int tunaRepeatSelectTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatSelectType, -1);
-        if (tunaRepeatSelectTypeIndex >= 0) {
-            tunaRepeatSelectType = tunaRepeatSelectTypeArray[tunaRepeatSelectTypeIndex];
+        int repeatSelectTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatSelectType, -1);
+        if (repeatSelectTypeIndex >= 0) {
+            repeatSelectType = repeatSelectTypeArray[repeatSelectTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaRepeatSelectType");
+            throw new IllegalArgumentException("The content attribute require a property named repeatSelectType");
         }
 
-        tunaRepeatCurrentIndex = typedArray.getInt(R.styleable.TRepeat_repeatCurrentIndex, -1);
+        repeatCurrentIndex = typedArray.getInt(R.styleable.TRepeat_repeatCurrentIndex, -1);
         typedArray.recycle();
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (tunaTotal < 1) {
+        if (total < 1) {
             // Preview defaults
             if (isInEditMode()) {
-                tunaTotal = 5;
-                tunaFloatArray = new float[tunaTotal];
+                total = 5;
+                floatArray = new float[total];
             } else {
                 throw new IndexOutOfBoundsException("The content attribute tunaRepeatTotal must be greater than or equal 1");
             }
         } else {
-            tunaFloatArray = new float[tunaTotal];
+            floatArray = new float[total];
         }
 
-        if (tunaRepeatCurrentIndex < -1 || tunaRepeatCurrentIndex > tunaTotal - 1) {
-            throw new IndexOutOfBoundsException("The content attribute tunaRepeatCurrentIndex length must be not less than -1 and smaller than the tunaTotal length minus 1");
+        if (repeatCurrentIndex < -1 || repeatCurrentIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute repeatCurrentIndex length must be not less than -1 and smaller than the total length minus 1");
         }
 
 
-        if (tunaRepeatShapeType == TunaRepeatShapeType.CUSTOM) {
-            int tunaRepeatCustomBitmapSrcNormalWidth = tunaRepeatBitmapSrcNormal.getWidth();
-            int tunaRepeatCustomBitmapSrcNormalHeight = tunaRepeatBitmapSrcNormal.getHeight();
-            int tunaRepeatCustomBitmapSrcSelectWidth = tunaRepeatBitmapSrcSelect.getWidth();
-            int tunaRepeatCustomBitmapSrcSelectHeight = tunaRepeatBitmapSrcSelect.getHeight();
-            if (tunaRepeatCustomBitmapSrcNormalWidth != tunaRepeatCustomBitmapSrcSelectWidth || tunaRepeatCustomBitmapSrcNormalHeight != tunaRepeatCustomBitmapSrcSelectHeight) {
-                throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaRepeatCustomBitmapSrcNormal and tunaRepeatCustomBitmapSrcSelect needed equal");
+        if (repeatShapeType == RepeatShapeType.CUSTOM) {
+            int repeatCustomBitmapSrcNormalWidth = repeatBitmapSrcNormal.getWidth();
+            int repeatCustomBitmapSrcNormalHeight = repeatBitmapSrcNormal.getHeight();
+            int repeatCustomBitmapSrcSelectWidth = repeatBitmapSrcSelect.getWidth();
+            int repeatCustomBitmapSrcSelectHeight = repeatBitmapSrcSelect.getHeight();
+            if (repeatCustomBitmapSrcNormalWidth != repeatCustomBitmapSrcSelectWidth || repeatCustomBitmapSrcNormalHeight != repeatCustomBitmapSrcSelectHeight) {
+                throw new IndexOutOfBoundsException("Both the width and height of the attribute repeatCustomBitmapSrcNormal and repeatCustomBitmapSrcSelect needed equal");
             }
 
-            tunaSrcHeightScale = tunaHeight * (tunaRepeatItemFractionBottom - tunaRepeatItemFractionTop);
-            tunaSrcWidthScale = tunaSrcHeightScale * tunaRepeatCustomBitmapSrcNormalWidth / tunaRepeatCustomBitmapSrcNormalHeight;
-            tunaScale = tunaSrcHeightScale / tunaRepeatCustomBitmapSrcNormalWidth;
+            srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
+            srcWidthScale = srcHeightScale * repeatCustomBitmapSrcNormalWidth / repeatCustomBitmapSrcNormalHeight;
+            scale = srcHeightScale / repeatCustomBitmapSrcNormalWidth;
 
-            initTunaMatrix(tunaScale, tunaScale);
+            initMatrix(scale, scale);
 
-        } else if (tunaRepeatShapeType == TunaRepeatShapeType.CIRCLE) {
-            tunaSrcHeightScale = tunaHeight * (tunaRepeatItemFractionBottom - tunaRepeatItemFractionTop);
-            tunaSrcWidthScale = tunaSrcHeightScale;
+        } else if (repeatShapeType == RepeatShapeType.CIRCLE) {
+            srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
+            srcWidthScale = srcHeightScale;
 
         }
 
-        tunaDy = tunaHeight * tunaRepeatItemFractionTop;
-        tunaSurplus = tunaWidth - tunaSrcWidthScale * tunaTotal;
-        tunaShare = tunaSurplus / (tunaTotal + 1);
-        // tunaRepeatCentreXArray avoid generating with new
-        for (int i = 0; i < tunaTotal; i++) {
-            tunaFloatArray[i] = tunaShare + tunaSrcWidthScale * 0.5f + (tunaShare + tunaSrcWidthScale) * i;
+        dy = height * repeatItemFractionTop;
+        surplus = width - srcWidthScale * total;
+        share = surplus / (total + 1);
+        // repeatCentreXArray avoid generating with new
+        for (int i = 0; i < total; i++) {
+            floatArray[i] = share + srcWidthScale * 0.5f + (share + srcWidthScale) * i;
         }
-        if (tunaSubLayoutListener != null) {
-            tunaSubLayoutListener.tunaSubLayout(this);
+        if (subLayoutListener != null) {
+            subLayoutListener.subLayout(this);
         }
     }
 
@@ -203,84 +203,84 @@ public class TRepeat extends TView {
         super.onDraw(canvas);
 
         //
-        switch (tunaRepeatShapeType) {
+        switch (repeatShapeType) {
             case CUSTOM:
 
                 // in order to draw a map of the effect of the half, the first painting baseBitmap
-                for (int i = 0; i < tunaTotal; i++) {
+                for (int i = 0; i < total; i++) {
                     if (i == 0) {
-                        canvas.translate(tunaShare, tunaDy);
+                        canvas.translate(share, dy);
                     } else {
-                        canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                        canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawBitmap(tunaRepeatBitmapSrcNormal, tunaMatrix, null);
+                    canvas.drawBitmap(repeatBitmapSrcNormal, matrix, null);
                 }
-                canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
+                canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
 
                 //
-                if (tunaStringArray != null) {
-                    for (int i = 0; i < tunaStringArray.length; i++) {
-                        drawTunaText(canvas, tunaStringArray[i], tunaWidth, tunaFloatArray[i], (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight
-                                        * tunaRepeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                initTunaTextPaint(Paint.Style.FILL, tunaRepeatItemTextColorNormal, tunaRepeatItemTextSize, Paint.Align.CENTER));
+                if (stringArray != null) {
+                    for (int i = 0; i < stringArray.length; i++) {
+                        drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
+                                        * repeatItemTextFractionBottom) * 0.5f, 0, 0,
+                                PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
 
                 // in order to draw a map of the effect of the half, drawing overlay
-                if (tunaPress) {
+                if (press) {
                     canvas.save();
-                    switch (tunaRepeatSelectType) {
+                    switch (repeatSelectType) {
                         case CONNECT:
-                            canvas.clipRect(0, 0, tunaRepeatCurrentX, tunaHeight);
+                            canvas.clipRect(0, 0, repeatCurrentX, height);
                             break;
                         case CURRENT:
-                            canvas.clipRect(tunaRepeatCurrentX - tunaSrcWidthScale, 0, tunaRepeatCurrentX, tunaHeight);
+                            canvas.clipRect(repeatCurrentX - srcWidthScale, 0, repeatCurrentX, height);
                             break;
                         default:
                             break;
                     }
-                    for (int i = 0; i < tunaTotal; i++) {
+                    for (int i = 0; i < total; i++) {
                         if (i == 0) {
-                            canvas.translate(tunaShare, tunaDy);
+                            canvas.translate(share, dy);
                         } else {
-                            canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                            canvas.translate(share + srcWidthScale, 0);
                         }
-                        canvas.drawBitmap(tunaRepeatBitmapSrcSelect, tunaMatrix, null);
+                        canvas.drawBitmap(repeatBitmapSrcSelect, matrix, null);
                     }
-                    canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
-                    if (tunaStringArray != null) {
-                        for (int i = 0; i < tunaStringArray.length; i++) {
-                            drawTunaText(canvas, tunaStringArray[i], tunaWidth, tunaFloatArray[i], (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight
-                                            * tunaRepeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    initTunaTextPaint(Paint.Style.FILL, tunaRepeatItemTextColorSelect, tunaRepeatItemTextSize, Paint.Align.CENTER));
+                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                    if (stringArray != null) {
+                        for (int i = 0; i < stringArray.length; i++) {
+                            drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
+                                            * repeatItemTextFractionBottom) * 0.5f, 0, 0,
+                                    PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                     canvas.restore();
                 } else {
-                    for (int i = 0; i < tunaTotal; i++) {
+                    for (int i = 0; i < total; i++) {
                         if (i == 0) {
-                            canvas.translate(tunaShare, tunaDy);
+                            canvas.translate(share, dy);
                         } else {
-                            canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                            canvas.translate(share + srcWidthScale, 0);
                         }
-                        canvas.drawBitmap(tunaRepeatSelectType == TunaRepeatSelectType.CONNECT ? i <= tunaRepeatCurrentIndex ? tunaRepeatBitmapSrcSelect
-                                : tunaRepeatBitmapSrcNormal : i == tunaRepeatCurrentIndex ? tunaRepeatBitmapSrcSelect : tunaRepeatBitmapSrcNormal, tunaMatrix, null);
+                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatBitmapSrcSelect
+                                : repeatBitmapSrcNormal : i == repeatCurrentIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
                     }
-                    canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
-                    if (tunaStringArray != null) {
-                        for (int i = 0; i < tunaStringArray.length; i++) {
-                            drawTunaText(
+                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                    if (stringArray != null) {
+                        for (int i = 0; i < stringArray.length; i++) {
+                            drawText(
                                     canvas,
-                                    tunaStringArray[i],
-                                    tunaWidth,
-                                    tunaFloatArray[i],
-                                    (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight * tunaRepeatItemTextFractionBottom) * 0.5f,
+                                    stringArray[i],
+                                    width,
+                                    floatArray[i],
+                                    (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
                                     0,
                                     0,
-                                    initTunaTextPaint(Paint.Style.FILL,
-                                            tunaRepeatSelectType == TunaRepeatSelectType.CONNECT ? i <= tunaRepeatCurrentIndex ? tunaRepeatItemTextColorSelect
-                                                    : tunaRepeatItemTextColorNormal : i == tunaRepeatCurrentIndex ? tunaRepeatItemTextColorSelect : tunaRepeatItemTextColorNormal,
-                                            tunaRepeatItemTextSize, Paint.Align.CENTER));
+                                    PaintTool.initTextPaint(Paint.Style.FILL,
+                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemTextColorSelect
+                                                    : repeatItemTextColorNormal : i == repeatCurrentIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                            repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                 }
@@ -289,84 +289,84 @@ public class TRepeat extends TView {
             case CIRCLE:
 
                 // in order to draw a map of the effect of the half, the first painting baseBitmap
-                for (int i = 0; i < tunaTotal; i++) {
+                for (int i = 0; i < total; i++) {
                     if (i == 0) {
-                        canvas.translate(tunaShare, tunaDy);
+                        canvas.translate(share, dy);
                     } else {
-                        canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                        canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawCircle(tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, initTunaPaint(tunaRepeatItemBackgroundNormal));
+                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatItemBackgroundNormal));
                 }
-                canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
+                canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
 
                 //
-                if (tunaStringArray != null) {
-                    for (int i = 0; i < tunaStringArray.length; i++) {
-                        drawTunaText(canvas, tunaStringArray[i], tunaWidth, tunaFloatArray[i], (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight
-                                        * tunaRepeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                initTunaTextPaint(Paint.Style.FILL, tunaRepeatItemTextColorNormal, tunaRepeatItemTextSize, Paint.Align.CENTER));
+                if (stringArray != null) {
+                    for (int i = 0; i < stringArray.length; i++) {
+                        drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
+                                        * repeatItemTextFractionBottom) * 0.5f, 0, 0,
+                                PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
 
                 // in order to draw a map of the effect of the half, drawing overlay
-                if (tunaPress) {
+                if (press) {
                     canvas.save();
-                    switch (tunaRepeatSelectType) {
+                    switch (repeatSelectType) {
                         case CONNECT:
-                            canvas.clipRect(0, 0, tunaRepeatCurrentX, tunaHeight);
+                            canvas.clipRect(0, 0, repeatCurrentX, height);
                             break;
                         case CURRENT:
-                            canvas.clipRect(tunaRepeatCurrentX - tunaSrcWidthScale, 0, tunaRepeatCurrentX, tunaHeight);
+                            canvas.clipRect(repeatCurrentX - srcWidthScale, 0, repeatCurrentX, height);
                             break;
                         default:
                             break;
                     }
-                    for (int i = 0; i < tunaTotal; i++) {
+                    for (int i = 0; i < total; i++) {
                         if (i == 0) {
-                            canvas.translate(tunaShare, tunaDy);
+                            canvas.translate(share, dy);
                         } else {
-                            canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                            canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(tunaRepeatBitmapSrcSelect, tunaMatrix, null);
-                        canvas.drawCircle(tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, initTunaPaint(tunaRepeatItemBackgroundSelect));
+//                        canvas.drawBitmap(repeatBitmapSrcSelect, matrix, null);
+                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatItemBackgroundSelect));
                     }
 
-                    canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
-                    if (tunaStringArray != null) {
-                        for (int i = 0; i < tunaStringArray.length; i++) {
-                            drawTunaText(canvas, tunaStringArray[i], tunaWidth, tunaFloatArray[i], (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight
-                                            * tunaRepeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    initTunaTextPaint(Paint.Style.FILL, tunaRepeatItemTextColorSelect, tunaRepeatItemTextSize, Paint.Align.CENTER));
+                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                    if (stringArray != null) {
+                        for (int i = 0; i < stringArray.length; i++) {
+                            drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
+                                            * repeatItemTextFractionBottom) * 0.5f, 0, 0,
+                                    PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                     canvas.restore();
                 } else {
-                    for (int i = 0; i < tunaTotal; i++) {
+                    for (int i = 0; i < total; i++) {
                         if (i == 0) {
-                            canvas.translate(tunaShare, tunaDy);
+                            canvas.translate(share, dy);
                         } else {
-                            canvas.translate(tunaShare + tunaSrcWidthScale, 0);
+                            canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(tunaRepeatSelectType == TunaRepeatSelectType.CONNECT ? i <= tunaRepeatCurrentIndex ? tunaRepeatBitmapSrcSelect
-//                                : tunaRepeatBitmapSrcNormal : i == tunaRepeatCurrentIndex ? tunaRepeatBitmapSrcSelect : tunaRepeatBitmapSrcNormal, tunaMatrix, null);
-                        canvas.drawCircle(tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, tunaSrcWidthScale / 2, initTunaPaint(tunaRepeatSelectType == TunaRepeatSelectType.CONNECT ? i <= tunaRepeatCurrentIndex ? tunaRepeatItemBackgroundSelect
-                                : tunaRepeatItemBackgroundNormal : i == tunaRepeatCurrentIndex ? tunaRepeatItemBackgroundSelect : tunaRepeatItemBackgroundNormal));
+//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatBitmapSrcSelect
+//                                : repeatBitmapSrcNormal : i == repeatCurrentIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
+                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemBackgroundSelect
+                                : repeatItemBackgroundNormal : i == repeatCurrentIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
                     }
-                    canvas.translate((tunaShare + tunaSrcWidthScale) * (1 - tunaTotal) - tunaShare, -tunaDy);
-                    if (tunaStringArray != null) {
-                        for (int i = 0; i < tunaStringArray.length; i++) {
-                            drawTunaText(
+                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                    if (stringArray != null) {
+                        for (int i = 0; i < stringArray.length; i++) {
+                            drawText(
                                     canvas,
-                                    tunaStringArray[i],
-                                    tunaWidth,
-                                    tunaFloatArray[i],
-                                    (tunaHeight * tunaRepeatItemTextFractionTop + tunaHeight * tunaRepeatItemTextFractionBottom) * 0.5f,
+                                    stringArray[i],
+                                    width,
+                                    floatArray[i],
+                                    (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
                                     0,
                                     0,
-                                    initTunaTextPaint(Paint.Style.FILL,
-                                            tunaRepeatSelectType == TunaRepeatSelectType.CONNECT ? i <= tunaRepeatCurrentIndex ? tunaRepeatItemTextColorSelect
-                                                    : tunaRepeatItemTextColorNormal : i == tunaRepeatCurrentIndex ? tunaRepeatItemTextColorSelect : tunaRepeatItemTextColorNormal,
-                                            tunaRepeatItemTextSize, Paint.Align.CENTER));
+                                    PaintTool.initTextPaint(Paint.Style.FILL,
+                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemTextColorSelect
+                                                    : repeatItemTextColorNormal : i == repeatCurrentIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                            repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                 }
@@ -379,42 +379,42 @@ public class TRepeat extends TView {
     }
 
     //
-    public float getTunaRepeatCurrentX() {
-        return tunaFloatArray[tunaRepeatCurrentIndex];
+    public float getRepeatCurrentX() {
+        return floatArray[repeatCurrentIndex];
     }
 
-    public void setTunaRepeatCurrentX(float tunaRepeatCurrentX) {
-        setTunaRepeatCurrentX(tunaRepeatCurrentX, false);
+    public void setRepeatCurrentX(float repeatCurrentX) {
+        setRepeatCurrentX(repeatCurrentX, false);
     }
 
-    public void setTunaRepeatCurrentX(int unit, float tunaRepeatCurrentX) {
-        setTunaRepeatCurrentX(unit, tunaRepeatCurrentX, false);
+    public void setRepeatCurrentX(int unit, float repeatCurrentX) {
+        setRepeatCurrentX(unit, repeatCurrentX, false);
     }
 
-    public void setTunaRepeatCurrentX(float tunaRepeatCurrentX, boolean needInvalidate) {
-        setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_DIP, tunaRepeatCurrentX, needInvalidate);
+    public void setRepeatCurrentX(float repeatCurrentX, boolean needInvalidate) {
+        setRepeatCurrentX(TypedValue.COMPLEX_UNIT_DIP, repeatCurrentX, needInvalidate);
     }
 
-    public void setTunaRepeatCurrentX(int unit, float tunaRepeatCurrentX, boolean needInvalidate) {
+    public void setRepeatCurrentX(int unit, float repeatCurrentX, boolean needInvalidate) {
         Context c = getContext();
         Resources r;
         if (c == null)
             r = Resources.getSystem();
         else
             r = c.getResources();
-        setTunaRepeatCurrentXRaw(applyDimension(unit, tunaRepeatCurrentX, r.getDisplayMetrics()), needInvalidate);
+        setRepeatCurrentXRaw(applyDimension(unit, repeatCurrentX, r.getDisplayMetrics()), needInvalidate);
     }
 
-    private void setTunaRepeatCurrentXRaw(float tunaRepeatCurrentX, boolean needInvalidate) {
-        this.tunaRepeatCurrentX = tunaRepeatCurrentX;
+    private void setRepeatCurrentXRaw(float repeatCurrentX, boolean needInvalidate) {
+        this.repeatCurrentX = repeatCurrentX;
         // calculate index
-        float minDistence = tunaWidth;
+        float minDistence = width;
         // From 0 to judge one by one, if the distance farther on the end of the
         // cycle
-        for (int i = 0; i < tunaTotal; i++) {
-            float centreDistance = Math.abs(tunaRepeatCurrentX - tunaFloatArray[i]);
+        for (int i = 0; i < total; i++) {
+            float centreDistance = Math.abs(repeatCurrentX - floatArray[i]);
             if (centreDistance < minDistence) {
-                tunaRepeatCurrentIndex = i;
+                repeatCurrentIndex = i;
                 minDistence = centreDistance;
             } else {
                 break;
@@ -425,71 +425,74 @@ public class TRepeat extends TView {
         }
     }
 
-    public int getTunaRepeatCurrentIndex() {
-        return tunaRepeatCurrentIndex;
+    public int getRepeatCurrentIndex() {
+        return repeatCurrentIndex;
     }
 
-    public void setTunaRepeatCurrentIndex(int tunaRepeatCurrentIndex) {
-        if (tunaRepeatCurrentIndex < -1 || tunaRepeatCurrentIndex > tunaTotal - 1) {
-            throw new IndexOutOfBoundsException("The content attribute tunaRepeatCurrentIndex length must be not less than -1 and smaller than the tunaTotal length -1");
+    public void setRepeatCurrentIndex(int repeatCurrentIndex) {
+        if (repeatCurrentIndex < -1 || repeatCurrentIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute repeatCurrentIndex length must be not less than -1 and smaller than the total length -1");
         }
-        this.tunaRepeatCurrentIndex = tunaRepeatCurrentIndex;
+        this.repeatCurrentIndex = repeatCurrentIndex;
         invalidate();
     }
 
-    public float[] getTunaRepeatCentreXArray() {
-        return tunaFloatArray;
+    public float[] getRepeatCentreXArray() {
+        return floatArray;
     }
 
-    public void setTunaRepeatCentreXArray(float[] tunaRepeatCentreXArray) {
-        this.tunaFloatArray = tunaRepeatCentreXArray;
+    public void setRepeatCentreXArray(float[] tunaRepeatCentreXArray) {
+        this.floatArray = tunaRepeatCentreXArray;
     }
 
-    public int getTunaRepeatTotal() {
-        return tunaTotal;
+    public int getRepeatTotal() {
+        return total;
     }
 
-    public void setTunaRepeatTotal(int tunaTotal) {
-        this.tunaTotal = tunaTotal;
+    public void setRepeatTotal(int total) {
+        this.total = total;
         invalidate();
     }
 
-    public String[] getTunaRepeatItemTextValueArray() {
-        return tunaStringArray;
+    public String[] getRepeatItemTextValueArray() {
+        return stringArray;
     }
 
-    public void setTunaRepeatItemTextValueArray(String[] tunaRepeatItemTextValueArray) {
-        this.tunaStringArray = tunaRepeatItemTextValueArray;
+    public void setRepeatItemTextValueArray(String[] repeatItemTextValueArray) {
+        this.stringArray = repeatItemTextValueArray;
     }
 
     //
-    public void setTunaRepeatListener(final TunaTouchListener tunaTouchListener, final TunaTouchDownListener tunaTouchDownListener, final TunaTouchUpListener tunaTouchUpListener) {
-        this.setTunaTouchListener(tunaTouchListener);
-        this.setTunaTouchDownListener(tunaTouchDownListener);
-        this.setTunaTouchUpListener(tunaTouchUpListener);
-        this.setTunaTouchCancelListener(new TunaTouchCancelListener() {
+    public void setRepeatListener(final TouchListener touchListener, final TouchDownListener touchDownListener, final TouchUpListener touchUpListener) {
+        this.setTouchListener(touchListener);
+        this.setTouchDownListener(touchDownListener);
+        this.setTouchUpListener(touchUpListener);
+        this.setTouchCancelListener(new TouchCancelListener() {
             @Override
-            public void tunaTouchCancel(View v) {
-                if (tunaTouchUpListener != null) {
-                    tunaTouchUpListener.tunaTouchUp(TRepeat.this);
+            public void touchCancel(View v) {
+                if (touchUpListener != null) {
+                    touchUpListener.touchUp(TRepeat.this);
                 }
             }
         });
-        this.setTunaTouchOutListener(new TunaTouchOutListener() {
+
+        this.setTouchOutListener(new TouchOutListener() {
             @Override
-            public void tunaTouchOut(View v) {
-                if (tunaTouchUpListener != null) {
-                    tunaTouchUpListener.tunaTouchUp(TRepeat.this);
+            public void touchOut(View v) {
+                if (touchUpListener != null) {
+                    touchUpListener.touchUp(TRepeat.this);
                 }
             }
         });
-        this.setTunaTouchInListener(new TunaTouchInListener() {
+
+        this.setTouchInListener(new TouchInListener() {
             @Override
-            public void tunaTouchIn(View v) {
-                if (tunaTouchDownListener != null) {
-                    tunaTouchDownListener.tunaTouchDown(TRepeat.this);
+            public void touchIn(View v) {
+                if (touchDownListener != null) {
+                    touchDownListener.touchDown(TRepeat.this);
                 }
             }
         });
+
     }
 }

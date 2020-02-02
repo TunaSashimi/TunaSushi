@@ -8,50 +8,52 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
+import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:59
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TTrangle extends TView {
 
-    //tunaTrangleStrokeWidth default 0
-    private float tunaTrangleStrokeWidth;
+    //trangleStrokeWidth default 0
+    private float trangleStrokeWidth;
 
-    //tunaTrangleStrokeColor default transparent
-    private int tunaTrangleStrokeColor;
+    //trangleStrokeColor default transparent
+    private int trangleStrokeColor;
 
-    // tunaTrangleBackgroundNormal default Color.WHITE,tunaTrangleBackgroundPress default tunaTrangleBackgroundNormal,tunaTrangleBackgroundSelect default tunaTrangleBackgroundNormal
-    private int tunaTrangleBackgroundNormal, tunaTrangleBackgroundPress, tunaTrangleBackgroundSelect;
+    // trangleBackgroundNormal default Color.WHITE,trangleBackgroundPress default trangleBackgroundNormal,trangleBackgroundSelect default trangleBackgroundNormal
+    private int trangleBackgroundNormal, trangleBackgroundPress, trangleBackgroundSelect;
 
-    private TunaTrangleTowardType tunaTrangleTowardType;
+    private TrangleTowardType trangleTowardType;
 
-    public enum TunaTrangleTowardType {
+    public enum TrangleTowardType {
         TOP(0),
         BOTTOM(1),
         LEFT(2),
         RIGHT(3),;
         final int nativeInt;
 
-        TunaTrangleTowardType(int ni) {
+        TrangleTowardType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaTrangleTowardType[] tunaTowardTypeArray = {
-            TunaTrangleTowardType.TOP,
-            TunaTrangleTowardType.BOTTOM,
-            TunaTrangleTowardType.LEFT,
-            TunaTrangleTowardType.RIGHT,
+    private static final TrangleTowardType[] towardTypeArray = {
+            TrangleTowardType.TOP,
+            TrangleTowardType.BOTTOM,
+            TrangleTowardType.LEFT,
+            TrangleTowardType.RIGHT,
     };
 
     //when draw a triangle possible need hide Maximum border line default false
-    private boolean tunaTrangleHideEdge;
+    private boolean trangleHideEdge;
 
     //some draw variables
     private double halfTopCornerDadian;
@@ -70,25 +72,25 @@ public class TTrangle extends TView {
     public TTrangle(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TTrangle.class.getSimpleName();
+        Tag = TTrangle.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangle);
 
         int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangle_trangleTowardType, -1);
         if (tunaTrangleTowardTypeIndex >= 0) {
-            tunaTrangleTowardType = tunaTowardTypeArray[tunaTrangleTowardTypeIndex];
+            trangleTowardType = towardTypeArray[tunaTrangleTowardTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute tunaTrangleTowardType type must be given");
+            throw new IllegalArgumentException("The content attribute trangleTowardType type must be given");
         }
 
-        tunaTrangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundNormal, Color.TRANSPARENT);
-        tunaTrangleBackgroundPress = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundPress, tunaTrangleBackgroundNormal);
-        tunaTrangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundSelect, tunaTrangleBackgroundNormal);
+        trangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundNormal, Color.TRANSPARENT);
+        trangleBackgroundPress = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundPress, trangleBackgroundNormal);
+        trangleBackgroundSelect = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundSelect, trangleBackgroundNormal);
 
-        tunaTrangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangle_trangleStrokeWidth, 0);
-        tunaTrangleStrokeColor = typedArray.getColor(R.styleable.TTrangle_trangleStrokeColor, Color.TRANSPARENT);
+        trangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangle_trangleStrokeWidth, 0);
+        trangleStrokeColor = typedArray.getColor(R.styleable.TTrangle_trangleStrokeColor, Color.TRANSPARENT);
 
-        tunaTrangleHideEdge = typedArray.getBoolean(R.styleable.TTrangle_trangleHideEdge, false);
+        trangleHideEdge = typedArray.getBoolean(R.styleable.TTrangle_trangleHideEdge, false);
 
         typedArray.recycle();
     }
@@ -96,20 +98,20 @@ public class TTrangle extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (tunaTrangleTowardType == TunaTrangleTowardType.TOP || tunaTrangleTowardType == TunaTrangleTowardType.BOTTOM) {
-            //tan(halfTopCornerDadian)=(1/2tunaWidth)/tunaHeight
-            halfTopCornerDadian = Math.atan((tunaWidth * 0.5f) / tunaHeight);
+        if (trangleTowardType == TrangleTowardType.TOP || trangleTowardType == TrangleTowardType.BOTTOM) {
+            //tan(halfTopCornerDadian)=(1/2tunaWidth)/height
+            halfTopCornerDadian = Math.atan((width * 0.5f) / height);
         } else {
-            //tan(halfTopCornerDadian)=(1/2tunaHeight)/tunaWidth
-            halfTopCornerDadian = Math.atan((tunaHeight * 0.5f) / tunaWidth);
+            //tan(halfTopCornerDadian)=(1/2tunaHeight)/width
+            halfTopCornerDadian = Math.atan((height * 0.5f) / width);
         }
 
-        //sin(halfTopCornerDadian)=tunaTrangleStrokeWidth/topCornerDistance
-        topCornerDistance = (float) (tunaTrangleStrokeWidth / Math.sin(halfTopCornerDadian));
-        //cos(halfTopCornerDadian)=tunaTrangleStrokeWidth/bottomCornerOneCalDirectionDistance
-        bottomCornerInternalDirectionDistance = (float) (tunaTrangleStrokeWidth / Math.cos(halfTopCornerDadian));
-        //tan(halfTopCornerDadian)=boundaryLineInterceptionDistance/tunaTrangleStrokeWidth
-        boundaryLineInterceptionDistance = (float) (Math.tan(halfTopCornerDadian) * tunaTrangleStrokeWidth);
+        //sin(halfTopCornerDadian)=trangleStrokeWidth/topCornerDistance
+        topCornerDistance = (float) (trangleStrokeWidth / Math.sin(halfTopCornerDadian));
+        //cos(halfTopCornerDadian)=trangleStrokeWidth/bottomCornerOneCalDirectionDistance
+        bottomCornerInternalDirectionDistance = (float) (trangleStrokeWidth / Math.cos(halfTopCornerDadian));
+        //tan(halfTopCornerDadian)=boundaryLineInterceptionDistance/trangleStrokeWidth
+        boundaryLineInterceptionDistance = (float) (Math.tan(halfTopCornerDadian) * trangleStrokeWidth);
     }
 
     @Override
@@ -117,111 +119,111 @@ public class TTrangle extends TView {
         super.onDraw(canvas);
         //start drawing from the outside triangle topCorner and draw clockwise
         //attention! direct coverage on some models will be the sideline, the way to avoid the use of painted area
-        switch (tunaTrangleTowardType) {
+        switch (trangleTowardType) {
             case TOP:
-                initTunaPathMoveTo(tunaWidth >> 1, 0);
-                //both requirements tunaTrangleStrokeWidth != 0 and tunaTrangleHideHypotenuse=true will cut edge
-                if (tunaTrangleStrokeWidth != 0 && tunaTrangleHideEdge) {
-                    tunaPath.lineTo(tunaWidth - boundaryLineInterceptionDistance, tunaHeight - tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(tunaWidth - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance), tunaHeight - tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(tunaWidth >> 1, topCornerDistance);
-                    tunaPath.lineTo(boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance, tunaHeight - tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(boundaryLineInterceptionDistance, tunaHeight - tunaTrangleStrokeWidth);
+                initPathMoveTo(width >> 1, 0);
+                //both requirements trangleStrokeWidth != 0 and tunaTrangleHideHypotenuse=true will cut edge
+                if (trangleStrokeWidth != 0 && trangleHideEdge) {
+                    path.lineTo(width - boundaryLineInterceptionDistance, height - trangleStrokeWidth);
+                    path.lineTo(width - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance), height - trangleStrokeWidth);
+                    path.lineTo(width >> 1, topCornerDistance);
+                    path.lineTo(boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance, height - trangleStrokeWidth);
+                    path.lineTo(boundaryLineInterceptionDistance, height - trangleStrokeWidth);
                 } else {
-                    tunaPath.lineTo(tunaWidth, tunaHeight);
-                    tunaPath.lineTo(0, tunaHeight);
+                    path.lineTo(width, height);
+                    path.lineTo(0, height);
                 }
                 break;
             case BOTTOM:
-                initTunaPathMoveTo(tunaWidth >> 1, tunaHeight);
-                if (tunaTrangleStrokeWidth != 0 && tunaTrangleHideEdge) {
-                    tunaPath.lineTo(boundaryLineInterceptionDistance, tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance, tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(tunaWidth >> 1, tunaHeight - topCornerDistance);
-                    tunaPath.lineTo(tunaWidth - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance), tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(tunaWidth - boundaryLineInterceptionDistance, tunaTrangleStrokeWidth);
+                initPathMoveTo(width >> 1, height);
+                if (trangleStrokeWidth != 0 && trangleHideEdge) {
+                    path.lineTo(boundaryLineInterceptionDistance, trangleStrokeWidth);
+                    path.lineTo(boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance, trangleStrokeWidth);
+                    path.lineTo(width >> 1, height - topCornerDistance);
+                    path.lineTo(width - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance), trangleStrokeWidth);
+                    path.lineTo(width - boundaryLineInterceptionDistance, trangleStrokeWidth);
                 } else {
-                    tunaPath.lineTo(0, 0);
-                    tunaPath.lineTo(tunaWidth, 0);
+                    path.lineTo(0, 0);
+                    path.lineTo(width, 0);
                 }
                 break;
             case LEFT:
-                initTunaPathMoveTo(0, tunaHeight >> 1);
-                if (tunaTrangleStrokeWidth != 0 && tunaTrangleHideEdge) {
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, boundaryLineInterceptionDistance);
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance);
-                    tunaPath.lineTo(topCornerDistance, tunaHeight >> 1);
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, tunaHeight - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance));
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, tunaHeight - boundaryLineInterceptionDistance);
+                initPathMoveTo(0, height >> 1);
+                if (trangleStrokeWidth != 0 && trangleHideEdge) {
+                    path.lineTo(width - trangleStrokeWidth, boundaryLineInterceptionDistance);
+                    path.lineTo(width - trangleStrokeWidth, boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance);
+                    path.lineTo(topCornerDistance, height >> 1);
+                    path.lineTo(width - trangleStrokeWidth, height - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance));
+                    path.lineTo(width - trangleStrokeWidth, height - boundaryLineInterceptionDistance);
                 } else {
-                    tunaPath.lineTo(tunaWidth, 0);
-                    tunaPath.lineTo(tunaWidth, tunaHeight);
+                    path.lineTo(width, 0);
+                    path.lineTo(width, height);
                 }
                 break;
             case RIGHT:
-                initTunaPathMoveTo(tunaWidth, tunaHeight >> 1);
-                if (tunaTrangleStrokeWidth != 0 && tunaTrangleHideEdge) {
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, tunaHeight - boundaryLineInterceptionDistance);
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, tunaHeight - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance));
-                    tunaPath.lineTo(tunaWidth - topCornerDistance, tunaHeight >> 1);
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance);
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, boundaryLineInterceptionDistance);
+                initPathMoveTo(width, height >> 1);
+                if (trangleStrokeWidth != 0 && trangleHideEdge) {
+                    path.lineTo(trangleStrokeWidth, height - boundaryLineInterceptionDistance);
+                    path.lineTo(trangleStrokeWidth, height - (boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance));
+                    path.lineTo(width - topCornerDistance, height >> 1);
+                    path.lineTo(trangleStrokeWidth, boundaryLineInterceptionDistance + bottomCornerInternalDirectionDistance);
+                    path.lineTo(trangleStrokeWidth, boundaryLineInterceptionDistance);
                 } else {
-                    tunaPath.lineTo(0, tunaHeight);
-                    tunaPath.lineTo(0, 0);
+                    path.lineTo(0, height);
+                    path.lineTo(0, 0);
                 }
                 break;
         }
 
-        tunaPath.close();
-        canvas.drawPath(tunaPath,
-                initTunaPaint(Paint.Style.FILL, tunaTrangleStrokeWidth != 0 ?
-                        tunaTrangleStrokeColor : tunaSelect ? tunaTrangleBackgroundSelect : tunaPress ? tunaTrangleBackgroundPress : tunaTrangleBackgroundNormal));
+        path.close();
+        canvas.drawPath(path,
+                PaintTool.initPaint(Paint.Style.FILL, trangleStrokeWidth != 0 ?
+                        trangleStrokeColor : select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal));
 
         //drawing  the inside triangle topCorner and draw clockwise
-        switch (tunaTrangleTowardType) {
+        switch (trangleTowardType) {
             case TOP:
-                if (tunaTrangleStrokeWidth != 0) {
-                    tunaPaint.setColor(tunaSelect ? tunaTrangleBackgroundSelect : tunaPress ? tunaTrangleBackgroundPress : tunaTrangleBackgroundNormal);
-                    tunaPath.reset();
-                    tunaPath.moveTo(tunaWidth >> 1, topCornerDistance);
-                    tunaPath.lineTo(tunaWidth - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance), tunaHeight - tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance, tunaHeight - tunaTrangleStrokeWidth);
-                    tunaPath.close();
-                    canvas.drawPath(tunaPath, tunaPaint);
+                if (trangleStrokeWidth != 0) {
+                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
+                    path.reset();
+                    path.moveTo(width >> 1, topCornerDistance);
+                    path.lineTo(width - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance), height - trangleStrokeWidth);
+                    path.lineTo(bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance, height - trangleStrokeWidth);
+                    path.close();
+                    canvas.drawPath(path, paint);
                 }
                 break;
             case BOTTOM:
-                if (tunaTrangleStrokeWidth != 0) {
-                    tunaPaint.setColor(tunaSelect ? tunaTrangleBackgroundSelect : tunaPress ? tunaTrangleBackgroundPress : tunaTrangleBackgroundNormal);
-                    tunaPath.reset();
-                    tunaPath.moveTo(tunaWidth >> 1, tunaHeight - topCornerDistance);
-                    tunaPath.lineTo(bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance, tunaTrangleStrokeWidth);
-                    tunaPath.lineTo(tunaWidth - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance), tunaTrangleStrokeWidth);
-                    tunaPath.close();
-                    canvas.drawPath(tunaPath, tunaPaint);
+                if (trangleStrokeWidth != 0) {
+                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
+                    path.reset();
+                    path.moveTo(width >> 1, height - topCornerDistance);
+                    path.lineTo(bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance, trangleStrokeWidth);
+                    path.lineTo(width - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance), trangleStrokeWidth);
+                    path.close();
+                    canvas.drawPath(path, paint);
                 }
                 break;
             case LEFT:
-                if (tunaTrangleStrokeWidth != 0) {
-                    tunaPaint.setColor(tunaSelect ? tunaTrangleBackgroundSelect : tunaPress ? tunaTrangleBackgroundPress : tunaTrangleBackgroundNormal);
-                    tunaPath.reset();
-                    tunaPath.moveTo(topCornerDistance, tunaHeight >> 1);
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance);
-                    tunaPath.lineTo(tunaWidth - tunaTrangleStrokeWidth, tunaHeight - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance));
-                    tunaPath.close();
-                    canvas.drawPath(tunaPath, tunaPaint);
+                if (trangleStrokeWidth != 0) {
+                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
+                    path.reset();
+                    path.moveTo(topCornerDistance, height >> 1);
+                    path.lineTo(width - trangleStrokeWidth, bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance);
+                    path.lineTo(width - trangleStrokeWidth, height - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance));
+                    path.close();
+                    canvas.drawPath(path, paint);
                 }
                 break;
             case RIGHT:
-                if (tunaTrangleStrokeWidth != 0) {
-                    tunaPaint.setColor(tunaSelect ? tunaTrangleBackgroundSelect : tunaPress ? tunaTrangleBackgroundPress : tunaTrangleBackgroundNormal);
-                    tunaPath.reset();
-                    tunaPath.moveTo(tunaWidth - topCornerDistance, tunaHeight >> 1);
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, tunaHeight - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance));
-                    tunaPath.lineTo(tunaTrangleStrokeWidth, bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance);
-                    tunaPath.close();
-                    canvas.drawPath(tunaPath, tunaPaint);
+                if (trangleStrokeWidth != 0) {
+                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
+                    path.reset();
+                    path.moveTo(width - topCornerDistance, height >> 1);
+                    path.lineTo(trangleStrokeWidth, height - (bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance));
+                    path.lineTo(trangleStrokeWidth, bottomCornerInternalDirectionDistance + boundaryLineInterceptionDistance);
+                    path.close();
+                    canvas.drawPath(path, paint);
                 }
                 break;
         }

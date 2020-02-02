@@ -10,13 +10,15 @@ import com.tunasushi.tuna.TImage;
 
 public class TImageActivity extends Activity {
 
+    private TImage timage;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_t_image);
 
-        final TImage tunaImage01 = findViewById(R.id.tImage01);
+        timage = findViewById(R.id.tImage01);
 
         SeekBar seekBar01 = findViewById(R.id.seekBar01);
         SeekBar seekBar02 = findViewById(R.id.seekBar02);
@@ -25,7 +27,7 @@ public class TImageActivity extends Activity {
         seekBar01.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tunaImage01.setTunaImageBright(progress / 50f);//0-2
+                timage.setImageBright(progress / 50f);//0-2
             }
 
             @Override
@@ -40,7 +42,7 @@ public class TImageActivity extends Activity {
         seekBar02.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tunaImage01.setTunaImageHue((progress - 50) / 50f * 180);//-180-180
+                timage.setImageHue((progress - 50) / 50f * 180);//-180-180
             }
 
             @Override
@@ -55,7 +57,7 @@ public class TImageActivity extends Activity {
         seekBar03.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tunaImage01.setTunaImageSaturation(progress / 50f);//0-2
+                timage.setImageSaturation(progress / 50f);//0-2
             }
 
             @Override

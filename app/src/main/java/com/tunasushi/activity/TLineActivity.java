@@ -13,7 +13,7 @@ import com.tunasushi.tuna.TLine;
 
 
 public class TLineActivity extends Activity {
-    private TLine tunaLineAC, tunaLineMove;
+    private TLine tLineAC, tLineMove;
     private Button buttonCenterAC, buttonHiddenAC;
 
     @Override
@@ -22,38 +22,39 @@ public class TLineActivity extends Activity {
 
         setContentView(R.layout.activity_t_line);
 
-        int tuna_button_width = 120;
+        float tuna_button_width = getResources().getDimension(
+                R.dimen.tuna_button_width);
 
-        tunaLineAC = findViewById(R.id.tLineAC);
-        tunaLineMove = findViewById(R.id.tLineMove);
+        tLineAC = findViewById(R.id.tLineAC);
+        tLineMove = findViewById(R.id.tLineMove);
 
         buttonCenterAC = findViewById(R.id.buttonCenterAC);
         buttonHiddenAC = findViewById(R.id.buttonHiddenAC);
 
         //
-        tunaLineAC.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineAC.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
 
         //
         buttonCenterAC.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                tunaLineAC.centerArrow();
+                tLineAC.centerArrow();
             }
         });
 
         buttonHiddenAC.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                tunaLineAC.hideArrow();
+                tLineAC.hideArrow();
             }
         });
 
-        tunaLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
 
-        tunaLineMove.setTunaTouchListener(new TView.TunaTouchListener() {
+        tLineMove.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaLineMove.getTunaTouchEventX());
+            public void touch(View v) {
+                tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tLineMove.getTouchEventX());
             }
         });
     }

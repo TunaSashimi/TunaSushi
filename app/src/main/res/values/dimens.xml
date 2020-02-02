@@ -41,7 +41,7 @@
     <dimen name="tuna_stroke_width">2px</dimen>
     <dimen name="tuna_stroke_mask">-2px</dimen>
 
-    <!-- Exclusive TunaView or any of its subclasses use -->
+    <!-- Exclusive TView or any of its subclasses use -->
 
     <dimen name="tuna_textmark_radius">4dp</dimen>
     <dimen name="tuna_textmark_tipsRadius">10dp</dimen>

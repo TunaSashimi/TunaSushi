@@ -10,7 +10,7 @@ import com.tunasushi.tuna.TAnalysis;
 
 
 public class TAnalysisActivity extends Activity {
-    private TAnalysis tAnalysisView;
+    private TAnalysis tAnalysis;
     private SeekBar seekbar;
 
     @Override
@@ -19,13 +19,13 @@ public class TAnalysisActivity extends Activity {
 
         setContentView(R.layout.activity_t_analysis);
 
-        tAnalysisView = findViewById(R.id.tAnalysis);
+        tAnalysis = findViewById(R.id.tAnalysis);
         seekbar = findViewById(R.id.seekbar);
 
         seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tAnalysisView.SetControlXandY(progress, progress);
+                tAnalysis.setControlXandY(progress, progress);
             }
 
             @Override

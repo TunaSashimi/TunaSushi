@@ -27,7 +27,7 @@ import java.util.Locale;
 /**
  * @author Tunasashimi
  * @date 2019-11-19 16:46
- * @Copyright 2019 TunaSashimi. All rights reserved.
+ * @Copyright 2019 Sashimi. All rights reserved.
  * @Description
  */
 public class DeviceTool {
@@ -40,8 +40,8 @@ public class DeviceTool {
     public static float displayDensity, displayScaledDensity, displayXdpi, displayYdpi;
 
     //
-    public static StringBuffer tunaStringBuffer;
-    public static final int tunaStringBufferCapacity = 288;
+    public static StringBuffer stringBuffer;
+    public static final int stringBufferCapacity = 288;
 
     //
     public static void initDisplayMetrics(Context context) {
@@ -54,40 +54,40 @@ public class DeviceTool {
             displayXdpi = displayMetrics.xdpi;
             displayYdpi = displayMetrics.ydpi;
 
-            tunaStringBuffer = new StringBuffer(tunaStringBufferCapacity);
-            tunaStringBuffer.append("设备厂商 : ");
-            tunaStringBuffer.append(Build.BRAND);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("设备型号 : ");
-            tunaStringBuffer.append(Build.MODEL);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("系统版本 : ");
-            tunaStringBuffer.append(Build.VERSION.RELEASE);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("API等级 : ");
-            tunaStringBuffer.append(Build.VERSION.SDK);
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("系统语言 : ");
-            tunaStringBuffer.append(Locale.getDefault().getLanguage());
-            tunaStringBuffer.append(" , ");
-            tunaStringBuffer.append("屏幕分辨率 : ");
-            tunaStringBuffer.append(displayWidth);
-            tunaStringBuffer.append(" * ");
-            tunaStringBuffer.append(displayHeight);
-            tunaStringBuffer.append(" ( ");
-            tunaStringBuffer.append(displayWidth / displayDensity);
-            tunaStringBuffer.append("dp * ");
-            tunaStringBuffer.append(displayHeight / displayDensity);
-            tunaStringBuffer.append("dp ) ");
-            tunaStringBuffer.append(" , 屏幕密度 : ");
-            tunaStringBuffer.append(displayDensity);
-            tunaStringBuffer.append(" , 伸缩密度 : ");
-            tunaStringBuffer.append(displayScaledDensity);
-            tunaStringBuffer.append(" , X维 : ");
-            tunaStringBuffer.append(displayXdpi);
-            tunaStringBuffer.append(" 像素点 / 英寸 , Y维 : ");
-            tunaStringBuffer.append(displayYdpi);
-            tunaStringBuffer.append(" 像素点 / 英寸 。 ");
+            stringBuffer = new StringBuffer(stringBufferCapacity);
+            stringBuffer.append("设备厂商 : ");
+            stringBuffer.append(Build.BRAND);
+            stringBuffer.append(" , ");
+            stringBuffer.append("设备型号 : ");
+            stringBuffer.append(Build.MODEL);
+            stringBuffer.append(" , ");
+            stringBuffer.append("系统版本 : ");
+            stringBuffer.append(Build.VERSION.RELEASE);
+            stringBuffer.append(" , ");
+            stringBuffer.append("API等级 : ");
+            stringBuffer.append(Build.VERSION.SDK);
+            stringBuffer.append(" , ");
+            stringBuffer.append("系统语言 : ");
+            stringBuffer.append(Locale.getDefault().getLanguage());
+            stringBuffer.append(" , ");
+            stringBuffer.append("屏幕分辨率 : ");
+            stringBuffer.append(displayWidth);
+            stringBuffer.append(" * ");
+            stringBuffer.append(displayHeight);
+            stringBuffer.append(" ( ");
+            stringBuffer.append(displayWidth / displayDensity);
+            stringBuffer.append("dp * ");
+            stringBuffer.append(displayHeight / displayDensity);
+            stringBuffer.append("dp ) ");
+            stringBuffer.append(" , 屏幕密度 : ");
+            stringBuffer.append(displayDensity);
+            stringBuffer.append(" , 伸缩密度 : ");
+            stringBuffer.append(displayScaledDensity);
+            stringBuffer.append(" , X维 : ");
+            stringBuffer.append(displayXdpi);
+            stringBuffer.append(" 像素点 / 英寸 , Y维 : ");
+            stringBuffer.append(displayYdpi);
+            stringBuffer.append(" 像素点 / 英寸 。 ");
         }
     }
 

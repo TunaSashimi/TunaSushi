@@ -15,47 +15,48 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.PathTool.initPath;
+import static com.tunasushi.tool.PathTool.path;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TDrag extends TView {
 
-    private String[] tunaDragTextValueArray;
-    private int tunaDragAngle;
-    private int tunaDragFillColor;
-    private float tunaDragStrokeWidth;
-    private int tunaDragStrokeColor;
-    private float tunaDragTextSize;
-    private int tunaDragTextColorNormal;
+    private String[] dragTextValueArray;
+    private int dragAngle;
+    private int dragFillColor;
+    private float dragStrokeWidth;
+    private int dragStrokeColor;
+    private float dragTextSize;
+    private int dragTextColorNormal;
 
-    private int tunaDragBallBackgroundNormal, tunaDragBallBackgroundPress;
+    private int dragBallBackgroundNormal, dragBallBackgroundPress;
 
-    private float tunaDragBallStrokeWidth;
-    private int tunaDragBallStrokeColorNormal, tunaDragBallStrokeColorPress;
+    private float dragBallStrokeWidth;
+    private int dragBallStrokeColorNormal, dragBallStrokeColorPress;
 
-    private float tunaDragBallRadiusNormal, tunaDragBallRadiusPress;
+    private float dragBallRadiusNormal, dragBallRadiusPress;
 
-    private int tunaDragBallTextColor;
-    private Bitmap tunaDragBallBitmapSrcPress;
+    private int dragBallTextColor;
+    private Bitmap dragBallBitmapSrcPress;
 
-    private RectF[] tunaDragCircleRectFArray;
-    private float[] tunaDragCircleCentreXArray;
+    private RectF[] dragCircleRectFArray;
+    private float[] dragCircleCentreXArray;
 
-    private float tunaDragCurrentX;
-    private int tunaDragCurrentIndex;
+    private float dragCurrentX;
+    private int dragCurrentIndex;
 
     // some draw variables
-    private float circleNormalDiameter;
+    private float dragCircleNormalDiameter;
 
     public TDrag(Context context) {
         this(context, null);
@@ -68,59 +69,59 @@ public class TDrag extends TView {
     public TDrag(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TDrag.class.getSimpleName();
+        Tag = TDrag.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDrag);
 
-        int tunaDragTextValueArrayId = typedArray.getResourceId(R.styleable.TDrag_dragTextValueArray, -1);
-        if (tunaDragTextValueArrayId != -1) {
+        int dragTextValueArrayId = typedArray.getResourceId(R.styleable.TDrag_dragTextValueArray, -1);
+        if (dragTextValueArrayId != -1) {
             if (isInEditMode()) {
-                tunaDragTextValueArray = new String[]{"0", "1", "2", "5", "10"};
+                dragTextValueArray = new String[]{"0", "1", "2", "5", "10"};
             } else {
-                tunaDragTextValueArray = typedArray.getResources().getStringArray(tunaDragTextValueArrayId);
+                dragTextValueArray = typedArray.getResources().getStringArray(dragTextValueArrayId);
             }
-            tunaTotal = tunaDragTextValueArray.length;
-            if (tunaTotal < 2) {
-                throw new IndexOutOfBoundsException("The content attribute tunaDragArray length must be at least 2");
+            total = dragTextValueArray.length;
+            if (total < 2) {
+                throw new IndexOutOfBoundsException("The content attribute dragTextValueArray length must be at least 2");
             } else {
-                tunaDragCircleCentreXArray = new float[tunaTotal];
-                tunaDragCircleRectFArray = new RectF[tunaTotal];
-                for (int i = 0; i < tunaTotal; i++) {
-                    tunaDragCircleRectFArray[i] = new RectF();
+                dragCircleCentreXArray = new float[total];
+                dragCircleRectFArray = new RectF[total];
+                for (int i = 0; i < total; i++) {
+                    dragCircleRectFArray[i] = new RectF();
                 }
             }
 
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaDragArray");
+            throw new IllegalArgumentException("The content attribute require a property named dragTextValueArray");
         }
 
-        tunaDragCurrentIndex = typedArray.getInt(R.styleable.TDrag_dragCurrentIndex, -1);
-        if (tunaDragCurrentIndex >= tunaTotal) {
-            throw new IndexOutOfBoundsException("The content attribute tunaDragCurrentIndex length must be smaller than the tunaDragArray length");
+        dragCurrentIndex = typedArray.getInt(R.styleable.TDrag_dragCurrentIndex, -1);
+        if (dragCurrentIndex >= total) {
+            throw new IndexOutOfBoundsException("The content attribute dragCurrentIndex length must be smaller than the tunaDragArray length");
         }
 
-        tunaDragAngle = typedArray.getInt(R.styleable.TDrag_dragAngle, 30);
-        tunaDragFillColor = typedArray.getColor(R.styleable.TDrag_dragFillColor, Color.TRANSPARENT);
-        tunaDragStrokeWidth = typedArray.getDimension(R.styleable.TDrag_dragStrokeWidth, 0);
-        tunaDragStrokeColor = typedArray.getColor(R.styleable.TDrag_dragStrokeColor, Color.TRANSPARENT);
-        tunaDragTextSize = typedArray.getDimension(R.styleable.TDrag_dragTextSize, 18);
-        tunaDragTextColorNormal = typedArray.getColor(R.styleable.TDrag_dragTextColorNormal, Color.TRANSPARENT);
+        dragAngle = typedArray.getInt(R.styleable.TDrag_dragAngle, 30);
+        dragFillColor = typedArray.getColor(R.styleable.TDrag_dragFillColor, Color.TRANSPARENT);
+        dragStrokeWidth = typedArray.getDimension(R.styleable.TDrag_dragStrokeWidth, 0);
+        dragStrokeColor = typedArray.getColor(R.styleable.TDrag_dragStrokeColor, Color.TRANSPARENT);
+        dragTextSize = typedArray.getDimension(R.styleable.TDrag_dragTextSize, 18);
+        dragTextColorNormal = typedArray.getColor(R.styleable.TDrag_dragTextColorNormal, Color.TRANSPARENT);
 
-        tunaDragBallBackgroundNormal = typedArray.getColor(R.styleable.TDrag_dragBallBackgroundNormal, Color.TRANSPARENT);
-        tunaDragBallBackgroundPress = typedArray.getColor(R.styleable.TDrag_dragBallBackgroundPress, tunaDragBallBackgroundNormal);
+        dragBallBackgroundNormal = typedArray.getColor(R.styleable.TDrag_dragBallBackgroundNormal, Color.TRANSPARENT);
+        dragBallBackgroundPress = typedArray.getColor(R.styleable.TDrag_dragBallBackgroundPress, dragBallBackgroundNormal);
 
-        tunaDragBallStrokeWidth = typedArray.getDimension(R.styleable.TDrag_dragBallStrokeWidth, 0);
-        tunaDragBallStrokeColorNormal = typedArray.getColor(R.styleable.TDrag_dragBallStrokeColorNormal, Color.TRANSPARENT);
-        tunaDragBallStrokeColorPress = typedArray.getColor(R.styleable.TDrag_dragBallStrokeColorPress, tunaDragBallStrokeColorNormal);
+        dragBallStrokeWidth = typedArray.getDimension(R.styleable.TDrag_dragBallStrokeWidth, 0);
+        dragBallStrokeColorNormal = typedArray.getColor(R.styleable.TDrag_dragBallStrokeColorNormal, Color.TRANSPARENT);
+        dragBallStrokeColorPress = typedArray.getColor(R.styleable.TDrag_dragBallStrokeColorPress, dragBallStrokeColorNormal);
 
-        tunaDragBallRadiusNormal = typedArray.getDimension(R.styleable.TDrag_dragBallRadiusNormal, 0);
-        tunaDragBallRadiusPress = typedArray.getDimension(R.styleable.TDrag_dragBallRadiusPress, tunaDragBallRadiusNormal);
+        dragBallRadiusNormal = typedArray.getDimension(R.styleable.TDrag_dragBallRadiusNormal, 0);
+        dragBallRadiusPress = typedArray.getDimension(R.styleable.TDrag_dragBallRadiusPress, dragBallRadiusNormal);
 
-        tunaDragBallTextColor = typedArray.getColor(R.styleable.TDrag_dragBallTextColor, Color.TRANSPARENT);
+        dragBallTextColor = typedArray.getColor(R.styleable.TDrag_dragBallTextColor, Color.TRANSPARENT);
 
-        int tunaDragBallBitmapSrcPressId = typedArray.getResourceId(R.styleable.TDrag_dragBallBitmapSrcPress, -1);
-        if (tunaDragBallBitmapSrcPressId != -1) {
-            tunaDragBallBitmapSrcPress = BitmapFactory.decodeResource(getResources(), tunaDragBallBitmapSrcPressId);
+        int dragBallBitmapSrcPressId = typedArray.getResourceId(R.styleable.TDrag_dragBallBitmapSrcPress, -1);
+        if (dragBallBitmapSrcPressId != -1) {
+            dragBallBitmapSrcPress = BitmapFactory.decodeResource(getResources(), dragBallBitmapSrcPressId);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -134,28 +135,28 @@ public class TDrag extends TView {
 
         /**
          * attantion that the bottom of the circle radius equals the small
-         * tunaDragBallRadiusNormal!
+         * dragBallRadiusNormal!
          */
-        circleNormalDiameter = tunaDragBallRadiusNormal * 2;
-        tunaSurplus = tunaWidth - circleNormalDiameter * tunaTotal - tunaDragStrokeWidth;
-        tunaShare = tunaSurplus / (tunaTotal - 1);
+        dragCircleNormalDiameter = dragBallRadiusNormal * 2;
+        surplus = width - dragCircleNormalDiameter * total - dragStrokeWidth;
+        share = surplus / (total - 1);
 
         // The view must be greater than the height multiplied by the
         // tunaDragArray length
-        if (tunaShare <= 0) {
-            throw new IndexOutOfBoundsException("The view must be greater than the height multiplied by the tunaDragArray length");
+        if (share <= 0) {
+            throw new IndexOutOfBoundsException("The view must be greater than the height multiplied by the dragArray length");
         }
 
         // first start draw bottom of the picture:
 
-        // tunaDy=hypotenuse*sin(tunaDragAngle*0.5f)
-        tunaDy = (float) (circleNormalDiameter * 0.5f * Math.sin(Math.toRadians(tunaDragAngle * 0.5f)));
-        // tunaDx=hypotenuse-hypotenuse*cos(tunaDragAngle*0.5f)
-        tunaDx = (float) (circleNormalDiameter * 0.5f - circleNormalDiameter * 0.5f * Math.cos(Math.toRadians(tunaDragAngle * 0.5f)));
+        // dy=hypotenuse*sin(dragAngle*0.5f)
+        dy = (float) (dragCircleNormalDiameter * 0.5f * Math.sin(Math.toRadians(dragAngle * 0.5f)));
+        // dx=hypotenuse-hypotenuse*cos(dragAngle*0.5f)
+        dx = (float) (dragCircleNormalDiameter * 0.5f - dragCircleNormalDiameter * 0.5f * Math.cos(Math.toRadians(dragAngle * 0.5f)));
 
-        // tunaDragCircleCentreXArray avoid generating with new
-        for (int i = 0; i < tunaTotal; i++) {
-            tunaDragCircleCentreXArray[i] = (circleNormalDiameter + tunaShare) * i + circleNormalDiameter * 0.5f + tunaDragStrokeWidth * 0.5f;
+        // dragCircleCentreXArray avoid generating with new
+        for (int i = 0; i < total; i++) {
+            dragCircleCentreXArray[i] = (dragCircleNormalDiameter + share) * i + dragCircleNormalDiameter * 0.5f + dragStrokeWidth * 0.5f;
         }
     }
 
@@ -164,86 +165,86 @@ public class TDrag extends TView {
         super.onDraw(canvas);
 
         // 移上去按下去边框没了
-        // tunaRectArray avoid generating with new
-        for (int i = 0; i < tunaTotal; i++) {
-            tunaDragCircleRectFArray[i].set((circleNormalDiameter + tunaShare) * i + tunaDragStrokeWidth * 0.5f, (tunaHeight - circleNormalDiameter) * 0.5f,
-                    (circleNormalDiameter + tunaShare) * i + circleNormalDiameter + tunaDragStrokeWidth * 0.5f, (tunaHeight - circleNormalDiameter) * 0.5f + circleNormalDiameter);
+        // rectArray avoid generating with new
+        for (int i = 0; i < total; i++) {
+            dragCircleRectFArray[i].set((dragCircleNormalDiameter + share) * i + dragStrokeWidth * 0.5f, (height - dragCircleNormalDiameter) * 0.5f,
+                    (dragCircleNormalDiameter + share) * i + dragCircleNormalDiameter + dragStrokeWidth * 0.5f, (height - dragCircleNormalDiameter) * 0.5f + dragCircleNormalDiameter);
         }
 
-        initTunaPath();
+        initPath();
 
-        for (int i = 0; i < tunaTotal; i++) {
+        for (int i = 0; i < total; i++) {
             if (i == 0) {
-                tunaPath.addArc(tunaDragCircleRectFArray[i], tunaDragAngle * 0.5f, 360 - tunaDragAngle);
+                path.addArc(dragCircleRectFArray[i], dragAngle * 0.5f, 360 - dragAngle);
             } else {
-                tunaPath.lineTo(tunaDragCircleCentreXArray[i] - circleNormalDiameter * 0.5f + tunaDx, (tunaHeight >> 1) - tunaDy);
-                tunaPath.addArc(tunaDragCircleRectFArray[i], 180 + tunaDragAngle * 0.5f, i != tunaTotal - 1 ? 180 - tunaDragAngle : 360 - tunaDragAngle);
+                path.lineTo(dragCircleCentreXArray[i] - dragCircleNormalDiameter * 0.5f + dx, (height >> 1) - dy);
+                path.addArc(dragCircleRectFArray[i], 180 + dragAngle * 0.5f, i != total - 1 ? 180 - dragAngle : 360 - dragAngle);
             }
         }
 
-        for (int i = tunaTotal - 2; i >= 0; i--) {
-            tunaPath.lineTo(tunaDragCircleCentreXArray[i] + circleNormalDiameter * 0.5f - tunaDx, (tunaHeight >> 1) + tunaDy);
+        for (int i = total - 2; i >= 0; i--) {
+            path.lineTo(dragCircleCentreXArray[i] + dragCircleNormalDiameter * 0.5f - dx, (height >> 1) + dy);
             if (i != 0) {
-                tunaPath.addArc(tunaDragCircleRectFArray[i], tunaDragAngle * 0.5f, 180 - tunaDragAngle);
+                path.addArc(dragCircleRectFArray[i], dragAngle * 0.5f, 180 - dragAngle);
             }
         }
 
         // draw bottom pitcure
-        canvas.drawPath(tunaPath, initTunaPaint(Paint.Style.STROKE, tunaDragStrokeColor, tunaDragStrokeWidth));
+        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, dragStrokeColor, dragStrokeWidth));
 
         // draw bottom filling
-        initTunaPaint(Paint.Style.FILL, tunaDragFillColor);
+        PaintTool.initPaint(Paint.Style.FILL, dragFillColor);
 
-        for (int i = 0; i < tunaTotal; i++) {
-            canvas.drawCircle(tunaDragCircleCentreXArray[i], tunaHeight >> 1, circleNormalDiameter * 0.5f - tunaDragBallStrokeWidth, tunaPaint);
+        for (int i = 0; i < total; i++) {
+            canvas.drawCircle(dragCircleCentreXArray[i], height >> 1, dragCircleNormalDiameter * 0.5f - dragBallStrokeWidth, paint);
 
-            if (i != tunaTotal - 1) {
+            if (i != total - 1) {
                 // Normally rectangle from the top left corner should be
-                // tunaDragCircleCentreXArray [i] + circleDiameter / 2 ,
+                // dragCircleCentreXArray [i] + circleDiameter / 2 ,
                 // Considering the circles and rectangles are not well matched
                 // and another reason from float to int when deleting the
-                // decimal, so the need to subtract about fivefold tunaDx
+                // decimal, so the need to subtract about fivefold dx
                 // adjustment (),
-                // To the left :tunaDragCircleCentreXArray [i] +
-                // circleDiameter*0.5f-tunaDx * 5 ,
-                // To the right:tunaDragCircleCentreXArray [i] + circleDiameter
-                // / 2 + tunaShare + tunaDx * 5
+                // To the left :dragCircleCentreXArray [i] +
+                // circleDiameter*0.5f-dx * 5 ,
+                // To the right:dragCircleCentreXArray [i] + circleDiameter
+                // / 2 + share + dx * 5
 
-                tunaDragCircleRectFArray[0].set(tunaDragCircleCentreXArray[i] + circleNormalDiameter * 0.5f - tunaDx * 5, (tunaHeight >> 1) - tunaDy, tunaDragCircleCentreXArray[i]
-                        + circleNormalDiameter * 0.5f + tunaShare + tunaDx * 5, (tunaHeight >> 1) + tunaDy);
+                dragCircleRectFArray[0].set(dragCircleCentreXArray[i] + dragCircleNormalDiameter * 0.5f - dx * 5, (height >> 1) - dy, dragCircleCentreXArray[i]
+                        + dragCircleNormalDiameter * 0.5f + share + dx * 5, (height >> 1) + dy);
 
-                canvas.drawRect(tunaDragCircleRectFArray[0], tunaPaint);
+                canvas.drawRect(dragCircleRectFArray[0], paint);
             }
         }
 
         // draw bottom text
 
-        initTunaTextPaint(Paint.Style.FILL, tunaDragTextColorNormal, tunaDragTextSize, Align.CENTER);
-        for (int i = 0; i < tunaTotal; i++) {
-            drawTunaText(canvas, tunaDragTextValueArray[i], tunaWidth, tunaDragCircleCentreXArray[i], tunaHeight >> 1, 0, 0, tunaPaint);
+        PaintTool.initTextPaint(Paint.Style.FILL, dragTextColorNormal, dragTextSize, Align.CENTER);
+        for (int i = 0; i < total; i++) {
+            drawText(canvas, dragTextValueArray[i], width, dragCircleCentreXArray[i], height >> 1, 0, 0, paint);
         }
 
         // draw response
-        if (tunaPress) {
+        if (press) {
             // If the incoming the background painted directly
-            if (tunaDragBallBitmapSrcPress != null) {
+            if (dragBallBitmapSrcPress != null) {
 
-                tunaDragCircleRectFArray[0].set(tunaDragCurrentX - tunaDragBallRadiusPress, (tunaHeight >> 1) - tunaDragBallRadiusPress,
-                        tunaDragCurrentX + tunaDragBallRadiusPress, (tunaHeight >> 1) + tunaDragBallRadiusPress);
+                dragCircleRectFArray[0].set(dragCurrentX - dragBallRadiusPress, (height >> 1) - dragBallRadiusPress,
+                        dragCurrentX + dragBallRadiusPress, (height >> 1) + dragBallRadiusPress);
 
-                canvas.drawBitmap(tunaDragBallBitmapSrcPress, null, tunaDragCircleRectFArray[0], tunaPaint);
+                canvas.drawBitmap(dragBallBitmapSrcPress, null, dragCircleRectFArray[0], paint);
 
                 // No not incoming the background draw the default texture
             } else {
-                tunaPaint.setColor(tunaDragBallStrokeColorPress);
-                canvas.drawCircle(tunaDragCurrentX, tunaHeight >> 1, tunaDragBallRadiusPress, tunaPaint);
-                tunaPaint.setColor(tunaDragBallBackgroundPress);
-                canvas.drawCircle(tunaDragCurrentX, tunaHeight >> 1, tunaDragBallRadiusPress - tunaDragBallStrokeWidth, tunaPaint);
+                paint.setColor(dragBallStrokeColorPress);
+                canvas.drawCircle(dragCurrentX, height >> 1, dragBallRadiusPress, paint);
+                paint.setColor(dragBallBackgroundPress);
+                canvas.drawCircle(dragCurrentX, height >> 1, dragBallRadiusPress - dragBallStrokeWidth, paint);
 
                 // draw veins overlapping round
 
-                float bezierOvalX = tunaDragCurrentX;
-                float bezierOvalY = tunaHeight >> 1;
+                float bezierOvalX = dragCurrentX;
+                float bezierOvalY = height >> 1;
 
                 // 左下的图形宽度的一半,高度的一半
                 float deviationOvalX = 4;
@@ -259,18 +260,18 @@ public class TDrag extends TView {
                 float controlOvalXOffset = 4;
                 float controlOvalYOffset = 4;
 
-                tunaPath.reset();
+                path.reset();
 
-                initTunaPaint(Paint.Style.STROKE, tunaDragStrokeColor);
+                PaintTool.initPaint(Paint.Style.STROKE, dragStrokeColor);
 
-                for (int i = 0; (deviationOvalXOffset + controlOvalYOffset) * i < tunaDragBallRadiusPress; i++) {
+                for (int i = 0; (deviationOvalXOffset + controlOvalYOffset) * i < dragBallRadiusPress; i++) {
                     if (i == 0) {
-                        tunaPath.moveTo(bezierOvalX, bezierOvalY);
+                        path.moveTo(bezierOvalX, bezierOvalY);
                     }
-                    tunaPath.quadTo(bezierOvalX, bezierOvalY - deviationOvalY - controlOvalY, bezierOvalX + deviationOvalX, bezierOvalY - deviationOvalY);// topRight
-                    tunaPath.quadTo(bezierOvalX + deviationOvalX + controlOvalX, bezierOvalY, bezierOvalX + deviationOvalX, bezierOvalY + deviationOvalY);// bottomRight
-                    tunaPath.quadTo(bezierOvalX, bezierOvalY + deviationOvalY + controlOvalY, bezierOvalX - deviationOvalX, bezierOvalY + deviationOvalY);// bottomLeft
-                    tunaPath.quadTo(bezierOvalX - deviationOvalX - controlOvalX, bezierOvalY, bezierOvalX - deviationOvalX, bezierOvalY - deviationOvalY);// topLeft
+                    path.quadTo(bezierOvalX, bezierOvalY - deviationOvalY - controlOvalY, bezierOvalX + deviationOvalX, bezierOvalY - deviationOvalY);// topRight
+                    path.quadTo(bezierOvalX + deviationOvalX + controlOvalX, bezierOvalY, bezierOvalX + deviationOvalX, bezierOvalY + deviationOvalY);// bottomRight
+                    path.quadTo(bezierOvalX, bezierOvalY + deviationOvalY + controlOvalY, bezierOvalX - deviationOvalX, bezierOvalY + deviationOvalY);// bottomLeft
+                    path.quadTo(bezierOvalX - deviationOvalX - controlOvalX, bezierOvalY, bezierOvalX - deviationOvalX, bezierOvalY - deviationOvalY);// topLeft
 
                     deviationOvalX += deviationOvalXOffset;
                     deviationOvalY += deviationOvalYOffset;
@@ -278,54 +279,54 @@ public class TDrag extends TView {
                     controlOvalX += controlOvalXOffset;
                     controlOvalY += controlOvalYOffset;
                 }
-                canvas.drawPath(tunaPath, tunaPaint);
+                canvas.drawPath(path, paint);
             }
 
-            drawTunaText(canvas, tunaDragTextValueArray[tunaDragCurrentIndex], tunaWidth, tunaDragCurrentX, tunaHeight >> 1, 0, 0,
-                    initTunaTextPaint(Paint.Style.FILL, tunaDragBallTextColor, tunaDragTextSize, Align.CENTER));
+            drawText(canvas, dragTextValueArray[dragCurrentIndex], width, dragCurrentX, height >> 1, 0, 0,
+                    PaintTool.initTextPaint(Paint.Style.FILL, dragBallTextColor, dragTextSize, Align.CENTER));
 
         } else {
-            float adjuestX = tunaDragCircleCentreXArray[tunaDragCurrentIndex];
+            float adjuestX = dragCircleCentreXArray[dragCurrentIndex];
 
             // draw response circle
-            canvas.drawCircle(adjuestX, tunaHeight >> 1, tunaDragBallRadiusNormal, initTunaPaint(Paint.Style.FILL, tunaDragBallStrokeColorNormal));
-            canvas.drawCircle(adjuestX, tunaHeight >> 1, tunaDragBallRadiusNormal - tunaDragBallStrokeWidth, initTunaPaint(Paint.Style.FILL, tunaDragBallBackgroundNormal));
+            canvas.drawCircle(adjuestX, height >> 1, dragBallRadiusNormal, PaintTool.initPaint(Paint.Style.FILL, dragBallStrokeColorNormal));
+            canvas.drawCircle(adjuestX, height >> 1, dragBallRadiusNormal - dragBallStrokeWidth, PaintTool.initPaint(Paint.Style.FILL, dragBallBackgroundNormal));
 
             // draw response text
-            drawTunaText(canvas, tunaDragTextValueArray[tunaDragCurrentIndex], tunaWidth, adjuestX, tunaHeight >> 1, 0, 0,
-                    initTunaTextPaint(Paint.Style.FILL, tunaDragBallTextColor, tunaDragTextSize, Align.CENTER));
+            drawText(canvas, dragTextValueArray[dragCurrentIndex], width, adjuestX, height >> 1, 0, 0,
+                    PaintTool.initTextPaint(Paint.Style.FILL, dragBallTextColor, dragTextSize, Align.CENTER));
         }
     }
 
-    public float getTunaDragCurrentX() {
-        return tunaDragCurrentX;
+    public float getDragCurrentX() {
+        return dragCurrentX;
     }
 
-    public void setTunaDragCurrentX(float tunaDragCurrentX) {
-        setTunaDragCurrentX(TypedValue.COMPLEX_UNIT_DIP, tunaDragCurrentX);
+    public void setDragCurrentX(float dragCurrentX) {
+        setDragCurrentX(TypedValue.COMPLEX_UNIT_DIP, dragCurrentX);
     }
 
-    public void setTunaDragCurrentX(int unit, float tunaDragCurrentX) {
+    public void setDragCurrentX(int unit, float dragCurrentX) {
         Context c = getContext();
         Resources r;
         if (c == null)
             r = Resources.getSystem();
         else
             r = c.getResources();
-        setTunaDragCurrentXRaw(applyDimension(unit, tunaDragCurrentX, r.getDisplayMetrics()));
+        setDragCurrentXRaw(applyDimension(unit, dragCurrentX, r.getDisplayMetrics()));
     }
 
-    private void setTunaDragCurrentXRaw(float tunaDragCurrentX) {
-        if (this.tunaDragCurrentX != tunaDragCurrentX) {
-            this.tunaDragCurrentX = tunaDragCurrentX;
+    private void setDragCurrentXRaw(float dragCurrentX) {
+        if (this.dragCurrentX != dragCurrentX) {
+            this.dragCurrentX = dragCurrentX;
             // calculate index
-            float minDistence = tunaWidth;
+            float minDistence = width;
             // From 0 to judge one by one, if the distance farther on the end of
             // the cycle
-            for (int i = 0; i < tunaTotal; i++) {
-                float circleCentreDistance = Math.abs(tunaDragCurrentX - tunaDragCircleCentreXArray[i]);
+            for (int i = 0; i < total; i++) {
+                float circleCentreDistance = Math.abs(dragCurrentX - dragCircleCentreXArray[i]);
                 if (circleCentreDistance < minDistence) {
-                    tunaDragCurrentIndex = i;
+                    dragCurrentIndex = i;
                     minDistence = circleCentreDistance;
                 } else {
                     break;
@@ -334,15 +335,15 @@ public class TDrag extends TView {
         }
     }
 
-    public int getTunaCurrentIndex() {
-        return tunaDragCurrentIndex;
+    public int getDragCurrentIndex() {
+        return dragCurrentIndex;
     }
 
-    public void setTunaCurrentIndex(int tunaDragCurrentIndex) {
-        if (tunaDragCurrentIndex < 0 || tunaDragCurrentIndex >= tunaTotal) {
-            throw new IndexOutOfBoundsException("The content attribute tunaDragCurrentIndex length must be not less than zero and smaller than the tunaDragArray length");
+    public void setDragCurrentIndex(int dragCurrentIndex) {
+        if (dragCurrentIndex < 0 || dragCurrentIndex >= total) {
+            throw new IndexOutOfBoundsException("The content attribute dragCurrentIndex length must be not less than zero and smaller than the dragArray length");
         }
-        this.tunaDragCurrentIndex = tunaDragCurrentIndex;
+        this.dragCurrentIndex = dragCurrentIndex;
         invalidate();
     }
 }

@@ -61,7 +61,7 @@
 
             <com.tunasushi.tuna.TView
                 android:id="@+id/tViewMaterialRadio01"
-                style="@style/TunaView_RadioGroup_DrackBrown_Left"
+                style="@style/TView_RadioGroup_DrackBrown_Left"
                 android:layout_toLeftOf="@id/viewRadioGroupDrackBrownAnchor"
                 app:material="spread"
                 app:select="true"
@@ -71,7 +71,7 @@
 
             <com.tunasushi.tuna.TView
                 android:id="@+id/tViewMaterialRadio02"
-                style="@style/TunaView_RadioGroup_DrackBrown_Right"
+                style="@style/TView_RadioGroup_DrackBrown_Right"
                 android:layout_toRightOf="@id/viewRadioGroupDrackBrownAnchor"
                 app:material="spread"
                 app:textMark="true"

@@ -16,14 +16,14 @@ public class TRowActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case TUNAROW_PLAY:
-                    tunaRow.play();
+                    tRow.play();
                     break;
                 default:
                     break;
             }
         }
     };
-    private TRow tunaRow;
+    private TRow tRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class TRowActivity extends Activity {
 
         setContentView(R.layout.activity_t_row);
 
-        tunaRow = findViewById(R.id.tRow);
+        tRow = findViewById(R.id.tRow);
         handler.sendEmptyMessageDelayed(TUNAROW_PLAY, 1000);
     }
 }

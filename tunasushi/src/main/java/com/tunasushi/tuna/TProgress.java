@@ -12,53 +12,54 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
+import com.tunasushi.tool.PaintTool;
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
+import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:56
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TProgress extends TView {
-    private int tunaProgressArcBackgroundNormal, tunaProgressBoundBackgroundNormal;
-    private Bitmap tunaProgressBitmapSrcBack, tunaProgressBitmapSrcFront;
+    private int progressArcBackgroundNormal, progressBoundBackgroundNormal;
+    private Bitmap progressBitmapSrcBack, progressBitmapSrcFront;
 
-    private TunaProgressShapeType tunaProgressShapeType;
+    private ProgressShapeType progressShapeType;
 
-    public enum TunaProgressShapeType {
+    public enum ProgressShapeType {
         CUSTOM(0),
         CIRCLE(1),;
         final int nativeInt;
 
-        TunaProgressShapeType(int ni) {
+        ProgressShapeType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaProgressShapeType[] tunaProgressShapeTypeArray = {
-            TunaProgressShapeType.CUSTOM,
-            TunaProgressShapeType.CIRCLE,
+    private static final ProgressShapeType[] progressShapeTypeArray = {
+            ProgressShapeType.CUSTOM,
+            ProgressShapeType.CIRCLE,
     };
 
-    private TunaProgressPromoteType tunaProgressPromoteType;
+    private ProgressPromoteType progressPromoteType;
 
-    public enum TunaProgressPromoteType {
+    public enum ProgressPromoteType {
         CLOCKWISE(0),
         UPWARD(1),
         UPDOWN(2),;
         final int nativeInt;
 
-        TunaProgressPromoteType(int ni) {
+        ProgressPromoteType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaProgressPromoteType[] tunaProgressPromoteTypeArray = {
-            TunaProgressPromoteType.CLOCKWISE,
-            TunaProgressPromoteType.UPWARD,
-            TunaProgressPromoteType.UPDOWN,
+    private static final ProgressPromoteType[] progressPromoteTypeArray = {
+            ProgressPromoteType.CLOCKWISE,
+            ProgressPromoteType.UPWARD,
+            ProgressPromoteType.UPDOWN,
     };
 
     private static final float PROMOTE_CIRCLE_STARTANGLE = -90;
@@ -74,42 +75,42 @@ public class TProgress extends TView {
     public TProgress(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TProgress.class.getSimpleName();
+        Tag = TProgress.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TProgress);
 
-        int tunaProgressShapeTypeIndex = typedArray.getInt(R.styleable.TProgress_progressShapeType, -1);
-        if (tunaProgressShapeTypeIndex >= 0) {
-            tunaProgressShapeType = tunaProgressShapeTypeArray[tunaProgressShapeTypeIndex];
+        int progressShapeTypeIndex = typedArray.getInt(R.styleable.TProgress_progressShapeType, -1);
+        if (progressShapeTypeIndex >= 0) {
+            progressShapeType = progressShapeTypeArray[progressShapeTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaProgressShapeType");
+            throw new IllegalArgumentException("The content attribute require a property named progressShapeType");
         }
 
-        int tunaProgressPromoteTypeIndex = typedArray.getInt(R.styleable.TProgress_progressPromoteType, -1);
-        if (tunaProgressPromoteTypeIndex >= 0) {
-            tunaProgressPromoteType = tunaProgressPromoteTypeArray[tunaProgressPromoteTypeIndex];
+        int progressPromoteTypeIndex = typedArray.getInt(R.styleable.TProgress_progressPromoteType, -1);
+        if (progressPromoteTypeIndex >= 0) {
+            progressPromoteType = progressPromoteTypeArray[progressPromoteTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaProgressPromoteType");
+            throw new IllegalArgumentException("The content attribute require a property named progressPromoteType");
         }
 
-        if (tunaProgressShapeType == TunaProgressShapeType.CUSTOM) {
+        if (progressShapeType == ProgressShapeType.CUSTOM) {
 
-            int tunaProgressBitmapSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcBack, -1);
-            if (tunaProgressBitmapSrcBackId != -1) {
-                tunaProgressBitmapSrcBack = BitmapFactory.decodeResource(getResources(), tunaProgressBitmapSrcBackId);
+            int progressBitmapSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcBack, -1);
+            if (progressBitmapSrcBackId != -1) {
+                progressBitmapSrcBack = BitmapFactory.decodeResource(getResources(), progressBitmapSrcBackId);
             } else {
-                throw new IllegalArgumentException("The content attribute require a property named tunaProgressBitmapSrcBack");
+                throw new IllegalArgumentException("The content attribute require a property named progressBitmapSrcBack");
             }
 
-            int tunaProgressBitmapSrcFrontId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcFront, -1);
-            if (tunaProgressBitmapSrcFrontId != -1) {
-                tunaProgressBitmapSrcFront = BitmapFactory.decodeResource(getResources(), tunaProgressBitmapSrcFrontId);
+            int progressBitmapSrcFrontId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcFront, -1);
+            if (progressBitmapSrcFrontId != -1) {
+                progressBitmapSrcFront = BitmapFactory.decodeResource(getResources(), progressBitmapSrcFrontId);
             } else {
-                throw new IllegalArgumentException("The content attribute require a property named tunaProgressBitmapSrcFront");
+                throw new IllegalArgumentException("The content attribute require a property named progressBitmapSrcFront");
             }
         } else {
-            tunaProgressArcBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressArcBackgroundNormal, Color.TRANSPARENT);
-            tunaProgressBoundBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressBoundBackgroundNormal, Color.TRANSPARENT);
+            progressArcBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressArcBackgroundNormal, Color.TRANSPARENT);
+            progressBoundBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressBoundBackgroundNormal, Color.TRANSPARENT);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -121,19 +122,19 @@ public class TProgress extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        if (tunaProgressShapeType == TunaProgressShapeType.CUSTOM) {
-            int tunaProgressBitmapSrcFrontWidth = tunaProgressBitmapSrcFront.getWidth();
-            int tunaProgressBitmapSrcFrontHeight = tunaProgressBitmapSrcFront.getHeight();
-            int tunaProgressBitmapSrcBackWidth = tunaProgressBitmapSrcBack.getWidth();
-            int tunaProgressBitmapSrcBackHeight = tunaProgressBitmapSrcBack.getHeight();
-            if (tunaProgressBitmapSrcFrontWidth != tunaProgressBitmapSrcBackWidth || tunaProgressBitmapSrcFrontHeight != tunaProgressBitmapSrcBackHeight) {
-                throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaProgressBitmapSrcFront and tunaProgressBitmapSrcBack needed equal");
+        if (progressShapeType == ProgressShapeType.CUSTOM) {
+            int progressBitmapSrcFrontWidth = progressBitmapSrcFront.getWidth();
+            int progressBitmapSrcFrontHeight = progressBitmapSrcFront.getHeight();
+            int progressBitmapSrcBackWidth = progressBitmapSrcBack.getWidth();
+            int progressBitmapSrcBackHeight = progressBitmapSrcBack.getHeight();
+            if (progressBitmapSrcFrontWidth != progressBitmapSrcBackWidth || progressBitmapSrcFrontHeight != progressBitmapSrcBackHeight) {
+                throw new IndexOutOfBoundsException("Both the width and height of the attribute progressBitmapSrcFront and progressBitmapSrcBack needed equal");
             }
 
-            if (tunaProgressShapeType == TunaProgressShapeType.CUSTOM) {
-                tunaScale = tunaWidth * 1f / tunaProgressBitmapSrcBackWidth;
+            if (progressShapeType == ProgressShapeType.CUSTOM) {
+                scale = width * 1f / progressBitmapSrcBackWidth;
             }
-            initTunaMatrix(tunaScale, tunaScale);
+            initMatrix(scale, scale);
         }
     }
 
@@ -142,54 +143,54 @@ public class TProgress extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        switch (tunaProgressShapeType) {
+        switch (progressShapeType) {
             case CUSTOM:
 
-                canvas.drawBitmap(tunaProgressBitmapSrcBack, tunaMatrix, null);
+                canvas.drawBitmap(progressBitmapSrcBack, matrix, null);
                 canvas.save();
 
-                switch (tunaProgressPromoteType) {
+                switch (progressPromoteType) {
                     case CLOCKWISE:
-                        initTunaPathMoveTo(tunaWidth >> 1, tunaHeight >> 1);
-                        tunaPath.lineTo(tunaWidth >> 1, 0);
+                        initPathMoveTo(width >> 1, height >> 1);
+                        path.lineTo(width >> 1, 0);
                         //Change two times to deal with circular coverage to the part to be lazy
-                        tunaPath.addArc(initTunaRectF(-tunaWidth, -tunaHeight, tunaWidth << 1, tunaWidth << 1), PROMOTE_CIRCLE_STARTANGLE, 360 * tunaPercent);
-                        tunaPath.lineTo(tunaWidth >> 1, tunaHeight >> 1);
-                        tunaPath.close();
-                        canvas.clipPath(tunaPath);
+                        path.addArc(initRectF(-width, -height, width << 1, width << 1), PROMOTE_CIRCLE_STARTANGLE, 360 * percent);
+                        path.lineTo(width >> 1, height >> 1);
+                        path.close();
+                        canvas.clipPath(path);
                         break;
                     case UPWARD:
-                        canvas.clipRect(initTunaRect(0, (int) (tunaHeight * (1 - tunaPercent)), tunaWidth, tunaHeight));
+                        canvas.clipRect(initRect(0, (int) (height * (1 - percent)), width, height));
                         break;
                     case UPDOWN:
-                        canvas.clipRect(initTunaRect(0, (int) (tunaHeight * tunaPercent * 0.5f), tunaWidth, (int) (tunaHeight * (1 - tunaPercent * 0.5f))), Op.INTERSECT);
+                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.INTERSECT);
                         break;
                     default:
                         break;
                 }
 
-                canvas.drawBitmap(tunaProgressBitmapSrcFront, tunaMatrix, null);
+                canvas.drawBitmap(progressBitmapSrcFront, matrix, null);
                 canvas.restore();
 
                 break;
             case CIRCLE:
 
-                canvas.drawCircle(tunaWidth >> 1, tunaHeight >> 1, tunaWidth >> 1, initTunaPaint(Paint.Style.STROKE, tunaProgressBoundBackgroundNormal));
+                canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.STROKE, progressBoundBackgroundNormal));
 
-                switch (tunaProgressPromoteType) {
+                switch (progressPromoteType) {
                     case CLOCKWISE:
-                        canvas.drawArc(initTunaRectF(0, 0, tunaWidth, tunaHeight), PROMOTE_CIRCLE_STARTANGLE, 360 * tunaPercent, true, initTunaPaint(Paint.Style.FILL, tunaProgressArcBackgroundNormal));
+                        canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, PaintTool.initPaint(Paint.Style.FILL, progressArcBackgroundNormal));
                         break;
                     case UPWARD:
                         canvas.save();
-                        canvas.clipRect(initTunaRect(0, (int) (tunaHeight * (1 - tunaPercent)), tunaWidth, tunaHeight));
-                        canvas.drawCircle(tunaWidth >> 1, tunaHeight >> 1, tunaWidth >> 1, initTunaPaint(Paint.Style.FILL, tunaProgressBoundBackgroundNormal));
+                        canvas.clipRect(initRect(0, (int) (height * (1 - percent)), width, height));
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
                         canvas.restore();
                         break;
                     case UPDOWN:
                         canvas.save();
-                        canvas.clipRect(initTunaRect(0, (int) (tunaHeight * tunaPercent * 0.5f), tunaWidth, (int) (tunaHeight * (1 - tunaPercent * 0.5f))), Op.INTERSECT);
-                        canvas.drawCircle(tunaWidth >> 1, tunaHeight >> 1, tunaWidth >> 1, initTunaPaint(Paint.Style.FILL, tunaProgressBoundBackgroundNormal));
+                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.INTERSECT);
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
                         canvas.restore();
                         break;
                     default:
@@ -200,12 +201,12 @@ public class TProgress extends TView {
 
     }
 
-    public float getTunaProgressPercent() {
-        return tunaPercent;
+    public float getProgressPercent() {
+        return percent;
     }
 
-    public void setTunaProgressPercent(float tunaProgressBallPercent) {
-        this.tunaPercent = tunaProgressBallPercent;
+    public void setProgressPercent(float progressPercent) {
+        this.percent = progressPercent;
         invalidate();
     }
 }

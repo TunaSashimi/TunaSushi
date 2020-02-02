@@ -10,18 +10,18 @@ import android.view.MotionEvent;
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:50
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TTrack extends TView {
-    private float currentX, currentY;
-    private float distanceX, distanceY;
-    private float intervalX, intervalY;
+    private float trackCurrentX, trackCurrentY;
+    private float trackDistanceX, trackDistanceY;
+    private float trackIntervalX, trackIntervalY;
 
-    private int intervalTime;
-    private boolean isIntervalTime;
+    private int trackIntervalTime;
+    private boolean trackisIntervalTime;
 
-    private Paint p;
+    private Paint trackPaint;
 
     public TTrack(Context context) {
         this(context, null);
@@ -34,42 +34,42 @@ public class TTrack extends TView {
     public TTrack(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TTrack.class.getSimpleName();
+        Tag = TTrack.class.getSimpleName();
 
-        p = new Paint();
-        p.setColor(Color.CYAN);
+        trackPaint = new Paint();
+        trackPaint.setColor(Color.CYAN);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                distanceX = event.getX() - currentX;
-                distanceY = event.getY() - currentY;
+                trackDistanceX = event.getX() - trackCurrentX;
+                trackDistanceY = event.getY() - trackCurrentY;
 
-                intervalX = distanceX / 5;
-                intervalY = distanceY / 5;
+                trackIntervalX = trackDistanceX / 5;
+                trackIntervalY = trackDistanceY / 5;
 
-                intervalTime = 5;
-                isIntervalTime = true;
+                trackIntervalTime = 5;
+                trackisIntervalTime = true;
 
                 invalidate();
 
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (isIntervalTime) {
+                if (trackisIntervalTime) {
                     return true;
                 }
-                currentX = event.getX();
-                currentY = event.getY();
+                trackCurrentX = event.getX();
+                trackCurrentY = event.getY();
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                if (isIntervalTime) {
+                if (trackisIntervalTime) {
                     return true;
                 }
-                currentX = event.getX();
-                currentY = event.getY();
+                trackCurrentX = event.getX();
+                trackCurrentY = event.getY();
                 invalidate();
                 break;
             default:
@@ -82,15 +82,15 @@ public class TTrack extends TView {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawCircle(currentX, currentY, 80, p);
+        canvas.drawCircle(trackCurrentX, trackCurrentY, 80, trackPaint);
 
-        if (intervalTime > 0) {
-            intervalTime--;
-            currentX = currentX + intervalX;
-            currentY = currentY + intervalY;
+        if (trackIntervalTime > 0) {
+            trackIntervalTime--;
+            trackCurrentX = trackCurrentX + trackIntervalX;
+            trackCurrentY = trackCurrentY + trackIntervalY;
             postInvalidateDelayed(20);
         } else {
-            isIntervalTime = false;
+            trackisIntervalTime = false;
         }
 
     }

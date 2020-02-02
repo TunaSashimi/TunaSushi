@@ -24,7 +24,7 @@ public class TDrawActivity extends Activity {
     private EmbossMaskFilter embossMaskFilter;
     private BlurMaskFilter blurMaskFilter;
 
-    private TDraw tunaPainting;
+    private TDraw tDraw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class TDrawActivity extends Activity {
         embossMaskFilter = new EmbossMaskFilter(new float[]{1, 1, 1}, 0.4f, 6, 3.5f);
         blurMaskFilter = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
 
-        tunaPainting = findViewById(R.id.tDraw);
-        tunaPainting.setTunaPaintingListener();
+        tDraw = findViewById(R.id.tDraw);
+        tDraw.setPaintingListener();
     }
 
     @Override
@@ -51,41 +51,41 @@ public class TDrawActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        tunaPainting.getTunaPaintingPaint().setXfermode(null);
-        tunaPainting.getTunaPaintingPaint().setAlpha(0xFF);
+        tDraw.getPaintingPaint().setXfermode(null);
+        tDraw.getPaintingPaint().setAlpha(0xFF);
 
         switch (item.getItemId()) {
             case COLOR_MENU_ID:
-                ColorPickerDialog tunaColorPicker = new ColorPickerDialog(this,
-                    tunaPainting.getTunaPaintingPaint().getColor(),
+                ColorPickerDialog colorPicker = new ColorPickerDialog(this,
+                    tDraw.getPaintingPaint().getColor(),
                     new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
-                            tunaPainting.getTunaPaintingPaint().setColor(color);
+                        public void colorSelect(int color) {
+                            tDraw.getPaintingPaint().setColor(color);
                         }
                     });
-                tunaColorPicker.show();
+                colorPicker.show();
                 return true;
             case EMBOSS_MENU_ID:
-                if (tunaPainting.getTunaPaintingPaint().getMaskFilter() != embossMaskFilter) {
-                    tunaPainting.getTunaPaintingPaint().setMaskFilter(embossMaskFilter);
+                if (tDraw.getPaintingPaint().getMaskFilter() != embossMaskFilter) {
+                    tDraw.getPaintingPaint().setMaskFilter(embossMaskFilter);
                 } else {
-                    tunaPainting.getTunaPaintingPaint().setMaskFilter(null);
+                    tDraw.getPaintingPaint().setMaskFilter(null);
                 }
                 return true;
             case BLUR_MENU_ID:
-                if (tunaPainting.getTunaPaintingPaint().getMaskFilter() != blurMaskFilter) {
-                    tunaPainting.getTunaPaintingPaint().setMaskFilter(blurMaskFilter);
+                if (tDraw.getPaintingPaint().getMaskFilter() != blurMaskFilter) {
+                    tDraw.getPaintingPaint().setMaskFilter(blurMaskFilter);
                 } else {
-                    tunaPainting.getTunaPaintingPaint().setMaskFilter(null);
+                    tDraw.getPaintingPaint().setMaskFilter(null);
                 }
                 return true;
             case ERASE_MENU_ID:
-                tunaPainting.getTunaPaintingPaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+                tDraw.getPaintingPaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
                 return true;
             case SRCATOP_MENU_ID:
-                tunaPainting.getTunaPaintingPaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-                tunaPainting.getTunaPaintingPaint().setAlpha(0x80);
+                tDraw.getPaintingPaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
+                tDraw.getPaintingPaint().setAlpha(0x80);
                 return true;
         }
         return super.onOptionsItemSelected(item);

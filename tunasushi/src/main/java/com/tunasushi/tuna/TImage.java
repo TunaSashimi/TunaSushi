@@ -24,156 +24,156 @@ import static com.tunasushi.tool.BitmapTool.processBitmap;
 /**
  * @author Tunasashimi
  * @date 11/20/15 10:46
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TImage extends TView {
 
 
-    private float tunaImageRadius;
+    private float imageRadius;
 
-    public float getTunaImageRadius() {
-        return tunaImageRadius;
+    public float getImageRadius() {
+        return imageRadius;
     }
 
-    public void setTunaImageRadius(float tunaImageRadius) {
-        this.tunaImageRadius = tunaImageRadius;
+    public void setImageRadius(float imageRadius) {
+        this.imageRadius = imageRadius;
     }
 
-    private float tunaImageAlpha;
+    private float imageAlpha;
 
-    public float getTunaImageAlpha() {
-        return tunaImageAlpha;
+    public float getImageAlpha() {
+        return imageAlpha;
     }
 
-    public void setTunaImageAlpha(float tunaImageAlpha) {
-        this.tunaImageAlpha = tunaImageAlpha;
+    public void setImageAlpha(float imageAlpha) {
+        this.imageAlpha = imageAlpha;
     }
 
-    private boolean tunaImageSepia;
+    private boolean imageSepia;
 
-    public boolean isTunaImageSepia() {
-        return tunaImageSepia;
+    public boolean isImageSepia() {
+        return imageSepia;
     }
 
-    public void setTunaImageSepia(boolean tunaImageSepia) {
-        this.tunaImageSepia = tunaImageSepia;
+    public void setImageSepia(boolean imageSepia) {
+        this.imageSepia = imageSepia;
     }
 
-    private boolean tunaImageEmboss;
+    private boolean imageEmboss;
 
-    public boolean isTunaImageEmboss() {
-        return tunaImageEmboss;
+    public boolean isImageEmboss() {
+        return imageEmboss;
     }
 
-    public void setTunaImageEmboss(boolean tunaImageEmboss) {
-        this.tunaImageEmboss = tunaImageEmboss;
+    public void setImageEmboss(boolean imageEmboss) {
+        this.imageEmboss = imageEmboss;
     }
 
-    private boolean tunaImageBacksheet;
+    private boolean imageBacksheet;
 
-    public boolean isTunaImageBacksheet() {
-        return tunaImageBacksheet;
+    public boolean isImageBacksheet() {
+        return imageBacksheet;
     }
 
-    public void setTunaImageBacksheet(boolean tunaImageBacksheet) {
-        this.tunaImageBacksheet = tunaImageBacksheet;
+    public void setImageBacksheet(boolean imageBacksheet) {
+        this.imageBacksheet = imageBacksheet;
     }
 
-    private boolean tunaImageSketch;
+    private boolean imageSketch;
 
-    public boolean isTunaImageSketch() {
-        return tunaImageSketch;
+    public boolean isImageSketch() {
+        return imageSketch;
     }
 
-    public void setTunaImageSketch(boolean tunaImageSketch) {
-        this.tunaImageSketch = tunaImageSketch;
+    public void setImageSketch(boolean imageSketch) {
+        this.imageSketch = imageSketch;
     }
 
-    private float tunaImageSunshineFractionX;
+    private float imageSunshineFractionX;
 
-    public float getTunaImageSunshineFractionX() {
-        return tunaImageSunshineFractionX;
+    public float getImageSunshineFractionX() {
+        return imageSunshineFractionX;
     }
 
-    public void setTunaImageSunshineFractionX(float tunaImageSunshineFractionX) {
-        this.tunaImageSunshineFractionX = tunaImageSunshineFractionX;
+    public void setImageSunshineFractionX(float imageSunshineFractionX) {
+        this.imageSunshineFractionX = imageSunshineFractionX;
     }
 
-    private float tunaImageSunshineFractionY;
+    private float imageSunshineFractionY;
 
-    public float getTunaImageSunshineFractionY() {
-        return tunaImageSunshineFractionY;
+    public float getImageSunshineFractionY() {
+        return imageSunshineFractionY;
     }
 
-    public void setTunaImageSunshineFractionY(float tunaImageSunshineFractionY) {
-        this.tunaImageSunshineFractionY = tunaImageSunshineFractionY;
+    public void setImageSunshineFractionY(float imageSunshineFractionY) {
+        this.imageSunshineFractionY = imageSunshineFractionY;
     }
 
-    private float tunaImageBright;
+    private float imageBright;
 
-    public float getTunaImageBright() {
-        return tunaImageBright;
+    public float getImageBright() {
+        return imageBright;
     }
 
-    public void setTunaImageBright(float tunaImageBright) {
-        this.tunaImageBright = tunaImageBright;
+    public void setImageBright(float imageBright) {
+        this.imageBright = imageBright;
         invalidate();
     }
 
-    private float tunaImageHue;
+    private float imageHue;
 
-    public float getTunaImageHue() {
-        return tunaImageHue;
+    public float getImageHue() {
+        return imageHue;
     }
 
-    public void setTunaImageHue(float tunaImageHue) {
-        this.tunaImageHue = tunaImageHue;
+    public void setImageHue(float imageHue) {
+        this.imageHue = imageHue;
         invalidate();
     }
 
-    private float tunaImageSaturation;
+    private float imageSaturation;
 
-    public float getTunaImageSaturation() {
-        return tunaImageSaturation;
+    public float getImageSaturation() {
+        return imageSaturation;
     }
 
-    public void setTunaImageSaturation(float tunaImageSaturation) {
-        this.tunaImageSaturation = tunaImageSaturation;
+    public void setImageSaturation(float imageSaturation) {
+        this.imageSaturation = imageSaturation;
         invalidate();
     }
 
-    private TunaImageReverse tunaImageReverse;
+    private ImageReverse imageReverse;
 
-    public enum TunaImageReverse {
+    public enum ImageReverse {
         HORIZONTAL(0),
         VERTICAL(1),
         ;
         final int nativeInt;
 
-        TunaImageReverse(int ni) {
+        ImageReverse(int ni) {
             nativeInt = ni;
         }
     }
 
-    public TunaImageReverse getTunaImageReverse() {
-        return tunaImageReverse;
+    public ImageReverse getImageReverse() {
+        return imageReverse;
     }
 
-    public void setTunaImageReverse(TunaImageReverse tunaImageReverse) {
-        this.tunaImageReverse = tunaImageReverse;
+    public void setImageReverse(ImageReverse imageReverse) {
+        this.imageReverse = imageReverse;
     }
 
-    private static final TunaImageReverse[] tunaImageReverseArray = {TunaImageReverse.HORIZONTAL, TunaImageReverse.VERTICAL,};
+    private static final ImageReverse[] imageReverseArray = {ImageReverse.HORIZONTAL, ImageReverse.VERTICAL,};
 
-    private Bitmap tunaImageSrcBitmap;
+    private Bitmap imageSrcBitmap;
 
-    public Bitmap getTunaImageSrcBitmap() {
-        return tunaImageSrcBitmap;
+    public Bitmap getImageSrcBitmap() {
+        return imageSrcBitmap;
     }
 
-    public void setTunaImageSrcBitmap(Bitmap tunaImageSrcBitmap) {
-        this.tunaImageSrcBitmap = tunaImageSrcBitmap;
+    public void setImageSrcBitmap(Bitmap imageSrcBitmap) {
+        this.imageSrcBitmap = imageSrcBitmap;
     }
 
     public TImage(Context context) {
@@ -187,34 +187,34 @@ public class TImage extends TView {
     public TImage(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TImage.class.getSimpleName();
+        Tag = TImage.class.getSimpleName();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TImage);
 
-        int tunaImageSrcIndex = typedArray.getResourceId(R.styleable.TImage_imageSrc, -1);
-        if (tunaImageSrcIndex >= 0) {
-            tunaSrcBitmap = BitmapFactory.decodeResource(getResources(), tunaImageSrcIndex);
+        int imageSrcIndex = typedArray.getResourceId(R.styleable.TImage_imageSrc, -1);
+        if (imageSrcIndex >= 0) {
+            srcBitmap = BitmapFactory.decodeResource(getResources(), imageSrcIndex);
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaImageSrc");
+            throw new IllegalArgumentException("The content attribute require a property named imageSrc");
         }
 
-        tunaImageRadius = typedArray.getDimension(R.styleable.TImage_imageRadius, 0);
-        tunaImageAlpha = typedArray.getFraction(R.styleable.TImage_imageAlpha, 1, 1, 1f);
+        imageRadius = typedArray.getDimension(R.styleable.TImage_imageRadius, 0);
+        imageAlpha = typedArray.getFraction(R.styleable.TImage_imageAlpha, 1, 1, 1f);
 
-        tunaImageSepia = typedArray.getBoolean(R.styleable.TImage_imageSepia, false);
-        tunaImageEmboss = typedArray.getBoolean(R.styleable.TImage_imageEmboss, false);
-        tunaImageBacksheet = typedArray.getBoolean(R.styleable.TImage_imageBacksheet, false);
-        tunaImageSketch = typedArray.getBoolean(R.styleable.TImage_imageSketch, false);
+        imageSepia = typedArray.getBoolean(R.styleable.TImage_imageSepia, false);
+        imageEmboss = typedArray.getBoolean(R.styleable.TImage_imageEmboss, false);
+        imageBacksheet = typedArray.getBoolean(R.styleable.TImage_imageBacksheet, false);
+        imageSketch = typedArray.getBoolean(R.styleable.TImage_imageSketch, false);
 
-        tunaImageSunshineFractionX = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionX, 1, 1, 0);
-        tunaImageSunshineFractionY = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionY, 1, 1, 0);
+        imageSunshineFractionX = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionX, 1, 1, 0);
+        imageSunshineFractionY = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionY, 1, 1, 0);
 
-        tunaImageBright = typedArray.getDimension(R.styleable.TImage_imageBright, 1f);
-        tunaImageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0f);
-        tunaImageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1f);
+        imageBright = typedArray.getDimension(R.styleable.TImage_imageBright, 1f);
+        imageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0f);
+        imageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1f);
 
-        int tunaImageReverseIndex = typedArray.getInt(R.styleable.TImage_imageReverse, -1);
-        if (tunaImageReverseIndex >= 0) {
-            tunaImageReverse = tunaImageReverseArray[tunaImageReverseIndex];
+        int imageReverseIndex = typedArray.getInt(R.styleable.TImage_imageReverse, -1);
+        if (imageReverseIndex >= 0) {
+            imageReverse = imageReverseArray[imageReverseIndex];
         }
     }
 
@@ -222,10 +222,10 @@ public class TImage extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        tunaScaleSx = tunaWidth * 1f / tunaSrcBitmap.getWidth();
-        tunaScaleSy = tunaHeight * 1f / tunaSrcBitmap.getHeight();
+        scaleSx = width * 1f / srcBitmap.getWidth();
+        scaleSy = height * 1f / srcBitmap.getHeight();
 
-        initTunaMatrix(tunaScaleSx, tunaScaleSy);
+        initMatrix(scaleSx, scaleSy);
     }
 
     @Override
@@ -233,83 +233,83 @@ public class TImage extends TView {
         super.onDraw(canvas);
 
         //
-        tunaImageSrcBitmap = tunaSrcBitmap;
+        imageSrcBitmap = srcBitmap;
 
-        if (tunaImageRadius > 0) {
-            tunaImageSrcBitmap = getClassicRoundBitmap(tunaSrcBitmap, tunaWidth);
+        if (imageRadius > 0) {
+            imageSrcBitmap = getClassicRoundBitmap(srcBitmap, width);
         }
 
-        if (tunaImageAlpha != 1f) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getAlphaBitmap(tunaSrcBitmap, tunaImageAlpha);
+        if (imageAlpha != 1f) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getAlphaBitmap(srcBitmap, imageAlpha);
             } else {
-                tunaImageSrcBitmap = getAlphaBitmap(tunaImageSrcBitmap, tunaImageAlpha);
+                imageSrcBitmap = getAlphaBitmap(imageSrcBitmap, imageAlpha);
             }
         }
 
-        if (tunaImageSepia) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getSepiaBitmap(tunaSrcBitmap);
+        if (imageSepia) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getSepiaBitmap(srcBitmap);
             } else {
-                tunaImageSrcBitmap = getSepiaBitmap(tunaImageSrcBitmap);
+                imageSrcBitmap = getSepiaBitmap(imageSrcBitmap);
             }
         }
 
-        if (tunaImageEmboss) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getEmbossBitmap(tunaSrcBitmap);
+        if (imageEmboss) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getEmbossBitmap(srcBitmap);
             } else {
-                tunaImageSrcBitmap = getEmbossBitmap(tunaImageSrcBitmap);
+                imageSrcBitmap = getEmbossBitmap(imageSrcBitmap);
             }
         }
 
-        if (tunaImageBacksheet) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getBacksheetBitmap(tunaSrcBitmap);
+        if (imageBacksheet) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getBacksheetBitmap(srcBitmap);
             } else {
-                tunaImageSrcBitmap = getBacksheetBitmap(tunaImageSrcBitmap);
+                imageSrcBitmap = getBacksheetBitmap(imageSrcBitmap);
             }
         }
 
-        if (tunaImageSketch) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getSketchBitmap(tunaSrcBitmap);
+        if (imageSketch) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getSketchBitmap(srcBitmap);
             } else {
-                tunaImageSrcBitmap = getSketchBitmap(tunaImageSrcBitmap);
+                imageSrcBitmap = getSketchBitmap(imageSrcBitmap);
             }
         }
 
-        if (tunaImageSunshineFractionX != 0 || tunaImageSunshineFractionY != 0) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getSunshineBitmap(
-                        tunaSrcBitmap,
-                        tunaWidth * tunaImageSunshineFractionX,
-                        tunaHeight * tunaImageSunshineFractionY);
+        if (imageSunshineFractionX != 0 || imageSunshineFractionY != 0) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getSunshineBitmap(
+                        srcBitmap,
+                        width * imageSunshineFractionX,
+                        height * imageSunshineFractionY);
                 ;
             } else {
-                tunaImageSrcBitmap = getSunshineBitmap(
-                        tunaImageSrcBitmap,
-                        tunaWidth * tunaImageSunshineFractionX,
-                        tunaHeight * tunaImageSunshineFractionY);
+                imageSrcBitmap = getSunshineBitmap(
+                        imageSrcBitmap,
+                        width * imageSunshineFractionX,
+                        height * imageSunshineFractionY);
                 ;
             }
         }
 
-        if (tunaImageReverse != null) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = getReverseBitmap(tunaSrcBitmap, tunaImageReverse == TunaImageReverse.HORIZONTAL ? 0 : 1);
+        if (imageReverse != null) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = getReverseBitmap(srcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
             } else {
-                tunaImageSrcBitmap = getReverseBitmap(tunaImageSrcBitmap, tunaImageReverse == TunaImageReverse.HORIZONTAL ? 0 : 1);
+                imageSrcBitmap = getReverseBitmap(imageSrcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
             }
         }
 
-        if (tunaImageBright != 1f || tunaImageHue != 0f || tunaImageSaturation != 1f) {
-            if (tunaImageSrcBitmap == null) {
-                tunaImageSrcBitmap = processBitmap(tunaSrcBitmap, tunaImageBright, tunaImageHue, tunaImageSaturation);
+        if (imageBright != 1f || imageHue != 0f || imageSaturation != 1f) {
+            if (imageSrcBitmap == null) {
+                imageSrcBitmap = processBitmap(srcBitmap, imageBright, imageHue, imageSaturation);
             } else {
-                tunaImageSrcBitmap = processBitmap(tunaImageSrcBitmap, tunaImageBright, tunaImageHue, tunaImageSaturation);
+                imageSrcBitmap = processBitmap(imageSrcBitmap, imageBright, imageHue, imageSaturation);
             }
         }
-        canvas.drawBitmap(tunaImageSrcBitmap, tunaMatrix, null);
+        canvas.drawBitmap(imageSrcBitmap, matrix, null);
     }
 }

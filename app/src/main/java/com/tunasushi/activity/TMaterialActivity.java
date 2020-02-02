@@ -13,7 +13,7 @@ public class TMaterialActivity extends Activity {
 
     private TView
 
-        tunaMaterialRadio01, tunaMaterialRadio02;
+            tViewMaterialRadio01, tViewMaterialRadio02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +22,9 @@ public class TMaterialActivity extends Activity {
         setContentView(R.layout.activity_t_materlai);
 
         //
-        tunaMaterialRadio01 = findViewById(R.id.tViewMaterialRadio01);
-        tunaMaterialRadio02 = findViewById(R.id.tViewMaterialRadio02);
+        tViewMaterialRadio01 = findViewById(R.id.tViewMaterialRadio01);
+        tViewMaterialRadio02 = findViewById(R.id.tViewMaterialRadio02);
 
-        TView.tunaAssociate(Arrays.asList(tunaMaterialRadio01, tunaMaterialRadio02));
+        TView.associate(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
     }
 }

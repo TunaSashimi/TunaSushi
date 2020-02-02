@@ -9,7 +9,7 @@ import com.tunasushi.tuna.TScale;
 
 public class TScaleActivity extends Activity {
 
-    private TScale tunaScaleBitmapSetBitmap;
+    private TScale tScaleBitmapSetBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class TScaleActivity extends Activity {
 
         setContentView(R.layout.activity_t_scale);
 
-        tunaScaleBitmapSetBitmap = findViewById(R.id.tScaleBitmapSetBitmap);
-        tunaScaleBitmapSetBitmap.setTunaScaleBitmapSrc(R.drawable.viewpagertest_imageview_resource02);
+        tScaleBitmapSetBitmap = findViewById(R.id.tScaleBitmapSetBitmap);
+        tScaleBitmapSetBitmap.setScaleBitmapSrc(R.drawable.iv_scale_bg03);
     }
 }

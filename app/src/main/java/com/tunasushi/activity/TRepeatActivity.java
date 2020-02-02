@@ -19,8 +19,8 @@ import com.tunasushi.tuna.TRepeat;
 import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
 
 public class TRepeatActivity extends Activity {
-    private TLine tunaLine;
-    private TRepeat tunaRepeatStar, tunaRepeatCar, tunaRepeatTips;
+    private TLine tLine;
+    private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
 
     private Button buttonEvaluation01;
     private Spinner spinnerEvaluation01;
@@ -34,62 +34,62 @@ public class TRepeatActivity extends Activity {
 
         setContentView(R.layout.activity_t_repeat);
 
-        tunaLine = findViewById(R.id.tLine);
+        tLine = findViewById(R.id.tLine);
 
         buttonEvaluation01 = findViewById(R.id.buttonEvaluation01);
 
-        tunaRepeatStar = findViewById(R.id.tRepeatStar);
-        tunaRepeatCar = findViewById(R.id.tRepeatCar);
-        tunaRepeatTips = findViewById(R.id.tRepeatTips);
+        tRepeatStar = findViewById(R.id.tRepeatStar);
+        tRepeatCar = findViewById(R.id.tRepeatCar);
+        tRepeatTips = findViewById(R.id.tRepeatTips);
 
-        tunaRepeatStar.setTunaRepeatListener(
-            new TView.TunaTouchListener() {
+        tRepeatStar.setRepeatListener(
+            new TView.TouchListener() {
                 @Override
-                public void tunaTouch(View v) {
-                    tunaRepeatStar.setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatStar.getTunaTouchEventX());
-                    tunaRepeatCar.setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatStar.getTunaTouchEventX(), true);
-                    tunaLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatStar.getTunaTouchEventX());
+                public void touch(View v) {
+                    tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                    tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX(), true);
+                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
                 }
             },
-            new TView.TunaTouchDownListener() {
+            new TView.TouchDownListener() {
                 @Override
-                public void tunaTouchDown(View v) {
-                    tunaRepeatCar.setTunaPress(true);
+                public void touchDown(View v) {
+                    tRepeatCar.setPress(true);
                 }
             },
-            new TView.TunaTouchUpListener() {
+            new TView.TouchUpListener() {
                 @Override
-                public void tunaTouchUp(View v) {
+                public void touchUp(View v) {
                     afterChoice();
-                    tunaRepeatCar.setTunaPress(false);
+                    tRepeatCar.setPress(false);
                 }
             }
         );
 
         //
-        tunaRepeatCar.setTunaRepeatTotal(indexes.length);
-        tunaRepeatCar.setTunaRepeatItemTextValueArray(indexes);
+        tRepeatCar.setRepeatTotal(indexes.length);
+        tRepeatCar.setRepeatItemTextValueArray(indexes);
 
-        tunaRepeatCar.setTunaRepeatListener(
-            new TView.TunaTouchListener() {
+        tRepeatCar.setRepeatListener(
+            new TView.TouchListener() {
                 @Override
-                public void tunaTouch(View v) {
-                    tunaRepeatCar.setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatCar.getTunaTouchEventX());
-                    tunaRepeatStar.setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatCar.getTunaTouchEventX(), true);
-                    tunaLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatCar.getTunaTouchEventX());
+                public void touch(View v) {
+                    tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                    tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX(), true);
+                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
                 }
             },
-            new TView.TunaTouchDownListener() {
+            new TView.TouchDownListener() {
                 @Override
-                public void tunaTouchDown(View v) {
-                    tunaRepeatStar.setTunaPress(true);
+                public void touchDown(View v) {
+                    tRepeatStar.setPress(true);
                 }
             },
-            new TView.TunaTouchUpListener() {
+            new TView.TouchUpListener() {
                 @Override
-                public void tunaTouchUp(View v) {
+                public void touchUp(View v) {
                     afterChoice();
-                    tunaRepeatStar.setTunaPress(false);
+                    tRepeatStar.setPress(false);
                 }
             }
         );
@@ -98,12 +98,12 @@ public class TRepeatActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if ("Unable".equals(buttonEvaluation01.getText().toString().trim())) {
-                    tunaRepeatStar.setTunaTouchType(TView.TunaTouchType.NONE);
-                    tunaRepeatCar.setTunaTouchType(TView.TunaTouchType.NONE);
+                    tRepeatStar.setTouchType(TView.TouchType.NONE);
+                    tRepeatCar.setTouchType(TView.TouchType.NONE);
                     buttonEvaluation01.setText("Enable");
                 } else {
-                    tunaRepeatStar.setTunaTouchType(TView.TunaTouchType.EDGE);
-                    tunaRepeatCar.setTunaTouchType(TView.TunaTouchType.EDGE);
+                    tRepeatStar.setTouchType(TView.TouchType.EDGE);
+                    tRepeatCar.setTouchType(TView.TouchType.EDGE);
                     buttonEvaluation01.setText("Unable");
                 }
             }
@@ -114,11 +114,11 @@ public class TRepeatActivity extends Activity {
         spinnerEvaluation01.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tunaRepeatStar.setTunaRepeatCurrentIndex(position - 1);
-                tunaRepeatCar.setTunaRepeatCurrentIndex(position - 1);
-                float tunaTouchEventX = tunaRepeatStar.getTunaTouchEventX();
+                tRepeatStar.setRepeatCurrentIndex(position - 1);
+                tRepeatCar.setRepeatCurrentIndex(position - 1);
+                float tunaTouchEventX = tRepeatStar.getTouchEventX();
                 if (tunaTouchEventX != 0) {
-                    tunaLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatStar.getTunaTouchEventX());
+                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
                 }
             }
 
@@ -127,25 +127,25 @@ public class TRepeatActivity extends Activity {
             }
         });
 
-        setLayoutByWidth(tunaRepeatTips, 5 * 40);
+        setLayoutByWidth(tRepeatTips, 5 * 40);
 
         //
-        tunaRepeatTips.setTunaRepeatListener(
+        tRepeatTips.setRepeatListener(
             null,
             null,
-            new TView.TunaTouchUpListener() {
+            new TView.TouchUpListener() {
                 @Override
-                public void tunaTouchUp(View v) {
-                    tunaRepeatTips.setTunaRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatTips.getTunaTouchEventX());
-//						Toast.makeText(TunaRepeatTest.this, "TuochUp", Toast.LENGTH_SHORT).show();
+                public void touchUp(View v) {
+                    tRepeatTips.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatTips.getTouchEventX());
+//						Toast.makeText(repeatTest.this, "TuochUp", Toast.LENGTH_SHORT).show();
                 }
             });
     }
 
     //
     private void afterChoice() {
-        int tunaRepeatStarCurrentIndex = tunaRepeatStar.getTunaRepeatCurrentIndex();
-        tunaLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaRepeatStar.getTunaRepeatCurrentX());
+        int tunaRepeatStarCurrentIndex = tRepeatStar.getRepeatCurrentIndex();
+        tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getRepeatCurrentX());
         if (tunaRepeatStarCurrentIndex == 0) {
         } else if (tunaRepeatStarCurrentIndex == 1) {
         } else if (tunaRepeatStarCurrentIndex == 2) {

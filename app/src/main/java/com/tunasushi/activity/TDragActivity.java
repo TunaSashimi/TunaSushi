@@ -11,25 +11,25 @@ import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TDrag;
 
 public class TDragActivity extends Activity {
-    private TDrag tunaDragTouchoutable, tunaDragTouchoutUnable;
-    private TView tunaViewTouchoutableReset, tunaViewTouchoutableGetIndex,
-        tunaViewTouchoutUnableReset, tunaViewTouchoutUnableGetIndex;
+    private TDrag tDragTouchoutable, tDragTouchoutUnable;
+    private TView tViewTouchoutableReset, tViewTouchoutableGetIndex,
+            tViewTouchoutUnableReset, tViewTouchoutUnableGetIndex;
 
-    private TView.TunaTouchUpListener tunaTouchUpListener = new TView.TunaTouchUpListener() {
+    private TView.TouchUpListener tunaTouchUpListener = new TView.TouchUpListener() {
         @Override
-        public void tunaTouchUp(View v) {
+        public void touchUp(View v) {
             switch (v.getId()) {
                 case R.id.tViewTouchoutableReset:
-                    tunaDragTouchoutable.setTunaCurrentIndex(0);
+                    tDragTouchoutable.setDragCurrentIndex(0);
                     break;
                 case R.id.tViewTouchoutableGetIndex:
-                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutable下标为" + tunaDragTouchoutable.getTunaCurrentIndex(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutable下标为" + tDragTouchoutable.getDragCurrentIndex(), Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tViewTouchoutUnableReset:
-                    tunaDragTouchoutUnable.setTunaCurrentIndex(0);
+                    tDragTouchoutUnable.setDragCurrentIndex(0);
                     break;
                 case R.id.tViewTouchoutUnableGetIndex:
-                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutUnable下标为" + tunaDragTouchoutUnable.getTunaCurrentIndex(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutUnable下标为" + tDragTouchoutUnable.getDragCurrentIndex(), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -43,33 +43,33 @@ public class TDragActivity extends Activity {
 
         setContentView(R.layout.activity_t_drag);
 
-        tunaDragTouchoutable = findViewById(R.id.tDragTouchoutable);
-        tunaDragTouchoutUnable = findViewById(R.id.tDragTouchoutUnable);
+        tDragTouchoutable = findViewById(R.id.tDragTouchoutable);
+        tDragTouchoutUnable = findViewById(R.id.tDragTouchoutUnable);
 
-        tunaViewTouchoutableReset = findViewById(R.id.tViewTouchoutableReset);
-        tunaViewTouchoutableGetIndex = findViewById(R.id.tViewTouchoutableGetIndex);
+        tViewTouchoutableReset = findViewById(R.id.tViewTouchoutableReset);
+        tViewTouchoutableGetIndex = findViewById(R.id.tViewTouchoutableGetIndex);
 
-        tunaViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
-        tunaViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
+        tViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
+        tViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
 
-        tunaDragTouchoutable.setTunaTouchListener(new TView.TunaTouchListener() {
+        tDragTouchoutable.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaDragTouchoutable.setTunaDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaDragTouchoutable.getTunaTouchEventX());
+            public void touch(View v) {
+                tDragTouchoutable.setDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tDragTouchoutable.getTouchEventX());
             }
         });
 
-        tunaDragTouchoutUnable.setTunaTouchListener(new TView.TunaTouchListener() {
+        tDragTouchoutUnable.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaDragTouchoutUnable.setTunaDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaDragTouchoutUnable.getTunaTouchEventX());
+            public void touch(View v) {
+                tDragTouchoutUnable.setDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tDragTouchoutUnable.getTouchEventX());
             }
         });
 
-        tunaViewTouchoutableReset.setTunaTouchUpListener(tunaTouchUpListener);
-        tunaViewTouchoutableGetIndex.setTunaTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutableReset.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutableGetIndex.setTouchUpListener(tunaTouchUpListener);
 
-        tunaViewTouchoutUnableReset.setTunaTouchUpListener(tunaTouchUpListener);
-        tunaViewTouchoutUnableGetIndex.setTunaTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutUnableReset.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutUnableGetIndex.setTouchUpListener(tunaTouchUpListener);
     }
 }

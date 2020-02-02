@@ -21,7 +21,7 @@ public class EntryActivity extends Activity {
             //
             TAnalysisActivity.class,
 
-            TBubbleViewActivity.class,
+            TBubbleActivity.class,
             TButtonActivity.class,
 
             TDialogActivity.class,

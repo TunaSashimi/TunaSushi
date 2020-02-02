@@ -12,71 +12,73 @@ import android.view.View;
 
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
+import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:55
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TLine extends TView {
 
-    private int tunaLineBackgroundNormal;
+    private int lineBackgroundNormal;
 
-    private float tunaLineArrowWidth;
-    private float tunaLineArrowHeight;
+    private float lineArrowWidth;
+    private float lineArrowHeight;
 
-    private float tunaLineArrowStrokeWidth;
-    private int tunaLineArrowStrokeColor;
+    private float lineArrowStrokeWidth;
+    private int lineArrowStrokeColor;
 
-    private int tunaLineArrowColor;
+    private int lineArrowColor;
 
-    private float tunaLineCurrentX;
+    private float lineCurrentX;
 
-    public float getTunaLineCurrentX() {
-        return tunaLineCurrentX;
+    public float getLineCurrentX() {
+        return lineCurrentX;
     }
 
     //
-    public void setLineCurrentX(float tunaLineCurrentX) {
-        setLineCurrentX(TypedValue.COMPLEX_UNIT_DIP, tunaLineCurrentX);
+    public void setLineCurrentX(float lineCurrentX) {
+        setLineCurrentX(TypedValue.COMPLEX_UNIT_DIP, lineCurrentX);
     }
 
-    public void setLineCurrentX(int unit, float tunaLineCurrentX) {
+    public void setLineCurrentX(int unit, float lineCurrentX) {
         Context c = getContext();
         Resources r;
         if (c == null)
             r = Resources.getSystem();
         else
             r = c.getResources();
-        setTunaLineCurrentXRaw(applyDimension(unit, tunaLineCurrentX, r.getDisplayMetrics()));
+        setLineCurrentXRaw(applyDimension(unit, lineCurrentX, r.getDisplayMetrics()));
     }
 
-    private void setTunaLineCurrentXRaw(float tunaLineCurrentX) {
-        if (this.tunaLineCurrentX != tunaLineCurrentX) {
-            this.tunaLineCurrentX = tunaLineCurrentX;
+    private void setLineCurrentXRaw(float lineCurrentX) {
+        if (this.lineCurrentX != lineCurrentX) {
+            this.lineCurrentX = lineCurrentX;
             invalidate();
         }
     }
 
-    private TunaLineTowardType tunaLineTowardType;
+    private LineTowardType lineTowardType;
 
-    public enum TunaLineTowardType {
+    public enum LineTowardType {
         TOP(0),
         BOTTOM(1),;
         final int nativeInt;
 
-        TunaLineTowardType(int ni) {
+        LineTowardType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaLineTowardType[] tunaLineTowardTypeArray = {
-            TunaLineTowardType.TOP,
-            TunaLineTowardType.BOTTOM,
+    private static final LineTowardType[] lineTowardTypeArray = {
+            LineTowardType.TOP,
+            LineTowardType.BOTTOM,
     };
 
     public TLine(Context context) {
@@ -90,33 +92,31 @@ public class TLine extends TView {
     public TLine(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TLine.class.getSimpleName();
+        Tag = TLine.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TLine);
 
-        tunaLineBackgroundNormal = typedArray.getColor(R.styleable.TLine_lineBackgroundNormal, Color.TRANSPARENT);
+        lineBackgroundNormal = typedArray.getColor(R.styleable.TLine_lineBackgroundNormal, Color.TRANSPARENT);
 
-        tunaLineArrowWidth = typedArray.getDimension(R.styleable.TLine_lineArrowWidth, 0);
-        tunaLineArrowHeight = typedArray.getDimension(R.styleable.TLine_lineArrowHeight, 0);
+        lineArrowWidth = typedArray.getDimension(R.styleable.TLine_lineArrowWidth, 0);
+        lineArrowHeight = typedArray.getDimension(R.styleable.TLine_lineArrowHeight, 0);
 
-        tunaLineArrowStrokeWidth = typedArray.getDimension(R.styleable.TLine_lineArrowStrokeWidth, 0);
-        tunaLineArrowStrokeColor = typedArray.getColor(R.styleable.TLine_lineArrowStrokeColor, Color.TRANSPARENT);
+        lineArrowStrokeWidth = typedArray.getDimension(R.styleable.TLine_lineArrowStrokeWidth, 0);
+        lineArrowStrokeColor = typedArray.getColor(R.styleable.TLine_lineArrowStrokeColor, Color.TRANSPARENT);
 
-        tunaLineArrowColor = typedArray.getColor(R.styleable.TLine_lineArrowColor, Color.TRANSPARENT);
+        lineArrowColor = typedArray.getColor(R.styleable.TLine_lineArrowColor, Color.TRANSPARENT);
 
         //If 0 is hidden
-//        tunaLineCurrentX = typedArray.getDimension(R.styleable.TunaLine_tunaLineCurrentX, 0);
-        tunaLineCurrentX = 0;
-        if (tunaLineCurrentX == 0) {
-            tunaLineCurrentX = -tunaLineArrowWidth;
+        lineCurrentX = typedArray.getDimension(R.styleable.TLine_lineCurrentX, 0);
+        if (lineCurrentX == 0) {
+            lineCurrentX = -lineArrowWidth;
         }
 
-//        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TunaTrangle_tunaTrangleTowardType, -1);
-        int tunaTrangleTowardTypeIndex = 0;
-        if (tunaTrangleTowardTypeIndex >= 0) {
-            tunaLineTowardType = tunaLineTowardTypeArray[tunaTrangleTowardTypeIndex];
+        int tunaLineTowardTypeIndex = typedArray.getInt(R.styleable.TLine_lineTowardType, -1);
+        if (tunaLineTowardTypeIndex >= 0) {
+            lineTowardType = lineTowardTypeArray[tunaLineTowardTypeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute tunaLineTowardType type must be given");
+            throw new IllegalArgumentException("The content attribute lineTowardType type must be given");
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -128,26 +128,26 @@ public class TLine extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(tunaLineBackgroundNormal);
+        canvas.drawColor(lineBackgroundNormal);
 
-        if (tunaLineArrowStrokeWidth > 0) {
-            switch (tunaLineTowardType) {
+        if (lineArrowStrokeWidth > 0) {
+            switch (lineTowardType) {
                 case TOP:
-                    drawTunaArrow(
+                    drawarrow(
                             canvas,
-                            tunaLineCurrentX,
-                            tunaLineArrowWidth, tunaLineArrowHeight,
-                            tunaLineArrowStrokeWidth,
-                            tunaLineArrowStrokeColor,
+                            lineCurrentX,
+                            lineArrowWidth, lineArrowHeight,
+                            lineArrowStrokeWidth,
+                            lineArrowStrokeColor,
                             true);
                     break;
                 case BOTTOM:
-                    drawTunaArrow(
+                    drawarrow(
                             canvas,
-                            tunaLineCurrentX,
-                            tunaLineArrowWidth, tunaLineArrowHeight,
-                            tunaLineArrowStrokeWidth,
-                            tunaLineArrowStrokeColor,
+                            lineCurrentX,
+                            lineArrowWidth, lineArrowHeight,
+                            lineArrowStrokeWidth,
+                            lineArrowStrokeColor,
                             false);
                     break;
                 default:
@@ -155,59 +155,59 @@ public class TLine extends TView {
             }
 
             //The filling part of the color triangle
-            if (tunaLineArrowColor != Color.TRANSPARENT) {
-                switch (tunaLineTowardType) {
+            if (lineArrowColor != Color.TRANSPARENT) {
+                switch (lineTowardType) {
                     case TOP:
-                        initTunaPathMoveTo(tunaLineCurrentX - tunaLineArrowWidth * 0.5f + tunaLineArrowStrokeWidth * 0.5f, tunaHeight);
-                        tunaPath.lineTo(tunaLineCurrentX, tunaHeight - tunaLineArrowHeight - tunaLineArrowStrokeWidth * 0.5f);
-                        tunaPath.lineTo(tunaLineCurrentX + tunaLineArrowWidth * 0.5f - tunaLineArrowStrokeWidth * 0.5f, tunaHeight);
+                        initPathMoveTo(lineCurrentX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, height);
+                        path.lineTo(lineCurrentX, height - lineArrowHeight - lineArrowStrokeWidth * 0.5f);
+                        path.lineTo(lineCurrentX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, height);
                         break;
                     case BOTTOM:
-                        initTunaPathMoveTo(tunaLineCurrentX - tunaLineArrowWidth * 0.5f + tunaLineArrowStrokeWidth * 0.5f, 0);
-                        tunaPath.lineTo(tunaLineCurrentX, tunaLineArrowHeight - tunaLineArrowStrokeWidth * 0.5f);
-                        tunaPath.lineTo(tunaLineCurrentX + tunaLineArrowWidth * 0.5f - tunaLineArrowStrokeWidth * 0.5f, 0);
+                        initPathMoveTo(lineCurrentX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, 0);
+                        path.lineTo(lineCurrentX, lineArrowHeight - lineArrowStrokeWidth * 0.5f);
+                        path.lineTo(lineCurrentX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, 0);
                         break;
                     default:
                         break;
                 }
-                tunaPath.close();
-                canvas.drawPath(tunaPath, initTunaPaint(Paint.Style.FILL, tunaLineArrowColor));
+                path.close();
+                canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, lineArrowColor));
             }
 
         }
     }
 
     //
-    protected void drawTunaArrow(Canvas canvas,
+    protected void drawarrow(Canvas canvas,
                                  float floatX,
                                  float arrowWidth, float arrowHeight,
                                  float arrowStrokeWidth, int arrowStrokeColor,
                                  boolean upward) {
 
         if (upward) {
-            initTunaPathMoveTo(0, tunaHeight - arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(floatX - arrowWidth * 0.5f, tunaHeight - arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(floatX, tunaHeight - arrowStrokeWidth * 0.5f - arrowHeight);
-            tunaPath.lineTo(floatX + arrowWidth * 0.5f, tunaHeight - arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(tunaWidth, tunaHeight - arrowStrokeWidth * 0.5f);
+            initPathMoveTo(0, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, height - arrowStrokeWidth * 0.5f - arrowHeight);
+            path.lineTo(floatX + arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(width, height - arrowStrokeWidth * 0.5f);
         } else {
-            initTunaPathMoveTo(0, arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            tunaPath.lineTo(tunaWidth, arrowStrokeWidth * 0.5f);
+            initPathMoveTo(0, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(width, arrowStrokeWidth * 0.5f);
         }
 
-        canvas.drawPath(tunaPath, initTunaPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
+        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
     }
 
     public void centerArrow() {
-        tunaLineCurrentX = tunaWidth >> 1;
+        lineCurrentX = width >> 1;
         invalidate();
     }
 
     public void hideArrow() {
-        tunaLineCurrentX = -tunaLineArrowWidth;
+        lineCurrentX = -lineArrowWidth;
         invalidate();
     }
 

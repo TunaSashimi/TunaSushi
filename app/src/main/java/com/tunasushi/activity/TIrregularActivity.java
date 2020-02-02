@@ -12,7 +12,7 @@ import com.tunasushi.tuna.TIrregular;
 
 public class TIrregularActivity extends Activity {
 
-    private TIrregular tunaIrregular;
+    private TIrregular tIrregular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +20,16 @@ public class TIrregularActivity extends Activity {
 
         setContentView(R.layout.activity_t_iregular);
 
-        tunaIrregular = findViewById(R.id.tIrregular);
+        tIrregular = findViewById(R.id.tIrregular);
 
-        tunaIrregular.setTunaTouchListener(new TView.TunaTouchListener() {
+        tIrregular.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaIrregular.setTunaIrregularCurrentX(TypedValue.COMPLEX_UNIT_PX, tunaIrregular.getTunaTouchEventX());
+            public void touch(View v) {
+                tIrregular.setIrregularCurrentX(TypedValue.COMPLEX_UNIT_PX, tIrregular.getTouchEventX());
             }
         });
 
-        tunaIrregular.setTunaIrregularChangeListener(new TIrregular.TunaIrregularChangeListener() {
+        tIrregular.setIrregularChangeListener(new TIrregular.IrregularChangeListener() {
             @Override
             public void tunaIrregularChange(boolean b) {
                 Toast.makeText(getApplication(), "Change==>" + b, Toast.LENGTH_SHORT).show();

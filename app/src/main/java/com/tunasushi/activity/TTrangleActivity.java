@@ -20,13 +20,13 @@ public class TTrangleActivity extends Activity {
         TViewButton = findViewById(R.id.tViewButton);
         TViewDialog = findViewById(R.id.tViewDialog);
 
-        TViewButton.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        TViewButton.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                if ("TunaSashimi".equals(TViewDialog.getTunaTextValue())) {
-                    TViewDialog.setTunaTextValue("金枪鱼刺身");
+            public void touchUp(View v) {
+                if ("TunaSashimi".equals(TViewDialog.getTextValue())) {
+                    TViewDialog.setTextValue("金枪鱼刺身");
                 } else {
-                    TViewDialog.setTunaTextValue("TunaSashimi");
+                    TViewDialog.setTextValue("TunaSashimi");
                 }
             }
         });

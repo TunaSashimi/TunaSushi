@@ -1,7 +1,6 @@
 package com.tunasushi.tool;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,23 +15,18 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.util.Base64;
-
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 /**
  * @author Tunasashimi
  * @date 2019-11-19 15:39
- * @Copyright 2019 TunaSashimi. All rights reserved.
+ * @Copyright 2019 Sashimi. All rights reserved.
  * @Description
  */
 public class BitmapTool {
 
     public static int bitmapMaxSize = 1536;
-    public static HashMap<String, Object> tunaGraphicsMap = new HashMap<String, Object>();
+    public static HashMap<String, Object> graphicsMap = new HashMap<String, Object>();
 
     //
     public static Bitmap decodeBitmapResource(Context context, int id) {
@@ -42,8 +36,8 @@ public class BitmapTool {
     //
     public static Bitmap decodeBitmapResource(Context context, int id, int inSampleSize) {
         String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
+        if (graphicsMap.containsKey(stringId)) {
+            Object object = graphicsMap.get(stringId);
             if (object != null && object instanceof Bitmap) {
                 return (Bitmap) object;
             }
@@ -56,15 +50,15 @@ public class BitmapTool {
         } else {
             bitmap = BitmapFactory.decodeResource(context.getResources(), id);
         }
-        tunaGraphicsMap.put(stringId, bitmap);
+        graphicsMap.put(stringId, bitmap);
         return bitmap;
     }
 
     //
     public Movie decodeGifResource(Context context, int id) {
         String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
+        if (graphicsMap.containsKey(stringId)) {
+            Object object = graphicsMap.get(stringId);
             if (object != null && object instanceof Movie) {
                 return (Movie) object;
             }
@@ -80,8 +74,8 @@ public class BitmapTool {
     //
     public Object decodeGraphicsResource(Context context, int id, int inSampleSize) {
         String stringId = String.valueOf(id);
-        if (tunaGraphicsMap.containsKey(stringId)) {
-            Object object = tunaGraphicsMap.get(stringId);
+        if (graphicsMap.containsKey(stringId)) {
+            Object object = graphicsMap.get(stringId);
             if (object != null) {
                 return object;
             }
@@ -101,8 +95,8 @@ public class BitmapTool {
 
     //
     public Bitmap decodeBitmapFile(String path, int reqWidth, int reqHeight) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
+        if (graphicsMap.containsKey(path)) {
+            Object object = graphicsMap.get(path);
             if (object != null && object instanceof Bitmap) {
                 return (Bitmap) object;
             }
@@ -132,14 +126,14 @@ public class BitmapTool {
             bitmapFactoryOptions.inJustDecodeBounds = false;
             bitmap = BitmapFactory.decodeFile(path, bitmapFactoryOptions);
         }
-        tunaGraphicsMap.put(path, bitmap);
+        graphicsMap.put(path, bitmap);
         return bitmap;
     }
 
     //
     public Movie decodeGifFile(String path) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
+        if (graphicsMap.containsKey(path)) {
+            Object object = graphicsMap.get(path);
             if (object != null && object instanceof Movie) {
                 return (Movie) object;
             }
@@ -149,8 +143,8 @@ public class BitmapTool {
 
     //
     public Object decodeGraphicsFile(String path) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
+        if (graphicsMap.containsKey(path)) {
+            Object object = graphicsMap.get(path);
             if (object != null) {
                 return object;
             }
@@ -165,8 +159,8 @@ public class BitmapTool {
 
     //
     public Object decodeGraphicsFile(String path, int reqWidth, int reqHeight) {
-        if (tunaGraphicsMap.containsKey(path)) {
-            Object object = tunaGraphicsMap.get(path);
+        if (graphicsMap.containsKey(path)) {
+            Object object = graphicsMap.get(path);
             if (object != null) {
                 return object;
             }
@@ -287,13 +281,13 @@ public class BitmapTool {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.BLACK);
 
-//        if (svgResourceId > 0) {
-//            SVG svg = SVGParser.getSVGFromInputStream(
-//                context.getResources().openRawResource(svgResourceId), width, height);
-//            canvas.drawPicture(svg.getPicture());
-//        } else {
-//            canvas.drawRect(new RectF(0.0f, 0.0f, width, height), paint);
-//        }
+        if (svgResourceId > 0) {
+            SVGTool.SVG svg = SVGTool.getSVGFromInputStream(
+                context.getResources().openRawResource(svgResourceId), width, height);
+            canvas.drawPicture(svg.getPicture());
+        } else {
+            canvas.drawRect(new RectF(0.0f, 0.0f, width, height), paint);
+        }
 
         return bitmap;
     }

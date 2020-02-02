@@ -11,7 +11,7 @@ import com.tunasushi.tuna.TView;
 
 public class TDialogActivity extends Activity {
 
-    private TDialog tunaDialogChoice, tunaDialogConfirm;
+    private TDialog tDialogChoice, tDialogConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,42 +19,42 @@ public class TDialogActivity extends Activity {
 
         setContentView(R.layout.activity_t_dialog);
 
-        tunaDialogChoice = findViewById(R.id.tDialogChoice);
-        tunaDialogConfirm = findViewById(R.id.tDialogConfirm);
+        tDialogChoice = findViewById(R.id.tDialogChoice);
+        tDialogConfirm = findViewById(R.id.tDialogConfirm);
 
-        tunaDialogChoice.setTunaTouchListener(new TView.TunaTouchListener() {
+        tDialogChoice.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaDialogChoice.setTunaDialogCurrentXY(tunaDialogChoice.getTunaTouchEventX(), tunaDialogChoice.getTunaTouchEventY());
+            public void touch(View v) {
+                tDialogChoice.setDialogCurrentXY(tDialogChoice.getTouchEventX(), tDialogChoice.getTouchEventY());
             }
         });
 
-        tunaDialogChoice.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                String choiceTextValueIndex = tunaDialogChoice.getTunaDialogCurrentChoiceTextValue();
+            public void touchUp(View v) {
+                String choiceTextValueIndex = tDialogChoice.getDialogCurrentChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();
                 }
-                tunaDialogChoice.setTunaDialogChoiceCurrentIndex(-1);
+                tDialogChoice.setDialogChoiceCurrentIndex(-1);
             }
         });
 
-        tunaDialogConfirm.setTunaTouchListener(new TView.TunaTouchListener() {
+        tDialogConfirm.setTouchListener(new TView.TouchListener() {
             @Override
-            public void tunaTouch(View v) {
-                tunaDialogConfirm.setTunaDialogCurrentXY(tunaDialogConfirm.getTunaTouchEventX(), tunaDialogConfirm.getTunaTouchEventY());
+            public void touch(View v) {
+                tDialogConfirm.setDialogCurrentXY(tDialogConfirm.getTouchEventX(), tDialogConfirm.getTouchEventY());
             }
         });
 
-        tunaDialogConfirm.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                String choiceTextValueIndex = tunaDialogConfirm.getTunaDialogCurrentChoiceTextValue();
+            public void touchUp(View v) {
+                String choiceTextValueIndex = tDialogConfirm.getDialogCurrentChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();
                 }
-                tunaDialogConfirm.setTunaDialogChoiceCurrentIndex(-1);
+                tDialogConfirm.setDialogChoiceCurrentIndex(-1);
             }
         });
     }

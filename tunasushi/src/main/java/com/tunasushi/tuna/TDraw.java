@@ -12,60 +12,62 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
+import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 11/15/15 16:17
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TDraw extends TView {
 
     //
-    private int tunaDrawColor;
+    private int drawColor;
 
-    public int getTunaDrawColor() {
-        return tunaDrawColor;
+    public int getDrawColor() {
+        return drawColor;
     }
 
-    public void setTunaDrawColor(int tunaDrawColor) {
-        this.tunaDrawColor = tunaDrawColor;
+    public void setDrawColor(int drawColor) {
+        this.drawColor = drawColor;
     }
 
-    private float tunaDrawWidth;
+    private float drawWidth;
 
-    public float getTunaDrawWidth() {
-        return tunaDrawWidth;
+    public float getDrawWidth() {
+        return drawWidth;
     }
 
-    public void setTunaDrawWidth(float tunaDrawWidth) {
-        this.tunaDrawWidth = tunaDrawWidth;
+    public void setDrawWidth(float drawWidth) {
+        this.drawWidth = drawWidth;
     }
 
     //
-    private Bitmap tunaDrawSrc;
+    private Bitmap drawSrc;
 
-    public Bitmap getTunaDrawSrc() {
-        return tunaDrawSrc;
+    public Bitmap getDrawSrc() {
+        return drawSrc;
     }
 
-    public void setTunaDrawSrc(int id) {
-        setTunaPaintingSrc(decodeBitmapResource(getContext(),id));
+    public void setDrawSrc(int id) {
+        setDrawSrc(decodeBitmapResource(getContext(),id));
     }
 
-    public void setTunaPaintingSrc(Bitmap tunaPaintingSrc) {
-        this.tunaDrawSrc = tunaPaintingSrc;
+    public void setDrawSrc(Bitmap bitmap) {
+        this.drawSrc = bitmap;
     }
 
 
-    private TunaPaintingType tunaDrawType;
-    public enum TunaPaintingType {
+    private DrawType drawType;
+    public enum DrawType {
         CIRCLE(0),
         STAR(1),
         HEART(2),
@@ -76,50 +78,50 @@ public class TDraw extends TView {
         SNAIL(7),;
         final int nativeInt;
 
-        TunaPaintingType(int ni) {
+        DrawType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaPaintingType[] tunaScaleTypeArray = {
-            TunaPaintingType.CIRCLE,
-            TunaPaintingType.STAR,
-            TunaPaintingType.HEART,
-            TunaPaintingType.FLOWER,
-            TunaPaintingType.PENTAGON,
-            TunaPaintingType.SIXTEENEDGE,
-            TunaPaintingType.FORTYEDGE,
-            TunaPaintingType.SNAIL,
+    private static final DrawType[] drawTypeArray = {
+            DrawType.CIRCLE,
+            DrawType.STAR,
+            DrawType.HEART,
+            DrawType.FLOWER,
+            DrawType.PENTAGON,
+            DrawType.SIXTEENEDGE,
+            DrawType.FORTYEDGE,
+            DrawType.SNAIL,
     };
 
-    private Bitmap tunaDrawDstBitmap;
-    protected Matrix tunaDrawDstMatrix;
+    private Bitmap drawDstBitmap;
+    protected Matrix drawDstMatrix;
 
-    public Matrix getTunaDrawDstMatrix() {
-        return tunaDrawDstMatrix;
+    public Matrix getDrawDstMatrix() {
+        return drawDstMatrix;
     }
 
-    public void setTunaDrawDstMatrix(Matrix tunaDrawDstMatrix) {
-        this.tunaDrawDstMatrix = tunaDrawDstMatrix;
+    public void setDrawDstMatrix(Matrix drawDstMatrix) {
+        this.drawDstMatrix = drawDstMatrix;
     }
 
-    protected Matrix initTunaPaintingDstMatrix(float sx, float sy) {
-        if (tunaDrawDstMatrix == null) {
-            tunaDrawDstMatrix = new Matrix();
+    protected Matrix initPaintingDstMatrix(float sx, float sy) {
+        if (drawDstMatrix == null) {
+            drawDstMatrix = new Matrix();
         }
-        tunaDrawDstMatrix.reset();
-        tunaDrawDstMatrix.setScale(sx, sy);
-        return tunaDrawDstMatrix;
+        drawDstMatrix.reset();
+        drawDstMatrix.setScale(sx, sy);
+        return drawDstMatrix;
     }
 
 
     //
-    private Paint mBitmapPaint;
-    private float mX, mY;
+    private Paint drawPaint;
+    private float drawX, drawY;
     private static final float TOUCH_TOLERANCE = 4;
 
-    public Paint getTunaPaintingPaint() {
-        return tunaPaint;
+    public Paint getPaintingPaint() {
+        return paint;
     }
 
     public TDraw(Context context) {
@@ -133,23 +135,23 @@ public class TDraw extends TView {
     public TDraw(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TDraw.class.getSimpleName();
+        Tag = TDraw.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDraw);
 
-        tunaDrawColor = typedArray.getColor(R.styleable.TDraw_drawColor, Color.RED);
-        tunaDrawWidth = typedArray.getDimension(R.styleable.TDraw_drawWidth, 12);
+        drawColor = typedArray.getColor(R.styleable.TDraw_drawColor, Color.RED);
+        drawWidth = typedArray.getDimension(R.styleable.TDraw_drawWidth, 12);
 
 
-        int tunaDrawSrcId = typedArray.getResourceId(R.styleable.TDraw_drawSrc, -1);
-        if (tunaDrawSrcId != -1) {
-            tunaDrawSrc = BitmapFactory.decodeResource(getResources(), tunaDrawSrcId);
+        int drawSrcId = typedArray.getResourceId(R.styleable.TDraw_drawSrc, -1);
+        if (drawSrcId != -1) {
+            drawSrc = BitmapFactory.decodeResource(getResources(), drawSrcId);
         }
 
         //
-        int tunaDrawTypeIndex = typedArray.getInt(R.styleable.TDraw_drawType, -1);
-        if (tunaDrawTypeIndex >= 0) {
-            tunaDrawType = tunaScaleTypeArray[tunaDrawTypeIndex];
+        int drawTypeIndex = typedArray.getInt(R.styleable.TDraw_drawType, -1);
+        if (drawTypeIndex >= 0) {
+            drawType = drawTypeArray[drawTypeIndex];
         }
 
         typedArray.recycle();
@@ -180,58 +182,58 @@ public class TDraw extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        //When the parent class in onMeasure initialized  tunaPaint in TunaView
-        initTunaPaint(Paint.Style.STROKE, tunaDrawColor, tunaDrawWidth);
-        tunaPaint.setAntiAlias(true);
-        tunaPaint.setDither(true);
-        tunaPaint.setStrokeJoin(Paint.Join.ROUND);
-        tunaPaint.setStrokeCap(Paint.Cap.ROUND);
+        //When the parent class in onMeasure initialized  paint in TView
+        PaintTool.initPaint(Paint.Style.STROKE, drawColor, drawWidth);
+        paint.setAntiAlias(true);
+        paint.setDither(true);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
 
 
         //
-        tunaSrcBitmap = Bitmap.createBitmap(tunaWidth, tunaHeight, Bitmap.Config.ARGB_8888);
-        tunaCanvas = new Canvas(tunaSrcBitmap);
+        srcBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(srcBitmap);
 
-        mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        drawPaint = new Paint(Paint.DITHER_FLAG);
         //
-        if (tunaDrawSrc != null) {
-            tunaScaleSx = tunaWidth * 1f / tunaDrawSrc.getWidth();
-            tunaScaleSy = tunaHeight * 1f / tunaDrawSrc.getHeight();
-            initTunaMatrix(tunaScaleSx, tunaScaleSy);
+        if (drawSrc != null) {
+            scaleSx = width * 1f / drawSrc.getWidth();
+            scaleSy = height * 1f / drawSrc.getHeight();
+            initMatrix(scaleSx, scaleSy);
         }
 
         //
-        if (tunaDrawType != null) {
-            int shortSide = tunaWidth >= tunaHeight ? tunaHeight : tunaWidth;
-            initTunaPaintingDstMatrix(tunaWidth * 1f / shortSide, tunaHeight * 1f / shortSide);
+        if (drawType != null) {
+            int shortSide = width >= height ? height : width;
+            initPaintingDstMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
             if (isInEditMode()) {
-                tunaDrawDstBitmap = getCircleBitmap(shortSide);
+                drawDstBitmap = getCircleBitmap(shortSide);
             } else {
-                switch (tunaDrawType) {
+                switch (drawType) {
                     case CIRCLE:
-                        tunaDrawDstBitmap = getCircleBitmap(shortSide);
+                        drawDstBitmap = getCircleBitmap(shortSide);
                         break;
                     case STAR:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
                         break;
                     case HEART:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
                         break;
                     case FLOWER:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
                         break;
                     case PENTAGON:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
                         break;
                     case SIXTEENEDGE:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
                         break;
                     case FORTYEDGE:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
                         break;
                     case SNAIL:
-                        tunaDrawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
+                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
                         break;
                 }
             }
@@ -240,84 +242,85 @@ public class TDraw extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (tunaDrawType == null) {
-            if (tunaDrawSrc != null) {
-                canvas.drawBitmap(tunaDrawSrc, tunaMatrix, null);
+        if (drawType == null) {
+            if (drawSrc != null) {
+                canvas.drawBitmap(drawSrc, matrix, null);
             }
-            canvas.drawBitmap(tunaSrcBitmap, 0, 0, mBitmapPaint);
-            if (tunaPath != null) {
-                canvas.drawPath(tunaPath, tunaPaint);
+            canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
+            if (path != null) {
+                canvas.drawPath(path, paint);
             }
         } else {
 
             //
-            if (tunaDrawSrc != null) {
-                canvas.saveLayer(0, 0, tunaWidth, tunaHeight, null, Canvas.ALL_SAVE_FLAG);
-                canvas.drawBitmap(tunaDrawDstBitmap, tunaDrawDstMatrix, tunaPaint);
-                tunaPaint.setXfermode(tunaPorterDuffXfermode);
-                canvas.drawBitmap(tunaDrawSrc, tunaMatrix, tunaPaint);
-                tunaPaint.setXfermode(null);
+            if (drawSrc != null) {
+                canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
+                canvas.drawBitmap(drawDstBitmap, drawDstMatrix, paint);
+                paint.setXfermode(porterDuffXfermode);
+                canvas.drawBitmap(drawSrc, matrix, paint);
+                paint.setXfermode(null);
                 canvas.restore();
             }
 
             //
-            canvas.saveLayer(0, 0, tunaWidth, tunaHeight, null, Canvas.ALL_SAVE_FLAG);
-            canvas.drawBitmap(tunaDrawDstBitmap, tunaDrawDstMatrix, mBitmapPaint);
-            mBitmapPaint.setXfermode(tunaPorterDuffXfermode);
-            canvas.drawBitmap(tunaSrcBitmap, 0, 0, mBitmapPaint);
-            mBitmapPaint.setXfermode(null);
+            canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
+            canvas.drawBitmap(drawDstBitmap, drawDstMatrix, drawPaint);
+            drawPaint.setXfermode(porterDuffXfermode);
+            canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
+            drawPaint.setXfermode(null);
             canvas.restore();
 
             //
-            if (tunaPath != null) {
-                canvas.drawPath(tunaPath, tunaPaint);
+            if (path != null) {
+                canvas.drawPath(path, paint);
             }
         }
     }
 
-    public void touchDown(float x, float y) {
-        initTunaPathMoveTo(x, y);
-        mX = x;
-        mY = y;
+    public void drawTouchDown(float x, float y) {
+        initPathMoveTo(x, y);
+        drawX = x;
+        drawY = y;
         invalidate();
     }
 
-    public void touchMove(float x, float y) {
-        float dx = Math.abs(x - mX);
-        float dy = Math.abs(y - mY);
+    public void drawTouchMove(float x, float y) {
+        float dx = Math.abs(x - drawX);
+        float dy = Math.abs(y - drawY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            tunaPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
-            mX = x;
-            mY = y;
+            path.quadTo(drawX, drawY, (x + drawX) / 2, (y + drawY) / 2);
+            drawX = x;
+            drawY = y;
         }
         invalidate();
     }
 
-    public void touchUp() {
-        tunaPath.lineTo(mX, mY);
-        tunaCanvas.drawPath(tunaPath, tunaPaint);
+    public void drawTouchUp() {
+        path.lineTo(drawX, drawY);
+        canvas.drawPath(path, paint);
         invalidate();
     }
 
     //
-    public void setTunaPaintingListener() {
-        setTunaTouchDownListener(new TView.TunaTouchDownListener() {
+    public void setPaintingListener() {
+        setTouchDownListener(new TouchDownListener() {
             @Override
-            public void tunaTouchDown(View v) {
-                touchDown(getTunaTouchEventX(), getTunaTouchEventY());
+            public void touchDown(View v) {
+                drawTouchDown(getTouchEventX(), getTouchEventY());
             }
         });
-        setTunaTouchMoveListener(new TView.TunaTouchMoveListener() {
-            @Override
-            public void tunaTouchMove(View v) {
-                touchMove(getTunaTouchEventX(), getTunaTouchEventY());
 
+        setTouchMoveListener(new TouchMoveListener() {
+            @Override
+            public void touchMove(View v) {
+                drawTouchMove(getTouchEventX(), getTouchEventY());
             }
         });
-        setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+
+        setTouchUpListener(new TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                touchUp();
+            public void touchUp(View v) {
+                drawTouchUp();
             }
         });
     }

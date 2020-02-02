@@ -17,60 +17,60 @@ import static com.tunasushi.tool.DeviceTool.applyDimension;
 /**
  * @author Tunasashimi
  * @date 8/31/16 16:11
- * @Copyright 2016 TunaSashimi. All rights reserved.
+ * @Copyright 2016 Sashimi. All rights reserved.
  * @Description
  */
 public class TIrregular extends TView {
 
-    private Bitmap tunaIrregularBitmapSrcNormal;
+    private Bitmap irregularBitmapSrcNormal;
 
-    public Bitmap getTunaIrregularBitmapSrcNormal() {
-        return tunaIrregularBitmapSrcNormal;
+    public Bitmap getIrregularBitmapSrcNormal() {
+        return irregularBitmapSrcNormal;
     }
 
-    public void setTunaIrregularBitmapSrcNormal(Bitmap tunaIrregularBitmapSrcNormal) {
-        this.tunaIrregularBitmapSrcNormal = tunaIrregularBitmapSrcNormal;
+    public void setIrregularBitmapSrcNormal(Bitmap irregularBitmapSrcNormal) {
+        this.irregularBitmapSrcNormal = irregularBitmapSrcNormal;
     }
 
-    private Bitmap tunaIrregularBitmapSrcSelect;
+    private Bitmap irregularBitmapSrcSelect;
 
-    public Bitmap getTunaIrregularBitmapSrcSelect() {
-        return tunaIrregularBitmapSrcSelect;
+    public Bitmap getIrregularBitmapSrcSelect() {
+        return irregularBitmapSrcSelect;
     }
 
-    public void setTunaIrregularBitmapSrcSelect(Bitmap tunaIrregularBitmapSrcSelect) {
-        this.tunaIrregularBitmapSrcSelect = tunaIrregularBitmapSrcSelect;
+    public void setIrregularBitmapSrcSelect(Bitmap irregularBitmapSrcSelect) {
+        this.irregularBitmapSrcSelect = irregularBitmapSrcSelect;
     }
 
-    private float tunaIrregularCurrentX;
+    private float irregularCurrentX;
 
     //
-    protected TunaIrregularChangeListener tunaIrregularChangeListener;
+    protected IrregularChangeListener irregularChangeListener;
 
-    public interface TunaIrregularChangeListener {
+    public interface IrregularChangeListener {
         void tunaIrregularChange(boolean b);
     }
 
-    public TunaIrregularChangeListener getTunaIrregularChangeListener() {
-        return tunaIrregularChangeListener;
+    public IrregularChangeListener getIrregularChangeListener() {
+        return irregularChangeListener;
     }
 
-    public void setTunaIrregularChangeListener(TunaIrregularChangeListener tunaIrregularChangeListener) {
-        this.tunaIrregularChangeListener = tunaIrregularChangeListener;
+    public void setIrregularChangeListener(IrregularChangeListener irregularChangeListener) {
+        this.irregularChangeListener = irregularChangeListener;
     }
 
-    // tunaIrregularSelect default false
-    protected boolean tunaIrregularSelect;
-    public boolean isTunaIrregularSelect() {
-        return tunaIrregularSelect;
+    // irregularSelect default false
+    protected boolean irregularSelect;
+    public boolean isIrregularSelect() {
+        return irregularSelect;
     }
 
-    public void setTunaIrregularSelect(boolean tunaIrregularSelect) {
-        this.tunaIrregularSelect = tunaIrregularSelect;
+    public void setIrregularSelect(boolean irregularSelect) {
+        this.irregularSelect = irregularSelect;
         invalidate();
 
-        if (tunaIrregularChangeListener != null) {
-            tunaIrregularChangeListener.tunaIrregularChange(tunaIrregularSelect);
+        if (irregularChangeListener != null) {
+            irregularChangeListener.tunaIrregularChange(irregularSelect);
         }
     }
 
@@ -85,18 +85,18 @@ public class TIrregular extends TView {
     public TIrregular(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        tunaTag = TIrregular.class.getSimpleName();
+        Tag = TIrregular.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TIrregular);
 
-        int tunaIrregularBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcNormal, -1);
-        if (tunaIrregularBitmapSrcNormalId != -1) {
-            tunaIrregularBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), tunaIrregularBitmapSrcNormalId);
+        int irregularBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcNormal, -1);
+        if (irregularBitmapSrcNormalId != -1) {
+            irregularBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), irregularBitmapSrcNormalId);
         }
 
-        int tunaIrregularBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcSelect, -1);
-        if (tunaIrregularBitmapSrcSelectId != -1) {
-            tunaIrregularBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), tunaIrregularBitmapSrcSelectId);
+        int irregularBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcSelect, -1);
+        if (irregularBitmapSrcSelectId != -1) {
+            irregularBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), irregularBitmapSrcSelectId);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -109,30 +109,30 @@ public class TIrregular extends TView {
         super.onDraw(canvas);
 
         //
-        if (tunaIrregularSelect) {
-            canvas.drawBitmap(tunaIrregularBitmapSrcSelect, 0, 0, null);
+        if (irregularSelect) {
+            canvas.drawBitmap(irregularBitmapSrcSelect, 0, 0, null);
         } else {
-            canvas.drawBitmap(tunaIrregularBitmapSrcNormal, 0, 0, null);
+            canvas.drawBitmap(irregularBitmapSrcNormal, 0, 0, null);
         }
     }
 
-    public void setTunaIrregularCurrentX(int unit, float IrregularCurrentX) {
+    public void setIrregularCurrentX(int unit, float irregularCurrentX) {
         Context c = getContext();
         Resources r;
         if (c == null)
             r = Resources.getSystem();
         else
             r = c.getResources();
-        setTunaIrregularCurrentXRaw(applyDimension(unit, IrregularCurrentX, r.getDisplayMetrics()));
+        setIrregularCurrentXRaw(applyDimension(unit, irregularCurrentX, r.getDisplayMetrics()));
     }
 
 
-    private void setTunaIrregularCurrentXRaw(float tunaIrregularCurrentX) {
-        if (this.tunaIrregularCurrentX != tunaIrregularCurrentX) {
-            this.tunaIrregularCurrentX = tunaIrregularCurrentX;
-            boolean selected = tunaIrregularCurrentX >= (tunaWidth / 2);
-            if (tunaIrregularSelect ^ selected) {
-                setTunaIrregularSelect(selected);
+    private void setIrregularCurrentXRaw(float irregularCurrentX) {
+        if (this.irregularCurrentX != irregularCurrentX) {
+            this.irregularCurrentX = irregularCurrentX;
+            boolean selected = irregularCurrentX >= (width / 2);
+            if (irregularSelect ^ selected) {
+                setIrregularSelect(selected);
             }
         }
     }

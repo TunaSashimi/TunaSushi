@@ -9,37 +9,36 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import com.tuna.R;
-
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
+import com.tunasushi.tool.PaintTool;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:51
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TButton extends TView{
 
-	private float tunaButtonBitmapFractionTop, tunaButtonBitmapFractionBottom;
-	private float tunaButtonTextFractionTop, tunaButtonTextFractionBottom;
+	private float buttonBitmapFractionTop, buttonBitmapFractionBottom;
+	private float buttonTextFractionTop, buttonTextFractionBottom;
 
-	private int tunaButtonBackgroundNormal, tunaButtonBackgroundPress;
-	private int tunaButtonForegroundNormal, tunaButtonForegroundPress;
+	private int buttonBackgroundNormal, buttonBackgroundPress;
+	private int buttonForegroundNormal, buttonForegroundPress;
 
-	private String tunaButtonTextValue;
+	private String buttonTextValue;
 
-	public String getTunaButtonTextValue(){
-		return tunaButtonTextValue;
+	public String getButtonTextValue(){
+		return buttonTextValue;
 	}
 
-	public void setTunaButtonTextValue(String tunaButtonTextValue){
-		this.tunaButtonTextValue = tunaButtonTextValue;
+	public void setButtonTextValue(String buttonTextValue){
+		this.buttonTextValue = buttonTextValue;
 	}
 
-	private float tunaButtonTextSize;
-	private int tunaButtonTextColorNormal;
+	private float buttonTextSize;
+	private int buttonTextColorNormal;
 
-	private Bitmap tunaButtonBitmapSrcNormal, tunaButtonBitmapSrcPress;
+	private Bitmap buttonBitmapSrcNormal, buttonBitmapSrcPress;
 
     public TButton(Context context) {
         this(context, null);
@@ -52,24 +51,24 @@ public class TButton extends TView{
     public TButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-		tunaTag = TButton.class.getSimpleName();
+		Tag = TButton.class.getSimpleName();
 
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TButton);
 
-		tunaButtonBackgroundNormal = typedArray.getColor(R.styleable.TButton_buttonBackgroundNormal, Color.TRANSPARENT);
-		tunaButtonBackgroundPress = typedArray.getColor(R.styleable.TButton_buttonBackgroundPress, tunaButtonBackgroundNormal);
+		buttonBackgroundNormal = typedArray.getColor(R.styleable.TButton_buttonBackgroundNormal, Color.TRANSPARENT);
+		buttonBackgroundPress = typedArray.getColor(R.styleable.TButton_buttonBackgroundPress, buttonBackgroundNormal);
 
-		tunaButtonForegroundNormal = typedArray.getColor(R.styleable.TButton_buttonForegroundNormal, Color.TRANSPARENT);
-		tunaButtonForegroundPress = typedArray.getColor(R.styleable.TButton_buttonForegroundPress, tunaButtonForegroundNormal);
+		buttonForegroundNormal = typedArray.getColor(R.styleable.TButton_buttonForegroundNormal, Color.TRANSPARENT);
+		buttonForegroundPress = typedArray.getColor(R.styleable.TButton_buttonForegroundPress, buttonForegroundNormal);
 
-		int tunaButtonBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcNormal, -1);
-		if (tunaButtonBitmapSrcNormalId != -1) {
-			tunaButtonBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), tunaButtonBitmapSrcNormalId);
+		int buttonBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcNormal, -1);
+		if (buttonBitmapSrcNormalId != -1) {
+			buttonBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), buttonBitmapSrcNormalId);
 		}
 
-		int tunaButton_tunaButtonBitmapSrcPressId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcPress, tunaButtonBitmapSrcNormalId);
-		if (tunaButton_tunaButtonBitmapSrcPressId != -1) {
-			tunaButtonBitmapSrcPress = BitmapFactory.decodeResource(getResources(), tunaButton_tunaButtonBitmapSrcPressId);
+		int buttonBitmapSrcPressId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcPress, buttonBitmapSrcNormalId);
+		if (buttonBitmapSrcPressId != -1) {
+			buttonBitmapSrcPress = BitmapFactory.decodeResource(getResources(), buttonBitmapSrcPressId);
 		}
 
 		// depending on the type of fraction, the getFraction method multiples
@@ -78,15 +77,15 @@ public class TButton extends TView{
 		// (pbase), ignoring the first.
 		// On the other hand, specifying a normal fraction, only the base
 		// argument is used, multiplying the fraction by this.
-		tunaButtonBitmapFractionTop = typedArray.getFraction(R.styleable.TButton_buttonBitmapFractionTop, 1, 1, 0);
-		tunaButtonBitmapFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonBitmapFractionBottom, 1, 1, 1);
+		buttonBitmapFractionTop = typedArray.getFraction(R.styleable.TButton_buttonBitmapFractionTop, 1, 1, 0);
+		buttonBitmapFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonBitmapFractionBottom, 1, 1, 1);
 
-		tunaButtonTextValue = typedArray.getString(R.styleable.TButton_buttonTextValue);
-		tunaButtonTextSize = typedArray.getDimension(R.styleable.TButton_buttonTextSize, 0);
-		tunaButtonTextColorNormal = typedArray.getColor(R.styleable.TButton_buttonTextColorNormal, Color.TRANSPARENT);
+		buttonTextValue = typedArray.getString(R.styleable.TButton_buttonTextValue);
+		buttonTextSize = typedArray.getDimension(R.styleable.TButton_buttonTextSize, 0);
+		buttonTextColorNormal = typedArray.getColor(R.styleable.TButton_buttonTextColorNormal, Color.TRANSPARENT);
 
-		tunaButtonTextFractionTop = typedArray.getFraction(R.styleable.TButton_buttonTextFractionTop, 1, 1, 0);
-		tunaButtonTextFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonTextFractionBottom, 1, 1, 1);
+		buttonTextFractionTop = typedArray.getFraction(R.styleable.TButton_buttonTextFractionTop, 1, 1, 0);
+		buttonTextFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonTextFractionBottom, 1, 1, 1);
 
 		typedArray.recycle();
 	}
@@ -95,36 +94,36 @@ public class TButton extends TView{
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom){
 		super.onLayout(changed, left, top, right, bottom);
 
-		int tunaButtonBitmapSrcNormalWidth = tunaButtonBitmapSrcNormal.getWidth();
-		int tunaButtonBitmapSrcNormalHeight = tunaButtonBitmapSrcNormal.getHeight();
-		int tunaButtonBitmapSrcPressWidth = tunaButtonBitmapSrcPress.getWidth();
-		int tunaButtonBitmapSrcPressHeight = tunaButtonBitmapSrcPress.getHeight();
+		int buttonBitmapSrcNormalWidth = buttonBitmapSrcNormal.getWidth();
+		int buttonBitmapSrcNormalHeight = buttonBitmapSrcNormal.getHeight();
+		int buttonBitmapSrcPressWidth = buttonBitmapSrcPress.getWidth();
+		int buttonBitmapSrcPressHeight = buttonBitmapSrcPress.getHeight();
 
-		if (tunaButtonBitmapSrcNormalWidth != tunaButtonBitmapSrcPressWidth || tunaButtonBitmapSrcNormalHeight != tunaButtonBitmapSrcPressHeight) {
-			throw new IllegalArgumentException("Both the width and height of the attribute tunaButtonBitmapSrcNormal and tunaButtonBitmapSrcPress needed equal");
+		if (buttonBitmapSrcNormalWidth != buttonBitmapSrcPressWidth || buttonBitmapSrcNormalHeight != buttonBitmapSrcPressHeight) {
+			throw new IllegalArgumentException("Both the width and height of the attribute buttonBitmapSrcNormal and buttonBitmapSrcPress needed equal");
 		}
 
-		tunaScale = tunaHeight * (tunaButtonBitmapFractionBottom - tunaButtonBitmapFractionTop) / tunaButtonBitmapSrcNormalWidth;
-		tunaDy = tunaHeight * tunaButtonBitmapFractionTop;
-		tunaDx = (tunaWidth - tunaButtonBitmapSrcNormalWidth * tunaScale) * 0.5f;
+		scale = height * (buttonBitmapFractionBottom - buttonBitmapFractionTop) / buttonBitmapSrcNormalWidth;
+		dy = height * buttonBitmapFractionTop;
+		dx = (width - buttonBitmapSrcNormalWidth * scale) * 0.5f;
 
-		initTunaMatrix(tunaScale, tunaScale);
+		initMatrix(scale, scale);
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas){
 		super.onDraw(canvas);
-		canvas.drawColor(tunaPress ? tunaButtonBackgroundPress : tunaButtonBackgroundNormal);
+		canvas.drawColor(press ? buttonBackgroundPress : buttonBackgroundNormal);
 
 		canvas.save();
-		canvas.translate(tunaDx, tunaDy);
-		canvas.drawBitmap(tunaPress ? tunaButtonBitmapSrcPress : tunaButtonBitmapSrcNormal, tunaMatrix, null);
-		canvas.translate(-tunaDx, -tunaDy);
+		canvas.translate(dx, dy);
+		canvas.drawBitmap(press ? buttonBitmapSrcPress : buttonBitmapSrcNormal, matrix, null);
+		canvas.translate(-dx, -dy);
 
-		drawTunaText(canvas, tunaButtonTextValue, tunaWidth, tunaWidth >> 1, (tunaHeight * tunaButtonTextFractionTop + tunaHeight * tunaButtonTextFractionBottom) * 0.5f, 0, 0,
-				initTunaTextPaint(Paint.Style.FILL, tunaButtonTextColorNormal, tunaButtonTextSize, Paint.Align.CENTER));
+		drawText(canvas, buttonTextValue, width, width >> 1, (height * buttonTextFractionTop + height * buttonTextFractionBottom) * 0.5f, 0, 0,
+				PaintTool.initTextPaint(Paint.Style.FILL, buttonTextColorNormal, buttonTextSize, Paint.Align.CENTER));
 
-		canvas.drawColor(tunaPress ? tunaButtonForegroundPress : tunaButtonForegroundNormal);
+		canvas.drawColor(press ? buttonForegroundPress : buttonForegroundNormal);
 
 	}
 }

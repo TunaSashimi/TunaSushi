@@ -11,8 +11,8 @@ import com.tunasushi.tuna.TProgress;
 
 public class TProgressActivity extends Activity {
 
-    private TProgress tunaProgressCircleClockWise, tunaProgressCircleUpWard, tunaProgressCircleUpDown,
-        tunaProgressCustomClockWise, tunaProgressCustomUpWard, tunaProgressCustomUpDown;
+    private TProgress tProgressCircleClockWise, tProgressCircleUpWard, tProgressCircleUpDown,
+            tProgressCustomClockWise, tProgressCustomUpWard, tProgressCustomUpDown;
 
     private SeekBar seekbar;
 
@@ -22,25 +22,25 @@ public class TProgressActivity extends Activity {
 
         setContentView(R.layout.activity_t_progress);
 
-        tunaProgressCircleClockWise = findViewById(R.id.tProgressCircleClockWise);
-        tunaProgressCircleUpWard = findViewById(R.id.tProgressCircleUpWard);
-        tunaProgressCircleUpDown = findViewById(R.id.tProgressCircleUpDown);
+        tProgressCircleClockWise = findViewById(R.id.tProgressCircleClockWise);
+        tProgressCircleUpWard = findViewById(R.id.tProgressCircleUpWard);
+        tProgressCircleUpDown = findViewById(R.id.tProgressCircleUpDown);
 
-        tunaProgressCustomClockWise = findViewById(R.id.tProgressCustomClockWise);
-        tunaProgressCustomUpWard = findViewById(R.id.tProgressCustomUpWard);
-        tunaProgressCustomUpDown = findViewById(R.id.tProgressCustomUpDown);
+        tProgressCustomClockWise = findViewById(R.id.tProgressCustomClockWise);
+        tProgressCustomUpWard = findViewById(R.id.tProgressCustomUpWard);
+        tProgressCustomUpDown = findViewById(R.id.tProgressCustomUpDown);
 
         seekbar = findViewById(R.id.seekbar);
         seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tunaProgressCircleClockWise.setTunaProgressPercent(progress * 0.01f);
-                tunaProgressCircleUpWard.setTunaProgressPercent(progress * 0.01f);
-                tunaProgressCircleUpDown.setTunaProgressPercent(progress * 0.01f);
+                tProgressCircleClockWise.setProgressPercent(progress * 0.01f);
+                tProgressCircleUpWard.setProgressPercent(progress * 0.01f);
+                tProgressCircleUpDown.setProgressPercent(progress * 0.01f);
 
-                tunaProgressCustomClockWise.setTunaProgressPercent(progress * 0.01f);
-                tunaProgressCustomUpWard.setTunaProgressPercent(progress * 0.01f);
-                tunaProgressCustomUpDown.setTunaProgressPercent(progress * 0.01f);
+                tProgressCustomClockWise.setProgressPercent(progress * 0.01f);
+                tProgressCustomUpWard.setProgressPercent(progress * 0.01f);
+                tProgressCustomUpDown.setProgressPercent(progress * 0.01f);
             }
 
             @Override

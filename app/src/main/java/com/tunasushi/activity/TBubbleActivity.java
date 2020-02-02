@@ -5,13 +5,13 @@ import android.os.Bundle;
 
 import com.tunasushi.R;
 
-
-public class TSVGActivity extends Activity {
+public class TBubbleActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_t_svg);
+
+        setContentView(R.layout.activity_t_bubble);
 
     }
 }

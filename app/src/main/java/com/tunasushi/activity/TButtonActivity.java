@@ -11,7 +11,7 @@ import com.tunasushi.tuna.TView;
 
 public class TButtonActivity extends Activity {
 
-    private TButton tunaButton01, tunaButton02, tunaButton03;
+    private TButton tButton01, tButton02, tButton03;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,26 +19,26 @@ public class TButtonActivity extends Activity {
 
         setContentView(R.layout.activity_t_button);
 
-        tunaButton01 = findViewById(R.id.tButton01);
-        tunaButton02 = findViewById(R.id.tButton02);
-        tunaButton03 = findViewById(R.id.tButton03);
+        tButton01 = findViewById(R.id.tButton01);
+        tButton02 = findViewById(R.id.tButton02);
+        tButton03 = findViewById(R.id.tButton03);
 
-        tunaButton01.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tButton01.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                Toast.makeText(TButtonActivity.this, tunaButton01.getTunaButtonTextValue(), Toast.LENGTH_SHORT).show();
+            public void touchUp(View v) {
+                Toast.makeText(TButtonActivity.this, tButton01.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
-        tunaButton02.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tButton02.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                Toast.makeText(TButtonActivity.this, tunaButton02.getTunaButtonTextValue(), Toast.LENGTH_SHORT).show();
+            public void touchUp(View v) {
+                Toast.makeText(TButtonActivity.this, tButton02.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
-        tunaButton03.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tButton03.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                Toast.makeText(TButtonActivity.this, tunaButton03.getTunaButtonTextValue(), Toast.LENGTH_SHORT).show();
+            public void touchUp(View v) {
+                Toast.makeText(TButtonActivity.this, tButton03.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
     }

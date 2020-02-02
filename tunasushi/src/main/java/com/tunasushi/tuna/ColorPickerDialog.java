@@ -15,7 +15,7 @@ import android.view.View;
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:51
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 
@@ -25,7 +25,7 @@ public class ColorPickerDialog extends Dialog {
     private colorSelectListener colorSelectListener;
 
     public interface colorSelectListener {
-        void tunaColorSelect(int color);
+        void colorSelect(int color);
     }
 
     public ColorPickerDialog(Context context, int initialColor, colorSelectListener colorSelectListener) {
@@ -40,18 +40,18 @@ public class ColorPickerDialog extends Dialog {
         super.onCreate(savedInstanceState);
 
         //Add a layer inside the listener and Add to contentview
-        colorSelectListener tunaColorSelectListener = new colorSelectListener() {
-            public void tunaColorSelect(int color) {
-                ColorPickerDialog.this.colorSelectListener.tunaColorSelect(color);
+        colorSelectListener colorSelectListener = new colorSelectListener() {
+            public void colorSelect(int color) {
+                ColorPickerDialog.this.colorSelectListener.colorSelect(color);
                 dismiss();
             }
         };
 
-        setContentView(new TunaColorPicker(getContext(), initialColor, tunaColorSelectListener));
+        setContentView(new colorPicker(getContext(), initialColor, colorSelectListener));
         setTitle("Select Color");
     }
 
-    private static class TunaColorPicker extends View {
+    private static class colorPicker extends View {
 
         private Paint mPaint;
         private Paint mCenterPaint;
@@ -71,7 +71,7 @@ public class ColorPickerDialog extends Dialog {
 
         float displayDensity;
 
-        TunaColorPicker(Context c, int color, colorSelectListener l) {
+        colorPicker(Context c, int color, colorSelectListener l) {
             super(c);
 
             mColorSelectListener = l;
@@ -169,7 +169,7 @@ public class ColorPickerDialog extends Dialog {
                 case MotionEvent.ACTION_UP:
                     if (mTrackingCenter) {
                         if (inCenter) {
-                            mColorSelectListener.tunaColorSelect(mCenterPaint.getColor());
+                            mColorSelectListener.colorSelect(mCenterPaint.getColor());
                         }
                         mTrackingCenter = false;    // so we draw w/o halo
                         invalidate();

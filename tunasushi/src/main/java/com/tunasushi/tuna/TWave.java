@@ -13,7 +13,7 @@ import android.view.WindowManager;
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:59
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TWave extends TView{
@@ -21,25 +21,25 @@ public class TWave extends TView{
 	// 波纹颜色
 	private static final int WAVE_PAINT_COLOR = 0x880000aa;
 	// y = Asin(wx+b)+h
-	private static final float STRETCH_FACTOR_A = 20;
-	private static final int OFFSET_Y = 0;
+	private static final float WAVE_STRETCH_FACTOR_A = 20;
+	private static final int WAVE_OFFSET_Y = 0;
 	// 第一条水波移动速度
-	private static final int TRANSLATE_X_SPEED_ONE = 7;
+	private static final int WAVE_TRANSLATE_X_SPEED_ONE = 7;
 	// 第二条水波移动速度
-	private static final int TRANSLATE_X_SPEED_TWO = 5;
-	private float mCycleFactorW;
+	private static final int WAVE_TRANSLATE_X_SPEED_TWO = 5;
+	private float waveCycleFactorW;
 
-	private int mTotalWidth, mTotalHeight;
-	private float[] mYPositions;
-	private float[] mResetOneYPositions;
-	private float[] mResetTwoYPositions;
-	private int mXOffsetSpeedOne;
-	private int mXOffsetSpeedTwo;
-	private int mXOneOffset;
-	private int mXTwoOffset;
+	private int waveTotalWidth, waveTotalHeight;
+	private float[] waveYPositions;
+	private float[] waveResetOneYPositions;
+	private float[] waveResetTwoYPositions;
+	private int waveXOffsetSpeedOne;
+	private int waveXOffsetSpeedTwo;
+	private int waveXOneOffset;
+	private int waveXTwoOffset;
 
-	private Paint mWavePaint;
-	private DrawFilter mDrawFilter;
+	private Paint wavePaint;
+	private DrawFilter mwaveDrawFilter;
 
     public TWave(Context context) {
         this(context, null);
@@ -52,21 +52,21 @@ public class TWave extends TView{
     public TWave(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-		tunaTag = TWave.class.getSimpleName();
+		Tag = TWave.class.getSimpleName();
 
 		// 将dp转化为px，用于控制不同分辨率上移动速度基本一致
-		mXOffsetSpeedOne = dipToPx(context, TRANSLATE_X_SPEED_ONE);
-		mXOffsetSpeedTwo = dipToPx(context, TRANSLATE_X_SPEED_TWO);
+		waveXOffsetSpeedOne = dipToPx(context, WAVE_TRANSLATE_X_SPEED_ONE);
+		waveXOffsetSpeedTwo = dipToPx(context, WAVE_TRANSLATE_X_SPEED_TWO);
 
 		// 初始绘制波纹的画笔
-		mWavePaint = new Paint();
+		wavePaint = new Paint();
 		// 去除画笔锯齿
-		mWavePaint.setAntiAlias(true);
+		wavePaint.setAntiAlias(true);
 		// 设置风格为实线
-		mWavePaint.setStyle(Style.FILL);
+		wavePaint.setStyle(Style.FILL);
 		// 设置画笔颜色
-		mWavePaint.setColor(WAVE_PAINT_COLOR);
-		mDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+		wavePaint.setColor(WAVE_PAINT_COLOR);
+		mwaveDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
 	}
 
@@ -83,28 +83,28 @@ public class TWave extends TView{
 		// y = Asin(wx+b)+h ，这个公式里：w影响周期，A影响振幅，h影响y位置，b为初相；
 
 		// 从canvas层面去除绘制时锯齿
-		canvas.setDrawFilter(mDrawFilter);
+		canvas.setDrawFilter(mwaveDrawFilter);
 		resetPositonY();
-		for (int i = 0; i < mTotalWidth; i++) {
+		for (int i = 0; i < waveTotalWidth; i++) {
 
 			// 减400只是为了控制波纹绘制的y的在屏幕的位置，大家可以改成一个变量，然后动态改变这个变量，从而形成波纹上升下降效果
 			// 绘制第一条水波纹
-			canvas.drawLine(i, mTotalHeight - mResetOneYPositions[i] - 400, i, mTotalHeight, mWavePaint);
+			canvas.drawLine(i, waveTotalHeight - waveResetOneYPositions[i] - 400, i, waveTotalHeight, wavePaint);
 
 			// 绘制第二条水波纹
-			canvas.drawLine(i, mTotalHeight - mResetTwoYPositions[i] - 400, i, mTotalHeight, mWavePaint);
+			canvas.drawLine(i, waveTotalHeight - waveResetTwoYPositions[i] - 400, i, waveTotalHeight, wavePaint);
 		}
 
 		// 改变两条波纹的移动点
-		mXOneOffset += mXOffsetSpeedOne;
-		mXTwoOffset += mXOffsetSpeedTwo;
+		waveXOneOffset += waveXOffsetSpeedOne;
+		waveXTwoOffset += waveXOffsetSpeedTwo;
 
 		// 如果已经移动到结尾处，则重头记录
-		if (mXOneOffset >= mTotalWidth) {
-			mXOneOffset = 0;
+		if (waveXOneOffset >= waveTotalWidth) {
+			waveXOneOffset = 0;
 		}
-		if (mXTwoOffset > mTotalWidth) {
-			mXTwoOffset = 0;
+		if (waveXTwoOffset > waveTotalWidth) {
+			waveXTwoOffset = 0;
 		}
 
 		// 引发view重绘，一般可以考虑延迟20-30ms重绘，空出时间片
@@ -114,35 +114,35 @@ public class TWave extends TView{
 
 	private void resetPositonY(){
 		// mXOneOffset代表当前第一条水波纹要移动的距离
-		int yOneInterval = mYPositions.length - mXOneOffset;
+		int yOneInterval = waveYPositions.length - waveXOneOffset;
 		// 使用System.arraycopy方式重新填充第一条波纹的数据
-		System.arraycopy(mYPositions, mXOneOffset, mResetOneYPositions, 0, yOneInterval);
-		System.arraycopy(mYPositions, 0, mResetOneYPositions, yOneInterval, mXOneOffset);
+		System.arraycopy(waveYPositions, waveXOneOffset, waveResetOneYPositions, 0, yOneInterval);
+		System.arraycopy(waveYPositions, 0, waveResetOneYPositions, yOneInterval, waveXOneOffset);
 
-		int yTwoInterval = mYPositions.length - mXTwoOffset;
-		System.arraycopy(mYPositions, mXTwoOffset, mResetTwoYPositions, 0, yTwoInterval);
-		System.arraycopy(mYPositions, 0, mResetTwoYPositions, yTwoInterval, mXTwoOffset);
+		int yTwoInterval = waveYPositions.length - waveXTwoOffset;
+		System.arraycopy(waveYPositions, waveXTwoOffset, waveResetTwoYPositions, 0, yTwoInterval);
+		System.arraycopy(waveYPositions, 0, waveResetTwoYPositions, yTwoInterval, waveXTwoOffset);
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh){
 		super.onSizeChanged(w, h, oldw, oldh);
 		// 记录下view的宽高
-		mTotalWidth = w;
-		mTotalHeight = h;
+		waveTotalWidth = w;
+		waveTotalHeight = h;
 		// 用于保存原始波纹的y值
-		mYPositions = new float[mTotalWidth];
+		waveYPositions = new float[waveTotalWidth];
 		// 用于保存波纹一的y值
-		mResetOneYPositions = new float[mTotalWidth];
+		waveResetOneYPositions = new float[waveTotalWidth];
 		// 用于保存波纹二的y值
-		mResetTwoYPositions = new float[mTotalWidth];
+		waveResetTwoYPositions = new float[waveTotalWidth];
 
 		// 将周期定为view总宽度
-		mCycleFactorW = (float) (2 * Math.PI / mTotalWidth);
+		waveCycleFactorW = (float) (2 * Math.PI / waveTotalWidth);
 
 		// 根据view总宽度得出所有对应的y值
-		for (int i = 0; i < mTotalWidth; i++) {
-			mYPositions[i] = (float) (STRETCH_FACTOR_A * Math.sin(mCycleFactorW * i) + OFFSET_Y);
+		for (int i = 0; i < waveTotalWidth; i++) {
+			waveYPositions[i] = (float) (WAVE_STRETCH_FACTOR_A * Math.sin(waveCycleFactorW * i) + WAVE_OFFSET_Y);
 		}
 	}
 

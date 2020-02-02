@@ -167,45 +167,4 @@
         <item name="radiusRightBottom">@dimen/tuna_radius</item>
 
     </style>
-
-
-    <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
-    <style name="TunaView_RadioGroup_DrackBrown">
-        <item name="android:layerType">software</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="backgroundNormal">#ffffff</item>
-        <item name="backgroundPress">#bc7955</item>
-        <item name="backgroundSelect">#592d2d</item>
-        <item name="strokeWidthNormal">@dimen/tuna_stroke_width</item>
-        <item name="strokeColorNormal">#592d2d</item>
-        <item name="textColorNormal">#592d2d</item>
-        <item name="textColorPress">#ffffff</item>
-        <item name="textColorSelect">#ffffff</item>
-        <item name="textSize">16dp</item>
-        <item name="selectType">same</item>
-    </style>
-
-    <style name="TunaView_RadioGroup_DrackBrown_Left" parent="TunaView_RadioGroup_DrackBrown">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">@dimen/tuna_stroke_mask</item>
-        <item name="radiusLeftTop">@dimen/tuna_radius</item>
-        <item name="radiusLeftBottom">@dimen/tuna_radius</item>
-        <item name="radiusRightTop">0dp</item>
-        <item name="radiusRightBottom">0dp</item>
-    </style>
-
-    <style name="TunaView_RadioGroup_DrackBrown_Right" parent="TunaView_RadioGroup_DrackBrown">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">@dimen/tuna_stroke_mask</item>
-        <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftTop">0dp</item>
-        <item name="radiusLeftBottom">0dp</item>
-        <item name="radiusRightTop">@dimen/tuna_radius</item>
-        <item name="radiusRightBottom">@dimen/tuna_radius</item>
-    </style>
-
 </resources>

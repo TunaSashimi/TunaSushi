@@ -121,7 +121,7 @@
             android:layout_below="@id/select01"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="android:layerType=software(关闭硬件加速)\n使用TunaView.tunaAssociate关联相应TunaView控件" />
+            android:text="android:layerType=software(关闭硬件加速)\n使用TView.associate关联相应TView控件" />
 
         <RelativeLayout
             android:id="@+id/relativeRadioGroupDrackBrown"
@@ -368,7 +368,7 @@
             app:srcPress="@drawable/iv_clippitcure02_bg"
             app:textColorNormal="#ffffff"
             app:textGravity="all_center"
-            app:textValue="tunaMark=true&amp;textGravity=center" />
+            app:textValue="mark=true&amp;textGravity=center" />
 
         <com.tunasushi.tuna.TView
             style="@style/TView_TextMark_Red_Horizontal"
@@ -383,7 +383,7 @@
             app:textColorNormal="#ffffff"
             app:textGravity="all_left"
             app:textRowSpaceRatio="200%"
-            app:textValue="tunaMark=true&amp;textGravity=left" />
+            app:textValue="mark=true&amp;textGravity=left" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/secondaryButton05"
@@ -451,7 +451,7 @@
             app:srcPress="@drawable/iv_clippitcure04_bg" />
 
         <TextView
-            android:id="@+id/textTunaContext"
+            android:id="@+id/textcontext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/secondaryButton08"
@@ -463,7 +463,7 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:layout_below="@id/textTunaContext"
+            android:layout_below="@id/textcontext"
             android:layout_marginLeft="@dimen/tuna_button_marginLeft"
             android:layout_marginRight="@dimen/tuna_button_marginRight"
             app:backgroundNormal="#e1e1e1"
@@ -507,7 +507,7 @@
             android:layout_marginRight="@dimen/tuna_button_marginRight"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcLeft="@drawable/iv_rmb_mark_bg"
+            app:srcLeft="@drawable/iv_currency_rmb"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftWidth="9dp"
@@ -525,7 +525,7 @@
             android:layout_toRightOf="@id/srcLeft"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcLeft="@drawable/iv_rmb_mark_bg"
+            app:srcLeft="@drawable/iv_currency_rmb"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftPadding="8dp"
@@ -554,7 +554,7 @@
             android:layout_margin="@dimen/tuna_button_marginLeft"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcRight="@drawable/iv_rmb_mark_bg"
+            app:srcRight="@drawable/iv_currency_rmb"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"
             app:srcRightWidth="9dp"
@@ -572,7 +572,7 @@
             android:layout_toRightOf="@id/srcRight"
             app:backgroundNormal="#00000000"
             app:radius="@dimen/tuna_radius"
-            app:srcRight="@drawable/iv_rmb_mark_bg"
+            app:srcRight="@drawable/iv_currency_rmb"
             app:srcRightDx="8dp"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"

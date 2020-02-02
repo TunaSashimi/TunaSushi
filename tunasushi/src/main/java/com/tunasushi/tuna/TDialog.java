@@ -9,62 +9,60 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
+import com.tunasushi.tool.PaintTool;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:52
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TDialog extends TView {
-    private int tunaDialogBackgroundNormal;
-    private float tunaDialogRadius;
+    private int dialogBackgroundNormal;
+    private float dialogRadius;
 
-    private float tunaDialogStrokeWidth;
-    private int tunaDialogStrokeColor;
+    private float dialogStrokeWidth;
+    private int dialogStrokeColor;
 
-    private String tunaDialogTitleTextValue;
-    private float tunaDialogTitleTextSize;
-    private int tunaDialogTitleTextColor;
-    private float tunaDialogTitleTextDy;
+    private String dialogTitleTextValue;
+    private float dialogTitleTextSize;
+    private int dialogTitleTextColor;
+    private float dialogTitleTextDy;
 
-    private String tunaDialogContentTextValue;
-    private float tunaDialogContentTextSize;
-    private int tunaDialogContentTextColor;
-    private float tunaDialogContentTextPaddingLeft;
-    private float tunaDialogContentTextPaddingRight;
-    private float tunaDialogContentTextDy;
+    private String dialogContentTextValue;
+    private float dialogContentTextSize;
+    private int dialogContentTextColor;
+    private float dialogContentTextPaddingLeft;
+    private float dialogContentTextPaddingRight;
+    private float dialogContentTextDy;
 
-    private int tunaDialogChoiceBackgroundNormal;
-    private int tunaDialogChoiceBackgroundPress;
+    private int dialogChoiceBackgroundNormal;
+    private int dialogChoiceBackgroundPress;
 
-    private float tunaDialogChoiceHeight;
-    private float tunaDialogChoiceStrokeWidth;
-    private int tunaDialogChoiceStrokeColor;
+    private float dialogChoiceHeight;
+    private float dialogChoiceStrokeWidth;
+    private int dialogChoiceStrokeColor;
 
+    private String[] dialogChoiceTextValueArray;
+    private float dialogChoiceTextSize;
+    private int dialogChoiceTextColorNormal;
+    private int dialogChoiceTextColorPress;
 
-    private String[] tunaDialogChoiceTextValueArray;
-    private float tunaDialogChoiceTextSize;
-    private int tunaDialogChoiceTextColorNormal;
-    private int tunaDialogChoiceTextColorPress;
+    private int dialogChoiceCurrentIndex;
 
-    private int tunaDialogChoiceCurrentIndex;
-
-    public int getTunaDialogChoiceCurrentIndex() {
-        return tunaDialogChoiceCurrentIndex;
+    public int getDialogChoiceCurrentIndex() {
+        return dialogChoiceCurrentIndex;
     }
 
-    public void setTunaDialogChoiceCurrentIndex(int tunaDialogChoiceCurrentIndex) {
-        this.tunaDialogChoiceCurrentIndex = tunaDialogChoiceCurrentIndex;
+    public void setDialogChoiceCurrentIndex(int dialogChoiceCurrentIndex) {
+        this.dialogChoiceCurrentIndex = dialogChoiceCurrentIndex;
     }
 
     //
-    private float radiusLeftBottom;
-    private float radiusRightBottom;
-    private int width;
+    private float dialogRadiusLeftBottom;
+    private float dialogRadiusRightBottom;
+    private int dialogWidth;
 
     public TDialog(Context context) {
         this(context, null);
@@ -77,60 +75,60 @@ public class TDialog extends TView {
     public TDialog(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TDialog.class.getSimpleName();
+        Tag = TDialog.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDialog);
 
-        tunaDialogBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogBackgroundNormal, Color.TRANSPARENT);
-        tunaDialogRadius = typedArray.getDimension(R.styleable.TDialog_dialogRadius, 0);
+        dialogBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogBackgroundNormal, Color.TRANSPARENT);
+        dialogRadius = typedArray.getDimension(R.styleable.TDialog_dialogRadius, 0);
 
-        tunaDialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
-        tunaDialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
+        dialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
+        dialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
 
-        tunaDialogTitleTextValue = typedArray.getString(R.styleable.TDialog_dialogTitleTextValue);
-        tunaDialogTitleTextSize = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextSize, 0);
-        tunaDialogTitleTextColor = typedArray.getColor(R.styleable.TDialog_dialogTitleTextColor, Color.TRANSPARENT);
-        tunaDialogTitleTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextDy, 0);
+        dialogTitleTextValue = typedArray.getString(R.styleable.TDialog_dialogTitleTextValue);
+        dialogTitleTextSize = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextSize, 0);
+        dialogTitleTextColor = typedArray.getColor(R.styleable.TDialog_dialogTitleTextColor, Color.TRANSPARENT);
+        dialogTitleTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextDy, 0);
 
-        tunaDialogContentTextValue = typedArray.getString(R.styleable.TDialog_dialogContentTextValue);
-        tunaDialogContentTextSize = typedArray.getDimension(R.styleable.TDialog_dialogContentTextSize, 0);
-        tunaDialogContentTextColor = typedArray.getColor(R.styleable.TDialog_dialogContentTextColor, Color.TRANSPARENT);
+        dialogContentTextValue = typedArray.getString(R.styleable.TDialog_dialogContentTextValue);
+        dialogContentTextSize = typedArray.getDimension(R.styleable.TDialog_dialogContentTextSize, 0);
+        dialogContentTextColor = typedArray.getColor(R.styleable.TDialog_dialogContentTextColor, Color.TRANSPARENT);
 
-        tunaDialogContentTextPaddingLeft = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingLeft, 0);
-        tunaDialogContentTextPaddingRight = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingRight, 0);
+        dialogContentTextPaddingLeft = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingLeft, 0);
+        dialogContentTextPaddingRight = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingRight, 0);
 
-        tunaDialogContentTextDy = typedArray.getDimension(R.styleable.TDialog_dialogContentTextDy, 0);
+        dialogContentTextDy = typedArray.getDimension(R.styleable.TDialog_dialogContentTextDy, 0);
 
-        tunaDialogChoiceBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundNormal, Color.TRANSPARENT);
-        tunaDialogChoiceBackgroundPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundPress, tunaDialogChoiceBackgroundNormal);
+        dialogChoiceBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundNormal, Color.TRANSPARENT);
+        dialogChoiceBackgroundPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundPress, dialogChoiceBackgroundNormal);
 
-        tunaDialogChoiceStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogChoiceStrokeWidth, 0);
-        tunaDialogChoiceStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceStrokeColor, Color.TRANSPARENT);
+        dialogChoiceStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogChoiceStrokeWidth, 0);
+        dialogChoiceStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceStrokeColor, Color.TRANSPARENT);
 
-        int tunaDialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceTextValueArray, -1);
+        int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceTextValueArray, -1);
 
-        if (tunaDialogChoiceTextValueArrayId != -1) {
+        if (dialogChoiceTextValueArrayId != -1) {
             if (isInEditMode()) {
-                tunaDialogChoiceTextValueArray = new String[]{"Confirm", "Cancel"};
+                dialogChoiceTextValueArray = new String[]{"Confirm", "Cancel"};
             } else {
-                tunaDialogChoiceTextValueArray = typedArray.getResources().getStringArray(tunaDialogChoiceTextValueArrayId);
+                dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
             }
-            tunaTotal = tunaDialogChoiceTextValueArray.length;
-            tunaFloatArray = new float[tunaTotal];
+            total = dialogChoiceTextValueArray.length;
+            floatArray = new float[total];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named tunaDragArray");
+            throw new IllegalArgumentException("The content attribute require a property named dialogChoiceTextValueArray");
         }
 
-        tunaDialogChoiceHeight = typedArray.getDimension(R.styleable.TDialog_dialogChoiceHeight, 0);
-        if (tunaDialogChoiceHeight <= 0) {
-            throw new IndexOutOfBoundsException("The content attribute tunaDialogChoiceHeight length must be greater than 0");
+        dialogChoiceHeight = typedArray.getDimension(R.styleable.TDialog_dialogChoiceHeight, 0);
+        if (dialogChoiceHeight <= 0) {
+            throw new IndexOutOfBoundsException("The content attribute dialogChoiceHeight length must be greater than 0");
         }
 
-        tunaDialogChoiceTextSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceTextSize, 0);
-        tunaDialogChoiceTextColorNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorNormal, Color.TRANSPARENT);
-        tunaDialogChoiceTextColorPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorPress, tunaDialogChoiceTextColorNormal);
+        dialogChoiceTextSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceTextSize, 0);
+        dialogChoiceTextColorNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorNormal, Color.TRANSPARENT);
+        dialogChoiceTextColorPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorPress, dialogChoiceTextColorNormal);
 
-        tunaDialogChoiceCurrentIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceCurrentIndex, -1);
+        dialogChoiceCurrentIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceCurrentIndex, -1);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -141,12 +139,12 @@ public class TDialog extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        tunaShare = tunaWidth * 1f / tunaTotal;
-        tunaDy = tunaHeight - tunaDialogChoiceHeight;
+        share = width * 1f / total;
+        dy = height - dialogChoiceHeight;
 
         //tunaRepeatCentreXArray avoid generating with new
-        for (int i = 0; i < tunaTotal; i++) {
-            tunaFloatArray[i] = tunaShare * 0.5f + tunaShare * i;
+        for (int i = 0; i < total; i++) {
+            floatArray[i] = share * 0.5f + share * i;
         }
     }
 
@@ -155,99 +153,99 @@ public class TDialog extends TView {
         super.onDraw(canvas);
 
         //
-        drawTunaRectClassic(canvas,
-                tunaWidth, tunaHeight,
-                tunaDialogBackgroundNormal,
-                tunaDialogStrokeWidth,
-                tunaDialogStrokeColor,
-                tunaDialogRadius);
+        drawRectClassic(canvas,
+                width, height,
+                dialogBackgroundNormal,
+                dialogStrokeWidth,
+                dialogStrokeColor,
+                dialogRadius);
 
-//		//drawTunaDialogTitleText
-        drawTunaText(
+//		//drawDialogTitleText
+        drawText(
                 canvas,
-                tunaDialogTitleTextValue,
-                tunaWidth,
-                tunaWidth >> 1,
-                tunaDialogTitleTextSize * 0.5f + tunaDialogTitleTextDy,
+                dialogTitleTextValue,
+                width,
+                width >> 1,
+                dialogTitleTextSize * 0.5f + dialogTitleTextDy,
                 0, 0,
-                initTunaTextPaint(Paint.Style.FILL, tunaDialogTitleTextColor, tunaDialogTitleTextSize, Paint.Align.CENTER));
+                PaintTool.initTextPaint(Paint.Style.FILL, dialogTitleTextColor, dialogTitleTextSize, Paint.Align.CENTER));
 
-        //drawTunaDialogContentText
-        drawTunaText(
+        //drawDialogContentText
+        drawText(
                 canvas,
-                tunaDialogContentTextValue,
-                tunaWidth,
-                tunaWidth >> 1,
-                (tunaHeight >> 1) + tunaDialogContentTextDy,
-                tunaDialogContentTextPaddingLeft, tunaDialogContentTextPaddingRight,
-                initTunaTextPaint(Paint.Style.FILL, tunaDialogContentTextColor, tunaDialogContentTextSize, Paint.Align.CENTER));
+                dialogContentTextValue,
+                width,
+                width >> 1,
+                (height >> 1) + dialogContentTextDy,
+                dialogContentTextPaddingLeft, dialogContentTextPaddingRight,
+                PaintTool.initTextPaint(Paint.Style.FILL, dialogContentTextColor, dialogContentTextSize, Paint.Align.CENTER));
 
         //draw Options
-        for (int i = 0; i < tunaTotal; i++) {
+        for (int i = 0; i < total; i++) {
             if (i == 0) {
-                radiusLeftBottom = tunaDialogRadius;
-                tunaDx = tunaShare * i;
-                if (i != (tunaTotal - 1)) {
-                    width = (int) (tunaShare + tunaDialogChoiceStrokeWidth * 0.5f);
-                    radiusRightBottom = 0;
+                dialogRadiusLeftBottom = dialogRadius;
+                dx = share * i;
+                if (i != (total - 1)) {
+                    dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
+                    dialogRadiusRightBottom = 0;
                 } else {
-                    width = (int) (tunaShare + tunaDialogChoiceStrokeWidth);
-                    radiusRightBottom = tunaDialogRadius;
+                    dialogWidth = (int) (share + dialogChoiceStrokeWidth);
+                    dialogRadiusRightBottom = dialogRadius;
                 }
             } else {
-                radiusLeftBottom = 0;
-                tunaDx = tunaShare * i - tunaDialogChoiceStrokeWidth * 0.5f;
-                if (i != (tunaTotal - 1)) {
-                    radiusRightBottom = 0;
-                    width = (int) (tunaShare + tunaDialogChoiceStrokeWidth);
+                dialogRadiusLeftBottom = 0;
+                dx = share * i - dialogChoiceStrokeWidth * 0.5f;
+                if (i != (total - 1)) {
+                    dialogRadiusRightBottom = 0;
+                    dialogWidth = (int) (share + dialogChoiceStrokeWidth);
                 } else {
-                    width = (int) (tunaShare + tunaDialogChoiceStrokeWidth * 0.5f);
-                    radiusRightBottom = tunaDialogRadius;
+                    dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
+                    dialogRadiusRightBottom = dialogRadius;
                 }
             }
             //
-            canvas.translate(tunaDx, tunaDy);
+            canvas.translate(dx, dy);
             //
-            drawTunaRectCustom(canvas, width, (int) tunaDialogChoiceHeight, i == tunaDialogChoiceCurrentIndex ? tunaDialogChoiceBackgroundPress : tunaDialogChoiceBackgroundNormal,
-                    tunaDialogChoiceStrokeWidth, tunaDialogChoiceStrokeColor, 0, radiusLeftBottom, 0, radiusRightBottom);
+            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceCurrentIndex ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal,
+                    dialogChoiceStrokeWidth, dialogChoiceStrokeColor, 0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
             //
-            drawTunaText(
+            drawText(
                     canvas,
-                    tunaDialogChoiceTextValueArray[i],
-                    tunaWidth,
-                    width * 0.5f,
-                    tunaDialogChoiceHeight * 0.5f,
+                    dialogChoiceTextValueArray[i],
+                    width,
+                    dialogWidth * 0.5f,
+                    dialogChoiceHeight * 0.5f,
                     0,
                     0,
-                    initTunaTextPaint(Paint.Style.FILL,
-                            i == tunaDialogChoiceCurrentIndex ? tunaDialogChoiceTextColorPress : tunaDialogChoiceTextColorNormal, tunaDialogChoiceTextSize,
+                    PaintTool.initTextPaint(Paint.Style.FILL,
+                            i == dialogChoiceCurrentIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
                             Paint.Align.CENTER));
             //
-            canvas.translate(-tunaDx, -tunaDy);
+            canvas.translate(-dx, -dy);
         }
 
 //		//Then draw a border line again
-        drawTunaRectClassic(canvas,
-                tunaWidth, tunaHeight,
+        drawRectClassic(canvas,
+                width, height,
                 Color.TRANSPARENT,
-                tunaDialogStrokeWidth,
-                tunaDialogStrokeColor,
-                tunaDialogRadius);
+                dialogStrokeWidth,
+                dialogStrokeColor,
+                dialogRadius);
     }
 
 
-    public void setTunaDialogCurrentXY(float tunaDialogCurrentX, float tunaDialogCurrentY) {
+    public void setDialogCurrentXY(float dialogCurrentX, float dialogCurrentY) {
         //calculate index
-        if (tunaDialogCurrentY >= tunaDy) {
+        if (dialogCurrentY >= dy) {
 
-            float minDistence = tunaWidth;
+            float minDistence = width;
 
             //From 0 to judge one by one, if the distance farther on the end of the cycle
-            for (int i = 0; i < tunaTotal; i++) {
-                float centreDistance = Math.abs(tunaDialogCurrentX - tunaFloatArray[i]);
+            for (int i = 0; i < total; i++) {
+                float centreDistance = Math.abs(dialogCurrentX - floatArray[i]);
 
                 if (centreDistance < minDistence) {
-                    tunaDialogChoiceCurrentIndex = i;
+                    dialogChoiceCurrentIndex = i;
                     minDistence = centreDistance;
 
                 } else {
@@ -255,13 +253,13 @@ public class TDialog extends TView {
                 }
             }
         } else {
-            tunaDialogChoiceCurrentIndex = -1;
+            dialogChoiceCurrentIndex = -1;
         }
     }
 
-    public String getTunaDialogCurrentChoiceTextValue() {
-        if (tunaDialogChoiceCurrentIndex >= 0) {
-            return tunaDialogChoiceTextValueArray[tunaDialogChoiceCurrentIndex];
+    public String getDialogCurrentChoiceTextValue() {
+        if (dialogChoiceCurrentIndex >= 0) {
+            return dialogChoiceTextValueArray[dialogChoiceCurrentIndex];
         } else {
             return null;
         }

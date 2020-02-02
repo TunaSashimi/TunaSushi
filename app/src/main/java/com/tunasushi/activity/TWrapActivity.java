@@ -13,7 +13,7 @@ import com.tunasushi.tuna.TWrap;
 import java.util.Arrays;
 
 public class TWrapActivity extends Activity {
-    private TWrap tunaWrap;
+    private TWrap tWrap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,16 +21,16 @@ public class TWrapActivity extends Activity {
 
         setContentView(R.layout.activity_t_wrap);
 
-        tunaWrap = findViewById(R.id.tWrap);
-        tunaWrap.setTunaWrapItemTextValueArray(
+        tWrap = findViewById(R.id.tWrap);
+        tWrap.setTWrapItemTextValueArray(
             new String[]{
                 " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
             });
 
-        tunaWrap.setTunaTouchUpListener(new TView.TunaTouchUpListener() {
+        tWrap.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void tunaTouchUp(View v) {
-                tunaWrap.setTunaWrapCurrentXY(tunaWrap.getTunaTouchEventX(), tunaWrap.getTunaTouchEventY());
+            public void touchUp(View v) {
+                tWrap.setWrapCurrentXY(tWrap.getTouchEventX(), tWrap.getTouchEventY());
             }
         });
 
@@ -38,7 +38,7 @@ public class TWrapActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), Arrays.toString(tunaWrap.getTunaWrapCurrentSelect()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapCurrentSelect()), Toast.LENGTH_LONG).show();
             }
         });
     }

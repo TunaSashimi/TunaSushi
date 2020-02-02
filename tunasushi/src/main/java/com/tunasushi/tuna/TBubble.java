@@ -9,179 +9,179 @@ import android.graphics.Region.Op;
 import android.util.AttributeSet;
 
 import com.tuna.R;
-
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
+import com.tunasushi.tool.PaintTool;
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
+import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:50
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TBubble extends TView {
 
-    private int tunaBubbleBackground;
+    private int bubbleBackground;
 
-    public int getTunaBubbleBackground() {
-        return tunaBubbleBackground;
+    public int getBubbleBackground() {
+        return bubbleBackground;
     }
 
-    public void setTunaBubbleBackground(int tunaBubbleBackground) {
-        this.tunaBubbleBackground = tunaBubbleBackground;
+    public void setBubbleBackground(int bubbleBackground) {
+        this.bubbleBackground = bubbleBackground;
     }
 
-    private float tunaBubbleRadius;
+    private float bubbleRadius;
 
-    public float getTunaBubbleRadius() {
-        return tunaBubbleRadius;
+    public float getBubbleRadius() {
+        return bubbleRadius;
     }
 
-    public void setTunaBubbleRadius(float tunaBubbleRadius) {
-        this.tunaBubbleRadius = tunaBubbleRadius;
+    public void setBubbleRadius(float bubbleRadius) {
+        this.bubbleRadius = bubbleRadius;
     }
 
-    private float tunaBubbleEdgeWidth;
+    private float bubbleEdgeWidth;
 
-    public float getTunaBubbleEdgeWidth() {
-        return tunaBubbleEdgeWidth;
+    public float getBubbleEdgeWidth() {
+        return bubbleEdgeWidth;
     }
 
-    public void setTunaBubbleEdgeWidth(float tunaBubbleEdgeWidth) {
-        this.tunaBubbleEdgeWidth = tunaBubbleEdgeWidth;
+    public void setBubbleEdgeWidth(float bubbleEdgeWidth) {
+        this.bubbleEdgeWidth = bubbleEdgeWidth;
     }
 
-    private float tunaBubbleEdgeHeight;
+    private float bubbleEdgeHeight;
 
-    public float getTunaBubbleEdgeHeight() {
-        return tunaBubbleEdgeHeight;
+    public float getBubbleEdgeHeight() {
+        return bubbleEdgeHeight;
     }
 
-    public void setTunaBubbleEdgeHeight(float tunaBubbleEdgeHeight) {
-        this.tunaBubbleEdgeHeight = tunaBubbleEdgeHeight;
+    public void setBubbleEdgeHeight(float bubbleEdgeHeight) {
+        this.bubbleEdgeHeight = bubbleEdgeHeight;
     }
 
-    private String tunaBubbleTextValue;
+    private String bubbleTextValue;
 
-    public String getTunaBubbleTextValue() {
-        return tunaBubbleTextValue;
+    public String getBubbleTextValue() {
+        return bubbleTextValue;
     }
 
-    public void setTunaBubbleTextValue(String tunaBubbleTextValue) {
-        this.tunaBubbleTextValue = tunaBubbleTextValue;
+    public void setBubbleTextValue(String bubbleTextValue) {
+        this.bubbleTextValue = bubbleTextValue;
         requestLayout();
     }
 
-    private float tunaBubbleTextSize;
+    private float bubbleTextSize;
 
-    public float getTunaBubbleTextSize() {
-        return tunaBubbleTextSize;
+    public float getBubbleTextSize() {
+        return bubbleTextSize;
     }
 
-    public void setTunaBubbleTextSize(float tunaBubbleTextSize) {
-        this.tunaBubbleTextSize = tunaBubbleTextSize;
+    public void setBubbleTextSize(float bubbleTextSize) {
+        this.bubbleTextSize = bubbleTextSize;
     }
 
-    private int tunaBubbleTextColorNormal;
+    private int bubbleTextColorNormal;
 
-    public int getTunaBubbleTextColorNormal() {
-        return tunaBubbleTextColorNormal;
+    public int getBubbleTextColorNormal() {
+        return bubbleTextColorNormal;
     }
 
-    public void setTunaBubbleTextColorNormal(int tunaBubbleTextColorNormal) {
-        this.tunaBubbleTextColorNormal = tunaBubbleTextColorNormal;
+    public void setBubbleTextColorNormal(int bubbleTextColorNormal) {
+        this.bubbleTextColorNormal = bubbleTextColorNormal;
     }
 
 
-    private float tunaBubbleTextPadding;
+    private float bubbleTextPadding;
 
-    public float getTunaBubbleTextPadding() {
-        return tunaBubbleTextPadding;
+    public float getBubbleTextPadding() {
+        return bubbleTextPadding;
     }
 
-    public void setTunaBubbleTextPadding(float tunaBubbleTextPadding) {
-        this.tunaBubbleTextPadding = tunaBubbleTextPadding;
+    public void setBubbleTextPadding(float bubbleTextPadding) {
+        this.bubbleTextPadding = bubbleTextPadding;
     }
 
-    private TunaBubbleTowardType tunaBubbleTowardType;
+    private BubbleTowardType bubbleTowardType;
 
-    public TunaBubbleTowardType getTunaBubbleTowardType() {
-        return tunaBubbleTowardType;
+    public BubbleTowardType getBubbleTowardType() {
+        return bubbleTowardType;
     }
 
-    public void setTunaBubbleTowardType(TunaBubbleTowardType tunaBubbleTowardType) {
-        this.tunaBubbleTowardType = tunaBubbleTowardType;
+    public void setBubbleTowardType(BubbleTowardType bubbleTowardType) {
+        this.bubbleTowardType = bubbleTowardType;
     }
 
-    public enum TunaBubbleTowardType {
+    public enum BubbleTowardType {
         LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),;
         final int nativeInt;
 
-        TunaBubbleTowardType(int ni) {
+        BubbleTowardType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaBubbleTowardType[] tunaBubbleTowardTypeArray = {TunaBubbleTowardType.LEFT, TunaBubbleTowardType.TOP, TunaBubbleTowardType.RIGHT,
-            TunaBubbleTowardType.BOTTOM,};
+    private static final BubbleTowardType[] bubbleTowardTypeArray = {BubbleTowardType.LEFT, BubbleTowardType.TOP, BubbleTowardType.RIGHT,
+            BubbleTowardType.BOTTOM,};
 
-    public static TunaBubbleTowardType[] getTunabubbletowardtypeArray() {
-        return tunaBubbleTowardTypeArray;
+    public static BubbleTowardType[] getbubbletowardtypeArray() {
+        return bubbleTowardTypeArray;
     }
 
-    private TunaBubbleLocationType tunaBubbleLocationType;
+    private BubbleLocationType bubbleLocationType;
 
-    public TunaBubbleLocationType getTunaBubbleLocationType() {
-        return tunaBubbleLocationType;
+    public BubbleLocationType getBubbleLocationType() {
+        return bubbleLocationType;
     }
 
-    public void setTunaBubbleTowardType(TunaBubbleLocationType tunaBubbleLocationType) {
-        this.tunaBubbleLocationType = tunaBubbleLocationType;
+    public void setBubbleTowardType(BubbleLocationType bubbleLocationType) {
+        this.bubbleLocationType = bubbleLocationType;
     }
 
-    public enum TunaBubbleLocationType {
+    public enum BubbleLocationType {
         LOW(0), MIDDLE(1), HIGH(2),;
         final int nativeInt;
 
-        TunaBubbleLocationType(int ni) {
+        BubbleLocationType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaBubbleLocationType[] tunaBubbleLocationTypeArray = {TunaBubbleLocationType.LOW, TunaBubbleLocationType.MIDDLE, TunaBubbleLocationType.HIGH,};
+    private static final BubbleLocationType[] bubbleLocationTypeArray = {BubbleLocationType.LOW, BubbleLocationType.MIDDLE, BubbleLocationType.HIGH,};
 
-    public static TunaBubbleLocationType[] getTTunaBubbleLocationTypeArray() {
-        return tunaBubbleLocationTypeArray;
+    public static BubbleLocationType[] getBubbleLocationTypeArray() {
+        return bubbleLocationTypeArray;
     }
 
-    private float tunaBubbleOffset;
+    private float bubbleOffset;
 
-    public float getTunaBubbleOffset() {
-        return tunaBubbleOffset;
+    public float getBubbleOffset() {
+        return bubbleOffset;
     }
 
-    public void setTunaBubbleOffset(float tunaBubbleOffset) {
-        this.tunaBubbleOffset = tunaBubbleOffset;
+    public void setBubbleOffset(float bubbleOffset) {
+        this.bubbleOffset = bubbleOffset;
     }
 
-    private int tunaBubbleStrokeColor;
+    private int bubbleStrokeColor;
 
-    public int getTunaBubbleStrokeColor() {
-        return tunaBubbleStrokeColor;
+    public int getBubbleStrokeColor() {
+        return bubbleStrokeColor;
     }
 
-    public void setTunaBubbleStrokeColor(int tunaBubbleStrokeColor) {
-        this.tunaBubbleStrokeColor = tunaBubbleStrokeColor;
+    public void setBubbleStrokeColor(int bubbleStrokeColor) {
+        this.bubbleStrokeColor = bubbleStrokeColor;
     }
 
-    private float tunaBubbleStrokeWidth;
+    private float bubbleStrokeWidth;
 
-    public float getTunaBubbleStrokeWidth() {
-        return tunaBubbleStrokeWidth;
+    public float getBubbleStrokeWidth() {
+        return bubbleStrokeWidth;
     }
 
-    public void setTunaBubbleStrokeWidth(float tunaBubbleStrokeWidth) {
-        this.tunaBubbleStrokeWidth = tunaBubbleStrokeWidth;
+    public void setBubbleStrokeWidth(float bubbleStrokeWidth) {
+        this.bubbleStrokeWidth = bubbleStrokeWidth;
     }
 
     public TBubble(Context context) {
@@ -195,38 +195,38 @@ public class TBubble extends TView {
     public TBubble(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TBubble.class.getSimpleName();
+        Tag = TBubble.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubble);
 
-        tunaBubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
-        tunaBubbleRadius = typedArray.getDimension(R.styleable.TBubble_bubbleRadius, 0);
+        bubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
+        bubbleRadius = typedArray.getDimension(R.styleable.TBubble_bubbleRadius, 0);
 
-        tunaBubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeWidth, 0);
-        tunaBubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
+        bubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeWidth, 0);
+        bubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
 
-        tunaBubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
-        tunaBubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, 0);
-        tunaBubbleTextColorNormal = typedArray.getColor(R.styleable.TBubble_bubbleTextColorNormal, Color.TRANSPARENT);
-        tunaBubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
+        bubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
+        bubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, 0);
+        bubbleTextColorNormal = typedArray.getColor(R.styleable.TBubble_bubbleTextColorNormal, Color.TRANSPARENT);
+        bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
-        int tunaBubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);
-        if (tunaBubbleTowardTypeIndex >= 0) {
-            tunaBubbleTowardType = tunaBubbleTowardTypeArray[tunaBubbleTowardTypeIndex];
+        int bubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);
+        if (bubbleTowardTypeIndex >= 0) {
+            bubbleTowardType = bubbleTowardTypeArray[bubbleTowardTypeIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute tunaBubbleTowardType type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubbleTowardType type it does not conform to the rules");
         }
 
-        int tunaBubbleLocationTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleLocationType, 0);
-        if (tunaBubbleLocationTypeIndex >= 0) {
-            tunaBubbleLocationType = tunaBubbleLocationTypeArray[tunaBubbleLocationTypeIndex];
+        int bubbleLocationTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleLocationType, 0);
+        if (bubbleLocationTypeIndex >= 0) {
+            bubbleLocationType = bubbleLocationTypeArray[bubbleLocationTypeIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute tunaBubbleLocationType type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubbleLocationType type it does not conform to the rules");
         }
 
-        tunaBubbleOffset = typedArray.getDimension(R.styleable.TBubble_bubbleOffset, 0);
-        tunaBubbleStrokeColor = typedArray.getColor(R.styleable.TBubble_bubbleStrokeColor, tunaBubbleBackground);
-        tunaBubbleStrokeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleStrokeWidth, 0);
+        bubbleOffset = typedArray.getDimension(R.styleable.TBubble_bubbleOffset, 0);
+        bubbleStrokeColor = typedArray.getColor(R.styleable.TBubble_bubbleStrokeColor, bubbleBackground);
+        bubbleStrokeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleStrokeWidth, 0);
 
         typedArray.recycle();
     }
@@ -236,19 +236,19 @@ public class TBubble extends TView {
 //	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
 //		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 //		
-////		setMeasuredDimension(resolveTunaSize((int)(getMinimumTunaWidth(tunaBubbleTextValue,tunaBubbleTextSize) + tunaBubbleEdgeWidth + tunaBubbleTextPadding), widthMeasureSpec), 
-////				resolveTunaSize((int) getMinimumTunaHeight(tunaBubbleTextValue), heightMeasureSpec));
+////		setMeasuredDimension(resolveSize((int)(getMinimumWidth(bubbleTextValue,bubbleTextSize) + bubbleEdgeWidth + bubbleTextPadding), widthMeasureSpec),
+////				resolveSize((int) getMinimumHeight(bubbleTextValue), heightMeasureSpec));
 //		
 //	}
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (tunaBubbleEdgeWidth <= 0 || tunaBubbleEdgeWidth + tunaBubbleStrokeWidth * 0.5f > tunaWidth) {
-            throw new IndexOutOfBoundsException("The content attribute tunaBubbleEdgeWidth it does not conform to the rules");
+        if (bubbleEdgeWidth <= 0 || bubbleEdgeWidth + bubbleStrokeWidth * 0.5f > width) {
+            throw new IndexOutOfBoundsException("The content attribute bubbleEdgeWidth it does not conform to the rules");
         }
-        if (tunaBubbleEdgeHeight <= 0 || tunaBubbleEdgeHeight + tunaBubbleStrokeWidth * 0.5f > tunaHeight) {
-            throw new IndexOutOfBoundsException("The content attribute tunaBubbleEdgeHeight it does not conform to the rules");
+        if (bubbleEdgeHeight <= 0 || bubbleEdgeHeight + bubbleStrokeWidth * 0.5f > height) {
+            throw new IndexOutOfBoundsException("The content attribute bubbleEdgeHeight it does not conform to the rules");
         }
 
 
@@ -261,8 +261,8 @@ public class TBubble extends TView {
         //By default center offset to adjust the position!
         float left = 0;
         float top = 0;
-        float right = tunaWidth;
-        float bottom = tunaHeight;
+        float right = width;
+        float bottom = height;
 
         float rectLeft = 0;
         float rectTop = 0;
@@ -296,217 +296,217 @@ public class TBubble extends TView {
         float offsetX = 0;
         float offsetY = 0;
 
-        float textWidth = tunaWidth - tunaBubbleStrokeWidth * 2;
-        float textCenterX = tunaWidth >> 1;
-        float textCenterY = tunaHeight >> 1;
+        float textWidth = width - bubbleStrokeWidth * 2;
+        float textCenterX = width >> 1;
+        float textCenterY = height >> 1;
 
-        switch (tunaBubbleTowardType) {
+        switch (bubbleTowardType) {
             case LEFT:
 
-                switch (tunaBubbleLocationType) {
+                switch (bubbleLocationType) {
                     case LOW:
-                        offsetY = (tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1;
-                        offsetY += tunaBubbleOffset;
+                        offsetY = (height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetY += bubbleOffset;
                         break;
                     case MIDDLE:
-                        offsetY += tunaBubbleOffset;
+                        offsetY += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetY = ((tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1) * -1;
-                        offsetY += tunaBubbleOffset;
+                        offsetY = ((height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetY += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                left = tunaBubbleEdgeHeight;
+                left = bubbleEdgeHeight;
 
-                rectTop = (tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f + offsetY;
-                rectBottom = rectTop + tunaBubbleEdgeWidth;
-                rectLeft = tunaBubbleEdgeHeight + offsetX;
-                rectRight = rectLeft + tunaBubbleStrokeWidth;
+                rectTop = (height >> 1) - bubbleEdgeWidth * 0.5f + offsetY;
+                rectBottom = rectTop + bubbleEdgeWidth;
+                rectLeft = bubbleEdgeHeight + offsetX;
+                rectRight = rectLeft + bubbleStrokeWidth;
 
-                inPolygonVertexX0 = tunaBubbleStrokeWidth + offsetX;
-                inPolygonVertexY0 = (tunaHeight >> 1) + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 + tunaBubbleEdgeHeight;
-                intPolygonVertexY1 = inPolygonVertexY0 + tunaBubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 + tunaBubbleRadius;
+                inPolygonVertexX0 = bubbleStrokeWidth + offsetX;
+                inPolygonVertexY0 = (height >> 1) + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 + bubbleEdgeHeight;
+                intPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
+                inPolygonVertexX2 = inPolygonVertexX1 + bubbleRadius;
                 inPolygonVertexY2 = intPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
-                inPolygonVertexY3 = inPolygonVertexY2 - tunaBubbleEdgeWidth;
+                inPolygonVertexY3 = inPolygonVertexY2 - bubbleEdgeWidth;
                 inPolygonVertexX4 = inPolygonVertexX1;
                 inPolygonVertexY4 = inPolygonVertexY3;
 
                 outPolygonVertexX0 = offsetX;
-                outPolygonVertexY0 = (tunaHeight >> 1) + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 + tunaBubbleEdgeHeight;
-                outPolygonVertexY1 = outPolygonVertexY0 + tunaBubbleEdgeWidth * 0.5f;
-                outPolygonVertexX2 = outPolygonVertexX1 + tunaBubbleStrokeWidth;
+                outPolygonVertexY0 = (height >> 1) + offsetY;
+                outPolygonVertexX1 = outPolygonVertexX0 + bubbleEdgeHeight;
+                outPolygonVertexY1 = outPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
+                outPolygonVertexX2 = outPolygonVertexX1 + bubbleStrokeWidth;
                 outPolygonVertexY2 = outPolygonVertexY1;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
                 outPolygonVertexX4 = outPolygonVertexX2;
-                outPolygonVertexY4 = outPolygonVertexY1 - tunaBubbleEdgeWidth;
+                outPolygonVertexY4 = outPolygonVertexY1 - bubbleEdgeWidth;
                 outPolygonVertexX5 = outPolygonVertexX1;
                 outPolygonVertexY5 = outPolygonVertexY4;
 
                 //
-                textCenterX += tunaBubbleEdgeHeight * 0.5f;
+                textCenterX += bubbleEdgeHeight * 0.5f;
 
                 break;
 
             case TOP:
-                switch (tunaBubbleLocationType) {
+                switch (bubbleLocationType) {
                     case LOW:
-                        offsetX = ((tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1) * -1;
-                        offsetX += tunaBubbleOffset;
+                        offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetX += bubbleOffset;
                         break;
                     case MIDDLE:
-                        offsetX += tunaBubbleOffset;
+                        offsetX += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetX = (tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1;
-                        offsetX += tunaBubbleOffset;
+                        offsetX = (width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetX += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                top = tunaBubbleEdgeHeight;
+                top = bubbleEdgeHeight;
 
-                rectTop = tunaBubbleEdgeHeight + offsetY;
-                rectBottom = rectTop + tunaBubbleStrokeWidth;
-                rectLeft = (tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f + offsetX;
-                rectRight = rectLeft + tunaBubbleEdgeWidth;
+                rectTop = bubbleEdgeHeight + offsetY;
+                rectBottom = rectTop + bubbleStrokeWidth;
+                rectLeft = (width >> 1) - bubbleEdgeWidth * 0.5f + offsetX;
+                rectRight = rectLeft + bubbleEdgeWidth;
 
-                inPolygonVertexX0 = (tunaWidth >> 1) + offsetX;
-                inPolygonVertexY0 = tunaBubbleStrokeWidth + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - tunaBubbleEdgeWidth * 0.5f;
-                intPolygonVertexY1 = inPolygonVertexY0 + tunaBubbleEdgeHeight;
+                inPolygonVertexX0 = (width >> 1) + offsetX;
+                inPolygonVertexY0 = bubbleStrokeWidth + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
+                intPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = intPolygonVertexY1 + tunaBubbleRadius;
-                inPolygonVertexX3 = inPolygonVertexX2 + tunaBubbleEdgeWidth;
+                inPolygonVertexY2 = intPolygonVertexY1 + bubbleRadius;
+                inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
                 inPolygonVertexY4 = intPolygonVertexY1;
 
-                outPolygonVertexX0 = (tunaWidth >> 1) + offsetX;
+                outPolygonVertexX0 = (width >> 1) + offsetX;
                 outPolygonVertexY0 = offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - tunaBubbleEdgeWidth * 0.5f;
-                outPolygonVertexY1 = outPolygonVertexY0 + tunaBubbleEdgeHeight;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
+                outPolygonVertexY1 = outPolygonVertexY0 + bubbleEdgeHeight;
                 outPolygonVertexX2 = outPolygonVertexX1;
-                outPolygonVertexY2 = outPolygonVertexY1 + tunaBubbleStrokeWidth;
+                outPolygonVertexY2 = outPolygonVertexY1 + bubbleStrokeWidth;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2 + tunaBubbleEdgeWidth;
+                outPolygonVertexX4 = outPolygonVertexX2 + bubbleEdgeWidth;
                 outPolygonVertexY4 = outPolygonVertexY2;
                 outPolygonVertexX5 = outPolygonVertexX4;
                 outPolygonVertexY5 = outPolygonVertexY1;
 
                 //
-                textCenterY += tunaBubbleEdgeHeight * 0.5f;
+                textCenterY += bubbleEdgeHeight * 0.5f;
 
                 break;
 
             case RIGHT:
-                switch (tunaBubbleLocationType) {
+                switch (bubbleLocationType) {
                     case LOW:
-                        offsetY = ((tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1) * -1;
-                        offsetY += tunaBubbleOffset;
+                        offsetY = ((height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetY += bubbleOffset;
                         break;
                     case MIDDLE:
-                        offsetY += tunaBubbleOffset;
+                        offsetY += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetY = (tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1;
-                        offsetY += tunaBubbleOffset;
+                        offsetY = (height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetY += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                right -= tunaBubbleEdgeHeight;
+                right -= bubbleEdgeHeight;
 
-                rectTop = (tunaHeight >> 1) - tunaBubbleEdgeWidth * 0.5f + offsetY;
-                rectBottom = rectTop + tunaBubbleEdgeWidth;
-                rectRight = tunaWidth - tunaBubbleStrokeWidth + offsetX;
-                rectLeft = rectRight - tunaBubbleEdgeHeight;
+                rectTop = (height >> 1) - bubbleEdgeWidth * 0.5f + offsetY;
+                rectBottom = rectTop + bubbleEdgeWidth;
+                rectRight = width - bubbleStrokeWidth + offsetX;
+                rectLeft = rectRight - bubbleEdgeHeight;
 
-                inPolygonVertexX0 = tunaWidth - tunaBubbleStrokeWidth + offsetX;
-                inPolygonVertexY0 = (tunaHeight >> 1) + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - tunaBubbleEdgeHeight;
-                intPolygonVertexY1 = inPolygonVertexY0 - tunaBubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 - tunaBubbleRadius;
+                inPolygonVertexX0 = width - bubbleStrokeWidth + offsetX;
+                inPolygonVertexY0 = (height >> 1) + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeHeight;
+                intPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
+                inPolygonVertexX2 = inPolygonVertexX1 - bubbleRadius;
                 inPolygonVertexY2 = intPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
-                inPolygonVertexY3 = inPolygonVertexY2 + tunaBubbleEdgeWidth;
+                inPolygonVertexY3 = inPolygonVertexY2 + bubbleEdgeWidth;
                 inPolygonVertexX4 = inPolygonVertexX1;
                 inPolygonVertexY4 = inPolygonVertexY3;
 
-                outPolygonVertexX0 = tunaWidth + offsetX;
-                outPolygonVertexY0 = (tunaHeight >> 1) + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - tunaBubbleEdgeHeight;
-                outPolygonVertexY1 = outPolygonVertexY0 - tunaBubbleEdgeWidth * 0.5f;
-                outPolygonVertexX2 = outPolygonVertexX1 - tunaBubbleStrokeWidth;
+                outPolygonVertexX0 = width + offsetX;
+                outPolygonVertexY0 = (height >> 1) + offsetY;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeHeight;
+                outPolygonVertexY1 = outPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
+                outPolygonVertexX2 = outPolygonVertexX1 - bubbleStrokeWidth;
                 outPolygonVertexY2 = outPolygonVertexY1;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
                 outPolygonVertexX4 = outPolygonVertexX2;
-                outPolygonVertexY4 = outPolygonVertexY1 + tunaBubbleEdgeWidth;
+                outPolygonVertexY4 = outPolygonVertexY1 + bubbleEdgeWidth;
                 outPolygonVertexX5 = outPolygonVertexX1;
                 outPolygonVertexY5 = outPolygonVertexY4;
 
                 //
-                textCenterX -= tunaBubbleEdgeHeight * 0.5f;
+                textCenterX -= bubbleEdgeHeight * 0.5f;
 
                 break;
 
             case BOTTOM:
-                switch (tunaBubbleLocationType) {
+                switch (bubbleLocationType) {
                     case LOW:
-                        offsetX = ((tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1) * -1;
-                        offsetX += tunaBubbleOffset;
+                        offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetX += bubbleOffset;
                         break;
                     case MIDDLE:
-                        offsetX += tunaBubbleOffset;
+                        offsetX += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetX = (tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f - tunaBubbleStrokeWidth * 1;
-                        offsetX += tunaBubbleOffset;
+                        offsetX = (width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetX += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                bottom -= tunaBubbleEdgeHeight;
+                bottom -= bubbleEdgeHeight;
 
-                rectBottom = tunaHeight - tunaBubbleStrokeWidth + offsetY;
-                rectTop = rectBottom - tunaBubbleEdgeHeight;
-                rectLeft = (tunaWidth >> 1) - tunaBubbleEdgeWidth * 0.5f + offsetX;
-                rectRight = rectLeft + tunaBubbleEdgeWidth;
+                rectBottom = height - bubbleStrokeWidth + offsetY;
+                rectTop = rectBottom - bubbleEdgeHeight;
+                rectLeft = (width >> 1) - bubbleEdgeWidth * 0.5f + offsetX;
+                rectRight = rectLeft + bubbleEdgeWidth;
 
-                inPolygonVertexX0 = (tunaWidth >> 1) + offsetX;
-                inPolygonVertexY0 = tunaHeight - tunaBubbleStrokeWidth + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - tunaBubbleEdgeWidth * 0.5f;
-                intPolygonVertexY1 = inPolygonVertexY0 - tunaBubbleEdgeHeight;
+                inPolygonVertexX0 = (width >> 1) + offsetX;
+                inPolygonVertexY0 = height - bubbleStrokeWidth + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
+                intPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = intPolygonVertexY1 - tunaBubbleRadius;
-                inPolygonVertexX3 = inPolygonVertexX2 + tunaBubbleEdgeWidth;
+                inPolygonVertexY2 = intPolygonVertexY1 - bubbleRadius;
+                inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
                 inPolygonVertexY4 = intPolygonVertexY1;
 
-                outPolygonVertexX0 = (tunaWidth >> 1) + offsetX;
-                outPolygonVertexY0 = tunaHeight + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - tunaBubbleEdgeWidth * 0.5f;
-                outPolygonVertexY1 = outPolygonVertexY0 - tunaBubbleEdgeHeight;
+                outPolygonVertexX0 = (width >> 1) + offsetX;
+                outPolygonVertexY0 = height + offsetY;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
+                outPolygonVertexY1 = outPolygonVertexY0 - bubbleEdgeHeight;
                 outPolygonVertexX2 = outPolygonVertexX1;
-                outPolygonVertexY2 = outPolygonVertexY1 - tunaBubbleStrokeWidth;
+                outPolygonVertexY2 = outPolygonVertexY1 - bubbleStrokeWidth;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2 + tunaBubbleEdgeWidth;
+                outPolygonVertexX4 = outPolygonVertexX2 + bubbleEdgeWidth;
                 outPolygonVertexY4 = outPolygonVertexY2;
                 outPolygonVertexX5 = outPolygonVertexX4;
                 outPolygonVertexY5 = outPolygonVertexY1;
 
                 //
-                textCenterY -= tunaBubbleEdgeHeight * 0.5f;
+                textCenterY -= bubbleEdgeHeight * 0.5f;
 
                 break;
             default:
@@ -515,33 +515,33 @@ public class TBubble extends TView {
 
         //
         canvas.save();
-        canvas.clipRect(initTunaRect((int) rectLeft, (int) rectTop, (int) rectRight, (int) rectBottom), Op.DIFFERENCE);
-        drawTunaRectClassic(canvas, left, top, right, bottom, tunaBubbleBackground, tunaBubbleStrokeWidth, tunaBubbleStrokeColor, tunaBubbleRadius);
+        canvas.clipRect(initRect((int) rectLeft, (int) rectTop, (int) rectRight, (int) rectBottom), Op.DIFFERENCE);
+        drawRectClassic(canvas, left, top, right, bottom, bubbleBackground, bubbleStrokeWidth, bubbleStrokeColor, bubbleRadius);
         canvas.restore();
 
         //
-        initTunaPathMoveTo(inPolygonVertexX0, inPolygonVertexY0);
-        tunaPath.lineTo(inPolygonVertexX1, intPolygonVertexY1);
-        tunaPath.lineTo(inPolygonVertexX2, inPolygonVertexY2);
-        tunaPath.lineTo(inPolygonVertexX3, inPolygonVertexY3);
-        tunaPath.lineTo(inPolygonVertexX4, inPolygonVertexY4);
-        tunaPath.close();
-        canvas.drawPath(tunaPath, initTunaPaint(Paint.Style.FILL, tunaBubbleBackground));
+        initPathMoveTo(inPolygonVertexX0, inPolygonVertexY0);
+        path.lineTo(inPolygonVertexX1, intPolygonVertexY1);
+        path.lineTo(inPolygonVertexX2, inPolygonVertexY2);
+        path.lineTo(inPolygonVertexX3, inPolygonVertexY3);
+        path.lineTo(inPolygonVertexX4, inPolygonVertexY4);
+        path.close();
+        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, bubbleBackground));
 
         //
-        initTunaPathMoveTo(outPolygonVertexX0, outPolygonVertexY0);
-        tunaPath.lineTo(outPolygonVertexX1, outPolygonVertexY1);
-        tunaPath.lineTo(outPolygonVertexX2, outPolygonVertexY2);
-        tunaPath.lineTo(outPolygonVertexX3, outPolygonVertexY3);
-        tunaPath.lineTo(outPolygonVertexX4, outPolygonVertexY4);
-        tunaPath.lineTo(outPolygonVertexX5, outPolygonVertexY5);
-        tunaPath.close();
-        canvas.drawPath(tunaPath, initTunaPaint(Paint.Style.FILL, tunaBubbleStrokeColor));
+        initPathMoveTo(outPolygonVertexX0, outPolygonVertexY0);
+        path.lineTo(outPolygonVertexX1, outPolygonVertexY1);
+        path.lineTo(outPolygonVertexX2, outPolygonVertexY2);
+        path.lineTo(outPolygonVertexX3, outPolygonVertexY3);
+        path.lineTo(outPolygonVertexX4, outPolygonVertexY4);
+        path.lineTo(outPolygonVertexX5, outPolygonVertexY5);
+        path.close();
+        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, bubbleStrokeColor));
 
         //
-        if (tunaBubbleTextValue != null) {
-            drawTunaText(canvas, tunaBubbleTextValue, textWidth, textCenterX, textCenterY, 0, 0,
-                    initTunaTextPaint(Paint.Style.FILL, tunaBubbleTextColorNormal, tunaBubbleTextSize, Paint.Align.CENTER));
+        if (bubbleTextValue != null) {
+            drawText(canvas, bubbleTextValue, textWidth, textCenterX, textCenterY, 0, 0,
+                    PaintTool.initTextPaint(Paint.Style.FILL, bubbleTextColorNormal, bubbleTextSize, Paint.Align.CENTER));
         }
 
     }

@@ -17,12 +17,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetricsInt;
-import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
-import android.graphics.Path.Direction;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
@@ -30,7 +27,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Property;
@@ -58,26 +54,25 @@ import android.widget.ToggleButton;
 
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.RequiresApi;
 
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.DeviceTool.applyDimension;
 import static com.tunasushi.tool.DeviceTool.convertToPX;
 import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.initTextPaint;
+import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.PathTool.initPathRoundRect;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
  * @author Tunasashimi
  * @date 11/4/15 17:25
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Tunasashimi. All rights reserved.
  * @Description
  */
 
@@ -86,170 +81,108 @@ public class TView extends View {
      * The following fields and methods of the parent class and subclass can always use
      */
     // as the mark of TView species
-    protected String tunaTag;
+    protected String Tag;
 
     // the width and height of the TView(put together to save the number of rows)
-    protected int tunaWidth, tunaHeight;
+    protected int width, height;
 
     //
-    protected int tunaLayer;
-    protected int tunaTotal;
+    protected int layer;
+    protected int total;
 
-    protected Bitmap tunaSrcBitmap;
-
-
-    protected float tunaSrcWidthScale, tunaSrcHeightScale;
-
-    protected float tunaCenterX, tunaCenterY;
-    protected float tunaDx, tunaDy;
-    protected float tunaScale, tunaScaleSx, tunaScaleSy;
-
-    protected float tunaPercent;
-    protected float tunaSurplus, tunaShare;
+    protected Bitmap srcBitmap;
 
 
-    protected float[] tunaFloatArray;
-    protected String[] tunaStringArray;
+    protected float srcWidthScale, srcHeightScale;
 
-    //
-    protected Path tunaPath;
+    protected float centerX, centerY;
+    protected float dx, dy;
+    protected float scale, scaleSx, scaleSy;
 
-    public Path getTunaPath() {
-        return tunaPath;
+    protected float percent;
+    protected float surplus, share;
+
+
+    protected float[] floatArray;
+    protected String[] stringArray;
+
+
+
+    protected Rect rect;
+
+    public Rect getRect() {
+        return rect;
     }
 
-    public void setTunaPath(Path tunaPath) {
-        this.tunaPath = tunaPath;
+    public void setRect(Rect rect) {
+        this.rect = rect;
     }
 
-    protected Path initTunaPath() {
-        if (tunaPath == null) {
-            tunaPath = new Path();
-        } else {
-            tunaPath.reset();
+    protected Rect initRect() {
+        if (rect == null) {
+            rect = new Rect();
         }
-        return tunaPath;
+        return rect;
     }
 
-    protected Path initTunaPathMoveTo(float x, float y) {
-        if (tunaPath == null) {
-            tunaPath = new Path();
-        } else {
-            tunaPath.reset();
+    protected Rect initRect(int left, int top, int right, int bottom) {
+        if (rect == null) {
+            rect = new Rect(left, top, right, bottom);
         }
-        tunaPath.moveTo(x, y);
-        return tunaPath;
+        rect.set(left, top, right, bottom);
+        return rect;
     }
 
-    protected Path initTunaPathLineTo(float x, float y) {
-        if (tunaPath == null) {
-            tunaPath = new Path();
-        } else {
-            tunaPath.reset();
-        }
-        tunaPath.lineTo(x, y);
-        return tunaPath;
+    protected RectF rectF;
+
+    public RectF getRectF() {
+        return rectF;
     }
 
-    protected Path initTunaPathArc(RectF oval, float startAngle, float sweepAngle) {
-        if (tunaPath == null) {
-            tunaPath = new Path();
-        } else {
-            tunaPath.reset();
-        }
-        tunaPath.addArc(oval, startAngle, sweepAngle);
-        return tunaPath;
-    }
-
-    protected Path initTunaPathRoundRect(RectF rect, float[] radii, Direction dir) {
-        if (tunaPath == null) {
-            tunaPath = new Path();
-        } else {
-            tunaPath.reset();
-        }
-        // This setting will cause the following message appears reading xml
-        // The graphics preview in the layout editor may not be accurate:
-        // Different corner sizes are not supported in Path.addRoundRect.
-        // (Ignore for this session)
-        tunaPath.addRoundRect(rect, radii, dir);
-        return tunaPath;
-    }
-
-    protected Rect tunaRect;
-
-    public Rect getTunaRect() {
-        return tunaRect;
-    }
-
-    public void setTunaRect(Rect tunaRect) {
-        this.tunaRect = tunaRect;
-    }
-
-    protected Rect initTunaRect() {
-        if (tunaRect == null) {
-            tunaRect = new Rect();
-        }
-        return tunaRect;
-    }
-
-    protected Rect initTunaRect(int left, int top, int right, int bottom) {
-        if (tunaRect == null) {
-            tunaRect = new Rect(left, top, right, bottom);
-        }
-        tunaRect.set(left, top, right, bottom);
-        return tunaRect;
-    }
-
-    protected RectF tunaRectF;
-
-    public RectF getTunaRectF() {
-        return tunaRectF;
-    }
-
-    public void setTunaRectF(RectF tunaRectF) {
-        this.tunaRectF = tunaRectF;
+    public void setRectF(RectF rectF) {
+        this.rectF = rectF;
     }
 
     //
-    protected RectF initTunaRectF(float left, float top, float right, float bottom) {
-        if (tunaRectF == null) {
-            tunaRectF = new RectF(left, top, right, bottom);
+    protected RectF initRectF(float left, float top, float right, float bottom) {
+        if (rectF == null) {
+            rectF = new RectF(left, top, right, bottom);
         }
-        tunaRectF.set(left, top, right, bottom);
-        return tunaRectF;
+        rectF.set(left, top, right, bottom);
+        return rectF;
     }
 
-    protected Canvas tunaCanvas;
+    protected Canvas canvas;
 
-    public Canvas getTunaCanvas() {
-        return tunaCanvas;
+    public Canvas getCanvas() {
+        return canvas;
     }
 
-    public void setTunaCanvas(Canvas tunaCanvas) {
-        this.tunaCanvas = tunaCanvas;
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
     }
 
     //
-    protected Matrix tunaMatrix;
+    protected Matrix matrix;
 
-    public Matrix getTunaMatrix() {
-        return tunaMatrix;
+    public Matrix getMatrix() {
+        return matrix;
     }
 
-    public void setTunaMatrix(Matrix tunaMatrix) {
-        this.tunaMatrix = tunaMatrix;
+    public void setMatrix(Matrix matrix) {
+        this.matrix = matrix;
     }
 
-    protected Matrix initTunaMatrix(float sx, float sy) {
-        if (tunaMatrix == null) {
-            tunaMatrix = new Matrix();
+    protected Matrix initMatrix(float sx, float sy) {
+        if (matrix == null) {
+            matrix = new Matrix();
         }
-        tunaMatrix.reset();
-        tunaMatrix.setScale(sx, sy);
-        return tunaMatrix;
+        matrix.reset();
+        matrix.setScale(sx, sy);
+        return matrix;
     }
 
-    public static Matrix initTunaMatrix(Matrix matrix, float sx, float sy) {
+    public static Matrix initMatrix(Matrix matrix, float sx, float sy) {
         if (matrix == null) {
             matrix = new Matrix();
         }
@@ -259,82 +192,82 @@ public class TView extends View {
     }
 
 
-    protected LayoutInflater initTunaLayoutInflater() {
-        if (tunaLayoutInflater == null) {
-            tunaLayoutInflater = LayoutInflater.from(getContext());
+    protected LayoutInflater initLayoutInflater() {
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(getContext());
         }
-        return tunaLayoutInflater;
+        return layoutInflater;
     }
 
 
-    protected void setTunaLayout(int width, int height) {
-        if (tunaLayoutParams == null) {
-            tunaLayoutParams = getLayoutParams();
+    protected void setLayout(int width, int height) {
+        if (layoutParams == null) {
+            layoutParams = getLayoutParams();
         }
-        tunaLayoutParams.width = width;
-        tunaLayoutParams.height = height;
-        setLayoutParams(tunaLayoutParams);
+        layoutParams.width = width;
+        layoutParams.height = height;
+        setLayoutParams(layoutParams);
         invalidate();
     }
 
 
     //
-    protected void initTunaCanvas(Canvas canvas) {
+    protected void initcanvas(Canvas canvas) {
         if (canvas.getDrawFilter() == null) {
-            canvas.setDrawFilter(tunaPaintFlagsDrawFilter);
-            tunaCanvasHardwareAccelerated = canvas.isHardwareAccelerated();
+            canvas.setDrawFilter(paintFlagsDrawFilter);
+            canvasHardwareAccelerated = canvas.isHardwareAccelerated();
         }
     }
 
     // 8
-    protected void drawTunaRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
-                                      float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
 
-        drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
                 radiusRightBottom);
     }
 
     // 10
-    protected void drawTunaRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                      float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
 
-        drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
                 radiusRightBottom);
     }
 
     // 10
-    protected void drawTunaRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                      float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
 
-        drawTunaRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
                 radiusRightTop, radiusRightBottom);
     }
 
     // 14
-    protected void drawTunaRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                      int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
-        drawTunaRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
                 radiusRightTop, radiusRightBottom);
     }
 
     // 14
-    protected void drawTunaRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                      int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
-        drawTunaRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
                 radiusLeftBottom, radiusRightTop, radiusRightBottom);
     }
 
     // 15
-    protected void drawTunaRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                      float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
+                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
         if (strokeWidth > 0) {
             canvas.drawPath(
-                    initTunaPathRoundRect(initTunaRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
-                            Path.Direction.CW), initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+                    initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
+                            Path.Direction.CW), PaintTool.initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
         }
 
         int radiiLength = radii.length;
@@ -344,93 +277,93 @@ public class TView extends View {
         }
 
         canvas.drawPath(
-                initTunaPathRoundRect(initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
-                shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                        shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                initPathRoundRect(initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
+                shader == null ? shadowRadius == 0 ? PaintTool.initPaint(fillColor) : PaintTool.initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? PaintTool.initPaint(Paint.Style.FILL, shader) : PaintTool.initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
                         shadowDy));
     }
 
     // 5
-    protected void drawTunaRectClassic(Canvas canvas, float width, float height, int fillColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float radius) {
 
-        drawTunaRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radius);
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radius);
     }
 
     // 7
-    protected void drawTunaRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
     }
 
     // 7
-    protected void drawTunaRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
     }
 
     // 9
-    protected void drawTunaRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
     }
 
     // 9
-    protected void drawTunaRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
     }
 
     // 11
-    protected void drawTunaRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                       int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                   int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
     }
 
     // 11
-    protected void drawTunaRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                       int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                   int strokeColor, float radius) {
 
-        drawTunaRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
     }
 
     // 12
-    protected void drawTunaRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                       float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
+                                   float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
 
         if (strokeWidth > 0) {
-            canvas.drawRoundRect(initTunaRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
-                    initTunaPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+            canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
+                    PaintTool.initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
         }
 
         canvas.drawRoundRect(
-                initTunaRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
+                initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
                 radius,
                 radius,
-                shader == null ? shadowRadius == 0 ? initTunaPaint(fillColor) : initTunaPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                        shadowDy) : shadowRadius == 0 ? initTunaPaint(Paint.Style.FILL, shader) : initTunaPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                shader == null ? shadowRadius == 0 ? PaintTool.initPaint(fillColor) : PaintTool.initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? PaintTool.initPaint(Paint.Style.FILL, shader) : PaintTool.initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
                         shadowDy));
     }
 
     // 6
-    protected float[] drawTunaText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
-        return drawTunaText(canvas, string, width, centerX, centerY, 0, 0, paint, tunaTextGravityArray[0], 1.0f, null);
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
+        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, textGravityArray[0], 1.0f, null);
     }
 
     // 8
-    protected float[] drawTunaText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
-        return drawTunaText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, tunaTextGravityArray[0], 1.0f, null);
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, textGravityArray[0], 1.0f, null);
     }
 
     // 9
-    protected float[] drawTunaText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                                   float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        return drawTunaText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, tunaTextGravityArray[0], textRowSpaceRatio, valueMeasureList);
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
+                               float textRowSpaceRatio, List<Integer> valueMeasureList) {
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, textGravityArray[0], textRowSpaceRatio, valueMeasureList);
     }
 
     // 10
-    protected float[] drawTunaText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                                   TunaTextGravity tunaTextGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
+                               TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
 
         if (valueMeasureList == null) {
             valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
@@ -459,7 +392,7 @@ public class TView extends View {
             float measureLength = paint.measureText(drawString);
 
             if (i != valueMeasureListSize - 1) {
-                switch (tunaTextGravity) {
+                switch (textGravity) {
                     case ALL_CENTER:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
                         break;
@@ -477,7 +410,7 @@ public class TView extends View {
                 }
             } else {
                 float availableWidth = width - paddingLeft - paddingRight;
-                switch (tunaTextGravity) {
+                switch (textGravity) {
                     case ALL_CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
                         return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
@@ -499,7 +432,7 @@ public class TView extends View {
     }
 
     //
-    protected void drawTunaTextMark(
+    protected void drawTextMark(
             Canvas canvas,
             float radius, Paint paint,
             float markRadius,
@@ -510,76 +443,76 @@ public class TView extends View {
             float markTextSize,
             List<Integer> valueMeasureList) {
 
-        float cx = (tunaWidth >> 1) + offsetX + markRadius + markDx;
-        float cy = (tunaHeight >> 1) + offsetY + markDy;
+        float cx = (width >> 1) + offsetX + markRadius + markDx;
+        float cy = (height >> 1) + offsetY + markDy;
 
         canvas.drawCircle(cx, cy, radius, paint);
         if (markText != null) {
-            // Because, drawText use the same method to clear the cache tunaMeasureRowList
-            drawTunaText(canvas, markText, tunaWidth, cx, cy, 0, 0,
-                    initTunaTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
+            // Because, drawText use the same method to clear the cache measureRowList
+            drawText(canvas, markText, width, cx, cy, 0, 0,
+                    PaintTool.initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
                     , 1, valueMeasureList);
         }
     }
 
     //
-    public void setTunaStatius(boolean tunaPress, boolean tunaSelect, boolean tunaTextMark) {
-        if (this.tunaPress != tunaPress || this.tunaSelect != tunaSelect || this.tunaTextMark != tunaTextMark) {
-            this.tunaPress = tunaPress;
-            this.tunaSelect = tunaSelect;
-            this.tunaTextMark = tunaTextMark;
+    public void setStatius(boolean press, boolean select, boolean textMark) {
+        if (this.press != press || this.select != select || this.textMark != textMark) {
+            this.press = press;
+            this.select = select;
+            this.textMark = textMark;
             invalidate();
         }
     }
 
     //
-    public void setTunaStatius(boolean tunaPress, boolean tunaSelect, boolean tunaTextMark, boolean tunaMaterial) {
-        if (this.tunaPress != tunaPress || this.tunaSelect != tunaSelect || this.tunaTextMark != tunaTextMark) {
-            this.tunaPress = tunaPress;
-            this.tunaSelect = tunaSelect;
-            this.tunaTextMark = tunaTextMark;
-            if (!tunaMaterial && tunaMaterialAnimatorSet != null) {
-                this.tunaMaterialAnimatorSet.cancel();
+    public void setStatius(boolean press, boolean select, boolean textMark, boolean material) {
+        if (this.press != press || this.select != select || this.textMark != textMark) {
+            this.press = press;
+            this.select = select;
+            this.textMark = textMark;
+            if (!material && materialAnimatorSet != null) {
+                this.materialAnimatorSet.cancel();
             }
             invalidate();
         }
     }
 
     //
-    public static void tunaAssociate(final TView[] TViewArray) {
+    public static void associate(final TView[] TViewArray) {
         if (TViewArray == null) {
             return;
         }
         final int arraySize = TViewArray.length;
         for (int i = 0; i < arraySize; i++) {
             final int finalI = i;
-            TViewArray[i].setTunaAssociateListener(new TunaAssociateListener() {
+            TViewArray[i].setAssociateListener(new associateListener() {
                 @Override
-                public void tunaAssociate(View v) {
+                public void associate(View v) {
                     for (int j = 0; j < arraySize; j++) {
                         if (j != finalI) {
-                            TViewArray[j].setTunaStatius(false, false, false);
+                            TViewArray[j].setStatius(false, false, false);
                         }
                     }
                 }
             });
-            TViewArray[i].setTunaTouchCancelListener(new TunaTouchCancelListener() {
+            TViewArray[i].setTouchCancelListener(new TouchCancelListener() {
                 @Override
-                public void tunaTouchCancel(View v) {
+                public void touchCancel(View v) {
                     for (int j = 0; j < arraySize; j++) {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    TViewArray[j].setTunaStatius(false, true, false);
+                                    TViewArray[j].setStatius(false, true, false);
                                 } else if (j > finalI + 1) {
-                                    TViewArray[j].setTunaStatius(false, false, false);
+                                    TViewArray[j].setStatius(false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    TViewArray[j].setTunaStatius(false, true, false);
+                                    TViewArray[j].setStatius(false, true, false);
                                 } else if (j < finalI - 1) {
-                                    TViewArray[j].setTunaStatius(false, false, false);
+                                    TViewArray[j].setStatius(false, false, false);
                                 }
                                 break;
                         }
@@ -590,40 +523,40 @@ public class TView extends View {
     }
 
     //
-    public static void tunaAssociate(final List<TView> TViewList) {
+    public static void associate(final List<TView> TViewList) {
         if (TViewList == null) {
             return;
         }
         final int listSize = TViewList.size();
         for (int i = 0; i < listSize; i++) {
             final int finalI = i;
-            TViewList.get(i).setTunaAssociateListener(new TunaAssociateListener() {
+            TViewList.get(i).setAssociateListener(new associateListener() {
                 @Override
-                public void tunaAssociate(View v) {
+                public void associate(View v) {
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
-                            TViewList.get(j).setTunaStatius(false, false, false, false);
+                            TViewList.get(j).setStatius(false, false, false, false);
                         }
                     }
                 }
             });
-            TViewList.get(i).setTunaTouchCancelListener(new TunaTouchCancelListener() {
+            TViewList.get(i).setTouchCancelListener(new TouchCancelListener() {
                 @Override
-                public void tunaTouchCancel(View v) {
+                public void touchCancel(View v) {
                     for (int j = 0; j < listSize; j++) {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    TViewList.get(j).setTunaStatius(false, true, false, false);
+                                    TViewList.get(j).setStatius(false, true, false, false);
                                 } else if (j > finalI + 1) {
-                                    TViewList.get(j).setTunaStatius(false, false, false, false);
+                                    TViewList.get(j).setStatius(false, false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    TViewList.get(j).setTunaStatius(false, true, false, false);
+                                    TViewList.get(j).setStatius(false, true, false, false);
                                 } else if (j < finalI - 1) {
-                                    TViewList.get(j).setTunaStatius(false, false, false, false);
+                                    TViewList.get(j).setStatius(false, false, false, false);
                                 }
                                 break;
                         }
@@ -634,15 +567,15 @@ public class TView extends View {
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, String string, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int width, int leftStyle,
-                                   int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, String string, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
+                               int rightStyle, int horizontalStyle, int wholeStyle) {
 
-        tunaDynamic(titleArray, string, tunaTouchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(titleArray, string, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, String string, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                                   int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, String string, TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int horizontalStyle, int wholeStyle) {
         int index = 0;
         for (int i = 0; i < titleArray.length; i++) {
             if (titleArray[i].equals(string)) {
@@ -650,41 +583,41 @@ public class TView extends View {
                 break;
             }
         }
-        tunaDynamic(titleArray, index, tunaTouchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(titleArray, index, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                                   int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int horizontalStyle, int wholeStyle) {
 
-        tunaDynamic(titleArray, 0, tunaTouchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(titleArray, 0, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                                   int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int horizontalStyle, int wholeStyle) {
 
-        tunaDynamic(titleArray, 0, tunaTouchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(titleArray, 0, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, int index, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                                   int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int horizontalStyle, int wholeStyle) {
 
-        tunaDynamic(titleArray, index, tunaTouchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(titleArray, index, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
     }
 
     //
-    public static void tunaDynamic(String[] titleArray, int index, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
-                                   int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
+                               int rightStyle, int horizontalStyle, int wholeStyle) {
 
-        tunaDynamicRaw(titleArray, index, tunaTouchUpListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
+        dynamicRaw(titleArray, index, touchUpListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
                 horizontalStyle, wholeStyle);
     }
 
     //
-    private static void tunaDynamicRaw(String[] titleArray, int index, TunaTouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int width, int leftStyle,
-                                       int rightStyle, int horizontalStyle, int wholeStyle) {
+    private static void dynamicRaw(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
+                                   int rightStyle, int horizontalStyle, int wholeStyle) {
 
         Context context = linearLayout.getContext();
 
@@ -699,18 +632,18 @@ public class TView extends View {
 
             TView TView = new TView(context, null, wholeStyle);
 
-            TView.setTunaTextValue(titleArray[0]);
-            TView.setTunaTouchUpListener(tunaTouchUpListener);
+            TView.setTextValue(titleArray[0]);
+            TView.setTouchUpListener(touchUpListener);
             linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
         } else {
 
             for (int i = 0; i < titleArray.length; i++) {
                 TView TView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
-                TView.setTunaTextValue(titleArray[i]);
+                TView.setTextValue(titleArray[i]);
                 if (i == index) {
-                    TView.setTunaSelect(true);
+                    TView.setSelect(true);
                 }
-                TView.setTunaTouchUpListener(tunaTouchUpListener);
+                TView.setTouchUpListener(touchUpListener);
 
                 TViewList.add(TView);
                 linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -723,101 +656,101 @@ public class TView extends View {
                     setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
                 }
             }
-            TView.tunaAssociate(TViewList);
+            TView.associate(TViewList);
         }
     }
 
     //
-    protected View tunaPropertiesView;
-    protected LayoutParams tunaLayoutParams;
-    protected LayoutInflater tunaLayoutInflater;
+    protected View propertiesView;
+    protected LayoutParams layoutParams;
+    protected LayoutInflater layoutInflater;
 
-    protected void showTunaProperties() {
+    protected void showProperties() {
 
-        tunaPropertiesView = initTunaLayoutInflater().inflate(R.layout.properties, null);
+        propertiesView = initLayoutInflater().inflate(R.layout.properties, null);
 
-        final TextView text_display = tunaPropertiesView.findViewById(R.id.text_display);
+        final TextView text_display = propertiesView.findViewById(R.id.text_display);
 
-        final EditText edit_width = tunaPropertiesView.findViewById(R.id.edit_width);
-        final EditText edit_height = tunaPropertiesView.findViewById(R.id.edit_height);
+        final EditText edit_width = propertiesView.findViewById(R.id.edit_width);
+        final EditText edit_height = propertiesView.findViewById(R.id.edit_height);
 
-        final EditText edit_backgroundNormal = tunaPropertiesView.findViewById(R.id.edit_backgroundNormal);
-        final EditText edit_backgroundPress = tunaPropertiesView.findViewById(R.id.edit_backgroundPress);
-        final EditText edit_backgroundSelect = tunaPropertiesView.findViewById(R.id.edit_backgroundSelect);
+        final EditText edit_backgroundNormal = propertiesView.findViewById(R.id.edit_backgroundNormal);
+        final EditText edit_backgroundPress = propertiesView.findViewById(R.id.edit_backgroundPress);
+        final EditText edit_backgroundSelect = propertiesView.findViewById(R.id.edit_backgroundSelect);
 
-        final EditText edit_textSize = tunaPropertiesView.findViewById(R.id.edit_textSize);
-        final EditText edit_textColorNormal = tunaPropertiesView.findViewById(R.id.edit_textColorNormal);
+        final EditText edit_textSize = propertiesView.findViewById(R.id.edit_textSize);
+        final EditText edit_textColorNormal = propertiesView.findViewById(R.id.edit_textColorNormal);
 
-        final EditText edit_strokeWidth = tunaPropertiesView.findViewById(R.id.edit_strokeWidth);
-        final EditText edit_strokeColor = tunaPropertiesView.findViewById(R.id.edit_strokeColor);
+        final EditText edit_strokeWidth = propertiesView.findViewById(R.id.edit_strokeWidth);
+        final EditText edit_strokeColor = propertiesView.findViewById(R.id.edit_strokeColor);
 
-        final Button btn_width_pius = tunaPropertiesView.findViewById(R.id.btn_width_pius);
-        final Button btn_width_minus = tunaPropertiesView.findViewById(R.id.btn_width_minus);
-        final Button btn_height_pius = tunaPropertiesView.findViewById(R.id.btn_height_pius);
-        final Button btn_height_minus = tunaPropertiesView.findViewById(R.id.btn_height_minus);
+        final Button btn_width_pius = propertiesView.findViewById(R.id.btn_width_pius);
+        final Button btn_width_minus = propertiesView.findViewById(R.id.btn_width_minus);
+        final Button btn_height_pius = propertiesView.findViewById(R.id.btn_height_pius);
+        final Button btn_height_minus = propertiesView.findViewById(R.id.btn_height_minus);
 
-        final Button btn_textSize_pius = tunaPropertiesView.findViewById(R.id.btn_textSize_pius);
-        final Button btn_textSize_minus = tunaPropertiesView.findViewById(R.id.btn_textSize_minus);
+        final Button btn_textSize_pius = propertiesView.findViewById(R.id.btn_textSize_pius);
+        final Button btn_textSize_minus = propertiesView.findViewById(R.id.btn_textSize_minus);
 
-        final Button btn_strokeWidth_pius = tunaPropertiesView.findViewById(R.id.btn_strokeWidth_pius);
-        final Button btn_strokeWidth_minus = tunaPropertiesView.findViewById(R.id.btn_strokeWidth_minus);
+        final Button btn_strokeWidth_pius = propertiesView.findViewById(R.id.btn_strokeWidth_pius);
+        final Button btn_strokeWidth_minus = propertiesView.findViewById(R.id.btn_strokeWidth_minus);
 
-        final Button btn_backgroundNormal = tunaPropertiesView.findViewById(R.id.btn_backgroundNormal);
-        final Button btn_backgroundPress = tunaPropertiesView.findViewById(R.id.btn_backgroundPress);
-        final Button btn_backgroundSelect = tunaPropertiesView.findViewById(R.id.btn_backgroundSelect);
+        final Button btn_backgroundNormal = propertiesView.findViewById(R.id.btn_backgroundNormal);
+        final Button btn_backgroundPress = propertiesView.findViewById(R.id.btn_backgroundPress);
+        final Button btn_backgroundSelect = propertiesView.findViewById(R.id.btn_backgroundSelect);
 
-        final Button btn_textColorNormal = tunaPropertiesView.findViewById(R.id.btn_textColorNormal);
+        final Button btn_textColorNormal = propertiesView.findViewById(R.id.btn_textColorNormal);
 
-        final Button btn_strokeColor = tunaPropertiesView.findViewById(R.id.btn_strokeColor);
+        final Button btn_strokeColor = propertiesView.findViewById(R.id.btn_strokeColor);
 
-        final ToggleButton toogle_mark = tunaPropertiesView.findViewById(R.id.toogle_mark);
-        final TextView text_mark = tunaPropertiesView.findViewById(R.id.text_mark);
+        final ToggleButton toogle_mark = propertiesView.findViewById(R.id.toogle_mark);
+        final TextView text_mark = propertiesView.findViewById(R.id.text_mark);
 
-        final ToggleButton toogle_thisHardwareAccelerated = tunaPropertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
-        final TextView text_thisHardwareAccelerated = tunaPropertiesView.findViewById(R.id.text_thisHardwareAccelerated);
+        final ToggleButton toogle_thisHardwareAccelerated = propertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
+        final TextView text_thisHardwareAccelerated = propertiesView.findViewById(R.id.text_thisHardwareAccelerated);
 
-        final ToggleButton toogle_canvasHardwareAccelerated = tunaPropertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
-        final TextView text_canvasHardwareAccelerated = tunaPropertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
+        final ToggleButton toogle_canvasHardwareAccelerated = propertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
+        final TextView text_canvasHardwareAccelerated = propertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
 
 
         DeviceTool.initDisplayMetrics(getContext());
-        text_display.setText(DeviceTool.tunaStringBuffer);
+        text_display.setText(DeviceTool.stringBuffer);
 
-        edit_width.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaWidth)));
-        edit_height.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaHeight)));
+        edit_width.setText(String.valueOf(DeviceTool.pxToDp(getContext(), width)));
+        edit_height.setText(String.valueOf(DeviceTool.pxToDp(getContext(), height)));
 
-        edit_backgroundNormal.setText(tunaBackgroundNormal != 0 ? Integer.toHexString(tunaBackgroundNormal) : "00000000");
-        edit_backgroundPress.setText(tunaBackgroundPress != 0 ? Integer.toHexString(tunaBackgroundPress) : "00000000");
-        edit_backgroundSelect.setText(tunaBackgroundSelect != 0 ? Integer.toHexString(tunaBackgroundSelect) : "00000000");
+        edit_backgroundNormal.setText(backgroundNormal != 0 ? Integer.toHexString(backgroundNormal) : "00000000");
+        edit_backgroundPress.setText(backgroundPress != 0 ? Integer.toHexString(backgroundPress) : "00000000");
+        edit_backgroundSelect.setText(backgroundSelect != 0 ? Integer.toHexString(backgroundSelect) : "00000000");
 
-        edit_textSize.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaTextSize)));
-        edit_textColorNormal.setText(tunaTextColorNormal != 0 ? Integer.toHexString(tunaTextColorNormal) : "00000000");
+        edit_textSize.setText(String.valueOf(DeviceTool.pxToDp(getContext(), textSize)));
+        edit_textColorNormal.setText(textColorNormal != 0 ? Integer.toHexString(textColorNormal) : "00000000");
 
-        edit_strokeWidth.setText(String.valueOf(DeviceTool.pxToDp(getContext(), tunaStrokeWidthNormal)));
-        edit_strokeColor.setText(tunaStrokeColorNormal != 0 ? Integer.toHexString(tunaStrokeColorNormal) : "00000000");
+        edit_strokeWidth.setText(String.valueOf(DeviceTool.pxToDp(getContext(), strokeWidthNormal)));
+        edit_strokeColor.setText(strokeColorNormal != 0 ? Integer.toHexString(strokeColorNormal) : "00000000");
 
         //
-        edit_backgroundNormal.setTextColor(tunaBackgroundNormal);
-        edit_backgroundPress.setTextColor(tunaBackgroundPress);
-        edit_backgroundSelect.setTextColor(tunaBackgroundSelect);
-        edit_strokeColor.setTextColor(tunaStrokeColorNormal);
-        edit_textColorNormal.setTextColor(tunaTextColorNormal);
+        edit_backgroundNormal.setTextColor(backgroundNormal);
+        edit_backgroundPress.setTextColor(backgroundPress);
+        edit_backgroundSelect.setTextColor(backgroundSelect);
+        edit_strokeColor.setTextColor(strokeColorNormal);
+        edit_textColorNormal.setTextColor(textColorNormal);
 
-        btn_backgroundNormal.setBackgroundColor(tunaBackgroundNormal);
-        btn_backgroundPress.setBackgroundColor(tunaBackgroundPress);
-        btn_backgroundSelect.setBackgroundColor(tunaBackgroundSelect);
-        btn_strokeColor.setBackgroundColor(tunaStrokeColorNormal);
-        btn_textColorNormal.setBackgroundColor(tunaTextColorNormal);
+        btn_backgroundNormal.setBackgroundColor(backgroundNormal);
+        btn_backgroundPress.setBackgroundColor(backgroundPress);
+        btn_backgroundSelect.setBackgroundColor(backgroundSelect);
+        btn_strokeColor.setBackgroundColor(strokeColorNormal);
+        btn_textColorNormal.setBackgroundColor(textColorNormal);
 
-        toogle_mark.setChecked(tunaTextMark);
-        text_mark.setText(String.valueOf(tunaTextMark));
+        toogle_mark.setChecked(textMark);
+        text_mark.setText(String.valueOf(textMark));
 
-        tunaIsHardwareAccelerated = this.isHardwareAccelerated();
-        toogle_thisHardwareAccelerated.setChecked(tunaIsHardwareAccelerated);
-        text_thisHardwareAccelerated.setText(String.valueOf(tunaIsHardwareAccelerated));
+        isHardwareAccelerated = this.isHardwareAccelerated();
+        toogle_thisHardwareAccelerated.setChecked(isHardwareAccelerated);
+        text_thisHardwareAccelerated.setText(String.valueOf(isHardwareAccelerated));
 
-        toogle_canvasHardwareAccelerated.setChecked(tunaCanvasHardwareAccelerated);
-        text_canvasHardwareAccelerated.setText(String.valueOf(tunaCanvasHardwareAccelerated));
+        toogle_canvasHardwareAccelerated.setChecked(canvasHardwareAccelerated);
+        text_canvasHardwareAccelerated.setText(String.valueOf(canvasHardwareAccelerated));
 
         //
         toogle_mark.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -828,7 +761,7 @@ public class TView extends View {
         });
 
         //
-        OnClickListener tunaOnClickListener = new OnClickListener() {
+        OnClickListener onClickListener = new OnClickListener() {
             @Override
             public void onClick(View view) {
                 /**
@@ -852,45 +785,45 @@ public class TView extends View {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
+                        public void colorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
                             edit_backgroundNormal.setTextColor(color);
                             edit_backgroundNormal.setText(String.valueOf(Integer.toHexString(color)));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
+                        public void colorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
                             edit_backgroundPress.setTextColor(color);
                             edit_backgroundPress.setText(String.valueOf(Integer.toHexString(color)));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new ColorPickerDialog(getContext(), tunaBackgroundNormal, new ColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
+                        public void colorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
                             edit_backgroundSelect.setTextColor(color);
                             edit_backgroundSelect.setText(String.valueOf(Integer.toHexString(color)));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), strokeColorNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
+                        public void colorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
                             edit_textColorNormal.setTextColor(color);
                             edit_textColorNormal.setText(String.valueOf(Integer.toHexString(color)));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new ColorPickerDialog(getContext(), tunaStrokeColorNormal, new ColorPickerDialog.colorSelectListener() {
+                    new ColorPickerDialog(getContext(), strokeColorNormal, new ColorPickerDialog.colorSelectListener() {
                         @Override
-                        public void tunaColorSelect(int color) {
+                        public void colorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);
                             edit_strokeColor.setTextColor(color);
                             edit_strokeColor.setText(String.valueOf(Integer.toHexString(color)));
@@ -900,500 +833,500 @@ public class TView extends View {
             }
         };
 
-        btn_width_pius.setOnClickListener(tunaOnClickListener);
-        btn_width_minus.setOnClickListener(tunaOnClickListener);
-        btn_height_pius.setOnClickListener(tunaOnClickListener);
-        btn_height_minus.setOnClickListener(tunaOnClickListener);
-        btn_textSize_pius.setOnClickListener(tunaOnClickListener);
-        btn_textSize_minus.setOnClickListener(tunaOnClickListener);
-        btn_strokeWidth_pius.setOnClickListener(tunaOnClickListener);
-        btn_strokeWidth_minus.setOnClickListener(tunaOnClickListener);
+        btn_width_pius.setOnClickListener(onClickListener);
+        btn_width_minus.setOnClickListener(onClickListener);
+        btn_height_pius.setOnClickListener(onClickListener);
+        btn_height_minus.setOnClickListener(onClickListener);
+        btn_textSize_pius.setOnClickListener(onClickListener);
+        btn_textSize_minus.setOnClickListener(onClickListener);
+        btn_strokeWidth_pius.setOnClickListener(onClickListener);
+        btn_strokeWidth_minus.setOnClickListener(onClickListener);
 
-        btn_backgroundNormal.setOnClickListener(tunaOnClickListener);
-        btn_backgroundPress.setOnClickListener(tunaOnClickListener);
-        btn_backgroundSelect.setOnClickListener(tunaOnClickListener);
+        btn_backgroundNormal.setOnClickListener(onClickListener);
+        btn_backgroundPress.setOnClickListener(onClickListener);
+        btn_backgroundSelect.setOnClickListener(onClickListener);
 
-        btn_textColorNormal.setOnClickListener(tunaOnClickListener);
-        btn_strokeColor.setOnClickListener(tunaOnClickListener);
+        btn_textColorNormal.setOnClickListener(onClickListener);
+        btn_strokeColor.setOnClickListener(onClickListener);
 
         new AlertDialog.Builder(getContext(), android.R.style.Theme_Holo_Light)
                 .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setView(tunaPropertiesView)
+                .setView(propertiesView)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //
-                        tunaBackgroundNormal = Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim());
-                        tunaBackgroundPress = Color.parseColor("#" + edit_backgroundPress.getText().toString().trim());
-                        tunaBackgroundSelect = Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim());
-                        tunaStrokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
-                        tunaTextColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
+                        backgroundNormal = Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim());
+                        backgroundPress = Color.parseColor("#" + edit_backgroundPress.getText().toString().trim());
+                        backgroundSelect = Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim());
+                        strokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
+                        textColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
 
-                        tunaTextSize = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_textSize.getText().toString().trim()));
+                        textSize = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_textSize.getText().toString().trim()));
 
-                        tunaStrokeWidthNormal = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
+                        strokeWidthNormal = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
 
-                        tunaTextMark = text_mark.getText().toString().trim().equals("true") ? true : false;
+                        textMark = text_mark.getText().toString().trim().equals("true") ? true : false;
 
-                        setTunaLayout(DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_width.getText().toString().trim())), DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_height.getText().toString().trim())));
+                        setLayout(DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_width.getText().toString().trim())), DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_height.getText().toString().trim())));
                     }
                 }).setNegativeButton("Cancel", null).create().show();
     }
 
     // Hardware accelerated this
-    protected boolean tunaIsHardwareAccelerated;
+    protected boolean isHardwareAccelerated;
     // Hardware accelerated canvas
-    protected boolean tunaCanvasHardwareAccelerated;
+    protected boolean canvasHardwareAccelerated;
 
     // default edge
-    private TunaTouchType tunaTouchType;
+    private TouchType touchType;
 
-    public enum TunaTouchType {
+    public enum TouchType {
         EDGE(0), ALWAYS(1), NONE(2),
         ;
         final int nativeInt;
 
-        TunaTouchType(int ni) {
+        TouchType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaTouchType[] tunaTouchTypeArray = {TunaTouchType.EDGE, TunaTouchType.ALWAYS, TunaTouchType.NONE,};
+    private static final TouchType[] touchTypeArray = {TouchType.EDGE, TouchType.ALWAYS, TouchType.NONE,};
 
-    public TunaTouchType getTunaTouchType() {
-        return tunaTouchType;
+    public TouchType getTouchType() {
+        return touchType;
     }
 
-    public void setTunaTouchType(TunaTouchType tunaTouchType) {
-        this.tunaTouchType = tunaTouchType;
+    public void setTouchType(TouchType touchType) {
+        this.touchType = touchType;
     }
 
-    private boolean tunaSuper;
+    private boolean tSuper;
 
-    public boolean isTunaSuper() {
-        return tunaSuper;
+    public boolean istSuper() {
+        return tSuper;
     }
 
-    public void setTunaSuper(boolean tunaSuper) {
-        this.tunaSuper = tunaSuper;
+    public void settSuper(boolean tSuper) {
+        this.tSuper = tSuper;
     }
 
-    protected boolean tunaClassic;
+    protected boolean classic;
 
-    public boolean isTunaClassic() {
-        return tunaClassic;
+    public boolean isclassic() {
+        return classic;
     }
 
-    public void setTunaClassic(boolean tunaClassic) {
-        this.tunaClassic = tunaClassic;
+    public void setClassic(boolean classic) {
+        this.classic = classic;
     }
 
-    // can modify the properties when tunaDebug is true
-    protected boolean tunaDebugable;
+    // can modify the properties when debug is true
+    protected boolean debugable;
 
-    public boolean isTunaDebugable() {
-        return tunaDebugable;
+    public boolean isDebugable() {
+        return debugable;
     }
 
-    public void setTunaDebugable(boolean tunaDebugable) {
-        this.tunaDebugable = tunaDebugable;
+    public void setDebugable(boolean debugable) {
+        this.debugable = debugable;
     }
 
-    // tunaTouchIntercept default false
-    protected boolean tunaTouchIntercept;
+    // touchIntercept default false
+    protected boolean touchIntercept;
 
-    public boolean isTunaTouchIntercept() {
-        return tunaTouchIntercept;
+    public boolean isTouchIntercept() {
+        return touchIntercept;
     }
 
-    public void setTunaTouchIntercept(boolean tunaTouchIntercept) {
-        this.tunaTouchIntercept = tunaTouchIntercept;
+    public void setTouchIntercept(boolean touchIntercept) {
+        this.touchIntercept = touchIntercept;
     }
 
-    // tunaPress default false
-    protected boolean tunaPress;
+    // press default false
+    protected boolean press;
 
-    public boolean isTunaPress() {
-        return tunaPress;
+    public boolean isPress() {
+        return press;
     }
 
-    public void setTunaPress(boolean tunaPress) {
-        this.tunaPress = tunaPress;
+    public void setPress(boolean press) {
+        this.press = press;
     }
 
-    // tunaSelect default false
-    protected boolean tunaSelect;
+    // select default false
+    protected boolean select;
 
-    public boolean isTunaSelect() {
-        return tunaSelect;
+    public boolean isSelect() {
+        return select;
     }
 
-    public void setTunaSelect(boolean tunaSelect) {
-        this.tunaSelect = tunaSelect;
+    public void setSelect(boolean select) {
+        this.select = select;
         invalidate();
     }
 
     //
-    protected boolean tunaSelectRaw;
+    protected boolean selectRaw;
 
     // default none
-    private TunaSelectType tunaSelectType;
+    private SelectType selectType;
 
-    public enum TunaSelectType {
+    public enum SelectType {
         NONE(0), SAME(1), REVERSE(2),
         ;
         final int nativeInt;
 
-        TunaSelectType(int ni) {
+        SelectType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaSelectType[] tunaSelectTypeArray = {TunaSelectType.NONE, TunaSelectType.SAME, TunaSelectType.REVERSE,};
+    private static final SelectType[] selectTypeArray = {SelectType.NONE, SelectType.SAME, SelectType.REVERSE,};
 
-    public TunaSelectType getTunaSelectType() {
-        return tunaSelectType;
+    public SelectType getSelectType() {
+        return selectType;
     }
 
-    public void setTunaSelectType(TunaSelectType tunaSelectType) {
-        this.tunaSelectType = tunaSelectType;
+    public void setSelectType(SelectType selectType) {
+        this.selectType = selectType;
     }
 
-    // tunaRotate default 0
-    private int tunaRotate;
+    // rotate default 0
+    private int rotate;
 
-    public int getTunaRotate() {
-        return tunaRotate;
+    public int getRotate() {
+        return rotate;
     }
 
-    public void setTunaRotate(int tunaRotate) {
-        this.tunaRotate = tunaRotate;
+    public void setRotate(int rotate) {
+        this.rotate = rotate;
     }
 
     // default false
-    protected boolean tunaAnimationable;
+    protected boolean animationable;
 
-    public boolean isTunaAnimationable() {
-        return tunaAnimationable;
+    public boolean isanimationable() {
+        return animationable;
     }
 
-    public void setTunaAnimationable(boolean tunaAnimationable) {
-        this.tunaAnimationable = tunaAnimationable;
-        if (tunaAnimationable) {
+    public void setAnimationable(boolean animationable) {
+        this.animationable = animationable;
+        if (animationable) {
             invalidate();
         }
     }
 
     //
-    protected float tunaTouchEventX;
+    protected float touchEventX;
 
-    public float getTunaTouchEventX() {
-        return tunaTouchEventX;
+    public float getTouchEventX() {
+        return touchEventX;
     }
 
-    public void setTunaTouchEventX(float tunaTouchEventEventX) {
-        this.tunaTouchEventX = tunaTouchEventEventX;
+    public void setTouchEventX(float touchEventEventX) {
+        this.touchEventX = touchEventEventX;
     }
 
     //
-    protected float tunaTouchEventY;
+    protected float touchEventY;
 
-    public float getTunaTouchEventY() {
-        return tunaTouchEventY;
+    public float getTouchEventY() {
+        return touchEventY;
     }
 
-    public void setTunaTouchEventY(float tunaTouchEventEventY) {
-        this.tunaTouchEventY = tunaTouchEventEventY;
+    public void setTouchEventY(float touchEventEventY) {
+        this.touchEventY = touchEventEventY;
     }
 
     // default false
-    protected boolean tunaTouchOutBounds;
+    protected boolean touchOutBounds;
 
-    public boolean isTunaTouchOutBounds() {
-        return tunaTouchOutBounds;
+    public boolean isTouchOutBounds() {
+        return touchOutBounds;
     }
 
-    public void setTunaTouchOutBounds(boolean tunaTouchOutBounds) {
-        this.tunaTouchOutBounds = tunaTouchOutBounds;
-    }
-
-    //
-    protected TunaLayoutListener tunaLayoutListener;
-
-    public interface TunaLayoutListener {
-        void tunaLayout(View v);
-    }
-
-    public TunaLayoutListener getTunaLayoutListener() {
-        return tunaLayoutListener;
-    }
-
-    public void setTunaLayoutListener(TunaLayoutListener tunaLayoutListener) {
-        this.tunaLayoutListener = tunaLayoutListener;
+    public void setTouchOutBounds(boolean touchOutBounds) {
+        this.touchOutBounds = touchOutBounds;
     }
 
     //
-    protected TunaDrawListener tunaDrawListener;
+    protected LayoutListener layoutListener;
 
-    public interface TunaDrawListener {
-        void tunaDraw(View v);
+    public interface LayoutListener {
+        void layout(View v);
     }
 
-    public TunaDrawListener getTunaDrawListener() {
-        return tunaDrawListener;
+    public LayoutListener getLayoutListener() {
+        return layoutListener;
     }
 
-    public void setTunaDrawListener(TunaDrawListener tunaDrawListener) {
-        this.tunaDrawListener = tunaDrawListener;
-    }
-
-    //
-    protected TunaAnimateEndListener tunaAnimateEndListener;
-
-    public interface TunaAnimateEndListener {
-        void tunaAnimateEnd(View v);
-    }
-
-    public TunaAnimateEndListener getTunaAnimateEndListener() {
-        return tunaAnimateEndListener;
-    }
-
-    public void setTunaAnimateEndListener(TunaAnimateEndListener tunaAnimateEndListener) {
-        this.tunaAnimateEndListener = tunaAnimateEndListener;
+    public void setLayoutListener(LayoutListener layoutListener) {
+        this.layoutListener = layoutListener;
     }
 
     //
-    protected TunaTouchListener tunaTouchListener;
+    protected DrawListener drawListener;
 
-    public interface TunaTouchListener {
-        void tunaTouch(View v);
+    public interface DrawListener {
+        void draw(View v);
     }
 
-    public TunaTouchListener getTunaTouchListener() {
-        return tunaTouchListener;
+    public DrawListener getDrawListener() {
+        return drawListener;
     }
 
-    public void setTunaTouchListener(TunaTouchListener tunaTouchListener) {
-        this.tunaTouchListener = tunaTouchListener;
-    }
-
-    //
-    protected TunaTouchDownListener tunaTouchDownListener;
-
-    public interface TunaTouchDownListener {
-        void tunaTouchDown(View v);
-    }
-
-    public TunaTouchDownListener getTunaTouchDownListener() {
-        return tunaTouchDownListener;
-    }
-
-    public void setTunaTouchDownListener(TunaTouchDownListener tunaTouchDownListener) {
-        this.tunaTouchDownListener = tunaTouchDownListener;
+    public void setDrawListener(DrawListener drawListener) {
+        this.drawListener = drawListener;
     }
 
     //
-    protected TunaTouchMoveListener tunaTouchMoveListener;
+    protected animateEndListener animateEndListener;
 
-    public interface TunaTouchMoveListener {
-        void tunaTouchMove(View v);
+    public interface animateEndListener {
+        void animateEnd(View v);
     }
 
-    public TunaTouchMoveListener getTunaTouchMoveListener() {
-        return tunaTouchMoveListener;
+    public animateEndListener getAnimateEndListener() {
+        return animateEndListener;
     }
 
-    public void setTunaTouchMoveListener(TunaTouchMoveListener tunaTouchMoveListener) {
-        this.tunaTouchMoveListener = tunaTouchMoveListener;
-    }
-
-    //
-    protected TunaTouchUpListener tunaTouchUpListener;
-
-    public interface TunaTouchUpListener {
-        void tunaTouchUp(View v);
-    }
-
-    public TunaTouchUpListener getTunaTouchUpListener() {
-        return tunaTouchUpListener;
-    }
-
-    public void setTunaTouchUpListener(TunaTouchUpListener tunaTouchUpListener) {
-        this.tunaTouchUpListener = tunaTouchUpListener;
+    public void setAnimateEndListener(animateEndListener animateEndListener) {
+        this.animateEndListener = animateEndListener;
     }
 
     //
-    protected TunaTouchCancelListener tunaTouchCancelListener;
+    protected TouchListener touchListener;
 
-    public interface TunaTouchCancelListener {
-        void tunaTouchCancel(View v);
+    public interface TouchListener {
+        void touch(View v);
     }
 
-    public TunaTouchCancelListener getTunaTouchCancelListener() {
-        return tunaTouchCancelListener;
+    public TouchListener getTouchListener() {
+        return touchListener;
     }
 
-    public void setTunaTouchCancelListener(TunaTouchCancelListener tunaTouchCancelListener) {
-        this.tunaTouchCancelListener = tunaTouchCancelListener;
-    }
-
-    //
-    protected TunaTouchOutListener tunaTouchOutListener;
-
-    public interface TunaTouchOutListener {
-        void tunaTouchOut(View v);
-    }
-
-    public TunaTouchOutListener getTunaTouchOutListener() {
-        return tunaTouchOutListener;
-    }
-
-    public void setTunaTouchOutListener(TunaTouchOutListener tunaTouchOutListener) {
-        this.tunaTouchOutListener = tunaTouchOutListener;
+    public void setTouchListener(TouchListener touchListener) {
+        this.touchListener = touchListener;
     }
 
     //
-    protected TunaTouchInListener tunaTouchInListener;
+    protected TouchDownListener touchDownListener;
 
-    public interface TunaTouchInListener {
-        void tunaTouchIn(View v);
+    public interface TouchDownListener {
+        void touchDown(View v);
     }
 
-    public TunaTouchInListener getTunaTouchInListener() {
-        return tunaTouchInListener;
+    public TouchDownListener getTouchDownListener() {
+        return touchDownListener;
     }
 
-    public void setTunaTouchInListener(TunaTouchInListener tunaTouchInListener) {
-        this.tunaTouchInListener = tunaTouchInListener;
-    }
-
-    // TunaAssociateListener is written in onTouchUp
-    protected TunaAssociateListener tunaAssociateListener;
-
-    public interface TunaAssociateListener {
-        void tunaAssociate(View v);
-    }
-
-    public TunaAssociateListener getTunaAssociateListener() {
-        return tunaAssociateListener;
-    }
-
-    public void setTunaAssociateListener(TunaAssociateListener tunaAssociateListener) {
-        this.tunaAssociateListener = tunaAssociateListener;
+    public void setTouchDownListener(TouchDownListener touchDownListener) {
+        this.touchDownListener = touchDownListener;
     }
 
     //
-    protected TunaSubLayoutListener tunaSubLayoutListener;
+    protected TouchMoveListener touchMoveListener;
 
-    public interface TunaSubLayoutListener {
-        void tunaSubLayout(View v);
+    public interface TouchMoveListener {
+        void touchMove(View v);
     }
 
-    public TunaSubLayoutListener getTunaSubLayoutListener() {
-        return tunaSubLayoutListener;
+    public TouchMoveListener getTouchMoveListener() {
+        return touchMoveListener;
     }
 
-    public void setTunaSubLayoutListener(TunaSubLayoutListener tunaSubLayoutListener) {
-        this.tunaSubLayoutListener = tunaSubLayoutListener;
-    }
-
-    //
-    protected TunaSubDrawListener tunaSubDrawListener;
-
-    public interface TunaSubDrawListener {
-        void tunaSubDraw(View v);
-    }
-
-    public TunaSubDrawListener getTunaSubDrawListener() {
-        return tunaSubDrawListener;
-    }
-
-    public void setTunaSubDrawListener(TunaSubDrawListener tunaSubDrawListener) {
-        this.tunaSubDrawListener = tunaSubDrawListener;
+    public void setTouchMoveListener(TouchMoveListener touchMoveListener) {
+        this.touchMoveListener = touchMoveListener;
     }
 
     //
-    protected TunaSubAnimateEndListener tunaSubAnimateEndListener;
+    protected TouchUpListener touchUpListener;
 
-    public interface TunaSubAnimateEndListener {
-        void tunaSubAnimateEnd(View v);
+    public interface TouchUpListener {
+        void touchUp(View v);
     }
 
-    public TunaSubAnimateEndListener getTunaSubAnimateEndListener() {
-        return tunaSubAnimateEndListener;
+    public TouchUpListener getTouchUpListener() {
+        return touchUpListener;
     }
 
-    public void setTunaSubAnimateEndListener(TunaSubAnimateEndListener tunaSubAnimateEndListener) {
-        this.tunaSubAnimateEndListener = tunaSubAnimateEndListener;
+    public void setTouchUpListener(TouchUpListener touchUpListener) {
+        this.touchUpListener = touchUpListener;
+    }
+
+    //
+    protected TouchCancelListener touchCancelListener;
+
+    public interface TouchCancelListener {
+        void touchCancel(View v);
+    }
+
+    public TouchCancelListener getTouchCancelListener() {
+        return touchCancelListener;
+    }
+
+    public void setTouchCancelListener(TouchCancelListener touchCancelListener) {
+        this.touchCancelListener = touchCancelListener;
+    }
+
+    //
+    protected TouchOutListener touchOutListener;
+
+    public interface TouchOutListener {
+        void touchOut(View v);
+    }
+
+    public TouchOutListener getTouchOutListener() {
+        return touchOutListener;
+    }
+
+    public void setTouchOutListener(TouchOutListener touchOutListener) {
+        this.touchOutListener = touchOutListener;
+    }
+
+    //
+    protected TouchInListener touchInListener;
+
+    public interface TouchInListener {
+        void touchIn(View v);
+    }
+
+    public TouchInListener getTouchInListener() {
+        return touchInListener;
+    }
+
+    public void setTouchInListener(TouchInListener touchInListener) {
+        this.touchInListener = touchInListener;
+    }
+
+    // associateListener is written in onTouchUp
+    protected associateListener associateListener;
+
+    public interface associateListener {
+        void associate(View v);
+    }
+
+    public associateListener getAssociateListener() {
+        return associateListener;
+    }
+
+    public void setAssociateListener(associateListener associateListener) {
+        this.associateListener = associateListener;
+    }
+
+    //
+    protected SubLayoutListener subLayoutListener;
+
+    public interface SubLayoutListener {
+        void subLayout(View v);
+    }
+
+    public SubLayoutListener getSubLayoutListener() {
+        return subLayoutListener;
+    }
+
+    public void setSubLayoutListener(SubLayoutListener subLayoutListener) {
+        this.subLayoutListener = subLayoutListener;
+    }
+
+    //
+    protected SubDrawListener subDrawListener;
+
+    public interface SubDrawListener {
+        void subDraw(View v);
+    }
+
+    public SubDrawListener getSubDrawListener() {
+        return subDrawListener;
+    }
+
+    public void setSubDrawListener(SubDrawListener subDrawListener) {
+        this.subDrawListener = subDrawListener;
+    }
+
+    //
+    protected SubAnimateEndListener subAnimateEndListener;
+
+    public interface SubAnimateEndListener {
+        void subAnimateEnd(View v);
+    }
+
+    public SubAnimateEndListener getSubAnimateEndListener() {
+        return subAnimateEndListener;
+    }
+
+    public void setSubAnimateEndListener(SubAnimateEndListener subAnimateEndListener) {
+        this.subAnimateEndListener = subAnimateEndListener;
     }
 
     /**
      * The following fields and methods can be used only in the superclass
      */
 
-    // tunaBackgroundNormal in onLayout if tunaBackgroundNormal transparent and have drawn the case of default white shadow
-    private int tunaBackgroundNormal;
+    // backgroundNormal in onLayout if backgroundNormal transparent and have drawn the case of default white shadow
+    private int backgroundNormal;
 
-    public int getTunaBackgroundNormal() {
-        return tunaBackgroundNormal;
+    public int getBackgroundNormal() {
+        return backgroundNormal;
     }
 
-    public void setTunaBackgroundNormal(int tunaBackgroundNormal) {
-        this.tunaBackgroundNormal = tunaBackgroundNormal;
+    public void setBackgroundNormal(int backgroundNormal) {
+        this.backgroundNormal = backgroundNormal;
     }
 
-    // tunaBackgroundPress default tunaBackgroundNormal
-    private int tunaBackgroundPress;
+    // backgroundPress default backgroundNormal
+    private int backgroundPress;
 
-    public int getTunaBackgroundPress() {
-        return tunaBackgroundPress;
+    public int getBackgroundPress() {
+        return backgroundPress;
     }
 
-    public void setTunaBackgroundPress(int tunaBackgroundPress) {
-        this.tunaBackgroundPress = tunaBackgroundPress;
+    public void setBackgroundPress(int backgroundPress) {
+        this.backgroundPress = backgroundPress;
     }
 
-    // tunaBackgroundSelect default tunaBackgroundNormal
-    private int tunaBackgroundSelect;
+    // backgroundSelect default backgroundNormal
+    private int backgroundSelect;
 
-    public int getTunaBackgroundSelect() {
-        return tunaBackgroundSelect;
+    public int getBackgroundSelect() {
+        return backgroundSelect;
     }
 
-    public void setTunaBackgroundSelect(int tunaBackgroundSelect) {
-        this.tunaBackgroundSelect = tunaBackgroundSelect;
+    public void setBackgroundSelect(int backgroundSelect) {
+        this.backgroundSelect = backgroundSelect;
     }
 
-    // tunaForegroundNormal default transparent
-    private int tunaForegroundNormal;
+    // foregroundNormal default transparent
+    private int foregroundNormal;
 
-    public int getTunaForegroundNormal() {
-        return tunaForegroundNormal;
+    public int getForegroundNormal() {
+        return foregroundNormal;
     }
 
-    public void setTunaForegroundNormal(int tunaForegroundNormal) {
-        this.tunaForegroundNormal = tunaForegroundNormal;
+    public void setForegroundNormal(int foregroundNormal) {
+        this.foregroundNormal = foregroundNormal;
     }
 
-    // tunaForegroundPress default tunaForegroundNormal
-    private int tunaForegroundPress;
+    // foregroundPress default foregroundNormal
+    private int foregroundPress;
 
-    public int getTunaForegroundPress() {
-        return tunaForegroundPress;
+    public int getForegroundPress() {
+        return foregroundPress;
     }
 
-    public void setTunaForegroundPress(int tunaForegroundPress) {
-        this.tunaForegroundPress = tunaForegroundPress;
+    public void setForegroundPress(int foregroundPress) {
+        this.foregroundPress = foregroundPress;
     }
 
-    // tunaForegroundSelect default tunaForegroundNormal
-    private int tunaForegroundSelect;
+    // foregroundSelect default foregroundNormal
+    private int foregroundSelect;
 
-    public int getTunaForegroundSelect() {
-        return tunaForegroundSelect;
+    public int getForegroundSelect() {
+        return foregroundSelect;
     }
 
-    public void setTunaForegroundSelect(int tunaForegroundSelect) {
-        this.tunaForegroundSelect = tunaForegroundSelect;
+    public void setForegroundSelect(int foregroundSelect) {
+        this.foregroundSelect = foregroundSelect;
     }
 
     public static final int DIRECTION_LEFT = 0x00000001;
@@ -1402,608 +1335,608 @@ public class TView extends View {
     public static final int DIRECTION_BOTTOM = DIRECTION_TOP << 1;
     public static final int DIRECTION_MASK = DIRECTION_LEFT | DIRECTION_RIGHT | DIRECTION_TOP | DIRECTION_BOTTOM;
 
-    private int tunaBackgroundNormalAngle;
+    private int backgroundNormalAngle;
 
-    public int getTunaBackgroundNormalAngle() {
-        return tunaBackgroundNormalAngle;
+    public int getBackgroundNormalAngle() {
+        return backgroundNormalAngle;
     }
 
-    public void setTunaBackgroundNormalAngle(int tunaBackgroundNormalAngle) {
-        this.tunaBackgroundNormalAngle = tunaBackgroundNormalAngle;
+    public void setBackgroundNormalAngle(int backgroundNormalAngle) {
+        this.backgroundNormalAngle = backgroundNormalAngle;
     }
 
-    private int tunaBackgroundPressAngle;
+    private int backgroundPressAngle;
 
-    public int getTunaBackgroundPressAngle() {
-        return tunaBackgroundPressAngle;
+    public int getBackgroundPressAngle() {
+        return backgroundPressAngle;
     }
 
-    public void setTunaBackgroundPressAngle(int tunaBackgroundPressAngle) {
-        this.tunaBackgroundPressAngle = tunaBackgroundPressAngle;
+    public void setBackgroundPressAngle(int backgroundPressAngle) {
+        this.backgroundPressAngle = backgroundPressAngle;
     }
 
-    private int tunaBackgroundSelectAngle;
+    private int backgroundSelectAngle;
 
-    public int getTunaBackgroundSelectAngle() {
-        return tunaBackgroundSelectAngle;
+    public int getBackgroundSelectAngle() {
+        return backgroundSelectAngle;
     }
 
-    public void setTunaBackgroundSelectAngle(int tunaBackgroundSelectAngle) {
-        this.tunaBackgroundSelectAngle = tunaBackgroundSelectAngle;
+    public void setBackgroundSelectAngle(int backgroundSelectAngle) {
+        this.backgroundSelectAngle = backgroundSelectAngle;
     }
 
-    // tunaBackgroundNormalGradientStart default tunaBackgroundNormal
-    private int tunaBackgroundNormalGradientStart;
+    // backgroundNormalGradientStart default backgroundNormal
+    private int backgroundNormalGradientStart;
 
-    public int getTunaBackgroundNormalGradientStart() {
-        return tunaBackgroundNormalGradientStart;
+    public int getBackgroundNormalGradientStart() {
+        return backgroundNormalGradientStart;
     }
 
-    public void setTunaBackgroundNormalGradientStart(int tunaBackgroundNormalGradientStart) {
-        this.tunaBackgroundNormalGradientStart = tunaBackgroundNormalGradientStart;
+    public void setBackgroundNormalGradientStart(int backgroundNormalGradientStart) {
+        this.backgroundNormalGradientStart = backgroundNormalGradientStart;
     }
 
-    // tunaBackgroundNormalGradientEnd default tunaBackgroundNormal
-    private int tunaBackgroundNormalGradientEnd;
+    // backgroundNormalGradientEnd default backgroundNormal
+    private int backgroundNormalGradientEnd;
 
-    public int getTunaBackgroundNormalGradientEnd() {
-        return tunaBackgroundNormalGradientEnd;
+    public int getBackgroundNormalGradientEnd() {
+        return backgroundNormalGradientEnd;
     }
 
-    public void setTunaBackgroundNormalGradientEnd(int tunaBackgroundNormalGradientEnd) {
-        this.tunaBackgroundNormalGradientEnd = tunaBackgroundNormalGradientEnd;
+    public void setBackgroundNormalGradientEnd(int backgroundNormalGradientEnd) {
+        this.backgroundNormalGradientEnd = backgroundNormalGradientEnd;
     }
 
-    // tunaBackgroundPressGradientStart default tunaBackgroundPress
-    private int tunaBackgroundPressGradientStart;
+    // backgroundPressGradientStart default backgroundPress
+    private int backgroundPressGradientStart;
 
-    public int getTunaBackgroundPressGradientStart() {
-        return tunaBackgroundPressGradientStart;
+    public int getBackgroundPressGradientStart() {
+        return backgroundPressGradientStart;
     }
 
-    public void setTunaBackgroundPressGradientStart(int tunaBackgroundPressGradientStart) {
-        this.tunaBackgroundPressGradientStart = tunaBackgroundPressGradientStart;
+    public void setBackgroundPressGradientStart(int backgroundPressGradientStart) {
+        this.backgroundPressGradientStart = backgroundPressGradientStart;
     }
 
-    // tunaBackgroundPressGradientEnd default tunaBackgroundPress
-    private int tunaBackgroundPressGradientEnd;
+    // backgroundPressGradientEnd default backgroundPress
+    private int backgroundPressGradientEnd;
 
-    public int getTunaBackgroundPressGradientEnd() {
-        return tunaBackgroundPressGradientEnd;
+    public int getBackgroundPressGradientEnd() {
+        return backgroundPressGradientEnd;
     }
 
-    public void setTunaBackgroundPressGradientEnd(int tunaBackgroundPressGradientEnd) {
-        this.tunaBackgroundPressGradientEnd = tunaBackgroundPressGradientEnd;
+    public void setBackgroundPressGradientEnd(int backgroundPressGradientEnd) {
+        this.backgroundPressGradientEnd = backgroundPressGradientEnd;
     }
 
-    // tunaBackgroundSelectGradientStart default tunaBackgroundSelect
-    private int tunaBackgroundSelectGradientStart;
+    // backgroundSelectGradientStart default backgroundSelect
+    private int backgroundSelectGradientStart;
 
-    public int getTunaBackgroundSelectGradientStart() {
-        return tunaBackgroundSelectGradientStart;
+    public int getBackgroundSelectGradientStart() {
+        return backgroundSelectGradientStart;
     }
 
-    public void setTunaBackgroundSelectGradientStart(int tunaBackgroundSelectGradientStart) {
-        this.tunaBackgroundSelectGradientStart = tunaBackgroundSelectGradientStart;
+    public void setBackgroundSelectGradientStart(int backgroundSelectGradientStart) {
+        this.backgroundSelectGradientStart = backgroundSelectGradientStart;
     }
 
-    // tunaBackgroundSelectGradientEnd default tunaBackgroundSelect
-    private int tunaBackgroundSelectGradientEnd;
+    // backgroundSelectGradientEnd default backgroundSelect
+    private int backgroundSelectGradientEnd;
 
-    public int getTunaBackgroundSelectGradientEnd() {
-        return tunaBackgroundSelectGradientEnd;
+    public int getBackgroundSelectGradientEnd() {
+        return backgroundSelectGradientEnd;
     }
 
-    public void setTunaBackgroundSelectGradientEnd(int tunaBackgroundSelectGradientEnd) {
-        this.tunaBackgroundSelectGradientEnd = tunaBackgroundSelectGradientEnd;
+    public void setBackgroundSelectGradientEnd(int backgroundSelectGradientEnd) {
+        this.backgroundSelectGradientEnd = backgroundSelectGradientEnd;
     }
 
-    // tunaBackgroundNormalShader default null
-    private Shader tunaBackgroundNormalShader;
+    // backgroundNormalShader default null
+    private Shader backgroundNormalShader;
 
-    public Shader getTunaBackgroundNormalShader() {
-        return tunaBackgroundNormalShader;
+    public Shader getBackgroundNormalShader() {
+        return backgroundNormalShader;
     }
 
-    public void setTunaBackgroundNormalShader(Shader tunaBackgroundNormalShader) {
-        this.tunaBackgroundNormalShader = tunaBackgroundNormalShader;
+    public void setBackgroundNormalShader(Shader backgroundNormalShader) {
+        this.backgroundNormalShader = backgroundNormalShader;
     }
 
-    // tunaBackgroundPressShader default null
-    private Shader tunaBackgroundPressShader;
+    // backgroundPressShader default null
+    private Shader backgroundPressShader;
 
-    public Shader getTunaBackgroundPressShader() {
-        return tunaBackgroundPressShader;
+    public Shader getBackgroundPressShader() {
+        return backgroundPressShader;
     }
 
-    public void setTunaBackgroundPressShader(Shader tunaBackgroundPressShader) {
-        this.tunaBackgroundPressShader = tunaBackgroundPressShader;
+    public void setBackgroundPressShader(Shader backgroundPressShader) {
+        this.backgroundPressShader = backgroundPressShader;
     }
 
-    // tunaBackgroundSelectShader default null
-    private Shader tunaBackgroundSelectShader;
+    // backgroundSelectShader default null
+    private Shader backgroundSelectShader;
 
-    public Shader getTunaBackgroundSelectShader() {
-        return tunaBackgroundSelectShader;
+    public Shader getBackgroundSelectShader() {
+        return backgroundSelectShader;
     }
 
-    public void setTunaBackgroundSelectShader(Shader tunaBackgroundSelectShader) {
-        this.tunaBackgroundSelectShader = tunaBackgroundSelectShader;
-    }
-
-    //
-    private float tunaBackgroundNormalShadowRadius;
-
-    public float getTunaBackgroundNormalShadowRadius() {
-        return tunaBackgroundNormalShadowRadius;
-    }
-
-    public void setTunaBackgroundNormalShadowRadius(float tunaBackgroundNormalShadowRadius) {
-        setTunaBackgroundNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundNormalShadowRadius);
-    }
-
-    public void setTunaBackgroundNormalShadowRadius(int unit, float tunaBackgroundNormalShadowRadius) {
-        setTunaBackgroundNormalShadowRadiusRaw(applyDimension(unit, tunaBackgroundNormalShadowRadius, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundNormalShadowRadiusRaw(float tunaBackgroundNormalShadowRadius) {
-        if (this.tunaBackgroundNormalShadowRadius != tunaBackgroundNormalShadowRadius) {
-            this.tunaBackgroundNormalShadowRadius = tunaBackgroundNormalShadowRadius;
-            invalidate();
-        }
+    public void setBackgroundSelectShader(Shader backgroundSelectShader) {
+        this.backgroundSelectShader = backgroundSelectShader;
     }
 
     //
-    private int tunaBackgroundNormalShadowColor;
+    private float backgroundNormalShadowRadius;
 
-    public int getTunaBackgroundNormalShadowColor() {
-        return tunaBackgroundNormalShadowColor;
+    public float getBackgroundNormalShadowRadius() {
+        return backgroundNormalShadowRadius;
     }
 
-    public void setTunaBackgroundNormalShadowColor(int tunaBackgroundNormalShadowColor) {
-        this.tunaBackgroundNormalShadowColor = tunaBackgroundNormalShadowColor;
+    public void setBackgroundNormalShadowRadius(float backgroundNormalShadowRadius) {
+        setBackgroundNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowRadius);
     }
 
-    //
-    private float tunaBackgroundNormalShadowDx;
-
-    public float getTunaBackgroundNormalShadowDx() {
-        return tunaBackgroundNormalShadowDx;
+    public void setBackgroundNormalShadowRadius(int unit, float backgroundNormalShadowRadius) {
+        setBackgroundNormalShadowRadiusRaw(applyDimension(unit, backgroundNormalShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    public void setTunaBackgroundNormalShadowDx(float tunaBackgroundNormalShadowDx) {
-        setTunaBackgroundNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundNormalShadowDx);
-    }
-
-    public void setTunaBackgroundNormalShadowDx(int unit, float tunaBackgroundNormalShadowDx) {
-        setTunaBackgroundNormalShadowDxRaw(applyDimension(unit, tunaBackgroundNormalShadowDx, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundNormalShadowDxRaw(float tunaBackgroundNormalShadowDx) {
-        if (this.tunaBackgroundNormalShadowDx != tunaBackgroundNormalShadowDx) {
-            this.tunaBackgroundNormalShadowDx = tunaBackgroundNormalShadowDx;
+    private void setBackgroundNormalShadowRadiusRaw(float backgroundNormalShadowRadius) {
+        if (this.backgroundNormalShadowRadius != backgroundNormalShadowRadius) {
+            this.backgroundNormalShadowRadius = backgroundNormalShadowRadius;
             invalidate();
         }
     }
 
     //
-    private float tunaBackgroundNormalShadowDy;
+    private int backgroundNormalShadowColor;
 
-    public float getTunaBackgroundNormalShadowDy() {
-        return tunaBackgroundNormalShadowDy;
+    public int getBackgroundNormalShadowColor() {
+        return backgroundNormalShadowColor;
     }
 
-    public void setTunaBackgroundNormalShadowDy(float tunaBackgroundNormalShadowDy) {
-        setTunaBackgroundNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundNormalShadowDy);
+    public void setBackgroundNormalShadowColor(int backgroundNormalShadowColor) {
+        this.backgroundNormalShadowColor = backgroundNormalShadowColor;
     }
 
-    public void setTunaBackgroundNormalShadowDy(int unit, float tunaBackgroundNormalShadowDy) {
-        setTunaBackgroundNormalShadowDyRaw(applyDimension(unit, tunaBackgroundNormalShadowDy, getViewDisplayMetrics(this)));
+    //
+    private float backgroundNormalShadowDx;
+
+    public float getBackgroundNormalShadowDx() {
+        return backgroundNormalShadowDx;
     }
 
-    private void setTunaBackgroundNormalShadowDyRaw(float tunaBackgroundNormalShadowDy) {
-        if (this.tunaBackgroundNormalShadowDy != tunaBackgroundNormalShadowDy) {
-            this.tunaBackgroundNormalShadowDy = tunaBackgroundNormalShadowDy;
-            invalidate();
-        }
+    public void setBackgroundNormalShadowDx(float backgroundNormalShadowDx) {
+        setBackgroundNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowDx);
     }
 
-    // default tunaBackgroundNormalShadowRadius
-    private float tunaBackgroundPressShadowRadius;
-
-    public float getTunaBackgroundPressShadowRadius() {
-        return tunaBackgroundPressShadowRadius;
+    public void setBackgroundNormalShadowDx(int unit, float backgroundNormalShadowDx) {
+        setBackgroundNormalShadowDxRaw(applyDimension(unit, backgroundNormalShadowDx, getViewDisplayMetrics(this)));
     }
 
-    public void setTunaBackgroundPressShadowRadius(float tunaBackgroundPressShadowRadius) {
-        setTunaBackgroundPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundPressShadowRadius);
-    }
-
-    public void setTunaBackgroundPressShadowRadius(int unit, float tunaBackgroundPressShadowRadius) {
-        setTunaBackgroundPressShadowRadiusRaw(applyDimension(unit, tunaBackgroundPressShadowRadius, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundPressShadowRadiusRaw(float tunaBackgroundPressShadowRadius) {
-        if (this.tunaBackgroundPressShadowRadius != tunaBackgroundPressShadowRadius) {
-            this.tunaBackgroundPressShadowRadius = tunaBackgroundPressShadowRadius;
-            invalidate();
-        }
-    }
-
-    // default tunaBackgroundNormalShadowColor
-    private int tunaBackgroundPressShadowColor;
-
-    public int getTunaBackgroundPressShadowColor() {
-        return tunaBackgroundPressShadowColor;
-    }
-
-    public void setTunaBackgroundPressShadowColor(int tunaBackgroundPressShadowColor) {
-        this.tunaBackgroundPressShadowColor = tunaBackgroundPressShadowColor;
-    }
-
-    // default tunaBackgroundNormalShadowDx
-    private float tunaBackgroundPressShadowDx;
-
-    public float getTunaBackgroundPressShadowDx() {
-        return tunaBackgroundPressShadowDx;
-    }
-
-    public void setTunaBackgroundPressShadowDx(float tunaBackgroundPressShadowDx) {
-        setTunaBackgroundPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundPressShadowDx);
-    }
-
-    public void setTunaBackgroundPressShadowDx(int unit, float tunaBackgroundPressShadowDx) {
-        setTunaBackgroundPressShadowDxRaw(applyDimension(unit, tunaBackgroundPressShadowDx, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundPressShadowDxRaw(float tunaBackgroundPressShadowDx) {
-        if (this.tunaBackgroundPressShadowDx != tunaBackgroundPressShadowDx) {
-            this.tunaBackgroundPressShadowDx = tunaBackgroundPressShadowDx;
-            invalidate();
-        }
-    }
-
-    // default tunaBackgroundNormalShadowDy
-    private float tunaBackgroundPressShadowDy;
-
-    public float getTunaBackgroundPressShadowDy() {
-        return tunaBackgroundPressShadowDy;
-    }
-
-    public void setTunaBackgroundPressShadowDy(float tunaBackgroundPressShadowDy) {
-        setTunaBackgroundPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundPressShadowDy);
-    }
-
-    public void setTunaBackgroundPressShadowDy(int unit, float tunaBackgroundPressShadowDy) {
-        setTunaBackgroundPressShadowDyRaw(applyDimension(unit, tunaBackgroundPressShadowDy, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundPressShadowDyRaw(float tunaBackgroundPressShadowDy) {
-        if (this.tunaBackgroundPressShadowDy != tunaBackgroundPressShadowDy) {
-            this.tunaBackgroundPressShadowDy = tunaBackgroundPressShadowDy;
-            invalidate();
-        }
-    }
-
-    // default tunaBackgroundNormalShadowRadius
-    private float tunaBackgroundSelectShadowRadius;
-
-    public float getTunaBackgroundSelectShadowRadius() {
-        return tunaBackgroundSelectShadowRadius;
-    }
-
-    public void setTunaBackgroundSelectShadowRadius(float tunaBackgroundSelectShadowRadius) {
-        setTunaBackgroundSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundSelectShadowRadius);
-    }
-
-    public void setTunaBackgroundSelectShadowRadius(int unit, float tunaBackgroundSelectShadowRadius) {
-        setTunaBackgroundSelectShadowRadiusRaw(applyDimension(unit, tunaBackgroundSelectShadowRadius, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundSelectShadowRadiusRaw(float tunaBackgroundSelectShadowRadius) {
-        if (this.tunaBackgroundSelectShadowRadius != tunaBackgroundSelectShadowRadius) {
-            this.tunaBackgroundSelectShadowRadius = tunaBackgroundSelectShadowRadius;
-            invalidate();
-        }
-    }
-
-    // default tunaBackgroundNormalShadowColor
-    private int tunaBackgroundSelectShadowColor;
-
-    public int getTunaBackgroundSelectShadowColor() {
-        return tunaBackgroundSelectShadowColor;
-    }
-
-    public void setTunaBackgroundSelectShadowColor(int tunaBackgroundSelectShadowColor) {
-        this.tunaBackgroundSelectShadowColor = tunaBackgroundSelectShadowColor;
-    }
-
-    // default tunaBackgroundNormalShadowDx
-    private float tunaBackgroundSelectShadowDx;
-
-    public float getTunaBackgroundSelectShadowDx() {
-        return tunaBackgroundSelectShadowDx;
-    }
-
-    public void setTunaBackgroundSelectShadowDx(float tunaBackgroundSelectShadowDx) {
-        setTunaBackgroundSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundSelectShadowDx);
-    }
-
-    public void setTunaBackgroundSelectShadowDx(int unit, float tunaBackgroundSelectShadowDx) {
-        setTunaBackgroundSelectShadowDxRaw(applyDimension(unit, tunaBackgroundSelectShadowDx, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundSelectShadowDxRaw(float tunaBackgroundSelectShadowDx) {
-        if (this.tunaBackgroundSelectShadowDx != tunaBackgroundSelectShadowDx) {
-            this.tunaBackgroundSelectShadowDx = tunaBackgroundSelectShadowDx;
-            invalidate();
-        }
-    }
-
-    // default tunaBackgroundNormalShadowDy
-    private float tunaBackgroundSelectShadowDy;
-
-    public float getTunaBackgroundSelectShadowDy() {
-        return tunaBackgroundSelectShadowDy;
-    }
-
-    public void setTunaBackgroundSelectShadowDy(float tunaBackgroundSelectShadowDy) {
-        setTunaBackgroundSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaBackgroundSelectShadowDy);
-    }
-
-    public void setTunaBackgroundSelectShadowDy(int unit, float tunaBackgroundSelectShadowDy) {
-        setTunaBackgroundSelectShadowDyRaw(applyDimension(unit, tunaBackgroundSelectShadowDy, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaBackgroundSelectShadowDyRaw(float tunaBackgroundSelectShadowDy) {
-        if (this.tunaBackgroundSelectShadowDy != tunaBackgroundSelectShadowDy) {
-            this.tunaBackgroundSelectShadowDy = tunaBackgroundSelectShadowDy;
+    private void setBackgroundNormalShadowDxRaw(float backgroundNormalShadowDx) {
+        if (this.backgroundNormalShadowDx != backgroundNormalShadowDx) {
+            this.backgroundNormalShadowDx = backgroundNormalShadowDx;
             invalidate();
         }
     }
 
     //
-    private Bitmap tunaSrcNormal;
+    private float backgroundNormalShadowDy;
 
-    public Bitmap getTunaSrcNormal() {
-        return tunaSrcNormal;
+    public float getBackgroundNormalShadowDy() {
+        return backgroundNormalShadowDy;
     }
 
-    public void setTunaSrcNormal(int id) {
-        setTunaSrcNormal(decodeBitmapResource(getContext(), id));
+    public void setBackgroundNormalShadowDy(float backgroundNormalShadowDy) {
+        setBackgroundNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowDy);
     }
 
-    public void setTunaSrcNormal(Bitmap tunaSrcNormal) {
-        this.tunaSrcNormal = tunaSrcNormal;
+    public void setBackgroundNormalShadowDy(int unit, float backgroundNormalShadowDy) {
+        setBackgroundNormalShadowDyRaw(applyDimension(unit, backgroundNormalShadowDy, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundNormalShadowDyRaw(float backgroundNormalShadowDy) {
+        if (this.backgroundNormalShadowDy != backgroundNormalShadowDy) {
+            this.backgroundNormalShadowDy = backgroundNormalShadowDy;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowRadius
+    private float backgroundPressShadowRadius;
+
+    public float getBackgroundPressShadowRadius() {
+        return backgroundPressShadowRadius;
+    }
+
+    public void setBackgroundPressShadowRadius(float backgroundPressShadowRadius) {
+        setBackgroundPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowRadius);
+    }
+
+    public void setBackgroundPressShadowRadius(int unit, float backgroundPressShadowRadius) {
+        setBackgroundPressShadowRadiusRaw(applyDimension(unit, backgroundPressShadowRadius, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundPressShadowRadiusRaw(float backgroundPressShadowRadius) {
+        if (this.backgroundPressShadowRadius != backgroundPressShadowRadius) {
+            this.backgroundPressShadowRadius = backgroundPressShadowRadius;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowColor
+    private int backgroundPressShadowColor;
+
+    public int getBackgroundPressShadowColor() {
+        return backgroundPressShadowColor;
+    }
+
+    public void setBackgroundPressShadowColor(int backgroundPressShadowColor) {
+        this.backgroundPressShadowColor = backgroundPressShadowColor;
+    }
+
+    // default backgroundNormalShadowDx
+    private float backgroundPressShadowDx;
+
+    public float getBackgroundPressShadowDx() {
+        return backgroundPressShadowDx;
+    }
+
+    public void setBackgroundPressShadowDx(float backgroundPressShadowDx) {
+        setBackgroundPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowDx);
+    }
+
+    public void setBackgroundPressShadowDx(int unit, float backgroundPressShadowDx) {
+        setBackgroundPressShadowDxRaw(applyDimension(unit, backgroundPressShadowDx, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundPressShadowDxRaw(float backgroundPressShadowDx) {
+        if (this.backgroundPressShadowDx != backgroundPressShadowDx) {
+            this.backgroundPressShadowDx = backgroundPressShadowDx;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowDy
+    private float backgroundPressShadowDy;
+
+    public float getBackgroundPressShadowDy() {
+        return backgroundPressShadowDy;
+    }
+
+    public void setBackgroundPressShadowDy(float backgroundPressShadowDy) {
+        setBackgroundPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowDy);
+    }
+
+    public void setBackgroundPressShadowDy(int unit, float backgroundPressShadowDy) {
+        setBackgroundPressShadowDyRaw(applyDimension(unit, backgroundPressShadowDy, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundPressShadowDyRaw(float backgroundPressShadowDy) {
+        if (this.backgroundPressShadowDy != backgroundPressShadowDy) {
+            this.backgroundPressShadowDy = backgroundPressShadowDy;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowRadius
+    private float backgroundSelectShadowRadius;
+
+    public float getBackgroundSelectShadowRadius() {
+        return backgroundSelectShadowRadius;
+    }
+
+    public void setBackgroundSelectShadowRadius(float backgroundSelectShadowRadius) {
+        setBackgroundSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowRadius);
+    }
+
+    public void setBackgroundSelectShadowRadius(int unit, float backgroundSelectShadowRadius) {
+        setBackgroundSelectShadowRadiusRaw(applyDimension(unit, backgroundSelectShadowRadius, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundSelectShadowRadiusRaw(float backgroundSelectShadowRadius) {
+        if (this.backgroundSelectShadowRadius != backgroundSelectShadowRadius) {
+            this.backgroundSelectShadowRadius = backgroundSelectShadowRadius;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowColor
+    private int backgroundSelectShadowColor;
+
+    public int getBackgroundSelectShadowColor() {
+        return backgroundSelectShadowColor;
+    }
+
+    public void setBackgroundSelectShadowColor(int backgroundSelectShadowColor) {
+        this.backgroundSelectShadowColor = backgroundSelectShadowColor;
+    }
+
+    // default backgroundNormalShadowDx
+    private float backgroundSelectShadowDx;
+
+    public float getBackgroundSelectShadowDx() {
+        return backgroundSelectShadowDx;
+    }
+
+    public void setBackgroundSelectShadowDx(float backgroundSelectShadowDx) {
+        setBackgroundSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowDx);
+    }
+
+    public void setBackgroundSelectShadowDx(int unit, float backgroundSelectShadowDx) {
+        setBackgroundSelectShadowDxRaw(applyDimension(unit, backgroundSelectShadowDx, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundSelectShadowDxRaw(float backgroundSelectShadowDx) {
+        if (this.backgroundSelectShadowDx != backgroundSelectShadowDx) {
+            this.backgroundSelectShadowDx = backgroundSelectShadowDx;
+            invalidate();
+        }
+    }
+
+    // default backgroundNormalShadowDy
+    private float backgroundSelectShadowDy;
+
+    public float getBackgroundSelectShadowDy() {
+        return backgroundSelectShadowDy;
+    }
+
+    public void setBackgroundSelectShadowDy(float backgroundSelectShadowDy) {
+        setBackgroundSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowDy);
+    }
+
+    public void setBackgroundSelectShadowDy(int unit, float backgroundSelectShadowDy) {
+        setBackgroundSelectShadowDyRaw(applyDimension(unit, backgroundSelectShadowDy, getViewDisplayMetrics(this)));
+    }
+
+    private void setBackgroundSelectShadowDyRaw(float backgroundSelectShadowDy) {
+        if (this.backgroundSelectShadowDy != backgroundSelectShadowDy) {
+            this.backgroundSelectShadowDy = backgroundSelectShadowDy;
+            invalidate();
+        }
+    }
+
+    //
+    private Bitmap srcNormal;
+
+    public Bitmap getSrcNormal() {
+        return srcNormal;
+    }
+
+    public void setSrcNormal(int id) {
+        setSrcNormal(decodeBitmapResource(getContext(), id));
+    }
+
+    public void setSrcNormal(Bitmap srcNormal) {
+        this.srcNormal = srcNormal;
         invalidate();
     }
 
     //
-    private Bitmap tunaSrcPress;
+    private Bitmap srcPress;
 
-    public Bitmap getTunaSrcPress() {
-        return tunaSrcPress;
+    public Bitmap getSrcPress() {
+        return srcPress;
     }
 
-    public void setTunaSrcPress(int id) {
-        setTunaSrcPress(decodeBitmapResource(getContext(), id));
+    public void setSrcPress(int id) {
+        setSrcPress(decodeBitmapResource(getContext(), id));
     }
 
-    public void setTunaSrcPress(Bitmap tunaSrcPress) {
-        this.tunaSrcPress = tunaSrcPress;
+    public void setSrcPress(Bitmap srcPress) {
+        this.srcPress = srcPress;
         invalidate();
     }
 
     //
-    private Bitmap tunaSrcSelect;
+    private Bitmap srcSelect;
 
-    public Bitmap getTunaSrcSelect() {
-        return tunaSrcSelect;
+    public Bitmap getSrcSelect() {
+        return srcSelect;
     }
 
-    public void setTunaSrcSelect(int id) {
-        setTunaSrcSelect(decodeBitmapResource(getContext(), id));
+    public void setSrcSelect(int id) {
+        setSrcSelect(decodeBitmapResource(getContext(), id));
     }
 
-    public void setTunaSrcSelect(Bitmap tunaSrcSelect) {
-        this.tunaSrcSelect = tunaSrcSelect;
+    public void setSrcSelect(Bitmap srcSelect) {
+        this.srcSelect = srcSelect;
         invalidate();
     }
 
     //
-    private float tunaSrcNormalShadowRadius;
+    private float srcNormalShadowRadius;
 
-    public float getTunaSrcNormalShadowRadius() {
-        return tunaSrcNormalShadowRadius;
+    public float getSrcNormalShadowRadius() {
+        return srcNormalShadowRadius;
     }
 
-    public void setTunaSrcNormalShadowRadius(float tunaSrcNormalShadowRadius) {
-        setTunaSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaSrcNormalShadowRadius);
+    public void setSrcNormalShadowRadius(float srcNormalShadowRadius) {
+        setSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowRadius);
     }
 
-    public void setTunaSrcNormalShadowRadius(int unit, float tunaSrcNormalShadowRadius) {
-        setTunaSrcNormalShadowRadiusRaw(applyDimension(unit, tunaSrcNormalShadowRadius, getViewDisplayMetrics(this)));
+    public void setSrcNormalShadowRadius(int unit, float srcNormalShadowRadius) {
+        setSrcNormalShadowRadiusRaw(applyDimension(unit, srcNormalShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcNormalShadowRadiusRaw(float tunaSrcNormalShadowRadius) {
-        if (this.tunaSrcNormalShadowRadius != tunaSrcNormalShadowRadius) {
-            this.tunaSrcNormalShadowRadius = tunaSrcNormalShadowRadius;
+    private void setSrcNormalShadowRadiusRaw(float srcNormalShadowRadius) {
+        if (this.srcNormalShadowRadius != srcNormalShadowRadius) {
+            this.srcNormalShadowRadius = srcNormalShadowRadius;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcNormalShadowDx;
+    private float srcNormalShadowDx;
 
-    public float getTunaSrcNormalShadowDx() {
-        return tunaSrcNormalShadowDx;
+    public float getSrcNormalShadowDx() {
+        return srcNormalShadowDx;
     }
 
-    public void setTunaSrcNormalShadowDx(float tunaSrcNormalShadowDx) {
-        setTunaSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcNormalShadowDx);
+    public void setSrcNormalShadowDx(float srcNormalShadowDx) {
+        setSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowDx);
     }
 
-    public void setTunaSrcNormalShadowDx(int unit, float tunaSrcNormalShadowDx) {
-        setTunaSrcNormalShadowDxRaw(applyDimension(unit, tunaSrcNormalShadowDx, getViewDisplayMetrics(this)));
+    public void setSrcNormalShadowDx(int unit, float srcNormalShadowDx) {
+        setSrcNormalShadowDxRaw(applyDimension(unit, srcNormalShadowDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcNormalShadowDxRaw(float tunaSrcNormalShadowDx) {
-        if (this.tunaSrcNormalShadowDx != tunaSrcNormalShadowDx) {
-            this.tunaSrcNormalShadowDx = tunaSrcNormalShadowDx;
+    private void setSrcNormalShadowDxRaw(float srcNormalShadowDx) {
+        if (this.srcNormalShadowDx != srcNormalShadowDx) {
+            this.srcNormalShadowDx = srcNormalShadowDx;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcNormalShadowDy;
+    private float srcNormalShadowDy;
 
-    public float getTunaSrcNormalShadowDy() {
-        return tunaSrcNormalShadowDy;
+    public float getSrcNormalShadowDy() {
+        return srcNormalShadowDy;
     }
 
-    public void setTunaSrcNormalShadowDy(float tunaSrcNormalShadowDy) {
-        setTunaSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcNormalShadowDy);
+    public void setSrcNormalShadowDy(float srcNormalShadowDy) {
+        setSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowDy);
     }
 
-    public void setTunaSrcNormalShadowDy(int unit, float tunaSrcNormalShadowDy) {
-        setTunaSrcNormalShadowDyRaw(applyDimension(unit, tunaSrcNormalShadowDy, getViewDisplayMetrics(this)));
+    public void setSrcNormalShadowDy(int unit, float srcNormalShadowDy) {
+        setSrcNormalShadowDyRaw(applyDimension(unit, srcNormalShadowDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcNormalShadowDyRaw(float tunaSrcNormalShadowDy) {
-        if (this.tunaSrcNormalShadowDy != tunaSrcNormalShadowDy) {
-            this.tunaSrcNormalShadowDy = tunaSrcNormalShadowDy;
+    private void setSrcNormalShadowDyRaw(float srcNormalShadowDy) {
+        if (this.srcNormalShadowDy != srcNormalShadowDy) {
+            this.srcNormalShadowDy = srcNormalShadowDy;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowRadius
-    private float tunaSrcPressShadowRadius;
+    // default srcNormalShadowRadius
+    private float srcPressShadowRadius;
 
-    public float getTunaSrcPressShadowRadius() {
-        return tunaSrcPressShadowRadius;
+    public float getSrcPressShadowRadius() {
+        return srcPressShadowRadius;
     }
 
-    public void setTunaSrcPressShadowRadius(float tunaSrcPressShadowRadius) {
-        setTunaSrcPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaSrcPressShadowRadius);
+    public void setSrcPressShadowRadius(float srcPressShadowRadius) {
+        setSrcPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowRadius);
     }
 
-    public void setTunaSrcPressShadowRadius(int unit, float tunaSrcPressShadowRadius) {
-        setTunaSrcPressShadowRadiusRaw(applyDimension(unit, tunaSrcPressShadowRadius, getViewDisplayMetrics(this)));
+    public void setSrcPressShadowRadius(int unit, float srcPressShadowRadius) {
+        setSrcPressShadowRadiusRaw(applyDimension(unit, srcPressShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcPressShadowRadiusRaw(float tunaSrcPressShadowRadius) {
-        if (this.tunaSrcPressShadowRadius != tunaSrcPressShadowRadius) {
-            this.tunaSrcPressShadowRadius = tunaSrcPressShadowRadius;
+    private void setSrcPressShadowRadiusRaw(float srcPressShadowRadius) {
+        if (this.srcPressShadowRadius != srcPressShadowRadius) {
+            this.srcPressShadowRadius = srcPressShadowRadius;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowDx
-    private float tunaSrcPressShadowDx;
+    // default srcNormalShadowDx
+    private float srcPressShadowDx;
 
-    public float getTunaSrcPressShadowDx() {
-        return tunaSrcPressShadowDx;
+    public float getSrcPressShadowDx() {
+        return srcPressShadowDx;
     }
 
-    public void setTunaSrcPressShadowDx(float tunaSrcPressShadowDx) {
-        setTunaSrcPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcPressShadowDx);
+    public void setSrcPressShadowDx(float srcPressShadowDx) {
+        setSrcPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowDx);
     }
 
-    public void setTunaSrcPressShadowDx(int unit, float tunaSrcPressShadowDx) {
-        setTunaSrcPressShadowDxRaw(applyDimension(unit, tunaSrcPressShadowDx, getViewDisplayMetrics(this)));
+    public void setSrcPressShadowDx(int unit, float srcPressShadowDx) {
+        setSrcPressShadowDxRaw(applyDimension(unit, srcPressShadowDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcPressShadowDxRaw(float tunaSrcPressShadowDx) {
-        if (this.tunaSrcPressShadowDx != tunaSrcPressShadowDx) {
-            this.tunaSrcPressShadowDx = tunaSrcPressShadowDx;
+    private void setSrcPressShadowDxRaw(float srcPressShadowDx) {
+        if (this.srcPressShadowDx != srcPressShadowDx) {
+            this.srcPressShadowDx = srcPressShadowDx;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowDy
-    private float tunaSrcPressShadowDy;
+    // default srcNormalShadowDy
+    private float srcPressShadowDy;
 
-    public float getTunaSrcPressShadowDy() {
-        return tunaSrcPressShadowDy;
+    public float getSrcPressShadowDy() {
+        return srcPressShadowDy;
     }
 
-    public void setTunaSrcPressShadowDy(float tunaSrcPressShadowDy) {
-        setTunaSrcPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcPressShadowDy);
+    public void setSrcPressShadowDy(float srcPressShadowDy) {
+        setSrcPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowDy);
     }
 
-    public void setTunaSrcPressShadowDy(int unit, float tunaSrcPressShadowDy) {
-        setTunaSrcPressShadowDyRaw(applyDimension(unit, tunaSrcPressShadowDy, getViewDisplayMetrics(this)));
+    public void setSrcPressShadowDy(int unit, float srcPressShadowDy) {
+        setSrcPressShadowDyRaw(applyDimension(unit, srcPressShadowDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcPressShadowDyRaw(float tunaSrcPressShadowDy) {
-        if (this.tunaSrcPressShadowDy != tunaSrcPressShadowDy) {
-            this.tunaSrcPressShadowDy = tunaSrcPressShadowDy;
+    private void setSrcPressShadowDyRaw(float srcPressShadowDy) {
+        if (this.srcPressShadowDy != srcPressShadowDy) {
+            this.srcPressShadowDy = srcPressShadowDy;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowRadius
-    private float tunaSrcSelectShadowRadius;
+    // default srcNormalShadowRadius
+    private float srcSelectShadowRadius;
 
-    public float getTunaSrcSelectShadowRadius() {
-        return tunaSrcSelectShadowRadius;
+    public float getSrcSelectShadowRadius() {
+        return srcSelectShadowRadius;
     }
 
-    public void setTunaSrcSelectShadowRadius(float tunaSrcSelectShadowRadius) {
-        setTunaSrcSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaSrcSelectShadowRadius);
+    public void setSrcSelectShadowRadius(float srcSelectShadowRadius) {
+        setSrcSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowRadius);
     }
 
-    public void setTunaSrcSelectShadowRadius(int unit, float tunaSrcSelectShadowRadius) {
-        setTunaSrcSelectShadowRadiusRaw(applyDimension(unit, tunaSrcSelectShadowRadius, getViewDisplayMetrics(this)));
+    public void setSrcSelectShadowRadius(int unit, float srcSelectShadowRadius) {
+        setSrcSelectShadowRadiusRaw(applyDimension(unit, srcSelectShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcSelectShadowRadiusRaw(float tunaSrcSelectShadowRadius) {
-        if (this.tunaSrcSelectShadowRadius != tunaSrcSelectShadowRadius) {
-            this.tunaSrcSelectShadowRadius = tunaSrcSelectShadowRadius;
+    private void setSrcSelectShadowRadiusRaw(float srcSelectShadowRadius) {
+        if (this.srcSelectShadowRadius != srcSelectShadowRadius) {
+            this.srcSelectShadowRadius = srcSelectShadowRadius;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowDx
-    private float tunaSrcSelectShadowDx;
+    // default srcNormalShadowDx
+    private float srcSelectShadowDx;
 
-    public float getTunaSrcSelectShadowDx() {
-        return tunaSrcSelectShadowDx;
+    public float getSrcSelectShadowDx() {
+        return srcSelectShadowDx;
     }
 
-    public void setTunaSrcSelectShadowDx(float tunaSrcSelectShadowDx) {
-        setTunaSrcSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcSelectShadowDx);
+    public void setSrcSelectShadowDx(float srcSelectShadowDx) {
+        setSrcSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowDx);
     }
 
-    public void setTunaSrcSelectShadowDx(int unit, float tunaSrcSelectShadowDx) {
-        setTunaSrcSelectShadowDxRaw(applyDimension(unit, tunaSrcSelectShadowDx, getViewDisplayMetrics(this)));
+    public void setSrcSelectShadowDx(int unit, float srcSelectShadowDx) {
+        setSrcSelectShadowDxRaw(applyDimension(unit, srcSelectShadowDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcSelectShadowDxRaw(float tunaSrcSelectShadowDx) {
-        if (this.tunaSrcSelectShadowDx != tunaSrcSelectShadowDx) {
-            this.tunaSrcSelectShadowDx = tunaSrcSelectShadowDx;
+    private void setSrcSelectShadowDxRaw(float srcSelectShadowDx) {
+        if (this.srcSelectShadowDx != srcSelectShadowDx) {
+            this.srcSelectShadowDx = srcSelectShadowDx;
             invalidate();
         }
     }
 
-    // default tunaSrcNormalShadowDy
-    private float tunaSrcSelectShadowDy;
+    // default srcNormalShadowDy
+    private float srcSelectShadowDy;
 
-    public float getTunaSrcSelectShadowDy() {
-        return tunaSrcSelectShadowDy;
+    public float getSrcSelectShadowDy() {
+        return srcSelectShadowDy;
     }
 
-    public void setTunaSrcSelectShadowDy(float tunaSrcSelectShadowDy) {
-        setTunaSrcSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcSelectShadowDy);
+    public void setSrcSelectShadowDy(float srcSelectShadowDy) {
+        setSrcSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowDy);
     }
 
-    public void setTunaSrcSelectShadowDy(int unit, float tunaSrcSelectShadowDy) {
-        setTunaSrcSelectShadowDyRaw(applyDimension(unit, tunaSrcSelectShadowDy, getViewDisplayMetrics(this)));
+    public void setSrcSelectShadowDy(int unit, float srcSelectShadowDy) {
+        setSrcSelectShadowDyRaw(applyDimension(unit, srcSelectShadowDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcSelectShadowDyRaw(float tunaSrcSelectShadowDy) {
-        if (this.tunaSrcSelectShadowDy != tunaSrcSelectShadowDy) {
-            this.tunaSrcSelectShadowDy = tunaSrcSelectShadowDy;
+    private void setSrcSelectShadowDyRaw(float srcSelectShadowDy) {
+        if (this.srcSelectShadowDy != srcSelectShadowDy) {
+            this.srcSelectShadowDy = srcSelectShadowDy;
             invalidate();
         }
     }
@@ -2018,2036 +1951,2036 @@ public class TView extends View {
     public static final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
 
     //
-    private int tunaSrcAnchorGravity;
+    private int srcAnchorGravity;
 
-    public int getTunaDownloadMarkGravity() {
-        return tunaSrcAnchorGravity;
+    public int getDownloadMarkGravity() {
+        return srcAnchorGravity;
     }
 
-    public void setSrcAnchorGravity(int tunaSrcAnchorGravity) {
-        this.tunaSrcAnchorGravity = tunaSrcAnchorGravity;
+    public void setSrcAnchorGravity(int srcAnchorGravity) {
+        this.srcAnchorGravity = srcAnchorGravity;
     }
 
     // anchor Normal,Press,Select use one Matrix
-    protected Matrix tunaAnchorMatrix;
+    protected Matrix anchorMatrix;
 
-    public Matrix getTunaAnchorMatrix() {
-        return tunaAnchorMatrix;
+    public Matrix getAnchorMatrix() {
+        return anchorMatrix;
     }
 
-    public void setTunaAnchorMatrix(Matrix tunaAnchorMatrix) {
-        this.tunaAnchorMatrix = tunaAnchorMatrix;
+    public void setAnchorMatrix(Matrix anchorMatrix) {
+        this.anchorMatrix = anchorMatrix;
     }
 
-    protected Matrix initTunaAnchorMatrix(float sx, float sy) {
-        if (tunaAnchorMatrix == null) {
-            tunaAnchorMatrix = new Matrix();
+    protected Matrix initanchorMatrix(float sx, float sy) {
+        if (anchorMatrix == null) {
+            anchorMatrix = new Matrix();
         }
-        tunaAnchorMatrix.reset();
-        tunaAnchorMatrix.setScale(sx, sy);
-        return tunaAnchorMatrix;
+        anchorMatrix.reset();
+        anchorMatrix.setScale(sx, sy);
+        return anchorMatrix;
     }
 
     //
-    private Bitmap tunaSrcAnchorNormal;
+    private Bitmap srcAnchorNormal;
 
-    public Bitmap getTunaSrcAnchorNormal() {
-        return tunaSrcAnchorNormal;
+    public Bitmap getSrcAnchorNormal() {
+        return srcAnchorNormal;
     }
 
-    public void setTunaSrcAnchorNormal(Bitmap tunaSrcAnchorNormal) {
-        this.tunaSrcAnchorNormal = tunaSrcAnchorNormal;
+    public void setSrcAnchorNormal(Bitmap srcAnchorNormal) {
+        this.srcAnchorNormal = srcAnchorNormal;
     }
 
     //
-    private float tunaSrcAnchorNormalWidth;
+    private float srcAnchorNormalWidth;
 
-    public float getTunaSrcAnchorNormalWidth() {
-        return tunaSrcAnchorNormalWidth;
+    public float getSrcAnchorNormalWidth() {
+        return srcAnchorNormalWidth;
     }
 
-    public void setTunaSrcAnchorNormalWidth(float tunaSrcAnchorNormalWidth) {
-        setTunaSrcAnchorNormalWidth(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorNormalWidth);
+    public void setSrcAnchorNormalWidth(float srcAnchorNormalWidth) {
+        setSrcAnchorNormalWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalWidth);
     }
 
-    public void setTunaSrcAnchorNormalWidth(int unit, float tunaSrcAnchorNormalWidth) {
-        setTunaSrcAnchorNormalWidthRaw(applyDimension(unit, tunaSrcAnchorNormalWidth, getViewDisplayMetrics(this)));
+    public void setSrcAnchorNormalWidth(int unit, float srcAnchorNormalWidth) {
+        setSrcAnchorNormalWidthRaw(applyDimension(unit, srcAnchorNormalWidth, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorNormalWidthRaw(float tunaSrcAnchorNormalWidth) {
-        if (this.tunaSrcAnchorNormalWidth != tunaSrcAnchorNormalWidth) {
-            this.tunaSrcAnchorNormalWidth = tunaSrcAnchorNormalWidth;
+    private void setSrcAnchorNormalWidthRaw(float srcAnchorNormalWidth) {
+        if (this.srcAnchorNormalWidth != srcAnchorNormalWidth) {
+            this.srcAnchorNormalWidth = srcAnchorNormalWidth;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorNormalHeight;
+    private float srcAnchorNormalHeight;
 
-    public float getTunaSrcAnchorNormalHeight() {
-        return tunaSrcAnchorNormalHeight;
+    public float getSrcAnchorNormalHeight() {
+        return srcAnchorNormalHeight;
     }
 
-    public void setTunaSrcAnchorNormalHeight(float tunaSrcAnchorNormalHeight) {
-        setTunaSrcAnchorNormalHeight(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorNormalHeight);
+    public void setSrcAnchorNormalHeight(float srcAnchorNormalHeight) {
+        setSrcAnchorNormalHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalHeight);
     }
 
-    public void setTunaSrcAnchorNormalHeight(int unit, float tunaSrcAnchorNormalHeight) {
-        setTunaSrcAnchorNormalHeightRaw(applyDimension(unit, tunaSrcAnchorNormalHeight, getViewDisplayMetrics(this)));
+    public void setSrcAnchorNormalHeight(int unit, float srcAnchorNormalHeight) {
+        setSrcAnchorNormalHeightRaw(applyDimension(unit, srcAnchorNormalHeight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorNormalHeightRaw(float tunaSrcAnchorNormalHeight) {
-        if (this.tunaSrcAnchorNormalHeight != tunaSrcAnchorNormalHeight) {
-            this.tunaSrcAnchorNormalHeight = tunaSrcAnchorNormalHeight;
+    private void setSrcAnchorNormalHeightRaw(float srcAnchorNormalHeight) {
+        if (this.srcAnchorNormalHeight != srcAnchorNormalHeight) {
+            this.srcAnchorNormalHeight = srcAnchorNormalHeight;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorNormalDx;
+    private float srcAnchorNormalDx;
 
-    public float getTunaSrcAnchorNormalDx() {
-        return tunaSrcAnchorNormalDx;
+    public float getSrcAnchorNormalDx() {
+        return srcAnchorNormalDx;
     }
 
-    public void setTunaSrcAnchorNormalDx(float tunaSrcAnchorNormalDx) {
-        setTunaSrcAnchorNormalDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorNormalDx);
+    public void setSrcAnchorNormalDx(float srcAnchorNormalDx) {
+        setSrcAnchorNormalDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalDx);
     }
 
-    public void setTunaSrcAnchorNormalDx(int unit, float tunaSrcAnchorNormalDx) {
-        setTunaSrcAnchorNormalDxRaw(applyDimension(unit, tunaSrcAnchorNormalDx, getViewDisplayMetrics(this)));
+    public void setSrcAnchorNormalDx(int unit, float srcAnchorNormalDx) {
+        setSrcAnchorNormalDxRaw(applyDimension(unit, srcAnchorNormalDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorNormalDxRaw(float tunaSrcAnchorNormalDx) {
-        if (this.tunaSrcAnchorNormalDx != tunaSrcAnchorNormalDx) {
-            this.tunaSrcAnchorNormalDx = tunaSrcAnchorNormalDx;
+    private void setSrcAnchorNormalDxRaw(float srcAnchorNormalDx) {
+        if (this.srcAnchorNormalDx != srcAnchorNormalDx) {
+            this.srcAnchorNormalDx = srcAnchorNormalDx;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorNormalDy;
+    private float srcAnchorNormalDy;
 
-    public float getTunaSrcAnchorNormalDy() {
-        return tunaSrcAnchorNormalDy;
+    public float getSrcAnchorNormalDy() {
+        return srcAnchorNormalDy;
     }
 
-    public void setTunaSrcAnchorNormalDy(float tunaSrcAnchorNormalDy) {
-        setTunaSrcAnchorNormalDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorNormalDy);
+    public void setSrcAnchorNormalDy(float srcAnchorNormalDy) {
+        setSrcAnchorNormalDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalDy);
     }
 
-    public void setTunaSrcAnchorNormalDy(int unit, float tunaSrcAnchorNormalDy) {
-        setTunaSrcAnchorNormalDyRaw(applyDimension(unit, tunaSrcAnchorNormalDy, getViewDisplayMetrics(this)));
+    public void setSrcAnchorNormalDy(int unit, float srcAnchorNormalDy) {
+        setSrcAnchorNormalDyRaw(applyDimension(unit, srcAnchorNormalDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorNormalDyRaw(float tunaSrcAnchorNormalDy) {
-        if (this.tunaSrcAnchorNormalDy != tunaSrcAnchorNormalDy) {
-            this.tunaSrcAnchorNormalDy = tunaSrcAnchorNormalDy;
+    private void setSrcAnchorNormalDyRaw(float srcAnchorNormalDy) {
+        if (this.srcAnchorNormalDy != srcAnchorNormalDy) {
+            this.srcAnchorNormalDy = srcAnchorNormalDy;
             invalidate();
         }
     }
 
     //
-    private Bitmap tunaSrcAnchorPress;
+    private Bitmap srcAnchorPress;
 
-    public Bitmap getTunaSrcAnchorPress() {
-        return tunaSrcAnchorPress;
+    public Bitmap getSrcAnchorPress() {
+        return srcAnchorPress;
     }
 
-    public void setTunaSrcAnchorPress(Bitmap tunaSrcAnchorPress) {
-        this.tunaSrcAnchorPress = tunaSrcAnchorPress;
-    }
-
-    //
-    private float tunaSrcAnchorPressWidth;
-
-    public float getTunaSrcAnchorPressWidth() {
-        return tunaSrcAnchorPressWidth;
-    }
-
-    public void setTunaSrcAnchorPressWidth(float tunaSrcAnchorPressWidth) {
-        setTunaSrcAnchorPressWidth(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorPressWidth);
-    }
-
-    public void setTunaSrcAnchorPressWidth(int unit, float tunaSrcAnchorPressWidth) {
-        setTunaSrcAnchorPressWidthRaw(applyDimension(unit, tunaSrcAnchorPressWidth, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaSrcAnchorPressWidthRaw(float tunaSrcAnchorPressWidth) {
-        if (this.tunaSrcAnchorPressWidth != tunaSrcAnchorPressWidth) {
-            this.tunaSrcAnchorPressWidth = tunaSrcAnchorPressWidth;
-            invalidate();
-        }
+    public void setSrcAnchorPress(Bitmap srcAnchorPress) {
+        this.srcAnchorPress = srcAnchorPress;
     }
 
     //
-    private float tunaSrcAnchorPressHeight;
+    private float srcAnchorPressWidth;
 
-    public float getTunaSrcAnchorPressHeight() {
-        return tunaSrcAnchorPressHeight;
+    public float getSrcAnchorPressWidth() {
+        return srcAnchorPressWidth;
     }
 
-    public void setTunaSrcAnchorPressHeight(float tunaSrcAnchorPressHeight) {
-        setTunaSrcAnchorPressHeight(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorPressHeight);
+    public void setSrcAnchorPressWidth(float srcAnchorPressWidth) {
+        setSrcAnchorPressWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressWidth);
     }
 
-    public void setTunaSrcAnchorPressHeight(int unit, float tunaSrcAnchorPressHeight) {
-        setTunaSrcAnchorPressHeightRaw(applyDimension(unit, tunaSrcAnchorPressHeight, getViewDisplayMetrics(this)));
+    public void setSrcAnchorPressWidth(int unit, float srcAnchorPressWidth) {
+        setSrcAnchorPressWidthRaw(applyDimension(unit, srcAnchorPressWidth, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorPressHeightRaw(float tunaSrcAnchorPressHeight) {
-        if (this.tunaSrcAnchorPressHeight != tunaSrcAnchorPressHeight) {
-            this.tunaSrcAnchorPressHeight = tunaSrcAnchorPressHeight;
+    private void setSrcAnchorPressWidthRaw(float srcAnchorPressWidth) {
+        if (this.srcAnchorPressWidth != srcAnchorPressWidth) {
+            this.srcAnchorPressWidth = srcAnchorPressWidth;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorPressDx;
+    private float srcAnchorPressHeight;
 
-    public float getTunaSrcAnchorPressDx() {
-        return tunaSrcAnchorPressDx;
+    public float getSrcAnchorPressHeight() {
+        return srcAnchorPressHeight;
     }
 
-    public void setTunaSrcAnchorPressDx(float tunaSrcAnchorPressDx) {
-        setTunaSrcAnchorPressDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorPressDx);
+    public void setSrcAnchorPressHeight(float srcAnchorPressHeight) {
+        setSrcAnchorPressHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressHeight);
     }
 
-    public void setTunaSrcAnchorPressDx(int unit, float tunaSrcAnchorPressDx) {
-        setTunaSrcAnchorPressDxRaw(applyDimension(unit, tunaSrcAnchorPressDx, getViewDisplayMetrics(this)));
+    public void setSrcAnchorPressHeight(int unit, float srcAnchorPressHeight) {
+        setSrcAnchorPressHeightRaw(applyDimension(unit, srcAnchorPressHeight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorPressDxRaw(float tunaSrcAnchorPressDx) {
-        if (this.tunaSrcAnchorPressDx != tunaSrcAnchorPressDx) {
-            this.tunaSrcAnchorPressDx = tunaSrcAnchorPressDx;
+    private void setSrcAnchorPressHeightRaw(float srcAnchorPressHeight) {
+        if (this.srcAnchorPressHeight != srcAnchorPressHeight) {
+            this.srcAnchorPressHeight = srcAnchorPressHeight;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorPressDy;
+    private float srcAnchorPressDx;
 
-    public float getTunaSrcAnchorPressDy() {
-        return tunaSrcAnchorPressDy;
+    public float getSrcAnchorPressDx() {
+        return srcAnchorPressDx;
     }
 
-    public void setTunaSrcAnchorPressDy(float tunaSrcAnchorPressDy) {
-        setTunaSrcAnchorPressDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorPressDy);
+    public void setSrcAnchorPressDx(float srcAnchorPressDx) {
+        setSrcAnchorPressDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressDx);
     }
 
-    public void setTunaSrcAnchorPressDy(int unit, float tunaSrcAnchorPressDy) {
-        setTunaSrcAnchorPressDyRaw(applyDimension(unit, tunaSrcAnchorPressDy, getViewDisplayMetrics(this)));
+    public void setSrcAnchorPressDx(int unit, float srcAnchorPressDx) {
+        setSrcAnchorPressDxRaw(applyDimension(unit, srcAnchorPressDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorPressDyRaw(float tunaSrcAnchorPressDy) {
-        if (this.tunaSrcAnchorPressDy != tunaSrcAnchorPressDy) {
-            this.tunaSrcAnchorPressDy = tunaSrcAnchorPressDy;
+    private void setSrcAnchorPressDxRaw(float srcAnchorPressDx) {
+        if (this.srcAnchorPressDx != srcAnchorPressDx) {
+            this.srcAnchorPressDx = srcAnchorPressDx;
             invalidate();
         }
     }
 
     //
-    private Bitmap tunaSrcAnchorSelect;
+    private float srcAnchorPressDy;
 
-    public Bitmap getTunaSrcAnchorSelect() {
-        return tunaSrcAnchorSelect;
+    public float getSrcAnchorPressDy() {
+        return srcAnchorPressDy;
     }
 
-    public void setTunaSrcAnchorSelect(Bitmap tunaSrcAnchorSelect) {
-        this.tunaSrcAnchorSelect = tunaSrcAnchorSelect;
+    public void setSrcAnchorPressDy(float srcAnchorPressDy) {
+        setSrcAnchorPressDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressDy);
     }
 
-    //
-    private float tunaSrcAnchorSelectWidth;
-
-    public float getTunaSrcAnchorSelectWidth() {
-        return tunaSrcAnchorSelectWidth;
+    public void setSrcAnchorPressDy(int unit, float srcAnchorPressDy) {
+        setSrcAnchorPressDyRaw(applyDimension(unit, srcAnchorPressDy, getViewDisplayMetrics(this)));
     }
 
-    public void setTunaSrcAnchorSelectWidth(float tunaSrcAnchorSelectWidth) {
-        setTunaSrcAnchorSelectWidth(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorSelectWidth);
-    }
-
-    public void setTunaSrcAnchorSelectWidth(int unit, float tunaSrcAnchorSelectWidth) {
-        setTunaSrcAnchorSelectWidthRaw(applyDimension(unit, tunaSrcAnchorSelectWidth, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaSrcAnchorSelectWidthRaw(float tunaSrcAnchorSelectWidth) {
-        if (this.tunaSrcAnchorSelectWidth != tunaSrcAnchorSelectWidth) {
-            this.tunaSrcAnchorSelectWidth = tunaSrcAnchorSelectWidth;
+    private void setSrcAnchorPressDyRaw(float srcAnchorPressDy) {
+        if (this.srcAnchorPressDy != srcAnchorPressDy) {
+            this.srcAnchorPressDy = srcAnchorPressDy;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorSelectHeight;
+    private Bitmap srcAnchorSelect;
 
-    public float getTunaSrcAnchorSelectHeight() {
-        return tunaSrcAnchorSelectHeight;
+    public Bitmap getSrcAnchorSelect() {
+        return srcAnchorSelect;
     }
 
-    public void setTunaSrcAnchorSelectHeight(float tunaSrcAnchorSelectHeight) {
-        setTunaSrcAnchorSelectHeight(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorSelectHeight);
+    public void setSrcAnchorSelect(Bitmap srcAnchorSelect) {
+        this.srcAnchorSelect = srcAnchorSelect;
     }
 
-    public void setTunaSrcAnchorSelectHeight(int unit, float tunaSrcAnchorSelectHeight) {
-        setTunaSrcAnchorSelectHeightRaw(applyDimension(unit, tunaSrcAnchorSelectHeight, getViewDisplayMetrics(this)));
+    //
+    private float srcAnchorSelectWidth;
+
+    public float getSrcAnchorSelectWidth() {
+        return srcAnchorSelectWidth;
     }
 
-    private void setTunaSrcAnchorSelectHeightRaw(float tunaSrcAnchorSelectHeight) {
-        if (this.tunaSrcAnchorSelectHeight != tunaSrcAnchorSelectHeight) {
-            this.tunaSrcAnchorSelectHeight = tunaSrcAnchorSelectHeight;
+    public void setSrcAnchorSelectWidth(float srcAnchorSelectWidth) {
+        setSrcAnchorSelectWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectWidth);
+    }
+
+    public void setSrcAnchorSelectWidth(int unit, float srcAnchorSelectWidth) {
+        setSrcAnchorSelectWidthRaw(applyDimension(unit, srcAnchorSelectWidth, getViewDisplayMetrics(this)));
+    }
+
+    private void setSrcAnchorSelectWidthRaw(float srcAnchorSelectWidth) {
+        if (this.srcAnchorSelectWidth != srcAnchorSelectWidth) {
+            this.srcAnchorSelectWidth = srcAnchorSelectWidth;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorSelectDx;
+    private float srcAnchorSelectHeight;
 
-    public float getTunaSrcAnchorSelectDx() {
-        return tunaSrcAnchorSelectDx;
+    public float getSrcAnchorSelectHeight() {
+        return srcAnchorSelectHeight;
     }
 
-    public void setTunaSrcAnchorSelectDx(float tunaSrcAnchorSelectDx) {
-        setTunaSrcAnchorSelectDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorSelectDx);
+    public void setSrcAnchorSelectHeight(float srcAnchorSelectHeight) {
+        setSrcAnchorSelectHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectHeight);
     }
 
-    public void setTunaSrcAnchorSelectDx(int unit, float tunaSrcAnchorSelectDx) {
-        setTunaSrcAnchorSelectDxRaw(applyDimension(unit, tunaSrcAnchorSelectDx, getViewDisplayMetrics(this)));
+    public void setSrcAnchorSelectHeight(int unit, float srcAnchorSelectHeight) {
+        setSrcAnchorSelectHeightRaw(applyDimension(unit, srcAnchorSelectHeight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorSelectDxRaw(float tunaSrcAnchorSelectDx) {
-        if (this.tunaSrcAnchorSelectDx != tunaSrcAnchorSelectDx) {
-            this.tunaSrcAnchorSelectDx = tunaSrcAnchorSelectDx;
+    private void setSrcAnchorSelectHeightRaw(float srcAnchorSelectHeight) {
+        if (this.srcAnchorSelectHeight != srcAnchorSelectHeight) {
+            this.srcAnchorSelectHeight = srcAnchorSelectHeight;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcAnchorSelectDy;
+    private float srcAnchorSelectDx;
 
-    public float getTunaSrcAnchorSelectDy() {
-        return tunaSrcAnchorSelectDy;
+    public float getSrcAnchorSelectDx() {
+        return srcAnchorSelectDx;
     }
 
-    public void setTunaSrcAnchorSelectDy(float tunaSrcAnchorSelectDy) {
-        setTunaSrcAnchorSelectDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcAnchorSelectDy);
+    public void setSrcAnchorSelectDx(float srcAnchorSelectDx) {
+        setSrcAnchorSelectDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectDx);
     }
 
-    public void setTunaSrcAnchorSelectDy(int unit, float tunaSrcAnchorSelectDy) {
-        setTunaSrcAnchorSelectDyRaw(applyDimension(unit, tunaSrcAnchorSelectDy, getViewDisplayMetrics(this)));
+    public void setSrcAnchorSelectDx(int unit, float srcAnchorSelectDx) {
+        setSrcAnchorSelectDxRaw(applyDimension(unit, srcAnchorSelectDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcAnchorSelectDyRaw(float tunaSrcAnchorSelectDy) {
-        if (this.tunaSrcAnchorSelectDy != tunaSrcAnchorSelectDy) {
-            this.tunaSrcAnchorSelectDy = tunaSrcAnchorSelectDy;
+    private void setSrcAnchorSelectDxRaw(float srcAnchorSelectDx) {
+        if (this.srcAnchorSelectDx != srcAnchorSelectDx) {
+            this.srcAnchorSelectDx = srcAnchorSelectDx;
             invalidate();
         }
     }
 
-    // tunaStrokeWidthNormal default 0
-    private float tunaStrokeWidthNormal;
+    //
+    private float srcAnchorSelectDy;
 
-    public float getTunaStrokeWidthNormal() {
-        return tunaStrokeWidthNormal;
+    public float getSrcAnchorSelectDy() {
+        return srcAnchorSelectDy;
     }
 
-    public void setTunaStrokeWidthNormal(float tunaStrokeWidthNormal) {
-        setTunaStrokeWidthNormal(TypedValue.COMPLEX_UNIT_DIP, tunaStrokeWidthNormal);
+    public void setSrcAnchorSelectDy(float srcAnchorSelectDy) {
+        setSrcAnchorSelectDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectDy);
     }
 
-    public void setTunaStrokeWidthNormal(int unit, float tunaStrokeWidthNormal) {
-        setTunaStrokeWidthNormalRaw(applyDimension(unit, tunaStrokeWidthNormal, getViewDisplayMetrics(this)));
+    public void setSrcAnchorSelectDy(int unit, float srcAnchorSelectDy) {
+        setSrcAnchorSelectDyRaw(applyDimension(unit, srcAnchorSelectDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaStrokeWidthNormalRaw(float tunaStrokeWidthNormal) {
-        if (this.tunaStrokeWidthNormal != tunaStrokeWidthNormal) {
-            this.tunaStrokeWidthNormal = tunaStrokeWidthNormal;
+    private void setSrcAnchorSelectDyRaw(float srcAnchorSelectDy) {
+        if (this.srcAnchorSelectDy != srcAnchorSelectDy) {
+            this.srcAnchorSelectDy = srcAnchorSelectDy;
             invalidate();
         }
     }
 
-    // tunaStrokeColorNormal default transparent
-    private int tunaStrokeColorNormal;
+    // strokeWidthNormal default 0
+    private float strokeWidthNormal;
 
-    public int getTunaStrokeColorNormal() {
-        return tunaStrokeColorNormal;
+    public float getStrokeWidthNormal() {
+        return strokeWidthNormal;
     }
 
-    public void setTunaStrokeColorNormal(int tunaStrokeColorNormal) {
-        this.tunaStrokeColorNormal = tunaStrokeColorNormal;
+    public void setStrokeWidthNormal(float strokeWidthNormal) {
+        setStrokeWidthNormal(TypedValue.COMPLEX_UNIT_DIP, strokeWidthNormal);
     }
 
-    // tunaStrokeWidthPress default tunaStrokeWidthNormal
-    private float tunaStrokeWidthPress;
-
-    public float getTunaStrokeWidthPress() {
-        return tunaStrokeWidthPress;
+    public void setStrokeWidthNormal(int unit, float strokeWidthNormal) {
+        setStrokeWidthNormalRaw(applyDimension(unit, strokeWidthNormal, getViewDisplayMetrics(this)));
     }
 
-    public void setTunaStrokeWidthPress(float tunaStrokeWidthPress) {
-        setTunaStrokeWidthPress(TypedValue.COMPLEX_UNIT_DIP, tunaStrokeWidthPress);
-    }
-
-    public void setTunaStrokeWidthPress(int unit, float tunaStrokeWidthPress) {
-        setTunaStrokeWidthPressRaw(applyDimension(unit, tunaStrokeWidthPress, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaStrokeWidthPressRaw(float tunaStrokeWidthPress) {
-        if (this.tunaStrokeWidthPress != tunaStrokeWidthPress) {
-            this.tunaStrokeWidthPress = tunaStrokeWidthPress;
+    private void setStrokeWidthNormalRaw(float strokeWidthNormal) {
+        if (this.strokeWidthNormal != strokeWidthNormal) {
+            this.strokeWidthNormal = strokeWidthNormal;
             invalidate();
         }
     }
 
-    // tunaStrokeColorPress default tunaStrokeColorNormal
-    private int tunaStrokeColorPress;
+    // strokeColorNormal default transparent
+    private int strokeColorNormal;
 
-    public int getTunaStrokeColorPress() {
-        return tunaStrokeColorPress;
+    public int getStrokeColorNormal() {
+        return strokeColorNormal;
     }
 
-    public void setTunaStrokeColorPress(int tunaStrokeColorPress) {
-        this.tunaStrokeColorPress = tunaStrokeColorPress;
+    public void setStrokeColorNormal(int strokeColorNormal) {
+        this.strokeColorNormal = strokeColorNormal;
     }
 
-    // tunaStrokeWidthSelect default tunaStrokeWidthNormal
-    private float tunaStrokeWidthSelect;
+    // strokeWidthPress default strokeWidthNormal
+    private float strokeWidthPress;
 
-    public float getTunaStrokeWidthSelect() {
-        return tunaStrokeWidthSelect;
+    public float getStrokeWidthPress() {
+        return strokeWidthPress;
     }
 
-    public void setTunaStrokeWidthSelect(float tunaStrokeWidthSelect) {
-        setTunaStrokeWidthSelect(TypedValue.COMPLEX_UNIT_DIP, tunaStrokeWidthSelect);
+    public void setStrokeWidthPress(float strokeWidthPress) {
+        setStrokeWidthPress(TypedValue.COMPLEX_UNIT_DIP, strokeWidthPress);
     }
 
-    public void setTunaStrokeWidthSelect(int unit, float tunaStrokeWidthSelect) {
-        setTunaStrokeWidthSelectRaw(applyDimension(unit, tunaStrokeWidthSelect, getViewDisplayMetrics(this)));
+    public void setStrokeWidthPress(int unit, float strokeWidthPress) {
+        setStrokeWidthPressRaw(applyDimension(unit, strokeWidthPress, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaStrokeWidthSelectRaw(float tunaStrokeWidthSelect) {
-        if (this.tunaStrokeWidthSelect != tunaStrokeWidthSelect) {
-            this.tunaStrokeWidthSelect = tunaStrokeWidthSelect;
+    private void setStrokeWidthPressRaw(float strokeWidthPress) {
+        if (this.strokeWidthPress != strokeWidthPress) {
+            this.strokeWidthPress = strokeWidthPress;
             invalidate();
         }
     }
 
-    // tunaStrokeColorSelect default tunaStrokeColorNormal
-    private int tunaStrokeColorSelect;
+    // strokeColorPress default strokeColorNormal
+    private int strokeColorPress;
 
-    public int getTunaStrokeColorSelect() {
-        return tunaStrokeColorSelect;
+    public int getStrokeColorPress() {
+        return strokeColorPress;
     }
 
-    public void setTunaStrokeColorSelect(int tunaStrokeColorSelect) {
-        this.tunaStrokeColorSelect = tunaStrokeColorSelect;
+    public void setStrokeColorPress(int strokeColorPress) {
+        this.strokeColorPress = strokeColorPress;
     }
 
-    // tunaRadius default 0
-    private float tunaRadius;
+    // strokeWidthSelect default strokeWidthNormal
+    private float strokeWidthSelect;
 
-    public float getTunaRadius() {
-        return tunaRadius;
+    public float getStrokeWidthSelect() {
+        return strokeWidthSelect;
     }
 
-    public void setTunaRadius(float tunaRadius) {
-        setTunaRadius(TypedValue.COMPLEX_UNIT_DIP, tunaRadius);
+    public void setStrokeWidthSelect(float strokeWidthSelect) {
+        setStrokeWidthSelect(TypedValue.COMPLEX_UNIT_DIP, strokeWidthSelect);
     }
 
-    public void setTunaRadius(int unit, float tunaRadius) {
-        setTunaRadiusRaw(applyDimension(unit, tunaRadius, getViewDisplayMetrics(this)));
+    public void setStrokeWidthSelect(int unit, float strokeWidthSelect) {
+        setStrokeWidthSelectRaw(applyDimension(unit, strokeWidthSelect, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaRadiusRaw(float tunaRadius) {
-        if (this.tunaRadius != tunaRadius) {
-            this.tunaRadius = tunaRadius;
+    private void setStrokeWidthSelectRaw(float strokeWidthSelect) {
+        if (this.strokeWidthSelect != strokeWidthSelect) {
+            this.strokeWidthSelect = strokeWidthSelect;
+            invalidate();
+        }
+    }
+
+    // strokeColorSelect default strokeColorNormal
+    private int strokeColorSelect;
+
+    public int getStrokeColorSelect() {
+        return strokeColorSelect;
+    }
+
+    public void setStrokeColorSelect(int strokeColorSelect) {
+        this.strokeColorSelect = strokeColorSelect;
+    }
+
+    // radius default 0
+    private float radius;
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(float radius) {
+        setRadius(TypedValue.COMPLEX_UNIT_DIP, radius);
+    }
+
+    public void setRadius(int unit, float radius) {
+        setRadiusRaw(applyDimension(unit, radius, getViewDisplayMetrics(this)));
+    }
+
+    private void setRadiusRaw(float radius) {
+        if (this.radius != radius) {
+            this.radius = radius;
             invalidate();
         }
     }
 
     // radius of draw custom roundRect
-    // tunaRadiusLeftTop,tunaRadiusLeftBottom,tunaRadiusRightTop,tunaRadiusRightBottom default 0
-    private float tunaRadiusLeftTop;
+    // radiusLeftTop,radiusLeftBottom,radiusRightTop,radiusRightBottom default 0
+    private float radiusLeftTop;
 
-    public float getTunaRadiusLeftTop() {
-        return tunaRadiusLeftTop;
+    public float getRadiusLeftTop() {
+        return radiusLeftTop;
     }
 
-    public void setTunaRadiusLeftTop(float tunaRadiusLeftTop) {
-        setTunaRadiusLeftTop(TypedValue.COMPLEX_UNIT_DIP, tunaRadiusLeftTop);
+    public void setRadiusLeftTop(float radiusLeftTop) {
+        setRadiusLeftTop(TypedValue.COMPLEX_UNIT_DIP, radiusLeftTop);
     }
 
-    public void setTunaRadiusLeftTop(int unit, float tunaRadiusLeftTop) {
-        setTunaRadiusLeftTopRaw(applyDimension(unit, tunaRadiusLeftTop, getViewDisplayMetrics(this)));
+    public void setRadiusLeftTop(int unit, float radiusLeftTop) {
+        setRadiusLeftTopRaw(applyDimension(unit, radiusLeftTop, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaRadiusLeftTopRaw(float tunaRadiusLeftTop) {
-        if (this.tunaRadiusLeftTop != tunaRadiusLeftTop) {
-            this.tunaRadiusLeftTop = tunaRadiusLeftTop;
+    private void setRadiusLeftTopRaw(float radiusLeftTop) {
+        if (this.radiusLeftTop != radiusLeftTop) {
+            this.radiusLeftTop = radiusLeftTop;
             invalidate();
         }
     }
 
     //
-    private float tunaRadiusLeftBottom;
+    private float radiusLeftBottom;
 
-    public float getTunaRadiusLeftBottom() {
-        return tunaRadiusLeftBottom;
+    public float getRadiusLeftBottom() {
+        return radiusLeftBottom;
     }
 
-    public void setTunaRadiusLeftBottom(float tunaRadiusLeftBottom) {
-        setTunaRadiusLeftBottom(TypedValue.COMPLEX_UNIT_DIP, tunaRadiusLeftBottom);
+    public void setRadiusLeftBottom(float radiusLeftBottom) {
+        setRadiusLeftBottom(TypedValue.COMPLEX_UNIT_DIP, radiusLeftBottom);
     }
 
-    public void setTunaRadiusLeftBottom(int unit, float tunaRadiusLeftBottom) {
-        setTunaRadiusLeftBottomRaw(applyDimension(unit, tunaRadiusLeftBottom, getViewDisplayMetrics(this)));
+    public void setRadiusLeftBottom(int unit, float radiusLeftBottom) {
+        setRadiusLeftBottomRaw(applyDimension(unit, radiusLeftBottom, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaRadiusLeftBottomRaw(float tunaRadiusLeftBottom) {
-        if (this.tunaRadiusLeftBottom != tunaRadiusLeftBottom) {
-            this.tunaRadiusLeftBottom = tunaRadiusLeftBottom;
+    private void setRadiusLeftBottomRaw(float radiusLeftBottom) {
+        if (this.radiusLeftBottom != radiusLeftBottom) {
+            this.radiusLeftBottom = radiusLeftBottom;
             invalidate();
         }
     }
 
     //
-    private float tunaRadiusRightTop;
+    private float radiusRightTop;
 
-    public float getTunaRadiusRightTop() {
-        return tunaRadiusRightTop;
+    public float getRadiusRightTop() {
+        return radiusRightTop;
     }
 
-    public void setTunaRadiusRightTop(float tunaRadiusRightTop) {
-        setTunaRadiusRightTop(TypedValue.COMPLEX_UNIT_DIP, tunaRadiusRightTop);
+    public void setRadiusRightTop(float radiusRightTop) {
+        setRadiusRightTop(TypedValue.COMPLEX_UNIT_DIP, radiusRightTop);
     }
 
-    public void setTunaRadiusRightTop(int unit, float tunaRadiusRightTop) {
-        setTunaRadiusRightTopRaw(applyDimension(unit, tunaRadiusRightTop, getViewDisplayMetrics(this)));
+    public void setRadiusRightTop(int unit, float radiusRightTop) {
+        setRadiusRightTopRaw(applyDimension(unit, radiusRightTop, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaRadiusRightTopRaw(float tunaRadiusRightTop) {
-        if (this.tunaRadiusRightTop != tunaRadiusRightTop) {
-            this.tunaRadiusRightTop = tunaRadiusRightTop;
+    private void setRadiusRightTopRaw(float radiusRightTop) {
+        if (this.radiusRightTop != radiusRightTop) {
+            this.radiusRightTop = radiusRightTop;
             invalidate();
         }
     }
 
     //
-    private float tunaRadiusRightBottom;
+    private float radiusRightBottom;
 
-    public float getTunaRadiusRightBottom() {
-        return tunaRadiusRightBottom;
+    public float getRadiusRightBottom() {
+        return radiusRightBottom;
     }
 
-    public void setTunaRadiusRightBottom(float tunaRadiusRightBottom) {
-        setTunaRadiusRightBottom(TypedValue.COMPLEX_UNIT_DIP, tunaRadiusRightBottom);
+    public void setRadiusRightBottom(float radiusRightBottom) {
+        setRadiusRightBottom(TypedValue.COMPLEX_UNIT_DIP, radiusRightBottom);
     }
 
-    public void setTunaRadiusRightBottom(int unit, float tunaRadiusRightBottom) {
-        setTunaRadiusRightBottomRaw(applyDimension(unit, tunaRadiusRightBottom, getViewDisplayMetrics(this)));
+    public void setRadiusRightBottom(int unit, float radiusRightBottom) {
+        setRadiusRightBottomRaw(applyDimension(unit, radiusRightBottom, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaRadiusRightBottomRaw(float tunaRadiusRightBottom) {
-        if (this.tunaRadiusRightBottom != tunaRadiusRightBottom) {
-            this.tunaRadiusRightBottom = tunaRadiusRightBottom;
+    private void setRadiusRightBottomRaw(float radiusRightBottom) {
+        if (this.radiusRightBottom != radiusRightBottom) {
+            this.radiusRightBottom = radiusRightBottom;
             invalidate();
         }
     }
 
-    // tunaTextMark default false
-    protected boolean tunaTextMark;
+    // textMark default false
+    protected boolean textMark;
 
-    public boolean isTunaTextMark() {
-        return tunaTextMark;
+    public boolean istextMark() {
+        return textMark;
     }
 
-    public void setTunaTextMark(boolean tunaTextMark) {
-        this.tunaTextMark = tunaTextMark;
+    public void setTextMark(boolean textMark) {
+        this.textMark = textMark;
         invalidate();
     }
 
-    public void setTunaTextMark(String tunaTextMarkTextValue) {
-        this.tunaTextMarkTextValue = tunaTextMarkTextValue;
+    public void setTextMark(String textMarkTextValue) {
+        this.textMarkTextValue = textMarkTextValue;
         requestLayout();
     }
 
-    public void setTunaTextMark(float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, float tunaTextMarkTextSize, int tunaTextMarkTextColor,
-                                float tunaTextMarkDx, float tunaTextMarkDy) {
-        setTunaTextMark(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkRadius, tunaTextMarkColor, tunaTextMarkTextValue, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkTextSize,
-                tunaTextMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDy);
+    public void setTextMark(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
+                                float textMarkDx, float textMarkDy) {
+        setTextMark(TypedValue.COMPLEX_UNIT_DIP, textMarkRadius, textMarkColor, textMarkTextValue, TypedValue.COMPLEX_UNIT_DIP, textMarkTextSize,
+                textMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, textMarkDx, TypedValue.COMPLEX_UNIT_DIP, textMarkDy);
     }
 
-    public void setTunaTextMark(int tunaTextMarkRadiusUnit, float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, int tunaTextMarkTextSizeUnit,
-                                float tunaTextMarkTextSize, int tunaTextMarkTextColor, int tunaTextMarkDxUnit, float tunaTextMarkDx, int tunaTextMarkDyUnit, float tunaTextMarkDy) {
+    public void setTextMark(int textMarkRadiusUnit, float textMarkRadius, int textMarkColor, String textMarkTextValue, int textMarkTextSizeUnit,
+                                float textMarkTextSize, int textMarkTextColor, int textMarkDxUnit, float textMarkDx, int textMarkDyUnit, float textMarkDy) {
 
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
-        setTunaTextMarkRaw(applyDimension(tunaTextMarkRadiusUnit, tunaTextMarkRadius, displayMetrics), tunaTextMarkColor, tunaTextMarkTextValue,
-                applyDimension(tunaTextMarkTextSizeUnit, tunaTextMarkTextSize, displayMetrics), tunaTextMarkTextColor,
-                applyDimension(tunaTextMarkDxUnit, tunaTextMarkDx, displayMetrics), applyDimension(tunaTextMarkDyUnit, tunaTextMarkDy, displayMetrics));
+        setTextMarkRaw(applyDimension(textMarkRadiusUnit, textMarkRadius, displayMetrics), textMarkColor, textMarkTextValue,
+                applyDimension(textMarkTextSizeUnit, textMarkTextSize, displayMetrics), textMarkTextColor,
+                applyDimension(textMarkDxUnit, textMarkDx, displayMetrics), applyDimension(textMarkDyUnit, textMarkDy, displayMetrics));
     }
 
-    private void setTunaTextMarkRaw(float tunaTextMarkRadius, int tunaTextMarkColor, String tunaTextMarkTextValue, float tunaTextMarkTextSize, int tunaTextMarkTextColor,
-                                    float tunaTextMarkDx, float tunaTextMarkDy) {
-        if (this.tunaTextMarkRadius != tunaTextMarkRadius || this.tunaTextMarkColor != tunaTextMarkColor || this.tunaTextMarkTextValue != tunaTextMarkTextValue
-                || this.tunaTextMarkTextSize != tunaTextMarkTextSize || this.tunaTextMarkTextColor != tunaTextMarkTextColor || this.tunaTextMarkDx != tunaTextMarkDx
-                || this.tunaTextMarkDy != tunaTextMarkDy) {
-            this.tunaTextMarkRadius = tunaTextMarkRadius;
-            this.tunaTextMarkColor = tunaTextMarkColor;
-            this.tunaTextMarkTextValue = tunaTextMarkTextValue;
-            this.tunaTextMarkTextSize = tunaTextMarkTextSize;
-            this.tunaTextMarkTextColor = tunaTextMarkTextColor;
-            this.tunaTextMarkDx = tunaTextMarkDx;
-            this.tunaTextMarkDy = tunaTextMarkDy;
-            this.tunaTextMark = true;
+    private void setTextMarkRaw(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
+                                    float textMarkDx, float textMarkDy) {
+        if (this.textMarkRadius != textMarkRadius || this.textMarkColor != textMarkColor || this.textMarkTextValue != textMarkTextValue
+                || this.textMarkTextSize != textMarkTextSize || this.textMarkTextColor != textMarkTextColor || this.textMarkDx != textMarkDx
+                || this.textMarkDy != textMarkDy) {
+            this.textMarkRadius = textMarkRadius;
+            this.textMarkColor = textMarkColor;
+            this.textMarkTextValue = textMarkTextValue;
+            this.textMarkTextSize = textMarkTextSize;
+            this.textMarkTextColor = textMarkTextColor;
+            this.textMarkDx = textMarkDx;
+            this.textMarkDy = textMarkDy;
+            this.textMark = true;
             invalidate();
         }
     }
 
-    // tunaTextMarkTouchable default false
-    private boolean tunaTextMarkTouchable;
+    // textMarkTouchable default false
+    private boolean textMarkTouchable;
 
-    public boolean isTunaTextMarkTouchable() {
-        return tunaTextMarkTouchable;
+    public boolean istextMarkTouchable() {
+        return textMarkTouchable;
     }
 
-    public void setTunaTextMarkTouchable(boolean tunaTextMarkTouchable) {
-        this.tunaTextMarkTouchable = tunaTextMarkTouchable;
+    public void setTextMarkTouchable(boolean textMarkTouchable) {
+        this.textMarkTouchable = textMarkTouchable;
     }
 
-    // tunaTextMarkRadius default 0
-    private float tunaTextMarkRadius;
+    // textMarkRadius default 0
+    private float textMarkRadius;
 
-    public float getTunaTextMarkRadius() {
-        return tunaTextMarkRadius;
+    public float getTextMarkRadius() {
+        return textMarkRadius;
     }
 
-    public void setTunaTextMarkRadius(float tunaTextMarkRadius) {
-        setTunaTextMarkRadius(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkRadius);
+    public void setTextMarkRadius(float textMarkRadius) {
+        setTextMarkRadius(TypedValue.COMPLEX_UNIT_DIP, textMarkRadius);
     }
 
-    public void setTunaTextMarkRadius(int unit, float tunaTextMarkRadius) {
-        setTunaTextMarkRadiusRaw(applyDimension(unit, tunaTextMarkRadius, getViewDisplayMetrics(this)));
+    public void setTextMarkRadius(int unit, float textMarkRadius) {
+        setTextMarkRadiusRaw(applyDimension(unit, textMarkRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextMarkRadiusRaw(float tunaTextMarkRadius) {
-        if (this.tunaTextMarkRadius != tunaTextMarkRadius) {
-            this.tunaTextMarkRadius = tunaTextMarkRadius;
+    private void setTextMarkRadiusRaw(float textMarkRadius) {
+        if (this.textMarkRadius != textMarkRadius) {
+            this.textMarkRadius = textMarkRadius;
             invalidate();
         }
     }
 
-    // tunaTextMarkColor default transparent
-    private int tunaTextMarkColor;
+    // textMarkColor default transparent
+    private int textMarkColor;
 
-    public int getTunaTextMarkColor() {
-        return tunaTextMarkColor;
+    public int getTextMarkColor() {
+        return textMarkColor;
     }
 
-    public void setTunaTextMarkColor(int tunaTextMarkColor) {
-        this.tunaTextMarkColor = tunaTextMarkColor;
+    public void setTextMarkColor(int textMarkColor) {
+        this.textMarkColor = textMarkColor;
     }
 
     //
-    private String tunaTextMarkTextValue;
+    private String textMarkTextValue;
 
-    public String getTunaTextMarkTextValue() {
-        return tunaTextMarkTextValue;
+    public String getTextMarkTextValue() {
+        return textMarkTextValue;
     }
 
-    public void setTunaTextMarkTextValue(String tunaTextMarkTextValue) {
-        this.tunaTextMarkTextValue = tunaTextMarkTextValue;
+    public void setTextMarkTextValue(String textMarkTextValue) {
+        this.textMarkTextValue = textMarkTextValue;
         requestLayout();
     }
 
-    private List<Integer> tunaTextMarkTextValueMeasureList;
+    private List<Integer> textMarkTextValueMeasureList;
 
-    public List<Integer> getTunaTextMarkTextValueMeasureList() {
-        return tunaTextMarkTextValueMeasureList;
+    public List<Integer> getTextMarkTextValueMeasureList() {
+        return textMarkTextValueMeasureList;
     }
 
-    public void setTunaTextMarkTextValueMeasureList(List<Integer> tunaTextMarkTextValueMeasureList) {
-        this.tunaTextMarkTextValueMeasureList = tunaTextMarkTextValueMeasureList;
+    public void setTextMarkTextValueMeasureList(List<Integer> textMarkTextValueMeasureList) {
+        this.textMarkTextValueMeasureList = textMarkTextValueMeasureList;
     }
 
     //
-    private float tunaTextMarkTextSize;
+    private float textMarkTextSize;
 
-    public float getTunaTextMarkTextSize() {
-        return tunaTextMarkTextSize;
+    public float getTextMarkTextSize() {
+        return textMarkTextSize;
     }
 
-    public void setTunaTextMarkTextSize(float tunaTextMarkTextSize) {
-        setTunaTextMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkTextSize);
+    public void setTextMarkTextSize(float textMarkTextSize) {
+        setTextMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, textMarkTextSize);
     }
 
-    public void setTunaTextMarkTextSize(int unit, float tunaTextMarkTextSize) {
-        setTunaTextMarkTextSizeRaw(applyDimension(unit, tunaTextMarkTextSize, getViewDisplayMetrics(this)));
+    public void setTextMarkTextSize(int unit, float textMarkTextSize) {
+        setTextMarkTextSizeRaw(applyDimension(unit, textMarkTextSize, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextMarkTextSizeRaw(float tunaTextMarkTextSize) {
-        if (this.tunaTextMarkTextSize != tunaTextMarkTextSize) {
-            this.tunaTextMarkTextSize = tunaTextMarkTextSize;
+    private void setTextMarkTextSizeRaw(float textMarkTextSize) {
+        if (this.textMarkTextSize != textMarkTextSize) {
+            this.textMarkTextSize = textMarkTextSize;
             invalidate();
         }
     }
 
     //
-    private int tunaTextMarkTextColor;
+    private int textMarkTextColor;
 
-    public int getTunaTextMarkTextColor() {
-        return tunaTextMarkTextColor;
+    public int getTextMarkTextColor() {
+        return textMarkTextColor;
     }
 
-    public void setTunaTextMarkTextColor(int tunaTextMarkTextColor) {
-        this.tunaTextMarkTextColor = tunaTextMarkTextColor;
+    public void setTextMarkTextColor(int textMarkTextColor) {
+        this.textMarkTextColor = textMarkTextColor;
     }
 
     //
-    private float tunaTextMarkDx;
+    private float textMarkDx;
 
-    public float getTunaTextMarkDx() {
-        return tunaTextMarkDx;
+    public float getTextMarkDx() {
+        return textMarkDx;
     }
 
-    public void setTunaTextMarkDx(float tunaTextMarkDx) {
-        setTunaTextMarkDx(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDx);
+    public void setTextMarkDx(float textMarkDx) {
+        setTextMarkDx(TypedValue.COMPLEX_UNIT_DIP, textMarkDx);
     }
 
-    public void setTunaTextMarkDx(int unit, float tunaTextMarkDx) {
-        setTunaTextMarkDxRaw(applyDimension(unit, tunaTextMarkDx, getViewDisplayMetrics(this)));
+    public void setTextMarkDx(int unit, float textMarkDx) {
+        setTextMarkDxRaw(applyDimension(unit, textMarkDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextMarkDxRaw(float tunaTextMarkDx) {
-        if (this.tunaTextMarkDx != tunaTextMarkDx) {
-            this.tunaTextMarkDx = tunaTextMarkDx;
+    private void setTextMarkDxRaw(float textMarkDx) {
+        if (this.textMarkDx != textMarkDx) {
+            this.textMarkDx = textMarkDx;
             invalidate();
         }
     }
 
     //
-    private float tunaTextMarkDy;
+    private float textMarkDy;
 
-    public float getTunaTextMarkDy() {
-        return tunaTextMarkDy;
+    public float getTextMarkDy() {
+        return textMarkDy;
     }
 
-    public void setTunaTextMarkDy(float tunaTextMarkDy) {
-        setTunaTextMarkDy(TypedValue.COMPLEX_UNIT_DIP, tunaTextMarkDy);
+    public void setTextMarkDy(float textMarkDy) {
+        setTextMarkDy(TypedValue.COMPLEX_UNIT_DIP, textMarkDy);
     }
 
-    public void setTunaTextMarkDy(int unit, float tunaTextMarkDy) {
-        setTunaTextMarkDyRaw(applyDimension(unit, tunaTextMarkDy, getViewDisplayMetrics(this)));
+    public void setTextMarkDy(int unit, float textMarkDy) {
+        setTextMarkDyRaw(applyDimension(unit, textMarkDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextMarkDyRaw(float tunaTextMarkDy) {
-        if (this.tunaTextMarkDy != tunaTextMarkDy) {
-            this.tunaTextMarkDy = tunaTextMarkDy;
+    private void setTextMarkDyRaw(float textMarkDy) {
+        if (this.textMarkDy != textMarkDy) {
+            this.textMarkDy = textMarkDy;
             invalidate();
         }
     }
 
     //
-    private float tunaTextMarkFractionDx;
+    private float textMarkFractionDx;
 
-    public float getTunaTextMarkFractionDx() {
-        return tunaTextMarkFractionDx;
+    public float getTextMarkFractionDx() {
+        return textMarkFractionDx;
     }
 
-    public void setTunaTextMarkFractionDx(float tunaTextMarkFractionDx) {
-        this.tunaTextMarkFractionDx = tunaTextMarkFractionDx;
+    public void setTextMarkFractionDx(float textMarkFractionDx) {
+        this.textMarkFractionDx = textMarkFractionDx;
     }
 
     //
-    private float tunaTextMarkFractionDy;
+    private float textMarkFractionDy;
 
-    public float getTunaTextMarkFractionDy() {
-        return tunaTextMarkFractionDy;
+    public float getTextMarkFractionDy() {
+        return textMarkFractionDy;
     }
 
-    public void setTunaTextMarkFractionDy(float tunaTextMarkFractionDy) {
-        this.tunaTextMarkFractionDy = tunaTextMarkFractionDy;
+    public void setTextMarkFractionDy(float textMarkFractionDy) {
+        this.textMarkFractionDy = textMarkFractionDy;
     }
 
-    // tunaTextValue default null
-    private String tunaTextValue;
+    // textValue default null
+    private String textValue;
 
-    public String getTunaTextValue() {
-        return tunaTextValue;
+    public String getTextValue() {
+        return textValue;
     }
 
-    public void setTunaTextValue(String tunaTextValue) {
-        this.tunaTextValue = tunaTextValue;
+    public void setTextValue(String textValue) {
+        this.textValue = textValue;
         requestLayout();
     }
 
-    private List<Integer> tunaTextValueMeasureList;
+    private List<Integer> textValueMeasureList;
 
-    public List<Integer> getTunaTextValueMeasureList() {
-        return tunaTextValueMeasureList;
+    public List<Integer> getTextValueMeasureList() {
+        return textValueMeasureList;
     }
 
-    public void setTunaTextValueMeasureList(List<Integer> tunaTextValueMeasureList) {
-        this.tunaTextValueMeasureList = tunaTextValueMeasureList;
+    public void setTextValueMeasureList(List<Integer> textValueMeasureList) {
+        this.textValueMeasureList = textValueMeasureList;
     }
 
-    // tunaTextSize default 0
-    private float tunaTextSize;
+    // textSize default 0
+    private float textSize;
 
-    public float getTunaTextSize() {
-        return tunaTextSize;
+    public float getTextSize() {
+        return textSize;
     }
 
-    public void setTunaTextSize(float tunaTextSize) {
-        setTunaTextSize(TypedValue.COMPLEX_UNIT_DIP, tunaTextSize);
+    public void setTextSize(float textSize) {
+        setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
     }
 
-    public void setTunaTextSize(int unit, float tunaTextSize) {
-        setTunaTextSizeRaw(applyDimension(unit, tunaTextSize, getViewDisplayMetrics(this)));
+    public void setTextSize(int unit, float textSize) {
+        setTextSizeRaw(applyDimension(unit, textSize, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextSizeRaw(float tunaTextSize) {
-        if (this.tunaTextSize != tunaTextSize) {
-            this.tunaTextSize = tunaTextSize;
+    private void setTextSizeRaw(float textSize) {
+        if (this.textSize != textSize) {
+            this.textSize = textSize;
             invalidate();
         }
     }
 
-    // tunaTextColorNormal default transparent
-    private int tunaTextColorNormal;
+    // textColorNormal default transparent
+    private int textColorNormal;
 
-    public int getTunaTextColorNormal() {
-        return tunaTextColorNormal;
+    public int getTextColorNormal() {
+        return textColorNormal;
     }
 
-    public void setTunaTextColorNormal(int tunaTextColorNormal) {
-        this.tunaTextColorNormal = tunaTextColorNormal;
+    public void setTextColorNormal(int textColorNormal) {
+        this.textColorNormal = textColorNormal;
     }
 
-    // tunaTextColorPress default tunaTextColorNormal
-    private int tunaTextColorPress;
+    // textColorPress default textColorNormal
+    private int textColorPress;
 
-    public int getTunaTextColorPress() {
-        return tunaTextColorPress;
+    public int getTextColorPress() {
+        return textColorPress;
     }
 
-    public void setTunaTextColorPress(int tunaTextColorPress) {
-        this.tunaTextColorPress = tunaTextColorPress;
+    public void setTextColorPress(int textColorPress) {
+        this.textColorPress = textColorPress;
     }
 
-    // tunaTextColorSelect default tunaTextColorNormal
-    private int tunaTextColorSelect;
+    // textColorSelect default textColorNormal
+    private int textColorSelect;
 
-    public int getTunaTextColorSelect() {
-        return tunaTextColorSelect;
+    public int getTextColorSelect() {
+        return textColorSelect;
     }
 
-    public void setTunaTextColorSelect(int tunaTextColorSelect) {
-        this.tunaTextColorSelect = tunaTextColorSelect;
+    public void setTextColorSelect(int textColorSelect) {
+        this.textColorSelect = textColorSelect;
     }
 
-    // tunaTextPaddingLeft means distance between tunaSrcLeft and The
-    // leftmost,note about the tunaSrcLeftPadding
-    private float tunaTextPaddingLeft;
+    // textPaddingLeft means distance between srcLeft and The
+    // leftmost,note about the srcLeftPadding
+    private float textPaddingLeft;
 
-    public float getTunaTextPaddingLeft() {
-        return tunaTextPaddingLeft;
+    public float getTextPaddingLeft() {
+        return textPaddingLeft;
     }
 
-    public void setTunaTextPaddingLeft(float tunaTextPaddingLeft) {
-        setTunaTextPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, tunaTextPaddingLeft);
+    public void setTextPaddingLeft(float textPaddingLeft) {
+        setTextPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, textPaddingLeft);
     }
 
-    public void setTunaTextPaddingLeft(int unit, float tunaTextPaddingLeft) {
-        setTunaTextPaddingLeftRaw(applyDimension(unit, tunaTextPaddingLeft, getViewDisplayMetrics(this)));
+    public void setTextPaddingLeft(int unit, float textPaddingLeft) {
+        setTextPaddingLeftRaw(applyDimension(unit, textPaddingLeft, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextPaddingLeftRaw(float tunaTextPaddingLeft) {
-        if (this.tunaTextPaddingLeft != tunaTextPaddingLeft) {
-            this.tunaTextPaddingLeft = tunaTextPaddingLeft;
+    private void setTextPaddingLeftRaw(float textPaddingLeft) {
+        if (this.textPaddingLeft != textPaddingLeft) {
+            this.textPaddingLeft = textPaddingLeft;
             invalidate();
         }
     }
 
-    // tunaTextPaddingRight means distance between tunaSrcRight and The
-    // rightmost,note about the tunaSrcRightPadding
-    private float tunaTextPaddingRight;
+    // textPaddingRight means distance between srcRight and The
+    // rightmost,note about the srcRightPadding
+    private float textPaddingRight;
 
-    public float getTunaTextPaddingRight() {
-        return tunaTextPaddingRight;
+    public float getTextPaddingRight() {
+        return textPaddingRight;
     }
 
-    public void setTunaTextPaddingRight(float tunaTextPaddingRight) {
-        setTunaTextPaddingRight(TypedValue.COMPLEX_UNIT_DIP, tunaTextPaddingRight);
+    public void setTextPaddingRight(float textPaddingRight) {
+        setTextPaddingRight(TypedValue.COMPLEX_UNIT_DIP, textPaddingRight);
     }
 
-    public void setTunaTextPaddingRight(int unit, float tunaTextPaddingRight) {
-        setTunaTextPaddingRightRaw(applyDimension(unit, tunaTextPaddingRight, getViewDisplayMetrics(this)));
+    public void setTextPaddingRight(int unit, float textPaddingRight) {
+        setTextPaddingRightRaw(applyDimension(unit, textPaddingRight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextPaddingRightRaw(float tunaTextPaddingRight) {
-        if (this.tunaTextPaddingRight != tunaTextPaddingRight) {
-            this.tunaTextPaddingRight = tunaTextPaddingRight;
+    private void setTextPaddingRightRaw(float textPaddingRight) {
+        if (this.textPaddingRight != textPaddingRight) {
+            this.textPaddingRight = textPaddingRight;
             invalidate();
         }
     }
 
     //
-    private float tunaTextRowSpaceRatio = 1.0f;
+    private float textRowSpaceRatio = 1.0f;
 
-    public float getTunaTextRowSpaceRatio() {
-        return tunaTextRowSpaceRatio;
+    public float getTextRowSpaceRatio() {
+        return textRowSpaceRatio;
     }
 
-    public void setTunaTextRowSpaceRatio(float tunaTextRowSpaceRatio) {
-        this.tunaTextRowSpaceRatio = tunaTextRowSpaceRatio;
+    public void setTextRowSpaceRatio(float textRowSpaceRatio) {
+        this.textRowSpaceRatio = textRowSpaceRatio;
     }
 
     //
-    private TunaTextGravity tunaTextGravity;
+    private TextGravity textGravity;
 
-    public enum TunaTextGravity {
+    public enum TextGravity {
         ALL_CENTER(0), ALL_LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
         final int nativeInt;
 
-        TunaTextGravity(int ni) {
+        TextGravity(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaTextGravity[] tunaTextGravityArray = {TunaTextGravity.ALL_CENTER, TunaTextGravity.ALL_LEFT, TunaTextGravity.CENTER_LEFT, TunaTextGravity.LEFT_CENTER,};
+    private static final TextGravity[] textGravityArray = {TextGravity.ALL_CENTER, TextGravity.ALL_LEFT, TextGravity.CENTER_LEFT, TextGravity.LEFT_CENTER,};
 
-    public TunaTextGravity getTunaTextGravity() {
-        return tunaTextGravity;
+    public TextGravity getTextGravity() {
+        return textGravity;
     }
 
-    public void setTunaTextGravity(TunaTextGravity tunaTextGravity) {
-        this.tunaTextGravity = tunaTextGravity;
+    public void setTextGravity(TextGravity textGravity) {
+        this.textGravity = textGravity;
     }
 
     //
-    private Typeface tunaTextTypeFace;
+    private Typeface textTypeFace;
 
-    public enum TunaTextTypeFace {
+    public enum TextTypeFace {
         NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
         final int nativeInt;
 
-        TunaTextTypeFace(int ni) {
+        TextTypeFace(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final int[] tunaTextTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+    private static final int[] textTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
-    public Typeface getTunaTextTypeFace() {
-        return tunaTextTypeFace;
+    public Typeface getTextTypeFace() {
+        return textTypeFace;
     }
 
-    public void setTunaTextTypeFace(Typeface tunaTextTypeFace) {
-        this.tunaTextTypeFace = tunaTextTypeFace;
+    public void setTextTypeFace(Typeface textTypeFace) {
+        this.textTypeFace = textTypeFace;
     }
 
-    // attention that tunaTextDx is the width of the base , tunaTextDy is the
+    // attention that textDx is the width of the base , textDy is the
     // height of the base
-    private float tunaTextDx;
+    private float textDx;
 
-    public float getTunaTextDx() {
-        return tunaTextDx;
+    public float getTextDx() {
+        return textDx;
     }
 
-    public void setTunaTextDx(float tunaTextDx) {
-        setTunaTextDx(TypedValue.COMPLEX_UNIT_DIP, tunaTextDx);
+    public void setTextDx(float textDx) {
+        setTextDx(TypedValue.COMPLEX_UNIT_DIP, textDx);
     }
 
-    public void setTunaTextDx(int unit, float tunaTextDx) {
-        setTunaTextDxRaw(applyDimension(unit, tunaTextDx, getViewDisplayMetrics(this)));
+    public void setTextDx(int unit, float textDx) {
+        setTextDxRaw(applyDimension(unit, textDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextDxRaw(float tunaTextDx) {
-        if (this.tunaTextDx != tunaTextDx) {
-            this.tunaTextDx = tunaTextDx;
+    private void setTextDxRaw(float textDx) {
+        if (this.textDx != textDx) {
+            this.textDx = textDx;
             invalidate();
         }
     }
 
     //
-    private float tunaTextDy;
+    private float textDy;
 
-    public float getTunaTextDy() {
-        return tunaTextDy;
+    public float getTextDy() {
+        return textDy;
     }
 
-    public void setTunaTextDy(float tunaTextDy) {
-        setTunaTextDy(TypedValue.COMPLEX_UNIT_DIP, tunaTextDy);
+    public void setTextDy(float textDy) {
+        setTextDy(TypedValue.COMPLEX_UNIT_DIP, textDy);
     }
 
-    public void setTunaTextDy(int unit, float tunaTextDy) {
-        setTunaTextDyRaw(applyDimension(unit, tunaTextDy, getViewDisplayMetrics(this)));
+    public void setTextDy(int unit, float textDy) {
+        setTextDyRaw(applyDimension(unit, textDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextDyRaw(float tunaTextDy) {
-        if (this.tunaTextDy != tunaTextDy) {
-            this.tunaTextDy = tunaTextDy;
+    private void setTextDyRaw(float textDy) {
+        if (this.textDy != textDy) {
+            this.textDy = textDy;
             invalidate();
         }
     }
 
     //
-    private float tunaTextFractionDx;
+    private float textFractionDx;
 
-    public float getTunaTextFractionDx() {
-        return tunaTextFractionDx;
+    public float getTextFractionDx() {
+        return textFractionDx;
     }
 
-    public void setTunaTextFractionDx(float tunaTextFractionDx) {
-        this.tunaTextFractionDx = tunaTextFractionDx;
-    }
-
-    //
-    private float tunaTextFractionDy;
-
-    public float getTunaTextFractionDy() {
-        return tunaTextFractionDy;
-    }
-
-    public void setTunaTextFractionDy(float tunaTextFractionDy) {
-        this.tunaTextFractionDy = tunaTextFractionDy;
+    public void setTextFractionDx(float textFractionDx) {
+        this.textFractionDx = textFractionDx;
     }
 
     //
-    private float tunaTextDrawWidth;
-    private float tunaTextEndOffsetCenterX;
-    private float tunaTextEndOffsetCenterY;
+    private float textFractionDy;
+
+    public float getTextFractionDy() {
+        return textFractionDy;
+    }
+
+    public void setTextFractionDy(float textFractionDy) {
+        this.textFractionDy = textFractionDy;
+    }
 
     //
-    private float tunaTextShadowRadius;
+    private float textDrawWidth;
+    private float textEndOffsetCenterX;
+    private float textEndOffsetCenterY;
 
-    public float getTunaTextShadowRadius() {
-        return tunaTextShadowRadius;
+    //
+    private float textShadowRadius;
+
+    public float getTextShadowRadius() {
+        return textShadowRadius;
     }
 
-    public void setTunaTextShadowRadius(float tunaTextShadowRadius) {
-        setTunaTextShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaTextShadowRadius);
+    public void setTextShadowRadius(float textShadowRadius) {
+        setTextShadowRadius(TypedValue.COMPLEX_UNIT_DIP, textShadowRadius);
     }
 
-    public void setTunaTextShadowRadius(int unit, float tunaTextShadowRadius) {
-        setTunaTextShadowRadiusRaw(applyDimension(unit, tunaTextShadowRadius, getViewDisplayMetrics(this)));
+    public void setTextShadowRadius(int unit, float textShadowRadius) {
+        setTextShadowRadiusRaw(applyDimension(unit, textShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextShadowRadiusRaw(float tunaTextShadowRadius) {
-        if (this.tunaTextShadowRadius != tunaTextShadowRadius) {
-            this.tunaTextShadowRadius = tunaTextShadowRadius;
+    private void setTextShadowRadiusRaw(float textShadowRadius) {
+        if (this.textShadowRadius != textShadowRadius) {
+            this.textShadowRadius = textShadowRadius;
             invalidate();
         }
     }
 
     //
-    private int tunaTextShadowColor;
+    private int textShadowColor;
 
-    public int getTunaTextShadowColor() {
-        return tunaTextShadowColor;
+    public int getTextShadowColor() {
+        return textShadowColor;
     }
 
-    public void setTunaTextShadowColor(int tunaTextShadowColor) {
-        this.tunaTextShadowColor = tunaTextShadowColor;
+    public void setTextShadowColor(int textShadowColor) {
+        this.textShadowColor = textShadowColor;
     }
 
     //
-    private float tunaTextShadowDx;
+    private float textShadowDx;
 
-    public float getTunaTextShadowDx() {
-        return tunaTextShadowDx;
+    public float getTextShadowDx() {
+        return textShadowDx;
     }
 
-    public void setTunaTextShadowDx(float tunaTextShadowDx) {
-        setTunaTextShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaTextShadowDx);
+    public void setTextShadowDx(float textShadowDx) {
+        setTextShadowDx(TypedValue.COMPLEX_UNIT_DIP, textShadowDx);
     }
 
-    public void setTunaTextShadowDx(int unit, float tunaTextShadowDx) {
-        setTunaTextShadowDxRaw(applyDimension(unit, tunaTextShadowDx, getViewDisplayMetrics(this)));
+    public void setTextShadowDx(int unit, float textShadowDx) {
+        setTextShadowDxRaw(applyDimension(unit, textShadowDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextShadowDxRaw(float tunaTextShadowDx) {
-        if (this.tunaTextShadowDx != tunaTextShadowDx) {
-            this.tunaTextShadowDx = tunaTextShadowDx;
+    private void setTextShadowDxRaw(float textShadowDx) {
+        if (this.textShadowDx != textShadowDx) {
+            this.textShadowDx = textShadowDx;
             invalidate();
         }
     }
 
     //
-    private float tunaTextShadowDy;
+    private float textShadowDy;
 
-    public float getTunaTextShadowDy() {
-        return tunaTextShadowDy;
+    public float getTextShadowDy() {
+        return textShadowDy;
     }
 
-    public void setTunaTextShadowDy(float tunaTextShadowDy) {
-        setTunaTextShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaTextShadowDy);
+    public void setTextShadowDy(float textShadowDy) {
+        setTextShadowDy(TypedValue.COMPLEX_UNIT_DIP, textShadowDy);
     }
 
-    public void setTunaTextShadowDy(int unit, float tunaTextShadowDy) {
-        setTunaTextShadowDyRaw(applyDimension(unit, tunaTextShadowDy, getViewDisplayMetrics(this)));
+    public void setTextShadowDy(int unit, float textShadowDy) {
+        setTextShadowDyRaw(applyDimension(unit, textShadowDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaTextShadowDyRaw(float tunaTextShadowDy) {
-        if (this.tunaTextShadowDy != tunaTextShadowDy) {
-            this.tunaTextShadowDy = tunaTextShadowDy;
+    private void setTextShadowDyRaw(float textShadowDy) {
+        if (this.textShadowDy != textShadowDy) {
+            this.textShadowDy = textShadowDy;
             invalidate();
         }
     }
 
-    // tunaContentValue default null
-    private String tunaContentValue;
+    // contentValue default null
+    private String contentValue;
 
-    public String getTunaContentValue() {
-        return tunaContentValue;
+    public String getContentValue() {
+        return contentValue;
     }
 
-    public void setTunaContentValue(String tunaContentValue) {
-        this.tunaContentValue = tunaContentValue;
+    public void setContentValue(String contentValue) {
+        this.contentValue = contentValue;
         requestLayout();
     }
 
-    private List<Integer> tunaContentValueMeasureList;
+    private List<Integer> contentValueMeasureList;
 
-    public List<Integer> getTunaContentValueMeasureList() {
-        return tunaContentValueMeasureList;
+    public List<Integer> getContentValueMeasureList() {
+        return contentValueMeasureList;
     }
 
-    public void setTunaContentValueMeasureList(List<Integer> tunaContentValueMeasureList) {
-        this.tunaContentValueMeasureList = tunaContentValueMeasureList;
+    public void setContentValueMeasureList(List<Integer> contentValueMeasureList) {
+        this.contentValueMeasureList = contentValueMeasureList;
     }
 
-    // tunaContentSize default 0
-    private float tunaContentSize;
+    // contentSize default 0
+    private float contentSize;
 
-    public float getTunaContentSize() {
-        return tunaContentSize;
+    public float getContentSize() {
+        return contentSize;
     }
 
-    public void setTunaContentSize(float tunaContentSize) {
-        setTunaContentSize(TypedValue.COMPLEX_UNIT_DIP, tunaContentSize);
+    public void setContentSize(float contentSize) {
+        setContentSize(TypedValue.COMPLEX_UNIT_DIP, contentSize);
     }
 
-    public void setTunaContentSize(int unit, float tunaContentSize) {
-        setTunaContentSizeRaw(applyDimension(unit, tunaContentSize, getViewDisplayMetrics(this)));
+    public void setContentSize(int unit, float contentSize) {
+        setContentSizeRaw(applyDimension(unit, contentSize, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentSizeRaw(float tunaContentSize) {
-        if (this.tunaContentSize != tunaContentSize) {
-            this.tunaContentSize = tunaContentSize;
+    private void setContentSizeRaw(float contentSize) {
+        if (this.contentSize != contentSize) {
+            this.contentSize = contentSize;
             invalidate();
         }
     }
 
     //
-    private float tunaContentShadowRadius;
+    private float contentShadowRadius;
 
-    public float getTunaContentShadowRadius() {
-        return tunaContentShadowRadius;
+    public float getContentShadowRadius() {
+        return contentShadowRadius;
     }
 
-    public void setTunaContentShadowRadius(float tunaContentShadowRadius) {
-        setTunaContentShadowRadius(TypedValue.COMPLEX_UNIT_DIP, tunaContentShadowRadius);
+    public void setContentShadowRadius(float contentShadowRadius) {
+        setContentShadowRadius(TypedValue.COMPLEX_UNIT_DIP, contentShadowRadius);
     }
 
-    public void setTunaContentShadowRadius(int unit, float tunaContentShadowRadius) {
-        setTunaContentShadowRadiusRaw(applyDimension(unit, tunaContentShadowRadius, getViewDisplayMetrics(this)));
+    public void setContentShadowRadius(int unit, float contentShadowRadius) {
+        setContentShadowRadiusRaw(applyDimension(unit, contentShadowRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentShadowRadiusRaw(float tunaContentShadowRadius) {
-        if (this.tunaContentShadowRadius != tunaContentShadowRadius) {
-            this.tunaContentShadowRadius = tunaContentShadowRadius;
+    private void setContentShadowRadiusRaw(float contentShadowRadius) {
+        if (this.contentShadowRadius != contentShadowRadius) {
+            this.contentShadowRadius = contentShadowRadius;
             invalidate();
         }
     }
 
     //
-    private int tunaContentShadowColor;
+    private int contentShadowColor;
 
-    public int getTunaContentShadowColor() {
-        return tunaContentShadowColor;
+    public int getContentShadowColor() {
+        return contentShadowColor;
     }
 
-    public void setTunaContentShadowColor(int tunaContentShadowColor) {
-        this.tunaContentShadowColor = tunaContentShadowColor;
-    }
-
-    //
-    private float tunaContentShadowDx;
-
-    public float getTunaContentShadowDx() {
-        return tunaContentShadowDx;
-    }
-
-    public void setTunaContentShadowDx(float tunaContentShadowDx) {
-        setTunaContentShadowDx(TypedValue.COMPLEX_UNIT_DIP, tunaContentShadowDx);
-    }
-
-    public void setTunaContentShadowDx(int unit, float tunaContentShadowDx) {
-        setTunaContentShadowDxRaw(applyDimension(unit, tunaContentShadowDx, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaContentShadowDxRaw(float tunaContentShadowDx) {
-        if (this.tunaContentShadowDx != tunaContentShadowDx) {
-            this.tunaContentShadowDx = tunaContentShadowDx;
-            invalidate();
-        }
+    public void setContentShadowColor(int contentShadowColor) {
+        this.contentShadowColor = contentShadowColor;
     }
 
     //
-    private float tunaContentShadowDy;
+    private float contentShadowDx;
 
-    public float getTunaContentShadowDy() {
-        return tunaContentShadowDy;
+    public float getContentShadowDx() {
+        return contentShadowDx;
     }
 
-    public void setTunaContentShadowDy(float tunaContentShadowDy) {
-        setTunaContentShadowDy(TypedValue.COMPLEX_UNIT_DIP, tunaContentShadowDy);
+    public void setContentShadowDx(float contentShadowDx) {
+        setContentShadowDx(TypedValue.COMPLEX_UNIT_DIP, contentShadowDx);
     }
 
-    public void setTunaContentShadowDy(int unit, float tunaContentShadowDy) {
-        setTunaContentShadowDyRaw(applyDimension(unit, tunaContentShadowDy, getViewDisplayMetrics(this)));
+    public void setContentShadowDx(int unit, float contentShadowDx) {
+        setContentShadowDxRaw(applyDimension(unit, contentShadowDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentShadowDyRaw(float tunaContentShadowDy) {
-        if (this.tunaContentShadowDy != tunaContentShadowDy) {
-            this.tunaContentShadowDy = tunaContentShadowDy;
+    private void setContentShadowDxRaw(float contentShadowDx) {
+        if (this.contentShadowDx != contentShadowDx) {
+            this.contentShadowDx = contentShadowDx;
             invalidate();
         }
-    }
-
-    // tunaContentColorNormal default transparent
-    private int tunaContentColorNormal;
-
-    public int getTunaContentColorNormal() {
-        return tunaContentColorNormal;
-    }
-
-    public void setTunaContentColorNormal(int tunaContentColorNormal) {
-        this.tunaContentColorNormal = tunaContentColorNormal;
-    }
-
-    // tunaContentColorPress default tunaContentColorNormal
-    private int tunaContentColorPress;
-
-    public int getTunaContentColorPress() {
-        return tunaContentColorPress;
-    }
-
-    public void setTunaContentColorPress(int tunaContentColorPress) {
-        this.tunaContentColorPress = tunaContentColorPress;
-    }
-
-    // tunaContentColorSelect default tunaContentColorNormal
-    private int tunaContentColorSelect;
-
-    public int getTunaContentColorSelect() {
-        return tunaContentColorSelect;
-    }
-
-    public void setTunaContentColorSelect(int tunaContentColorSelect) {
-        this.tunaContentColorSelect = tunaContentColorSelect;
-    }
-
-    // tunaContentPaddingLeft means distance between tunaSrcLeft and The
-    // leftmost,note about the tunaSrcLeftPadding
-    private float tunaContentPaddingLeft;
-
-    public float getTunaContentPaddingLeft() {
-        return tunaContentPaddingLeft;
-    }
-
-    public void setTunaContentPaddingLeft(float tunaContentPaddingLeft) {
-        setTunaContentPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, tunaContentPaddingLeft);
-    }
-
-    public void setTunaContentPaddingLeft(int unit, float tunaContentPaddingLeft) {
-        setTunaContentPaddingLeftRaw(applyDimension(unit, tunaContentPaddingLeft, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaContentPaddingLeftRaw(float tunaContentPaddingLeft) {
-        if (this.tunaContentPaddingLeft != tunaContentPaddingLeft) {
-            this.tunaContentPaddingLeft = tunaContentPaddingLeft;
-            invalidate();
-        }
-    }
-
-    // tunaContentPaddingRight means distance between tunaSrcRight and The
-    // rightmost,note about the tunaSrcRightPadding
-    private float tunaContentPaddingRight;
-
-    public float getTunaContentPaddingRight() {
-        return tunaContentPaddingRight;
-    }
-
-    public void setTunaContentPaddingRight(float tunaContentPaddingRight) {
-        setTunaContentPaddingRight(TypedValue.COMPLEX_UNIT_DIP, tunaContentPaddingRight);
-    }
-
-    public void setTunaContentPaddingRight(int unit, float tunaContentPaddingRight) {
-        setTunaContentPaddingRightRaw(applyDimension(unit, tunaContentPaddingRight, getViewDisplayMetrics(this)));
-    }
-
-    private void setTunaContentPaddingRightRaw(float tunaContentPaddingRight) {
-        if (this.tunaContentPaddingRight != tunaContentPaddingRight) {
-            this.tunaContentPaddingRight = tunaContentPaddingRight;
-            invalidate();
-        }
-    }
-
-    private float tunaContentRowSpaceRatio = 1.0f;
-
-    public float getTunaContentRowSpaceRatio() {
-        return tunaContentRowSpaceRatio;
-    }
-
-    public void setTunaContentRowSpaceRatio(float tunaContentRowSpaceRatio) {
-        this.tunaContentRowSpaceRatio = tunaContentRowSpaceRatio;
     }
 
     //
-    private TunaContentGravity tunaContentGravity;
+    private float contentShadowDy;
 
-    public enum TunaContentGravity {
+    public float getContentShadowDy() {
+        return contentShadowDy;
+    }
+
+    public void setContentShadowDy(float contentShadowDy) {
+        setContentShadowDy(TypedValue.COMPLEX_UNIT_DIP, contentShadowDy);
+    }
+
+    public void setContentShadowDy(int unit, float contentShadowDy) {
+        setContentShadowDyRaw(applyDimension(unit, contentShadowDy, getViewDisplayMetrics(this)));
+    }
+
+    private void setContentShadowDyRaw(float contentShadowDy) {
+        if (this.contentShadowDy != contentShadowDy) {
+            this.contentShadowDy = contentShadowDy;
+            invalidate();
+        }
+    }
+
+    // contentColorNormal default transparent
+    private int contentColorNormal;
+
+    public int getContentColorNormal() {
+        return contentColorNormal;
+    }
+
+    public void setContentColorNormal(int contentColorNormal) {
+        this.contentColorNormal = contentColorNormal;
+    }
+
+    // contentColorPress default contentColorNormal
+    private int contentColorPress;
+
+    public int getContentColorPress() {
+        return contentColorPress;
+    }
+
+    public void setContentColorPress(int contentColorPress) {
+        this.contentColorPress = contentColorPress;
+    }
+
+    // contentColorSelect default contentColorNormal
+    private int contentColorSelect;
+
+    public int getContentColorSelect() {
+        return contentColorSelect;
+    }
+
+    public void setContentColorSelect(int contentColorSelect) {
+        this.contentColorSelect = contentColorSelect;
+    }
+
+    // contentPaddingLeft means distance between srcLeft and The
+    // leftmost,note about the srcLeftPadding
+    private float contentPaddingLeft;
+
+    public float getContentPaddingLeft() {
+        return contentPaddingLeft;
+    }
+
+    public void setContentPaddingLeft(float contentPaddingLeft) {
+        setContentPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, contentPaddingLeft);
+    }
+
+    public void setContentPaddingLeft(int unit, float contentPaddingLeft) {
+        setContentPaddingLeftRaw(applyDimension(unit, contentPaddingLeft, getViewDisplayMetrics(this)));
+    }
+
+    private void setContentPaddingLeftRaw(float contentPaddingLeft) {
+        if (this.contentPaddingLeft != contentPaddingLeft) {
+            this.contentPaddingLeft = contentPaddingLeft;
+            invalidate();
+        }
+    }
+
+    // contentPaddingRight means distance between srcRight and The
+    // rightmost,note about the srcRightPadding
+    private float contentPaddingRight;
+
+    public float getContentPaddingRight() {
+        return contentPaddingRight;
+    }
+
+    public void setContentPaddingRight(float contentPaddingRight) {
+        setContentPaddingRight(TypedValue.COMPLEX_UNIT_DIP, contentPaddingRight);
+    }
+
+    public void setContentPaddingRight(int unit, float contentPaddingRight) {
+        setContentPaddingRightRaw(applyDimension(unit, contentPaddingRight, getViewDisplayMetrics(this)));
+    }
+
+    private void setContentPaddingRightRaw(float contentPaddingRight) {
+        if (this.contentPaddingRight != contentPaddingRight) {
+            this.contentPaddingRight = contentPaddingRight;
+            invalidate();
+        }
+    }
+
+    private float contentRowSpaceRatio = 1.0f;
+
+    public float getContentRowSpaceRatio() {
+        return contentRowSpaceRatio;
+    }
+
+    public void setContentRowSpaceRatio(float contentRowSpaceRatio) {
+        this.contentRowSpaceRatio = contentRowSpaceRatio;
+    }
+
+    //
+    private ContentGravity contentGravity;
+
+    public enum ContentGravity {
         ALL_CENTER(0), ALL_LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
         final int nativeInt;
 
-        TunaContentGravity(int ni) {
+        ContentGravity(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaContentGravity[] tunaContentGravityArray = {TunaContentGravity.ALL_CENTER, TunaContentGravity.ALL_LEFT, TunaContentGravity.CENTER_LEFT, TunaContentGravity.LEFT_CENTER,};
+    private static final ContentGravity[] contentGravityArray = {ContentGravity.ALL_CENTER, ContentGravity.ALL_LEFT, ContentGravity.CENTER_LEFT, ContentGravity.LEFT_CENTER,};
 
-    public TunaContentGravity getTunaContentGravity() {
-        return tunaContentGravity;
+    public ContentGravity getContentGravity() {
+        return contentGravity;
     }
 
-    public void setTunaContentGravity(TunaContentGravity tunaContentGravity) {
-        this.tunaContentGravity = tunaContentGravity;
+    public void setContentGravity(ContentGravity contentGravity) {
+        this.contentGravity = contentGravity;
     }
 
     //
-    private Typeface tunaContentTypeFace;
+    private Typeface contentTypeFace;
 
-    public enum TunaContentTypeFace {
+    public enum ContentTypeFace {
         NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
         final int nativeInt;
 
-        TunaContentTypeFace(int ni) {
+        ContentTypeFace(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final int[] tunaContentTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
+    private static final int[] contentTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
 
-    public Typeface getTunaContentTypeFace() {
-        return tunaContentTypeFace;
+    public Typeface getContentTypeFace() {
+        return contentTypeFace;
     }
 
-    public void Typeface(Typeface tunaContentTypeFace) {
-        this.tunaContentTypeFace = tunaContentTypeFace;
+    public void Typeface(Typeface contentTypeFace) {
+        this.contentTypeFace = contentTypeFace;
     }
 
-    // attention that tunaContentDx is the width of the base , tunaContentDy is
+    // attention that contentDx is the width of the base , contentDy is
     // the height of the base
-    private float tunaContentDx;
+    private float contentDx;
 
-    public float getTunaContenttDx() {
-        return tunaContentDx;
+    public float getContenttDx() {
+        return contentDx;
     }
 
-    public void setTunaContentDx(float tunaContentDx) {
-        setTunaTextDx(TypedValue.COMPLEX_UNIT_DIP, tunaContentDx);
+    public void setContentDx(float contentDx) {
+        setTextDx(TypedValue.COMPLEX_UNIT_DIP, contentDx);
     }
 
-    public void setTunaContentDx(int unit, float tunaContentDx) {
-        setTunaContentDxRaw(applyDimension(unit, tunaContentDx, getViewDisplayMetrics(this)));
+    public void setContentDx(int unit, float contentDx) {
+        setContentDxRaw(applyDimension(unit, contentDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentDxRaw(float tunaContentDx) {
-        if (this.tunaContentDx != tunaContentDx) {
-            this.tunaContentDx = tunaContentDx;
+    private void setContentDxRaw(float contentDx) {
+        if (this.contentDx != contentDx) {
+            this.contentDx = contentDx;
             invalidate();
         }
     }
 
     //
-    private float tunaContentDy;
+    private float contentDy;
 
-    public float getTunaContentDy() {
-        return tunaContentDy;
+    public float getContentDy() {
+        return contentDy;
     }
 
-    public void setTunaContentDy(float tunaContentDy) {
-        setTunaContentDy(TypedValue.COMPLEX_UNIT_DIP, tunaContentDy);
+    public void setContentDy(float contentDy) {
+        setContentDy(TypedValue.COMPLEX_UNIT_DIP, contentDy);
     }
 
-    public void setTunaContentDy(int unit, float tunaContentDy) {
-        setTunaContentDyRaw(applyDimension(unit, tunaContentDy, getViewDisplayMetrics(this)));
+    public void setContentDy(int unit, float contentDy) {
+        setContentDyRaw(applyDimension(unit, contentDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentDyRaw(float tunaContentDy) {
-        if (this.tunaContentDy != tunaContentDy) {
-            this.tunaContentDy = tunaContentDy;
+    private void setContentDyRaw(float contentDy) {
+        if (this.contentDy != contentDy) {
+            this.contentDy = contentDy;
             invalidate();
         }
     }
 
     //
-    private float tunaContentFractionDx;
+    private float contentFractionDx;
 
-    public float getTunaContentFractionDx() {
-        return tunaContentFractionDx;
+    public float getContentFractionDx() {
+        return contentFractionDx;
     }
 
-    public void setTunaContentFractionDx(float tunaContentFractionDx) {
-        this.tunaContentFractionDx = tunaContentFractionDx;
+    public void setContentFractionDx(float contentFractionDx) {
+        this.contentFractionDx = contentFractionDx;
     }
 
     //
-    private float tunaContentFractionDy;
+    private float contentFractionDy;
 
-    public float getTunaContentFractionDy() {
-        return tunaContentFractionDy;
+    public float getContentFractionDy() {
+        return contentFractionDy;
     }
 
-    public void setTunaContentFractionDy(float tunaContentFractionDy) {
-        this.tunaContentFractionDy = tunaContentFractionDy;
+    public void setContentFractionDy(float contentFractionDy) {
+        this.contentFractionDy = contentFractionDy;
     }
 
-    // tunaContentMark default false
-    protected boolean tunaContentMark;
+    // contentMark default false
+    protected boolean contentMark;
 
-    public boolean isTunaContentMark() {
-        return tunaContentMark;
+    public boolean iscontentMark() {
+        return contentMark;
     }
 
-    public void setTunaContentMark(boolean tunaContentMark) {
-        this.tunaContentMark = tunaContentMark;
+    public void setContentMark(boolean contentMark) {
+        this.contentMark = contentMark;
         invalidate();
     }
 
-    public void setTunaContentMark(String tunaContentMarkTextValue) {
-        this.tunaContentMarkTextValue = tunaContentMarkTextValue;
+    public void setContentMark(String contentMarkTextValue) {
+        this.contentMarkTextValue = contentMarkTextValue;
         invalidate();
     }
 
-    public void setTunaContentMark(float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue, float tunaContentMarkTextSize,
-                                   int tunaContentMarkTextColor, float tunaContentMarkDx, float tunaContentMarkDy) {
-        setTunaContentMark(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkRadius, tunaContentMarkColor, tunaContentMarkTextValue, TypedValue.COMPLEX_UNIT_DIP,
-                tunaContentMarkTextSize, tunaContentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDx, TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDy);
+    public void setContentMark(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
+                                   int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
+        setContentMark(TypedValue.COMPLEX_UNIT_DIP, contentMarkRadius, contentMarkColor, contentMarkTextValue, TypedValue.COMPLEX_UNIT_DIP,
+                contentMarkTextSize, contentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, contentMarkDx, TypedValue.COMPLEX_UNIT_DIP, contentMarkDy);
     }
 
-    public void setTunaContentMark(int tunaContentMarkRadiusUnit, float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue,
-                                   int tunaContentMarkTextSizeUnit, float tunaContentMarkTextSize, int tunaContentMarkTextColor, int tunaContentMarkDxUnit, float tunaContentMarkDx,
-                                   int tunaContentMarkDyUnit, float tunaContentMarkDy) {
+    public void setContentMark(int contentMarkRadiusUnit, float contentMarkRadius, int contentMarkColor, String contentMarkTextValue,
+                                   int contentMarkTextSizeUnit, float contentMarkTextSize, int contentMarkTextColor, int contentMarkDxUnit, float contentMarkDx,
+                                   int contentMarkDyUnit, float contentMarkDy) {
 
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
-        setTunaContentMarkRaw(applyDimension(tunaContentMarkRadiusUnit, tunaContentMarkRadius, displayMetrics), tunaContentMarkColor, tunaContentMarkTextValue,
-                applyDimension(tunaContentMarkTextSizeUnit, tunaContentMarkTextSize, displayMetrics), tunaContentMarkTextColor,
-                applyDimension(tunaContentMarkDxUnit, tunaContentMarkDx, displayMetrics), applyDimension(tunaContentMarkDyUnit, tunaContentMarkDy, displayMetrics));
+        setContentMarkRaw(applyDimension(contentMarkRadiusUnit, contentMarkRadius, displayMetrics), contentMarkColor, contentMarkTextValue,
+                applyDimension(contentMarkTextSizeUnit, contentMarkTextSize, displayMetrics), contentMarkTextColor,
+                applyDimension(contentMarkDxUnit, contentMarkDx, displayMetrics), applyDimension(contentMarkDyUnit, contentMarkDy, displayMetrics));
     }
 
-    private void setTunaContentMarkRaw(float tunaContentMarkRadius, int tunaContentMarkColor, String tunaContentMarkTextValue, float tunaContentMarkTextSize,
-                                       int tunaContentMarkTextColor, float tunaContentMarkDx, float tunaContentMarkDy) {
-        if (this.tunaContentMarkRadius != tunaContentMarkRadius || this.tunaContentMarkColor != tunaContentMarkColor || this.tunaContentMarkTextValue != tunaContentMarkTextValue
-                || this.tunaContentMarkTextSize != tunaContentMarkTextSize || this.tunaContentMarkTextColor != tunaContentMarkTextColor
-                || this.tunaContentMarkDx != tunaContentMarkDx || this.tunaContentMarkDy != tunaContentMarkDy) {
-            this.tunaContentMarkRadius = tunaContentMarkRadius;
-            this.tunaContentMarkColor = tunaContentMarkColor;
-            this.tunaContentMarkTextValue = tunaContentMarkTextValue;
-            this.tunaContentMarkTextSize = tunaContentMarkTextSize;
-            this.tunaContentMarkTextColor = tunaContentMarkTextColor;
-            this.tunaContentMarkDx = tunaContentMarkDx;
-            this.tunaContentMarkDy = tunaContentMarkDy;
-            this.tunaContentMark = true;
+    private void setContentMarkRaw(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
+                                       int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
+        if (this.contentMarkRadius != contentMarkRadius || this.contentMarkColor != contentMarkColor || this.contentMarkTextValue != contentMarkTextValue
+                || this.contentMarkTextSize != contentMarkTextSize || this.contentMarkTextColor != contentMarkTextColor
+                || this.contentMarkDx != contentMarkDx || this.contentMarkDy != contentMarkDy) {
+            this.contentMarkRadius = contentMarkRadius;
+            this.contentMarkColor = contentMarkColor;
+            this.contentMarkTextValue = contentMarkTextValue;
+            this.contentMarkTextSize = contentMarkTextSize;
+            this.contentMarkTextColor = contentMarkTextColor;
+            this.contentMarkDx = contentMarkDx;
+            this.contentMarkDy = contentMarkDy;
+            this.contentMark = true;
             invalidate();
         }
     }
 
-    // tunaContentMarkTouchable default false
-    private boolean tunaContentMarkTouchable;
+    // contentMarkTouchable default false
+    private boolean contentMarkTouchable;
 
-    public boolean isTunaContentMarkTouchable() {
-        return tunaContentMarkTouchable;
+    public boolean iscontentMarkTouchable() {
+        return contentMarkTouchable;
     }
 
-    public void setTunaContentMarkTouchable(boolean tunaContentMarkTouchable) {
-        this.tunaContentMarkTouchable = tunaContentMarkTouchable;
+    public void setContentMarkTouchable(boolean contentMarkTouchable) {
+        this.contentMarkTouchable = contentMarkTouchable;
     }
 
-    // tunaContentMarkRadius default 0
-    private float tunaContentMarkRadius;
+    // contentMarkRadius default 0
+    private float contentMarkRadius;
 
-    public float getTunaContentMarkRadius() {
-        return tunaContentMarkRadius;
+    public float getContentMarkRadius() {
+        return contentMarkRadius;
     }
 
-    public void setTunaContentMarkRadius(float tunaContentMarkRadius) {
-        setTunaContentMarkRadius(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkRadius);
+    public void setContentMarkRadius(float contentMarkRadius) {
+        setContentMarkRadius(TypedValue.COMPLEX_UNIT_DIP, contentMarkRadius);
     }
 
-    public void setTunaContentMarkRadius(int unit, float tunaContentMarkRadius) {
-        setTunaContentMarkRadiusRaw(applyDimension(unit, tunaContentMarkRadius, getViewDisplayMetrics(this)));
+    public void setContentMarkRadius(int unit, float contentMarkRadius) {
+        setContentMarkRadiusRaw(applyDimension(unit, contentMarkRadius, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentMarkRadiusRaw(float tunaContentMarkRadius) {
-        if (this.tunaContentMarkRadius != tunaContentMarkRadius) {
-            this.tunaContentMarkRadius = tunaContentMarkRadius;
+    private void setContentMarkRadiusRaw(float contentMarkRadius) {
+        if (this.contentMarkRadius != contentMarkRadius) {
+            this.contentMarkRadius = contentMarkRadius;
             invalidate();
         }
     }
 
-    // tunaContentMarkColor default transparent
-    private int tunaContentMarkColor;
+    // contentMarkColor default transparent
+    private int contentMarkColor;
 
-    public int getTunaContentMarkColor() {
-        return tunaContentMarkColor;
+    public int getContentMarkColor() {
+        return contentMarkColor;
     }
 
-    public void setTunaContentMarkColor(int tunaContentMarkColor) {
-        this.tunaContentMarkColor = tunaContentMarkColor;
+    public void setContentMarkColor(int contentMarkColor) {
+        this.contentMarkColor = contentMarkColor;
     }
 
     //
-    private String tunaContentMarkTextValue;
+    private String contentMarkTextValue;
 
-    public String getTunaContentMarkTextValue() {
-        return tunaContentMarkTextValue;
+    public String getContentMarkTextValue() {
+        return contentMarkTextValue;
     }
 
-    public void setTunaContentMarkTextValue(String tunaContentMarkTextValue) {
-        this.tunaContentMarkTextValue = tunaContentMarkTextValue;
+    public void setContentMarkTextValue(String contentMarkTextValue) {
+        this.contentMarkTextValue = contentMarkTextValue;
         requestLayout();
     }
 
-    private List<Integer> tunaContentMarkTextValueMeasureList;
+    private List<Integer> contentMarkTextValueMeasureList;
 
-    public List<Integer> getTunaContentMarkTextValueMeasureList() {
-        return tunaContentMarkTextValueMeasureList;
+    public List<Integer> getContentMarkTextValueMeasureList() {
+        return contentMarkTextValueMeasureList;
     }
 
-    public void setTunaContentMarkTextValueMeasureList(List<Integer> tunaContentMarkTextValueMeasureList) {
-        this.tunaContentMarkTextValueMeasureList = tunaContentMarkTextValueMeasureList;
+    public void setContentMarkTextValueMeasureList(List<Integer> contentMarkTextValueMeasureList) {
+        this.contentMarkTextValueMeasureList = contentMarkTextValueMeasureList;
     }
 
     //
-    private float tunaContentMarkTextSize;
+    private float contentMarkTextSize;
 
-    public float getTunaContentMarkTextSize() {
-        return tunaContentMarkTextSize;
+    public float getContentMarkTextSize() {
+        return contentMarkTextSize;
     }
 
-    public void setTunaContentMarkTextSize(float tunaContentMarkTextSize) {
-        setTunaContentMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkTextSize);
+    public void setContentMarkTextSize(float contentMarkTextSize) {
+        setContentMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, contentMarkTextSize);
     }
 
-    public void setTunaContentMarkTextSize(int unit, float tunaContentMarkTextSize) {
-        setTunaContentMarkTextSizeRaw(applyDimension(unit, tunaContentMarkTextSize, getViewDisplayMetrics(this)));
+    public void setContentMarkTextSize(int unit, float contentMarkTextSize) {
+        setContentMarkTextSizeRaw(applyDimension(unit, contentMarkTextSize, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentMarkTextSizeRaw(float tunaContentMarkTextSize) {
-        if (this.tunaContentMarkTextSize != tunaContentMarkTextSize) {
-            this.tunaContentMarkTextSize = tunaContentMarkTextSize;
+    private void setContentMarkTextSizeRaw(float contentMarkTextSize) {
+        if (this.contentMarkTextSize != contentMarkTextSize) {
+            this.contentMarkTextSize = contentMarkTextSize;
             invalidate();
         }
     }
 
     //
-    private int tunaContentMarkTextColor;
+    private int contentMarkTextColor;
 
-    public int getTunaContentMarkTextColor() {
-        return tunaContentMarkTextColor;
+    public int getContentMarkTextColor() {
+        return contentMarkTextColor;
     }
 
-    public void setTunaContentMarkTextColor(int tunaContentMarkTextColor) {
-        this.tunaContentMarkTextColor = tunaContentMarkTextColor;
+    public void setContentMarkTextColor(int contentMarkTextColor) {
+        this.contentMarkTextColor = contentMarkTextColor;
     }
 
     //
-    private float tunaContentMarkDx;
+    private float contentMarkDx;
 
-    public float getTunaContentMarkDx() {
-        return tunaContentMarkDx;
+    public float getContentMarkDx() {
+        return contentMarkDx;
     }
 
-    public void setTunaContentMarkDx(float tunaContentMarkDx) {
-        setTunaContentMarkDx(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDx);
+    public void setContentMarkDx(float contentMarkDx) {
+        setContentMarkDx(TypedValue.COMPLEX_UNIT_DIP, contentMarkDx);
     }
 
-    public void setTunaContentMarkDx(int unit, float tunaContentMarkDx) {
-        setTunaContentMarkDxRaw(applyDimension(unit, tunaContentMarkDx, getViewDisplayMetrics(this)));
+    public void setContentMarkDx(int unit, float contentMarkDx) {
+        setContentMarkDxRaw(applyDimension(unit, contentMarkDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentMarkDxRaw(float tunaContentMarkDx) {
-        if (this.tunaContentMarkDx != tunaContentMarkDx) {
-            this.tunaContentMarkDx = tunaContentMarkDx;
+    private void setContentMarkDxRaw(float contentMarkDx) {
+        if (this.contentMarkDx != contentMarkDx) {
+            this.contentMarkDx = contentMarkDx;
             invalidate();
         }
     }
 
     //
-    private float tunaContentMarkDy;
+    private float contentMarkDy;
 
-    public float getTunaContentMarkDy() {
-        return tunaContentMarkDy;
+    public float getContentMarkDy() {
+        return contentMarkDy;
     }
 
-    public void setTunaContentMarkDy(float tunaContentMarkDy) {
-        setTunaContentMarkDy(TypedValue.COMPLEX_UNIT_DIP, tunaContentMarkDy);
+    public void setContentMarkDy(float contentMarkDy) {
+        setContentMarkDy(TypedValue.COMPLEX_UNIT_DIP, contentMarkDy);
     }
 
-    public void setTunaContentMarkDy(int unit, float tunaContentMarkDy) {
-        setTunaContentMarkDyRaw(applyDimension(unit, tunaContentMarkDy, getViewDisplayMetrics(this)));
+    public void setContentMarkDy(int unit, float contentMarkDy) {
+        setContentMarkDyRaw(applyDimension(unit, contentMarkDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaContentMarkDyRaw(float tunaContentMarkDy) {
-        if (this.tunaContentMarkDy != tunaContentMarkDy) {
-            this.tunaContentMarkDy = tunaContentMarkDy;
+    private void setContentMarkDyRaw(float contentMarkDy) {
+        if (this.contentMarkDy != contentMarkDy) {
+            this.contentMarkDy = contentMarkDy;
             invalidate();
         }
     }
 
     //
-    private float tunaContentMarkFractionDx;
+    private float contentMarkFractionDx;
 
-    public float getTunaContentMarkFractionDx() {
-        return tunaContentMarkFractionDx;
+    public float getContentMarkFractionDx() {
+        return contentMarkFractionDx;
     }
 
-    public void setTunaContentMarkFractionDx(float tunaContentMarkFractionDx) {
-        this.tunaContentMarkFractionDx = tunaContentMarkFractionDx;
-    }
-
-    //
-    private float tunaContentMarkFractionDy;
-
-    public float getTunaContentMarkFractionDy() {
-        return tunaContentMarkFractionDy;
-    }
-
-    public void setTunaContentMarkFractionDy(float tunaContentMarkFractionDy) {
-        this.tunaContentMarkFractionDy = tunaContentMarkFractionDy;
+    public void setContentMarkFractionDx(float contentMarkFractionDx) {
+        this.contentMarkFractionDx = contentMarkFractionDx;
     }
 
     //
-    private float tunaContentDrawWidth;
-    private float tunaContentEndOffsetCenterX;
-    private float tunaContentEndOffsetCenterY;
+    private float contentMarkFractionDy;
 
-    //
-    private Bitmap tunaSrcLeft;
-
-    public Bitmap getTunaSrcLeft() {
-        return tunaSrcLeft;
+    public float getContentMarkFractionDy() {
+        return contentMarkFractionDy;
     }
 
-    public void setTunaSrcLeft(Bitmap tunaSrcLeft) {
-        this.tunaSrcLeft = tunaSrcLeft;
+    public void setContentMarkFractionDy(float contentMarkFractionDy) {
+        this.contentMarkFractionDy = contentMarkFractionDy;
     }
 
     //
-    private float tunaSrcLeftWidth;
+    private float contentDrawWidth;
+    private float contentEndOffsetCenterX;
+    private float contentEndOffsetCenterY;
 
-    public float getTunaSrcLeftWidth() {
-        return tunaSrcLeftWidth;
+    //
+    private Bitmap srcLeft;
+
+    public Bitmap getSrcLeft() {
+        return srcLeft;
     }
 
-    public void setTunaSrcLeftWidth(float tunaSrcLeftWidth) {
-        setTunaSrcLeftWidth(TypedValue.COMPLEX_UNIT_DIP, tunaSrcLeftWidth);
+    public void setSrcLeft(Bitmap srcLeft) {
+        this.srcLeft = srcLeft;
     }
 
-    public void setTunaSrcLeftWidth(int unit, float tunaSrcLeftWidth) {
-        setTunaSrcLeftWidthRaw(applyDimension(unit, tunaSrcLeftWidth, getViewDisplayMetrics(this)));
+    //
+    private float srcLeftWidth;
+
+    public float getSrcLeftWidth() {
+        return srcLeftWidth;
     }
 
-    private void setTunaSrcLeftWidthRaw(float tunaSrcLeftWidth) {
-        if (this.tunaSrcLeftWidth != tunaSrcLeftWidth) {
-            this.tunaSrcLeftWidth = tunaSrcLeftWidth;
+    public void setSrcLeftWidth(float srcLeftWidth) {
+        setSrcLeftWidth(TypedValue.COMPLEX_UNIT_DIP, srcLeftWidth);
+    }
+
+    public void setSrcLeftWidth(int unit, float srcLeftWidth) {
+        setSrcLeftWidthRaw(applyDimension(unit, srcLeftWidth, getViewDisplayMetrics(this)));
+    }
+
+    private void setSrcLeftWidthRaw(float srcLeftWidth) {
+        if (this.srcLeftWidth != srcLeftWidth) {
+            this.srcLeftWidth = srcLeftWidth;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcLeftHeight;
+    private float srcLeftHeight;
 
-    public float getTunaSrcLeftHeight() {
-        return tunaSrcLeftHeight;
+    public float getSrcLeftHeight() {
+        return srcLeftHeight;
     }
 
-    public void setTunaSrcLeftHeight(float tunaSrcLeftHeight) {
-        setTunaSrcLeftHeight(TypedValue.COMPLEX_UNIT_DIP, tunaSrcLeftHeight);
+    public void setSrcLeftHeight(float srcLeftHeight) {
+        setSrcLeftHeight(TypedValue.COMPLEX_UNIT_DIP, srcLeftHeight);
     }
 
-    public void setTunaSrcLeftHeight(int unit, float tunaSrcLeftHeight) {
-        setTunaSrcLeftHeightRaw(applyDimension(unit, tunaSrcLeftHeight, getViewDisplayMetrics(this)));
+    public void setSrcLeftHeight(int unit, float srcLeftHeight) {
+        setSrcLeftHeightRaw(applyDimension(unit, srcLeftHeight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcLeftHeightRaw(float tunaSrcLeftHeight) {
-        if (this.tunaSrcLeftHeight != tunaSrcLeftHeight) {
-            this.tunaSrcLeftHeight = tunaSrcLeftHeight;
+    private void setSrcLeftHeightRaw(float srcLeftHeight) {
+        if (this.srcLeftHeight != srcLeftHeight) {
+            this.srcLeftHeight = srcLeftHeight;
             invalidate();
         }
     }
 
     //
-    protected Matrix tunaLeftMatrix;
+    protected Matrix leftMatrix;
 
-    public Matrix getTunaLeftMatrix() {
-        return tunaLeftMatrix;
+    public Matrix getLeftMatrix() {
+        return leftMatrix;
     }
 
-    public void setTunaLeftMatrix(Matrix tunaLeftMatrix) {
-        this.tunaLeftMatrix = tunaLeftMatrix;
+    public void setLeftMatrix(Matrix leftMatrix) {
+        this.leftMatrix = leftMatrix;
     }
 
-    protected Matrix initTunaLeftMatrix(float sx, float sy) {
-        if (tunaLeftMatrix == null) {
-            tunaLeftMatrix = new Matrix();
+    protected Matrix initLeftMatrix(float sx, float sy) {
+        if (leftMatrix == null) {
+            leftMatrix = new Matrix();
         }
-        tunaLeftMatrix.reset();
-        tunaLeftMatrix.setScale(sx, sy);
-        return tunaLeftMatrix;
+        leftMatrix.reset();
+        leftMatrix.setScale(sx, sy);
+        return leftMatrix;
     }
 
-    // tunaSrcLeftPadding means distance between tunaSrcLeft and textview,note
-    // about the tunaTextPaddingLeft
-    private float tunaSrcLeftPadding;
+    // srcLeftPadding means distance between srcLeft and textview,note
+    // about the textPaddingLeft
+    private float srcLeftPadding;
 
-    public float getTunaSrcLeftPadding() {
-        return tunaSrcLeftPadding;
+    public float getSrcLeftPadding() {
+        return srcLeftPadding;
     }
 
-    public void setTunaSrcLeftPadding(float tunaSrcLeftPadding) {
-        setTunaSrcLeftPadding(TypedValue.COMPLEX_UNIT_DIP, tunaSrcLeftPadding);
+    public void setSrcLeftPadding(float srcLeftPadding) {
+        setSrcLeftPadding(TypedValue.COMPLEX_UNIT_DIP, srcLeftPadding);
     }
 
-    public void setTunaSrcLeftPadding(int unit, float tunaSrcLeftPadding) {
-        setTunaSrcLeftPaddingRaw(applyDimension(unit, tunaSrcLeftPadding, getViewDisplayMetrics(this)));
+    public void setSrcLeftPadding(int unit, float srcLeftPadding) {
+        setSrcLeftPaddingRaw(applyDimension(unit, srcLeftPadding, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcLeftPaddingRaw(float tunaSrcLeftPadding) {
-        if (this.tunaSrcLeftPadding != tunaSrcLeftPadding) {
-            this.tunaSrcLeftPadding = tunaSrcLeftPadding;
+    private void setSrcLeftPaddingRaw(float srcLeftPadding) {
+        if (this.srcLeftPadding != srcLeftPadding) {
+            this.srcLeftPadding = srcLeftPadding;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcLeftDx;
+    private float srcLeftDx;
 
-    public float getTunaSrcLeftDx() {
-        return tunaSrcLeftDx;
+    public float getSrcLeftDx() {
+        return srcLeftDx;
     }
 
-    public void setTunaSrcLeftDx(float tunaSrcLeftDx) {
-        setTunaSrcLeftDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcLeftDx);
+    public void setSrcLeftDx(float srcLeftDx) {
+        setSrcLeftDx(TypedValue.COMPLEX_UNIT_DIP, srcLeftDx);
     }
 
-    public void setTunaSrcLeftDx(int unit, float tunaSrcLeftDx) {
-        setTunaSrcLeftDxRaw(applyDimension(unit, tunaSrcLeftDx, getViewDisplayMetrics(this)));
+    public void setSrcLeftDx(int unit, float srcLeftDx) {
+        setSrcLeftDxRaw(applyDimension(unit, srcLeftDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcLeftDxRaw(float tunaSrcLeftDx) {
-        if (this.tunaSrcLeftDx != tunaSrcLeftDx) {
-            this.tunaSrcLeftDx = tunaSrcLeftDx;
+    private void setSrcLeftDxRaw(float srcLeftDx) {
+        if (this.srcLeftDx != srcLeftDx) {
+            this.srcLeftDx = srcLeftDx;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcLeftDy;
+    private float srcLeftDy;
 
-    public float getTunaSrcLeftDy() {
-        return tunaSrcLeftDy;
+    public float getSrcLeftDy() {
+        return srcLeftDy;
     }
 
-    public void setTunaSrcLeftDy(float tunaSrcLeftDy) {
-        setTunaSrcLeftDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcLeftDy);
+    public void setSrcLeftDy(float srcLeftDy) {
+        setSrcLeftDy(TypedValue.COMPLEX_UNIT_DIP, srcLeftDy);
     }
 
-    public void setTunaSrcLeftDy(int unit, float tunaSrcLeftDy) {
-        setTunaSrcLeftDyRaw(applyDimension(unit, tunaSrcLeftDy, getViewDisplayMetrics(this)));
+    public void setSrcLeftDy(int unit, float srcLeftDy) {
+        setSrcLeftDyRaw(applyDimension(unit, srcLeftDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcLeftDyRaw(float tunaSrcLeftDy) {
-        if (this.tunaSrcLeftDy != tunaSrcLeftDy) {
-            this.tunaSrcLeftDy = tunaSrcLeftDy;
+    private void setSrcLeftDyRaw(float srcLeftDy) {
+        if (this.srcLeftDy != srcLeftDy) {
+            this.srcLeftDy = srcLeftDy;
             invalidate();
         }
     }
 
     //
-    private Bitmap tunaSrcRight;
+    private Bitmap srcRight;
 
-    public Bitmap getTunaSrcRight() {
-        return tunaSrcRight;
+    public Bitmap getSrcRight() {
+        return srcRight;
     }
 
-    public void setTunaSrcRight(Bitmap tunaSrcRight) {
-        this.tunaSrcRight = tunaSrcRight;
+    public void setSrcRight(Bitmap srcRight) {
+        this.srcRight = srcRight;
     }
 
     //
-    private float tunaSrcRightWidth;
+    private float srcRightWidth;
 
-    public float getTunaSrcRightWidth() {
-        return tunaSrcRightWidth;
+    public float getSrcRightWidth() {
+        return srcRightWidth;
     }
 
-    public void setTunaSrcRightWidth(float tunaSrcRightWidth) {
-        setTunaSrcRightWidth(TypedValue.COMPLEX_UNIT_DIP, tunaSrcRightWidth);
+    public void setSrcRightWidth(float srcRightWidth) {
+        setSrcRightWidth(TypedValue.COMPLEX_UNIT_DIP, srcRightWidth);
     }
 
-    public void setTunaSrcRightWidth(int unit, float tunaSrcRightWidth) {
-        setTunaSrcRightWidthRaw(applyDimension(unit, tunaSrcRightWidth, getViewDisplayMetrics(this)));
+    public void setSrcRightWidth(int unit, float srcRightWidth) {
+        setSrcRightWidthRaw(applyDimension(unit, srcRightWidth, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcRightWidthRaw(float tunaSrcRightWidth) {
-        if (this.tunaSrcRightWidth != tunaSrcRightWidth) {
-            this.tunaSrcRightWidth = tunaSrcRightWidth;
+    private void setSrcRightWidthRaw(float srcRightWidth) {
+        if (this.srcRightWidth != srcRightWidth) {
+            this.srcRightWidth = srcRightWidth;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcRightHeight;
+    private float srcRightHeight;
 
-    public float getTunaSrcRightHeight() {
-        return tunaSrcRightHeight;
+    public float getSrcRightHeight() {
+        return srcRightHeight;
     }
 
-    public void setTunaSrcRightHeight(float tunaSrcRightHeight) {
-        setTunaSrcRightHeight(TypedValue.COMPLEX_UNIT_DIP, tunaSrcRightHeight);
+    public void setSrcRightHeight(float srcRightHeight) {
+        setSrcRightHeight(TypedValue.COMPLEX_UNIT_DIP, srcRightHeight);
     }
 
-    public void setTunaSrcRightHeight(int unit, float tunaSrcRightHeight) {
-        setTunaSrcRightHeightRaw(applyDimension(unit, tunaSrcRightHeight, getViewDisplayMetrics(this)));
+    public void setSrcRightHeight(int unit, float srcRightHeight) {
+        setSrcRightHeightRaw(applyDimension(unit, srcRightHeight, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcRightHeightRaw(float tunaSrcRightHeight) {
-        if (this.tunaSrcRightHeight != tunaSrcRightHeight) {
-            this.tunaSrcRightHeight = tunaSrcRightHeight;
+    private void setSrcRightHeightRaw(float srcRightHeight) {
+        if (this.srcRightHeight != srcRightHeight) {
+            this.srcRightHeight = srcRightHeight;
             invalidate();
         }
     }
 
     //
-    protected Matrix tunaRightMatrix;
+    protected Matrix rightMatrix;
 
-    public Matrix getTunaRightMatrix() {
-        return tunaRightMatrix;
+    public Matrix getRightMatrix() {
+        return rightMatrix;
     }
 
-    public void setTunaRightMatrix(Matrix tunaRightMatrix) {
-        this.tunaRightMatrix = tunaRightMatrix;
+    public void setRightMatrix(Matrix rightMatrix) {
+        this.rightMatrix = rightMatrix;
     }
 
-    protected Matrix initTunaRightMatrix(float sx, float sy) {
-        if (tunaRightMatrix == null) {
-            tunaRightMatrix = new Matrix();
+    protected Matrix initrightMatrix(float sx, float sy) {
+        if (rightMatrix == null) {
+            rightMatrix = new Matrix();
         }
-        tunaRightMatrix.reset();
-        tunaRightMatrix.setScale(sx, sy);
-        return tunaRightMatrix;
+        rightMatrix.reset();
+        rightMatrix.setScale(sx, sy);
+        return rightMatrix;
     }
 
-    // tunaSrcRightPadding means distance between tunaSrcRight and textview,note
-    // about the tunaTextPaddingRight
-    private float tunaSrcRightPadding;
+    // srcRightPadding means distance between srcRight and textview,note
+    // about the textPaddingRight
+    private float srcRightPadding;
 
-    public float getTunaSrcRightPadding() {
-        return tunaSrcRightPadding;
+    public float getSrcRightPadding() {
+        return srcRightPadding;
     }
 
-    public void setTunaSrcRightPadding(float tunaSrcRightPadding) {
-        setTunaSrcRightPadding(TypedValue.COMPLEX_UNIT_DIP, tunaSrcRightPadding);
+    public void setSrcRightPadding(float srcRightPadding) {
+        setSrcRightPadding(TypedValue.COMPLEX_UNIT_DIP, srcRightPadding);
     }
 
-    public void setTunaSrcRightPadding(int unit, float tunaSrcRightPadding) {
-        setTunaSrcRightPaddingRaw(applyDimension(unit, tunaSrcRightPadding, getViewDisplayMetrics(this)));
+    public void setSrcRightPadding(int unit, float srcRightPadding) {
+        setSrcRightPaddingRaw(applyDimension(unit, srcRightPadding, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcRightPaddingRaw(float tunaSrcRightPadding) {
-        if (this.tunaSrcRightPadding != tunaSrcRightPadding) {
-            this.tunaSrcRightPadding = tunaSrcRightPadding;
+    private void setSrcRightPaddingRaw(float srcRightPadding) {
+        if (this.srcRightPadding != srcRightPadding) {
+            this.srcRightPadding = srcRightPadding;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcRightDx;
+    private float srcRightDx;
 
-    public float getTunaSrcRightDx() {
-        return tunaSrcRightDx;
+    public float getSrcRightDx() {
+        return srcRightDx;
     }
 
-    public void setTunaSrcRightDx(float tunaSrcRightDx) {
-        setTunaSrcRightDx(TypedValue.COMPLEX_UNIT_DIP, tunaSrcRightDx);
+    public void setSrcRightDx(float srcRightDx) {
+        setSrcRightDx(TypedValue.COMPLEX_UNIT_DIP, srcRightDx);
     }
 
-    public void setTunaSrcRightDx(int unit, float tunaSrcRightDx) {
-        setTunaSrcRightDxRaw(applyDimension(unit, tunaSrcRightDx, getViewDisplayMetrics(this)));
+    public void setSrcRightDx(int unit, float srcRightDx) {
+        setSrcRightDxRaw(applyDimension(unit, srcRightDx, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcRightDxRaw(float tunaSrcRightDx) {
-        if (this.tunaSrcRightDx != tunaSrcRightDx) {
-            this.tunaSrcRightDx = tunaSrcRightDx;
+    private void setSrcRightDxRaw(float srcRightDx) {
+        if (this.srcRightDx != srcRightDx) {
+            this.srcRightDx = srcRightDx;
             invalidate();
         }
     }
 
     //
-    private float tunaSrcRightDy;
+    private float srcRightDy;
 
-    public float getTunaSrcRightDy() {
-        return tunaSrcRightDy;
+    public float getSrcRightDy() {
+        return srcRightDy;
     }
 
-    public void setTunaSrcRightDy(float tunaSrcRightDy) {
-        setTunaSrcRightDy(TypedValue.COMPLEX_UNIT_DIP, tunaSrcRightDy);
+    public void setSrcRightDy(float srcRightDy) {
+        setSrcRightDy(TypedValue.COMPLEX_UNIT_DIP, srcRightDy);
     }
 
-    public void setTunaSrcRightDy(int unit, float tunaSrcRightDy) {
-        setTunaSrcRightDyRaw(applyDimension(unit, tunaSrcRightDy, getViewDisplayMetrics(this)));
+    public void setSrcRightDy(int unit, float srcRightDy) {
+        setSrcRightDyRaw(applyDimension(unit, srcRightDy, getViewDisplayMetrics(this)));
     }
 
-    private void setTunaSrcRightDyRaw(float tunaSrcRightDy) {
-        if (this.tunaSrcRightDy != tunaSrcRightDy) {
-            this.tunaSrcRightDy = tunaSrcRightDy;
+    private void setSrcRightDyRaw(float srcRightDy) {
+        if (this.srcRightDy != srcRightDy) {
+            this.srcRightDy = srcRightDy;
             invalidate();
         }
     }
 
-    // attention tunaPorterDuffXfermode default 0 instead of -1!
-    protected PorterDuffXfermode tunaPorterDuffXfermode;
+    // attention porterDuffXfermode default 0 instead of -1!
+    protected PorterDuffXfermode porterDuffXfermode;
 
-    public enum TunaPorterDuffXfermode {
+    public enum TPorterDuffXfermode {
         SRC_IN(0), SRC_OUT(1),
         ;
         final int nativeInt;
 
-        TunaPorterDuffXfermode(int ni) {
+        TPorterDuffXfermode(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final Mode[] tunaPorterDuffXfermodeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
+    public static final Mode[] porterDuffXfermodeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
 
-    public PorterDuffXfermode getTunaPorterDuffXfermode() {
-        return tunaPorterDuffXfermode;
+    public PorterDuffXfermode getPorterDuffXfermode() {
+        return porterDuffXfermode;
     }
 
-    public void setTunaPorterDuffXfermode(PorterDuffXfermode tunaPorterDuffXfermode) {
-        this.tunaPorterDuffXfermode = tunaPorterDuffXfermode;
+    public void setPorterDuffXfermode(PorterDuffXfermode porterDuffXfermode) {
+        this.porterDuffXfermode = porterDuffXfermode;
     }
 
     //
-    private TunaMaterial tunaMaterial;
+    private Material material;
 
-    public enum TunaMaterial {
+    public enum Material {
         SPREAD(0), TRANS(1),
         ;
         final int nativeInt;
 
-        TunaMaterial(int ni) {
+        Material(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final TunaMaterial[] tunaMaterialArray = {TunaMaterial.SPREAD, TunaMaterial.TRANS,};
+    private static final Material[] materialArray = {Material.SPREAD, Material.TRANS,};
 
-    public TunaMaterial getTunaMaterial() {
-        return tunaMaterial;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setTunaMaterial(TunaMaterial tunaMaterial) {
-        this.tunaMaterial = tunaMaterial;
-    }
-
-    //
-    private boolean tunaMaterialMove;
-
-    public boolean isTunaMaterialMove() {
-        return tunaMaterialMove;
-    }
-
-    public void setTunaMaterialMove(boolean tunaMaterialMove) {
-        this.tunaMaterialMove = tunaMaterialMove;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     //
-    private float tunaMaterialRadius;
+    private boolean materialMove;
 
-    public float getTunaMaterialRadius() {
-        return tunaMaterialRadius;
+    public boolean isMaterialMove() {
+        return materialMove;
     }
 
-    public void setTunaMaterialRadius(float tunaMaterialRadius) {
-        this.tunaMaterialRadius = tunaMaterialRadius;
-    }
-
-    //
-    private float tunaTouchDownEventX;
-
-    public float getTunaTouchDownEventX() {
-        return tunaTouchDownEventX;
-    }
-
-    public void setTunaTouchDownEventX(float tunaTouchDownEventX) {
-        this.tunaTouchDownEventX = tunaTouchDownEventX;
+    public void setMaterialMove(boolean materialMove) {
+        this.materialMove = materialMove;
     }
 
     //
-    private float tunaTouchDownEventY;
+    private float materialRadius;
 
-    public float getTunaTouchDownEventY() {
-        return tunaTouchDownEventY;
+    public float getMaterialRadius() {
+        return materialRadius;
     }
 
-    public void setTunaTouchDownEventY(float tunaTouchDownEventY) {
-        this.tunaTouchDownEventY = tunaTouchDownEventY;
-    }
-
-    //
-    private int tunaMaterialDuraction = 500;
-
-    public int getTunaMaterialDuraction() {
-        return tunaMaterialDuraction;
-    }
-
-    public void setTunaMaterialDuraction(int tunaMaterialDuraction) {
-        this.tunaMaterialDuraction = tunaMaterialDuraction;
+    public void setMaterialRadius(float materialRadius) {
+        this.materialRadius = materialRadius;
     }
 
     //
-    private boolean tunaMaterialPlay;
+    private float touchDownEventX;
 
-    public boolean isTunaMaterialPlay() {
-        return tunaMaterialPlay;
+    public float getTouchDownEventX() {
+        return touchDownEventX;
     }
 
-    public void setTunaMaterialPlay(boolean tunaMaterialPlay) {
-        this.tunaMaterialPlay = tunaMaterialPlay;
-    }
-
-    //
-    private TimeInterpolator tunaMaterialTimeInterpolator;
-
-    public TimeInterpolator getTunaMaterialTimeInterpolator() {
-        return tunaMaterialTimeInterpolator;
-    }
-
-    public void setTunaMaterialTimeInterpolator(TimeInterpolator tunaMaterialTimeInterpolator) {
-        this.tunaMaterialTimeInterpolator = tunaMaterialTimeInterpolator;
+    public void setTouchDownEventX(float touchDownEventX) {
+        this.touchDownEventX = touchDownEventX;
     }
 
     //
-    public enum TunaMaterialTimeInterpolator {
+    private float touchDownEventY;
+
+    public float getTouchDownEventY() {
+        return touchDownEventY;
+    }
+
+    public void setTouchDownEventY(float touchDownEventY) {
+        this.touchDownEventY = touchDownEventY;
+    }
+
+    //
+    private int materialDuraction = 500;
+
+    public int getMaterialDuraction() {
+        return materialDuraction;
+    }
+
+    public void setMaterialDuraction(int materialDuraction) {
+        this.materialDuraction = materialDuraction;
+    }
+
+    //
+    private boolean materialPlay;
+
+    public boolean ismaterialPlay() {
+        return materialPlay;
+    }
+
+    public void setMaterialPlay(boolean materialPlay) {
+        this.materialPlay = materialPlay;
+    }
+
+    //
+    private TimeInterpolator materialTimeInterpolator;
+
+    public TimeInterpolator getMaterialTimeInterpolator() {
+        return materialTimeInterpolator;
+    }
+
+    public void setMaterialTimeInterpolator(TimeInterpolator materialTimeInterpolator) {
+        this.materialTimeInterpolator = materialTimeInterpolator;
+    }
+
+    //
+    public enum materialTimeInterpolator {
         ACCELERATEDECELERATEINTERPOLATOR(0),
         ACCELERATEINTERPOLATOR(1),
         ANTICIPATEINTERPOLATOR(2),
@@ -4060,78 +3993,78 @@ public class TView extends View {
         ;
         final int nativeInt;
 
-        TunaMaterialTimeInterpolator(int ni) {
+        materialTimeInterpolator(int ni) {
             nativeInt = ni;
         }
     }
 
     //
-    private static final TimeInterpolator[] tunaMaterialTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(),
+    private static final TimeInterpolator[] materialTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(),
             new AnticipateInterpolator(), new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(),
             new LinearInterpolator(), new OvershootInterpolator(),};
 
     //
-    private AnimatorSet tunaMaterialAnimatorSet;
+    private AnimatorSet materialAnimatorSet;
 
-    public AnimatorSet getTunaMaterialAnimatorSet() {
-        return tunaMaterialAnimatorSet;
+    public AnimatorSet getMaterialAnimatorSet() {
+        return materialAnimatorSet;
     }
 
-    public void setTunaMaterialAnimatorSet(AnimatorSet tunaMaterialAnimatorSet) {
-        this.tunaMaterialAnimatorSet = tunaMaterialAnimatorSet;
+    public void setMaterialAnimatorSet(AnimatorSet materialAnimatorSet) {
+        this.materialAnimatorSet = materialAnimatorSet;
     }
 
     //
-    private Property<TView, Float> tunaMaterialRadiusProperty = new Property<TView, Float>(Float.class, "tunaMaterialRadius") {
+    private Property<TView, Float> materialRadiusProperty = new Property<TView, Float>(Float.class, "materialRadius") {
         @Override
-        public Float get(TView tunaview) {
-            return tunaview.tunaMaterialRadius;
+        public Float get(TView tview) {
+            return tview.materialRadius;
         }
 
         @Override
-        public void set(TView tunaview, Float value) {
-            tunaview.tunaMaterialRadius = value;
+        public void set(TView tview, Float value) {
+            tview.materialRadius = value;
             invalidate();
         }
     };
 
     //
-    private Property<TView, Float> tunaMaterialPaintXProperty = new Property<TView, Float>(Float.class, "tunaMaterialPaintX") {
+    private Property<TView, Float> materialPaintXProperty = new Property<TView, Float>(Float.class, "materialPaintX") {
         @Override
-        public Float get(TView tunaview) {
-            return tunaview.tunaTouchDownEventX;
+        public Float get(TView tview) {
+            return tview.touchDownEventX;
         }
 
         @Override
-        public void set(TView tunaview, Float value) {
-            tunaview.tunaTouchDownEventX = value;
+        public void set(TView tview, Float value) {
+            tview.touchDownEventX = value;
         }
     };
 
     //
-    private Property<TView, Float> tunaMaterialPaintYProperty = new Property<TView, Float>(Float.class, "tunaMaterialPaintY") {
+    private Property<TView, Float> materialPaintYProperty = new Property<TView, Float>(Float.class, "materialPaintY") {
         @Override
-        public Float get(TView tunaview) {
-            return tunaview.tunaTouchDownEventY;
+        public Float get(TView tview) {
+            return tview.touchDownEventY;
         }
 
         @Override
-        public void set(TView tunaview, Float value) {
-            tunaview.tunaTouchDownEventY = value;
+        public void set(TView tview, Float value) {
+            tview.touchDownEventY = value;
         }
     };
 
     // This setting will cause the following message appears reading xml
     // The graphics preview in the layout editor may not be accurate: Paint
     // Flags Draw Filters are not supported. (Ignore for this session)
-    private PaintFlagsDrawFilter tunaPaintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+    private PaintFlagsDrawFilter paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
-    public PaintFlagsDrawFilter getTunaPaintFlagsDrawFilter() {
-        return tunaPaintFlagsDrawFilter;
+    public PaintFlagsDrawFilter getPaintFlagsDrawFilter() {
+        return paintFlagsDrawFilter;
     }
 
-    public void setTunaPaintFlagsDrawFilter(PaintFlagsDrawFilter tunaPaintFlagsDrawFilter) {
-        this.tunaPaintFlagsDrawFilter = tunaPaintFlagsDrawFilter;
+    public void setPaintFlagsDrawFilter(PaintFlagsDrawFilter paintFlagsDrawFilter) {
+        this.paintFlagsDrawFilter = paintFlagsDrawFilter;
     }
 
     //
@@ -4143,7 +4076,7 @@ public class TView extends View {
     // in response to the dispathtouch event: need touch TOUCH_DOWN_TIMES
     // consecutive times within SHOW_PROPERTY_MAX_TIME_MILLIS ,
     // and the touch location can not exceed SHOW_PROPERTY_MAX_DISTANCE_DIP,
-    // tunaTouchDownEventX and tunaTouchDownEventY position refresh when pressed
+    // touchDownEventX and touchDownEventY position refresh when pressed
     // eachtimes
     private static final int SHOW_PROPERTY_MAX_TIME_MILLIS = 200 * TOUCH_DOWN_TIMES;
 
@@ -4158,316 +4091,318 @@ public class TView extends View {
     public TView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        tunaTag = TView.class.getSimpleName();
+        Tag = TView.class.getSimpleName();
 
         //
-        tunaDebugable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
+        debugable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
-        // tunaTouchType default edge
-        int tunaTouchTypeIndex = typedArray.getInt(R.styleable.TView_touchType, 0);
-        tunaTouchType = tunaTouchTypeArray[tunaTouchTypeIndex];
+        // touchType default edge
+        int touchTypeIndex = typedArray.getInt(R.styleable.TView_touchType, 0);
+        touchType = touchTypeArray[touchTypeIndex];
 
-        tunaTouchIntercept = typedArray.getBoolean(R.styleable.TView_touchIntercept, false);
+        touchIntercept = typedArray.getBoolean(R.styleable.TView_touchIntercept, false);
 
-        tunaPress = typedArray.getBoolean(R.styleable.TView_press, false);
-        tunaSelect = typedArray.getBoolean(R.styleable.TView_select, false);
+        press = typedArray.getBoolean(R.styleable.TView_press, false);
+        select = typedArray.getBoolean(R.styleable.TView_select, false);
 
-        // tunaSelectType default none
-        int tunaSelectTypeIndex = typedArray.getInt(R.styleable.TView_selectType, 0);
-        tunaSelectType = tunaSelectTypeArray[tunaSelectTypeIndex];
+        // selectType default none
+        int selectTypeIndex = typedArray.getInt(R.styleable.TView_selectType, 0);
+        selectType = selectTypeArray[selectTypeIndex];
 
-        tunaAnimationable = typedArray.getBoolean(R.styleable.TView_animationable, false);
-        tunaRotate = typedArray.getInt(R.styleable.TView_rotate, 0);
+        animationable = typedArray.getBoolean(R.styleable.TView_animationable, false);
+        rotate = typedArray.getInt(R.styleable.TView_rotate, 0);
 
-        // tunaXfermodeIndex default PorterDuff.Mode.SRC_IN
-        int tunaXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
-        tunaPorterDuffXfermode = new PorterDuffXfermode(tunaPorterDuffXfermodeArray[tunaXfermodeIndex]);
+        // xfermodeIndex default PorterDuff.Mode.SRC_IN
+        int xfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
 
-        tunaSuper = TView.class == this.getClass();
+        //
+        porterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[xfermodeIndex]);
 
-        if (tunaSuper) {
+        tSuper = TView.class == this.getClass();
 
-            // note that the use of default values ​​can be defined,tunaBackgroundNormal to the default white to achieve clip tunaBitmap results!
-            tunaBackgroundNormal = typedArray.getColor(R.styleable.TView_backgroundNormal, Color.TRANSPARENT);
-            tunaBackgroundPress = typedArray.getColor(R.styleable.TView_backgroundPress, tunaBackgroundNormal);
-            tunaBackgroundSelect = typedArray.getColor(R.styleable.TView_backgroundSelect, tunaBackgroundNormal);
+        if (tSuper) {
 
-            tunaForegroundNormal = typedArray.getColor(R.styleable.TView_foregroundNormal, Color.TRANSPARENT);
-            tunaForegroundPress = typedArray.getColor(R.styleable.TView_foregroundPress, tunaForegroundNormal);
-            tunaForegroundSelect = typedArray.getColor(R.styleable.TView_foregroundSelect, tunaForegroundNormal);
+            // note that the use of default values ​​can be defined,backgroundNormal to the default white to achieve clip bitmap results!
+            backgroundNormal = typedArray.getColor(R.styleable.TView_backgroundNormal, Color.TRANSPARENT);
+            backgroundPress = typedArray.getColor(R.styleable.TView_backgroundPress, backgroundNormal);
+            backgroundSelect = typedArray.getColor(R.styleable.TView_backgroundSelect, backgroundNormal);
 
-            //
-            tunaBackgroundNormalAngle = typedArray.getInt(R.styleable.TView_backgroundNormalAngle, Integer.MAX_VALUE);
-            if (tunaBackgroundNormalAngle != Integer.MAX_VALUE) {
-                tunaBackgroundNormalGradientStart = typedArray.getColor(R.styleable.TView_backgroundNormalGradientStart, tunaBackgroundNormal);
-                tunaBackgroundNormalGradientEnd = typedArray.getColor(R.styleable.TView_backgroundNormalGradientEnd, tunaBackgroundNormal);
-            }
-
-            tunaBackgroundPressAngle = typedArray.getInt(R.styleable.TView_backgroundPressAngle, Integer.MAX_VALUE);
-            if (tunaBackgroundPressAngle != Integer.MAX_VALUE) {
-                tunaBackgroundPressGradientStart = typedArray.getColor(R.styleable.TView_backgroundPressGradientStart, tunaBackgroundPress);
-                tunaBackgroundPressGradientEnd = typedArray.getColor(R.styleable.TView_backgroundPressGradientEnd, tunaBackgroundPress);
-            }
-
-            tunaBackgroundSelectAngle = typedArray.getInt(R.styleable.TView_backgroundSelectAngle, Integer.MAX_VALUE);
-            if (tunaBackgroundSelectAngle != Integer.MAX_VALUE) {
-                tunaBackgroundSelectGradientStart = typedArray.getColor(R.styleable.TView_backgroundSelectGradientStart, tunaBackgroundSelect);
-                tunaBackgroundSelectGradientEnd = typedArray.getColor(R.styleable.TView_backgroundSelectGradientEnd, tunaBackgroundSelect);
-            }
-
-            //Note tuna Background Normal ShadowRadius and tunaSrcNormal ShadowRadius are two values!
-            tunaBackgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowRadius, 0);
-            if (tunaBackgroundNormalShadowRadius > 0) {
-                tunaBackgroundNormalShadowColor = typedArray.getColor(R.styleable.TView_backgroundNormalShadowColor, Color.TRANSPARENT);
-                tunaBackgroundNormalShadowDx = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDx, 0);
-                tunaBackgroundNormalShadowDy = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDy, 0);
-            }
+            foregroundNormal = typedArray.getColor(R.styleable.TView_foregroundNormal, Color.TRANSPARENT);
+            foregroundPress = typedArray.getColor(R.styleable.TView_foregroundPress, foregroundNormal);
+            foregroundSelect = typedArray.getColor(R.styleable.TView_foregroundSelect, foregroundNormal);
 
             //
-            tunaBackgroundPressShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundPressShadowRadius, tunaBackgroundNormalShadowRadius);
-            if (tunaBackgroundPressShadowRadius > 0) {
-                tunaBackgroundPressShadowColor = typedArray.getColor(R.styleable.TView_backgroundPressShadowColor, tunaBackgroundNormalShadowColor);
-                tunaBackgroundPressShadowDx = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDx, tunaBackgroundNormalShadowDx);
-                tunaBackgroundPressShadowDy = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDy, tunaBackgroundNormalShadowDy);
+            backgroundNormalAngle = typedArray.getInt(R.styleable.TView_backgroundNormalAngle, Integer.MAX_VALUE);
+            if (backgroundNormalAngle != Integer.MAX_VALUE) {
+                backgroundNormalGradientStart = typedArray.getColor(R.styleable.TView_backgroundNormalGradientStart, backgroundNormal);
+                backgroundNormalGradientEnd = typedArray.getColor(R.styleable.TView_backgroundNormalGradientEnd, backgroundNormal);
+            }
+
+            backgroundPressAngle = typedArray.getInt(R.styleable.TView_backgroundPressAngle, Integer.MAX_VALUE);
+            if (backgroundPressAngle != Integer.MAX_VALUE) {
+                backgroundPressGradientStart = typedArray.getColor(R.styleable.TView_backgroundPressGradientStart, backgroundPress);
+                backgroundPressGradientEnd = typedArray.getColor(R.styleable.TView_backgroundPressGradientEnd, backgroundPress);
+            }
+
+            backgroundSelectAngle = typedArray.getInt(R.styleable.TView_backgroundSelectAngle, Integer.MAX_VALUE);
+            if (backgroundSelectAngle != Integer.MAX_VALUE) {
+                backgroundSelectGradientStart = typedArray.getColor(R.styleable.TView_backgroundSelectGradientStart, backgroundSelect);
+                backgroundSelectGradientEnd = typedArray.getColor(R.styleable.TView_backgroundSelectGradientEnd, backgroundSelect);
+            }
+
+            //Note background Normal ShadowRadius and srcNormal ShadowRadius are two values!
+            backgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowRadius, 0);
+            if (backgroundNormalShadowRadius > 0) {
+                backgroundNormalShadowColor = typedArray.getColor(R.styleable.TView_backgroundNormalShadowColor, Color.TRANSPARENT);
+                backgroundNormalShadowDx = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDx, 0);
+                backgroundNormalShadowDy = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDy, 0);
             }
 
             //
-            tunaBackgroundSelectShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowRadius, tunaBackgroundNormalShadowRadius);
-            if (tunaBackgroundSelectShadowRadius > 0) {
-                tunaBackgroundSelectShadowColor = typedArray.getColor(R.styleable.TView_backgroundSelectShadowColor, tunaBackgroundNormalShadowColor);
-                tunaBackgroundSelectShadowDx = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDx, tunaBackgroundNormalShadowDx);
-                tunaBackgroundSelectShadowDy = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDy, tunaBackgroundNormalShadowDy);
+            backgroundPressShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundPressShadowRadius, backgroundNormalShadowRadius);
+            if (backgroundPressShadowRadius > 0) {
+                backgroundPressShadowColor = typedArray.getColor(R.styleable.TView_backgroundPressShadowColor, backgroundNormalShadowColor);
+                backgroundPressShadowDx = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDx, backgroundNormalShadowDx);
+                backgroundPressShadowDy = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDy, backgroundNormalShadowDy);
             }
 
             //
-            int tunaSrcNormalId = typedArray.getResourceId(R.styleable.TView_srcNormal, -1);
-            if (tunaSrcNormalId != -1) {
+            backgroundSelectShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowRadius, backgroundNormalShadowRadius);
+            if (backgroundSelectShadowRadius > 0) {
+                backgroundSelectShadowColor = typedArray.getColor(R.styleable.TView_backgroundSelectShadowColor, backgroundNormalShadowColor);
+                backgroundSelectShadowDx = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDx, backgroundNormalShadowDx);
+                backgroundSelectShadowDy = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDy, backgroundNormalShadowDy);
+            }
 
-                tunaSrcNormal = BitmapFactory.decodeResource(getResources(), tunaSrcNormalId);
+            //
+            int srcNormalId = typedArray.getResourceId(R.styleable.TView_srcNormal, -1);
+            if (srcNormalId != -1) {
+
+                srcNormal = BitmapFactory.decodeResource(getResources(), srcNormalId);
 
                 //
-                int tunaSrcPressId = typedArray.getResourceId(R.styleable.TView_srcPress, -1);
-                if (tunaSrcPressId != -1) {
-                    tunaSrcPress = BitmapFactory.decodeResource(getResources(), tunaSrcPressId);
+                int srcPressId = typedArray.getResourceId(R.styleable.TView_srcPress, -1);
+                if (srcPressId != -1) {
+                    srcPress = BitmapFactory.decodeResource(getResources(), srcPressId);
                 } else {
-                    tunaSrcPress = tunaSrcNormal;
+                    srcPress = srcNormal;
                 }
                 //
-                int tunaSrcSelectId = typedArray.getResourceId(R.styleable.TView_srcPress, -1);
-                if (tunaSrcSelectId != -1) {
-                    tunaSrcSelect = BitmapFactory.decodeResource(getResources(), tunaSrcSelectId);
+                int srcSelectId = typedArray.getResourceId(R.styleable.TView_srcPress, -1);
+                if (srcSelectId != -1) {
+                    srcSelect = BitmapFactory.decodeResource(getResources(), srcSelectId);
                 } else {
-                    tunaSrcSelect = tunaSrcNormal;
+                    srcSelect = srcNormal;
                 }
 
-                tunaSrcNormalShadowRadius = typedArray.getDimension(R.styleable.TView_srcNormalShadowRadius, 0);
-                if (tunaSrcNormalShadowRadius > 0) {
-                    tunaSrcNormalShadowDx = typedArray.getDimension(R.styleable.TView_srcNormalShadowDx, 0);
-                    tunaSrcNormalShadowDy = typedArray.getDimension(R.styleable.TView_srcNormalShadowDy, 0);
+                srcNormalShadowRadius = typedArray.getDimension(R.styleable.TView_srcNormalShadowRadius, 0);
+                if (srcNormalShadowRadius > 0) {
+                    srcNormalShadowDx = typedArray.getDimension(R.styleable.TView_srcNormalShadowDx, 0);
+                    srcNormalShadowDy = typedArray.getDimension(R.styleable.TView_srcNormalShadowDy, 0);
                 }
                 //
-                tunaSrcPressShadowRadius = typedArray.getDimension(R.styleable.TView_srcPressShadowRadius, tunaSrcNormalShadowRadius);
-                if (tunaSrcPressShadowRadius > 0) {
-                    tunaSrcPressShadowDx = typedArray.getDimension(R.styleable.TView_srcPressShadowDx, tunaSrcNormalShadowDx);
-                    tunaSrcPressShadowDy = typedArray.getDimension(R.styleable.TView_srcPressShadowDy, tunaSrcNormalShadowDy);
+                srcPressShadowRadius = typedArray.getDimension(R.styleable.TView_srcPressShadowRadius, srcNormalShadowRadius);
+                if (srcPressShadowRadius > 0) {
+                    srcPressShadowDx = typedArray.getDimension(R.styleable.TView_srcPressShadowDx, srcNormalShadowDx);
+                    srcPressShadowDy = typedArray.getDimension(R.styleable.TView_srcPressShadowDy, srcNormalShadowDy);
                 }
                 //
-                tunaSrcSelectShadowRadius = typedArray.getDimension(R.styleable.TView_srcSelectShadowRadius, tunaSrcNormalShadowRadius);
-                if (tunaSrcSelectShadowRadius > 0) {
-                    tunaSrcSelectShadowDx = typedArray.getDimension(R.styleable.TView_srcSelectShadowDx, tunaSrcNormalShadowDx);
-                    tunaSrcSelectShadowDy = typedArray.getDimension(R.styleable.TView_srcSelectShadowDy, tunaSrcNormalShadowDy);
+                srcSelectShadowRadius = typedArray.getDimension(R.styleable.TView_srcSelectShadowRadius, srcNormalShadowRadius);
+                if (srcSelectShadowRadius > 0) {
+                    srcSelectShadowDx = typedArray.getDimension(R.styleable.TView_srcSelectShadowDx, srcNormalShadowDx);
+                    srcSelectShadowDy = typedArray.getDimension(R.styleable.TView_srcSelectShadowDy, srcNormalShadowDy);
                 }
             }
             //
-            int tunaSrcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_srcAnchorNormal, -1);
-            if (tunaSrcAnchorNormalId != -1) {
+            int srcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_srcAnchorNormal, -1);
+            if (srcAnchorNormalId != -1) {
 
                 //
-                tunaSrcAnchorNormal = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorNormalId);
-                tunaSrcAnchorNormalWidth = typedArray.getDimension(R.styleable.TView_srcAnchorNormalWidth, 0);
-                tunaSrcAnchorNormalHeight = typedArray.getDimension(R.styleable.TView_srcAnchorNormalHeight, 0);
-                tunaSrcAnchorNormalDx = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDx, 0);
-                tunaSrcAnchorNormalDy = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDy, 0);
+                srcAnchorNormal = BitmapFactory.decodeResource(getResources(), srcAnchorNormalId);
+                srcAnchorNormalWidth = typedArray.getDimension(R.styleable.TView_srcAnchorNormalWidth, 0);
+                srcAnchorNormalHeight = typedArray.getDimension(R.styleable.TView_srcAnchorNormalHeight, 0);
+                srcAnchorNormalDx = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDx, 0);
+                srcAnchorNormalDy = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDy, 0);
                 //
-                tunaSrcAnchorPressWidth = typedArray.getDimension(R.styleable.TView_srcAnchorPressWidth, tunaSrcAnchorNormalWidth);
-                tunaSrcAnchorPressHeight = typedArray.getDimension(R.styleable.TView_srcAnchorPressHeight, tunaSrcAnchorNormalHeight);
-                tunaSrcAnchorPressDx = typedArray.getDimension(R.styleable.TView_srcAnchorPressDx, tunaSrcAnchorNormalDx);
-                tunaSrcAnchorPressDy = typedArray.getDimension(R.styleable.TView_srcAnchorPressDy, tunaSrcAnchorNormalDy);
+                srcAnchorPressWidth = typedArray.getDimension(R.styleable.TView_srcAnchorPressWidth, srcAnchorNormalWidth);
+                srcAnchorPressHeight = typedArray.getDimension(R.styleable.TView_srcAnchorPressHeight, srcAnchorNormalHeight);
+                srcAnchorPressDx = typedArray.getDimension(R.styleable.TView_srcAnchorPressDx, srcAnchorNormalDx);
+                srcAnchorPressDy = typedArray.getDimension(R.styleable.TView_srcAnchorPressDy, srcAnchorNormalDy);
                 //
-                tunaSrcAnchorSelectWidth = typedArray.getDimension(R.styleable.TView_srcAnchorSelectWidth, tunaSrcAnchorNormalWidth);
-                tunaSrcAnchorSelectHeight = typedArray.getDimension(R.styleable.TView_srcAnchorSelectHeight, tunaSrcAnchorNormalHeight);
-                tunaSrcAnchorSelectDx = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDx, tunaSrcAnchorNormalDx);
-                tunaSrcAnchorSelectDy = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDy, tunaSrcAnchorNormalDy);
+                srcAnchorSelectWidth = typedArray.getDimension(R.styleable.TView_srcAnchorSelectWidth, srcAnchorNormalWidth);
+                srcAnchorSelectHeight = typedArray.getDimension(R.styleable.TView_srcAnchorSelectHeight, srcAnchorNormalHeight);
+                srcAnchorSelectDx = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDx, srcAnchorNormalDx);
+                srcAnchorSelectDy = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDy, srcAnchorNormalDy);
 
                 //
-                int tunaSrcAnchorPressId = typedArray.getResourceId(R.styleable.TView_srcAnchorPress, -1);
-                if (tunaSrcAnchorPressId != -1) {
-                    tunaSrcAnchorPress = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorPressId);
+                int srcAnchorPressId = typedArray.getResourceId(R.styleable.TView_srcAnchorPress, -1);
+                if (srcAnchorPressId != -1) {
+                    srcAnchorPress = BitmapFactory.decodeResource(getResources(), srcAnchorPressId);
                 } else {
-                    tunaSrcAnchorPress = tunaSrcAnchorNormal;
+                    srcAnchorPress = srcAnchorNormal;
                 }
                 //
-                int tunaSrcAnchorSelectId = typedArray.getResourceId(R.styleable.TView_srcAnchorSelect, -1);
-                if (tunaSrcAnchorSelectId != -1) {
-                    tunaSrcAnchorSelect = BitmapFactory.decodeResource(getResources(), tunaSrcAnchorSelectId);
+                int srcAnchorSelectId = typedArray.getResourceId(R.styleable.TView_srcAnchorSelect, -1);
+                if (srcAnchorSelectId != -1) {
+                    srcAnchorSelect = BitmapFactory.decodeResource(getResources(), srcAnchorSelectId);
                 } else {
-                    tunaSrcAnchorSelect = tunaSrcAnchorNormal;
+                    srcAnchorSelect = srcAnchorNormal;
                 }
 
                 //
-                tunaSrcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
+                srcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
             }
 
             //
-            int tunaSrcLeftId = typedArray.getResourceId(R.styleable.TView_srcLeft, -1);
-            if (tunaSrcLeftId != -1) {
-                tunaSrcLeft = BitmapFactory.decodeResource(getResources(), tunaSrcLeftId);
-                tunaSrcLeftWidth = typedArray.getDimension(R.styleable.TView_srcLeftWidth, 0);
-                tunaSrcLeftHeight = typedArray.getDimension(R.styleable.TView_srcLeftHeight, 0);
-                tunaSrcLeftPadding = typedArray.getDimension(R.styleable.TView_srcLeftPadding, 0);
-                tunaSrcLeftDx = typedArray.getDimension(R.styleable.TView_srcLeftDx, 0);
-                tunaSrcLeftDy = typedArray.getDimension(R.styleable.TView_srcLeftDy, 0);
+            int srcLeftId = typedArray.getResourceId(R.styleable.TView_srcLeft, -1);
+            if (srcLeftId != -1) {
+                srcLeft = BitmapFactory.decodeResource(getResources(), srcLeftId);
+                srcLeftWidth = typedArray.getDimension(R.styleable.TView_srcLeftWidth, 0);
+                srcLeftHeight = typedArray.getDimension(R.styleable.TView_srcLeftHeight, 0);
+                srcLeftPadding = typedArray.getDimension(R.styleable.TView_srcLeftPadding, 0);
+                srcLeftDx = typedArray.getDimension(R.styleable.TView_srcLeftDx, 0);
+                srcLeftDy = typedArray.getDimension(R.styleable.TView_srcLeftDy, 0);
 
-                if (tunaSrcLeftWidth == 0 || tunaSrcLeftHeight == 0) {
-                    throw new IllegalArgumentException("The content attribute require property named tunaSrcLeftWidth and tunaSrcLeftHeight");
+                if (srcLeftWidth == 0 || srcLeftHeight == 0) {
+                    throw new IllegalArgumentException("The content attribute require property named srcLeftWidth and srcLeftHeight");
                 }
             }
 
             //
-            int tunaSrcRightId = typedArray.getResourceId(R.styleable.TView_srcRight, -1);
-            if (tunaSrcRightId != -1) {
-                tunaSrcRight = BitmapFactory.decodeResource(getResources(), tunaSrcRightId);
-                tunaSrcRightWidth = typedArray.getDimension(R.styleable.TView_srcRightWidth, 0);
-                tunaSrcRightHeight = typedArray.getDimension(R.styleable.TView_srcRightHeight, 0);
-                tunaSrcRightPadding = typedArray.getDimension(R.styleable.TView_srcRightPadding, 0);
-                tunaSrcRightDx = typedArray.getDimension(R.styleable.TView_srcRightDx, 0);
-                tunaSrcRightDy = typedArray.getDimension(R.styleable.TView_srcRightDy, 0);
+            int srcRightId = typedArray.getResourceId(R.styleable.TView_srcRight, -1);
+            if (srcRightId != -1) {
+                srcRight = BitmapFactory.decodeResource(getResources(), srcRightId);
+                srcRightWidth = typedArray.getDimension(R.styleable.TView_srcRightWidth, 0);
+                srcRightHeight = typedArray.getDimension(R.styleable.TView_srcRightHeight, 0);
+                srcRightPadding = typedArray.getDimension(R.styleable.TView_srcRightPadding, 0);
+                srcRightDx = typedArray.getDimension(R.styleable.TView_srcRightDx, 0);
+                srcRightDy = typedArray.getDimension(R.styleable.TView_srcRightDy, 0);
 
-                if (tunaSrcRightWidth == 0 || tunaSrcRightHeight == 0) {
-                    throw new IllegalArgumentException("The content attribute require property named tunaSrcRightWidth and tunaSrcRightHeight");
+                if (srcRightWidth == 0 || srcRightHeight == 0) {
+                    throw new IllegalArgumentException("The content attribute require property named srcRightWidth and srcRightHeight");
                 }
             }
 
             //
-            tunaTextMark = typedArray.getBoolean(R.styleable.TView_textMark, false);
-            tunaTextMarkTouchable = typedArray.getBoolean(R.styleable.TView_textMarkTouchable, false);
-            tunaTextMarkRadius = typedArray.getDimension(R.styleable.TView_textMarkRadius, 0);
-            tunaTextMarkColor = typedArray.getColor(R.styleable.TView_textMarkColor, Color.TRANSPARENT);
-            tunaTextMarkTextValue = typedArray.getString(R.styleable.TView_textMarkTextValue);
-            tunaTextMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, 0);
-            tunaTextMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor, Color.TRANSPARENT);
+            textMark = typedArray.getBoolean(R.styleable.TView_textMark, false);
+            textMarkTouchable = typedArray.getBoolean(R.styleable.TView_textMarkTouchable, false);
+            textMarkRadius = typedArray.getDimension(R.styleable.TView_textMarkRadius, 0);
+            textMarkColor = typedArray.getColor(R.styleable.TView_textMarkColor, Color.TRANSPARENT);
+            textMarkTextValue = typedArray.getString(R.styleable.TView_textMarkTextValue);
+            textMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, 0);
+            textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor, Color.TRANSPARENT);
 
             //
-            tunaContentMark = typedArray.getBoolean(R.styleable.TView_contentMark, false);
-            tunaContentMarkTouchable = typedArray.getBoolean(R.styleable.TView_contentMarkTouchable, false);
-            tunaContentMarkRadius = typedArray.getDimension(R.styleable.TView_contentMarkRadius, 0);
-            tunaContentMarkColor = typedArray.getColor(R.styleable.TView_contentMarkColor, Color.TRANSPARENT);
-            tunaContentMarkTextValue = typedArray.getString(R.styleable.TView_contentMarkTextValue);
-            tunaContentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, 0);
-            tunaContentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor, Color.TRANSPARENT);
+            contentMark = typedArray.getBoolean(R.styleable.TView_contentMark, false);
+            contentMarkTouchable = typedArray.getBoolean(R.styleable.TView_contentMarkTouchable, false);
+            contentMarkRadius = typedArray.getDimension(R.styleable.TView_contentMarkRadius, 0);
+            contentMarkColor = typedArray.getColor(R.styleable.TView_contentMarkColor, Color.TRANSPARENT);
+            contentMarkTextValue = typedArray.getString(R.styleable.TView_contentMarkTextValue);
+            contentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, 0);
+            contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor, Color.TRANSPARENT);
 
             //
-            tunaStrokeWidthNormal = typedArray.getDimension(R.styleable.TView_strokeWidthNormal, 0);
-            tunaStrokeColorNormal = typedArray.getColor(R.styleable.TView_strokeColorNormal, Color.TRANSPARENT);
-            tunaStrokeWidthPress = typedArray.getDimension(R.styleable.TView_strokeWidthPress, tunaStrokeWidthNormal);
-            tunaStrokeColorPress = typedArray.getColor(R.styleable.TView_strokeColorPress, tunaStrokeColorNormal);
-            tunaStrokeWidthSelect = typedArray.getDimension(R.styleable.TView_strokeWidthSelect, tunaStrokeWidthNormal);
-            tunaStrokeColorSelect = typedArray.getColor(R.styleable.TView_strokeColorSelect, tunaStrokeColorNormal);
+            strokeWidthNormal = typedArray.getDimension(R.styleable.TView_strokeWidthNormal, 0);
+            strokeColorNormal = typedArray.getColor(R.styleable.TView_strokeColorNormal, Color.TRANSPARENT);
+            strokeWidthPress = typedArray.getDimension(R.styleable.TView_strokeWidthPress, strokeWidthNormal);
+            strokeColorPress = typedArray.getColor(R.styleable.TView_strokeColorPress, strokeColorNormal);
+            strokeWidthSelect = typedArray.getDimension(R.styleable.TView_strokeWidthSelect, strokeWidthNormal);
+            strokeColorSelect = typedArray.getColor(R.styleable.TView_strokeColorSelect, strokeColorNormal);
 
             //
-            tunaRadius = typedArray.getDimension(R.styleable.TView_radius, 0);
-            tunaRadiusLeftTop = typedArray.getDimension(R.styleable.TView_radiusLeftTop, tunaRadius);
-            tunaRadiusLeftBottom = typedArray.getDimension(R.styleable.TView_radiusLeftBottom, tunaRadius);
-            tunaRadiusRightTop = typedArray.getDimension(R.styleable.TView_radiusRightTop, tunaRadius);
-            tunaRadiusRightBottom = typedArray.getDimension(R.styleable.TView_radiusRightBottom, tunaRadius);
+            radius = typedArray.getDimension(R.styleable.TView_radius, 0);
+            radiusLeftTop = typedArray.getDimension(R.styleable.TView_radiusLeftTop, radius);
+            radiusLeftBottom = typedArray.getDimension(R.styleable.TView_radiusLeftBottom, radius);
+            radiusRightTop = typedArray.getDimension(R.styleable.TView_radiusRightTop, radius);
+            radiusRightBottom = typedArray.getDimension(R.styleable.TView_radiusRightBottom, radius);
 
-            tunaClassic = (tunaRadius == tunaRadiusLeftTop && tunaRadiusLeftTop == tunaRadiusLeftBottom && tunaRadiusLeftBottom == tunaRadiusRightTop && tunaRadiusRightTop == tunaRadiusRightBottom);
-
-            //
-            tunaTextValue = typedArray.getString(R.styleable.TView_textValue);
-            tunaTextSize = typedArray.getDimension(R.styleable.TView_textSize, 0);
-
-            tunaTextColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, Color.TRANSPARENT);
-            tunaTextColorPress = typedArray.getColor(R.styleable.TView_textColorPress, tunaTextColorNormal);
-            tunaTextColorSelect = typedArray.getColor(R.styleable.TView_textColorSelect, tunaTextColorNormal);
-
-            tunaTextPaddingLeft = typedArray.getDimension(R.styleable.TView_textPaddingLeft, 0);
-            tunaTextPaddingRight = typedArray.getDimension(R.styleable.TView_textPaddingRight, 0);
-            tunaTextRowSpaceRatio = typedArray.getFraction(R.styleable.TView_textRowSpaceRatio, 1, 1, 1);
+            classic = (radius == radiusLeftTop && radiusLeftTop == radiusLeftBottom && radiusLeftBottom == radiusRightTop && radiusRightTop == radiusRightBottom);
 
             //
-            int tunaTextGravityIndex = typedArray.getInt(R.styleable.TView_textGravity, 0);
-            if (tunaTextGravityIndex >= 0) {
-                tunaTextGravity = tunaTextGravityArray[tunaTextGravityIndex];
+            textValue = typedArray.getString(R.styleable.TView_textValue);
+            textSize = typedArray.getDimension(R.styleable.TView_textSize, 0);
+
+            textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, Color.TRANSPARENT);
+            textColorPress = typedArray.getColor(R.styleable.TView_textColorPress, textColorNormal);
+            textColorSelect = typedArray.getColor(R.styleable.TView_textColorSelect, textColorNormal);
+
+            textPaddingLeft = typedArray.getDimension(R.styleable.TView_textPaddingLeft, 0);
+            textPaddingRight = typedArray.getDimension(R.styleable.TView_textPaddingRight, 0);
+            textRowSpaceRatio = typedArray.getFraction(R.styleable.TView_textRowSpaceRatio, 1, 1, 1);
+
+            //
+            int textGravityIndex = typedArray.getInt(R.styleable.TView_textGravity, 0);
+            if (textGravityIndex >= 0) {
+                textGravity = textGravityArray[textGravityIndex];
             }
 
             //
-            int tunaTextTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);
-            if (tunaTextTypeFaceIndex >= 0) {
-                tunaTextTypeFace = Typeface.create(Typeface.DEFAULT, tunaTextTypeFaceArray[tunaTextTypeFaceIndex]);
+            int textTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);
+            if (textTypeFaceIndex >= 0) {
+                textTypeFace = Typeface.create(Typeface.DEFAULT, textTypeFaceArray[textTypeFaceIndex]);
             }
 
-            tunaTextDx = typedArray.getDimension(R.styleable.TView_textDx, 0);
-            tunaTextDy = typedArray.getDimension(R.styleable.TView_textDy, 0);
-            tunaTextFractionDx = typedArray.getFraction(R.styleable.TView_textFractionDx, 1, 1, 0);
-            tunaTextFractionDy = typedArray.getFraction(R.styleable.TView_textFractionDy, 1, 1, 0);
+            textDx = typedArray.getDimension(R.styleable.TView_textDx, 0);
+            textDy = typedArray.getDimension(R.styleable.TView_textDy, 0);
+            textFractionDx = typedArray.getFraction(R.styleable.TView_textFractionDx, 1, 1, 0);
+            textFractionDy = typedArray.getFraction(R.styleable.TView_textFractionDy, 1, 1, 0);
 
             //
-            tunaTextShadowRadius = typedArray.getDimension(R.styleable.TView_textShadowRadius, 0);
-            if (tunaTextShadowRadius > 0) {
-                tunaTextShadowColor = typedArray.getColor(R.styleable.TView_textShadowColor, Color.TRANSPARENT);
-                tunaTextShadowDx = typedArray.getDimension(R.styleable.TView_textShadowDx, 0);
-                tunaTextShadowDy = typedArray.getDimension(R.styleable.TView_textShadowDy, 0);
-            }
-
-            //
-            tunaContentValue = typedArray.getString(R.styleable.TView_contentValue);
-            tunaContentSize = typedArray.getDimension(R.styleable.TView_contentSize, 0);
-
-            tunaContentColorNormal = typedArray.getColor(R.styleable.TView_contentColorNormal, Color.TRANSPARENT);
-            tunaContentColorPress = typedArray.getColor(R.styleable.TView_contentColorPress, tunaContentColorNormal);
-            tunaContentColorSelect = typedArray.getColor(R.styleable.TView_contentColorSelect, tunaContentColorNormal);
-
-            tunaContentPaddingLeft = typedArray.getDimension(R.styleable.TView_contentPaddingLeft, 0);
-            tunaContentPaddingRight = typedArray.getDimension(R.styleable.TView_contentPaddingRight, 0);
-            tunaContentRowSpaceRatio = typedArray.getFraction(R.styleable.TView_contentRowSpaceRatio, 1, 1, 1);
-
-            //
-            int tunaContentGravityIndex = typedArray.getInt(R.styleable.TView_contentGravity, 0);
-            if (tunaContentGravityIndex >= 0) {
-                tunaContentGravity = tunaContentGravityArray[tunaContentGravityIndex];
-            }
-
-            int tunaContentTypeFaceIndex = typedArray.getInt(R.styleable.TView_contentTypeFace, 0);
-            if (tunaContentTypeFaceIndex >= 0) {
-                tunaContentTypeFace = Typeface.create(Typeface.DEFAULT, tunaContentTypeFaceArray[tunaContentTypeFaceIndex]);
-            }
-
-            tunaContentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);
-            tunaContentDy = typedArray.getDimension(R.styleable.TView_contentDy, 0);
-            tunaContentFractionDx = typedArray.getFraction(R.styleable.TView_contentFractionDx, 1, 1, 0);
-            tunaContentFractionDy = typedArray.getFraction(R.styleable.TView_contentFractionDy, 1, 1, 0);
-
-            //
-            tunaContentShadowRadius = typedArray.getDimension(R.styleable.TView_contentShadowRadius, 0);
-            if (tunaContentShadowRadius > 0) {
-                tunaContentShadowColor = typedArray.getColor(R.styleable.TView_contentShadowColor, Color.TRANSPARENT);
-                tunaContentShadowDx = typedArray.getDimension(R.styleable.TView_contentShadowDx, 0);
-                tunaContentShadowDy = typedArray.getDimension(R.styleable.TView_contentShadowDy, 0);
+            textShadowRadius = typedArray.getDimension(R.styleable.TView_textShadowRadius, 0);
+            if (textShadowRadius > 0) {
+                textShadowColor = typedArray.getColor(R.styleable.TView_textShadowColor, Color.TRANSPARENT);
+                textShadowDx = typedArray.getDimension(R.styleable.TView_textShadowDx, 0);
+                textShadowDy = typedArray.getDimension(R.styleable.TView_textShadowDy, 0);
             }
 
             //
-            tunaTextMarkDx = typedArray.getDimension(R.styleable.TView_textMarkDx, 0);
-            tunaTextMarkDy = typedArray.getDimension(R.styleable.TView_textMarkDy, 0);
-            tunaTextMarkFractionDx = typedArray.getFraction(R.styleable.TView_textMarkFractionDx, 1, 1, 0);
-            tunaTextMarkFractionDy = typedArray.getFraction(R.styleable.TView_textMarkFractionDy, 1, 1, 0);
+            contentValue = typedArray.getString(R.styleable.TView_contentValue);
+            contentSize = typedArray.getDimension(R.styleable.TView_contentSize, 0);
 
-            // tunaMaterialIndex default -1
-            int tunaMaterialIndex = typedArray.getInt(R.styleable.TView_material, -1);
-            if (tunaMaterialIndex > -1) {
-                tunaMaterial = tunaMaterialArray[tunaMaterialIndex];
+            contentColorNormal = typedArray.getColor(R.styleable.TView_contentColorNormal, Color.TRANSPARENT);
+            contentColorPress = typedArray.getColor(R.styleable.TView_contentColorPress, contentColorNormal);
+            contentColorSelect = typedArray.getColor(R.styleable.TView_contentColorSelect, contentColorNormal);
+
+            contentPaddingLeft = typedArray.getDimension(R.styleable.TView_contentPaddingLeft, 0);
+            contentPaddingRight = typedArray.getDimension(R.styleable.TView_contentPaddingRight, 0);
+            contentRowSpaceRatio = typedArray.getFraction(R.styleable.TView_contentRowSpaceRatio, 1, 1, 1);
+
+            //
+            int contentGravityIndex = typedArray.getInt(R.styleable.TView_contentGravity, 0);
+            if (contentGravityIndex >= 0) {
+                contentGravity = contentGravityArray[contentGravityIndex];
+            }
+
+            int contentTypeFaceIndex = typedArray.getInt(R.styleable.TView_contentTypeFace, 0);
+            if (contentTypeFaceIndex >= 0) {
+                contentTypeFace = Typeface.create(Typeface.DEFAULT, contentTypeFaceArray[contentTypeFaceIndex]);
+            }
+
+            contentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);
+            contentDy = typedArray.getDimension(R.styleable.TView_contentDy, 0);
+            contentFractionDx = typedArray.getFraction(R.styleable.TView_contentFractionDx, 1, 1, 0);
+            contentFractionDy = typedArray.getFraction(R.styleable.TView_contentFractionDy, 1, 1, 0);
+
+            //
+            contentShadowRadius = typedArray.getDimension(R.styleable.TView_contentShadowRadius, 0);
+            if (contentShadowRadius > 0) {
+                contentShadowColor = typedArray.getColor(R.styleable.TView_contentShadowColor, Color.TRANSPARENT);
+                contentShadowDx = typedArray.getDimension(R.styleable.TView_contentShadowDx, 0);
+                contentShadowDy = typedArray.getDimension(R.styleable.TView_contentShadowDy, 0);
+            }
+
+            //
+            textMarkDx = typedArray.getDimension(R.styleable.TView_textMarkDx, 0);
+            textMarkDy = typedArray.getDimension(R.styleable.TView_textMarkDy, 0);
+            textMarkFractionDx = typedArray.getFraction(R.styleable.TView_textMarkFractionDx, 1, 1, 0);
+            textMarkFractionDy = typedArray.getFraction(R.styleable.TView_textMarkFractionDy, 1, 1, 0);
+
+            // materialIndex default -1
+            int materialIndex = typedArray.getInt(R.styleable.TView_material, -1);
+            if (materialIndex > -1) {
+                material = materialArray[materialIndex];
             }
         }
 
@@ -4480,28 +4415,28 @@ public class TView extends View {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
-        if (tunaTouchType == TunaTouchType.NONE) {
+        if (touchType == TouchType.NONE) {
             return super.dispatchTouchEvent(event);
         }
 
-        //This sentence is telling the parent control, my own event handling! when TunaDrag and other views nested inside the ScroView will be used !
+        //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScroView will be used !
 
-        if (tunaTouchIntercept) {
+        if (touchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
         }
 
-        tunaTouchEventX = event.getX();
-        tunaTouchEventY = event.getY();
+        touchEventX = event.getX();
+        touchEventY = event.getY();
 
-        if (tunaTouchListener != null && (tunaTouchType == TunaTouchType.ALWAYS || !tunaTouchOutBounds)) {
-            tunaTouchListener.tunaTouch(this);
+        if (touchListener != null && (touchType == TouchType.ALWAYS || !touchOutBounds)) {
+            touchListener.touch(this);
         }
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
                 //
-                if (tunaDebugable) {
+                if (debugable) {
 
                     if (touchDownCount == 0) {
                         touchDownCount = 1;
@@ -4509,69 +4444,69 @@ public class TView extends View {
                     } else if (touchDownCount == TOUCH_DOWN_TIMES - 1) {
                         touchDownTimeEnd = System.currentTimeMillis();
                         if ((touchDownTimeEnd - touchDownTimeStart) < SHOW_PROPERTY_MAX_TIME_MILLIS) {
-                            showTunaProperties();
+                            showProperties();
                         }
                         touchDownCount = 0;
                     } else {
-                        float touchDownTimeDistanceX = Math.abs(tunaTouchDownEventX - event.getX());
-                        float touchDownTimeDistanceY = Math.abs(tunaTouchDownEventY - event.getY());
+                        float touchDownTimeDistanceX = Math.abs(touchDownEventX - event.getX());
+                        float touchDownTimeDistanceY = Math.abs(touchDownEventY - event.getY());
                         if (touchDownTimeDistanceX < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity && touchDownTimeDistanceY < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity) {
                             touchDownCount++;
                         }
                     }
-                    tunaTouchDownEventX = event.getX();
-                    tunaTouchDownEventY = event.getY();
+                    touchDownEventX = event.getX();
+                    touchDownEventY = event.getY();
                     if ((System.currentTimeMillis() - touchDownTimeStart) >= SHOW_PROPERTY_MAX_TIME_MILLIS) {
                         touchDownCount = 0;
                     }
                 }
 
-                tunaPress = true;
-                tunaSelect = false;
+                press = true;
+                select = false;
 
-                if (!tunaTextMarkTouchable) {
-                    tunaTextMark = false;
+                if (!textMarkTouchable) {
+                    textMark = false;
                 }
 
-                if (!tunaContentMarkTouchable) {
-                    tunaContentMark = false;
+                if (!contentMarkTouchable) {
+                    contentMark = false;
                 }
 
-                if (!tunaTouchOutBounds && tunaAssociateListener != null) {
-                    tunaAssociateListener.tunaAssociate(this);
+                if (!touchOutBounds && associateListener != null) {
+                    associateListener.associate(this);
                 }
 
-                if (!tunaTouchOutBounds && tunaTouchDownListener != null) {
-                    tunaTouchDownListener.tunaTouchDown(this);
+                if (!touchOutBounds && touchDownListener != null) {
+                    touchDownListener.touchDown(this);
                 }
 
-                if (tunaMaterial != null) {
-                    switch (tunaMaterial) {
+                if (material != null) {
+                    switch (material) {
                         case SPREAD:
                             float startRadius, endRadius;
-                            if (tunaWidth >= tunaHeight) {
-                                startRadius = tunaTouchDownEventY >= tunaHeight - tunaTouchDownEventY ? tunaTouchDownEventY : tunaHeight - tunaTouchDownEventY;
-                                endRadius = tunaWidth << 1;
+                            if (width >= height) {
+                                startRadius = touchDownEventY >= height - touchDownEventY ? touchDownEventY : height - touchDownEventY;
+                                endRadius = width << 1;
                             } else {
-                                startRadius = tunaTouchDownEventX >= tunaWidth - tunaTouchDownEventX ? tunaTouchDownEventX : tunaWidth - tunaTouchDownEventX;
-                                endRadius = tunaHeight << 1;
+                                startRadius = touchDownEventX >= width - touchDownEventX ? touchDownEventX : width - touchDownEventX;
+                                endRadius = height << 1;
                             }
-                            tunaMaterialAnimatorSet = new AnimatorSet();
-                            if (tunaMaterialMove) {
-                                tunaMaterialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, tunaMaterialRadiusProperty, startRadius, endRadius),
-                                        ObjectAnimator.ofFloat(this, tunaMaterialPaintXProperty, tunaTouchDownEventX, tunaWidth >> 1),
-                                        ObjectAnimator.ofFloat(this, tunaMaterialPaintYProperty, tunaTouchDownEventY, tunaHeight >> 1));
+                            materialAnimatorSet = new AnimatorSet();
+                            if (materialMove) {
+                                materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius),
+                                        ObjectAnimator.ofFloat(this, materialPaintXProperty, touchDownEventX, width >> 1),
+                                        ObjectAnimator.ofFloat(this, materialPaintYProperty, touchDownEventY, height >> 1));
                             } else {
-                                tunaMaterialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, tunaMaterialRadiusProperty, startRadius, endRadius));
+                                materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius));
                             }
-                            tunaMaterialAnimatorSet.setDuration(tunaMaterialDuraction);
-                            if (tunaMaterialTimeInterpolator != null) {
-                                tunaMaterialAnimatorSet.setInterpolator(tunaMaterialTimeInterpolator);
+                            materialAnimatorSet.setDuration(materialDuraction);
+                            if (materialTimeInterpolator != null) {
+                                materialAnimatorSet.setInterpolator(materialTimeInterpolator);
                             }
-                            tunaMaterialAnimatorSet.addListener(new AnimatorListener() {
+                            materialAnimatorSet.addListener(new AnimatorListener() {
                                 @Override
                                 public void onAnimationStart(Animator animation) {
-                                    tunaMaterialPlay = true;
+                                    materialPlay = true;
                                 }
 
                                 @Override
@@ -4580,15 +4515,15 @@ public class TView extends View {
 
                                 @Override
                                 public void onAnimationEnd(Animator animation) {
-                                    tunaMaterialPlay = false;
+                                    materialPlay = false;
                                 }
 
                                 @Override
                                 public void onAnimationCancel(Animator animation) {
-                                    tunaMaterialPlay = false;
+                                    materialPlay = false;
                                 }
                             });
-                            tunaMaterialAnimatorSet.start();
+                            materialAnimatorSet.start();
                             break;
                         case TRANS:
                             break;
@@ -4600,109 +4535,109 @@ public class TView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 //
-                if (tunaTouchType == TunaTouchType.ALWAYS) {
+                if (touchType == TouchType.ALWAYS) {
 
-                    tunaPress = true;
-                    tunaSelect = false;
-                } else if (!tunaTouchOutBounds && (tunaTouchEventX < 0 || tunaTouchEventX > tunaWidth || tunaTouchEventY < 0 || tunaTouchEventY > tunaHeight)) {
+                    press = true;
+                    select = false;
+                } else if (!touchOutBounds && (touchEventX < 0 || touchEventX > width || touchEventY < 0 || touchEventY > height)) {
 
-                    tunaPress = false;
-                    tunaSelect = false;
+                    press = false;
+                    select = false;
 
-                    if (!tunaTextMarkTouchable) {
-                        tunaTextMark = false;
+                    if (!textMarkTouchable) {
+                        textMark = false;
                     }
-                    if (!tunaContentMarkTouchable) {
-                        tunaContentMark = false;
+                    if (!contentMarkTouchable) {
+                        contentMark = false;
                     }
 
                     invalidate();
 
-                    tunaTouchOutBounds = true;
-                    if (tunaTouchOutListener != null) {
-                        tunaTouchOutListener.tunaTouchOut(this);
+                    touchOutBounds = true;
+                    if (touchOutListener != null) {
+                        touchOutListener.touchOut(this);
                     }
-                } else if (tunaTouchOutBounds && (tunaTouchEventX >= 0 && tunaTouchEventX <= tunaWidth && tunaTouchEventY >= 0 && tunaTouchEventY <= tunaHeight)) {
+                } else if (touchOutBounds && (touchEventX >= 0 && touchEventX <= width && touchEventY >= 0 && touchEventY <= height)) {
 
-                    tunaPress = true;
-                    tunaSelect = false;
+                    press = true;
+                    select = false;
 
-                    if (!tunaTextMarkTouchable) {
-                        tunaTextMark = false;
-                    }
-
-                    if (!tunaContentMarkTouchable) {
-                        tunaContentMark = false;
+                    if (!textMarkTouchable) {
+                        textMark = false;
                     }
 
-                    tunaTouchOutBounds = false;
-                    if (tunaTouchInListener != null) {
-                        tunaTouchInListener.tunaTouchIn(this);
+                    if (!contentMarkTouchable) {
+                        contentMark = false;
+                    }
+
+                    touchOutBounds = false;
+                    if (touchInListener != null) {
+                        touchInListener.touchIn(this);
                     }
                 }
 
                 //
-                if (!tunaTouchOutBounds && tunaTouchMoveListener != null) {
-                    tunaTouchMoveListener.tunaTouchMove(this);
+                if (!touchOutBounds && touchMoveListener != null) {
+                    touchMoveListener.touchMove(this);
                 }
 
                 break;
             case MotionEvent.ACTION_UP:
                 //
-                tunaPress = false;
-                switch (tunaSelectType) {
+                press = false;
+                switch (selectType) {
                     case NONE:
-                        tunaSelect = false;
+                        select = false;
                         break;
                     case SAME:
-                        tunaSelect = true;
+                        select = true;
                         break;
                     case REVERSE:
-                        tunaSelectRaw = !tunaSelectRaw;
-                        tunaSelect = tunaSelectRaw;
+                        selectRaw = !selectRaw;
+                        select = selectRaw;
                         break;
                     default:
                         break;
                 }
 
-                if (!tunaTextMarkTouchable) {
-                    tunaTextMark = false;
+                if (!textMarkTouchable) {
+                    textMark = false;
                 }
-                if (!tunaContentMarkTouchable) {
-                    tunaContentMark = false;
-                }
-
-                if (!tunaTouchOutBounds && tunaAssociateListener != null) {
-                    tunaAssociateListener.tunaAssociate(this);
+                if (!contentMarkTouchable) {
+                    contentMark = false;
                 }
 
-                if (!tunaTouchOutBounds && tunaTouchUpListener != null) {
-                    tunaTouchUpListener.tunaTouchUp(this);
+                if (!touchOutBounds && associateListener != null) {
+                    associateListener.associate(this);
                 }
 
-                tunaTouchOutBounds = false;
+                if (!touchOutBounds && touchUpListener != null) {
+                    touchUpListener.touchUp(this);
+                }
+
+                touchOutBounds = false;
 
                 break;
             case MotionEvent.ACTION_CANCEL:
-                tunaPress = false;
-                tunaSelect = false;
+                press = false;
+                select = false;
 
-                if (!tunaTextMarkTouchable) {
-                    tunaTextMark = false;
+                if (!textMarkTouchable) {
+                    textMark = false;
                 }
-                if (!tunaContentMarkTouchable) {
-                    tunaContentMark = false;
+                if (!contentMarkTouchable) {
+                    contentMark = false;
                 }
 
-                if (!tunaTouchOutBounds && tunaTouchCancelListener != null) {
-                    tunaTouchCancelListener.tunaTouchCancel(this);
+                if (!touchOutBounds && touchCancelListener != null) {
+                    touchCancelListener.touchCancel(this);
                 }
                 break;
             default:
                 break;
         }
 
-        if (!tunaTouchOutBounds) {
+        if (!touchOutBounds) {
             invalidate();
         }
         return true;
@@ -4710,18 +4645,18 @@ public class TView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (tunaTextValue != null) {
-            tunaTextValueMeasureList = tunaMeasure(widthMeasureSpec, heightMeasureSpec,
-                    tunaTextValue, initTunaTextPaint(tunaTextSize), tunaTextPaddingLeft, tunaTextPaddingRight,
-                    tunaTextRowSpaceRatio);
+        if (textValue != null) {
+            textValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
+                    textValue, PaintTool.initTextPaint(textSize), textPaddingLeft, textPaddingRight,
+                    textRowSpaceRatio);
         } else {
-            tunaContentValueMeasureList = tunaMeasure(widthMeasureSpec, heightMeasureSpec,
-                    tunaContentValue, initTunaTextPaint(tunaContentSize), tunaTextPaddingLeft, tunaTextPaddingRight,
-                    tunaContentRowSpaceRatio);
+            contentValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
+                    contentValue, PaintTool.initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
+                    contentRowSpaceRatio);
         }
     }
 
-    protected List<Integer> tunaMeasure(int widthMeasureSpec, int heightMeasureSpec,
+    protected List<Integer> measure(int widthMeasureSpec, int heightMeasureSpec,
                                         String textValue, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
         List<Integer> ValueMeasureList = null;
 
@@ -4796,18 +4731,18 @@ public class TView extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        tunaWidth = getWidth();
-        tunaHeight = getHeight();
+        width = getWidth();
+        height = getHeight();
 
-        if (!tunaSuper) {
+        if (!tSuper) {
             return;
         }
 
-        if (tunaForegroundNormal != Color.TRANSPARENT || tunaForegroundPress != Color.TRANSPARENT || tunaForegroundSelect != Color.TRANSPARENT || tunaSrcNormal != null
-                || tunaSrcPress != null || tunaSrcSelect != null || tunaSrcNormalShadowRadius > 0 || tunaSrcPressShadowRadius > 0 || tunaSrcSelectShadowRadius > 0
-                || tunaBackgroundNormalShadowRadius > 0 || tunaBackgroundPressShadowRadius > 0 || tunaBackgroundSelectShadowRadius > 0 || tunaBackgroundNormalAngle != Integer.MAX_VALUE
-                || tunaBackgroundPressAngle != Integer.MAX_VALUE || tunaBackgroundSelectAngle != Integer.MAX_VALUE || tunaSrcAnchorNormal != null || tunaSrcAnchorPress != null
-                || tunaSrcAnchorSelect != null
+        if (foregroundNormal != Color.TRANSPARENT || foregroundPress != Color.TRANSPARENT || foregroundSelect != Color.TRANSPARENT || srcNormal != null
+                || srcPress != null || srcSelect != null || srcNormalShadowRadius > 0 || srcPressShadowRadius > 0 || srcSelectShadowRadius > 0
+                || backgroundNormalShadowRadius > 0 || backgroundPressShadowRadius > 0 || backgroundSelectShadowRadius > 0 || backgroundNormalAngle != Integer.MAX_VALUE
+                || backgroundPressAngle != Integer.MAX_VALUE || backgroundSelectAngle != Integer.MAX_VALUE || srcAnchorNormal != null || srcAnchorPress != null
+                || srcAnchorSelect != null
 
         ) {
             // setShadowLayer() is only supported on text when hardware acceleration is on.
@@ -4816,102 +4751,102 @@ public class TView extends View {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
-        if (tunaSrcNormal != null || tunaSrcPress != null || tunaSrcSelect != null || tunaBackgroundNormalShadowRadius > 0 || tunaBackgroundPressShadowRadius > 0 || tunaBackgroundSelectShadowRadius > 0) {
-            if (tunaBackgroundNormal == Color.TRANSPARENT) {
-                tunaBackgroundNormal = Color.WHITE;
+        if (srcNormal != null || srcPress != null || srcSelect != null || backgroundNormalShadowRadius > 0 || backgroundPressShadowRadius > 0 || backgroundSelectShadowRadius > 0) {
+            if (backgroundNormal == Color.TRANSPARENT) {
+                backgroundNormal = Color.WHITE;
             }
-            if (tunaBackgroundPress == Color.TRANSPARENT) {
-                tunaBackgroundPress = tunaBackgroundNormal;
+            if (backgroundPress == Color.TRANSPARENT) {
+                backgroundPress = backgroundNormal;
             }
-            if (tunaBackgroundSelect == Color.TRANSPARENT) {
-                tunaBackgroundSelect = tunaBackgroundNormal;
+            if (backgroundSelect == Color.TRANSPARENT) {
+                backgroundSelect = backgroundNormal;
             }
         }
 
-        // tunaText
-        tunaTextDx += tunaWidth * tunaTextFractionDx;
-        tunaTextDy += tunaHeight * tunaTextFractionDy;
+        // text
+        textDx += width * textFractionDx;
+        textDy += height * textFractionDy;
 
-        // tunaTextMark
-        tunaTextMarkDx += tunaWidth * tunaTextMarkFractionDx;
-        tunaTextMarkDy += tunaHeight * tunaTextMarkFractionDy;
-
-        //
-        if (tunaBackgroundNormalAngle != Integer.MAX_VALUE) {
-            tunaBackgroundNormalShader = getLinearGradient(tunaWidth, tunaHeight, tunaBackgroundNormalAngle, tunaBackgroundNormalGradientStart, tunaBackgroundNormalGradientEnd);
-        }
-        if (tunaBackgroundPressAngle != Integer.MAX_VALUE) {
-            tunaBackgroundPressShader = getLinearGradient(tunaWidth, tunaHeight, tunaBackgroundPressAngle, tunaBackgroundPressGradientStart, tunaBackgroundPressGradientEnd);
-        }
-        if (tunaBackgroundSelectAngle != Integer.MAX_VALUE) {
-            tunaBackgroundSelectShader = getLinearGradient(tunaWidth, tunaHeight, tunaBackgroundSelectAngle, tunaBackgroundSelectGradientStart, tunaBackgroundSelectGradientEnd);
-        }
+        // textMark
+        textMarkDx += width * textMarkFractionDx;
+        textMarkDy += height * textMarkFractionDy;
 
         //
-        int tunaSrcNormalWidthRaw = 0, tunaSrcNormalHeightRaw = 0, tunaSrcPressWidthRaw = 0, tunaSrcPressHeightRaw = 0, tunaSrcSelectWidthRaw = 0, tunaSrcSelectHeightRaw = 0;
-        if (tunaSrcNormal != null) {
-            tunaSrcNormalWidthRaw = tunaSrcNormal.getWidth();
-            tunaSrcNormalHeightRaw = tunaSrcNormal.getHeight();
-
-            initTunaMatrix((tunaWidth - tunaSrcNormalShadowRadius * 2f - tunaBackgroundNormalShadowRadius * 2f - tunaBackgroundNormalShadowDx * 2f) / tunaSrcNormalWidthRaw,
-                    (tunaHeight - tunaSrcNormalShadowRadius * 2f - tunaBackgroundNormalShadowRadius * 2f - tunaBackgroundNormalShadowDy * 2f) / tunaSrcNormalHeightRaw);
+        if (backgroundNormalAngle != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundNormalAngle, backgroundNormalGradientStart, backgroundNormalGradientEnd);
         }
-
-        if (tunaSrcPress != null) {
-            tunaSrcPressWidthRaw = tunaSrcPress.getWidth();
-            tunaSrcPressHeightRaw = tunaSrcPress.getHeight();
+        if (backgroundPressAngle != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundPressAngle, backgroundPressGradientStart, backgroundPressGradientEnd);
         }
-
-        if (tunaSrcSelect != null) {
-            tunaSrcSelectWidthRaw = tunaSrcSelect.getWidth();
-            tunaSrcSelectHeightRaw = tunaSrcSelect.getHeight();
-        }
-
-        if (tunaSrcNormalWidthRaw != tunaSrcPressWidthRaw || tunaSrcNormalHeightRaw != tunaSrcPressHeightRaw || tunaSrcPressWidthRaw != tunaSrcSelectWidthRaw
-                || tunaSrcPressHeightRaw != tunaSrcSelectHeightRaw) {
-            throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaSrcNormal ,tunaSrcPress and tunaSrcSelect needed equal");
+        if (backgroundSelectAngle != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundSelectAngle, backgroundSelectGradientStart, backgroundSelectGradientEnd);
         }
 
         //
-        int tunaSrcAnchorNormalWidthRaw = 0, tunaSrcAnchorNormalHeightRaw = 0, tunaSrcAnchorPressWidthRaw = 0, tunaSrcAnchorPressHeightRaw = 0, tunaSrcAnchorSelectWidthRaw = 0, tunaSrcAnchorSelectHeightRaw = 0;
+        int srcNormalWidthRaw = 0, srcNormalHeightRaw = 0, srcPressWidthRaw = 0, srcPressHeightRaw = 0, srcSelectWidthRaw = 0, srcSelectHeightRaw = 0;
+        if (srcNormal != null) {
+            srcNormalWidthRaw = srcNormal.getWidth();
+            srcNormalHeightRaw = srcNormal.getHeight();
 
-        if (tunaSrcAnchorNormal != null) {
-            tunaSrcAnchorNormalWidthRaw = tunaSrcAnchorNormal.getWidth();
-            tunaSrcAnchorNormalHeightRaw = tunaSrcAnchorNormal.getHeight();
-
-            initTunaAnchorMatrix(tunaSrcAnchorNormalWidth / tunaSrcAnchorNormalWidthRaw, tunaSrcAnchorNormalHeight / tunaSrcAnchorNormalHeightRaw);
+            initMatrix((width - srcNormalShadowRadius * 2f - backgroundNormalShadowRadius * 2f - backgroundNormalShadowDx * 2f) / srcNormalWidthRaw,
+                    (height - srcNormalShadowRadius * 2f - backgroundNormalShadowRadius * 2f - backgroundNormalShadowDy * 2f) / srcNormalHeightRaw);
         }
 
-        if (tunaSrcAnchorPress != null) {
-            tunaSrcAnchorPressWidthRaw = tunaSrcAnchorPress.getWidth();
-            tunaSrcAnchorPressHeightRaw = tunaSrcAnchorPress.getHeight();
+        if (srcPress != null) {
+            srcPressWidthRaw = srcPress.getWidth();
+            srcPressHeightRaw = srcPress.getHeight();
         }
 
-        if (tunaSrcAnchorSelect != null) {
-            tunaSrcAnchorSelectWidthRaw = tunaSrcAnchorSelect.getWidth();
-            tunaSrcAnchorSelectHeightRaw = tunaSrcAnchorSelect.getHeight();
+        if (srcSelect != null) {
+            srcSelectWidthRaw = srcSelect.getWidth();
+            srcSelectHeightRaw = srcSelect.getHeight();
         }
 
-        if (tunaSrcAnchorNormalWidthRaw != tunaSrcAnchorPressWidthRaw || tunaSrcAnchorNormalHeightRaw != tunaSrcAnchorPressHeightRaw
-                || tunaSrcAnchorPressWidthRaw != tunaSrcAnchorSelectWidthRaw || tunaSrcAnchorPressHeightRaw != tunaSrcAnchorSelectHeightRaw) {
-            throw new IndexOutOfBoundsException("Both the width and height of the attribute tunaSrcAnchorNormal ,tunaSrcAnchorPress and tunaSrcAnchorSelect needed equal");
+        if (srcNormalWidthRaw != srcPressWidthRaw || srcNormalHeightRaw != srcPressHeightRaw || srcPressWidthRaw != srcSelectWidthRaw
+                || srcPressHeightRaw != srcSelectHeightRaw) {
+            throw new IndexOutOfBoundsException("Both the width and height of the attribute srcNormal ,srcPress and srcSelect needed equal");
         }
 
         //
-        if (tunaSrcLeft != null) {
-            int tunaSrcLeftWidthRaw = tunaSrcLeft.getWidth();
-            int tunaSrcLeftHeightRaw = tunaSrcLeft.getHeight();
-            initTunaLeftMatrix(tunaSrcLeftWidth / tunaSrcLeftWidthRaw, tunaSrcLeftHeight / tunaSrcLeftHeightRaw);
+        int srcAnchorNormalWidthRaw = 0, srcAnchorNormalHeightRaw = 0, srcAnchorPressWidthRaw = 0, srcAnchorPressHeightRaw = 0, srcAnchorSelectWidthRaw = 0, srcAnchorSelectHeightRaw = 0;
+
+        if (srcAnchorNormal != null) {
+            srcAnchorNormalWidthRaw = srcAnchorNormal.getWidth();
+            srcAnchorNormalHeightRaw = srcAnchorNormal.getHeight();
+
+            initanchorMatrix(srcAnchorNormalWidth / srcAnchorNormalWidthRaw, srcAnchorNormalHeight / srcAnchorNormalHeightRaw);
         }
 
-        if (tunaSrcRight != null) {
-            int tunaSrcRightWidthRaw = tunaSrcRight.getWidth();
-            int tunaSrcRightHeightRaw = tunaSrcRight.getHeight();
-            initTunaRightMatrix(tunaSrcRightWidth / tunaSrcRightWidthRaw, tunaSrcRightHeight / tunaSrcRightHeightRaw);
+        if (srcAnchorPress != null) {
+            srcAnchorPressWidthRaw = srcAnchorPress.getWidth();
+            srcAnchorPressHeightRaw = srcAnchorPress.getHeight();
         }
 
-        if (tunaLayoutListener != null) {
-            tunaLayoutListener.tunaLayout(this);
+        if (srcAnchorSelect != null) {
+            srcAnchorSelectWidthRaw = srcAnchorSelect.getWidth();
+            srcAnchorSelectHeightRaw = srcAnchorSelect.getHeight();
+        }
+
+        if (srcAnchorNormalWidthRaw != srcAnchorPressWidthRaw || srcAnchorNormalHeightRaw != srcAnchorPressHeightRaw
+                || srcAnchorPressWidthRaw != srcAnchorSelectWidthRaw || srcAnchorPressHeightRaw != srcAnchorSelectHeightRaw) {
+            throw new IndexOutOfBoundsException("Both the width and height of the attribute srcAnchorNormal ,srcAnchorPress and srcAnchorSelect needed equal");
+        }
+
+        //
+        if (srcLeft != null) {
+            int srcLeftWidthRaw = srcLeft.getWidth();
+            int srcLeftHeightRaw = srcLeft.getHeight();
+            initLeftMatrix(srcLeftWidth / srcLeftWidthRaw, srcLeftHeight / srcLeftHeightRaw);
+        }
+
+        if (srcRight != null) {
+            int srcRightWidthRaw = srcRight.getWidth();
+            int srcRightHeightRaw = srcRight.getHeight();
+            initrightMatrix(srcRightWidth / srcRightWidthRaw, srcRightHeight / srcRightHeightRaw);
+        }
+
+        if (layoutListener != null) {
+            layoutListener.layout(this);
         }
     }
 
@@ -4919,267 +4854,267 @@ public class TView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        initTunaCanvas(canvas);
+        initcanvas(canvas);
 
         //
-        if (tunaRotate != 0) {
-            canvas.rotate(tunaRotate, tunaWidth >> 1, tunaHeight >> 1);
+        if (rotate != 0) {
+            canvas.rotate(rotate, width >> 1, height >> 1);
         }
-        if (!tunaSuper) {
+        if (!tSuper) {
             return;
         }
 
         //
-        boolean needSaveLayer = (tunaSrcNormal != null || tunaSrcPress != null || tunaSrcSelect != null);
+        boolean needSaveLayer = (srcNormal != null || srcPress != null || srcSelect != null);
         if (needSaveLayer) {
             // draw the src/dst example into our offscreen bitmap
-            tunaLayer = canvas.saveLayer(0, 0, tunaWidth, tunaHeight, null);
+            layer = canvas.saveLayer(0, 0, width, height, null);
         }
 
-        // dst, note that when tunaSrcSelectShadowRadius > 0, the parent background color must take incoming as tunaBackgroundNormal!
+        // dst, note that when srcSelectShadowRadius > 0, the parent background color must take incoming as backgroundNormal!
 
-        if (tunaClassic) {
+        if (classic) {
 
-            if (tunaMaterialPlay) {
-                drawTunaRectClassic(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                                - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
-                        tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal, tunaRadius);
+            if (materialPlay) {
+                drawRectClassic(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
+                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
+                                - backgroundNormalShadowDy, backgroundNormal, backgroundNormalShader, backgroundNormalShadowRadius,
+                        backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal, radius);
 
-                canvas.drawCircle(tunaTouchDownEventX, tunaTouchDownEventY, tunaMaterialRadius, initTunaPaint(tunaBackgroundPress));
+                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, PaintTool.initPaint(backgroundPress));
             } else {
-                drawTunaRectClassic(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                                - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
-                        tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
-                        tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
-                        tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
-                        tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
-                        tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
-                                : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
-                                : tunaStrokeColorNormal, tunaRadius);
+                drawRectClassic(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
+                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
+                                - backgroundNormalShadowDy, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
+                        select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
+                        select ? backgroundSelectShadowRadius : press ? backgroundPressShadowRadius : backgroundNormalShadowRadius,
+                        select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
+                        select ? backgroundSelectShadowDx : press ? backgroundPressShadowDx : backgroundNormalShadowDx,
+                        select ? backgroundSelectShadowDy : press ? backgroundPressShadowDy : backgroundNormalShadowDy, select ? strokeWidthSelect
+                                : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
+                                : strokeColorNormal, radius);
             }
         } else {
 
             // draw MaterialDesign Effect
-            if (tunaMaterialPlay) {
-                drawTunaRectCustom(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                                - tunaBackgroundNormalShadowDy, tunaBackgroundNormal, tunaBackgroundNormalShader, tunaBackgroundNormalShadowRadius,
-                        tunaBackgroundNormalShadowColor, tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowDy, tunaStrokeWidthNormal, tunaStrokeColorNormal,
-                        tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+            if (materialPlay) {
+                drawRectCustom(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
+                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
+                                - backgroundNormalShadowDy, backgroundNormal, backgroundNormalShader, backgroundNormalShadowRadius,
+                        backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal,
+                        radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
 
-                canvas.drawCircle(tunaTouchDownEventX, tunaTouchDownEventY, tunaMaterialRadius, initTunaPaint(tunaBackgroundPress));
+                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, PaintTool.initPaint(backgroundPress));
             } else {
-                drawTunaRectCustom(canvas, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDx, tunaBackgroundNormalShadowRadius + tunaBackgroundNormalShadowDy,
-                        tunaWidth - tunaBackgroundNormalShadowRadius - tunaBackgroundNormalShadowDx, tunaHeight - tunaBackgroundNormalShadowRadius
-                                - tunaBackgroundNormalShadowDy, tunaSelect ? tunaBackgroundSelect : tunaPress ? tunaBackgroundPress : tunaBackgroundNormal,
-                        tunaSelect ? tunaBackgroundSelectShader : tunaPress ? tunaBackgroundPressShader : tunaBackgroundNormalShader,
-                        tunaSelect ? tunaBackgroundSelectShadowRadius : tunaPress ? tunaBackgroundPressShadowRadius : tunaBackgroundNormalShadowRadius,
-                        tunaSelect ? tunaBackgroundSelectShadowColor : tunaPress ? tunaBackgroundPressShadowColor : tunaBackgroundNormalShadowColor,
-                        tunaSelect ? tunaBackgroundSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx : tunaBackgroundNormalShadowDx,
-                        tunaSelect ? tunaBackgroundSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy : tunaBackgroundNormalShadowDy, tunaSelect ? tunaStrokeWidthSelect
-                                : tunaPress ? tunaStrokeWidthPress : tunaStrokeWidthNormal, tunaSelect ? tunaStrokeColorSelect : tunaPress ? tunaStrokeColorPress
-                                : tunaStrokeColorNormal, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                drawRectCustom(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
+                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
+                                - backgroundNormalShadowDy, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
+                        select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
+                        select ? backgroundSelectShadowRadius : press ? backgroundPressShadowRadius : backgroundNormalShadowRadius,
+                        select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
+                        select ? backgroundSelectShadowDx : press ? backgroundPressShadowDx : backgroundNormalShadowDx,
+                        select ? backgroundSelectShadowDy : press ? backgroundPressShadowDy : backgroundNormalShadowDy, select ? strokeWidthSelect
+                                : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
+                                : strokeColorNormal, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
             }
         }
 
-        // draw tunaBitmap
+        // draw bitmap
         if (needSaveLayer) {
-            tunaPaint.setXfermode(tunaPorterDuffXfermode);
+            paint.setXfermode(porterDuffXfermode);
 
-            // If they are offset tunaBackgroundShadow, mobile, is to draw on the background shadow,
+            // If they are offset backgroundShadow, mobile, is to draw on the background shadow,
             // without moving the bigger picture and the need to set the width and height
 
-            canvas.translate(tunaSelect ? tunaBackgroundSelectShadowDx * 2f + tunaSrcSelectShadowRadius - tunaSrcSelectShadowDx : tunaPress ? tunaBackgroundPressShadowDx * 2f
-                            + tunaSrcPressShadowRadius - tunaSrcPressShadowDx : tunaBackgroundNormalShadowDx * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDx,
-                    tunaSelect ? tunaBackgroundSelectShadowDy * 2f + tunaSrcSelectShadowRadius - tunaSrcSelectShadowDy : tunaPress ? tunaBackgroundPressShadowDy * 2f
-                            + tunaSrcPressShadowRadius - tunaSrcPressShadowDy : tunaBackgroundNormalShadowDy * 2f + tunaSrcNormalShadowRadius - tunaSrcNormalShadowDy);
+            canvas.translate(select ? backgroundSelectShadowDx * 2f + srcSelectShadowRadius - srcSelectShadowDx : press ? backgroundPressShadowDx * 2f
+                            + srcPressShadowRadius - srcPressShadowDx : backgroundNormalShadowDx * 2f + srcNormalShadowRadius - srcNormalShadowDx,
+                    select ? backgroundSelectShadowDy * 2f + srcSelectShadowRadius - srcSelectShadowDy : press ? backgroundPressShadowDy * 2f
+                            + srcPressShadowRadius - srcPressShadowDy : backgroundNormalShadowDy * 2f + srcNormalShadowRadius - srcNormalShadowDy);
             canvas.drawBitmap(
-                    tunaSelect ? tunaSrcSelect : tunaPress ? tunaSrcPress : tunaSrcNormal,
-                    tunaMatrix,
-                    initTunaPaint(tunaPaint, tunaSelect ? tunaSrcSelectShadowRadius : tunaPress ? tunaSrcPressShadowRadius : tunaSrcNormalShadowRadius,
-                            tunaSelect ? tunaSrcSelectShadowDx : tunaPress ? tunaSrcPressShadowDx : tunaSrcNormalShadowDx, tunaSelect ? tunaSrcSelectShadowDy
-                                    : tunaPress ? tunaSrcPressShadowDy : tunaSrcNormalShadowDy));
-            canvas.translate(tunaSelect ? -tunaBackgroundSelectShadowDx * 2f - tunaSrcSelectShadowRadius + tunaSrcSelectShadowDx : tunaPress ? -tunaBackgroundPressShadowDx * 2f
-                            - tunaSrcPressShadowRadius + tunaSrcPressShadowDx : -tunaBackgroundNormalShadowDx * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDx,
-                    tunaSelect ? -tunaBackgroundSelectShadowDy * 2f - tunaSrcSelectShadowRadius + tunaSrcSelectShadowDy : tunaPress ? -tunaBackgroundPressShadowDy * 2f
-                            - tunaSrcPressShadowRadius + tunaSrcPressShadowDy : -tunaBackgroundNormalShadowDy * 2f - tunaSrcNormalShadowRadius + tunaSrcNormalShadowDy);
+                    select ? srcSelect : press ? srcPress : srcNormal,
+                    matrix,
+                    PaintTool.initPaint(paint, select ? srcSelectShadowRadius : press ? srcPressShadowRadius : srcNormalShadowRadius,
+                            select ? srcSelectShadowDx : press ? srcPressShadowDx : srcNormalShadowDx, select ? srcSelectShadowDy
+                                    : press ? srcPressShadowDy : srcNormalShadowDy));
+            canvas.translate(select ? -backgroundSelectShadowDx * 2f - srcSelectShadowRadius + srcSelectShadowDx : press ? -backgroundPressShadowDx * 2f
+                            - srcPressShadowRadius + srcPressShadowDx : -backgroundNormalShadowDx * 2f - srcNormalShadowRadius + srcNormalShadowDx,
+                    select ? -backgroundSelectShadowDy * 2f - srcSelectShadowRadius + srcSelectShadowDy : press ? -backgroundPressShadowDy * 2f
+                            - srcPressShadowRadius + srcPressShadowDy : -backgroundNormalShadowDy * 2f - srcNormalShadowRadius + srcNormalShadowDy);
 
-            tunaPaint.setXfermode(null);
+            paint.setXfermode(null);
 
-            // Uncomment will cause a null pointer with tunaPaint in xml preview canvas.restoreToCount(tunaLayer);
+            // Uncomment will cause a null pointer with paint in xml preview canvas.restoreToCount(layer);
         }
 
-        // draw tunaAnchor
-        if (tunaSrcAnchorNormal != null) {
+        // draw anchor
+        if (srcAnchorNormal != null) {
 
             float anchorDx = 0, anchorDy = 0;
-            switch (tunaSrcAnchorGravity & GRAVITY_MASK) {
+            switch (srcAnchorGravity & GRAVITY_MASK) {
                 case LEFT:
                     break;
                 case CENTER_HORIZONTAL:
-                    anchorDx = (tunaWidth >> 1) - tunaSrcAnchorNormalWidth * 0.5f;
+                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
                     break;
                 case RIGHT:
-                    anchorDx = tunaWidth - tunaSrcAnchorNormalWidth;
+                    anchorDx = width - srcAnchorNormalWidth;
                     break;
                 case CENTER_VERTICAL:
-                    anchorDy = (tunaHeight >> 1) - tunaSrcAnchorNormalHeight * 0.5f;
+                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
                     break;
                 case CENTER:
-                    anchorDx = (tunaWidth >> 1) - tunaSrcAnchorNormalWidth * 0.5f;
-                    anchorDy = (tunaHeight >> 1) - tunaSrcAnchorNormalHeight * 0.5f;
+                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
+                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
                     break;
                 case RIGHT | CENTER_VERTICAL:
-                    anchorDx = tunaWidth - tunaSrcAnchorNormalWidth;
-                    anchorDy = (tunaHeight >> 1) - tunaSrcAnchorNormalHeight * 0.5f;
+                    anchorDx = width - srcAnchorNormalWidth;
+                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
                     break;
                 case BOTTOM:
-                    anchorDy = tunaHeight - tunaSrcAnchorNormalHeight;
+                    anchorDy = height - srcAnchorNormalHeight;
                     break;
                 case BOTTOM | CENTER_HORIZONTAL:
-                    anchorDx = (tunaWidth >> 1) - tunaSrcAnchorNormalWidth * 0.5f;
-                    anchorDy = tunaHeight - tunaSrcAnchorNormalHeight;
+                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
+                    anchorDy = height - srcAnchorNormalHeight;
                     break;
                 case BOTTOM | RIGHT:
-                    anchorDx = tunaWidth - tunaSrcAnchorNormalWidth;
-                    anchorDy = tunaHeight - tunaSrcAnchorNormalHeight;
+                    anchorDx = width - srcAnchorNormalWidth;
+                    anchorDy = height - srcAnchorNormalHeight;
                     break;
                 default:
                     break;
             }
 
-            canvas.translate(anchorDx + (tunaSelect ? tunaSrcAnchorSelectDx : tunaPress ? tunaSrcAnchorPressDx : tunaSrcAnchorNormalDx), anchorDy
-                    + (tunaSelect ? tunaSrcAnchorSelectDy : tunaPress ? tunaSrcAnchorPressDy : tunaSrcAnchorNormalDy));
+            canvas.translate(anchorDx + (select ? srcAnchorSelectDx : press ? srcAnchorPressDx : srcAnchorNormalDx), anchorDy
+                    + (select ? srcAnchorSelectDy : press ? srcAnchorPressDy : srcAnchorNormalDy));
 
-            canvas.drawBitmap(tunaSelect ? tunaSrcAnchorSelect : tunaPress ? tunaSrcAnchorPress : tunaSrcAnchorNormal, tunaAnchorMatrix, tunaPaint);
+            canvas.drawBitmap(select ? srcAnchorSelect : press ? srcAnchorPress : srcAnchorNormal, anchorMatrix, paint);
 
-            canvas.translate(-anchorDx + (tunaSelect ? -tunaSrcAnchorSelectDx : tunaPress ? -tunaSrcAnchorPressDx : -tunaSrcAnchorNormalDx), -anchorDy
-                    + (tunaSelect ? -tunaSrcAnchorSelectDy : tunaPress ? -tunaSrcAnchorPressDy : -tunaSrcAnchorNormalDy));
+            canvas.translate(-anchorDx + (select ? -srcAnchorSelectDx : press ? -srcAnchorPressDx : -srcAnchorNormalDx), -anchorDy
+                    + (select ? -srcAnchorSelectDy : press ? -srcAnchorPressDy : -srcAnchorNormalDy));
         }
 
-        // draw tunaText
-        if (tunaTextValue != null) {
-            float f[] = drawTunaText(
+        // draw text
+        if (textValue != null) {
+            float f[] = drawText(
                     canvas,
-                    tunaTextValue,
-                    tunaWidth,
-                    (tunaWidth >> 1) + tunaTextDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
-                    (tunaHeight >> 1) + tunaTextDy,
-                    tunaTextPaddingLeft + tunaSrcLeftWidth,
-                    tunaTextPaddingRight + tunaSrcRightWidth,
-                    initTunaTextPaint(Paint.Style.FILL,
-                            tunaMaterialPlay ? tunaTextColorPress : tunaSelect ? tunaTextColorSelect : tunaPress ? tunaTextColorPress : tunaTextColorNormal, tunaTextSize,
-                            tunaTextShadowRadius, tunaTextShadowColor, tunaTextShadowDx, tunaTextShadowDy, tunaTextTypeFace, Paint.Align.CENTER),
-                    tunaTextGravity,
-                    tunaTextRowSpaceRatio,
-                    tunaTextValueMeasureList);
+                    textValue,
+                    width,
+                    (width >> 1) + textDx + srcLeftWidth * 0.5f + srcLeftPadding * 0.5f - srcRightWidth * 0.5f - srcRightPadding * 0.5f,
+                    (height >> 1) + textDy,
+                    textPaddingLeft + srcLeftWidth,
+                    textPaddingRight + srcRightWidth,
+                    initTextPaint(Paint.Style.FILL,
+                            materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal, textSize,
+                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textTypeFace, Paint.Align.CENTER),
+                    textGravity,
+                    textRowSpaceRatio,
+                    textValueMeasureList);
 
-            tunaTextDrawWidth = f[0];
-            tunaTextEndOffsetCenterX = f[1];
-            tunaTextEndOffsetCenterY = f[2];
+            textDrawWidth = f[0];
+            textEndOffsetCenterX = f[1];
+            textEndOffsetCenterY = f[2];
         }
 
-        // draw tunaContent
-        if (tunaContentValue != null) {
-            //Conversion of style into tunaTextGravity to use drawTunaText method!
-            TunaTextGravity tunaTextGravityFromContent = tunaTextGravityArray[tunaContentGravity.nativeInt];
+        // draw content
+        if (contentValue != null) {
+            //Conversion of style into textGravity to use drawText method!
+            TextGravity textGravityFromContent = textGravityArray[contentGravity.nativeInt];
 
-            float f[] = drawTunaText(
+            float f[] = drawText(
                     canvas,
-                    tunaContentValue,
-                    tunaWidth,
-                    (tunaWidth >> 1) + tunaContentDx + tunaSrcLeftWidth * 0.5f + tunaSrcLeftPadding * 0.5f - tunaSrcRightWidth * 0.5f - tunaSrcRightPadding * 0.5f,
-                    (tunaHeight >> 1) + tunaContentDy,
-                    tunaContentPaddingLeft + tunaSrcLeftWidth,
-                    tunaContentPaddingRight + tunaSrcRightWidth,
-                    initTunaTextPaint(Paint.Style.FILL,
-                            tunaMaterialPlay ? tunaContentColorPress : tunaSelect ? tunaContentColorSelect : tunaPress ? tunaContentColorPress : tunaContentColorNormal, tunaContentSize,
-                            tunaContentShadowRadius, tunaContentShadowColor, tunaContentShadowDx, tunaContentShadowDy, tunaContentTypeFace, Paint.Align.CENTER),
-                    tunaTextGravityFromContent,
-                    tunaContentRowSpaceRatio,
-                    tunaContentValueMeasureList);
+                    contentValue,
+                    width,
+                    (width >> 1) + contentDx + srcLeftWidth * 0.5f + srcLeftPadding * 0.5f - srcRightWidth * 0.5f - srcRightPadding * 0.5f,
+                    (height >> 1) + contentDy,
+                    contentPaddingLeft + srcLeftWidth,
+                    contentPaddingRight + srcRightWidth,
+                    initTextPaint(Paint.Style.FILL,
+                            materialPlay ? contentColorPress : select ? contentColorSelect : press ? contentColorPress : contentColorNormal, contentSize,
+                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentTypeFace, Paint.Align.CENTER),
+                    textGravityFromContent,
+                    contentRowSpaceRatio,
+                    contentValueMeasureList);
 
-            tunaContentDrawWidth = f[0];
-            tunaContentEndOffsetCenterX = f[1];
-            tunaContentEndOffsetCenterY = f[2];
+            contentDrawWidth = f[0];
+            contentEndOffsetCenterX = f[1];
+            contentEndOffsetCenterY = f[2];
         }
 
-        // draw tunaBitmapLeft,the draw position is half of the tunaWidth minus
-        // the tunaSrcLeftPadding and tunaTextActualDrawWidth*0.5f
-        if (tunaSrcLeft != null) {
-            float dx = (tunaWidth >> 1) - tunaSrcLeftWidth * 0.5f - tunaTextDrawWidth * 0.5f - tunaSrcLeftPadding * 0.5f + tunaSrcLeftDx;
-            float dy = (tunaHeight >> 1) - tunaSrcLeftHeight * 0.5f + tunaSrcLeftDy;
+        // draw bitmapLeft,the draw position is half of the width minus
+        // the srcLeftPadding and textActualDrawWidth*0.5f
+        if (srcLeft != null) {
+            float dx = (width >> 1) - srcLeftWidth * 0.5f - textDrawWidth * 0.5f - srcLeftPadding * 0.5f + srcLeftDx;
+            float dy = (height >> 1) - srcLeftHeight * 0.5f + srcLeftDy;
 
             canvas.translate(dx, dy);
-            canvas.drawBitmap(tunaSrcLeft, tunaLeftMatrix, tunaPaint);
+            canvas.drawBitmap(srcLeft, leftMatrix, paint);
             canvas.translate(-dx, -dy);
         }
 
-        if (tunaSrcRight != null) {
+        if (srcRight != null) {
 
-            float dx = (tunaWidth >> 1) - tunaSrcRightWidth * 0.5f + tunaTextDrawWidth * 0.5f + tunaSrcRightPadding * 0.5f + tunaSrcRightDx;
-            float dy = (tunaHeight >> 1) - tunaSrcRightHeight * 0.5f + tunaSrcRightDy;
+            float dx = (width >> 1) - srcRightWidth * 0.5f + textDrawWidth * 0.5f + srcRightPadding * 0.5f + srcRightDx;
+            float dy = (height >> 1) - srcRightHeight * 0.5f + srcRightDy;
 
             canvas.translate(dx, dy);
-            canvas.drawBitmap(tunaSrcRight, tunaRightMatrix, tunaPaint);
+            canvas.drawBitmap(srcRight, rightMatrix, paint);
             canvas.translate(-dx, -dy);
         }
 
-        // draw tunaTextMark
-        if (tunaTextMark) {
-            drawTunaTextMark(canvas, tunaTextMarkRadius,
-                    initTunaPaint(tunaTextMarkColor),
-                    tunaTextMarkRadius,
-                    tunaTextMarkDx, tunaTextMarkDy,
-                    tunaTextDx + tunaTextEndOffsetCenterX + tunaTextMarkDx,
-                    tunaTextDy + tunaTextEndOffsetCenterY + tunaTextMarkDy,
-                    tunaTextMarkTextValue,
-                    tunaTextMarkTextColor,
-                    tunaTextMarkTextSize,
-                    tunaTextMarkTextValueMeasureList);
+        // draw textMark
+        if (textMark) {
+            drawTextMark(canvas, textMarkRadius,
+                    PaintTool.initPaint(textMarkColor),
+                    textMarkRadius,
+                    textMarkDx, textMarkDy,
+                    textDx + textEndOffsetCenterX + textMarkDx,
+                    textDy + textEndOffsetCenterY + textMarkDy,
+                    textMarkTextValue,
+                    textMarkTextColor,
+                    textMarkTextSize,
+                    textMarkTextValueMeasureList);
         }
 
-        // draw tunaContentMark
-        if (tunaContentMark) {
-            drawTunaTextMark(canvas, tunaContentMarkRadius,
-                    initTunaPaint(tunaContentMarkColor),
-                    tunaContentMarkRadius,
-                    tunaContentMarkDx, tunaContentMarkDy,
-                    tunaContentDx + tunaContentEndOffsetCenterX + tunaContentMarkDx,
-                    tunaContentDy + tunaContentEndOffsetCenterY + tunaContentMarkDy,
-                    tunaContentMarkTextValue,
-                    tunaContentMarkTextColor,
-                    tunaContentMarkTextSize,
-                    tunaContentMarkTextValueMeasureList);
+        // draw contentMark
+        if (contentMark) {
+            drawTextMark(canvas, contentMarkRadius,
+                    PaintTool.initPaint(contentMarkColor),
+                    contentMarkRadius,
+                    contentMarkDx, contentMarkDy,
+                    contentDx + contentEndOffsetCenterX + contentMarkDx,
+                    contentDy + contentEndOffsetCenterY + contentMarkDy,
+                    contentMarkTextValue,
+                    contentMarkTextColor,
+                    contentMarkTextSize,
+                    contentMarkTextValueMeasureList);
         }
 
-        // draw tunaForeground
-        if (tunaSelect && tunaForegroundSelect != Color.TRANSPARENT) {
-            if (tunaClassic) {
-                drawTunaRectClassic(canvas, tunaWidth, tunaHeight, tunaForegroundSelect, tunaRadius);
+        // draw foreground
+        if (select && foregroundSelect != Color.TRANSPARENT) {
+            if (classic) {
+                drawRectClassic(canvas, width, height, foregroundSelect, radius);
             } else {
-                drawTunaRectCustom(canvas, tunaWidth, tunaHeight, tunaForegroundSelect, 0, Color.TRANSPARENT, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundSelect, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
             }
-        } else if (tunaPress && tunaForegroundPress != Color.TRANSPARENT) {
-            if (tunaClassic) {
-                drawTunaRectClassic(canvas, tunaWidth, tunaHeight, tunaForegroundPress, tunaRadius);
+        } else if (press && foregroundPress != Color.TRANSPARENT) {
+            if (classic) {
+                drawRectClassic(canvas, width, height, foregroundPress, radius);
             } else {
-                drawTunaRectCustom(canvas, tunaWidth, tunaHeight, tunaForegroundPress, 0, Color.TRANSPARENT, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundPress, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
             }
-        } else if (tunaForegroundNormal != Color.TRANSPARENT) {
-            if (tunaClassic) {
-                drawTunaRectClassic(canvas, tunaWidth, tunaHeight, tunaForegroundNormal, tunaRadius);
+        } else if (foregroundNormal != Color.TRANSPARENT) {
+            if (classic) {
+                drawRectClassic(canvas, width, height, foregroundNormal, radius);
             } else {
-                drawTunaRectCustom(canvas, tunaWidth, tunaHeight, tunaForegroundNormal, 0, Color.TRANSPARENT, tunaRadiusLeftTop, tunaRadiusLeftBottom, tunaRadiusRightTop, tunaRadiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundNormal, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
             }
         }
-        if (tunaRotate != 0) {
-            canvas.rotate(-tunaRotate, tunaWidth >> 1, tunaHeight >> 1);
+        if (rotate != 0) {
+            canvas.rotate(-rotate, width >> 1, height >> 1);
         }
-        if (tunaDrawListener != null) {
-            tunaDrawListener.tunaDraw(this);
+        if (drawListener != null) {
+            drawListener.draw(this);
         }
     }
 }

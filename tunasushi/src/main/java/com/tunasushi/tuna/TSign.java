@@ -9,45 +9,44 @@ import android.graphics.Paint.FontMetricsInt;
 import android.util.AttributeSet;
 
 import com.tuna.R;
-
-import static com.tunasushi.tool.PaintTool.initTunaPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import com.tunasushi.tool.PaintTool;
+import static com.tunasushi.tool.PaintTool.paint;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TSign extends TView{
 
-	private int tunaDumbbellRectColor;
-	private float tunaDumbbellRectWidth, tunaDumbbellRectHeight;
-	private float tunaDumbbellRectMargin;
-	private float tunaDumbbellRectStrokeWidth;
+	private int signRectColor;
+	private float signRectWidth, signRectHeight;
+	private float signRectMargin;
+	private float signRectStrokeWidth;
 
-	private float tunaDumbbellCircleRadius;
-	private float tunaDumbbellCircleMargin;
-	private float tunaDumbbellCircleStrokeWidth;
-	private int tunaDumbbellCircleColorBefore, tunaDumbbellCircleColorAfter;
+	private float signCircleRadius;
+	private float signCircleMargin;
+	private float signCircleStrokeWidth;
+	private int signCircleColorBefore, signCircleColorAfter;
 
-	private float tunaDumbbellTextSize;
-	private float tunaDumbbellTextStrokeWidth;
-	private String tunaDumbbellTextValueBefore, tunaDumbbellTextValueAfter;
+	private float signTextSize;
+	private float signTextStrokeWidth;
+	private String signTextValueBefore, signTextValueAfter;
 
-	private TunaDumbbellDirection tunaDumbbellDirection;
+	private SignDirection signDirection;
 
-	public enum TunaDumbbellDirection {
+	public enum SignDirection {
 		HORIZONTAL(0), VERTICAL(1), ;
 		final int nativeInt;
 
-		TunaDumbbellDirection(int ni){
+		SignDirection(int ni){
 			nativeInt = ni;
 		}
 	}
 
-	private static final TunaDumbbellDirection[] tunaDumbbellDirectionArray = { TunaDumbbellDirection.HORIZONTAL, TunaDumbbellDirection.VERTICAL, };
+	private static final SignDirection[] signDirectionArray = { SignDirection.HORIZONTAL, SignDirection.VERTICAL, };
 
 	public TSign(Context context) {
 		this(context, null);
@@ -60,32 +59,32 @@ public class TSign extends TView{
 	public TSign(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		tunaTag = TSign.class.getSimpleName();
+		Tag = TSign.class.getSimpleName();
 
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSign);
 
-		tunaDumbbellRectColor = typedArray.getColor(R.styleable.TSign_signRectColor, Color.TRANSPARENT);
-		tunaDumbbellRectWidth = typedArray.getDimension(R.styleable.TSign_signRectWidth, 2);
-		tunaDumbbellRectHeight = typedArray.getDimension(R.styleable.TSign_signRectHeight, 2);
-		tunaDumbbellRectMargin = typedArray.getDimension(R.styleable.TSign_signRectMargin, 2);
-		tunaDumbbellRectStrokeWidth = typedArray.getDimension(R.styleable.TSign_signRectStrokeWidth, 2);
+		signRectColor = typedArray.getColor(R.styleable.TSign_signRectColor, Color.TRANSPARENT);
+		signRectWidth = typedArray.getDimension(R.styleable.TSign_signRectWidth, 2);
+		signRectHeight = typedArray.getDimension(R.styleable.TSign_signRectHeight, 2);
+		signRectMargin = typedArray.getDimension(R.styleable.TSign_signRectMargin, 2);
+		signRectStrokeWidth = typedArray.getDimension(R.styleable.TSign_signRectStrokeWidth, 2);
 
-		tunaDumbbellCircleRadius = typedArray.getDimension(R.styleable.TSign_signCircleRadius, 2);
-		tunaDumbbellCircleMargin = typedArray.getDimension(R.styleable.TSign_signCircleMargin, 2);
-		tunaDumbbellCircleStrokeWidth = typedArray.getDimension(R.styleable.TSign_signCircleStrokeWidth, 2);
-		tunaDumbbellCircleColorBefore = typedArray.getColor(R.styleable.TSign_signCircleColorBefore, Color.TRANSPARENT);
-		tunaDumbbellCircleColorAfter = typedArray.getColor(R.styleable.TSign_signCircleColorAfter, Color.TRANSPARENT);
+		signCircleRadius = typedArray.getDimension(R.styleable.TSign_signCircleRadius, 2);
+		signCircleMargin = typedArray.getDimension(R.styleable.TSign_signCircleMargin, 2);
+		signCircleStrokeWidth = typedArray.getDimension(R.styleable.TSign_signCircleStrokeWidth, 2);
+		signCircleColorBefore = typedArray.getColor(R.styleable.TSign_signCircleColorBefore, Color.TRANSPARENT);
+		signCircleColorAfter = typedArray.getColor(R.styleable.TSign_signCircleColorAfter, Color.TRANSPARENT);
 
-		tunaDumbbellTextSize = typedArray.getDimension(R.styleable.TSign_signTextSize, 2);
-		tunaDumbbellTextStrokeWidth = typedArray.getDimension(R.styleable.TSign_signTextStrokeWidth, 2);
-		tunaDumbbellTextValueBefore = typedArray.getString(R.styleable.TSign_signTextValueBefore);
-		tunaDumbbellTextValueAfter = typedArray.getString(R.styleable.TSign_signTextValueAfter);
+		signTextSize = typedArray.getDimension(R.styleable.TSign_signTextSize, 2);
+		signTextStrokeWidth = typedArray.getDimension(R.styleable.TSign_signTextStrokeWidth, 2);
+		signTextValueBefore = typedArray.getString(R.styleable.TSign_signTextValueBefore);
+		signTextValueAfter = typedArray.getString(R.styleable.TSign_signTextValueAfter);
 
-		int tunaDumbbellDirectionIndex = typedArray.getInt(R.styleable.TSign_signDirection, -1);
-		if (tunaDumbbellDirectionIndex >= 0) {
-			tunaDumbbellDirection = tunaDumbbellDirectionArray[tunaDumbbellDirectionIndex];
+		int signDirectionIndex = typedArray.getInt(R.styleable.TSign_signDirection, -1);
+		if (signDirectionIndex >= 0) {
+			signDirection = signDirectionArray[signDirectionIndex];
 		} else {
-			throw new IllegalArgumentException("The content attribute tunaDumbbellDirectionIndex type must be given");
+			throw new IllegalArgumentException("The content attribute signDirectionIndex type must be given");
 		}
 
 		typedArray.recycle();
@@ -95,97 +94,97 @@ public class TSign extends TView{
 	protected void onDraw(Canvas canvas){
 		super.onDraw(canvas);
 
-		if (tunaDumbbellCircleStrokeWidth != 0) {
-			initTunaPaint(Paint.Style.STROKE, tunaDumbbellCircleColorBefore, tunaDumbbellCircleStrokeWidth);
+		if (signCircleStrokeWidth != 0) {
+			PaintTool.initPaint(Paint.Style.STROKE, signCircleColorBefore, signCircleStrokeWidth);
 		} else {
-			initTunaPaint(Paint.Style.FILL, tunaDumbbellCircleColorBefore);
+			PaintTool.initPaint(Paint.Style.FILL, signCircleColorBefore);
 		}
 
-		float circleCenterYBefore = tunaDumbbellCircleRadius + tunaDumbbellCircleMargin;
-		canvas.drawCircle(tunaWidth >> 1, circleCenterYBefore, tunaDumbbellCircleRadius, tunaPaint);
+		float circleCenterYBefore = signCircleRadius + signCircleMargin;
+		canvas.drawCircle(width >> 1, circleCenterYBefore, signCircleRadius, paint);
 
 		// 后期拆分
-		if (tunaDumbbellTextStrokeWidth != 0) {
-			tunaPaint.setStyle(Paint.Style.STROKE);
-			tunaPaint.setStrokeWidth(tunaDumbbellTextStrokeWidth);
+		if (signTextStrokeWidth != 0) {
+			paint.setStyle(Paint.Style.STROKE);
+			paint.setStrokeWidth(signTextStrokeWidth);
 		} else {
-			tunaPaint.setStyle(Paint.Style.FILL);
+			paint.setStyle(Paint.Style.FILL);
 		}
 
-		tunaPaint.setTextSize(tunaDumbbellTextSize);
-		tunaPaint.setTextAlign(Paint.Align.CENTER);
-		FontMetricsInt fontMetrics = tunaPaint.getFontMetricsInt();
+		paint.setTextSize(signTextSize);
+		paint.setTextAlign(Paint.Align.CENTER);
+		FontMetricsInt fontMetrics = paint.getFontMetricsInt();
 		float baseline = (circleCenterYBefore * 2 - fontMetrics.bottom - fontMetrics.top) * 0.5f;
 
-		if (tunaDumbbellTextValueBefore != null) {
-			canvas.drawText(tunaDumbbellTextValueBefore, tunaWidth >> 1, baseline, tunaPaint);
+		if (signTextValueBefore != null) {
+			canvas.drawText(signTextValueBefore, width >> 1, baseline, paint);
 		}
 
-		if (tunaDumbbellRectStrokeWidth != 0) {
-			tunaPaint.setStyle(Paint.Style.STROKE);
-			tunaPaint.setStrokeWidth(tunaDumbbellRectStrokeWidth);
+		if (signRectStrokeWidth != 0) {
+			paint.setStyle(Paint.Style.STROKE);
+			paint.setStrokeWidth(signRectStrokeWidth);
 		} else {
-			tunaPaint.setStyle(Paint.Style.FILL);
+			paint.setStyle(Paint.Style.FILL);
 		}
-		tunaPaint.setColor(tunaDumbbellRectColor);
+		paint.setColor(signRectColor);
 
-		if (tunaDumbbellDirection == TunaDumbbellDirection.VERTICAL) {
+		if (signDirection == SignDirection.VERTICAL) {
 
-			float rectCenterX = tunaWidth >> 1;
-			float rectCenterY = tunaDumbbellCircleMargin + tunaDumbbellCircleRadius * 2 + tunaDumbbellCircleStrokeWidth * 2 + tunaDumbbellRectMargin + tunaDumbbellRectHeight / 2
-					+ tunaDumbbellRectWidth;
+			float rectCenterX = width >> 1;
+			float rectCenterY = signCircleMargin + signCircleRadius * 2 + signCircleStrokeWidth * 2 + signRectMargin + signRectHeight / 2
+					+ signRectWidth;
 
 			for (;;) {
-				canvas.drawRect(rectCenterX - tunaDumbbellRectWidth / 2, rectCenterY - tunaDumbbellRectHeight / 2, rectCenterX + tunaDumbbellRectWidth / 2, rectCenterY
-						+ tunaDumbbellRectHeight / 2, tunaPaint);
-				if (tunaHeight
-						- (rectCenterY + tunaDumbbellRectHeight / 2 + tunaDumbbellRectMargin + tunaDumbbellRectStrokeWidth + tunaDumbbellCircleMargin + tunaDumbbellCircleRadius
-								* 2 + tunaDumbbellCircleStrokeWidth * 2) <= tunaDumbbellRectHeight + tunaDumbbellRectStrokeWidth * 2 + tunaDumbbellRectMargin) {
+				canvas.drawRect(rectCenterX - signRectWidth / 2, rectCenterY - signRectHeight / 2, rectCenterX + signRectWidth / 2, rectCenterY
+						+ signRectHeight / 2, paint);
+				if (height
+						- (rectCenterY + signRectHeight / 2 + signRectMargin + signRectStrokeWidth + signCircleMargin + signCircleRadius
+								* 2 + signCircleStrokeWidth * 2) <= signRectHeight + signRectStrokeWidth * 2 + signRectMargin) {
 					break;
 				}
-				rectCenterY += tunaDumbbellRectHeight + tunaDumbbellRectMargin + tunaDumbbellRectMargin * 2;
+				rectCenterY += signRectHeight + signRectMargin + signRectMargin * 2;
 			}
 
-			if (tunaDumbbellCircleStrokeWidth != 0) {
-				tunaPaint.setStyle(Paint.Style.STROKE);
-				tunaPaint.setStrokeWidth(tunaDumbbellCircleStrokeWidth);
+			if (signCircleStrokeWidth != 0) {
+				paint.setStyle(Paint.Style.STROKE);
+				paint.setStrokeWidth(signCircleStrokeWidth);
 			} else {
-				tunaPaint.setStyle(Paint.Style.FILL);
+				paint.setStyle(Paint.Style.FILL);
 			}
-			tunaPaint.setColor(tunaDumbbellCircleColorAfter);
+			paint.setColor(signCircleColorAfter);
 
-			float circleCenterAfter = rectCenterY + tunaDumbbellRectHeight / 2 + tunaDumbbellRectMargin + tunaDumbbellRectStrokeWidth + tunaDumbbellCircleRadius
-					+ tunaDumbbellCircleStrokeWidth;
-			canvas.drawCircle(tunaWidth >> 1, circleCenterAfter, tunaDumbbellCircleRadius, tunaPaint);
+			float circleCenterAfter = rectCenterY + signRectHeight / 2 + signRectMargin + signRectStrokeWidth + signCircleRadius
+					+ signCircleStrokeWidth;
+			canvas.drawCircle(width >> 1, circleCenterAfter, signCircleRadius, paint);
 
-			if (tunaDumbbellTextStrokeWidth != 0) {
-				tunaPaint.setStyle(Paint.Style.STROKE);
-				tunaPaint.setStrokeWidth(tunaDumbbellTextStrokeWidth);
+			if (signTextStrokeWidth != 0) {
+				paint.setStyle(Paint.Style.STROKE);
+				paint.setStrokeWidth(signTextStrokeWidth);
 			} else {
-				tunaPaint.setStyle(Paint.Style.FILL);
+				paint.setStyle(Paint.Style.FILL);
 			}
 			baseline = (circleCenterAfter * 2 - fontMetrics.bottom - fontMetrics.top) * 0.5f;
 
-			if (tunaDumbbellTextValueAfter != null) {
-				canvas.drawText(tunaDumbbellTextValueAfter, tunaWidth >> 1, baseline, tunaPaint);
+			if (signTextValueAfter != null) {
+				canvas.drawText(signTextValueAfter, width >> 1, baseline, paint);
 			}
 
 		} else {
 
-			float rectCenterX = tunaDumbbellCircleMargin + tunaDumbbellCircleRadius * 2 + tunaDumbbellCircleStrokeWidth * 2 + tunaDumbbellRectMargin + tunaDumbbellRectHeight / 2
-					+ tunaDumbbellRectWidth;
-			float rectCenterY = tunaHeight >> 1;
+			float rectCenterX = signCircleMargin + signCircleRadius * 2 + signCircleStrokeWidth * 2 + signRectMargin + signRectHeight / 2
+					+ signRectWidth;
+			float rectCenterY = height >> 1;
 
 			for (;;) {
-				canvas.drawRect(rectCenterX - tunaDumbbellRectWidth / 2, rectCenterY - tunaDumbbellRectHeight / 2, rectCenterX + tunaDumbbellRectWidth / 2, rectCenterY
-						+ tunaDumbbellRectHeight / 2, tunaPaint);
+				canvas.drawRect(rectCenterX - signRectWidth / 2, rectCenterY - signRectHeight / 2, rectCenterX + signRectWidth / 2, rectCenterY
+						+ signRectHeight / 2, paint);
 
-				if (tunaWidth
-						- (rectCenterX + tunaDumbbellRectWidth / 2 + tunaDumbbellRectMargin + tunaDumbbellRectStrokeWidth + tunaDumbbellCircleMargin + tunaDumbbellCircleRadius * 2 + tunaDumbbellCircleStrokeWidth * 2) <= tunaDumbbellRectWidth
-						+ tunaDumbbellRectStrokeWidth * 2 + tunaDumbbellRectMargin) {
+				if (width
+						- (rectCenterX + signRectWidth / 2 + signRectMargin + signRectStrokeWidth + signCircleMargin + signCircleRadius * 2 + signCircleStrokeWidth * 2) <= signRectWidth
+						+ signRectStrokeWidth * 2 + signRectMargin) {
 					break;
 				}
-				rectCenterX += tunaDumbbellRectWidth + tunaDumbbellRectMargin + tunaDumbbellRectMargin * 2;
+				rectCenterX += signRectWidth + signRectMargin + signRectMargin * 2;
 			}
 
 		}

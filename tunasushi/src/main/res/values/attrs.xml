@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Attributes that can be used with {@link com.tunajslibs.tuna.TunaView} or any of its subclasses. -->
+    <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
         <!-- edge and always means you can touch ,the difference is edge not available out of the edge when you move out of time-->
         <attr name="touchType">
@@ -196,7 +196,7 @@
         <attr name="srcLeftWidth" format="dimension" />
         <attr name="srcLeftHeight" format="dimension" />
 
-        <!-- tunaTextPaddingLeft means distance between tunaSrcLeft and The leftmost,note about the tunaSrcLeftPadding -->
+        <!-- textPaddingLeft means distance between srcLeft and The leftmost,note about the srcLeftPadding -->
         <attr name="srcLeftPadding" format="dimension" />
         <attr name="srcLeftDx" format="dimension" />
         <attr name="srcLeftDy" format="dimension" />
@@ -205,7 +205,7 @@
         <attr name="srcRightWidth" format="dimension" />
         <attr name="srcRightHeight" format="dimension" />
 
-        <!-- tunaTextPaddingRight means distance between tunaSrcRight and The leftmost,note about the tunaSrcRightPadding -->
+        <!-- textPaddingRight means distance between srcRight and The leftmost,note about the srcRightPadding -->
         <attr name="srcRightPadding" format="dimension" />
         <attr name="srcRightDx" format="dimension" />
         <attr name="srcRightDy" format="dimension" />
@@ -577,10 +577,10 @@
             <enum name="vertical" value="1" />
         </attr>
     </declare-styleable>
-    
+
     <declare-styleable name="TSVG">
-        <attr name="sVGSrc" format="reference" />
-        <attr name="sVGType">
+        <attr name="SVGSrc" format="reference" />
+        <attr name="SVGType">
             <enum name="circle" value="0" />
             <enum name="star" value="1" />
             <enum name="heart" value="2" />
@@ -589,7 +589,6 @@
             <enum name="sixteenedge" value="5" />
             <enum name="fortyedge" value="6" />
             <enum name="snail" value="7" />
-            <enum name="fish" value="8" />
         </attr>
     </declare-styleable>
 

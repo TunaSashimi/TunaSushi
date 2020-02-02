@@ -10,6 +10,6 @@
         android:layout_width="447dp"
         android:layout_height="64dp"
         android:layout_margin="16dp"
-        app:irregularBitmapSrcNormal="@drawable/dialog_datesearch_switch01"
-        app:irregularBitmapSrcSelect="@drawable/dialog_datesearch_switch02" />
+        app:irregularBitmapSrcNormal="@drawable/iv_dialog_switch01"
+        app:irregularBitmapSrcSelect="@drawable/iv_dialog_switch02" />
 </RelativeLayout>

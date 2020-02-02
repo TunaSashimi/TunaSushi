@@ -150,6 +150,6 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#ffffff"
         app:textSize="14dp"
-        app:textValue="change the dialog name" />
+        app:textValue="change name" />
 
 </RelativeLayout>

@@ -19,51 +19,53 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 
 import com.tuna.R;
+import com.tunasushi.tool.PaintTool;
 
-import static com.tunasushi.tool.PaintTool.initTunaTextPaint;
-import static com.tunasushi.tool.PaintTool.tunaPaint;
+import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.PathTool.initPath;
+import static com.tunasushi.tool.PathTool.path;
 
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:58
- * @Copyright 2015 TunaSashimi. All rights reserved.
+ * @Copyright 2015 Sashimi. All rights reserved.
  * @Description
  */
 public class TScratch extends TView{
 
-	private Paint tunaScratchCoverPaint;
+	private Paint scratchCoverPaint;
 
-	private Bitmap tunaScratchCoverBitmap, tunaScratchSrcBitmap;
-
-	//
-	private int tunaScratchTouchX, tunaScratchTouchY;
+	private Bitmap scratchCoverBitmap, scratchSrcBitmap;
 
 	//
-	private String tunaScratchText;
+	private int scratchTouchX, scratchTouchY;
+
 	//
-	private int tunaScratchTextSize;
-	private int tunaScratchTextColor;
+	private String scratchText;
+	//
+	private int scratchTextSize;
+	private int scratchTextColor;
 
-	private int tunaScratchCoverColor;
-	private float tunaScratchCoverStrokeWidth;
+	private int scratchCoverColor;
+	private float scratchCoverStrokeWidth;
 
-	private float tunaScratchRadius;
+	private float scratchRadius;
 
-	private volatile boolean tunaScratchComplete;
+	private volatile boolean scratchComplete;
 
-	public interface onTunaScratchCompleteListener{
-		void onTunaScratchComplete();
+	public interface onScratchCompleteListener {
+		void onScratchComplete();
 	}
 
-	private onTunaScratchCompleteListener onTunaScratchCompleteListener;
+	private onScratchCompleteListener onScratchCompleteListener;
 
-	public onTunaScratchCompleteListener getOnTunaScratchCompleteListener(){
-		return onTunaScratchCompleteListener;
+	public onScratchCompleteListener getOnScratchCompleteListener(){
+		return onScratchCompleteListener;
 	}
 
-	public void setOnTunaScratchCompleteListener(onTunaScratchCompleteListener onTunaScratchCompleteListener){
-		this.onTunaScratchCompleteListener = onTunaScratchCompleteListener;
+	public void setOnScratchCompleteListener(onScratchCompleteListener onScratchCompleteListener){
+		this.onScratchCompleteListener = onScratchCompleteListener;
 	}
 
 	public TScratch(Context context) {
@@ -77,36 +79,36 @@ public class TScratch extends TView{
 	public TScratch(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		tunaTag = TScratch.class.getSimpleName();
+		Tag = TScratch.class.getSimpleName();
 
 		//
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TScratch);
-		int tunaScratchSrcId = typedArray.getResourceId(R.styleable.TScratch_scratchSrc, -1);
-		if (tunaScratchSrcId > -1) {
-			tunaScratchSrcBitmap = BitmapFactory.decodeResource(getResources(), tunaScratchSrcId);
+		int scratchSrcId = typedArray.getResourceId(R.styleable.TScratch_scratchSrc, -1);
+		if (scratchSrcId > -1) {
+			scratchSrcBitmap = BitmapFactory.decodeResource(getResources(), scratchSrcId);
 		}
 
-		tunaScratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
-		tunaScratchCoverColor = typedArray.getColor(R.styleable.TScratch_scratchCoverColor, Color.parseColor("#c0c0c0"));
+		scratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+		scratchCoverColor = typedArray.getColor(R.styleable.TScratch_scratchCoverColor, Color.parseColor("#c0c0c0"));
 
-		tunaScratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()));
-		tunaScratchText = typedArray.getString(R.styleable.TScratch_scratchText);
+		scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()));
+		scratchText = typedArray.getString(R.styleable.TScratch_scratchText);
 
-		tunaScratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 22, getResources().getDisplayMetrics()));
-		tunaScratchTextColor = typedArray.getColor(R.styleable.TScratch_scratchTextColor, Color.TRANSPARENT);
+		scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 22, getResources().getDisplayMetrics()));
+		scratchTextColor = typedArray.getColor(R.styleable.TScratch_scratchTextColor, Color.TRANSPARENT);
 
 		typedArray.recycle();
 
 		//
-		initTunaPath();
-		initTunaRect();
+		initPath();
+		initRect();
 
-		tunaScratchCoverPaint = new Paint();
+		scratchCoverPaint = new Paint();
 	}
 
-	public void setTunaScratchText(String tunaScratchText){
-		this.tunaScratchText = tunaScratchText;
-		tunaPaint.getTextBounds(tunaScratchText, 0, tunaScratchText.length(), tunaRect);
+	public void setScratchText(String scratchText){
+		this.scratchText = scratchText;
+		paint.getTextBounds(scratchText, 0, scratchText.length(), rect);
 	}
 
 	@Override
@@ -114,26 +116,26 @@ public class TScratch extends TView{
 		super.onLayout(changed, left, top, right, bottom);
 
 		//
-		tunaScratchCoverBitmap = Bitmap.createBitmap(tunaWidth, tunaHeight, Config.ARGB_8888);
-		tunaCanvas = new Canvas(tunaScratchCoverBitmap);
+		scratchCoverBitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+		canvas = new Canvas(scratchCoverBitmap);
 
 		//
-		tunaScratchCoverPaint.setColor(tunaScratchCoverColor);
-		tunaScratchCoverPaint.setAntiAlias(true);
-		tunaScratchCoverPaint.setDither(true);
+		scratchCoverPaint.setColor(scratchCoverColor);
+		scratchCoverPaint.setAntiAlias(true);
+		scratchCoverPaint.setDither(true);
 		// 设置结合处的样子, Miter为锐角, Round为圆弧, BEVEL为直线。
-		tunaScratchCoverPaint.setStrokeJoin(Paint.Join.ROUND);
+		scratchCoverPaint.setStrokeJoin(Paint.Join.ROUND);
 		// 设置笔刷类型
-		tunaScratchCoverPaint.setStrokeCap(Paint.Cap.ROUND);
-		tunaScratchCoverPaint.setStyle(Style.FILL);
-		tunaScratchCoverPaint.setStrokeWidth(tunaScratchCoverStrokeWidth);
+		scratchCoverPaint.setStrokeCap(Paint.Cap.ROUND);
+		scratchCoverPaint.setStyle(Style.FILL);
+		scratchCoverPaint.setStrokeWidth(scratchCoverStrokeWidth);
 
 		//
-		initTunaTextPaint(Style.FILL, tunaScratchTextColor, tunaScratchTextSize, Align.LEFT);
-		tunaPaint.getTextBounds(tunaScratchText, 0, tunaScratchText.length(), tunaRect);
+		PaintTool.initTextPaint(Style.FILL, scratchTextColor, scratchTextSize, Align.LEFT);
+		paint.getTextBounds(scratchText, 0, scratchText.length(), rect);
 
-		tunaCanvas.drawRoundRect(new RectF(0, 0, tunaWidth, tunaHeight), tunaScratchRadius, tunaScratchRadius, tunaScratchCoverPaint);
-		tunaCanvas.drawBitmap(tunaScratchSrcBitmap, null, new Rect(0, 0, tunaWidth, tunaHeight), null);
+		canvas.drawRoundRect(new RectF(0, 0, width, height), scratchRadius, scratchRadius, scratchCoverPaint);
+		canvas.drawBitmap(scratchSrcBitmap, null, new Rect(0, 0, width, height), null);
 	}
 
 	@Override
@@ -143,28 +145,28 @@ public class TScratch extends TView{
 		int y = (int) event.getY();
 		switch (action) {
 			case MotionEvent.ACTION_DOWN:
-				tunaScratchTouchX = x;
-				tunaScratchTouchY = y;
-				tunaPath.moveTo(tunaScratchTouchX, tunaScratchTouchY);
+				scratchTouchX = x;
+				scratchTouchY = y;
+				path.moveTo(scratchTouchX, scratchTouchY);
 				break;
 			case MotionEvent.ACTION_MOVE:
-				int dx = Math.abs(x - tunaScratchTouchX);
-				int dy = Math.abs(y - tunaScratchTouchY);
+				int dx = Math.abs(x - scratchTouchX);
+				int dy = Math.abs(y - scratchTouchY);
 				if (dx > 3 || dy > 3) {
-					tunaPath.lineTo(x, y);
+					path.lineTo(x, y);
 				}
-				tunaScratchTouchX = x;
-				tunaScratchTouchY = y;
+				scratchTouchX = x;
+				scratchTouchY = y;
 				break;
 			case MotionEvent.ACTION_UP:
-				if (!tunaScratchComplete) {
+				if (!scratchComplete) {
 					measurePixels();
 				}
 				break;
 			default:
 				break;
 		}
-		if (!tunaScratchComplete) {
+		if (!scratchComplete) {
 			invalidate();
 		}
 		return true;
@@ -181,7 +183,7 @@ public class TScratch extends TView{
 			int h = getHeight();
 			float wipeArea = 0;
 			float totalArea = w * h;
-			Bitmap bitmap = tunaScratchCoverBitmap;
+			Bitmap bitmap = scratchCoverBitmap;
 			int[] mPixels = new int[w * h];
 			// 获得bitmap上所有信息
 			bitmap.getPixels(mPixels, 0, w, 0, 0, w, h);
@@ -197,7 +199,7 @@ public class TScratch extends TView{
 			if (wipeArea > 0 && totalArea > 0) {
 				int percent = (int) (wipeArea * 100 / totalArea);
 				if (percent > 60) {
-					tunaScratchComplete = true;
+					scratchComplete = true;
 					postInvalidate();
 				}
 			}
@@ -206,18 +208,18 @@ public class TScratch extends TView{
 
 	@Override
 	protected void onDraw(Canvas canvas){
-		canvas.drawText(tunaScratchText, (tunaWidth >> 1) - tunaRect.width() / 2, (tunaHeight >> 1) + tunaRect.height() / 2, tunaPaint);
+		canvas.drawText(scratchText, (width >> 1) - rect.width() / 2, (height >> 1) + rect.height() / 2, paint);
 
-		if (!tunaScratchComplete) {
-			tunaScratchCoverPaint.setStyle(Style.STROKE);
-			tunaScratchCoverPaint.setXfermode(new PorterDuffXfermode(Mode.DST_OUT));
-			tunaCanvas.drawPath(tunaPath, tunaScratchCoverPaint);
-			canvas.drawBitmap(tunaScratchCoverBitmap, 0, 0, null);
+		if (!scratchComplete) {
+			scratchCoverPaint.setStyle(Style.STROKE);
+			scratchCoverPaint.setXfermode(new PorterDuffXfermode(Mode.DST_OUT));
+			this.canvas.drawPath(path, scratchCoverPaint);
+			canvas.drawBitmap(scratchCoverBitmap, 0, 0, null);
 		}
 
-		if (tunaScratchComplete) {
-			if (onTunaScratchCompleteListener != null) {
-				onTunaScratchCompleteListener.onTunaScratchComplete();
+		if (scratchComplete) {
+			if (onScratchCompleteListener != null) {
+				onScratchCompleteListener.onScratchComplete();
 			}
 		}
 	}
