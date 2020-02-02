@@ -16,8 +16,11 @@ import com.tunasushi.tuna.TView.TouchUpListener;
 
 import java.util.Arrays;
 
+import static com.tunasushi.tool.GroupTool.associate;
+import static com.tunasushi.tool.GroupTool.dynamic;
+
 public class TViewActivity extends Activity {
-    private TView TViewRectClassic01;
+    private TView TViewRectClassic01, TViewRectClassic02;
     private TView TViewMainButton01, TViewMainButton02;
     private TView TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right;
 
@@ -57,10 +60,14 @@ public class TViewActivity extends Activity {
             }
         });
 
-        TViewRectClassic01.setOnClickListener(new View.OnClickListener() {
+        /**
+         * 注意这里继承的是TView.OnClick事件
+         */
+        TViewRectClassic02 = findViewById(R.id.rectClassic02);
+        TViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TViewActivity.this, "OnClickListener", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -119,7 +126,7 @@ public class TViewActivity extends Activity {
         //	TView.associate(new TView[]{TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right});
 
         //or  can be placed on a list of incoming associate method
-        TView.associate(Arrays.asList(TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right));
+        associate(Arrays.asList(TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right));
 
         //
         String radioGroupTitleArray[] = {
@@ -139,7 +146,7 @@ public class TViewActivity extends Activity {
 
         //Activity activity, String[] titleArray, int index(下标默认0), TouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        TView.dynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
+        dynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
                 R.style.TView_RadioGroup_LightGray_Left,
                 R.style.TView_RadioGroup_LightGray_Right,
                 R.style.TView_RadioGroup_LightGray_Horizontal,

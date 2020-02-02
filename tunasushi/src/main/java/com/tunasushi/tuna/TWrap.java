@@ -16,6 +16,8 @@ import com.tunasushi.tool.PaintTool;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tunasushi.tool.DrawTool.drawRectClassic;
+import static com.tunasushi.tool.DrawTool.drawText;
 import static com.tunasushi.tool.PaintTool.paint;
 
 /**

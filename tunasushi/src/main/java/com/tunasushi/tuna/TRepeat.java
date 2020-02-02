@@ -16,6 +16,7 @@ import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.DeviceTool.applyDimension;
+import static com.tunasushi.tool.DrawTool.drawText;
 
 
 /**

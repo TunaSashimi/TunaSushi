@@ -10,6 +10,9 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
+
+import static com.tunasushi.tool.DrawTool.drawRectClassic;
+import static com.tunasushi.tool.DrawTool.drawText;
 import static com.tunasushi.tool.PathTool.initPathMoveTo;
 import static com.tunasushi.tool.PathTool.path;
 

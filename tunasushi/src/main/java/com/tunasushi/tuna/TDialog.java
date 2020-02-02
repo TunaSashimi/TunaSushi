@@ -11,6 +11,10 @@ import android.view.View;
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
 
+import static com.tunasushi.tool.DrawTool.drawRectClassic;
+import static com.tunasushi.tool.DrawTool.drawRectCustom;
+import static com.tunasushi.tool.DrawTool.drawText;
+
 
 /**
  * @author Tunasashimi

@@ -5,7 +5,6 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +18,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
@@ -63,11 +61,13 @@ import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.DeviceTool.applyDimension;
 import static com.tunasushi.tool.DeviceTool.convertToPX;
 import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.DrawTool.drawRectClassic;
+import static com.tunasushi.tool.DrawTool.drawRectCustom;
+import static com.tunasushi.tool.DrawTool.drawText;
+import static com.tunasushi.tool.DrawTool.drawTextMark;
 import static com.tunasushi.tool.PaintTool.initTextPaint;
 import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPathRoundRect;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
-import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
  * @author Tunasashimi
@@ -80,7 +80,6 @@ public class TView extends View {
     /**
      * The following fields and methods of the parent class and subclass can always use
      */
-    // as the mark of TView species
     protected String Tag;
 
     // the width and height of the TView(put together to save the number of rows)
@@ -95,8 +94,8 @@ public class TView extends View {
 
     protected float srcWidthScale, srcHeightScale;
 
-    protected float centerX, centerY;
     protected float dx, dy;
+    protected float centerX, centerY;
     protected float scale, scaleSx, scaleSy;
 
     protected float percent;
@@ -105,8 +104,6 @@ public class TView extends View {
 
     protected float[] floatArray;
     protected String[] stringArray;
-
-
 
     protected Rect rect;
 
@@ -133,18 +130,14 @@ public class TView extends View {
         return rect;
     }
 
-    protected RectF rectF;
+    public static RectF rectF;
 
-    public RectF getRectF() {
+    public static RectF getRectF() {
         return rectF;
     }
 
-    public void setRectF(RectF rectF) {
-        this.rectF = rectF;
-    }
-
     //
-    protected RectF initRectF(float left, float top, float right, float bottom) {
+    public static RectF initRectF(float left, float top, float right, float bottom) {
         if (rectF == null) {
             rectF = new RectF(left, top, right, bottom);
         }
@@ -210,248 +203,11 @@ public class TView extends View {
         invalidate();
     }
 
-
     //
-    protected void initcanvas(Canvas canvas) {
+    protected void initCanvas(Canvas canvas) {
         if (canvas.getDrawFilter() == null) {
             canvas.setDrawFilter(paintFlagsDrawFilter);
             canvasHardwareAccelerated = canvas.isHardwareAccelerated();
-        }
-    }
-
-    // 8
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
-    }
-
-    // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
-    }
-
-    // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
-    }
-
-    // 14
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
-    }
-
-    // 14
-    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
-                radiusLeftBottom, radiusRightTop, radiusRightBottom);
-    }
-
-    // 15
-    protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-
-        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
-        if (strokeWidth > 0) {
-            canvas.drawPath(
-                    initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
-                            Path.Direction.CW), PaintTool.initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
-        }
-
-        int radiiLength = radii.length;
-        for (int i = 0; i < radiiLength; i++) {
-            radii[i] -= strokeWidth;
-            radii[i] = radii[i] >= 0 ? radii[i] : 0;
-        }
-
-        canvas.drawPath(
-                initPathRoundRect(initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
-                shader == null ? shadowRadius == 0 ? PaintTool.initPaint(fillColor) : PaintTool.initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                        shadowDy) : shadowRadius == 0 ? PaintTool.initPaint(Paint.Style.FILL, shader) : PaintTool.initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
-                        shadowDy));
-    }
-
-    // 5
-    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float radius) {
-
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radius);
-    }
-
-    // 7
-    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, int strokeColor, float radius) {
-
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
-    }
-
-    // 7
-    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, int strokeColor, float radius) {
-
-        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
-    }
-
-    // 9
-    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, int strokeColor, float radius) {
-
-        drawRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
-    }
-
-    // 9
-    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, int strokeColor, float radius) {
-
-        drawRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
-    }
-
-    // 11
-    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
-
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
-    }
-
-    // 11
-    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
-
-        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
-    }
-
-    // 12
-    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                   float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
-
-        if (strokeWidth > 0) {
-            canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
-                    PaintTool.initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
-        }
-
-        canvas.drawRoundRect(
-                initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
-                radius,
-                radius,
-                shader == null ? shadowRadius == 0 ? PaintTool.initPaint(fillColor) : PaintTool.initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
-                        shadowDy) : shadowRadius == 0 ? PaintTool.initPaint(Paint.Style.FILL, shader) : PaintTool.initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
-                        shadowDy));
-    }
-
-    // 6
-    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, textGravityArray[0], 1.0f, null);
-    }
-
-    // 8
-    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, textGravityArray[0], 1.0f, null);
-    }
-
-    // 9
-    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, textGravityArray[0], textRowSpaceRatio, valueMeasureList);
-    }
-
-    // 10
-    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
-
-        if (valueMeasureList == null) {
-            valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
-        }
-
-        float textMiddleRow = (valueMeasureList.size() + 1) * 0.5f;
-
-        FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-        // float baseline = (targetRectBottom + targetRectTop - fontMetrics.bottom - fontMetrics.top) * 0.5f;
-        float baseline = centerY - fontMetrics.bottom * 0.5f - fontMetrics.top * 0.5f;
-        int halfWordHeight = (fontMetrics.descent - fontMetrics.ascent) >> 1;
-
-        //
-        String drawString;
-        float drawLineY;
-
-        int valueMeasureListSize = valueMeasureList.size();
-        for (int i = 0; i < valueMeasureListSize; i++) {
-            drawLineY = baseline + (i + 1 - textMiddleRow) * paint.getTextSize() * textRowSpaceRatio;
-            if (i == 0) {
-                drawString = string.substring(0, valueMeasureList.get(i));
-            } else {
-                drawString = string.substring(valueMeasureList.get(i - 1), valueMeasureList.get(i));
-            }
-
-            float measureLength = paint.measureText(drawString);
-
-            if (i != valueMeasureListSize - 1) {
-                switch (textGravity) {
-                    case ALL_CENTER:
-                        canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
-                        break;
-                    case ALL_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        break;
-                    case CENTER_LEFT:
-                        canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
-                        break;
-                    case LEFT_CENTER:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        break;
-                    default:
-                        break;
-                }
-            } else {
-                float availableWidth = width - paddingLeft - paddingRight;
-                switch (textGravity) {
-                    case ALL_CENTER:
-                        canvas.drawText(drawString, centerX, drawLineY, paint);
-                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case ALL_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case CENTER_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case LEFT_CENTER:
-                        canvas.drawText(drawString, centerX, drawLineY, paint);
-                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    default:
-                        break;
-                }
-            }
-        }
-        return new float[]{width, 0, 0};
-    }
-
-    //
-    protected void drawTextMark(
-            Canvas canvas,
-            float radius, Paint paint,
-            float markRadius,
-            float markDx, float markDy,
-            float offsetX, float offsetY,
-            String markText,
-            int markTextColor,
-            float markTextSize,
-            List<Integer> valueMeasureList) {
-
-        float cx = (width >> 1) + offsetX + markRadius + markDx;
-        float cy = (height >> 1) + offsetY + markDy;
-
-        canvas.drawCircle(cx, cy, radius, paint);
-        if (markText != null) {
-            // Because, drawText use the same method to clear the cache measureRowList
-            drawText(canvas, markText, width, cx, cy, 0, 0,
-                    PaintTool.initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
-                    , 1, valueMeasureList);
         }
     }
 
@@ -478,187 +234,6 @@ public class TView extends View {
         }
     }
 
-    //
-    public static void associate(final TView[] TViewArray) {
-        if (TViewArray == null) {
-            return;
-        }
-        final int arraySize = TViewArray.length;
-        for (int i = 0; i < arraySize; i++) {
-            final int finalI = i;
-            TViewArray[i].setAssociateListener(new associateListener() {
-                @Override
-                public void associate(View v) {
-                    for (int j = 0; j < arraySize; j++) {
-                        if (j != finalI) {
-                            TViewArray[j].setStatius(false, false, false);
-                        }
-                    }
-                }
-            });
-            TViewArray[i].setTouchCancelListener(new TouchCancelListener() {
-                @Override
-                public void touchCancel(View v) {
-                    for (int j = 0; j < arraySize; j++) {
-                        switch (finalI) {
-                            case 0:
-                                if (j == finalI + 1) {
-                                    TViewArray[j].setStatius(false, true, false);
-                                } else if (j > finalI + 1) {
-                                    TViewArray[j].setStatius(false, false, false);
-                                }
-                                break;
-                            default:
-                                if (j == finalI - 1) {
-                                    TViewArray[j].setStatius(false, true, false);
-                                } else if (j < finalI - 1) {
-                                    TViewArray[j].setStatius(false, false, false);
-                                }
-                                break;
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    //
-    public static void associate(final List<TView> TViewList) {
-        if (TViewList == null) {
-            return;
-        }
-        final int listSize = TViewList.size();
-        for (int i = 0; i < listSize; i++) {
-            final int finalI = i;
-            TViewList.get(i).setAssociateListener(new associateListener() {
-                @Override
-                public void associate(View v) {
-                    for (int j = 0; j < listSize; j++) {
-                        if (j != finalI) {
-                            TViewList.get(j).setStatius(false, false, false, false);
-                        }
-                    }
-                }
-            });
-            TViewList.get(i).setTouchCancelListener(new TouchCancelListener() {
-                @Override
-                public void touchCancel(View v) {
-                    for (int j = 0; j < listSize; j++) {
-                        switch (finalI) {
-                            case 0:
-                                if (j == finalI + 1) {
-                                    TViewList.get(j).setStatius(false, true, false, false);
-                                } else if (j > finalI + 1) {
-                                    TViewList.get(j).setStatius(false, false, false, false);
-                                }
-                                break;
-                            default:
-                                if (j == finalI - 1) {
-                                    TViewList.get(j).setStatius(false, true, false, false);
-                                } else if (j < finalI - 1) {
-                                    TViewList.get(j).setStatius(false, false, false, false);
-                                }
-                                break;
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    //
-    public static void dynamic(String[] titleArray, String string, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
-
-        dynamic(titleArray, string, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
-    }
-
-    //
-    public static void dynamic(String[] titleArray, String string, TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
-        int index = 0;
-        for (int i = 0; i < titleArray.length; i++) {
-            if (titleArray[i].equals(string)) {
-                index = i;
-                break;
-            }
-        }
-        dynamic(titleArray, index, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
-    }
-
-    //
-    public static void dynamic(String[] titleArray, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
-
-        dynamic(titleArray, 0, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
-    }
-
-    //
-    public static void dynamic(String[] titleArray, TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
-
-        dynamic(titleArray, 0, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
-    }
-
-    //
-    public static void dynamic(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
-
-        dynamic(titleArray, index, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
-    }
-
-    //
-    public static void dynamic(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
-
-        dynamicRaw(titleArray, index, touchUpListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
-                horizontalStyle, wholeStyle);
-    }
-
-    //
-    private static void dynamicRaw(String[] titleArray, int index, TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
-                                   int rightStyle, int horizontalStyle, int wholeStyle) {
-
-        Context context = linearLayout.getContext();
-
-//		int margin = context.getResources().getDimensionPixelOffset(R.dimen.tuna_stroke_mask);
-        int margin = -2;    //-2px
-
-        List<TView> TViewList = new ArrayList<TView>();
-
-        if (titleArray.length <= 0) {
-            return;
-        } else if (titleArray.length == 1) {
-
-            TView TView = new TView(context, null, wholeStyle);
-
-            TView.setTextValue(titleArray[0]);
-            TView.setTouchUpListener(touchUpListener);
-            linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
-        } else {
-
-            for (int i = 0; i < titleArray.length; i++) {
-                TView TView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
-                TView.setTextValue(titleArray[i]);
-                if (i == index) {
-                    TView.setSelect(true);
-                }
-                TView.setTouchUpListener(touchUpListener);
-
-                TViewList.add(TView);
-                linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
-
-                if (i == 0 && titleArray.length == 2) {
-                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, 0, 0, margin, 0);
-                } else if (i == 1 && titleArray.length == 2) {
-                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, 0, 0);
-                } else if (i != 0 && i != titleArray.length - 1) {
-                    setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
-                }
-            }
-            TView.associate(TViewList);
-        }
-    }
 
     //
     protected View propertiesView;
@@ -761,7 +336,7 @@ public class TView extends View {
         });
 
         //
-        OnClickListener onClickListener = new OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /**
@@ -900,14 +475,14 @@ public class TView extends View {
         this.touchType = touchType;
     }
 
-    private boolean tSuper;
+    private boolean origin;
 
-    public boolean istSuper() {
-        return tSuper;
+    public boolean isOrigin() {
+        return origin;
     }
 
-    public void settSuper(boolean tSuper) {
-        this.tSuper = tSuper;
+    public void setOrigin(boolean origin) {
+        this.origin = origin;
     }
 
     protected boolean classic;
@@ -1005,7 +580,7 @@ public class TView extends View {
     // default false
     protected boolean animationable;
 
-    public boolean isanimationable() {
+    public boolean isAnimationable() {
         return animationable;
     }
 
@@ -1152,6 +727,23 @@ public class TView extends View {
 
     public void setTouchUpListener(TouchUpListener touchUpListener) {
         this.touchUpListener = touchUpListener;
+    }
+
+    /**
+     * 增加常用的OnClickListener赋予TouchUpListener同样的触发
+     */
+    protected OnClickListener onClickListener;
+
+    public interface OnClickListener {
+        void onClick(View v);
+    }
+
+    public OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     //
@@ -2491,7 +2083,7 @@ public class TView extends View {
     // textMark default false
     protected boolean textMark;
 
-    public boolean istextMark() {
+    public boolean isTextMark() {
         return textMark;
     }
 
@@ -2506,13 +2098,13 @@ public class TView extends View {
     }
 
     public void setTextMark(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
-                                float textMarkDx, float textMarkDy) {
+                            float textMarkDx, float textMarkDy) {
         setTextMark(TypedValue.COMPLEX_UNIT_DIP, textMarkRadius, textMarkColor, textMarkTextValue, TypedValue.COMPLEX_UNIT_DIP, textMarkTextSize,
                 textMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, textMarkDx, TypedValue.COMPLEX_UNIT_DIP, textMarkDy);
     }
 
     public void setTextMark(int textMarkRadiusUnit, float textMarkRadius, int textMarkColor, String textMarkTextValue, int textMarkTextSizeUnit,
-                                float textMarkTextSize, int textMarkTextColor, int textMarkDxUnit, float textMarkDx, int textMarkDyUnit, float textMarkDy) {
+                            float textMarkTextSize, int textMarkTextColor, int textMarkDxUnit, float textMarkDx, int textMarkDyUnit, float textMarkDy) {
 
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
@@ -2522,7 +2114,7 @@ public class TView extends View {
     }
 
     private void setTextMarkRaw(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
-                                    float textMarkDx, float textMarkDy) {
+                                float textMarkDx, float textMarkDy) {
         if (this.textMarkRadius != textMarkRadius || this.textMarkColor != textMarkColor || this.textMarkTextValue != textMarkTextValue
                 || this.textMarkTextSize != textMarkTextSize || this.textMarkTextColor != textMarkTextColor || this.textMarkDx != textMarkDx
                 || this.textMarkDy != textMarkDy) {
@@ -3369,14 +2961,14 @@ public class TView extends View {
     }
 
     public void setContentMark(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
-                                   int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
+                               int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
         setContentMark(TypedValue.COMPLEX_UNIT_DIP, contentMarkRadius, contentMarkColor, contentMarkTextValue, TypedValue.COMPLEX_UNIT_DIP,
                 contentMarkTextSize, contentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, contentMarkDx, TypedValue.COMPLEX_UNIT_DIP, contentMarkDy);
     }
 
     public void setContentMark(int contentMarkRadiusUnit, float contentMarkRadius, int contentMarkColor, String contentMarkTextValue,
-                                   int contentMarkTextSizeUnit, float contentMarkTextSize, int contentMarkTextColor, int contentMarkDxUnit, float contentMarkDx,
-                                   int contentMarkDyUnit, float contentMarkDy) {
+                               int contentMarkTextSizeUnit, float contentMarkTextSize, int contentMarkTextColor, int contentMarkDxUnit, float contentMarkDx,
+                               int contentMarkDyUnit, float contentMarkDy) {
 
         DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
 
@@ -3386,7 +2978,7 @@ public class TView extends View {
     }
 
     private void setContentMarkRaw(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
-                                       int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
+                                   int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
         if (this.contentMarkRadius != contentMarkRadius || this.contentMarkColor != contentMarkColor || this.contentMarkTextValue != contentMarkTextValue
                 || this.contentMarkTextSize != contentMarkTextSize || this.contentMarkTextColor != contentMarkTextColor
                 || this.contentMarkDx != contentMarkDx || this.contentMarkDy != contentMarkDy) {
@@ -3405,7 +2997,7 @@ public class TView extends View {
     // contentMarkTouchable default false
     private boolean contentMarkTouchable;
 
-    public boolean iscontentMarkTouchable() {
+    public boolean isContentMarkTouchable() {
         return contentMarkTouchable;
     }
 
@@ -4120,9 +3712,9 @@ public class TView extends View {
         //
         porterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[xfermodeIndex]);
 
-        tSuper = TView.class == this.getClass();
+        origin = TView.class == this.getClass();
 
-        if (tSuper) {
+        if (origin) {
 
             // note that the use of default values ​​can be defined,backgroundNormal to the default white to achieve clip bitmap results!
             backgroundNormal = typedArray.getColor(R.styleable.TView_backgroundNormal, Color.TRANSPARENT);
@@ -4419,7 +4011,7 @@ public class TView extends View {
             return super.dispatchTouchEvent(event);
         }
 
-        //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScroView will be used !
+        //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScrollView will be used !
 
         if (touchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
@@ -4615,6 +4207,10 @@ public class TView extends View {
                     touchUpListener.touchUp(this);
                 }
 
+                if (!touchOutBounds && onClickListener != null) {
+                    onClickListener.onClick(this);
+                }
+
                 touchOutBounds = false;
 
                 break;
@@ -4657,7 +4253,7 @@ public class TView extends View {
     }
 
     protected List<Integer> measure(int widthMeasureSpec, int heightMeasureSpec,
-                                        String textValue, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
+                                    String textValue, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
         List<Integer> ValueMeasureList = null;
 
         //
@@ -4703,7 +4299,7 @@ public class TView extends View {
         return ValueMeasureList;
     }
 
-    protected List<Integer> generateMeasureList(String textValue, Paint paint, float width, float paddingLeft, float paddingRight) {
+    public static List<Integer> generateMeasureList(String textValue, Paint paint, float width, float paddingLeft, float paddingRight) {
         List<Integer> measureList = new ArrayList<Integer>();
         int charatcerLength = textValue.length();
         float characterWidth = paint.measureText(textValue);
@@ -4734,7 +4330,7 @@ public class TView extends View {
         width = getWidth();
         height = getHeight();
 
-        if (!tSuper) {
+        if (!origin) {
             return;
         }
 
@@ -4850,17 +4446,16 @@ public class TView extends View {
         }
     }
 
-    @SuppressLint("WrongConstant")
     @Override
     protected void onDraw(Canvas canvas) {
 
-        initcanvas(canvas);
+        initCanvas(canvas);
 
         //
         if (rotate != 0) {
             canvas.rotate(rotate, width >> 1, height >> 1);
         }
-        if (!tSuper) {
+        if (!origin) {
             return;
         }
 
@@ -5064,7 +4659,8 @@ public class TView extends View {
 
         // draw textMark
         if (textMark) {
-            drawTextMark(canvas, textMarkRadius,
+            drawTextMark(width, height,
+                    canvas, textMarkRadius,
                     PaintTool.initPaint(textMarkColor),
                     textMarkRadius,
                     textMarkDx, textMarkDy,
@@ -5078,7 +4674,8 @@ public class TView extends View {
 
         // draw contentMark
         if (contentMark) {
-            drawTextMark(canvas, contentMarkRadius,
+            drawTextMark(width, height,
+                    canvas, contentMarkRadius,
                     PaintTool.initPaint(contentMarkColor),
                     contentMarkRadius,
                     contentMarkDx, contentMarkDy,

@@ -9,6 +9,8 @@ import com.tunasushi.tuna.TView;
 
 import java.util.Arrays;
 
+import static com.tunasushi.tool.GroupTool.associate;
+
 public class TMaterialActivity extends Activity {
 
     private TView
@@ -25,6 +27,6 @@ public class TMaterialActivity extends Activity {
         tViewMaterialRadio01 = findViewById(R.id.tViewMaterialRadio01);
         tViewMaterialRadio02 = findViewById(R.id.tViewMaterialRadio02);
 
-        TView.associate(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
+        associate(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
     }
 }

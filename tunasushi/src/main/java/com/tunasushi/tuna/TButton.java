@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
 
+import static com.tunasushi.tool.DrawTool.drawText;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:51
