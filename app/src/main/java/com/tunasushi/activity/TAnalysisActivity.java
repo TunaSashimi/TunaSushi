@@ -25,7 +25,7 @@ public class TAnalysisActivity extends Activity {
         seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tAnalysis.setControlXandY(progress, progress);
+                tAnalysis.setAnalyaiaControlXY(progress, progress);
             }
 
             @Override

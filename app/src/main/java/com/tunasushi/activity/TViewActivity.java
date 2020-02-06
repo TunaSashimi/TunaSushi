@@ -137,16 +137,16 @@ public class TViewActivity extends Activity {
                 "身"
         };
         LinearLayout linearRadioGroupLightGray = findViewById(R.id.linearRadioGroupLightGray);
-        TouchUpListener tunaTouchUpListener = new TouchUpListener() {
+        TouchUpListener touchUpListener = new TouchUpListener() {
             @Override
             public void touchUp(View v) {
                 Toast.makeText(TViewActivity.this, ((TView) v).getTextValue(), Toast.LENGTH_SHORT).show();
             }
         };
 
-        //Activity activity, String[] titleArray, int index(下标默认0), TouchUpListener tunaTouchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
+        //String[] stringArray, int index(下标默认0), TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        dynamic(radioGroupTitleArray, "枪", tunaTouchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
+        dynamic(radioGroupTitleArray, "枪", touchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
                 R.style.TView_RadioGroup_LightGray_Left,
                 R.style.TView_RadioGroup_LightGray_Right,
                 R.style.TView_RadioGroup_LightGray_Horizontal,

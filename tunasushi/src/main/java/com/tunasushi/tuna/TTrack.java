@@ -57,13 +57,6 @@ public class TTrack extends TView {
 
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (trackisIntervalTime) {
-                    return true;
-                }
-                trackCurrentX = event.getX();
-                trackCurrentY = event.getY();
-                invalidate();
-                break;
             case MotionEvent.ACTION_UP:
                 if (trackisIntervalTime) {
                     return true;

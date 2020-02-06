@@ -117,7 +117,8 @@ public class TBubble extends TView {
     }
 
     public enum BubbleTowardType {
-        LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),;
+        LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),
+        ;
         final int nativeInt;
 
         BubbleTowardType(int ni) {
@@ -143,7 +144,8 @@ public class TBubble extends TView {
     }
 
     public enum BubbleLocationType {
-        LOW(0), MIDDLE(1), HIGH(2),;
+        LOW(0), MIDDLE(1), HIGH(2),
+        ;
         final int nativeInt;
 
         BubbleLocationType(int ni) {
@@ -234,16 +236,6 @@ public class TBubble extends TView {
         typedArray.recycle();
     }
 
-
-//	@Override
-//	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-//		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//		
-////		setMeasuredDimension(resolveSize((int)(getMinimumWidth(bubbleTextValue,bubbleTextSize) + bubbleEdgeWidth + bubbleTextPadding), widthMeasureSpec),
-////				resolveSize((int) getMinimumHeight(bubbleTextValue), heightMeasureSpec));
-//		
-//	}
-
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
@@ -253,8 +245,6 @@ public class TBubble extends TView {
         if (bubbleEdgeHeight <= 0 || bubbleEdgeHeight + bubbleStrokeWidth * 0.5f > height) {
             throw new IndexOutOfBoundsException("The content attribute bubbleEdgeHeight it does not conform to the rules");
         }
-
-
     }
 
     @Override

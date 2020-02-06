@@ -27,7 +27,6 @@
         <activity android:name=".activity.TButtonActivity" />
 
         <activity android:name=".activity.TDialogActivity" />
-        <activity android:name=".activity.TDragActivity" />
         <activity android:name=".activity.TDrawActivity" />
 
         <activity android:name=".activity.THollowActivity" />
@@ -43,12 +42,14 @@
 
         <activity android:name=".activity.TProgressActivity" />
 
+        <activity android:name=".activity.TRangeActivity" />
         <activity android:name=".activity.TRepeatActivity" />
         <activity android:name=".activity.TRippleActivity" />
         <activity android:name=".activity.TRowActivity" />
 
         <activity android:name=".activity.TScaleActivity" />
         <activity android:name=".activity.TScratchActivity" />
+        <activity android:name=".activity.TSeekActivity" />
         <activity android:name=".activity.TSignActivity" />
         <activity android:name=".activity.TSVGActivity" />
 

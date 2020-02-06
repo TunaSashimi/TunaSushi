@@ -15,6 +15,7 @@ import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.DeviceTool.applyDimension;
+import static com.tunasushi.tool.DrawTool.drawArrow;
 import static com.tunasushi.tool.PathTool.initPathMoveTo;
 import static com.tunasushi.tool.PathTool.path;
 
@@ -112,9 +113,9 @@ public class TLine extends TView {
             lineCurrentX = -lineArrowWidth;
         }
 
-        int tunaLineTowardTypeIndex = typedArray.getInt(R.styleable.TLine_lineTowardType, -1);
-        if (tunaLineTowardTypeIndex >= 0) {
-            lineTowardType = lineTowardTypeArray[tunaLineTowardTypeIndex];
+        int lineTowardTypeIndex = typedArray.getInt(R.styleable.TLine_lineTowardType, -1);
+        if (lineTowardTypeIndex >= 0) {
+            lineTowardType = lineTowardTypeArray[lineTowardTypeIndex];
         } else {
             throw new IllegalArgumentException("The content attribute lineTowardType type must be given");
         }
@@ -133,8 +134,9 @@ public class TLine extends TView {
         if (lineArrowStrokeWidth > 0) {
             switch (lineTowardType) {
                 case TOP:
-                    drawarrow(
+                    drawArrow(
                             canvas,
+                            width,height,
                             lineCurrentX,
                             lineArrowWidth, lineArrowHeight,
                             lineArrowStrokeWidth,
@@ -142,8 +144,9 @@ public class TLine extends TView {
                             true);
                     break;
                 case BOTTOM:
-                    drawarrow(
+                    drawArrow(
                             canvas,
+                            width,height,
                             lineCurrentX,
                             lineArrowWidth, lineArrowHeight,
                             lineArrowStrokeWidth,
@@ -177,29 +180,7 @@ public class TLine extends TView {
         }
     }
 
-    //
-    protected void drawarrow(Canvas canvas,
-                                 float floatX,
-                                 float arrowWidth, float arrowHeight,
-                                 float arrowStrokeWidth, int arrowStrokeColor,
-                                 boolean upward) {
 
-        if (upward) {
-            initPathMoveTo(0, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX, height - arrowStrokeWidth * 0.5f - arrowHeight);
-            path.lineTo(floatX + arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(width, height - arrowStrokeWidth * 0.5f);
-        } else {
-            initPathMoveTo(0, arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            path.lineTo(width, arrowStrokeWidth * 0.5f);
-        }
-
-        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
-    }
 
     public void centerArrow() {
         lineCurrentX = width >> 1;

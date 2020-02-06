@@ -110,140 +110,140 @@ public class GroupTool {
     }
 
     //9
-    public static void dynamic(String[] titleArray, String string, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, String string, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, string, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, string, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //9
-    public static void dynamic(String[] titleArray, String string, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, String string, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, string, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, string, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //10
-    public static void dynamic(String[] titleArray, String string, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, String string, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
         int index = 0;
-        for (int i = 0; i < titleArray.length; i++) {
-            if (titleArray[i].equals(string)) {
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i].equals(string)) {
                 index = i;
                 break;
             }
         }
-        dynamic(titleArray, index, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, index, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //10
-    public static void dynamic(String[] titleArray, String string, TView.OnClickListener onClickListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, String string, TView.OnClickListener onClickListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
         int index = 0;
-        for (int i = 0; i < titleArray.length; i++) {
-            if (titleArray[i].equals(string)) {
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i].equals(string)) {
                 index = i;
                 break;
             }
         }
-        dynamic(titleArray, index, onClickListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, index, onClickListener, linearLayout, unitWidth, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //8
-    public static void dynamic(String[] titleArray, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, 0, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, 0, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //8
-    public static void dynamic(String[] titleArray, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, 0, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, 0, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //8
-    public static void dynamic(String[] titleArray, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, 0, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, 0, touchUpListener, linearLayout, unitWidth, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //8
-    public static void dynamic(String[] titleArray, TView.OnClickListener onClickListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, TView.OnClickListener onClickListener, LinearLayout linearLayout, int unitWidth, int width, int leftStyle,
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, 0, onClickListener, linearLayout, unitWidth, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, 0, onClickListener, linearLayout, unitWidth, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //9
-    public static void dynamic(String[] titleArray, int index, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, int index, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, index, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, index, touchUpListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //9
-    public static void dynamic(String[] titleArray, int index, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
-                               int horizontalStyle, int wholeStyle) {
+    public static void dynamic(String[] stringArray, int index, TView.OnClickListener onClickListener, LinearLayout linearLayout, int width, int leftStyle, int rightStyle,
+                               int centerStyle, int itemStyle) {
 
-        dynamic(titleArray, index, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, horizontalStyle, wholeStyle);
+        dynamic(stringArray, index, onClickListener, linearLayout, TypedValue.COMPLEX_UNIT_DIP, width, leftStyle, rightStyle, centerStyle, itemStyle);
     }
 
     //10
-    public static void dynamic(String[] titleArray, int index,
+    public static void dynamic(String[] stringArray, int index,
                                TView.TouchUpListener touchUpListener,
                                LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamicRaw(titleArray, index, touchUpListener, null, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
-                horizontalStyle, wholeStyle);
+        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
+                centerStyle, itemStyle);
     }
 
     //10
-    public static void dynamic(String[] titleArray, int index,
+    public static void dynamic(String[] stringArray, int index,
                                TView.OnClickListener onClickListener,
                                LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
-                               int rightStyle, int horizontalStyle, int wholeStyle) {
+                               int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamicRaw(titleArray, index, null, onClickListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
-                horizontalStyle, wholeStyle);
+        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
+                centerStyle, itemStyle);
     }
 
     //10
-    private static void dynamicRaw(String[] titleArray, int index,
+    private static void dynamicRaw(String[] stringArray, int index,
                                    TView.TouchUpListener touchUpListener, TView.OnClickListener onClickListener, LinearLayout linearLayout,
-                                   int width, int leftStyle, int rightStyle, int horizontalStyle, int wholeStyle) {
+                                   int width, int leftStyle, int rightStyle, int centerStyle, int itemStyle) {
 
         Context context = linearLayout.getContext();
 
         int margin = -2;    //-2px
 
-        List<TView> TViewList = new ArrayList<TView>();
+        List<TView> TViewList = new ArrayList();
 
-        if (titleArray.length <= 0) {
+        if (stringArray.length <= 0) {
             return;
-        } else if (titleArray.length == 1) {
+        } else if (stringArray.length == 1) {
 
-            TView TView = new TView(context, null, wholeStyle);
+            TView TView = new TView(context, null, itemStyle);
 
-            TView.setTextValue(titleArray[0]);
+            TView.setTextValue(stringArray[0]);
 
             if (touchUpListener != null) {
                 TView.setTouchUpListener(touchUpListener);
             }
 
-            if(onClickListener!=null){
+            if (onClickListener != null) {
                 TView.setOnClickListener(onClickListener);
             }
 
             linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
         } else {
 
-            for (int i = 0; i < titleArray.length; i++) {
-                TView TView = new TView(context, null, i == 0 ? leftStyle : i == titleArray.length - 1 ? rightStyle : horizontalStyle);
-                TView.setTextValue(titleArray[i]);
+            for (int i = 0; i < stringArray.length; i++) {
+                TView TView = new TView(context, null, i == 0 ? leftStyle : i == stringArray.length - 1 ? rightStyle : centerStyle);
+                TView.setTextValue(stringArray[i]);
                 if (i == index) {
                     TView.setSelect(true);
                 }
@@ -252,11 +252,11 @@ public class GroupTool {
                 TViewList.add(TView);
                 linearLayout.addView(TView, width, LinearLayout.LayoutParams.MATCH_PARENT);
 
-                if (i == 0 && titleArray.length == 2) {
+                if (i == 0 && stringArray.length == 2) {
                     setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, 0, 0, margin, 0);
-                } else if (i == 1 && titleArray.length == 2) {
+                } else if (i == 1 && stringArray.length == 2) {
                     setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, 0, 0);
-                } else if (i != 0 && i != titleArray.length - 1) {
+                } else if (i != 0 && i != stringArray.length - 1) {
                     setViewMargins(TView, TypedValue.COMPLEX_UNIT_PX, margin, 0, margin, 0);
                 }
             }

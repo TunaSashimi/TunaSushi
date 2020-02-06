@@ -46,6 +46,7 @@ public class TWrap extends TView {
     }
 
     private String[] wrapItemTextValueArray;
+
     public void setTWrapItemTextValueArray(String[] tWrapItemTextValueArray) {
         this.wrapItemTextValueArray = tWrapItemTextValueArray;
     }
@@ -112,14 +113,13 @@ public class TWrap extends TView {
 
         //
         if (wrapTextSize <= 0) {
-            throw new IllegalArgumentException("The content attribute wrapTextSize length must be greater than 0 ");
+            throw new IllegalArgumentException("The content attribute wrapTextSize must be greater than 0 ");
         } else {
             PaintTool.initTextPaint(wrapTextColorNormal, wrapTextSize);
         }
 
 
         //
-        int specModeWidth = View.MeasureSpec.getMode(widthMeasureSpec);
         int specSizeWidth = View.MeasureSpec.getSize(widthMeasureSpec);
 
         //

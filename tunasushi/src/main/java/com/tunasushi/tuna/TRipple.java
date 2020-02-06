@@ -74,11 +74,11 @@ public class TRipple extends TView{
 						rippleInnerCircleColorGradientEnd);
 	}
 	
-	public void setRippleInnerCircleColor(int tunaRippleInnerCircleAngle, int tunaRippleInnerCircleColorGradientStart, int tunaRippleInnerCircleColorGradientEnd){
-		this.rippleInnerCircleColorGradientStart = tunaRippleInnerCircleColorGradientStart;
-		this.rippleInnerCircleColorGradientEnd = tunaRippleInnerCircleColorGradientEnd;
+	public void setRippleInnerCircleColor(int rippleInnerCircleAngle, int rippleInnerCircleColorGradientStart, int rippleInnerCircleColorGradientEnd){
+		this.rippleInnerCircleColorGradientStart = rippleInnerCircleColorGradientStart;
+		this.rippleInnerCircleColorGradientEnd = rippleInnerCircleColorGradientEnd;
 		
-		rippleInnerCircleColorShader = getLinearGradient(width, height,tunaRippleInnerCircleAngle, tunaRippleInnerCircleColorGradientStart, tunaRippleInnerCircleColorGradientEnd);
+		rippleInnerCircleColorShader = getLinearGradient(width, height,rippleInnerCircleAngle, rippleInnerCircleColorGradientStart, rippleInnerCircleColorGradientEnd);
 	}
 
 	//
@@ -130,18 +130,18 @@ public class TRipple extends TView{
 		
 	}
 	
-	public void setRippleOuterCircleColor(int tunaRippleOuterCircleColorGradientStart,int tunaRippleOuterCircleColorGradientEnd){
+	public void setRippleOuterCircleColor(int rippleOuterCircleColorGradientStart,int rippleOuterCircleColorGradientEnd){
 		setRippleOuterCircleColor(
 				rippleOuterCircleAngle == Integer.MAX_VALUE ? 0 : rippleOuterCircleAngle,
-				tunaRippleOuterCircleColorGradientStart, 
-				tunaRippleOuterCircleColorGradientEnd);
+				rippleOuterCircleColorGradientStart,
+				rippleOuterCircleColorGradientEnd);
 	}
 	
-	public void setRippleOuterCircleColor(int tunaRippleOuterCircleAngle,int tunaRippleOuterCircleColorGradientStart,int tunaRippleOuterCircleColorGradientEnd){
-		this.rippleOuterCircleColorGradientStart = tunaRippleOuterCircleColorGradientStart;
-		this.rippleOuterCircleColorGradientEnd = tunaRippleOuterCircleColorGradientEnd;
+	public void setRippleOuterCircleColor(int rippleOuterCircleAngle,int rippleOuterCircleColorGradientStart,int rippleOuterCircleColorGradientEnd){
+		this.rippleOuterCircleColorGradientStart = rippleOuterCircleColorGradientStart;
+		this.rippleOuterCircleColorGradientEnd = rippleOuterCircleColorGradientEnd;
 		
-		rippleOuterCircleColorShader = getLinearGradient(width, height,tunaRippleOuterCircleAngle, tunaRippleOuterCircleColorGradientStart, tunaRippleOuterCircleColorGradientEnd);
+		rippleOuterCircleColorShader = getLinearGradient(width, height,rippleOuterCircleAngle, rippleOuterCircleColorGradientStart, rippleOuterCircleColorGradientEnd);
 	}
 	
 	private float rippleTextSize;
@@ -185,13 +185,13 @@ public class TRipple extends TView{
 		setRippleTextDx(TypedValue.COMPLEX_UNIT_DIP, rippleTextDx);
 	}
 
-	public void setRippleTextDx(int unit, float tunaRippleTextDx){
-		setRippleTextDxRaw(applyDimension(unit, tunaRippleTextDx, getViewDisplayMetrics(this)));
+	public void setRippleTextDx(int unit, float rippleTextDx){
+		setRippleTextDxRaw(applyDimension(unit, rippleTextDx, getViewDisplayMetrics(this)));
 	}
 
-	private void setRippleTextDxRaw(float tunaRippleTextDx){
-		if (this.rippleTextDx != tunaRippleTextDx) {
-			this.rippleTextDx = tunaRippleTextDx;
+	private void setRippleTextDxRaw(float rippleTextDx){
+		if (this.rippleTextDx != rippleTextDx) {
+			this.rippleTextDx = rippleTextDx;
 		}
 	}
 
@@ -206,13 +206,13 @@ public class TRipple extends TView{
 		setRippleTextDy(TypedValue.COMPLEX_UNIT_DIP, rippleTextDy);
 	}
 
-	public void setRippleTextDy(int unit, float tunaRippleTextDy){
-		setRippleTextDyRaw(applyDimension(unit, tunaRippleTextDy, getViewDisplayMetrics(this)));
+	public void setRippleTextDy(int unit, float rippleTextDy){
+		setRippleTextDyRaw(applyDimension(unit, rippleTextDy, getViewDisplayMetrics(this)));
 	}
 
-	private void setRippleTextDyRaw(float tunaRippleTextDy){
-		if (this.rippleTextDy != tunaRippleTextDy) {
-			this.rippleTextDy = tunaRippleTextDy;
+	private void setRippleTextDyRaw(float rippleTextDy){
+		if (this.rippleTextDy != rippleTextDy) {
+			this.rippleTextDy = rippleTextDy;
 		}
 	}
 
@@ -358,7 +358,7 @@ public class TRipple extends TView{
 			new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(), new LinearInterpolator(),
 			new OvershootInterpolator(), };
 
-	public static TimeInterpolator[] getrippletimeinterpolatorarray(){
+	public static TimeInterpolator[] getRippletimeinterpolatorarray(){
 		return rippleTimeInterpolatorArray;
 	}
 

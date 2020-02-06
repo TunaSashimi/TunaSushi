@@ -31,7 +31,7 @@ public class TIrregularActivity extends Activity {
 
         tIrregular.setIrregularChangeListener(new TIrregular.IrregularChangeListener() {
             @Override
-            public void tunaIrregularChange(boolean b) {
+            public void irregularChange(boolean b) {
                 Toast.makeText(getApplication(), "Change==>" + b, Toast.LENGTH_SHORT).show();
             }
         });

@@ -25,7 +25,6 @@ public class EntryActivity extends Activity {
             TButtonActivity.class,
 
             TDialogActivity.class,
-            TDragActivity.class,
             TDrawActivity.class,
 
             THollowActivity.class,
@@ -41,12 +40,14 @@ public class EntryActivity extends Activity {
 
             TProgressActivity.class,
 
+            TRangeActivity.class,
             TRepeatActivity.class,
             TRippleActivity.class,
             TRowActivity.class,
 
             TScaleActivity.class,
             TScratchActivity.class,
+            TSeekActivity.class,
             TSignActivity.class,
             TSVGActivity.class,
 

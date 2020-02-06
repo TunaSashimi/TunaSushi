@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/buttonPlay"
             android:text="Change" />
-
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple01"
@@ -94,7 +92,7 @@
             android:layout_below="@+id/tRipple01"
             android:layout_margin="@dimen/tuna_button_margin"
             android:text="rippleInnerCircleRadius设置内圆半径\nrippleInnerCircleColor设置内圆颜色\nrippleOuterCircleColor设置外圆颜色\nrippleTextValue设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleInnerCircleColorGradientDirection设置内圆渐变方向\nrippleOuterCircleColorGradientDirection设置外圆渐变方向\nrippleInnerCircleColorGradientStart设置内圆渐变开始颜色\nrippleInnerCircleColorGradientEnd设置内圆渐变结束颜色\nrippleOuterCircleColorGradientStart设置外圆渐变开始颜色\nrippleOuterCircleColorGradientEnd设置外圆渐变结束颜色\nrippleDuraction设置持续时间\nrippleTimeInterpolator设置插补器"
-            android:textColor="#ffffff" />
+            android:textColor="#434343" />
 
     </RelativeLayout>
 </ScrollView>

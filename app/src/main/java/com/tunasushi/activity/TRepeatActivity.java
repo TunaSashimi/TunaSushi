@@ -144,13 +144,13 @@ public class TRepeatActivity extends Activity {
 
     //
     private void afterChoice() {
-        int tunaRepeatStarCurrentIndex = tRepeatStar.getRepeatCurrentIndex();
+        int repeatStarCurrentIndex = tRepeatStar.getRepeatCurrentIndex();
         tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getRepeatCurrentX());
-        if (tunaRepeatStarCurrentIndex == 0) {
-        } else if (tunaRepeatStarCurrentIndex == 1) {
-        } else if (tunaRepeatStarCurrentIndex == 2) {
-        } else if (tunaRepeatStarCurrentIndex == 3) {
-        } else if (tunaRepeatStarCurrentIndex == 4) {
+        if (repeatStarCurrentIndex == 0) {
+        } else if (repeatStarCurrentIndex == 1) {
+        } else if (repeatStarCurrentIndex == 2) {
+        } else if (repeatStarCurrentIndex == 3) {
+        } else if (repeatStarCurrentIndex == 4) {
         }
     }
 }

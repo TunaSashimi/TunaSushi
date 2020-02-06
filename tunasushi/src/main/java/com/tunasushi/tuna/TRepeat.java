@@ -155,7 +155,7 @@ public class TRepeat extends TView {
                 total = 5;
                 floatArray = new float[total];
             } else {
-                throw new IndexOutOfBoundsException("The content attribute tunaRepeatTotal must be greater than or equal 1");
+                throw new IndexOutOfBoundsException("The content attribute repeatTotal must be greater than or equal 1");
             }
         } else {
             floatArray = new float[total];
@@ -442,8 +442,8 @@ public class TRepeat extends TView {
         return floatArray;
     }
 
-    public void setRepeatCentreXArray(float[] tunaRepeatCentreXArray) {
-        this.floatArray = tunaRepeatCentreXArray;
+    public void setRepeatCentreXArray(float[] repeatCentreXArray) {
+        this.floatArray = repeatCentreXArray;
     }
 
     public int getRepeatTotal() {

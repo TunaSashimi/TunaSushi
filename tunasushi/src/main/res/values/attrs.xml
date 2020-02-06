@@ -321,26 +321,6 @@
         <attr name="dialogChoiceCurrentIndex" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="TDrag">
-        <attr name="dragStrokeWidth" format="dimension" />
-        <attr name="dragStrokeColor" format="reference|color" />
-        <attr name="dragTextSize" format="dimension" />
-        <attr name="dragTextColorNormal" format="reference|color" />
-        <attr name="dragTextValueArray" format="reference" />
-        <attr name="dragAngle" format="integer" />
-        <attr name="dragFillColor" format="reference|color" />
-        <attr name="dragCurrentIndex" format="integer" />
-        <attr name="dragBallTextColor" format="reference|color" />
-        <attr name="dragBallStrokeWidth" format="dimension" />
-        <attr name="dragBallStrokeColorNormal" format="reference|color" />
-        <attr name="dragBallStrokeColorPress" format="reference|color" />
-        <attr name="dragBallBackgroundNormal" format="reference|color" />
-        <attr name="dragBallBackgroundPress" format="reference|color" />
-        <attr name="dragBallRadiusNormal" format="dimension" />
-        <attr name="dragBallRadiusPress" format="dimension" />
-        <attr name="dragBallBitmapSrcPress" format="reference" />
-    </declare-styleable>
-
     <declare-styleable name="TDraw">
         <attr name="drawColor" format="reference|color" />
         <attr name="drawWidth" format="dimension" />
@@ -455,6 +435,12 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="TRange">
+        <attr name="rangeThink" format="dimension" />
+        <attr name="rangeColorNormal" format="reference|color" />
+        <attr name="rangeColorSelect" format="reference|color" />
+    </declare-styleable>
+
     <declare-styleable name="TRepeat">
         <attr name="repeatTotal" format="integer" />
         <attr name="repeatItemFractionTop" format="fraction" />
@@ -555,6 +541,26 @@
         <attr name="scratchText" format="string" />
         <attr name="scratchTextColor" format="color" />
         <attr name="scratchTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TSeek">
+        <attr name="seekStrokeWidth" format="dimension" />
+        <attr name="seekStrokeColor" format="reference|color" />
+        <attr name="seekTextSize" format="dimension" />
+        <attr name="seekTextColorNormal" format="reference|color" />
+        <attr name="seekTextValueArray" format="reference" />
+        <attr name="seekAngle" format="integer" />
+        <attr name="seekFillColor" format="reference|color" />
+        <attr name="seekCurrentIndex" format="integer" />
+        <attr name="seekDragTextColor" format="reference|color" />
+        <attr name="seekDragStrokeWidth" format="dimension" />
+        <attr name="seekDragStrokeColorNormal" format="reference|color" />
+        <attr name="seekDragStrokeColorPress" format="reference|color" />
+        <attr name="seekDragBackgroundNormal" format="reference|color" />
+        <attr name="seekDragBackgroundPress" format="reference|color" />
+        <attr name="seekDragRadiusNormal" format="dimension" />
+        <attr name="seekDragRadiusPress" format="dimension" />
+        <attr name="seekDragBitmapSrcPress" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TSign">

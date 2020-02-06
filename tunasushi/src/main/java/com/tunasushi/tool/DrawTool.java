@@ -10,7 +10,9 @@ import com.tunasushi.tuna.TView;
 
 import java.util.List;
 
+import static com.tunasushi.tool.PathTool.initPathMoveTo;
 import static com.tunasushi.tool.PathTool.initPathRoundRect;
+import static com.tunasushi.tool.PathTool.path;
 import static com.tunasushi.tuna.TView.generateMeasureList;
 import static com.tunasushi.tuna.TView.initRectF;
 
@@ -23,7 +25,7 @@ import static com.tunasushi.tuna.TView.initRectF;
 public class DrawTool {
     // 8
     public static void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
+                                      float radiusRightTop, float radiusRightBottom) {
 
         drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
                 radiusRightBottom);
@@ -31,7 +33,7 @@ public class DrawTool {
 
     // 10
     public static void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
+                                      float radiusRightTop, float radiusRightBottom) {
 
         drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
                 radiusRightBottom);
@@ -39,7 +41,7 @@ public class DrawTool {
 
     // 10
     public static void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
+                                      float radiusRightTop, float radiusRightBottom) {
 
         drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
                 radiusRightTop, radiusRightBottom);
@@ -47,7 +49,7 @@ public class DrawTool {
 
     // 14
     public static void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                      int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
                 radiusRightTop, radiusRightBottom);
@@ -55,7 +57,7 @@ public class DrawTool {
 
     // 14
     public static void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                      int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
                 radiusLeftBottom, radiusRightTop, radiusRightBottom);
@@ -63,7 +65,7 @@ public class DrawTool {
 
     // 15
     public static void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                      float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
 
         float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
         if (strokeWidth > 0) {
@@ -117,21 +119,21 @@ public class DrawTool {
 
     // 11
     public static void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
+                                       int strokeColor, float radius) {
 
         drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
     }
 
     // 11
     public static void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
+                                       int strokeColor, float radius) {
 
         drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
     }
 
     // 12
     public static void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                   float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
+                                       float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
 
         if (strokeWidth > 0) {
             canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
@@ -160,13 +162,13 @@ public class DrawTool {
 
     // 9
     public static float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               float textRowSpaceRatio, List<Integer> valueMeasureList) {
+                                   float textRowSpaceRatio, List<Integer> valueMeasureList) {
         return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.ALL_CENTER, textRowSpaceRatio, valueMeasureList);
     }
 
     // 10
     public static float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               TView.TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
+                                   TView.TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
 
         if (valueMeasureList == null) {
             valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
@@ -258,5 +260,30 @@ public class DrawTool {
                     PaintTool.initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
                     , 1, valueMeasureList);
         }
+    }
+
+    //
+    public static void drawArrow(Canvas canvas,
+                                 int width, int height,
+                                 float floatX,
+                                 float arrowWidth, float arrowHeight,
+                                 float arrowStrokeWidth, int arrowStrokeColor,
+                                 boolean upward) {
+
+        if (upward) {
+            initPathMoveTo(0, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, height - arrowStrokeWidth * 0.5f - arrowHeight);
+            path.lineTo(floatX + arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(width, height - arrowStrokeWidth * 0.5f);
+        } else {
+            initPathMoveTo(0, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(width, arrowStrokeWidth * 0.5f);
+        }
+
+        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
     }
 }

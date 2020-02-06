@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.tunasushi.tool.PaintTool;
+
 import static com.tunasushi.tool.PaintTool.paint;
 import static com.tunasushi.tool.PathTool.initPathMoveTo;
 import static com.tunasushi.tool.PathTool.path;
@@ -19,6 +20,22 @@ import static com.tunasushi.tool.PathTool.path;
  */
 public class TAnalysis extends TView {
     private int analysisControlX, analysisControlY;
+
+    public int getAnalysisControlX() {
+        return analysisControlX;
+    }
+
+    public void setAnalysisControlX(int analysisControlX) {
+        this.analysisControlX = analysisControlX;
+    }
+
+    public int getAnalysisControlY() {
+        return analysisControlY;
+    }
+
+    public void setAnalysisControlY(int analysisControlY) {
+        this.analysisControlY = analysisControlY;
+    }
 
     public TAnalysis(Context context) {
         this(context, null);
@@ -36,11 +53,16 @@ public class TAnalysis extends TView {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
 
         //父类中的onMeasure会initPaint导致构造方法中的paint失效
         PaintTool.initPaint(Paint.Style.FILL, Color.RED);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
 
         canvas.drawColor(Color.YELLOW);
 
@@ -63,23 +85,7 @@ public class TAnalysis extends TView {
         canvas.drawPath(path, paint);
     }
 
-    public int getAnalysisControlX() {
-        return analysisControlX;
-    }
-
-    public void setAnalysisControlX(int analysisControlX) {
-        this.analysisControlX = analysisControlX;
-    }
-
-    public int getAnalysisControlY() {
-        return analysisControlY;
-    }
-
-    public void setAnalysisControlY(int analysisControlY) {
-        this.analysisControlY = analysisControlY;
-    }
-
-    public void setControlXandY(int analysisControlX, int abalysisControlY) {
+    public void setAnalyaiaControlXY(int analysisControlX, int abalysisControlY) {
         this.analysisControlX = analysisControlX;
         this.analysisControlY = abalysisControlY;
         invalidate();

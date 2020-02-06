@@ -16,7 +16,6 @@ import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.PaintTool.paint;
 
-
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:57
@@ -26,25 +25,31 @@ import static com.tunasushi.tool.PaintTool.paint;
 public class TRow extends TView {
 
     private int rowBackgroundNormal;
+
     public int getRowBackgroundNormal() {
         return rowBackgroundNormal;
     }
+
     public void setRowBackgroundNormal(int rowBackgroundNormal) {
         this.rowBackgroundNormal = rowBackgroundNormal;
     }
 
     private int rowDuraction;
+
     public int getRowDuraction() {
         return rowDuraction;
     }
+
     public void setRowDuraction(int rowDuraction) {
         this.rowDuraction = rowDuraction;
     }
 
     private RowDirection rowDirection;
+
     public enum RowDirection {
         TOP(0),
-        BOTTOM(1),;
+        BOTTOM(1),
+        ;
         final int nativeInt;
 
         RowDirection(int ni) {
@@ -114,6 +119,7 @@ public class TRow extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+
         PaintTool.initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
 
         //

@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TDrag;
+import com.tunasushi.tuna.TSeek;
 
-public class TDragActivity extends Activity {
-    private TDrag tDragTouchoutable, tDragTouchoutUnable;
+public class TSeekActivity extends Activity {
+    private TSeek tSeekTouchoutable, tSeekTouchoutUnable;
     private TView tViewTouchoutableReset, tViewTouchoutableGetIndex,
             tViewTouchoutUnableReset, tViewTouchoutUnableGetIndex;
 
@@ -20,16 +20,16 @@ public class TDragActivity extends Activity {
         public void touchUp(View v) {
             switch (v.getId()) {
                 case R.id.tViewTouchoutableReset:
-                    tDragTouchoutable.setDragCurrentIndex(0);
+                    tSeekTouchoutable.setSeekCurrentIndex(0);
                     break;
                 case R.id.tViewTouchoutableGetIndex:
-                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutable下标为" + tDragTouchoutable.getDragCurrentIndex(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TSeekActivity.this, "TSeekTouchoutable下标为" + tSeekTouchoutable.getSeekCurrentIndex(), Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.tViewTouchoutUnableReset:
-                    tDragTouchoutUnable.setDragCurrentIndex(0);
+                    tSeekTouchoutUnable.setSeekCurrentIndex(0);
                     break;
                 case R.id.tViewTouchoutUnableGetIndex:
-                    Toast.makeText(TDragActivity.this, "tunaDragTouchoutUnable下标为" + tDragTouchoutUnable.getDragCurrentIndex(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TSeekActivity.this, "TSeekTouchoutUnable下标为" + tSeekTouchoutUnable.getSeekCurrentIndex(), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -41,10 +41,10 @@ public class TDragActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_t_drag);
+        setContentView(R.layout.activity_t_seek);
 
-        tDragTouchoutable = findViewById(R.id.tDragTouchoutable);
-        tDragTouchoutUnable = findViewById(R.id.tDragTouchoutUnable);
+        tSeekTouchoutable = findViewById(R.id.tSeekTouchoutable);
+        tSeekTouchoutUnable = findViewById(R.id.tSeekTouchoutUnable);
 
         tViewTouchoutableReset = findViewById(R.id.tViewTouchoutableReset);
         tViewTouchoutableGetIndex = findViewById(R.id.tViewTouchoutableGetIndex);
@@ -52,17 +52,17 @@ public class TDragActivity extends Activity {
         tViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
         tViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
 
-        tDragTouchoutable.setTouchListener(new TView.TouchListener() {
+        tSeekTouchoutable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(View v) {
-                tDragTouchoutable.setDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tDragTouchoutable.getTouchEventX());
+                tSeekTouchoutable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, tSeekTouchoutable.getTouchEventX());
             }
         });
 
-        tDragTouchoutUnable.setTouchListener(new TView.TouchListener() {
+        tSeekTouchoutUnable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(View v) {
-                tDragTouchoutUnable.setDragCurrentX(TypedValue.COMPLEX_UNIT_PX, tDragTouchoutUnable.getTouchEventX());
+                tSeekTouchoutUnable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, tSeekTouchoutUnable.getTouchEventX());
             }
         });
 

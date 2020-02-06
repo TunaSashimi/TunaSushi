@@ -48,7 +48,7 @@ public class TIrregular extends TView {
     protected IrregularChangeListener irregularChangeListener;
 
     public interface IrregularChangeListener {
-        void tunaIrregularChange(boolean b);
+        void irregularChange(boolean b);
     }
 
     public IrregularChangeListener getIrregularChangeListener() {
@@ -70,7 +70,7 @@ public class TIrregular extends TView {
         invalidate();
 
         if (irregularChangeListener != null) {
-            irregularChangeListener.tunaIrregularChange(irregularSelect);
+            irregularChangeListener.irregularChange(irregularSelect);
         }
     }
 
