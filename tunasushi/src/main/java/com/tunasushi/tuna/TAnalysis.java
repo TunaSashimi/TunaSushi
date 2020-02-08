@@ -49,22 +49,14 @@ public class TAnalysis extends TView {
         super(context, attrs, defStyleAttr);
 
         Tag = TAnalysis.class.getSimpleName();
-
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        //父类中的onMeasure会initPaint导致构造方法中的paint失效
-        PaintTool.initPaint(Paint.Style.FILL, Color.RED);
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(Color.YELLOW);
+        PaintTool.initPaint(Paint.Style.FILL, Color.RED);
 
         int bezierCircleX = 150;
         int bezierCircley = 150;

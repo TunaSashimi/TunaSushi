@@ -24,8 +24,8 @@ public class TIrregularActivity extends Activity {
 
         tIrregular.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
-                tIrregular.setIrregularCurrentX(TypedValue.COMPLEX_UNIT_PX, tIrregular.getTouchEventX());
+            public void touch(TView t) {
+                tIrregular.setIrregularCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
 

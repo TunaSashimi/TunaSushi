@@ -31,7 +31,7 @@ public class GroupTool {
             final int finalI = i;
             TViewArray[i].setAssociateListener(new TView.associateListener() {
                 @Override
-                public void associate(View v) {
+                public void associate(TView t) {
                     for (int j = 0; j < arraySize; j++) {
                         if (j != finalI) {
                             TViewArray[j].setStatius(false, false, false);
@@ -41,7 +41,7 @@ public class GroupTool {
             });
             TViewArray[i].setTouchCancelListener(new TView.TouchCancelListener() {
                 @Override
-                public void touchCancel(View v) {
+                public void touchCancel(TView t) {
                     for (int j = 0; j < arraySize; j++) {
                         switch (finalI) {
                             case 0:
@@ -75,7 +75,7 @@ public class GroupTool {
             final int finalI = i;
             TViewList.get(i).setAssociateListener(new TView.associateListener() {
                 @Override
-                public void associate(View v) {
+                public void associate(TView t) {
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
                             TViewList.get(j).setStatius(false, false, false, false);
@@ -85,7 +85,7 @@ public class GroupTool {
             });
             TViewList.get(i).setTouchCancelListener(new TView.TouchCancelListener() {
                 @Override
-                public void touchCancel(View v) {
+                public void touchCancel(TView t) {
                     for (int j = 0; j < listSize; j++) {
                         switch (finalI) {
                             case 0:

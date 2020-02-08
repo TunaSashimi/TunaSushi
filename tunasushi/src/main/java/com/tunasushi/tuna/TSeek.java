@@ -22,6 +22,8 @@ import static com.tunasushi.tool.DrawTool.drawText;
 import static com.tunasushi.tool.PaintTool.paint;
 import static com.tunasushi.tool.PathTool.initPath;
 import static com.tunasushi.tool.PathTool.path;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 /**
  * @author Tunasashimi
@@ -75,11 +77,7 @@ public class TSeek extends TView {
 
         int seekTextValueArrayId = typedArray.getResourceId(R.styleable.TSeek_seekTextValueArray, -1);
         if (seekTextValueArrayId != -1) {
-            if (isInEditMode()) {
-                seekTextValueArray = new String[]{"0", "1", "2", "5", "10"};
-            } else {
-                seekTextValueArray = typedArray.getResources().getStringArray(seekTextValueArrayId);
-            }
+            seekTextValueArray = typedArray.getResources().getStringArray(seekTextValueArrayId);
             total = seekTextValueArray.length;
             if (total < 2) {
                 throw new IndexOutOfBoundsException("The content attribute seekTextValueArray length must be at least 2");
@@ -90,7 +88,6 @@ public class TSeek extends TView {
                     seekCircleRectFArray[i] = new RectF();
                 }
             }
-
         } else {
             throw new IllegalArgumentException("The content attribute require a property named seekTextValueArray");
         }
@@ -134,25 +131,23 @@ public class TSeek extends TView {
         super.onLayout(changed, left, top, right, bottom);
 
         /**
-         * attantion that the bottom of the circle radius equals the small
-         * seekDragRadiusNormal!
+         * attantion that the bottom of the circle radius equals the small seekDragRadiusNormal!
          */
         seekCircleNormalDiameter = seekDragRadiusNormal * 2;
         surplus = width - seekCircleNormalDiameter * total - seekStrokeWidth;
         share = surplus / (total - 1);
 
-        // The view must be greater than the height multiplied by the
-        // seekArray length
+        // The view must be greater than the height multiplied by the seekArray length
         if (share <= 0) {
             throw new IndexOutOfBoundsException("The view must be greater than the height multiplied by the seekArray length");
         }
 
         // first start draw bottom of the picture:
 
-        // dy=hypotenuse*sin(seekAngle*0.5f)
-        dy = (float) (seekCircleNormalDiameter * 0.5f * Math.sin(Math.toRadians(seekAngle * 0.5f)));
-        // dx=hypotenuse-hypotenuse*cos(seekAngle*0.5f)
-        dx = (float) (seekCircleNormalDiameter * 0.5f - seekCircleNormalDiameter * 0.5f * Math.cos(Math.toRadians(seekAngle * 0.5f)));
+//        dy = hypotenuse * sin(seekAngle * 0.5f)
+        dy = (float) (seekCircleNormalDiameter * 0.5f * sin(Math.toRadians(seekAngle * 0.5f)));
+//        dx = hypotenuse - hypotenuse * cos(seekAngle * 0.5f)
+        dx = (float) (seekCircleNormalDiameter * 0.5f - seekCircleNormalDiameter * 0.5f * cos(Math.toRadians(seekAngle * 0.5f)));
 
         // seekCircleCentreXArray avoid generating with new
         for (int i = 0; i < total; i++) {
@@ -187,13 +182,14 @@ public class TSeek extends TView {
             }
         }
 
-        // draw bottom pitcure
+        // draw bottom stroke
         canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, seekStrokeColor, seekStrokeWidth));
 
-        // draw bottom filling
         PaintTool.initPaint(Paint.Style.FILL, seekFillColor);
 
         for (int i = 0; i < total; i++) {
+
+            // draw bottom circle
             canvas.drawCircle(seekCircleCentreXArray[i], height >> 1, seekCircleNormalDiameter * 0.5f - seekDragStrokeWidth, paint);
 
             if (i != total - 1) {
@@ -211,18 +207,18 @@ public class TSeek extends TView {
                 seekCircleRectFArray[0].set(seekCircleCentreXArray[i] + seekCircleNormalDiameter * 0.5f - dx * 5, (height >> 1) - dy, seekCircleCentreXArray[i]
                         + seekCircleNormalDiameter * 0.5f + share + dx * 5, (height >> 1) + dy);
 
+                // draw bottom rect
                 canvas.drawRect(seekCircleRectFArray[0], paint);
             }
         }
 
         // draw bottom text
-
         PaintTool.initTextPaint(Paint.Style.FILL, seekTextColorNormal, seekTextSize, Align.CENTER);
         for (int i = 0; i < total; i++) {
             drawText(canvas, seekTextValueArray[i], width, seekCircleCentreXArray[i], height >> 1, 0, 0, paint);
         }
 
-        // draw response
+        // draw drag
         if (press) {
             // If the incoming the background painted directly
             if (seekDragBitmapSrcPress != null) {

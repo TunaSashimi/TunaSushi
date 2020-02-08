@@ -29,7 +29,7 @@ public class TWrapActivity extends Activity {
 
         tWrap.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View v) {
+            public void touchUp(TView t) {
                 tWrap.setWrapCurrentXY(tWrap.getTouchEventX(), tWrap.getTouchEventY());
             }
         });

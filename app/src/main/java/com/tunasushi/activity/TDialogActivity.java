@@ -24,14 +24,14 @@ public class TDialogActivity extends Activity {
 
         tDialogChoice.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
+            public void touch(TView t) {
                 tDialogChoice.setDialogCurrentXY(tDialogChoice.getTouchEventX(), tDialogChoice.getTouchEventY());
             }
         });
 
         tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View v) {
+            public void touchUp(TView t) {
                 String choiceTextValueIndex = tDialogChoice.getDialogCurrentChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();
@@ -42,14 +42,14 @@ public class TDialogActivity extends Activity {
 
         tDialogConfirm.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
+            public void touch(TView t) {
                 tDialogConfirm.setDialogCurrentXY(tDialogConfirm.getTouchEventX(), tDialogConfirm.getTouchEventY());
             }
         });
 
         tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View v) {
+            public void touchUp(TView t) {
                 String choiceTextValueIndex = tDialogConfirm.getDialogCurrentChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();

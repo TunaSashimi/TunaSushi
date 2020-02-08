@@ -53,8 +53,8 @@ public class TLineActivity extends Activity {
 
         tLineMove.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
-                tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tLineMove.getTouchEventX());
+            public void touch(TView t) {
+                tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
     }

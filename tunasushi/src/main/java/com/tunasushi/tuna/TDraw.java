@@ -58,7 +58,7 @@ public class TDraw extends TView {
     }
 
     public void setDrawSrc(int id) {
-        setDrawSrc(decodeBitmapResource(getContext(),id));
+        setDrawSrc(decodeBitmapResource(getContext(), id));
     }
 
     public void setDrawSrc(Bitmap bitmap) {
@@ -67,6 +67,7 @@ public class TDraw extends TView {
 
 
     private DrawType drawType;
+
     public enum DrawType {
         CIRCLE(0),
         STAR(1),
@@ -75,7 +76,8 @@ public class TDraw extends TView {
         PENTAGON(4),
         SIXTEENEDGE(5),
         FORTYEDGE(6),
-        SNAIL(7),;
+        SNAIL(7),
+        ;
         final int nativeInt;
 
         DrawType(int ni) {
@@ -182,13 +184,12 @@ public class TDraw extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        //When the parent class in onMeasure initialized  paint in TView
+        //When the parent class in onMeasure initialized paint in TView
         PaintTool.initPaint(Paint.Style.STROKE, drawColor, drawWidth);
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
-
 
         //
         srcBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -285,8 +286,8 @@ public class TDraw extends TView {
     }
 
     public void drawTouchMove(float x, float y) {
-        float dx = Math.abs(x - drawX);
-        float dy = Math.abs(y - drawY);
+        dx = Math.abs(x - drawX);
+        dy = Math.abs(y - drawY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             path.quadTo(drawX, drawY, (x + drawX) / 2, (y + drawY) / 2);
             drawX = x;
@@ -305,21 +306,21 @@ public class TDraw extends TView {
     public void setPaintingListener() {
         setTouchDownListener(new TouchDownListener() {
             @Override
-            public void touchDown(View v) {
+            public void touchDown(TView t) {
                 drawTouchDown(getTouchEventX(), getTouchEventY());
             }
         });
 
         setTouchMoveListener(new TouchMoveListener() {
             @Override
-            public void touchMove(View v) {
+            public void touchMove(TView t) {
                 drawTouchMove(getTouchEventX(), getTouchEventY());
             }
         });
 
         setTouchUpListener(new TouchUpListener() {
             @Override
-            public void touchUp(View v) {
+            public void touchUp(TView t) {
                 drawTouchUp();
             }
         });

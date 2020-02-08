@@ -22,7 +22,7 @@ public class TTrangleActivity extends Activity {
 
         TViewButton.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View v) {
+            public void touchUp(TView t) {
                 if ("TunaSashimi".equals(TViewDialog.getTextValue())) {
                     TViewDialog.setTextValue("金枪鱼刺身");
                 } else {

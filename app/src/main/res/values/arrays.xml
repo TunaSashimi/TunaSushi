@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="dialog_textValueArray_choice">
+    <string-array name="dialog_text_value_array_choice">
         <item>@string/confirm</item>
         <item>@string/cancel</item>
     </string-array>
@@ -9,16 +9,24 @@
     <item name="confirm" type="string">确定</item>
     <item name="cancel" type="string">取消</item>
 
-    <string-array name="dialog_textValueArray_confirm">
+    <string-array name="dialog_text_value_array_confirm">
         <item>确定</item>
     </string-array>
 
-    <string-array name="seek_textValueArray">
+    <string-array name="seek_text_value_array">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>5</item>
         <item>10</item>
+    </string-array>
+
+    <string-array name="range_value_array">
+        <item>0</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
     </string-array>
 
 </resources>

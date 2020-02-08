@@ -39,7 +39,7 @@
             app:seekStrokeWidth="1px"
             app:seekTextColorNormal="#cccccc"
             app:seekTextSize="17dp"
-            app:seekTextValueArray="@array/seek_textValueArray"
+            app:seekTextValueArray="@array/seek_text_value_array"
             app:touchIntercept="true"
             app:touchType="always" />
 
@@ -88,7 +88,6 @@
             android:text="seekAngle管道角度\nseekDragBackgroundNormal设置小球常规背景\nseekDragBackgroundPress设置小球按下背景\nseekDragRadiusNormal设置小球常规半径\nseekDragRadiusPress设置小球按下半径\nseekDragStrokeColorNormal设置小球边框线常规颜色\nseekDragStrokeColorPress设置小球边框线按下颜色\nseekDragTextColor设置小球上字体颜色\nseekCurrentIndex选中下标\nseekFillColor填充颜色\nseekStrokeColor设置边框线颜色\nseekStrokeWidth设置边框线宽度\nseekTextColorNormal设置默认字体颜色\nseekTextSize设置字体大小\nseekTextValueArray选择项数组"
             android:textColor="#434343" />
 
-
         <com.tunasushi.tuna.TSeek
             android:id="@+id/tSeekTouchoutUnable"
             android:layout_width="match_parent"
@@ -111,7 +110,7 @@
             app:seekStrokeWidth="1px"
             app:seekTextColorNormal="#cccccc"
             app:seekTextSize="17dp"
-            app:seekTextValueArray="@array/seek_textValueArray"
+            app:seekTextValueArray="@array/seek_text_value_array"
             app:touchIntercept="true" />
 
         <!--From bottom to top of layout-->

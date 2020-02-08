@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -171,8 +171,8 @@ public class TWrap extends TView {
         float rowHeight = fontMetrics.descent - fontMetrics.ascent;
         float characterWidth = paint.measureText(wrapItemTextValueArray[0]);//At least one field
 
-        int dx = 0;
-        int dy = 0;
+        dx = 0;
+        dy = 0;
 
         for (int i = 0; i <= total - 1; i++) {
             float itemWidth = paint.measureText(wrapItemTextValueArray[i]);
@@ -198,11 +198,11 @@ public class TWrap extends TView {
     }
 
 
-    private void drawDetail(Canvas canvas, int dx, int dy, float itemWidth, float rowHeight, int i) {
+    private void drawDetail(Canvas canvas, float dx, float dy, float itemWidth, float rowHeight, int i) {
 
         //
         if (wrapList.size() <= i) {
-            wrapList.add(new Wrap(new Rect(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapItemTextValueArray[i]));
+            wrapList.add(new Wrap(new RectF(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapItemTextValueArray[i]));
         }
 
         Wrap wrap = wrapList.get(i);
@@ -247,11 +247,11 @@ public class TWrap extends TView {
     }
 
     public class Wrap {
-        public Rect wrapRect;
+        public RectF wrapRect;
         public boolean wrapSelect;
         public String wrapString;
 
-        public Wrap(Rect wrapRect, boolean wrapSelect, String wrapString) {
+        public Wrap(RectF wrapRect, boolean wrapSelect, String wrapString) {
             this.wrapRect = wrapRect;
             this.wrapSelect = wrapSelect;
             this.wrapString = wrapString;

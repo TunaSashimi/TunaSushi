@@ -120,9 +120,6 @@ public class TRow extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        PaintTool.initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
-
-        //
         switch (rowDirection) {
             case TOP:
                 rowStopY = 0;
@@ -131,6 +128,8 @@ public class TRow extends TView {
                 rowStopY = height;
                 break;
         }
+
+        PaintTool.initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
     }
 
     @Override

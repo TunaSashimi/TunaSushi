@@ -146,7 +146,6 @@ public class TDialog extends TView {
         share = width * 1f / total;
         dy = height - dialogChoiceHeight;
 
-        //repeatCentreXArray avoid generating with new
         for (int i = 0; i < total; i++) {
             floatArray[i] = share * 0.5f + share * i;
         }

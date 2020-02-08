@@ -45,7 +45,7 @@ public class TRepeatActivity extends Activity {
         tRepeatStar.setRepeatListener(
             new TView.TouchListener() {
                 @Override
-                public void touch(View v) {
+                public void touch(TView t) {
                     tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
                     tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX(), true);
                     tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
@@ -53,13 +53,13 @@ public class TRepeatActivity extends Activity {
             },
             new TView.TouchDownListener() {
                 @Override
-                public void touchDown(View v) {
+                public void touchDown(TView t) {
                     tRepeatCar.setPress(true);
                 }
             },
             new TView.TouchUpListener() {
                 @Override
-                public void touchUp(View v) {
+                public void touchUp(TView t) {
                     afterChoice();
                     tRepeatCar.setPress(false);
                 }
@@ -73,7 +73,7 @@ public class TRepeatActivity extends Activity {
         tRepeatCar.setRepeatListener(
             new TView.TouchListener() {
                 @Override
-                public void touch(View v) {
+                public void touch(TView t) {
                     tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
                     tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX(), true);
                     tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
@@ -81,13 +81,13 @@ public class TRepeatActivity extends Activity {
             },
             new TView.TouchDownListener() {
                 @Override
-                public void touchDown(View v) {
+                public void touchDown(TView t) {
                     tRepeatStar.setPress(true);
                 }
             },
             new TView.TouchUpListener() {
                 @Override
-                public void touchUp(View v) {
+                public void touchUp(TView t) {
                     afterChoice();
                     tRepeatStar.setPress(false);
                 }
@@ -135,7 +135,7 @@ public class TRepeatActivity extends Activity {
             null,
             new TView.TouchUpListener() {
                 @Override
-                public void touchUp(View v) {
+                public void touchUp(TView t) {
                     tRepeatTips.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatTips.getTouchEventX());
 //						Toast.makeText(repeatTest.this, "TuochUp", Toast.LENGTH_SHORT).show();
                 }

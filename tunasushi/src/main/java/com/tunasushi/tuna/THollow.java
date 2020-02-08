@@ -65,7 +65,7 @@ public class THollow extends TView {
             return;
         }
 
-        int dy = (int) (height * hollowTextFractionVertical);
+        dy = (int) (height * hollowTextFractionVertical);
 
         srcBitmap = Bitmap.createScaledBitmap(srcBitmap, width, height, false);
         hollowSrcBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -75,7 +75,6 @@ public class THollow extends TView {
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
         canvas.drawBitmap(srcBitmap, 0, 0, paint);
-
     }
 
     @Override

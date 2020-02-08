@@ -439,6 +439,10 @@
         <attr name="rangeThink" format="dimension" />
         <attr name="rangeColorNormal" format="reference|color" />
         <attr name="rangeColorSelect" format="reference|color" />
+        <attr name="rangeValueArray" format="reference" />
+        <attr name="rangeDragLeftBitmapSrc" format="reference" />
+        <attr name="rangeDragRightBitmapSrc" format="reference" />
+
     </declare-styleable>
 
     <declare-styleable name="TRepeat">

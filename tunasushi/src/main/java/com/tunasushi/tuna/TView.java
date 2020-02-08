@@ -95,7 +95,6 @@ public class TView extends View {
     protected float srcWidthScale, srcHeightScale;
 
     protected float dx, dy;
-    protected float centerX, centerY;
     protected float scale, scaleSx, scaleSy;
 
     protected float percent;
@@ -628,7 +627,7 @@ public class TView extends View {
     protected LayoutListener layoutListener;
 
     public interface LayoutListener {
-        void layout(View v);
+        void layout(TView t);
     }
 
     public LayoutListener getLayoutListener() {
@@ -643,7 +642,7 @@ public class TView extends View {
     protected DrawListener drawListener;
 
     public interface DrawListener {
-        void draw(View v);
+        void draw(TView t);
     }
 
     public DrawListener getDrawListener() {
@@ -658,7 +657,7 @@ public class TView extends View {
     protected animateEndListener animateEndListener;
 
     public interface animateEndListener {
-        void animateEnd(View v);
+        void animateEnd(TView t);
     }
 
     public animateEndListener getAnimateEndListener() {
@@ -673,7 +672,7 @@ public class TView extends View {
     protected TouchListener touchListener;
 
     public interface TouchListener {
-        void touch(View v);
+        void touch(TView t);
     }
 
     public TouchListener getTouchListener() {
@@ -688,7 +687,7 @@ public class TView extends View {
     protected TouchDownListener touchDownListener;
 
     public interface TouchDownListener {
-        void touchDown(View v);
+        void touchDown(TView t);
     }
 
     public TouchDownListener getTouchDownListener() {
@@ -703,7 +702,7 @@ public class TView extends View {
     protected TouchMoveListener touchMoveListener;
 
     public interface TouchMoveListener {
-        void touchMove(View v);
+        void touchMove(TView t);
     }
 
     public TouchMoveListener getTouchMoveListener() {
@@ -718,7 +717,7 @@ public class TView extends View {
     protected TouchUpListener touchUpListener;
 
     public interface TouchUpListener {
-        void touchUp(View v);
+        void touchUp(TView t);
     }
 
     public TouchUpListener getTouchUpListener() {
@@ -735,7 +734,7 @@ public class TView extends View {
     protected OnClickListener onClickListener;
 
     public interface OnClickListener {
-        void onClick(View v);
+        void onClick(TView t);
     }
 
     public OnClickListener getOnClickListener() {
@@ -750,7 +749,7 @@ public class TView extends View {
     protected TouchCancelListener touchCancelListener;
 
     public interface TouchCancelListener {
-        void touchCancel(View v);
+        void touchCancel(TView t);
     }
 
     public TouchCancelListener getTouchCancelListener() {
@@ -765,7 +764,7 @@ public class TView extends View {
     protected TouchOutListener touchOutListener;
 
     public interface TouchOutListener {
-        void touchOut(View v);
+        void touchOut(TView t);
     }
 
     public TouchOutListener getTouchOutListener() {
@@ -780,7 +779,7 @@ public class TView extends View {
     protected TouchInListener touchInListener;
 
     public interface TouchInListener {
-        void touchIn(View v);
+        void touchIn(TView t);
     }
 
     public TouchInListener getTouchInListener() {
@@ -795,7 +794,7 @@ public class TView extends View {
     protected associateListener associateListener;
 
     public interface associateListener {
-        void associate(View v);
+        void associate(TView t);
     }
 
     public associateListener getAssociateListener() {
@@ -810,7 +809,7 @@ public class TView extends View {
     protected SubLayoutListener subLayoutListener;
 
     public interface SubLayoutListener {
-        void subLayout(View v);
+        void subLayout(TView t);
     }
 
     public SubLayoutListener getSubLayoutListener() {
@@ -825,7 +824,7 @@ public class TView extends View {
     protected SubDrawListener subDrawListener;
 
     public interface SubDrawListener {
-        void subDraw(View v);
+        void subDraw(TView t);
     }
 
     public SubDrawListener getSubDrawListener() {
@@ -840,7 +839,7 @@ public class TView extends View {
     protected SubAnimateEndListener subAnimateEndListener;
 
     public interface SubAnimateEndListener {
-        void subAnimateEnd(View v);
+        void subAnimateEnd(TView t);
     }
 
     public SubAnimateEndListener getSubAnimateEndListener() {

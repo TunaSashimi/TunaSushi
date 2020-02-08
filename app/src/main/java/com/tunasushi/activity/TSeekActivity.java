@@ -3,7 +3,6 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
@@ -17,8 +16,8 @@ public class TSeekActivity extends Activity {
 
     private TView.TouchUpListener tunaTouchUpListener = new TView.TouchUpListener() {
         @Override
-        public void touchUp(View v) {
-            switch (v.getId()) {
+        public void touchUp(TView t) {
+            switch (t.getId()) {
                 case R.id.tViewTouchoutableReset:
                     tSeekTouchoutable.setSeekCurrentIndex(0);
                     break;
@@ -54,15 +53,15 @@ public class TSeekActivity extends Activity {
 
         tSeekTouchoutable.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
-                tSeekTouchoutable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, tSeekTouchoutable.getTouchEventX());
+            public void touch(TView t) {
+                tSeekTouchoutable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
 
         tSeekTouchoutUnable.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touch(View v) {
-                tSeekTouchoutUnable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, tSeekTouchoutUnable.getTouchEventX());
+            public void touch(TView t) {
+                tSeekTouchoutUnable.setSeekCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
 

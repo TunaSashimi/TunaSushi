@@ -5,11 +5,12 @@
     android:layout_height="match_parent">
 
     <com.tunasushi.tuna.TRange
-        android:id="@+id/rRange"
+        android:id="@+id/tRange"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
-        app:rangeColorNormal="#ffff00"
-        app:rangeColorSelect="#ff0000"
-        app:rangeThink="2dp" />
+        android:layout_marginTop="16dp"
+        app:rangeColorNormal="#f6f5fa"
+        app:rangeColorSelect="#0989ea"
+        app:rangeThink="2dp"
+        app:rangeValueArray="@array/range_value_array" />
 </RelativeLayout>

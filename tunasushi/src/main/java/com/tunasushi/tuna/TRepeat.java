@@ -470,7 +470,7 @@ public class TRepeat extends TView {
         this.setTouchUpListener(touchUpListener);
         this.setTouchCancelListener(new TouchCancelListener() {
             @Override
-            public void touchCancel(View v) {
+            public void touchCancel(TView t) {
                 if (touchUpListener != null) {
                     touchUpListener.touchUp(TRepeat.this);
                 }
@@ -479,7 +479,7 @@ public class TRepeat extends TView {
 
         this.setTouchOutListener(new TouchOutListener() {
             @Override
-            public void touchOut(View v) {
+            public void touchOut(TView t) {
                 if (touchUpListener != null) {
                     touchUpListener.touchUp(TRepeat.this);
                 }
@@ -488,7 +488,7 @@ public class TRepeat extends TView {
 
         this.setTouchInListener(new TouchInListener() {
             @Override
-            public void touchIn(View v) {
+            public void touchIn(TView t) {
                 if (touchDownListener != null) {
                     touchDownListener.touchDown(TRepeat.this);
                 }
