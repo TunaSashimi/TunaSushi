@@ -17,7 +17,12 @@ import com.tunasushi.tuna.TLine;
 import com.tunasushi.tuna.TRepeat;
 
 import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TRepeatActivity extends Activity {
     private TLine tLine;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
@@ -25,8 +30,7 @@ public class TRepeatActivity extends Activity {
     private Button buttonEvaluation01;
     private Spinner spinnerEvaluation01;
 
-    private String[]
-        indexes = {"-1", "0", "1", "2", "3"};
+    private String[] indexArray = {"-1", "0", "1", "2", "3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,55 +47,55 @@ public class TRepeatActivity extends Activity {
         tRepeatTips = findViewById(R.id.tRepeatTips);
 
         tRepeatStar.setRepeatListener(
-            new TView.TouchListener() {
-                @Override
-                public void touch(TView t) {
-                    tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
-                    tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX(), true);
-                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                new TView.TouchListener() {
+                    @Override
+                    public void touch(TView t) {
+                        t.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                        tRepeatCar.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                    }
+                },
+                new TView.TouchDownListener() {
+                    @Override
+                    public void touchDown(TView t) {
+                        tRepeatCar.setPress(true);
+                    }
+                },
+                new TView.TouchUpListener() {
+                    @Override
+                    public void touchUp(TView t) {
+                        afterChoice();
+                        tRepeatCar.setPress(false);
+                    }
                 }
-            },
-            new TView.TouchDownListener() {
-                @Override
-                public void touchDown(TView t) {
-                    tRepeatCar.setPress(true);
-                }
-            },
-            new TView.TouchUpListener() {
-                @Override
-                public void touchUp(TView t) {
-                    afterChoice();
-                    tRepeatCar.setPress(false);
-                }
-            }
         );
 
         //
-        tRepeatCar.setRepeatTotal(indexes.length);
-        tRepeatCar.setRepeatItemTextValueArray(indexes);
+        tRepeatCar.setRepeatTotal(indexArray.length);
+        tRepeatCar.setRepeatItemTextValueArray(indexArray);
 
         tRepeatCar.setRepeatListener(
-            new TView.TouchListener() {
-                @Override
-                public void touch(TView t) {
-                    tRepeatCar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
-                    tRepeatStar.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX(), true);
-                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                new TView.TouchListener() {
+                    @Override
+                    public void touch(TView t) {
+                        t.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                        tRepeatStar.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                    }
+                },
+                new TView.TouchDownListener() {
+                    @Override
+                    public void touchDown(TView t) {
+                        tRepeatStar.setPress(true);
+                    }
+                },
+                new TView.TouchUpListener() {
+                    @Override
+                    public void touchUp(TView t) {
+                        afterChoice();
+                        tRepeatStar.setPress(false);
+                    }
                 }
-            },
-            new TView.TouchDownListener() {
-                @Override
-                public void touchDown(TView t) {
-                    tRepeatStar.setPress(true);
-                }
-            },
-            new TView.TouchUpListener() {
-                @Override
-                public void touchUp(TView t) {
-                    afterChoice();
-                    tRepeatStar.setPress(false);
-                }
-            }
         );
 
         buttonEvaluation01.setOnClickListener(new OnClickListener() {
@@ -110,15 +114,15 @@ public class TRepeatActivity extends Activity {
         });
 
         spinnerEvaluation01 = findViewById(R.id.spinnerEvaluation01);
-        spinnerEvaluation01.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexes));
+        spinnerEvaluation01.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexArray));
         spinnerEvaluation01.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tRepeatStar.setRepeatCurrentIndex(position - 1);
-                tRepeatCar.setRepeatCurrentIndex(position - 1);
+                tRepeatStar.setRepeatIndex(position - 1);
+                tRepeatCar.setRepeatIndex(position - 1);
                 float tunaTouchEventX = tRepeatStar.getTouchEventX();
                 if (tunaTouchEventX != 0) {
-                    tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                    tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
                 }
             }
 
@@ -131,26 +135,25 @@ public class TRepeatActivity extends Activity {
 
         //
         tRepeatTips.setRepeatListener(
-            null,
-            null,
-            new TView.TouchUpListener() {
-                @Override
-                public void touchUp(TView t) {
-                    tRepeatTips.setRepeatCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatTips.getTouchEventX());
-//						Toast.makeText(repeatTest.this, "TuochUp", Toast.LENGTH_SHORT).show();
-                }
-            });
+                null,
+                null,
+                new TView.TouchUpListener() {
+                    @Override
+                    public void touchUp(TView t) {
+                        t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                    }
+                });
     }
 
     //
     private void afterChoice() {
-        int repeatStarCurrentIndex = tRepeatStar.getRepeatCurrentIndex();
-        tLine.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getRepeatCurrentX());
-        if (repeatStarCurrentIndex == 0) {
-        } else if (repeatStarCurrentIndex == 1) {
-        } else if (repeatStarCurrentIndex == 2) {
-        } else if (repeatStarCurrentIndex == 3) {
-        } else if (repeatStarCurrentIndex == 4) {
+        int repeatStarIndex = tRepeatStar.getRepeatIndex();
+        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getRepeatX());
+        if (repeatStarIndex == 0) {
+        } else if (repeatStarIndex == 1) {
+        } else if (repeatStarIndex == 2) {
+        } else if (repeatStarIndex == 3) {
+        } else if (repeatStarIndex == 4) {
         }
     }
 }

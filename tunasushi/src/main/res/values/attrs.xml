@@ -318,7 +318,7 @@
         <attr name="dialogChoiceTextColorNormal" format="reference|color" />
         <attr name="dialogChoiceTextColorPress" format="reference|color" />
 
-        <attr name="dialogChoiceCurrentIndex" format="integer" />
+        <attr name="dialogChoiceIndex" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="TDraw">
@@ -411,7 +411,7 @@
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
         </attr>
-        <attr name="lineCurrentX" format="dimension" />
+        <attr name="lineX" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="TMove">
@@ -440,9 +440,10 @@
         <attr name="rangeColorNormal" format="reference|color" />
         <attr name="rangeColorSelect" format="reference|color" />
         <attr name="rangeValueArray" format="reference" />
+        <attr name="rangeDragLeftIndex" format="integer" />
+        <attr name="rangeDragRightIndex" format="integer" />
         <attr name="rangeDragLeftBitmapSrc" format="reference" />
         <attr name="rangeDragRightBitmapSrc" format="reference" />
-
     </declare-styleable>
 
     <declare-styleable name="TRepeat">
@@ -469,7 +470,7 @@
         </attr>
         <attr name="repeatBitmapSrcNormal" format="reference" />
         <attr name="repeatBitmapSrcSelect" format="reference" />
-        <attr name="repeatCurrentIndex" format="integer" />
+        <attr name="repeatIndex" format="integer" />
         <attr name="repeatItemTextValueArray" format="reference" />
 
     </declare-styleable>
@@ -555,7 +556,7 @@
         <attr name="seekTextValueArray" format="reference" />
         <attr name="seekAngle" format="integer" />
         <attr name="seekFillColor" format="reference|color" />
-        <attr name="seekCurrentIndex" format="integer" />
+        <attr name="seekIndex" format="integer" />
         <attr name="seekDragTextColor" format="reference|color" />
         <attr name="seekDragStrokeWidth" format="dimension" />
         <attr name="seekDragStrokeColorNormal" format="reference|color" />

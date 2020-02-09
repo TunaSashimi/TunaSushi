@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
+
 import static com.tunasushi.tool.PathTool.initPathMoveTo;
 import static com.tunasushi.tool.PathTool.path;
 
@@ -30,7 +31,8 @@ public class TProgress extends TView {
 
     public enum ProgressShapeType {
         CUSTOM(0),
-        CIRCLE(1),;
+        CIRCLE(1),
+        ;
         final int nativeInt;
 
         ProgressShapeType(int ni) {
@@ -48,7 +50,8 @@ public class TProgress extends TView {
     public enum ProgressPromoteType {
         CLOCKWISE(0),
         UPWARD(1),
-        UPDOWN(2),;
+        UPDOWN(2),
+        ;
         final int nativeInt;
 
         ProgressPromoteType(int ni) {
@@ -163,7 +166,7 @@ public class TProgress extends TView {
                         canvas.clipRect(initRect(0, (int) (height * (1 - percent)), width, height));
                         break;
                     case UPDOWN:
-                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.INTERSECT);
+                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.DIFFERENCE);
                         break;
                     default:
                         break;
@@ -189,7 +192,7 @@ public class TProgress extends TView {
                         break;
                     case UPDOWN:
                         canvas.save();
-                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.INTERSECT);
+                        canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.DIFFERENCE);
                         canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
                         canvas.restore();
                         break;

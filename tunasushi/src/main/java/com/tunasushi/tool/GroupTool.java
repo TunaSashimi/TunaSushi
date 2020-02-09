@@ -2,7 +2,6 @@ package com.tunasushi.tool;
 
 import android.content.Context;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tunasushi.tuna.TView;
@@ -34,7 +33,7 @@ public class GroupTool {
                 public void associate(TView t) {
                     for (int j = 0; j < arraySize; j++) {
                         if (j != finalI) {
-                            TViewArray[j].setStatius(false, false, false);
+                            TViewArray[j].setStatus(false, false, false);
                         }
                     }
                 }
@@ -46,16 +45,16 @@ public class GroupTool {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    TViewArray[j].setStatius(false, true, false);
+                                    TViewArray[j].setStatus(false, true, false);
                                 } else if (j > finalI + 1) {
-                                    TViewArray[j].setStatius(false, false, false);
+                                    TViewArray[j].setStatus(false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    TViewArray[j].setStatius(false, true, false);
+                                    TViewArray[j].setStatus(false, true, false);
                                 } else if (j < finalI - 1) {
-                                    TViewArray[j].setStatius(false, false, false);
+                                    TViewArray[j].setStatus(false, false, false);
                                 }
                                 break;
                         }
@@ -78,7 +77,7 @@ public class GroupTool {
                 public void associate(TView t) {
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
-                            TViewList.get(j).setStatius(false, false, false, false);
+                            TViewList.get(j).setStatus(false, false, false, false);
                         }
                     }
                 }
@@ -90,16 +89,16 @@ public class GroupTool {
                         switch (finalI) {
                             case 0:
                                 if (j == finalI + 1) {
-                                    TViewList.get(j).setStatius(false, true, false, false);
+                                    TViewList.get(j).setStatus(false, true, false, false);
                                 } else if (j > finalI + 1) {
-                                    TViewList.get(j).setStatius(false, false, false, false);
+                                    TViewList.get(j).setStatus(false, false, false, false);
                                 }
                                 break;
                             default:
                                 if (j == finalI - 1) {
-                                    TViewList.get(j).setStatius(false, true, false, false);
+                                    TViewList.get(j).setStatus(false, true, false, false);
                                 } else if (j < finalI - 1) {
-                                    TViewList.get(j).setStatius(false, false, false, false);
+                                    TViewList.get(j).setStatus(false, false, false, false);
                                 }
                                 break;
                         }

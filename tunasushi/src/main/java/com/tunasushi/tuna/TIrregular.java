@@ -42,9 +42,6 @@ public class TIrregular extends TView {
         this.irregularBitmapSrcSelect = irregularBitmapSrcSelect;
     }
 
-    private float irregularCurrentX;
-
-    //
     protected IrregularChangeListener irregularChangeListener;
 
     public interface IrregularChangeListener {
@@ -61,6 +58,7 @@ public class TIrregular extends TView {
 
     // irregularSelect default false
     protected boolean irregularSelect;
+
     public boolean isIrregularSelect() {
         return irregularSelect;
     }
@@ -116,24 +114,12 @@ public class TIrregular extends TView {
         }
     }
 
-    public void setIrregularCurrentX(int unit, float irregularCurrentX) {
-        Context c = getContext();
-        Resources r;
-        if (c == null)
-            r = Resources.getSystem();
-        else
-            r = c.getResources();
-        setIrregularCurrentXRaw(applyDimension(unit, irregularCurrentX, r.getDisplayMetrics()));
-    }
-
-
-    private void setIrregularCurrentXRaw(float irregularCurrentX) {
-        if (this.irregularCurrentX != irregularCurrentX) {
-            this.irregularCurrentX = irregularCurrentX;
-            boolean selected = irregularCurrentX >= (width / 2);
-            if (irregularSelect ^ selected) {
-                setIrregularSelect(selected);
-            }
+    @Override
+    public void setXRaw(float x) {
+        this.x = x;
+        boolean selected = x >= (width >> 1);
+        if (irregularSelect ^ selected) {
+            setIrregularSelect(selected);
         }
     }
 }

@@ -22,16 +22,20 @@ import static com.tunasushi.tool.PaintTool.paint;
  * @Description
  */
 public class TRange extends TView {
+    private float rangeThink;
+
+    private int rangeColorNormal;
+    private int rangeColorSelect;
 
     private String[] rangeValueArray;
 
-    private float rangeThink;
-    private int rangeColorNormal;
-    private int rangeColorSelect;
+    private int rangeDragLeftIndex;
+    private int rangeDragRightIndex;
 
     private Bitmap rangeDragLeftBitmapSrc;
     private Bitmap rangeDragRightBitmapSrc;
 
+    //
     private float[] rangeCircleCentreXArray;
 
     public TRange(Context context) {
@@ -49,6 +53,14 @@ public class TRange extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRange);
 
+        rangeThink = typedArray.getDimension(R.styleable.TRange_rangeThink, 0);
+        if (rangeThink <= 0) {
+            throw new IllegalArgumentException("The content attribute rangeThink must be greater than 0 ");
+        }
+
+        rangeColorNormal = typedArray.getColor(R.styleable.TRange_rangeColorNormal, Color.TRANSPARENT);
+        rangeColorSelect = typedArray.getColor(R.styleable.TRange_rangeColorSelect, rangeColorNormal);
+
         int rangeValueArrayId = typedArray.getResourceId(R.styleable.TRange_rangeValueArray, -1);
         if (rangeValueArrayId != -1) {
             rangeValueArray = typedArray.getResources().getStringArray(rangeValueArrayId);
@@ -58,18 +70,21 @@ public class TRange extends TView {
             } else {
                 rangeCircleCentreXArray = new float[total];
             }
-
         } else {
             throw new IllegalArgumentException("The content attribute require a property named rangeValueArray");
         }
 
-        rangeThink = typedArray.getDimension(R.styleable.TRange_rangeThink, 0);
-        if (rangeThink <= 0) {
-            throw new IllegalArgumentException("The content attribute rangeThink must be greater than 0 ");
+        //0
+        rangeDragLeftIndex = typedArray.getInt(R.styleable.TRange_rangeDragLeftIndex, 0);
+        if (rangeDragLeftIndex < 0 || rangeDragLeftIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute rangeDragLeftIndex must be no less than 0 and no greater than rangeValueArray length");
         }
 
-        rangeColorNormal = typedArray.getColor(R.styleable.TRange_rangeColorNormal, Color.TRANSPARENT);
-        rangeColorSelect = typedArray.getColor(R.styleable.TRange_rangeColorSelect, rangeColorNormal);
+        //rangeValueArray.length - 1
+        rangeDragRightIndex = typedArray.getInt(R.styleable.TRange_rangeDragRightIndex, total - 1);
+        if (rangeDragRightIndex < 0 || rangeDragRightIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute rangeDragRightIndex must be no less than 0 and no greater than rangeValueArray length");
+        }
 
         //
         int rangeDragLeftBitmapSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragLeftBitmapSrc, -1);
@@ -104,13 +119,16 @@ public class TRange extends TView {
 
         // draw range dragLeft
         PaintTool.initPaint(Color.WHITE);
-        canvas.drawCircle(rangeCircleCentreXArray[0] + (height >> 1), height >> 1, height >> 1, paint);
+        canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex] + (height >> 1), height >> 1, height >> 1, paint);
 
         // draw range dragRight
-        canvas.drawCircle(rangeCircleCentreXArray[total - 1] - (height >> 1), height >> 1, height >> 1, paint);
+        canvas.drawCircle(rangeCircleCentreXArray[rangeDragRightIndex] - (height >> 1), height >> 1, height >> 1, paint);
 
         //draw rangeColorSelect
         PaintTool.initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
-        canvas.drawLine(rangeCircleCentreXArray[0] + height, height >> 1, width - height, height >> 1, paint);
+        canvas.drawLine(rangeCircleCentreXArray[rangeDragLeftIndex] + height, height >> 1,
+                rangeCircleCentreXArray[rangeDragRightIndex] - height, height >> 1, paint);
+
+
     }
 }

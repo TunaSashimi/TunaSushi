@@ -8,7 +8,12 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TProgress;
 
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TProgressActivity extends Activity {
 
     private TProgress tProgressCircleClockWise, tProgressCircleUpWard, tProgressCircleUpDown,

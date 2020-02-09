@@ -1,7 +1,6 @@
 package com.tunasushi.tuna;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,13 +10,11 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
 
-import static com.tunasushi.tool.DeviceTool.applyDimension;
 import static com.tunasushi.tool.DrawTool.drawText;
 import static com.tunasushi.tool.PaintTool.paint;
 import static com.tunasushi.tool.PathTool.initPath;
@@ -54,8 +51,7 @@ public class TSeek extends TView {
     private RectF[] seekCircleRectFArray;
     private float[] seekCircleCentreXArray;
 
-    private float seekCurrentX;
-    private int seekCurrentIndex;
+    private int seekIndex;
 
     // some draw variables
     private float seekCircleNormalDiameter;
@@ -92,9 +88,9 @@ public class TSeek extends TView {
             throw new IllegalArgumentException("The content attribute require a property named seekTextValueArray");
         }
 
-        seekCurrentIndex = typedArray.getInt(R.styleable.TSeek_seekCurrentIndex, -1);
-        if (seekCurrentIndex >= total) {
-            throw new IndexOutOfBoundsException("The content attribute seekCurrentIndex length must be smaller than the seekTextValueArray length");
+        seekIndex = typedArray.getInt(R.styleable.TSeek_seekIndex, -1);
+        if (seekIndex >= total) {
+            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be smaller than the seekTextValueArray length");
         }
 
         seekAngle = typedArray.getInt(R.styleable.TSeek_seekAngle, 30);
@@ -223,21 +219,21 @@ public class TSeek extends TView {
             // If the incoming the background painted directly
             if (seekDragBitmapSrcPress != null) {
 
-                seekCircleRectFArray[0].set(seekCurrentX - seekDragRadiusPress, (height >> 1) - seekDragRadiusPress,
-                        seekCurrentX + seekDragRadiusPress, (height >> 1) + seekDragRadiusPress);
+                seekCircleRectFArray[0].set(x - seekDragRadiusPress, (height >> 1) - seekDragRadiusPress,
+                        x + seekDragRadiusPress, (height >> 1) + seekDragRadiusPress);
 
                 canvas.drawBitmap(seekDragBitmapSrcPress, null, seekCircleRectFArray[0], paint);
 
                 // No not incoming the background draw the default texture
             } else {
                 paint.setColor(seekDragStrokeColorPress);
-                canvas.drawCircle(seekCurrentX, height >> 1, seekDragRadiusPress, paint);
+                canvas.drawCircle(x, height >> 1, seekDragRadiusPress, paint);
                 paint.setColor(seekDragBackgroundPress);
-                canvas.drawCircle(seekCurrentX, height >> 1, seekDragRadiusPress - seekDragStrokeWidth, paint);
+                canvas.drawCircle(x, height >> 1, seekDragRadiusPress - seekDragStrokeWidth, paint);
 
                 // draw veins overlapping round
 
-                float bezierOvalX = seekCurrentX;
+                float bezierOvalX = x;
                 float bezierOvalY = height >> 1;
 
                 // 左下的图形宽度的一半,高度的一半
@@ -276,68 +272,48 @@ public class TSeek extends TView {
                 canvas.drawPath(path, paint);
             }
 
-            drawText(canvas, seekTextValueArray[seekCurrentIndex], width, seekCurrentX, height >> 1, 0, 0,
+            drawText(canvas, seekTextValueArray[seekIndex], width, x, height >> 1, 0, 0,
                     PaintTool.initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
 
         } else {
-            float adjuestX = seekCircleCentreXArray[seekCurrentIndex];
+            float adjuestX = seekCircleCentreXArray[seekIndex];
 
             // draw response circle
             canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal, PaintTool.initPaint(Paint.Style.FILL, seekDragStrokeColorNormal));
             canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal - seekDragStrokeWidth, PaintTool.initPaint(Paint.Style.FILL, seekDragBackgroundNormal));
 
             // draw response text
-            drawText(canvas, seekTextValueArray[seekCurrentIndex], width, adjuestX, height >> 1, 0, 0,
+            drawText(canvas, seekTextValueArray[seekIndex], width, adjuestX, height >> 1, 0, 0,
                     PaintTool.initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
         }
     }
 
-    public float getSeekCurrentX() {
-        return seekCurrentX;
-    }
-
-    public void setSeekCurrentX(float seekCurrentX) {
-        setSeekCurrentX(TypedValue.COMPLEX_UNIT_DIP, seekCurrentX);
-    }
-
-    public void setSeekCurrentX(int unit, float seekCurrentX) {
-        Context c = getContext();
-        Resources r;
-        if (c == null)
-            r = Resources.getSystem();
-        else
-            r = c.getResources();
-        setSeekCurrentXRaw(applyDimension(unit, seekCurrentX, r.getDisplayMetrics()));
-    }
-
-    private void setSeekCurrentXRaw(float seekCurrentX) {
-        if (this.seekCurrentX != seekCurrentX) {
-            this.seekCurrentX = seekCurrentX;
-            // calculate index
-            float minDistence = width;
-            // From 0 to judge one by one, if the distance farther on the end of
-            // the cycle
-            for (int i = 0; i < total; i++) {
-                float circleCentreDistance = Math.abs(seekCurrentX - seekCircleCentreXArray[i]);
-                if (circleCentreDistance < minDistence) {
-                    seekCurrentIndex = i;
-                    minDistence = circleCentreDistance;
-                } else {
-                    break;
-                }
+    @Override
+    public void setXRaw(float x) {
+        this.x = x;
+        // calculate index
+        float minDistence = width;
+        // From 0 to judge one by one, if the distance farther on the end of the cycle
+        for (int i = 0; i < total; i++) {
+            float circleCentreDistance = Math.abs(x - seekCircleCentreXArray[i]);
+            if (circleCentreDistance < minDistence) {
+                seekIndex = i;
+                minDistence = circleCentreDistance;
+            } else {
+                break;
             }
         }
     }
 
-    public int getSeekCurrentIndex() {
-        return seekCurrentIndex;
+    public int getSeekIndex() {
+        return seekIndex;
     }
 
-    public void setSeekCurrentIndex(int seekCurrentIndex) {
-        if (seekCurrentIndex < 0 || seekCurrentIndex >= total) {
-            throw new IndexOutOfBoundsException("The content attribute seekCurrentIndex length must be not less than zero and smaller than the seekArray length");
+    public void setSeekIndex(int seekIndex) {
+        if (seekIndex < 0 || seekIndex >= total) {
+            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be no less than zero and smaller than the seekArray length");
         }
-        this.seekCurrentIndex = seekCurrentIndex;
+        this.seekIndex = seekIndex;
         invalidate();
     }
 }

@@ -2,13 +2,16 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-
 import com.tunasushi.R;
 import com.tunasushi.tuna.TDialog;
 import com.tunasushi.tuna.TView;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TDialogActivity extends Activity {
 
     private TDialog tDialogChoice, tDialogConfirm;
@@ -25,36 +28,36 @@ public class TDialogActivity extends Activity {
         tDialogChoice.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                tDialogChoice.setDialogCurrentXY(tDialogChoice.getTouchEventX(), tDialogChoice.getTouchEventY());
+                tDialogChoice.setDialogXY(tDialogChoice.getTouchEventX(), tDialogChoice.getTouchEventY());
             }
         });
 
         tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                String choiceTextValueIndex = tDialogChoice.getDialogCurrentChoiceTextValue();
+                String choiceTextValueIndex = tDialogChoice.getDialogChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();
                 }
-                tDialogChoice.setDialogChoiceCurrentIndex(-1);
+                tDialogChoice.setDialogChoiceIndex(-1);
             }
         });
 
         tDialogConfirm.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                tDialogConfirm.setDialogCurrentXY(tDialogConfirm.getTouchEventX(), tDialogConfirm.getTouchEventY());
+                tDialogConfirm.setDialogXY(tDialogConfirm.getTouchEventX(), tDialogConfirm.getTouchEventY());
             }
         });
 
         tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                String choiceTextValueIndex = tDialogConfirm.getDialogCurrentChoiceTextValue();
+                String choiceTextValueIndex = tDialogConfirm.getDialogChoiceTextValue();
                 if (choiceTextValueIndex != null) {
                     Toast.makeText(TDialogActivity.this, choiceTextValueIndex, Toast.LENGTH_SHORT).show();
                 }
-                tDialogConfirm.setDialogChoiceCurrentIndex(-1);
+                tDialogConfirm.setDialogChoiceIndex(-1);
             }
         });
     }

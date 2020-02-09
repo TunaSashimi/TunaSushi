@@ -6,8 +6,14 @@ import android.os.Bundle;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TRange;
 import com.tunasushi.tuna.TView;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TRangeActivity extends Activity {
+    private TRange rRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +21,7 @@ public class TRangeActivity extends Activity {
 
         setContentView(R.layout.activity_t_range);
 
-        TRange rRange = findViewById(R.id.tRange);
+        rRange = findViewById(R.id.tRange);
 
         //
         rRange.setTouchDownListener(new TView.TouchDownListener() {

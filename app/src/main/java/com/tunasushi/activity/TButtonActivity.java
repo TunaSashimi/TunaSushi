@@ -2,13 +2,18 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TButton;
 import com.tunasushi.tuna.TView;
 
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TButtonActivity extends Activity {
 
     private TButton tButton01, tButton02, tButton03;

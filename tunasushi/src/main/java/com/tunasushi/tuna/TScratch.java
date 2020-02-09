@@ -208,7 +208,7 @@ public class TScratch extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawText(scratchText, (width >> 1) - rect.width() / 2, (height >> 1) + rect.height() / 2, paint);
+        canvas.drawText(scratchText, (width >> 1) - (rect.width() >> 1), (height >> 1) + (rect.height() >> 1), paint);
 
         if (!scratchComplete) {
             scratchCoverPaint.setStyle(Style.STROKE);

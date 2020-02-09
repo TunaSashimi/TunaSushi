@@ -37,39 +37,19 @@ public class TLine extends TView {
 
     private int lineArrowColor;
 
-    private float lineCurrentX;
 
-    public float getLineCurrentX() {
-        return lineCurrentX;
-    }
-
-    //
-    public void setLineCurrentX(float lineCurrentX) {
-        setLineCurrentX(TypedValue.COMPLEX_UNIT_DIP, lineCurrentX);
-    }
-
-    public void setLineCurrentX(int unit, float lineCurrentX) {
-        Context c = getContext();
-        Resources r;
-        if (c == null)
-            r = Resources.getSystem();
-        else
-            r = c.getResources();
-        setLineCurrentXRaw(applyDimension(unit, lineCurrentX, r.getDisplayMetrics()));
-    }
-
-    private void setLineCurrentXRaw(float lineCurrentX) {
-        if (this.lineCurrentX != lineCurrentX) {
-            this.lineCurrentX = lineCurrentX;
+    @Override
+    public void setXRaw(float x) {
+            this.x = x;
             invalidate();
-        }
     }
 
     private LineTowardType lineTowardType;
 
     public enum LineTowardType {
         TOP(0),
-        BOTTOM(1),;
+        BOTTOM(1),
+        ;
         final int nativeInt;
 
         LineTowardType(int ni) {
@@ -108,9 +88,9 @@ public class TLine extends TView {
         lineArrowColor = typedArray.getColor(R.styleable.TLine_lineArrowColor, Color.TRANSPARENT);
 
         //If 0 is hidden
-        lineCurrentX = typedArray.getDimension(R.styleable.TLine_lineCurrentX, 0);
-        if (lineCurrentX == 0) {
-            lineCurrentX = -lineArrowWidth;
+        x = typedArray.getDimension(R.styleable.TLine_lineX, 0);
+        if (x == 0) {
+            x = -lineArrowWidth;
         }
 
         int lineTowardTypeIndex = typedArray.getInt(R.styleable.TLine_lineTowardType, -1);
@@ -136,8 +116,8 @@ public class TLine extends TView {
                 case TOP:
                     drawArrow(
                             canvas,
-                            width,height,
-                            lineCurrentX,
+                            width, height,
+                            x,
                             lineArrowWidth, lineArrowHeight,
                             lineArrowStrokeWidth,
                             lineArrowStrokeColor,
@@ -146,8 +126,8 @@ public class TLine extends TView {
                 case BOTTOM:
                     drawArrow(
                             canvas,
-                            width,height,
-                            lineCurrentX,
+                            width, height,
+                            x,
                             lineArrowWidth, lineArrowHeight,
                             lineArrowStrokeWidth,
                             lineArrowStrokeColor,
@@ -161,14 +141,14 @@ public class TLine extends TView {
             if (lineArrowColor != Color.TRANSPARENT) {
                 switch (lineTowardType) {
                     case TOP:
-                        initPathMoveTo(lineCurrentX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, height);
-                        path.lineTo(lineCurrentX, height - lineArrowHeight - lineArrowStrokeWidth * 0.5f);
-                        path.lineTo(lineCurrentX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, height);
+                        initPathMoveTo(x - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, height);
+                        path.lineTo(x, height - lineArrowHeight - lineArrowStrokeWidth * 0.5f);
+                        path.lineTo(x + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, height);
                         break;
                     case BOTTOM:
-                        initPathMoveTo(lineCurrentX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, 0);
-                        path.lineTo(lineCurrentX, lineArrowHeight - lineArrowStrokeWidth * 0.5f);
-                        path.lineTo(lineCurrentX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, 0);
+                        initPathMoveTo(x - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, 0);
+                        path.lineTo(x, lineArrowHeight - lineArrowStrokeWidth * 0.5f);
+                        path.lineTo(x + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, 0);
                         break;
                     default:
                         break;
@@ -181,15 +161,13 @@ public class TLine extends TView {
     }
 
 
-
     public void centerArrow() {
-        lineCurrentX = width >> 1;
+        x = width >> 1;
         invalidate();
     }
 
     public void hideArrow() {
-        lineCurrentX = -lineArrowWidth;
+        x = -lineArrowWidth;
         invalidate();
     }
-
 }

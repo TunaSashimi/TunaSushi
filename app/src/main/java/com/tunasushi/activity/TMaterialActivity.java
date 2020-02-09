@@ -11,11 +11,14 @@ import java.util.Arrays;
 
 import static com.tunasushi.tool.GroupTool.associate;
 
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TMaterialActivity extends Activity {
-
-    private TView
-
-            tViewMaterialRadio01, tViewMaterialRadio02;
+    private TView tViewMaterialRadio01, tViewMaterialRadio02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

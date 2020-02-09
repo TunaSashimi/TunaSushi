@@ -53,7 +53,7 @@ public class TWrap extends TView {
 
     //
     private List<Wrap> wrapList;
-    private boolean[] wrapCurrentSelect;
+    private boolean[] wrapSelect;
 
     public TWrap(Context context) {
         this(context, null);
@@ -108,7 +108,7 @@ public class TWrap extends TView {
             throw new IllegalArgumentException("The content attribute wrapItemTextValueArray length must be greater than 0 ");
         } else {
             wrapList = new ArrayList(total);
-            wrapCurrentSelect = new boolean[total];
+            wrapSelect = new boolean[total];
         }
 
         //
@@ -232,18 +232,18 @@ public class TWrap extends TView {
 
     }
 
-    public void setWrapCurrentXY(float wrapCurrentX, float wrapCurrentY) {
+    public void setWrapXY(float wrapX, float wrapY) {
         for (int i = 0; i <= total - 1; i++) {
             Wrap wrap = wrapList.get(i);
-            if (wrap.wrapRect.contains((int) wrapCurrentX, (int) wrapCurrentY)) {
+            if (wrap.wrapRect.contains((int) wrapX, (int) wrapY)) {
                 wrap.wrapSelect = !wrap.wrapSelect;
-                wrapCurrentSelect[i] = wrap.wrapSelect;
+                wrapSelect[i] = wrap.wrapSelect;
             }
         }
     }
 
-    public boolean[] getWrapCurrentSelect() {
-        return wrapCurrentSelect;
+    public boolean[] getWrapSelect() {
+        return wrapSelect;
     }
 
     public class Wrap {

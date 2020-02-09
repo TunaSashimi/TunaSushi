@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.View;
 
 import com.tuna.R;
 import com.tunasushi.tool.PaintTool;
@@ -32,14 +31,12 @@ public class TRepeat extends TView {
 
     private Bitmap repeatBitmapSrcNormal, repeatBitmapSrcSelect;
 
-    private float repeatCurrentX;
-    private int repeatCurrentIndex;
+    private int repeatIndex;
 
     private float repeatItemTextSize;
     private int repeatItemTextColorNormal, repeatItemTextColorSelect;
 
     private int repeatItemBackgroundNormal, repeatItemBackgroundSelect;
-
 
     private RepeatSelectType repeatSelectType;
 
@@ -90,7 +87,7 @@ public class TRepeat extends TView {
         if (repeatItemTextValueArrayId != -1) {
             stringArray = typedArray.getResources().getStringArray(repeatItemTextValueArrayId);
             if (total != stringArray.length) {
-                throw new IndexOutOfBoundsException("These two properties of total and repeatItemTextValueArray must be the same length");
+                throw new IndexOutOfBoundsException("These two properties of repeatTotal and repeatItemTextValueArray must be the same length");
             }
         }
 
@@ -102,7 +99,7 @@ public class TRepeat extends TView {
         repeatItemTextFractionBottom = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionBottom, 1, 1, 1);
 
         if (repeatItemTextFractionBottom <= repeatItemTextFractionTop) {
-            throw new IndexOutOfBoundsException("The content attribute repeatItemTextFractionBottom must be Equal to or greater than repeatItemTextFractionTop");
+            throw new IndexOutOfBoundsException("The content attribute repeatItemTextFractionBottom must be greater than repeatItemTextFractionTop");
         }
 
         repeatItemFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemFractionTop, 1, 1, 0);
@@ -142,7 +139,7 @@ public class TRepeat extends TView {
             throw new IllegalArgumentException("The content attribute require a property named repeatSelectType");
         }
 
-        repeatCurrentIndex = typedArray.getInt(R.styleable.TRepeat_repeatCurrentIndex, -1);
+        repeatIndex = typedArray.getInt(R.styleable.TRepeat_repeatIndex, -1);
         typedArray.recycle();
     }
 
@@ -150,19 +147,13 @@ public class TRepeat extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (total < 1) {
-            // Preview defaults
-            if (isInEditMode()) {
-                total = 5;
-                floatArray = new float[total];
-            } else {
-                throw new IndexOutOfBoundsException("The content attribute repeatTotal must be greater than or equal 1");
-            }
+            throw new IndexOutOfBoundsException("The content attribute repeatTotal must be greater than or equal 1");
         } else {
             floatArray = new float[total];
         }
 
-        if (repeatCurrentIndex < -1 || repeatCurrentIndex > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute repeatCurrentIndex length must be not less than -1 and smaller than the total length minus 1");
+        if (repeatIndex < -1 || repeatIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute repeatIndex length must be no less than -1 and smaller than the total length minus 1");
         }
 
 
@@ -232,10 +223,10 @@ public class TRepeat extends TView {
                     canvas.save();
                     switch (repeatSelectType) {
                         case CONNECT:
-                            canvas.clipRect(0, 0, repeatCurrentX, height);
+                            canvas.clipRect(0, 0, x, height);
                             break;
                         case CURRENT:
-                            canvas.clipRect(repeatCurrentX - srcWidthScale, 0, repeatCurrentX, height);
+                            canvas.clipRect(x - srcWidthScale, 0, x, height);
                             break;
                         default:
                             break;
@@ -264,8 +255,8 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatBitmapSrcSelect
-                                : repeatBitmapSrcNormal : i == repeatCurrentIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
+                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatBitmapSrcSelect
+                                : repeatBitmapSrcNormal : i == repeatIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
                     }
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
                     if (stringArray != null) {
@@ -279,8 +270,8 @@ public class TRepeat extends TView {
                                     0,
                                     0,
                                     PaintTool.initTextPaint(Paint.Style.FILL,
-                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemTextColorSelect
-                                                    : repeatItemTextColorNormal : i == repeatCurrentIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                                    : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                             repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
@@ -314,10 +305,10 @@ public class TRepeat extends TView {
                     canvas.save();
                     switch (repeatSelectType) {
                         case CONNECT:
-                            canvas.clipRect(0, 0, repeatCurrentX, height);
+                            canvas.clipRect(0, 0, x, height);
                             break;
                         case CURRENT:
-                            canvas.clipRect(repeatCurrentX - srcWidthScale, 0, repeatCurrentX, height);
+                            canvas.clipRect(x - srcWidthScale, 0, x, height);
                             break;
                         default:
                             break;
@@ -348,10 +339,10 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatBitmapSrcSelect
-//                                : repeatBitmapSrcNormal : i == repeatCurrentIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
-                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemBackgroundSelect
-                                : repeatItemBackgroundNormal : i == repeatCurrentIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
+//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatIndex ? repeatBitmapSrcSelect
+//                                : repeatBitmapSrcNormal : i == repeatIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
+                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
+                                : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
                     }
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
                     if (stringArray != null) {
@@ -365,8 +356,8 @@ public class TRepeat extends TView {
                                     0,
                                     0,
                                     PaintTool.initTextPaint(Paint.Style.FILL,
-                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatCurrentIndex ? repeatItemTextColorSelect
-                                                    : repeatItemTextColorNormal : i == repeatCurrentIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                                    : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                             repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
@@ -380,61 +371,40 @@ public class TRepeat extends TView {
     }
 
     //
-    public float getRepeatCurrentX() {
-        return floatArray[repeatCurrentIndex];
+    public float getRepeatX() {
+        return floatArray[repeatIndex];
     }
 
-    public void setRepeatCurrentX(float repeatCurrentX) {
-        setRepeatCurrentX(repeatCurrentX, false);
-    }
-
-    public void setRepeatCurrentX(int unit, float repeatCurrentX) {
-        setRepeatCurrentX(unit, repeatCurrentX, false);
-    }
-
-    public void setRepeatCurrentX(float repeatCurrentX, boolean needInvalidate) {
-        setRepeatCurrentX(TypedValue.COMPLEX_UNIT_DIP, repeatCurrentX, needInvalidate);
-    }
-
-    public void setRepeatCurrentX(int unit, float repeatCurrentX, boolean needInvalidate) {
-        Context c = getContext();
-        Resources r;
-        if (c == null)
-            r = Resources.getSystem();
-        else
-            r = c.getResources();
-        setRepeatCurrentXRaw(applyDimension(unit, repeatCurrentX, r.getDisplayMetrics()), needInvalidate);
-    }
-
-    private void setRepeatCurrentXRaw(float repeatCurrentX, boolean needInvalidate) {
-        this.repeatCurrentX = repeatCurrentX;
+    @Override
+    public void setXRaw(float x) {
+        this.x = x;
         // calculate index
         float minDistence = width;
         // From 0 to judge one by one, if the distance farther on the end of the
         // cycle
         for (int i = 0; i < total; i++) {
-            float centreDistance = Math.abs(repeatCurrentX - floatArray[i]);
+            float centreDistance = Math.abs(x - floatArray[i]);
             if (centreDistance < minDistence) {
-                repeatCurrentIndex = i;
+                repeatIndex = i;
                 minDistence = centreDistance;
             } else {
                 break;
             }
         }
-        if (needInvalidate) {
+//        if (needInvalidate) {
             invalidate();
-        }
+//        }
     }
 
-    public int getRepeatCurrentIndex() {
-        return repeatCurrentIndex;
+    public int getRepeatIndex() {
+        return repeatIndex;
     }
 
-    public void setRepeatCurrentIndex(int repeatCurrentIndex) {
-        if (repeatCurrentIndex < -1 || repeatCurrentIndex > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute repeatCurrentIndex length must be not less than -1 and smaller than the total length -1");
+    public void setRepeatIndex(int repeatIndex) {
+        if (repeatIndex < -1 || repeatIndex > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute repeatIndex length must be no less than -1 and smaller than the total length -1");
         }
-        this.repeatCurrentIndex = repeatCurrentIndex;
+        this.repeatIndex = repeatIndex;
         invalidate();
     }
 

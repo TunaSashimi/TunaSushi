@@ -15,7 +15,12 @@ import com.tunasushi.tuna.TRipple;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TRippleActivity extends Activity {
 
     private static final int PLAY_TUNARIPPLE_ANIMATION = 0;

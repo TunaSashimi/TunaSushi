@@ -11,7 +11,12 @@ import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TLine;
 
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TLineActivity extends Activity {
     private TLine tLineAC, tLineMove;
     private Button buttonCenterAC, buttonHiddenAC;
@@ -32,7 +37,7 @@ public class TLineActivity extends Activity {
         buttonHiddenAC = findViewById(R.id.buttonHiddenAC);
 
         //
-        tLineAC.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineAC.setX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
 
         //
         buttonCenterAC.setOnClickListener(new OnClickListener() {
@@ -49,12 +54,12 @@ public class TLineActivity extends Activity {
             }
         });
 
-        tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineMove.setX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
 
         tLineMove.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                tLineMove.setLineCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
     }

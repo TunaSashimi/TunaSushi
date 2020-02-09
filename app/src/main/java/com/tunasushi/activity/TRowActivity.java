@@ -8,7 +8,12 @@ import android.os.Message;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TRow;
 
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TRowActivity extends Activity {
     private final static int TUNAROW_PLAY = 0;
     private Handler handler = new Handler() {

@@ -7,7 +7,12 @@ import android.widget.SeekBar;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TImage;
 
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TImageActivity extends Activity {
 
     private TImage timage;

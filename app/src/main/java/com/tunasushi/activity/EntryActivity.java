@@ -13,6 +13,12 @@ import com.tunasushi.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Tunasashimi
+ * @date 2020-02-09 18:45
+ * @Copyright 2020 TunaSashimi. All rights reserved.
+ * @Description
+ */
 public class EntryActivity extends Activity {
     private Class<?>[] c = {
 

@@ -14,7 +14,7 @@ import android.view.MotionEvent;
  * @Description
  */
 public class TTrack extends TView {
-    private float trackCurrentX, trackCurrentY;
+    private float trackX, trackY;
     private float trackDistanceX, trackDistanceY;
     private float trackIntervalX, trackIntervalY;
 
@@ -44,8 +44,8 @@ public class TTrack extends TView {
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                trackDistanceX = event.getX() - trackCurrentX;
-                trackDistanceY = event.getY() - trackCurrentY;
+                trackDistanceX = event.getX() - trackX;
+                trackDistanceY = event.getY() - trackY;
 
                 trackIntervalX = trackDistanceX / 5;
                 trackIntervalY = trackDistanceY / 5;
@@ -61,8 +61,8 @@ public class TTrack extends TView {
                 if (trackisIntervalTime) {
                     return true;
                 }
-                trackCurrentX = event.getX();
-                trackCurrentY = event.getY();
+                trackX = event.getX();
+                trackY = event.getY();
                 invalidate();
                 break;
             default:
@@ -75,17 +75,15 @@ public class TTrack extends TView {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawCircle(trackCurrentX, trackCurrentY, 80, trackPaint);
+        canvas.drawCircle(trackX, trackY, 80, trackPaint);
 
         if (trackIntervalTime > 0) {
             trackIntervalTime--;
-            trackCurrentX = trackCurrentX + trackIntervalX;
-            trackCurrentY = trackCurrentY + trackIntervalY;
+            trackX = trackX + trackIntervalX;
+            trackY = trackY + trackIntervalY;
             postInvalidateDelayed(20);
         } else {
             trackisIntervalTime = false;
         }
-
     }
-
 }

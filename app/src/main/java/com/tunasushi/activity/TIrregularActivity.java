@@ -9,7 +9,12 @@ import android.widget.Toast;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TIrregular;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TIrregularActivity extends Activity {
 
     private TIrregular tIrregular;
@@ -25,7 +30,7 @@ public class TIrregularActivity extends Activity {
         tIrregular.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                tIrregular.setIrregularCurrentX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
 

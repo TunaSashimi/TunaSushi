@@ -6,7 +6,12 @@ import android.os.Bundle;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TScale;
 
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TScaleActivity extends Activity {
 
     private TScale tScaleBitmapSetBitmap;

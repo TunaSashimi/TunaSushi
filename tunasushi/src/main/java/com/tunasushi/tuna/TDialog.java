@@ -53,14 +53,14 @@ public class TDialog extends TView {
     private int dialogChoiceTextColorNormal;
     private int dialogChoiceTextColorPress;
 
-    private int dialogChoiceCurrentIndex;
+    private int dialogChoiceIndex;
 
-    public int getDialogChoiceCurrentIndex() {
-        return dialogChoiceCurrentIndex;
+    public int getDialogChoiceIndex() {
+        return dialogChoiceIndex;
     }
 
-    public void setDialogChoiceCurrentIndex(int dialogChoiceCurrentIndex) {
-        this.dialogChoiceCurrentIndex = dialogChoiceCurrentIndex;
+    public void setDialogChoiceIndex(int dialogChoiceIndex) {
+        this.dialogChoiceIndex = dialogChoiceIndex;
     }
 
     //
@@ -132,7 +132,7 @@ public class TDialog extends TView {
         dialogChoiceTextColorNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorNormal, Color.TRANSPARENT);
         dialogChoiceTextColorPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorPress, dialogChoiceTextColorNormal);
 
-        dialogChoiceCurrentIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceCurrentIndex, -1);
+        dialogChoiceIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceIndex, -1);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -209,7 +209,7 @@ public class TDialog extends TView {
             //
             canvas.translate(dx, dy);
             //
-            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceCurrentIndex ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal,
+            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal,
                     dialogChoiceStrokeWidth, dialogChoiceStrokeColor, 0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
             //
             drawText(
@@ -221,7 +221,7 @@ public class TDialog extends TView {
                     0,
                     0,
                     PaintTool.initTextPaint(Paint.Style.FILL,
-                            i == dialogChoiceCurrentIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
+                            i == dialogChoiceIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
                             Paint.Align.CENTER));
             //
             canvas.translate(-dx, -dy);
@@ -237,18 +237,18 @@ public class TDialog extends TView {
     }
 
 
-    public void setDialogCurrentXY(float dialogCurrentX, float dialogCurrentY) {
+    public void setDialogXY(float dialogX, float dialogY) {
         //calculate index
-        if (dialogCurrentY >= dy) {
+        if (dialogY >= dy) {
 
             float minDistence = width;
 
             //From 0 to judge one by one, if the distance farther on the end of the cycle
             for (int i = 0; i < total; i++) {
-                float centreDistance = Math.abs(dialogCurrentX - floatArray[i]);
+                float centreDistance = Math.abs(dialogX - floatArray[i]);
 
                 if (centreDistance < minDistence) {
-                    dialogChoiceCurrentIndex = i;
+                    dialogChoiceIndex = i;
                     minDistence = centreDistance;
 
                 } else {
@@ -256,13 +256,13 @@ public class TDialog extends TView {
                 }
             }
         } else {
-            dialogChoiceCurrentIndex = -1;
+            dialogChoiceIndex = -1;
         }
     }
 
-    public String getDialogCurrentChoiceTextValue() {
-        if (dialogChoiceCurrentIndex >= 0) {
-            return dialogChoiceTextValueArray[dialogChoiceCurrentIndex];
+    public String getDialogChoiceTextValue() {
+        if (dialogChoiceIndex >= 0) {
+            return dialogChoiceTextValueArray[dialogChoiceIndex];
         } else {
             return null;
         }

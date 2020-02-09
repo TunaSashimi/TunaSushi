@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,7 +47,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -91,7 +91,6 @@ public class TView extends View {
 
     protected Bitmap srcBitmap;
 
-
     protected float srcWidthScale, srcHeightScale;
 
     protected float dx, dy;
@@ -103,6 +102,48 @@ public class TView extends View {
 
     protected float[] floatArray;
     protected String[] stringArray;
+
+    //
+    public float x;
+    public void setX(float x) {
+        setX(TypedValue.COMPLEX_UNIT_DIP, x);
+    }
+
+    public void setX(int unit, float x) {
+        Context c = getContext();
+        Resources r;
+        if (c == null) {
+            r = Resources.getSystem();
+        } else {
+            r = c.getResources();
+        }
+        setXRaw(applyDimension(unit, x, r.getDisplayMetrics()));
+    }
+
+    public void setXRaw(float x) {
+    }
+
+
+    //
+    public float y;
+    public void setY(float y) {
+        setX(TypedValue.COMPLEX_UNIT_DIP, y);
+    }
+
+    public void setY(int unit, float y) {
+        Context c = getContext();
+        Resources r;
+        if (c == null) {
+            r = Resources.getSystem();
+        } else {
+            r = c.getResources();
+        }
+        setYRaw(applyDimension(unit, y, r.getDisplayMetrics()));
+    }
+
+    private void setYRaw(float y) {
+    }
+
 
     protected Rect rect;
 
@@ -211,7 +252,7 @@ public class TView extends View {
     }
 
     //
-    public void setStatius(boolean press, boolean select, boolean textMark) {
+    public void setStatus(boolean press, boolean select, boolean textMark) {
         if (this.press != press || this.select != select || this.textMark != textMark) {
             this.press = press;
             this.select = select;
@@ -221,7 +262,7 @@ public class TView extends View {
     }
 
     //
-    public void setStatius(boolean press, boolean select, boolean textMark, boolean material) {
+    public void setStatus(boolean press, boolean select, boolean textMark, boolean material) {
         if (this.press != press || this.select != select || this.textMark != textMark) {
             this.press = press;
             this.select = select;
@@ -232,7 +273,6 @@ public class TView extends View {
             invalidate();
         }
     }
-
 
     //
     protected View propertiesView;
@@ -4305,14 +4345,14 @@ public class TView extends View {
         float availableWidth = width - paddingLeft - paddingRight;
         //
         if (characterWidth > availableWidth) {
-            for (int measureStart = 0, measureCurrent = 1; measureCurrent <= charatcerLength; measureCurrent++) {
-                String measureString = textValue.substring(measureStart, measureCurrent);
+            for (int measureStart = 0, measure = 1; measure <= charatcerLength; measure++) {
+                String measureString = textValue.substring(measureStart, measure);
                 float measureLength = paint.measureText(measureString);
                 if (measureLength > availableWidth) {
-                    measureStart = measureCurrent - 1;
+                    measureStart = measure - 1;
                     measureList.add(measureStart);
-                } else if (measureCurrent == charatcerLength) {
-                    measureStart = measureCurrent;
+                } else if (measure == charatcerLength) {
+                    measureStart = measure;
                     measureList.add(measureStart);
                 }
             }

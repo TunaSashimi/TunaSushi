@@ -18,7 +18,12 @@ import java.util.Arrays;
 
 import static com.tunasushi.tool.GroupTool.associate;
 import static com.tunasushi.tool.GroupTool.dynamic;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TViewActivity extends Activity {
     private TView TViewRectClassic01, TViewRectClassic02;
     private TView TViewMainButton01, TViewMainButton02;

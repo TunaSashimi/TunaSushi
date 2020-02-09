@@ -11,7 +11,12 @@ import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TWrap;
 
 import java.util.Arrays;
-
+/**
+ * @author Tunasashimi
+ * @date 10/30/15 16:53
+ * @Copyright 2015 Sashimi. All rights reserved.
+ * @Description
+ */
 public class TWrapActivity extends Activity {
     private TWrap tWrap;
 
@@ -30,7 +35,7 @@ public class TWrapActivity extends Activity {
         tWrap.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                tWrap.setWrapCurrentXY(tWrap.getTouchEventX(), tWrap.getTouchEventY());
+                tWrap.setWrapXY(tWrap.getTouchEventX(), tWrap.getTouchEventY());
             }
         });
 
@@ -38,7 +43,7 @@ public class TWrapActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapCurrentSelect()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapSelect()), Toast.LENGTH_LONG).show();
             }
         });
     }
