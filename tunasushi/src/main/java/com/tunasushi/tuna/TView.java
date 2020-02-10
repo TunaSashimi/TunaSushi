@@ -198,11 +198,13 @@ public class TView extends View {
     //
     protected Matrix matrix;
 
-    public Matrix getMatrix() {
+    //The parent class has the method getTMatrix !
+    //Cannot write a method with the same name or the xml cannot be previewed!
+    public Matrix getTMatrix() {
         return matrix;
     }
 
-    public void setMatrix(Matrix matrix) {
+    public void setTMatrix(Matrix matrix) {
         this.matrix = matrix;
     }
 
