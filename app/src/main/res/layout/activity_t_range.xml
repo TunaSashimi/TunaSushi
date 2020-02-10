@@ -2,15 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
     <com.tunasushi.tuna.TRange
         android:id="@+id/tRange"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        app:rangeColorNormal="#f6f5fa"
+        android:layout_height="36dp"
+        android:layout_marginTop="48dp"
+        app:rangeColorNormal="#dde2e8"
         app:rangeColorSelect="#0989ea"
+        app:rangeDragColor="#ffffff"
+        app:rangeDragLeftIndex="1"
+        app:rangeDragStrokeColor="#dde2e8"
+        app:rangeDragStrokeWidth="2dp"
         app:rangeThink="2dp"
-        app:rangeValueArray="@array/range_value_array" />
+        app:rangeValueArray="@array/range_value_array"
+        app:touchIntercept="true"
+        app:touchType="always" />
 </RelativeLayout>

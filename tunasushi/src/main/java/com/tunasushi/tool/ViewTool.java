@@ -261,7 +261,7 @@ public class ViewTool {
 
     public static LinearGradient getLinearGradient(int width, int height, int angle, int gradientStart, int gradientEnd) {
         if (angle % 45 != 0) {
-            throw new IndexOutOfBoundsException("Angle value must be a multiple of 45");
+            throw new IndexOutOfBoundsException("The content attribute angle value must be a multiple of 45");
         }
         LinearGradient linearGradient = null;
         int quotient = angle / 45;

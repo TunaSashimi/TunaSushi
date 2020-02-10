@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TSeek;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
@@ -56,6 +57,13 @@ public class TSeekActivity extends Activity {
         tViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
         tViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
 
+        tViewTouchoutableReset.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutableGetIndex.setTouchUpListener(tunaTouchUpListener);
+
+        tViewTouchoutUnableReset.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutUnableGetIndex.setTouchUpListener(tunaTouchUpListener);
+
+        //
         tSeekTouchoutable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
@@ -63,17 +71,12 @@ public class TSeekActivity extends Activity {
             }
         });
 
+        //
         tSeekTouchoutUnable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
                 t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
-
-        tViewTouchoutableReset.setTouchUpListener(tunaTouchUpListener);
-        tViewTouchoutableGetIndex.setTouchUpListener(tunaTouchUpListener);
-
-        tViewTouchoutUnableReset.setTouchUpListener(tunaTouchUpListener);
-        tViewTouchoutUnableGetIndex.setTouchUpListener(tunaTouchUpListener);
     }
 }
