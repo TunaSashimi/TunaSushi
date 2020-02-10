@@ -52,6 +52,17 @@ public class TSeek extends TView {
     private float[] seekCircleCentreXArray;
 
     private int seekIndex;
+    public int getSeekIndex() {
+        return seekIndex;
+    }
+
+    public void setSeekIndex(int seekIndex) {
+        if (seekIndex < 0 || seekIndex >= total) {
+            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be no less than zero and smaller than the seekArray length");
+        }
+        this.seekIndex = seekIndex;
+        invalidate();
+    }
 
     // some draw variables
     private float seekCircleNormalDiameter;
@@ -133,9 +144,8 @@ public class TSeek extends TView {
         surplus = width - seekCircleNormalDiameter * total - seekStrokeWidth;
         share = surplus / (total - 1);
 
-        // The view must be greater than the height multiplied by the seekArray length
         if (share <= 0) {
-            throw new IndexOutOfBoundsException("The view must be greater than the height multiplied by the seekArray length");
+            throw new IndexOutOfBoundsException("The content attribute width must be greater than the height multiplied by the seekArray length");
         }
 
         // first start draw bottom of the picture:
@@ -303,17 +313,5 @@ public class TSeek extends TView {
                 break;
             }
         }
-    }
-
-    public int getSeekIndex() {
-        return seekIndex;
-    }
-
-    public void setSeekIndex(int seekIndex) {
-        if (seekIndex < 0 || seekIndex >= total) {
-            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be no less than zero and smaller than the seekArray length");
-        }
-        this.seekIndex = seekIndex;
-        invalidate();
     }
 }

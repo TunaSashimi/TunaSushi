@@ -440,6 +440,10 @@
         <attr name="rangeColorNormal" format="reference|color" />
         <attr name="rangeColorSelect" format="reference|color" />
         <attr name="rangeValueArray" format="reference" />
+
+        <attr name="rangeDragColor" format="reference|color" />
+        <attr name="rangeDragStrokeColor" format="reference|color" />
+        <attr name="rangeDragStrokeWidth" format="dimension" />
         <attr name="rangeDragLeftIndex" format="integer" />
         <attr name="rangeDragRightIndex" format="integer" />
         <attr name="rangeDragLeftBitmapSrc" format="reference" />
