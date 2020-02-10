@@ -2,10 +2,12 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.TypedValue;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TRange;
 import com.tunasushi.tuna.TView;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
@@ -24,13 +26,11 @@ public class TRangeActivity extends Activity {
         rRange = findViewById(R.id.tRange);
 
         //
-        rRange.setTouchDownListener(new TView.TouchDownListener() {
+        rRange.setTouchListener(new TView.TouchListener() {
             @Override
-            public void touchDown(TView t) {
-                System.out.println("TRangeActivity==>" + t.getTouchEventX());
+            public void touch(TView t) {
+                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
             }
         });
-
-
     }
 }

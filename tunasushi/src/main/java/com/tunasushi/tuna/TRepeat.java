@@ -87,7 +87,7 @@ public class TRepeat extends TView {
         if (repeatItemTextValueArrayId != -1) {
             stringArray = typedArray.getResources().getStringArray(repeatItemTextValueArrayId);
             if (total != stringArray.length) {
-                throw new IndexOutOfBoundsException("These two properties of repeatTotal and repeatItemTextValueArray must be the same length");
+                throw new IndexOutOfBoundsException("The content attribute repeatTotal and repeatItemTextValueArray must be the same length");
             }
         }
 
