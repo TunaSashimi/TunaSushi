@@ -29,7 +29,6 @@ import static com.tunasushi.tool.BitmapTool.processBitmap;
  */
 public class TImage extends TView {
 
-
     private float imageRadius;
 
     public float getImageRadius() {

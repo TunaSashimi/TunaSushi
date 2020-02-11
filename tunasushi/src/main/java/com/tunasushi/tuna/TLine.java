@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.tuna.R;
 
 /**
@@ -30,8 +31,8 @@ public class TLine extends TView {
 
     @Override
     public void setXRaw(float x) {
-            this.x = x;
-            invalidate();
+        this.x = x;
+        invalidate();
     }
 
     private LineTowardType lineTowardType;

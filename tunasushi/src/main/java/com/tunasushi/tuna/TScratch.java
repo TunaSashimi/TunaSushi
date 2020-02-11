@@ -19,6 +19,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 
 import com.tuna.R;
+
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 
 
@@ -84,10 +85,10 @@ public class TScratch extends TView {
             scratchSrc = BitmapFactory.decodeResource(getResources(), scratchSrcId);
         }
 
-        scratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, convertToPX(TypedValue.COMPLEX_UNIT_DIP, 10));
+        scratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, convertToPX(10, TypedValue.COMPLEX_UNIT_DIP));
         scratchCoverColor = typedArray.getColor(R.styleable.TScratch_scratchCoverColor, Color.parseColor("#c0c0c0"));
 
-        scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, convertToPX(TypedValue.COMPLEX_UNIT_DIP, 20));
+        scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, convertToPX(20, TypedValue.COMPLEX_UNIT_DIP));
         scratchText = typedArray.getString(R.styleable.TScratch_scratchText);
 
         scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, convertToPX(TypedValue.COMPLEX_UNIT_SP, 22));

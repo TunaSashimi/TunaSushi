@@ -20,7 +20,6 @@ import android.view.View;
  */
 
 public class ColorPickerDialog extends Dialog {
-
     private int initialColor;
     private colorSelectListener colorSelectListener;
 

@@ -24,6 +24,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.tuna.R;
+
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
@@ -178,10 +179,10 @@ public class TRipple extends TView {
     }
 
     public void setRippleTextDx(float rippleTextDx) {
-        setRippleTextDx(TypedValue.COMPLEX_UNIT_DIP, rippleTextDx);
+        setRippleTextDxRaw(rippleTextDx);
     }
 
-    public void setRippleTextDx(int unit, float rippleTextDx) {
+    public void setRippleTextDx(float rippleTextDx, int unit) {
         setRippleTextDxRaw(convertToPX(rippleTextDx, unit));
     }
 
@@ -199,10 +200,10 @@ public class TRipple extends TView {
     }
 
     public void setRippleTextDy(float rippleTextDy) {
-        setRippleTextDy(TypedValue.COMPLEX_UNIT_DIP, rippleTextDy);
+        setRippleTextDyRaw(rippleTextDy);
     }
 
-    public void setRippleTextDy(int unit, float rippleTextDy) {
+    public void setRippleTextDy(float rippleTextDy, int unit) {
         setRippleTextDyRaw(convertToPX(rippleTextDy, unit));
     }
 

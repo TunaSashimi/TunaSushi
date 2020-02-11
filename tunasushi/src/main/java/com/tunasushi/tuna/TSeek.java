@@ -11,7 +11,9 @@ import android.graphics.Paint.Align;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.tuna.R;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -45,6 +47,7 @@ public class TSeek extends TView {
     private float[] seekCircleCentreXArray;
 
     private int seekIndex;
+
     public int getSeekIndex() {
         return seekIndex;
     }

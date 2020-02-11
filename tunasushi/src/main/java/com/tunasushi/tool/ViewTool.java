@@ -26,13 +26,13 @@ public class ViewTool {
 
     //
     public static void setViewMargins(View view, int left, int top, int right, int bottom) {
-        setViewMargins(view, TypedValue.COMPLEX_UNIT_DIP, left, top, right, bottom);
+        setViewMarginsRaw(view, left, top, right, bottom);
     }
 
     //
-    public static void setViewMargins(View view, int unit, int left, int top, int right, int bottom) {
-        setViewMarginsRaw(view, (int) convertToPX(unit, left), (int) convertToPX(unit, top),
-                (int) convertToPX(unit, right), (int) convertToPX(unit, bottom));
+    public static void setViewMargins(View view, int left, int top, int right, int bottom, int unit) {
+        setViewMarginsRaw(view, (int) convertToPX(left, unit), (int) convertToPX(top, unit),
+                (int) convertToPX(right, unit), (int) convertToPX(bottom, unit));
     }
 
     //
@@ -103,10 +103,10 @@ public class ViewTool {
 
     //
     public static void setLayoutByWidth(View view, float width) {
-        setLayoutByWidth(view, TypedValue.COMPLEX_UNIT_DIP, width);
+        setLayoutByWidthRaw(view, width);
     }
 
-    public static void setLayoutByWidth(View view, int unit, float width) {
+    public static void setLayoutByWidth(View view, float width, int unit) {
         setLayoutByWidthRaw(view, convertToPX(width, unit));
     }
 
@@ -118,10 +118,10 @@ public class ViewTool {
 
     //
     public static void setLayoutByHeight(View view, float height) {
-        setLayoutByHeight(view, TypedValue.COMPLEX_UNIT_DIP, height);
+        setLayoutByHeightRaw(view, height);
     }
 
-    public static void setLayoutByHeight(View view, int unit, float height) {
+    public static void setLayoutByHeight(View view, float height, int unit) {
         setLayoutByHeightRaw(view, convertToPX(height, unit));
     }
 
@@ -133,10 +133,10 @@ public class ViewTool {
 
     //
     public static void setLayout(View view, float width, float height) {
-        setLayout(view, TypedValue.COMPLEX_UNIT_DIP, width, height);
+        setLayoutRaw(view, width, height);
     }
 
-    public static void setLayout(View view, int unit, float width, float height) {
+    public static void setLayout(View view, float width, float height, int unit) {
         setLayoutRaw(view, convertToPX(width, unit), convertToPX(height, unit));
     }
 

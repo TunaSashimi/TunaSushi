@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+
 import com.tuna.R;
 
 /**
@@ -31,7 +32,8 @@ public class TTrangle extends TView {
         TOP(0),
         BOTTOM(1),
         LEFT(2),
-        RIGHT(3),;
+        RIGHT(3),
+        ;
         final int nativeInt;
 
         TrangleTowardType(int ni) {

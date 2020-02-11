@@ -11,5 +11,4 @@
         app:drawColor="#ffff00"
         app:drawSrc="@drawable/iv_hollow_bg"
         app:drawWidth="8dp" />
-
 </RelativeLayout>

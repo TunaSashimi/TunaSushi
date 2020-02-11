@@ -130,7 +130,7 @@ public class TRepeatActivity extends Activity {
             }
         });
 
-        setLayoutByWidth(tRepeatTips, 5 * 40);
+        setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
 
         //
         tRepeatTips.setRepeatListener(

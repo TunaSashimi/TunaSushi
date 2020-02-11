@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.util.AttributeSet;
+
 import com.tuna.R;
 
 

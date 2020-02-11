@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
+
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
 
@@ -148,25 +149,25 @@ public class TSVG extends TView {
                 SVGSrc = getCircleBitmap(shortSide);
                 break;
             case STAR:
-                SVGSrc =getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_star);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
                 break;
             case HEART:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_heart);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
                 break;
             case FLOWER:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_flower);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
                 break;
             case PENTAGON:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_pentagon);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
                 break;
             case SIXTEENEDGE:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_sixteenedge);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
                 break;
             case FORTYEDGE:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_fortyedge);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
                 break;
             case SNAIL:
-                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_snail);
+                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
                 break;
         }
     }

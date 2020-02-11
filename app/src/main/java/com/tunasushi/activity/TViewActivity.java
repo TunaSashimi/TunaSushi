@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 import static com.tunasushi.tool.GroupTool.associate;
 import static com.tunasushi.tool.GroupTool.dynamic;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
@@ -81,13 +82,13 @@ public class TViewActivity extends Activity {
             @Override
             public void touchUp(TView t) {
                 TViewMainButton01.setTextMark(
-                        4,
+                        4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
                         0,
-                        0,
-                        0,
-                        0
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0, TypedValue.COMPLEX_UNIT_DIP
                 );
             }
         });
@@ -95,25 +96,25 @@ public class TViewActivity extends Activity {
         //
         TViewMainButton02 = findViewById(R.id.tViewShadowButton02);
         TViewMainButton02.setTextMark(
-                10,
+                10, TypedValue.COMPLEX_UNIT_DIP,
                 Color.RED,
                 "10",
-                10,
+                10, TypedValue.COMPLEX_UNIT_DIP,
                 Color.WHITE,
-                0,
-                0
+                0, TypedValue.COMPLEX_UNIT_DIP,
+                0, TypedValue.COMPLEX_UNIT_DIP
         );
         TViewMainButton02.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 TViewMainButton02.setTextMark(
-                        4,
+                        4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
                         0,
-                        0,
-                        0,
-                        0
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0, TypedValue.COMPLEX_UNIT_DIP
                 );
             }
         });
@@ -150,7 +151,11 @@ public class TViewActivity extends Activity {
 
         //String[] stringArray, int index(下标默认0), TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        dynamic(radioGroupTitleArray, "枪", touchUpListener, linearRadioGroupLightGray, TypedValue.COMPLEX_UNIT_DIP, 60,
+        dynamic(radioGroupTitleArray,
+                "枪",
+                touchUpListener,
+                linearRadioGroupLightGray,
+                60, TypedValue.COMPLEX_UNIT_DIP,
                 R.style.TView_RadioGroup_LightGray_Left,
                 R.style.TView_RadioGroup_LightGray_Right,
                 R.style.TView_RadioGroup_LightGray_Horizontal,

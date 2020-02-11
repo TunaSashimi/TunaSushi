@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+
 import com.tuna.R;
 
 
@@ -385,7 +386,7 @@ public class TRepeat extends TView {
             }
         }
 //        if (needInvalidate) {
-            invalidate();
+        invalidate();
 //        }
     }
 

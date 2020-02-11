@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+
 import com.tuna.R;
 
 /**
@@ -29,17 +30,21 @@ public class TRange extends TView {
     private float rangeDragStrokeWidth;
 
     private int rangeDragLeftIndex;
+
     public int getRangeDragLeftIndex() {
         return rangeDragLeftIndex;
     }
+
     public void setRangeDragLeftIndex(int rangeDragLeftIndex) {
         this.rangeDragLeftIndex = rangeDragLeftIndex;
     }
 
     private int rangeDragRightIndex;
+
     public int getRangeDragRightIndex() {
         return rangeDragRightIndex;
     }
+
     public void setRangeDragRightIndex(int rangeDragRightIndex) {
         this.rangeDragRightIndex = rangeDragRightIndex;
     }

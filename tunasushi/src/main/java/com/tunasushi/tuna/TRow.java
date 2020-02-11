@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.View;
+
 import com.tuna.R;
 
 /**

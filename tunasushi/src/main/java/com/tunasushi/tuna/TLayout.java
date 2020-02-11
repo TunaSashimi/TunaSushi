@@ -35,7 +35,7 @@ import static com.tunasushi.tool.ViewTool.getLinearGradient;
  */
 public class TLayout extends RelativeLayout {
 
-    protected String Tag = TLayout.class.getSimpleName();
+    protected String tag = TLayout.class.getSimpleName();
 
     protected int layoutWidth, layoutHeight;
     protected int layoutLayer;
@@ -49,6 +49,7 @@ public class TLayout extends RelativeLayout {
 
     //
     protected Matrix layoutMatrix;
+
     protected Matrix initMatrix(Matrix matrix, float sx, float sy) {
         if (matrix == null) {
             matrix = new Matrix();
@@ -120,10 +121,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowRadius(float layoutBackgroundNormalShadowRadius) {
-        setLayoutBackgroundNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, layoutBackgroundNormalShadowRadius);
+        setLayoutBackgroundNormalShadowRadiusRaw(layoutBackgroundNormalShadowRadius);
     }
 
-    public void setLayoutBackgroundNormalShadowRadius(int unit, float layoutBackgroundNormalShadowRadius) {
+    public void setLayoutBackgroundNormalShadowRadius(float layoutBackgroundNormalShadowRadius, int unit) {
         setLayoutBackgroundNormalShadowRadiusRaw(convertToPX(layoutBackgroundNormalShadowRadius, unit));
     }
 
@@ -153,10 +154,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowDx(float layoutBackgroundNormalShadowDx) {
-        setLayoutBackgroundNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, layoutBackgroundNormalShadowDx);
+        setLayoutBackgroundNormalShadowDxRaw(layoutBackgroundNormalShadowDx);
     }
 
-    public void setLayoutBackgroundNormalShadowDx(int unit, float layoutBackgroundNormalShadowDx) {
+    public void setLayoutBackgroundNormalShadowDx(float layoutBackgroundNormalShadowDx, int unit) {
         setLayoutBackgroundNormalShadowDxRaw(convertToPX(layoutBackgroundNormalShadowDx, unit));
     }
 
@@ -175,10 +176,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowDy(float layoutBackgroundNormalShadowDy) {
-        setLayoutBackgroundNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, layoutBackgroundNormalShadowDy);
+        setLayoutBackgroundNormalShadowDyRaw(layoutBackgroundNormalShadowDy);
     }
 
-    public void setLayoutBackgroundNormalShadowDy(int unit, float layoutBackgroundNormalShadowDy) {
+    public void setLayoutBackgroundNormalShadowDy(float layoutBackgroundNormalShadowDy, int unit) {
         setLayoutBackgroundNormalShadowDyRaw(convertToPX(layoutBackgroundNormalShadowDy, unit));
     }
 
@@ -208,10 +209,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutSrcNormalShadowRadius(float layoutSrcNormalShadowRadius) {
-        setLayoutSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowRadius);
+        setLayoutSrcNormalShadowRadiusRaw(layoutSrcNormalShadowRadius);
     }
 
-    public void setLayoutSrcNormalShadowRadius(int unit, float layoutSrcNormalShadowRadius) {
+    public void setLayoutSrcNormalShadowRadius(float layoutSrcNormalShadowRadius, int unit) {
         setLayoutSrcNormalShadowRadiusRaw(convertToPX(layoutSrcNormalShadowRadius, unit));
     }
 
@@ -230,10 +231,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutSrcNormalShadowDx(float layoutSrcNormalShadowDx) {
-        setLayoutSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDx);
+        setLayoutSrcNormalShadowDxRaw(layoutSrcNormalShadowDx);
     }
 
-    public void setLayoutSrcNormalShadowDx(int unit, float layoutSrcNormalShadowDx) {
+    public void setLayoutSrcNormalShadowDx(float layoutSrcNormalShadowDx, int unit) {
         setLayoutSrcNormalShadowDxRaw(convertToPX(layoutSrcNormalShadowDx, unit));
     }
 
@@ -252,10 +253,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutSrcNormalShadowDy(float layoutSrcNormalShadowDy) {
-        setLayoutSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDy);
+        setLayoutSrcNormalShadowDyRaw(layoutSrcNormalShadowDy);
     }
 
-    public void setLayoutSrcNormalShadowDy(int unit, float layoutSrcNormalShadowDy) {
+    public void setLayoutSrcNormalShadowDy(float layoutSrcNormalShadowDy, int unit) {
         setLayoutSrcNormalShadowDyRaw(convertToPX(layoutSrcNormalShadowDy, unit));
     }
 
@@ -297,10 +298,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutStrokeWidthNormal(float layoutStrokeWidthNormal) {
-        setLayoutStrokeWidthNormal(TypedValue.COMPLEX_UNIT_DIP, layoutStrokeWidthNormal);
+        setLayoutStrokeWidthNormalRaw(layoutStrokeWidthNormal);
     }
 
-    public void setLayoutStrokeWidthNormal(int unit, float layoutStrokeWidthNormal) {
+    public void setLayoutStrokeWidthNormal(float layoutStrokeWidthNormal, int unit) {
         setLayoutStrokeWidthNormalRaw(convertToPX(layoutStrokeWidthNormal, unit));
     }
 
@@ -330,10 +331,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadius(float layoutRadius) {
-        setLayoutRadius(TypedValue.COMPLEX_UNIT_DIP, layoutRadius);
+        setLayoutRadiusRaw(layoutRadius);
     }
 
-    public void setLayoutRadius(int unit, float layoutRadius) {
+    public void setLayoutRadius(float layoutRadius, int unit) {
         setLayoutRadiusRaw(convertToPX(layoutRadius, unit));
     }
 
@@ -352,10 +353,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusLeftTop(float layoutRadiusLeftTop) {
-        setLayoutRadiusLeftTop(TypedValue.COMPLEX_UNIT_DIP, layoutRadiusLeftTop);
+        setLayoutRadiusLeftTopRaw(layoutRadiusLeftTop);
     }
 
-    public void setLayoutRadiusLeftTop(int unit, float layoutRadiusLeftTop) {
+    public void setLayoutRadiusLeftTop(float layoutRadiusLeftTop, int unit) {
         setLayoutRadiusLeftTopRaw(convertToPX(layoutRadiusLeftTop, unit));
     }
 
@@ -374,10 +375,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusLeftBottom(float layoutRadiusLeftBottom) {
-        setLayoutRadiusLeftBottom(TypedValue.COMPLEX_UNIT_DIP, layoutRadiusLeftBottom);
+        setLayoutRadiusLeftBottomRaw(layoutRadiusLeftBottom);
     }
 
-    public void setLayoutRadiusLeftBottom(int unit, float layoutRadiusLeftBottom) {
+    public void setLayoutRadiusLeftBottom(float layoutRadiusLeftBottom, int unit) {
         setLayoutRadiusLeftBottomRaw(convertToPX(layoutRadiusLeftBottom, unit));
     }
 
@@ -396,10 +397,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusRightTop(float layoutRadiusRightTop) {
-        setLayoutRadiusRightTop(TypedValue.COMPLEX_UNIT_DIP, layoutRadiusRightTop);
+        setLayoutRadiusRightTopRaw(layoutRadiusRightTop);
     }
 
-    public void setLayoutRadiusRightTop(int unit, float layoutRadiusRightTop) {
+    public void setLayoutRadiusRightTop(float layoutRadiusRightTop, int unit) {
         setLayoutRadiusRightTopRaw(convertToPX(layoutRadiusRightTop, unit));
     }
 
@@ -418,10 +419,10 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusRightBottom(float layoutRadiusRightBottom) {
-        setLayoutRadiusRightBottom(TypedValue.COMPLEX_UNIT_DIP, layoutRadiusRightBottom);
+        setLayoutRadiusRightBottomRaw(layoutRadiusRightBottom);
     }
 
-    public void setLayoutRadiusRightBottom(int unit, float layoutRadiusRightBottom) {
+    public void setLayoutRadiusRightBottom(float layoutRadiusRightBottom, int unit) {
         setLayoutRadiusRightBottomRaw(convertToPX(layoutRadiusRightBottom, unit));
     }
 

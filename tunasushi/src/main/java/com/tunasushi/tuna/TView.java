@@ -574,7 +574,7 @@ public class TView extends View {
         setXRaw(x);
     }
 
-    public void setX(int unit, float x) {
+    public void setX(float x, int unit) {
         setXRaw(convertToPX(x, unit));
     }
 
@@ -590,7 +590,7 @@ public class TView extends View {
         setYRaw(y);
     }
 
-    public void setY(int unit, float y) {
+    public void setY(float y, int unit) {
         setYRaw(convertToPX(y, unit));
     }
 
@@ -1557,10 +1557,10 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowRadius(float backgroundNormalShadowRadius) {
-        setBackgroundNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowRadius);
+        setBackgroundNormalShadowRadiusRaw(backgroundNormalShadowRadius);
     }
 
-    public void setBackgroundNormalShadowRadius(int unit, float backgroundNormalShadowRadius) {
+    public void setBackgroundNormalShadowRadius(float backgroundNormalShadowRadius, int unit) {
         setBackgroundNormalShadowRadiusRaw(convertToPX(backgroundNormalShadowRadius, unit));
     }
 
@@ -1590,10 +1590,10 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowDx(float backgroundNormalShadowDx) {
-        setBackgroundNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowDx);
+        setBackgroundNormalShadowDxRaw(backgroundNormalShadowDx);
     }
 
-    public void setBackgroundNormalShadowDx(int unit, float backgroundNormalShadowDx) {
+    public void setBackgroundNormalShadowDx(float backgroundNormalShadowDx, int unit) {
         setBackgroundNormalShadowDxRaw(convertToPX(backgroundNormalShadowDx, unit));
     }
 
@@ -1612,10 +1612,10 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowDy(float backgroundNormalShadowDy) {
-        setBackgroundNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundNormalShadowDy);
+        setBackgroundNormalShadowDyRaw(backgroundNormalShadowDy);
     }
 
-    public void setBackgroundNormalShadowDy(int unit, float backgroundNormalShadowDy) {
+    public void setBackgroundNormalShadowDy(float backgroundNormalShadowDy, int unit) {
         setBackgroundNormalShadowDyRaw(convertToPX(backgroundNormalShadowDy, unit));
     }
 
@@ -1634,10 +1634,10 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowRadius(float backgroundPressShadowRadius) {
-        setBackgroundPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowRadius);
+        setBackgroundPressShadowRadiusRaw(backgroundPressShadowRadius);
     }
 
-    public void setBackgroundPressShadowRadius(int unit, float backgroundPressShadowRadius) {
+    public void setBackgroundPressShadowRadius(float backgroundPressShadowRadius, int unit) {
         setBackgroundPressShadowRadiusRaw(convertToPX(backgroundPressShadowRadius, unit));
     }
 
@@ -1667,10 +1667,10 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowDx(float backgroundPressShadowDx) {
-        setBackgroundPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowDx);
+        setBackgroundPressShadowDxRaw(backgroundPressShadowDx);
     }
 
-    public void setBackgroundPressShadowDx(int unit, float backgroundPressShadowDx) {
+    public void setBackgroundPressShadowDx(float backgroundPressShadowDx, int unit) {
         setBackgroundPressShadowDxRaw(convertToPX(backgroundPressShadowDx, unit));
     }
 
@@ -1689,10 +1689,10 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowDy(float backgroundPressShadowDy) {
-        setBackgroundPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundPressShadowDy);
+        setBackgroundPressShadowDyRaw(backgroundPressShadowDy);
     }
 
-    public void setBackgroundPressShadowDy(int unit, float backgroundPressShadowDy) {
+    public void setBackgroundPressShadowDy(float backgroundPressShadowDy, int unit) {
         setBackgroundPressShadowDyRaw(convertToPX(backgroundPressShadowDy, unit));
     }
 
@@ -1711,10 +1711,10 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowRadius(float backgroundSelectShadowRadius) {
-        setBackgroundSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowRadius);
+        setBackgroundSelectShadowRadiusRaw(backgroundSelectShadowRadius);
     }
 
-    public void setBackgroundSelectShadowRadius(int unit, float backgroundSelectShadowRadius) {
+    public void setBackgroundSelectShadowRadius(float backgroundSelectShadowRadius, int unit) {
         setBackgroundSelectShadowRadiusRaw(convertToPX(backgroundSelectShadowRadius, unit));
     }
 
@@ -1744,10 +1744,10 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowDx(float backgroundSelectShadowDx) {
-        setBackgroundSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowDx);
+        setBackgroundSelectShadowDxRaw(backgroundSelectShadowDx);
     }
 
-    public void setBackgroundSelectShadowDx(int unit, float backgroundSelectShadowDx) {
+    public void setBackgroundSelectShadowDx(float backgroundSelectShadowDx, int unit) {
         setBackgroundSelectShadowDxRaw(convertToPX(backgroundSelectShadowDx, unit));
     }
 
@@ -1766,10 +1766,10 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowDy(float backgroundSelectShadowDy) {
-        setBackgroundSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, backgroundSelectShadowDy);
+        setBackgroundSelectShadowDyRaw(backgroundSelectShadowDy);
     }
 
-    public void setBackgroundSelectShadowDy(int unit, float backgroundSelectShadowDy) {
+    public void setBackgroundSelectShadowDy(float backgroundSelectShadowDy, int unit) {
         setBackgroundSelectShadowDyRaw(convertToPX(backgroundSelectShadowDy, unit));
     }
 
@@ -1836,10 +1836,10 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowRadius(float srcNormalShadowRadius) {
-        setSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowRadius);
+        setSrcNormalShadowRadiusRaw(srcNormalShadowRadius);
     }
 
-    public void setSrcNormalShadowRadius(int unit, float srcNormalShadowRadius) {
+    public void setSrcNormalShadowRadius(float srcNormalShadowRadius, int unit) {
         setSrcNormalShadowRadiusRaw(convertToPX(srcNormalShadowRadius, unit));
     }
 
@@ -1858,10 +1858,10 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowDx(float srcNormalShadowDx) {
-        setSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowDx);
+        setSrcNormalShadowDxRaw(srcNormalShadowDx);
     }
 
-    public void setSrcNormalShadowDx(int unit, float srcNormalShadowDx) {
+    public void setSrcNormalShadowDx(float srcNormalShadowDx, int unit) {
         setSrcNormalShadowDxRaw(convertToPX(srcNormalShadowDx, unit));
     }
 
@@ -1880,10 +1880,10 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowDy(float srcNormalShadowDy) {
-        setSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcNormalShadowDy);
+        setSrcNormalShadowDyRaw(srcNormalShadowDy);
     }
 
-    public void setSrcNormalShadowDy(int unit, float srcNormalShadowDy) {
+    public void setSrcNormalShadowDy(float srcNormalShadowDy, int unit) {
         setSrcNormalShadowDyRaw(convertToPX(srcNormalShadowDy, unit));
     }
 
@@ -1902,10 +1902,10 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowRadius(float srcPressShadowRadius) {
-        setSrcPressShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowRadius);
+        setSrcPressShadowRadiusRaw(srcPressShadowRadius);
     }
 
-    public void setSrcPressShadowRadius(int unit, float srcPressShadowRadius) {
+    public void setSrcPressShadowRadius(float srcPressShadowRadius, int unit) {
         setSrcPressShadowRadiusRaw(convertToPX(srcPressShadowRadius, unit));
     }
 
@@ -1924,10 +1924,10 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowDx(float srcPressShadowDx) {
-        setSrcPressShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowDx);
+        setSrcPressShadowDxRaw(srcPressShadowDx);
     }
 
-    public void setSrcPressShadowDx(int unit, float srcPressShadowDx) {
+    public void setSrcPressShadowDx(float srcPressShadowDx, int unit) {
         setSrcPressShadowDxRaw(convertToPX(srcPressShadowDx, unit));
     }
 
@@ -1946,10 +1946,10 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowDy(float srcPressShadowDy) {
-        setSrcPressShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcPressShadowDy);
+        setSrcPressShadowDyRaw(srcPressShadowDy);
     }
 
-    public void setSrcPressShadowDy(int unit, float srcPressShadowDy) {
+    public void setSrcPressShadowDy(float srcPressShadowDy, int unit) {
         setSrcPressShadowDyRaw(convertToPX(srcPressShadowDy, unit));
     }
 
@@ -1968,10 +1968,10 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowRadius(float srcSelectShadowRadius) {
-        setSrcSelectShadowRadius(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowRadius);
+        setSrcSelectShadowRadiusRaw(srcSelectShadowRadius);
     }
 
-    public void setSrcSelectShadowRadius(int unit, float srcSelectShadowRadius) {
+    public void setSrcSelectShadowRadius(float srcSelectShadowRadius, int unit) {
         setSrcSelectShadowRadiusRaw(convertToPX(srcSelectShadowRadius, unit));
     }
 
@@ -1990,10 +1990,10 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowDx(float srcSelectShadowDx) {
-        setSrcSelectShadowDx(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowDx);
+        setSrcSelectShadowDxRaw(srcSelectShadowDx);
     }
 
-    public void setSrcSelectShadowDx(int unit, float srcSelectShadowDx) {
+    public void setSrcSelectShadowDx(float srcSelectShadowDx, int unit) {
         setSrcSelectShadowDxRaw(convertToPX(srcSelectShadowDx, unit));
     }
 
@@ -2012,10 +2012,10 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowDy(float srcSelectShadowDy) {
-        setSrcSelectShadowDy(TypedValue.COMPLEX_UNIT_DIP, srcSelectShadowDy);
+        setSrcSelectShadowDyRaw(srcSelectShadowDy);
     }
 
-    public void setSrcSelectShadowDy(int unit, float srcSelectShadowDy) {
+    public void setSrcSelectShadowDy(float srcSelectShadowDy, int unit) {
         setSrcSelectShadowDyRaw(convertToPX(srcSelectShadowDy, unit));
     }
 
@@ -2085,10 +2085,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalWidth(float srcAnchorNormalWidth) {
-        setSrcAnchorNormalWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalWidth);
+        setSrcAnchorNormalWidthRaw(srcAnchorNormalWidth);
     }
 
-    public void setSrcAnchorNormalWidth(int unit, float srcAnchorNormalWidth) {
+    public void setSrcAnchorNormalWidth(float srcAnchorNormalWidth, int unit) {
         setSrcAnchorNormalWidthRaw(convertToPX(srcAnchorNormalWidth, unit));
     }
 
@@ -2107,10 +2107,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalHeight(float srcAnchorNormalHeight) {
-        setSrcAnchorNormalHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalHeight);
+        setSrcAnchorNormalHeightRaw(srcAnchorNormalHeight);
     }
 
-    public void setSrcAnchorNormalHeight(int unit, float srcAnchorNormalHeight) {
+    public void setSrcAnchorNormalHeight(float srcAnchorNormalHeight, int unit) {
         setSrcAnchorNormalHeightRaw(convertToPX(srcAnchorNormalHeight, unit));
     }
 
@@ -2129,10 +2129,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalDx(float srcAnchorNormalDx) {
-        setSrcAnchorNormalDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalDx);
+        setSrcAnchorNormalDxRaw(srcAnchorNormalDx);
     }
 
-    public void setSrcAnchorNormalDx(int unit, float srcAnchorNormalDx) {
+    public void setSrcAnchorNormalDx(float srcAnchorNormalDx, int unit) {
         setSrcAnchorNormalDxRaw(convertToPX(srcAnchorNormalDx, unit));
     }
 
@@ -2151,10 +2151,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalDy(float srcAnchorNormalDy) {
-        setSrcAnchorNormalDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorNormalDy);
+        setSrcAnchorNormalDyRaw(srcAnchorNormalDy);
     }
 
-    public void setSrcAnchorNormalDy(int unit, float srcAnchorNormalDy) {
+    public void setSrcAnchorNormalDy(float srcAnchorNormalDy, int unit) {
         setSrcAnchorNormalDyRaw(convertToPX(srcAnchorNormalDy, unit));
     }
 
@@ -2184,10 +2184,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressWidth(float srcAnchorPressWidth) {
-        setSrcAnchorPressWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressWidth);
+        setSrcAnchorPressWidthRaw(srcAnchorPressWidth);
     }
 
-    public void setSrcAnchorPressWidth(int unit, float srcAnchorPressWidth) {
+    public void setSrcAnchorPressWidth(float srcAnchorPressWidth, int unit) {
         setSrcAnchorPressWidthRaw(convertToPX(srcAnchorPressWidth, unit));
     }
 
@@ -2206,10 +2206,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressHeight(float srcAnchorPressHeight) {
-        setSrcAnchorPressHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressHeight);
+        setSrcAnchorPressHeightRaw(srcAnchorPressHeight);
     }
 
-    public void setSrcAnchorPressHeight(int unit, float srcAnchorPressHeight) {
+    public void setSrcAnchorPressHeight(float srcAnchorPressHeight, int unit) {
         setSrcAnchorPressHeightRaw(convertToPX(srcAnchorPressHeight, unit));
     }
 
@@ -2228,10 +2228,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressDx(float srcAnchorPressDx) {
-        setSrcAnchorPressDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressDx);
+        setSrcAnchorPressDxRaw(srcAnchorPressDx);
     }
 
-    public void setSrcAnchorPressDx(int unit, float srcAnchorPressDx) {
+    public void setSrcAnchorPressDx(float srcAnchorPressDx, int unit) {
         setSrcAnchorPressDxRaw(convertToPX(srcAnchorPressDx, unit));
     }
 
@@ -2250,10 +2250,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressDy(float srcAnchorPressDy) {
-        setSrcAnchorPressDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorPressDy);
+        setSrcAnchorPressDyRaw(srcAnchorPressDy);
     }
 
-    public void setSrcAnchorPressDy(int unit, float srcAnchorPressDy) {
+    public void setSrcAnchorPressDy(float srcAnchorPressDy, int unit) {
         setSrcAnchorPressDyRaw(convertToPX(srcAnchorPressDy, unit));
     }
 
@@ -2283,10 +2283,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectWidth(float srcAnchorSelectWidth) {
-        setSrcAnchorSelectWidth(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectWidth);
+        setSrcAnchorSelectWidthRaw(srcAnchorSelectWidth);
     }
 
-    public void setSrcAnchorSelectWidth(int unit, float srcAnchorSelectWidth) {
+    public void setSrcAnchorSelectWidth(float srcAnchorSelectWidth, int unit) {
         setSrcAnchorSelectWidthRaw(convertToPX(srcAnchorSelectWidth, unit));
     }
 
@@ -2305,10 +2305,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectHeight(float srcAnchorSelectHeight) {
-        setSrcAnchorSelectHeight(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectHeight);
+        setSrcAnchorSelectHeightRaw(srcAnchorSelectHeight);
     }
 
-    public void setSrcAnchorSelectHeight(int unit, float srcAnchorSelectHeight) {
+    public void setSrcAnchorSelectHeight(float srcAnchorSelectHeight, int unit) {
         setSrcAnchorSelectHeightRaw(convertToPX(srcAnchorSelectHeight, unit));
     }
 
@@ -2327,10 +2327,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectDx(float srcAnchorSelectDx) {
-        setSrcAnchorSelectDx(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectDx);
+        setSrcAnchorSelectDxRaw(srcAnchorSelectDx);
     }
 
-    public void setSrcAnchorSelectDx(int unit, float srcAnchorSelectDx) {
+    public void setSrcAnchorSelectDx(float srcAnchorSelectDx, int unit) {
         setSrcAnchorSelectDxRaw(convertToPX(srcAnchorSelectDx, unit));
     }
 
@@ -2349,10 +2349,10 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectDy(float srcAnchorSelectDy) {
-        setSrcAnchorSelectDy(TypedValue.COMPLEX_UNIT_DIP, srcAnchorSelectDy);
+        setSrcAnchorSelectDyRaw(srcAnchorSelectDy);
     }
 
-    public void setSrcAnchorSelectDy(int unit, float srcAnchorSelectDy) {
+    public void setSrcAnchorSelectDy(float srcAnchorSelectDy, int unit) {
         setSrcAnchorSelectDyRaw(convertToPX(srcAnchorSelectDy, unit));
     }
 
@@ -2371,10 +2371,10 @@ public class TView extends View {
     }
 
     public void setStrokeWidthNormal(float strokeWidthNormal) {
-        setStrokeWidthNormal(TypedValue.COMPLEX_UNIT_DIP, strokeWidthNormal);
+        setStrokeWidthNormalRaw(strokeWidthNormal);
     }
 
-    public void setStrokeWidthNormal(int unit, float strokeWidthNormal) {
+    public void setStrokeWidthNormal(float strokeWidthNormal, int unit) {
         setStrokeWidthNormalRaw(convertToPX(strokeWidthNormal, unit));
     }
 
@@ -2404,10 +2404,10 @@ public class TView extends View {
     }
 
     public void setStrokeWidthPress(float strokeWidthPress) {
-        setStrokeWidthPress(TypedValue.COMPLEX_UNIT_DIP, strokeWidthPress);
+        setStrokeWidthPressRaw(strokeWidthPress);
     }
 
-    public void setStrokeWidthPress(int unit, float strokeWidthPress) {
+    public void setStrokeWidthPress(float strokeWidthPress, int unit) {
         setStrokeWidthPressRaw(convertToPX(strokeWidthPress, unit));
     }
 
@@ -2437,10 +2437,10 @@ public class TView extends View {
     }
 
     public void setStrokeWidthSelect(float strokeWidthSelect) {
-        setStrokeWidthSelect(TypedValue.COMPLEX_UNIT_DIP, strokeWidthSelect);
+        setStrokeWidthSelectRaw(strokeWidthSelect);
     }
 
-    public void setStrokeWidthSelect(int unit, float strokeWidthSelect) {
+    public void setStrokeWidthSelect(float strokeWidthSelect, int unit) {
         setStrokeWidthSelectRaw(convertToPX(strokeWidthSelect, unit));
     }
 
@@ -2470,10 +2470,10 @@ public class TView extends View {
     }
 
     public void setRadius(float radius) {
-        setRadius(TypedValue.COMPLEX_UNIT_DIP, radius);
+        setRadiusRaw(radius);
     }
 
-    public void setRadius(int unit, float radius) {
+    public void setRadius(float radius, int unit) {
         setRadiusRaw(convertToPX(radius, unit));
     }
 
@@ -2493,10 +2493,10 @@ public class TView extends View {
     }
 
     public void setRadiusLeftTop(float radiusLeftTop) {
-        setRadiusLeftTop(TypedValue.COMPLEX_UNIT_DIP, radiusLeftTop);
+        setRadiusLeftTopRaw(radiusLeftTop);
     }
 
-    public void setRadiusLeftTop(int unit, float radiusLeftTop) {
+    public void setRadiusLeftTop(float radiusLeftTop, int unit) {
         setRadiusLeftTopRaw(convertToPX(radiusLeftTop, unit));
     }
 
@@ -2515,10 +2515,10 @@ public class TView extends View {
     }
 
     public void setRadiusLeftBottom(float radiusLeftBottom) {
-        setRadiusLeftBottom(TypedValue.COMPLEX_UNIT_DIP, radiusLeftBottom);
+        setRadiusLeftBottomRaw(radiusLeftBottom);
     }
 
-    public void setRadiusLeftBottom(int unit, float radiusLeftBottom) {
+    public void setRadiusLeftBottom(float radiusLeftBottom, int unit) {
         setRadiusLeftBottomRaw(convertToPX(radiusLeftBottom, unit));
     }
 
@@ -2537,10 +2537,10 @@ public class TView extends View {
     }
 
     public void setRadiusRightTop(float radiusRightTop) {
-        setRadiusRightTop(TypedValue.COMPLEX_UNIT_DIP, radiusRightTop);
+        setRadiusRightTopRaw(radiusRightTop);
     }
 
-    public void setRadiusRightTop(int unit, float radiusRightTop) {
+    public void setRadiusRightTop(float radiusRightTop, int unit) {
         setRadiusRightTopRaw(convertToPX(radiusRightTop, unit));
     }
 
@@ -2559,10 +2559,10 @@ public class TView extends View {
     }
 
     public void setRadiusRightBottom(float radiusRightBottom) {
-        setRadiusRightBottom(TypedValue.COMPLEX_UNIT_DIP, radiusRightBottom);
+        setRadiusRightBottomRaw(radiusRightBottom);
     }
 
-    public void setRadiusRightBottom(int unit, float radiusRightBottom) {
+    public void setRadiusRightBottom(float radiusRightBottom, int unit) {
         setRadiusRightBottomRaw(convertToPX(radiusRightBottom, unit));
     }
 
@@ -2592,12 +2592,17 @@ public class TView extends View {
 
     public void setTextMark(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
                             float textMarkDx, float textMarkDy) {
-        setTextMark(TypedValue.COMPLEX_UNIT_DIP, textMarkRadius, textMarkColor, textMarkTextValue, TypedValue.COMPLEX_UNIT_DIP, textMarkTextSize,
-                textMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, textMarkDx, TypedValue.COMPLEX_UNIT_DIP, textMarkDy);
+        setTextMark(textMarkRadius, textMarkColor, textMarkTextValue, textMarkTextSize,
+                textMarkTextColor, textMarkDx, textMarkDy);
     }
 
-    public void setTextMark(int textMarkRadiusUnit, float textMarkRadius, int textMarkColor, String textMarkTextValue, int textMarkTextSizeUnit,
-                            float textMarkTextSize, int textMarkTextColor, int textMarkDxUnit, float textMarkDx, int textMarkDyUnit, float textMarkDy) {
+    public void setTextMark(float textMarkRadius, int textMarkRadiusUnit,
+                            int textMarkColor,
+                            String textMarkTextValue,
+                            float textMarkTextSize, int textMarkTextSizeUnit,
+                            int textMarkTextColor,
+                            float textMarkDx, int textMarkDxUnit,
+                            float textMarkDy, int textMarkDyUnit) {
 
         setTextMarkRaw(convertToPX(textMarkRadius, textMarkRadiusUnit), textMarkColor, textMarkTextValue,
                 convertToPX(textMarkTextSize, textMarkTextSizeUnit), textMarkTextColor,
@@ -2640,10 +2645,10 @@ public class TView extends View {
     }
 
     public void setTextMarkRadius(float textMarkRadius) {
-        setTextMarkRadius(TypedValue.COMPLEX_UNIT_DIP, textMarkRadius);
+        setTextMarkRadiusRaw(textMarkRadius);
     }
 
-    public void setTextMarkRadius(int unit, float textMarkRadius) {
+    public void setTextMarkRadius(float textMarkRadius, int unit) {
         setTextMarkRadiusRaw(convertToPX(textMarkRadius, unit));
     }
 
@@ -2695,10 +2700,10 @@ public class TView extends View {
     }
 
     public void setTextMarkTextSize(float textMarkTextSize) {
-        setTextMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, textMarkTextSize);
+        setTextMarkTextSizeRaw(textMarkTextSize);
     }
 
-    public void setTextMarkTextSize(int unit, float textMarkTextSize) {
+    public void setTextMarkTextSize(float textMarkTextSize, int unit) {
         setTextMarkTextSizeRaw(convertToPX(textMarkTextSize, unit));
     }
 
@@ -2728,10 +2733,10 @@ public class TView extends View {
     }
 
     public void setTextMarkDx(float textMarkDx) {
-        setTextMarkDx(TypedValue.COMPLEX_UNIT_DIP, textMarkDx);
+        setTextMarkDxRaw(textMarkDx);
     }
 
-    public void setTextMarkDx(int unit, float textMarkDx) {
+    public void setTextMarkDx(float textMarkDx, int unit) {
         setTextMarkDxRaw(convertToPX(textMarkDx, unit));
     }
 
@@ -2750,10 +2755,10 @@ public class TView extends View {
     }
 
     public void setTextMarkDy(float textMarkDy) {
-        setTextMarkDy(TypedValue.COMPLEX_UNIT_DIP, textMarkDy);
+        setTextMarkDyRaw(textMarkDy);
     }
 
-    public void setTextMarkDy(int unit, float textMarkDy) {
+    public void setTextMarkDy(float textMarkDy, int unit) {
         setTextMarkDyRaw(convertToPX(textMarkDy, unit));
     }
 
@@ -2816,10 +2821,10 @@ public class TView extends View {
     }
 
     public void setTextSize(float textSize) {
-        setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+        setTextSizeRaw(textSize);
     }
 
-    public void setTextSize(int unit, float textSize) {
+    public void setTextSize(float textSize, int unit) {
         setTextSizeRaw(convertToPX(textSize, unit));
     }
 
@@ -2872,10 +2877,10 @@ public class TView extends View {
     }
 
     public void setTextPaddingLeft(float textPaddingLeft) {
-        setTextPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, textPaddingLeft);
+        setTextPaddingLeftRaw(textPaddingLeft);
     }
 
-    public void setTextPaddingLeft(int unit, float textPaddingLeft) {
+    public void setTextPaddingLeft(float textPaddingLeft, int unit) {
         setTextPaddingLeftRaw(convertToPX(textPaddingLeft, unit));
     }
 
@@ -2895,10 +2900,10 @@ public class TView extends View {
     }
 
     public void setTextPaddingRight(float textPaddingRight) {
-        setTextPaddingRight(TypedValue.COMPLEX_UNIT_DIP, textPaddingRight);
+        setTextPaddingRightRaw(textPaddingRight);
     }
 
-    public void setTextPaddingRight(int unit, float textPaddingRight) {
+    public void setTextPaddingRight(float textPaddingRight, int unit) {
         setTextPaddingRightRaw(convertToPX(textPaddingRight, unit));
     }
 
@@ -2973,10 +2978,10 @@ public class TView extends View {
     }
 
     public void setTextDx(float textDx) {
-        setTextDx(TypedValue.COMPLEX_UNIT_DIP, textDx);
+        setTextDxRaw(textDx);
     }
 
-    public void setTextDx(int unit, float textDx) {
+    public void setTextDx(float textDx, int unit) {
         setTextDxRaw(convertToPX(textDx, unit));
     }
 
@@ -2995,10 +3000,10 @@ public class TView extends View {
     }
 
     public void setTextDy(float textDy) {
-        setTextDy(TypedValue.COMPLEX_UNIT_DIP, textDy);
+        setTextDyRaw(textDy);
     }
 
-    public void setTextDy(int unit, float textDy) {
+    public void setTextDy(float textDy, int unit) {
         setTextDyRaw(convertToPX(textDy, unit));
     }
 
@@ -3044,10 +3049,10 @@ public class TView extends View {
     }
 
     public void setTextShadowRadius(float textShadowRadius) {
-        setTextShadowRadius(TypedValue.COMPLEX_UNIT_DIP, textShadowRadius);
+        setTextShadowRadiusRaw(textShadowRadius);
     }
 
-    public void setTextShadowRadius(int unit, float textShadowRadius) {
+    public void setTextShadowRadius(float textShadowRadius, int unit) {
         setTextShadowRadiusRaw(convertToPX(textShadowRadius, unit));
     }
 
@@ -3077,10 +3082,10 @@ public class TView extends View {
     }
 
     public void setTextShadowDx(float textShadowDx) {
-        setTextShadowDx(TypedValue.COMPLEX_UNIT_DIP, textShadowDx);
+        setTextShadowDxRaw(textShadowDx);
     }
 
-    public void setTextShadowDx(int unit, float textShadowDx) {
+    public void setTextShadowDx(float textShadowDx, int unit) {
         setTextShadowDxRaw(convertToPX(textShadowDx, unit));
     }
 
@@ -3099,10 +3104,10 @@ public class TView extends View {
     }
 
     public void setTextShadowDy(float textShadowDy) {
-        setTextShadowDy(TypedValue.COMPLEX_UNIT_DIP, textShadowDy);
+        setTextShadowDyRaw(textShadowDy);
     }
 
-    public void setTextShadowDy(int unit, float textShadowDy) {
+    public void setTextShadowDy(float textShadowDy, int unit) {
         setTextShadowDyRaw(convertToPX(textShadowDy, unit));
     }
 
@@ -3143,10 +3148,10 @@ public class TView extends View {
     }
 
     public void setContentSize(float contentSize) {
-        setContentSize(TypedValue.COMPLEX_UNIT_DIP, contentSize);
+        setContentSizeRaw(contentSize);
     }
 
-    public void setContentSize(int unit, float contentSize) {
+    public void setContentSize(float contentSize, int unit) {
         setContentSizeRaw(convertToPX(contentSize, unit));
     }
 
@@ -3165,10 +3170,10 @@ public class TView extends View {
     }
 
     public void setContentShadowRadius(float contentShadowRadius) {
-        setContentShadowRadius(TypedValue.COMPLEX_UNIT_DIP, contentShadowRadius);
+        setContentShadowRadiusRaw(contentShadowRadius);
     }
 
-    public void setContentShadowRadius(int unit, float contentShadowRadius) {
+    public void setContentShadowRadius(float contentShadowRadius, int unit) {
         setContentShadowRadiusRaw(convertToPX(contentShadowRadius, unit));
     }
 
@@ -3198,10 +3203,10 @@ public class TView extends View {
     }
 
     public void setContentShadowDx(float contentShadowDx) {
-        setContentShadowDx(TypedValue.COMPLEX_UNIT_DIP, contentShadowDx);
+        setContentShadowDxRaw(contentShadowDx);
     }
 
-    public void setContentShadowDx(int unit, float contentShadowDx) {
+    public void setContentShadowDx(float contentShadowDx, int unit) {
         setContentShadowDxRaw(convertToPX(contentShadowDx, unit));
     }
 
@@ -3220,10 +3225,10 @@ public class TView extends View {
     }
 
     public void setContentShadowDy(float contentShadowDy) {
-        setContentShadowDy(TypedValue.COMPLEX_UNIT_DIP, contentShadowDy);
+        setContentShadowDyRaw(contentShadowDy);
     }
 
-    public void setContentShadowDy(int unit, float contentShadowDy) {
+    public void setContentShadowDy(float contentShadowDy, int unit) {
         setContentShadowDyRaw(convertToPX(contentShadowDy, unit));
     }
 
@@ -3276,10 +3281,10 @@ public class TView extends View {
     }
 
     public void setContentPaddingLeft(float contentPaddingLeft) {
-        setContentPaddingLeft(TypedValue.COMPLEX_UNIT_DIP, contentPaddingLeft);
+        setContentPaddingLeftRaw(contentPaddingLeft);
     }
 
-    public void setContentPaddingLeft(int unit, float contentPaddingLeft) {
+    public void setContentPaddingLeft(float contentPaddingLeft, int unit) {
         setContentPaddingLeftRaw(convertToPX(contentPaddingLeft, unit));
     }
 
@@ -3299,10 +3304,10 @@ public class TView extends View {
     }
 
     public void setContentPaddingRight(float contentPaddingRight) {
-        setContentPaddingRight(TypedValue.COMPLEX_UNIT_DIP, contentPaddingRight);
+        setContentPaddingRightRaw(contentPaddingRight);
     }
 
-    public void setContentPaddingRight(int unit, float contentPaddingRight) {
+    public void setContentPaddingRight(float contentPaddingRight, int unit) {
         setContentPaddingRightRaw(convertToPX(contentPaddingRight, unit));
     }
 
@@ -3376,10 +3381,10 @@ public class TView extends View {
     }
 
     public void setContentDx(float contentDx) {
-        setTextDx(TypedValue.COMPLEX_UNIT_DIP, contentDx);
+        setContentDxRaw(contentDx);
     }
 
-    public void setContentDx(int unit, float contentDx) {
+    public void setContentDx(float contentDx, int unit) {
         setContentDxRaw(convertToPX(contentDx, unit));
     }
 
@@ -3398,10 +3403,10 @@ public class TView extends View {
     }
 
     public void setContentDy(float contentDy) {
-        setContentDy(TypedValue.COMPLEX_UNIT_DIP, contentDy);
+        setContentDyRaw(contentDy);
     }
 
-    public void setContentDy(int unit, float contentDy) {
+    public void setContentDy(float contentDy, int unit) {
         setContentDyRaw(convertToPX(contentDy, unit));
     }
 
@@ -3453,13 +3458,17 @@ public class TView extends View {
 
     public void setContentMark(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
                                int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
-        setContentMark(TypedValue.COMPLEX_UNIT_DIP, contentMarkRadius, contentMarkColor, contentMarkTextValue, TypedValue.COMPLEX_UNIT_DIP,
-                contentMarkTextSize, contentMarkTextColor, TypedValue.COMPLEX_UNIT_DIP, contentMarkDx, TypedValue.COMPLEX_UNIT_DIP, contentMarkDy);
+        setContentMarkRaw(contentMarkRadius, contentMarkColor, contentMarkTextValue,
+                contentMarkTextSize, contentMarkTextColor, contentMarkDx, contentMarkDy);
     }
 
-    public void setContentMark(int contentMarkRadiusUnit, float contentMarkRadius, int contentMarkColor, String contentMarkTextValue,
-                               int contentMarkTextSizeUnit, float contentMarkTextSize, int contentMarkTextColor, int contentMarkDxUnit, float contentMarkDx,
-                               int contentMarkDyUnit, float contentMarkDy) {
+    public void setContentMark(float contentMarkRadius, int contentMarkRadiusUnit,
+                               int contentMarkColor,
+                               String contentMarkTextValue,
+                               float contentMarkTextSize, int contentMarkTextSizeUnit,
+                               int contentMarkTextColor,
+                               float contentMarkDx, int contentMarkDxUnit,
+                               float contentMarkDy, int contentMarkDyUnit) {
 
         setContentMarkRaw(convertToPX(contentMarkRadius, contentMarkRadiusUnit), contentMarkColor, contentMarkTextValue,
                 convertToPX(contentMarkTextSize, contentMarkTextSizeUnit), contentMarkTextColor,
@@ -3502,10 +3511,10 @@ public class TView extends View {
     }
 
     public void setContentMarkRadius(float contentMarkRadius) {
-        setContentMarkRadius(TypedValue.COMPLEX_UNIT_DIP, contentMarkRadius);
+        setContentMarkRadiusRaw(contentMarkRadius);
     }
 
-    public void setContentMarkRadius(int unit, float contentMarkRadius) {
+    public void setContentMarkRadius(float contentMarkRadius, int unit) {
         setContentMarkRadiusRaw(convertToPX(contentMarkRadius, unit));
     }
 
@@ -3557,10 +3566,10 @@ public class TView extends View {
     }
 
     public void setContentMarkTextSize(float contentMarkTextSize) {
-        setContentMarkTextSize(TypedValue.COMPLEX_UNIT_DIP, contentMarkTextSize);
+        setContentMarkTextSizeRaw(contentMarkTextSize);
     }
 
-    public void setContentMarkTextSize(int unit, float contentMarkTextSize) {
+    public void setContentMarkTextSize(float contentMarkTextSize, int unit) {
         setContentMarkTextSizeRaw(convertToPX(contentMarkTextSize, unit));
     }
 
@@ -3590,10 +3599,10 @@ public class TView extends View {
     }
 
     public void setContentMarkDx(float contentMarkDx) {
-        setContentMarkDx(TypedValue.COMPLEX_UNIT_DIP, contentMarkDx);
+        setContentMarkDxRaw(contentMarkDx);
     }
 
-    public void setContentMarkDx(int unit, float contentMarkDx) {
+    public void setContentMarkDx(float contentMarkDx, int unit) {
         setContentMarkDxRaw(convertToPX(contentMarkDx, unit));
     }
 
@@ -3612,10 +3621,10 @@ public class TView extends View {
     }
 
     public void setContentMarkDy(float contentMarkDy) {
-        setContentMarkDy(TypedValue.COMPLEX_UNIT_DIP, contentMarkDy);
+        setContentMarkDyRaw(contentMarkDy);
     }
 
-    public void setContentMarkDy(int unit, float contentMarkDy) {
+    public void setContentMarkDy(float contentMarkDy, int unit) {
         setContentMarkDyRaw(convertToPX(contentMarkDy, unit));
     }
 
@@ -3672,10 +3681,10 @@ public class TView extends View {
     }
 
     public void setSrcLeftWidth(float srcLeftWidth) {
-        setSrcLeftWidth(TypedValue.COMPLEX_UNIT_DIP, srcLeftWidth);
+        setSrcLeftWidthRaw(srcLeftWidth);
     }
 
-    public void setSrcLeftWidth(int unit, float srcLeftWidth) {
+    public void setSrcLeftWidth(float srcLeftWidth, int unit) {
         setSrcLeftWidthRaw(convertToPX(srcLeftWidth, unit));
     }
 
@@ -3694,10 +3703,10 @@ public class TView extends View {
     }
 
     public void setSrcLeftHeight(float srcLeftHeight) {
-        setSrcLeftHeight(TypedValue.COMPLEX_UNIT_DIP, srcLeftHeight);
+        setSrcLeftHeightRaw(srcLeftHeight);
     }
 
-    public void setSrcLeftHeight(int unit, float srcLeftHeight) {
+    public void setSrcLeftHeight(float srcLeftHeight, int unit) {
         setSrcLeftHeightRaw(convertToPX(srcLeftHeight, unit));
     }
 
@@ -3737,10 +3746,10 @@ public class TView extends View {
     }
 
     public void setSrcLeftPadding(float srcLeftPadding) {
-        setSrcLeftPadding(TypedValue.COMPLEX_UNIT_DIP, srcLeftPadding);
+        setSrcLeftPaddingRaw(srcLeftPadding);
     }
 
-    public void setSrcLeftPadding(int unit, float srcLeftPadding) {
+    public void setSrcLeftPadding(float srcLeftPadding, int unit) {
         setSrcLeftPaddingRaw(convertToPX(srcLeftPadding, unit));
     }
 
@@ -3759,10 +3768,10 @@ public class TView extends View {
     }
 
     public void setSrcLeftDx(float srcLeftDx) {
-        setSrcLeftDx(TypedValue.COMPLEX_UNIT_DIP, srcLeftDx);
+        setSrcLeftDxRaw(srcLeftDx);
     }
 
-    public void setSrcLeftDx(int unit, float srcLeftDx) {
+    public void setSrcLeftDx(float srcLeftDx, int unit) {
         setSrcLeftDxRaw(convertToPX(srcLeftDx, unit));
     }
 
@@ -3781,10 +3790,10 @@ public class TView extends View {
     }
 
     public void setSrcLeftDy(float srcLeftDy) {
-        setSrcLeftDy(TypedValue.COMPLEX_UNIT_DIP, srcLeftDy);
+        setSrcLeftDyRaw(srcLeftDy);
     }
 
-    public void setSrcLeftDy(int unit, float srcLeftDy) {
+    public void setSrcLeftDy(float srcLeftDy, int unit) {
         setSrcLeftDyRaw(convertToPX(srcLeftDy, unit));
     }
 
@@ -3814,10 +3823,10 @@ public class TView extends View {
     }
 
     public void setSrcRightWidth(float srcRightWidth) {
-        setSrcRightWidth(TypedValue.COMPLEX_UNIT_DIP, srcRightWidth);
+        setSrcRightWidthRaw(srcRightWidth);
     }
 
-    public void setSrcRightWidth(int unit, float srcRightWidth) {
+    public void setSrcRightWidth(float srcRightWidth, int unit) {
         setSrcRightWidthRaw(convertToPX(srcRightWidth, unit));
     }
 
@@ -3836,10 +3845,10 @@ public class TView extends View {
     }
 
     public void setSrcRightHeight(float srcRightHeight) {
-        setSrcRightHeight(TypedValue.COMPLEX_UNIT_DIP, srcRightHeight);
+        setSrcRightHeightRaw(srcRightHeight);
     }
 
-    public void setSrcRightHeight(int unit, float srcRightHeight) {
+    public void setSrcRightHeight(float srcRightHeight, int unit) {
         setSrcRightHeightRaw(convertToPX(srcRightHeight, unit));
     }
 
@@ -3879,10 +3888,10 @@ public class TView extends View {
     }
 
     public void setSrcRightPadding(float srcRightPadding) {
-        setSrcRightPadding(TypedValue.COMPLEX_UNIT_DIP, srcRightPadding);
+        setSrcRightPaddingRaw(srcRightPadding);
     }
 
-    public void setSrcRightPadding(int unit, float srcRightPadding) {
+    public void setSrcRightPadding(float srcRightPadding, int unit) {
         setSrcRightPaddingRaw(convertToPX(srcRightPadding, unit));
     }
 
@@ -3901,10 +3910,10 @@ public class TView extends View {
     }
 
     public void setSrcRightDx(float srcRightDx) {
-        setSrcRightDx(TypedValue.COMPLEX_UNIT_DIP, srcRightDx);
+        setSrcRightDxRaw(srcRightDx);
     }
 
-    public void setSrcRightDx(int unit, float srcRightDx) {
+    public void setSrcRightDx(float srcRightDx, int unit) {
         setSrcRightDxRaw(convertToPX(srcRightDx, unit));
     }
 
@@ -3923,10 +3932,10 @@ public class TView extends View {
     }
 
     public void setSrcRightDy(float srcRightDy) {
-        setSrcRightDy(TypedValue.COMPLEX_UNIT_DIP, srcRightDy);
+        setSrcRightDyRaw(srcRightDy);
     }
 
-    public void setSrcRightDy(int unit, float srcRightDy) {
+    public void setSrcRightDy(float srcRightDy, int unit) {
         setSrcRightDyRaw(convertToPX(srcRightDy, unit));
     }
 
@@ -4754,8 +4763,8 @@ public class TView extends View {
         int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
         //
-        int measuredWidth = (int) convertToPX(TypedValue.COMPLEX_UNIT_DIP, 96);
-        int measuredHeight = (int) convertToPX(TypedValue.COMPLEX_UNIT_DIP, 48);
+        int measuredWidth = (int) convertToPX(96, TypedValue.COMPLEX_UNIT_DIP);
+        int measuredHeight = (int) convertToPX(48, TypedValue.COMPLEX_UNIT_DIP);
 
         //measureWidth
         //expressed hope that the size of the parent view subviews should be determined by the value of specSize

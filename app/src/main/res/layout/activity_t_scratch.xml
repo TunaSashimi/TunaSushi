@@ -18,5 +18,4 @@
         app:scratchText="TunaSashimi"
         app:scratchTextColor="#0000ff"
         app:scratchTextSize="22sp" />
-
 </RelativeLayout>

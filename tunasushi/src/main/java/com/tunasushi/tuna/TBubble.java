@@ -18,7 +18,6 @@ import com.tuna.R;
  * @Description
  */
 public class TBubble extends TView {
-
     private int bubbleBackground;
 
     public int getTBubbleBackground() {
