@@ -20,7 +20,7 @@
     <!-- Spinner represents the clickable area -->
     <dimen name="tuna_spinner_width">100dp</dimen>
     <dimen name="tuna_spinner_height">60dp</dimen>
-    
+
     <!-- Layout represents the block or complex area -->
     <dimen name="tuna_layout_marginTop">19dp</dimen>
     <dimen name="tuna_layout_marginLeft">13dp</dimen>
@@ -30,7 +30,7 @@
     <dimen name="tuna_layout_height">160dp</dimen>
 
     <!-- Text represents the unclickable area -->
-    <dimen name="tuna_text_textSize">10dp</dimen>
+    <dimen name="tuna_text_textSize">12dp</dimen>
 
     <!-- Title represents the title bar area -->
 

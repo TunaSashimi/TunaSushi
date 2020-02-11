@@ -2969,6 +2969,16 @@ public class TView extends View {
         this.textTypeFace = textTypeFace;
     }
 
+    private String textTypeFaceAssets;
+
+    public String getTextTypeFaceAssets() {
+        return textTypeFaceAssets;
+    }
+
+    public void setTextTypeFaceAssets(String textTypeFaceAssets) {
+        this.textTypeFaceAssets = textTypeFaceAssets;
+    }
+
     // attention that textDx is the width of the base , textDy is the
     // height of the base
     private float textDx;
@@ -3372,8 +3382,17 @@ public class TView extends View {
         this.contentTypeFace = contentTypeFace;
     }
 
-    // attention that contentDx is the width of the base , contentDy is
-    // the height of the base
+    private String contentTypeFaceAssets;
+
+    public String getContentTypeFaceAssets() {
+        return contentTypeFaceAssets;
+    }
+
+    public void setContentTypeFaceAssets(String contentTypeFaceAssets) {
+        this.contentTypeFaceAssets = contentTypeFaceAssets;
+    }
+
+    // attention that contentDx is the width of the base , contentDy is the height of the base
     private float contentDx;
 
     public float getContenttDx() {
@@ -4428,10 +4447,17 @@ public class TView extends View {
                 textGravity = textGravityArray[textGravityIndex];
             }
 
-            //
-            int textTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);
-            if (textTypeFaceIndex >= 0) {
-                textTypeFace = Typeface.create(Typeface.DEFAULT, textTypeFaceArray[textTypeFaceIndex]);
+
+            // If textTypeFaceAssets is set then textTypeFace will be replaced!
+            textTypeFaceAssets = typedArray.getString(R.styleable.TView_textTypeFaceAssets);
+            if (textTypeFaceAssets != null) {
+                textTypeFace = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceAssets);
+            } else {
+                //
+                int textTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);
+                if (textTypeFaceIndex >= 0) {
+                    textTypeFace = Typeface.create(Typeface.DEFAULT, textTypeFaceArray[textTypeFaceIndex]);
+                }
             }
 
             textDx = typedArray.getDimension(R.styleable.TView_textDx, 0);
@@ -4465,9 +4491,16 @@ public class TView extends View {
                 contentGravity = contentGravityArray[contentGravityIndex];
             }
 
-            int contentTypeFaceIndex = typedArray.getInt(R.styleable.TView_contentTypeFace, 0);
-            if (contentTypeFaceIndex >= 0) {
-                contentTypeFace = Typeface.create(Typeface.DEFAULT, contentTypeFaceArray[contentTypeFaceIndex]);
+
+            // If contentTypeFaceAssets is set then contentTypeFace will be replaced!
+            contentTypeFaceAssets = typedArray.getString(R.styleable.TView_contentTypeFaceAssets);
+            if (contentTypeFaceAssets != null) {
+                contentTypeFace = Typeface.createFromAsset(getContext().getAssets(), contentTypeFaceAssets);
+            } else {
+                int contentTypeFaceIndex = typedArray.getInt(R.styleable.TView_contentTypeFace, 0);
+                if (contentTypeFaceIndex >= 0) {
+                    contentTypeFace = Typeface.create(Typeface.DEFAULT, contentTypeFaceArray[contentTypeFaceIndex]);
+                }
             }
 
             contentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);

@@ -47,8 +47,8 @@
             android:layout_alignTop="@id/tViewRectClassic02"
             android:layout_toRightOf="@id/tViewRectClassic02"
             app:backgroundNormal="#666666"
-            app:rotate="135"
             app:textColorNormal="#ffffff"
+            app:textTypeFaceAssets="fonts/computerfont.ttf"
             app:textValue="#666666" />
 
         <com.tunasushi.tuna.TView
@@ -56,7 +56,7 @@
             android:layout_alignTop="@id/tViewRectClassic03"
             android:layout_toRightOf="@id/tViewRectClassic03"
             app:backgroundNormal="#cccccc"
-            app:rotate="45"
+            app:rotate="135"
             app:textColorNormal="#ffffff"
             app:textValue="#cccccc" />
 
