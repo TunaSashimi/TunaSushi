@@ -11,14 +11,7 @@ import android.graphics.Paint.Align;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DrawTool.drawText;
-import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPath;
-import static com.tunasushi.tool.PathTool.path;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -46,7 +39,7 @@ public class TSeek extends TView {
     private float seekDragRadiusNormal, seekDragRadiusPress;
 
     private int seekDragTextColor;
-    private Bitmap seekDragBitmapSrcPress;
+    private Bitmap seekDragSrcPress;
 
     private RectF[] seekCircleRectFArray;
     private float[] seekCircleCentreXArray;
@@ -78,7 +71,7 @@ public class TSeek extends TView {
     public TSeek(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TSeek.class.getSimpleName();
+        tag = TSeek.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSeek);
 
@@ -123,9 +116,9 @@ public class TSeek extends TView {
 
         seekDragTextColor = typedArray.getColor(R.styleable.TSeek_seekDragTextColor, Color.TRANSPARENT);
 
-        int seekDragBitmapSrcPressId = typedArray.getResourceId(R.styleable.TSeek_seekDragBitmapSrcPress, -1);
-        if (seekDragBitmapSrcPressId != -1) {
-            seekDragBitmapSrcPress = BitmapFactory.decodeResource(getResources(), seekDragBitmapSrcPressId);
+        int seekDragSrcPressId = typedArray.getResourceId(R.styleable.TSeek_seekDragSrcPress, -1);
+        if (seekDragSrcPressId != -1) {
+            seekDragSrcPress = BitmapFactory.decodeResource(getResources(), seekDragSrcPressId);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -189,9 +182,9 @@ public class TSeek extends TView {
         }
 
         // draw bottom stroke
-        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.STROKE, seekStrokeColor, seekStrokeWidth));
+        canvas.drawPath(path, initPaint(Paint.Style.STROKE, seekStrokeColor, seekStrokeWidth));
 
-        PaintTool.initPaint(Paint.Style.FILL, seekFillColor);
+        initPaint(Paint.Style.FILL, seekFillColor);
 
         for (int i = 0; i < total; i++) {
 
@@ -219,7 +212,7 @@ public class TSeek extends TView {
         }
 
         // draw bottom text
-        PaintTool.initTextPaint(Paint.Style.FILL, seekTextColorNormal, seekTextSize, Align.CENTER);
+        initTextPaint(Paint.Style.FILL, seekTextColorNormal, seekTextSize, Align.CENTER);
         for (int i = 0; i < total; i++) {
             drawText(canvas, seekTextValueArray[i], width, seekCircleCentreXArray[i], height >> 1, 0, 0, paint);
         }
@@ -227,12 +220,12 @@ public class TSeek extends TView {
         // draw drag
         if (press) {
             // If the incoming the background painted directly
-            if (seekDragBitmapSrcPress != null) {
+            if (seekDragSrcPress != null) {
 
                 seekCircleRectFArray[0].set(x - seekDragRadiusPress, (height >> 1) - seekDragRadiusPress,
                         x + seekDragRadiusPress, (height >> 1) + seekDragRadiusPress);
 
-                canvas.drawBitmap(seekDragBitmapSrcPress, null, seekCircleRectFArray[0], paint);
+                canvas.drawBitmap(seekDragSrcPress, null, seekCircleRectFArray[0], paint);
 
                 // No not incoming the background draw the default texture
             } else {
@@ -262,7 +255,7 @@ public class TSeek extends TView {
 
                 path.reset();
 
-                PaintTool.initPaint(Paint.Style.STROKE, seekStrokeColor);
+                initPaint(Paint.Style.STROKE, seekStrokeColor);
 
                 for (int i = 0; (deviationOvalXOffset + controlOvalYOffset) * i < seekDragRadiusPress; i++) {
                     if (i == 0) {
@@ -283,18 +276,18 @@ public class TSeek extends TView {
             }
 
             drawText(canvas, seekTextValueArray[seekIndex], width, x, height >> 1, 0, 0,
-                    PaintTool.initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
 
         } else {
             float adjuestX = seekCircleCentreXArray[seekIndex];
 
             // draw response circle
-            canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal, PaintTool.initPaint(Paint.Style.FILL, seekDragStrokeColorNormal));
-            canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal - seekDragStrokeWidth, PaintTool.initPaint(Paint.Style.FILL, seekDragBackgroundNormal));
+            canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal, initPaint(Paint.Style.FILL, seekDragStrokeColorNormal));
+            canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal - seekDragStrokeWidth, initPaint(Paint.Style.FILL, seekDragBackgroundNormal));
 
             // draw response text
             drawText(canvas, seekTextValueArray[seekIndex], width, adjuestX, height >> 1, 0, 0,
-                    PaintTool.initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
         }
     }
 

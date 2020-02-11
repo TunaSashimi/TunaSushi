@@ -1,23 +1,13 @@
 package com.tunasushi.tuna;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
-
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DrawTool.drawArrow;
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
@@ -73,7 +63,7 @@ public class TLine extends TView {
     public TLine(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TLine.class.getSimpleName();
+        tag = TLine.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TLine);
 
@@ -154,7 +144,7 @@ public class TLine extends TView {
                         break;
                 }
                 path.close();
-                canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, lineArrowColor));
+                canvas.drawPath(path, initPaint(Paint.Style.FILL, lineArrowColor));
             }
 
         }

@@ -24,19 +24,19 @@ import java.util.TimerTask;
  */
 public class TMove extends TView {
     private float moveDistance;
-    private Bitmap moveSrcBitmap;
+    private Bitmap moveSrc;
 
-    private int moveSrcBitmapHeight;
-    private int moveSrcBitmapStartY;
+    private int moveSrcHeight;
+    private int moveSrcStartY;
     private static final int moveMsgWhat = 0x123;
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == moveMsgWhat) {
                 if (moveDistance <= 0) {
-                    moveSrcBitmapStartY = (int) (moveSrcBitmapHeight - moveDistance);
+                    moveSrcStartY = (int) (moveSrcHeight - moveDistance);
                 } else {
-                    moveSrcBitmapStartY -= moveDistance;
+                    moveSrcStartY -= moveDistance;
                 }
             }
             invalidate();
@@ -55,7 +55,7 @@ public class TMove extends TView {
     public TMove(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TMove.class.getSimpleName();
+        tag = TMove.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TMove);
 
@@ -87,10 +87,10 @@ public class TMove extends TView {
         scale = width * 1f / srcBitmapWidth;
 
 
-        moveSrcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), initMatrix(scale, scale), true);
-        moveSrcBitmapHeight = moveSrcBitmap.getHeight();
+        moveSrc = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), initMatrix(scale, scale), true);
+        moveSrcHeight = moveSrc.getHeight();
 
-        moveSrcBitmapStartY = moveSrcBitmapHeight - height;
+        moveSrcStartY = moveSrcHeight - height;
     }
 
     @Override
@@ -98,6 +98,6 @@ public class TMove extends TView {
         super.onDraw(canvas);
 
         //
-        canvas.drawBitmap(Bitmap.createBitmap(moveSrcBitmap, 0, moveSrcBitmapStartY, width, height), 0, 0, null);
+        canvas.drawBitmap(Bitmap.createBitmap(moveSrc, 0, moveSrcStartY, width, height), 0, 0, null);
     }
 }

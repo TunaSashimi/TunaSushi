@@ -8,17 +8,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.tunasushi.tool.DrawTool.drawRectClassic;
-import static com.tunasushi.tool.DrawTool.drawText;
-import static com.tunasushi.tool.PaintTool.paint;
 
 /**
  * @author Tunasashimi
@@ -41,14 +33,14 @@ public class TWrap extends TView {
     private float wrapTextSize;
     private int wrapTextColorNormal, wrapTextColorSelect;
 
-    public String[] getTWrapItemTextValueArray() {
+    public String[] getWrapItemTextValueArray() {
         return wrapItemTextValueArray;
     }
 
     private String[] wrapItemTextValueArray;
 
-    public void setTWrapItemTextValueArray(String[] tWrapItemTextValueArray) {
-        this.wrapItemTextValueArray = tWrapItemTextValueArray;
+    public void setWrapItemTextValueArray(String[] wrapItemTextValueArray) {
+        this.wrapItemTextValueArray = wrapItemTextValueArray;
     }
 
     //
@@ -66,7 +58,7 @@ public class TWrap extends TView {
     public TWrap(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TWrap.class.getSimpleName();
+        tag = TWrap.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TWrap);
 
@@ -88,11 +80,7 @@ public class TWrap extends TView {
 
         int wrapItemTextValueArrayId = typedArray.getResourceId(R.styleable.TWrap_wrapItemTextValueArray, -1);
         if (wrapItemTextValueArrayId != -1) {
-            if (isInEditMode()) {
-                wrapItemTextValueArray = new String[]{"ONE", "TWO", "THREE"};
-            } else {
-                wrapItemTextValueArray = typedArray.getResources().getStringArray(wrapItemTextValueArrayId);
-            }
+            wrapItemTextValueArray = typedArray.getResources().getStringArray(wrapItemTextValueArrayId);
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
             typedArray.recycle();
@@ -101,11 +89,12 @@ public class TWrap extends TView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //
+        //Not only the onMeasure method of the parent class will affect the alignment!
+        //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
         total = wrapItemTextValueArray.length;
 
         if (total <= 0) {
-            throw new IllegalArgumentException("The content attribute wrapItemTextValueArray length must be greater than 0 ");
+            throw new IllegalArgumentException("The content attribute tunaWrapItemTextValueArray length must be greater than 0 ");
         } else {
             wrapList = new ArrayList(total);
             wrapSelect = new boolean[total];
@@ -113,30 +102,28 @@ public class TWrap extends TView {
 
         //
         if (wrapTextSize <= 0) {
-            throw new IllegalArgumentException("The content attribute wrapTextSize must be greater than 0 ");
-        } else {
-            PaintTool.initTextPaint(wrapTextColorNormal, wrapTextSize);
+            throw new IllegalArgumentException("The content attribute tunaWrapTextSize length must be greater than 0 ");
         }
-
+        //
+        int specModeWidth = MeasureSpec.getMode(widthMeasureSpec);
+        int specSizeWidth = MeasureSpec.getSize(widthMeasureSpec);
 
         //
-        int specSizeWidth = View.MeasureSpec.getSize(widthMeasureSpec);
+        int specModeHeight = MeasureSpec.getMode(heightMeasureSpec);
+        int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
-        //
-        int specModeHeight = View.MeasureSpec.getMode(heightMeasureSpec);
-        int specSizeHeight = View.MeasureSpec.getSize(heightMeasureSpec);
-
-
+        initTextPaint(wrapTextColorNormal, wrapTextSize);
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         int rowHeight = fontMetrics.descent - fontMetrics.ascent;
 
         //
         int measuredWidth = specSizeWidth;
         int measuredHeight = rowHeight;//At least one line
+
         float characterWidth = paint.measureText(wrapItemTextValueArray[0]);//At least one field
 
         //measuredHeight
-        if (specModeHeight == View.MeasureSpec.AT_MOST) {// wrap_content
+        if (specModeHeight == MeasureSpec.AT_MOST) {// wrap_content
             for (int i = 0; i <= total - 1; i++) {
                 //
                 if (i != 0) {
@@ -149,9 +136,9 @@ public class TWrap extends TView {
                 } else {
                 }
             }
-        } else if (specModeHeight == View.MeasureSpec.EXACTLY) {// match_parent
+        } else if (specModeHeight == MeasureSpec.EXACTLY) {// match_parent
             measuredHeight = specSizeHeight;
-        } else if (specModeHeight == View.MeasureSpec.UNSPECIFIED) {// unspecified
+        } else if (specModeHeight == MeasureSpec.UNSPECIFIED) {// unspecified
             measuredHeight = specSizeHeight;
         }
         setMeasuredDimension(measuredWidth, measuredHeight);
@@ -226,7 +213,7 @@ public class TWrap extends TView {
                 itemWidth,
                 0,
                 rowHeight * 0.5f,
-                PaintTool.initTextPaint(wrap.wrapSelect ? wrapTextColorSelect : wrapTextColorNormal, wrapTextSize)
+                initTextPaint(wrap.wrapSelect ? wrapTextColorSelect : wrapTextColorNormal, wrapTextSize)
         );
         canvas.translate(-dx, -dy);
 

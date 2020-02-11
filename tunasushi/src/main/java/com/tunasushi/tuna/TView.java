@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +18,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
@@ -27,7 +27,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Property;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -52,21 +51,14 @@ import android.widget.ToggleButton;
 
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DeviceTool.convertToPX;
-import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
-import static com.tunasushi.tool.DrawTool.drawRectClassic;
-import static com.tunasushi.tool.DrawTool.drawRectCustom;
-import static com.tunasushi.tool.DrawTool.drawText;
-import static com.tunasushi.tool.DrawTool.drawTextMark;
-import static com.tunasushi.tool.PaintTool.initTextPaint;
-import static com.tunasushi.tool.PaintTool.paint;
+import static com.tunasushi.tool.ConvertTool.convertToPX;
+import static com.tunasushi.tool.ConvertTool.dpToPx;
+import static com.tunasushi.tool.ConvertTool.pxToDp;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
 /**
@@ -80,7 +72,7 @@ public class TView extends View {
     /**
      * The following fields and methods of the parent class and subclass can always use
      */
-    protected String Tag;
+    protected String tag;
 
     // the width and height of the TView(put together to save the number of rows)
     protected int width, height;
@@ -99,25 +91,491 @@ public class TView extends View {
     protected float percent;
     protected float surplus, share;
 
-
     protected float[] floatArray;
     protected String[] stringArray;
 
+    //paint cannot be used as a static method!
+    //Multithreading can go wrong!
+    protected Paint paint;
+
+    protected Paint getPaint() {
+        return paint;
+    }
+
+    protected void setPaint(Paint paint) {
+        this.paint = paint;
+    }
+
+    // 0
+    protected Paint initPaint() {
+        if (paint == null) {
+            return paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        } else {
+            paint.reset();
+            paint.clearShadowLayer();
+            paint.setAntiAlias(true);
+        }
+        return paint;
+    }
+
+    // 1
+    protected Paint initPaint(int colorValue) {
+        return initPaint(Paint.Style.FILL, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    }
+
+    // 2
+    protected Paint initPaint(Paint.Style style, int colorValue) {
+        return initPaint(style, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    }
+
+    // 2
+    protected Paint initPaint(Paint.Style style, Shader shader) {
+        return initPaint(style, 0, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, -1);
+    }
+
+    // 3
+    protected Paint initPaint(Paint.Style style, int colorValue, float strokeWidth) {
+        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    }
+
+    // 3
+    protected Paint initPaint(Paint.Style style, int colorValue, Shader shader) {
+        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, -1);
+    }
+
+    // 3
+    protected Paint initPaint(Paint.Style style, Shader shader, int alpha) {
+        return initPaint(style, 0, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
+    }
+
+    // 4
+    protected Paint initPaint(Paint.Style style, int colorValue, Shader shader, int alpha) {
+        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
+    }
+
+    // 4
+    protected Paint initPaint(Paint.Style style, int colorValue, float strokeWidth, int alpha) {
+        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, alpha);
+    }
+
+    // 4
+    protected Paint initPaint(Paint paint, float shadowRadius, float shadowDx, float shadowDy) {
+        paint.clearShadowLayer();
+        if (shadowRadius > 0) {
+            paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, Color.WHITE);
+        }
+        return paint;
+    }
+
+    // 6
+    protected Paint initPaint(Paint.Style style, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
+        return initPaint(style, 0, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
+    }
+
+    // 6
+    protected Paint initPaint(Paint.Style style, int colorValue, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
+        return initPaint(style, 0, colorValue, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
+    }
+
+    // 9
+    protected Paint initPaint(Paint.Style style, float strokeWidth, int colorValue, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
+        //
+        initPaint();
+        //
+        if (style != null) {
+            paint.setStyle(style);
+        }
+        if (strokeWidth != 0) {
+            paint.setStrokeWidth(strokeWidth);
+        }
+
+        // When the shadow color can not be set to transparent, but can not set
+        if (shader == null) {
+            paint.setColor(colorValue);
+        } else {
+            paint.setShader(shader);
+        }
+
+        if (shadowRadius != 0) {
+            paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
+        }
+        if (alpha != -1) {
+            paint.setAlpha(alpha);
+        }
+        return paint;
+    }
+
+    // 1
+    protected Paint initTextPaint(float textSize) {
+        return initTextPaint(null, Color.WHITE, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
+    }
+
+    // 2
+    protected Paint initTextPaint(int textColor, float textSize) {
+        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
+    }
+
+    // 3
+    protected Paint initTextPaint(int textColor, float textSize, Paint.Align align) {
+        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
+    }
+
+    // 4
+    protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, Paint.Align align) {
+        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
+    }
+
+    // 5
+    protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, Typeface typeFace, Paint.Align align) {
+        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, typeFace, align);
+    }
+
+    // 8
+    protected Paint initTextPaint(Paint.Style style, int colorValue, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align) {
+        //
+        initPaint();
+        //
+        if (style != null) {
+            paint.setStyle(style);
+        }
+        paint.setColor(colorValue);
+
+        if (textSize != 0) {
+            paint.setTextSize(textSize);
+        }
+        if (shadowRadius != 0) {
+            paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
+        }
+        if (align != null) {
+            paint.setTextAlign(align);
+        }
+
+        if (typeFace != null) {
+            paint.setTypeface(typeFace);
+        }
+        return paint;
+    }
+
+
+    // 8
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
+                radiusRightBottom);
+    }
+
+    // 10
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
+                radiusRightBottom);
+    }
+
+    // 10
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
+                radiusRightTop, radiusRightBottom);
+    }
+
+    // 14
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
+                radiusRightTop, radiusRightBottom);
+    }
+
+    // 14
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
+                radiusLeftBottom, radiusRightTop, radiusRightBottom);
+    }
+
+    // 15
+    protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
+                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
+        if (strokeWidth > 0) {
+            canvas.drawPath(
+                    initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
+                            Path.Direction.CW), initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+        }
+
+        int radiiLength = radii.length;
+        for (int i = 0; i < radiiLength; i++) {
+            radii[i] -= strokeWidth;
+            radii[i] = radii[i] >= 0 ? radii[i] : 0;
+        }
+
+        canvas.drawPath(
+                initPathRoundRect(initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth), radii, Path.Direction.CW),
+                shader == null ? shadowRadius == 0 ? initPaint(fillColor) : initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? initPaint(Paint.Style.FILL, shader) : initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                        shadowDy));
+    }
+
+    // 5
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radius);
+    }
+
+    // 7
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, int strokeColor, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    }
+
+    // 7
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, int strokeColor, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    }
+
+    // 9
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, int strokeColor, float radius) {
+        drawRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    }
+
+    // 9
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, int strokeColor, float radius) {
+        drawRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    }
+
+    // 11
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                   int strokeColor, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+    }
+
+    // 11
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
+                                   int strokeColor, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+    }
+
+    // 12
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
+                                   float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
+        if (strokeWidth > 0) {
+            canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
+                    initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
+        }
+
+        canvas.drawRoundRect(
+                initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
+                radius,
+                radius,
+                shader == null ? shadowRadius == 0 ? initPaint(fillColor) : initPaint(Paint.Style.FILL, fillColor, shadowRadius, shadowColor, shadowDx,
+                        shadowDy) : shadowRadius == 0 ? initPaint(Paint.Style.FILL, shader) : initPaint(Paint.Style.FILL, shader, shadowRadius, shadowColor, shadowDx,
+                        shadowDy));
+    }
+
+
+    // 6
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
+        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TView.TextGravity.ALL_CENTER, 1.0f, null);
+    }
+
+    // 8
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.ALL_CENTER, 1.0f, null);
+    }
+
+    // 9
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
+                               float textRowSpaceRatio, List<Integer> valueMeasureList) {
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.ALL_CENTER, textRowSpaceRatio, valueMeasureList);
+    }
+
+    // 10
+    protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
+                               TView.TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
+        if (valueMeasureList == null) {
+            valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
+        }
+
+        float textMiddleRow = (valueMeasureList.size() + 1) * 0.5f;
+
+        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+        // float baseline = (targetRectBottom + targetRectTop - fontMetrics.bottom - fontMetrics.top) * 0.5f;
+        float baseline = centerY - fontMetrics.bottom * 0.5f - fontMetrics.top * 0.5f;
+        int halfWordHeight = (fontMetrics.descent - fontMetrics.ascent) >> 1;
+
+        //
+        String drawString;
+        float drawLineY;
+
+        int valueMeasureListSize = valueMeasureList.size();
+        for (int i = 0; i < valueMeasureListSize; i++) {
+            drawLineY = baseline + (i + 1 - textMiddleRow) * paint.getTextSize() * textRowSpaceRatio;
+            if (i == 0) {
+                drawString = string.substring(0, valueMeasureList.get(i));
+            } else {
+                drawString = string.substring(valueMeasureList.get(i - 1), valueMeasureList.get(i));
+            }
+
+            float measureLength = paint.measureText(drawString);
+
+            if (i != valueMeasureListSize - 1) {
+                switch (textGravity) {
+                    case ALL_CENTER:
+                        canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
+                        break;
+                    case ALL_LEFT:
+                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        break;
+                    case CENTER_LEFT:
+                        canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
+                        break;
+                    case LEFT_CENTER:
+                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                float availableWidth = width - paddingLeft - paddingRight;
+                switch (textGravity) {
+                    case ALL_CENTER:
+                        canvas.drawText(drawString, centerX, drawLineY, paint);
+                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
+                    case ALL_LEFT:
+                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
+                    case CENTER_LEFT:
+                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
+                    case LEFT_CENTER:
+                        canvas.drawText(drawString, centerX, drawLineY, paint);
+                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
+                    default:
+                        break;
+                }
+            }
+        }
+        return new float[]{width, 0, 0};
+    }
+
+    //
+    protected void drawTextMark(
+            int width,
+            int height,
+            Canvas canvas,
+            float radius, Paint paint,
+            float markRadius,
+            float markDx, float markDy,
+            float offsetX, float offsetY,
+            String markText,
+            int markTextColor,
+            float markTextSize,
+            List<Integer> valueMeasureList) {
+
+        float cx = (width >> 1) + offsetX + markRadius + markDx;
+        float cy = (height >> 1) + offsetY + markDy;
+
+        canvas.drawCircle(cx, cy, radius, paint);
+        if (markText != null) {
+            // Because, drawText use the same method to clear the cache measureRowList
+            drawText(canvas, markText, width, cx, cy, 0, 0,
+                    initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
+                    , 1, valueMeasureList);
+        }
+    }
+
+    //
+    protected void drawArrow(Canvas canvas,
+                             int width, int height,
+                             float floatX,
+                             float arrowWidth, float arrowHeight,
+                             float arrowStrokeWidth, int arrowStrokeColor,
+                             boolean upward) {
+        if (upward) {
+            initPathMoveTo(0, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, height - arrowStrokeWidth * 0.5f - arrowHeight);
+            path.lineTo(floatX + arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
+            path.lineTo(width, height - arrowStrokeWidth * 0.5f);
+        } else {
+            initPathMoveTo(0, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
+            path.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
+            path.lineTo(width, arrowStrokeWidth * 0.5f);
+        }
+
+        canvas.drawPath(path, initPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
+    }
+
+    //
+    protected Path path;
+
+    protected Path getPath() {
+        return path;
+    }
+
+    protected Path initPath() {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        return path;
+    }
+
+    protected Path initPathMoveTo(float x, float y) {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        path.moveTo(x, y);
+        return path;
+    }
+
+    protected Path initPathLineTo(float x, float y) {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        path.lineTo(x, y);
+        return path;
+    }
+
+    protected Path initPathArc(RectF oval, float startAngle, float sweepAngle) {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        path.addArc(oval, startAngle, sweepAngle);
+        return path;
+    }
+
+    protected Path initPathRoundRect(RectF rect, float[] radii, Path.Direction dir) {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        // This setting will cause the following message appears reading xml
+        // The graphics preview in the layout editor may not be accurate:
+        // Different corner sizes are not supported in Path.addRoundRect.
+        // (Ignore for this session)
+        path.addRoundRect(rect, radii, dir);
+        return path;
+    }
+
+
     //
     public float x;
+
+    //Default unit px
     public void setX(float x) {
-        setX(TypedValue.COMPLEX_UNIT_DIP, x);
+        setXRaw(x);
     }
 
     public void setX(int unit, float x) {
-        Context c = getContext();
-        Resources r;
-        if (c == null) {
-            r = Resources.getSystem();
-        } else {
-            r = c.getResources();
-        }
-        setXRaw(applyDimension(unit, x, r.getDisplayMetrics()));
+        setXRaw(convertToPX(x, unit));
     }
 
     public void setXRaw(float x) {
@@ -126,19 +584,14 @@ public class TView extends View {
 
     //
     public float y;
+
+    //Default unit px
     public void setY(float y) {
-        setX(TypedValue.COMPLEX_UNIT_DIP, y);
+        setYRaw(y);
     }
 
     public void setY(int unit, float y) {
-        Context c = getContext();
-        Resources r;
-        if (c == null) {
-            r = Resources.getSystem();
-        } else {
-            r = c.getResources();
-        }
-        setYRaw(applyDimension(unit, y, r.getDisplayMetrics()));
+        setYRaw(convertToPX(y, unit));
     }
 
     private void setYRaw(float y) {
@@ -170,14 +623,14 @@ public class TView extends View {
         return rect;
     }
 
-    public static RectF rectF;
+    protected RectF rectF;
 
-    public static RectF getRectF() {
+    protected RectF getRectF() {
         return rectF;
     }
 
     //
-    public static RectF initRectF(float left, float top, float right, float bottom) {
+    protected RectF initRectF(float left, float top, float right, float bottom) {
         if (rectF == null) {
             rectF = new RectF(left, top, right, bottom);
         }
@@ -217,7 +670,7 @@ public class TView extends View {
         return matrix;
     }
 
-    public static Matrix initMatrix(Matrix matrix, float sx, float sy) {
+    protected Matrix initMatrix(Matrix matrix, float sx, float sy) {
         if (matrix == null) {
             matrix = new Matrix();
         }
@@ -226,7 +679,6 @@ public class TView extends View {
         return matrix;
     }
 
-
     protected LayoutInflater initLayoutInflater() {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(getContext());
@@ -234,13 +686,13 @@ public class TView extends View {
         return layoutInflater;
     }
 
-
     protected void setLayout(int width, int height) {
         if (layoutParams == null) {
             layoutParams = getLayoutParams();
         }
         layoutParams.width = width;
         layoutParams.height = height;
+
         setLayoutParams(layoutParams);
         invalidate();
     }
@@ -329,20 +781,20 @@ public class TView extends View {
         final TextView text_canvasHardwareAccelerated = propertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
 
 
-        DeviceTool.initDisplayMetrics(getContext());
+        DeviceTool.initDisplayMetrics();
         text_display.setText(DeviceTool.stringBuffer);
 
-        edit_width.setText(String.valueOf(DeviceTool.pxToDp(getContext(), width)));
-        edit_height.setText(String.valueOf(DeviceTool.pxToDp(getContext(), height)));
+        edit_width.setText(String.valueOf(pxToDp(width)));
+        edit_height.setText(String.valueOf(pxToDp(height)));
 
         edit_backgroundNormal.setText(backgroundNormal != 0 ? Integer.toHexString(backgroundNormal) : "00000000");
         edit_backgroundPress.setText(backgroundPress != 0 ? Integer.toHexString(backgroundPress) : "00000000");
         edit_backgroundSelect.setText(backgroundSelect != 0 ? Integer.toHexString(backgroundSelect) : "00000000");
 
-        edit_textSize.setText(String.valueOf(DeviceTool.pxToDp(getContext(), textSize)));
+        edit_textSize.setText(String.valueOf(pxToDp(textSize)));
         edit_textColorNormal.setText(textColorNormal != 0 ? Integer.toHexString(textColorNormal) : "00000000");
 
-        edit_strokeWidth.setText(String.valueOf(DeviceTool.pxToDp(getContext(), strokeWidthNormal)));
+        edit_strokeWidth.setText(String.valueOf(pxToDp(strokeWidthNormal)));
         edit_strokeColor.setText(strokeColorNormal != 0 ? Integer.toHexString(strokeColorNormal) : "00000000");
 
         //
@@ -477,13 +929,13 @@ public class TView extends View {
                         strokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
                         textColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
 
-                        textSize = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_textSize.getText().toString().trim()));
+                        textSize = dpToPx(Float.parseFloat(edit_textSize.getText().toString().trim()));
 
-                        strokeWidthNormal = DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
+                        strokeWidthNormal = dpToPx(Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
 
                         textMark = text_mark.getText().toString().trim().equals("true") ? true : false;
 
-                        setLayout(DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_width.getText().toString().trim())), DeviceTool.dpToPx(getContext(), Float.parseFloat(edit_height.getText().toString().trim())));
+                        setLayout(dpToPx(Float.parseFloat(edit_width.getText().toString().trim())), dpToPx(Float.parseFloat(edit_height.getText().toString().trim())));
                     }
                 }).setNegativeButton("Cancel", null).create().show();
     }
@@ -962,11 +1414,11 @@ public class TView extends View {
         this.foregroundSelect = foregroundSelect;
     }
 
-    public static final int DIRECTION_LEFT = 0x00000001;
-    public static final int DIRECTION_RIGHT = DIRECTION_LEFT << 1;
-    public static final int DIRECTION_TOP = DIRECTION_RIGHT << 1;
-    public static final int DIRECTION_BOTTOM = DIRECTION_TOP << 1;
-    public static final int DIRECTION_MASK = DIRECTION_LEFT | DIRECTION_RIGHT | DIRECTION_TOP | DIRECTION_BOTTOM;
+    protected final int DIRECTION_LEFT = 0x00000001;
+    protected final int DIRECTION_RIGHT = DIRECTION_LEFT << 1;
+    protected final int DIRECTION_TOP = DIRECTION_RIGHT << 1;
+    protected final int DIRECTION_BOTTOM = DIRECTION_TOP << 1;
+    protected final int DIRECTION_MASK = DIRECTION_LEFT | DIRECTION_RIGHT | DIRECTION_TOP | DIRECTION_BOTTOM;
 
     private int backgroundNormalAngle;
 
@@ -1109,7 +1561,7 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowRadius(int unit, float backgroundNormalShadowRadius) {
-        setBackgroundNormalShadowRadiusRaw(applyDimension(unit, backgroundNormalShadowRadius, getViewDisplayMetrics(this)));
+        setBackgroundNormalShadowRadiusRaw(convertToPX(backgroundNormalShadowRadius, unit));
     }
 
     private void setBackgroundNormalShadowRadiusRaw(float backgroundNormalShadowRadius) {
@@ -1142,7 +1594,7 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowDx(int unit, float backgroundNormalShadowDx) {
-        setBackgroundNormalShadowDxRaw(applyDimension(unit, backgroundNormalShadowDx, getViewDisplayMetrics(this)));
+        setBackgroundNormalShadowDxRaw(convertToPX(backgroundNormalShadowDx, unit));
     }
 
     private void setBackgroundNormalShadowDxRaw(float backgroundNormalShadowDx) {
@@ -1164,7 +1616,7 @@ public class TView extends View {
     }
 
     public void setBackgroundNormalShadowDy(int unit, float backgroundNormalShadowDy) {
-        setBackgroundNormalShadowDyRaw(applyDimension(unit, backgroundNormalShadowDy, getViewDisplayMetrics(this)));
+        setBackgroundNormalShadowDyRaw(convertToPX(backgroundNormalShadowDy, unit));
     }
 
     private void setBackgroundNormalShadowDyRaw(float backgroundNormalShadowDy) {
@@ -1186,7 +1638,7 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowRadius(int unit, float backgroundPressShadowRadius) {
-        setBackgroundPressShadowRadiusRaw(applyDimension(unit, backgroundPressShadowRadius, getViewDisplayMetrics(this)));
+        setBackgroundPressShadowRadiusRaw(convertToPX(backgroundPressShadowRadius, unit));
     }
 
     private void setBackgroundPressShadowRadiusRaw(float backgroundPressShadowRadius) {
@@ -1219,7 +1671,7 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowDx(int unit, float backgroundPressShadowDx) {
-        setBackgroundPressShadowDxRaw(applyDimension(unit, backgroundPressShadowDx, getViewDisplayMetrics(this)));
+        setBackgroundPressShadowDxRaw(convertToPX(backgroundPressShadowDx, unit));
     }
 
     private void setBackgroundPressShadowDxRaw(float backgroundPressShadowDx) {
@@ -1241,7 +1693,7 @@ public class TView extends View {
     }
 
     public void setBackgroundPressShadowDy(int unit, float backgroundPressShadowDy) {
-        setBackgroundPressShadowDyRaw(applyDimension(unit, backgroundPressShadowDy, getViewDisplayMetrics(this)));
+        setBackgroundPressShadowDyRaw(convertToPX(backgroundPressShadowDy, unit));
     }
 
     private void setBackgroundPressShadowDyRaw(float backgroundPressShadowDy) {
@@ -1263,7 +1715,7 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowRadius(int unit, float backgroundSelectShadowRadius) {
-        setBackgroundSelectShadowRadiusRaw(applyDimension(unit, backgroundSelectShadowRadius, getViewDisplayMetrics(this)));
+        setBackgroundSelectShadowRadiusRaw(convertToPX(backgroundSelectShadowRadius, unit));
     }
 
     private void setBackgroundSelectShadowRadiusRaw(float backgroundSelectShadowRadius) {
@@ -1296,7 +1748,7 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowDx(int unit, float backgroundSelectShadowDx) {
-        setBackgroundSelectShadowDxRaw(applyDimension(unit, backgroundSelectShadowDx, getViewDisplayMetrics(this)));
+        setBackgroundSelectShadowDxRaw(convertToPX(backgroundSelectShadowDx, unit));
     }
 
     private void setBackgroundSelectShadowDxRaw(float backgroundSelectShadowDx) {
@@ -1318,7 +1770,7 @@ public class TView extends View {
     }
 
     public void setBackgroundSelectShadowDy(int unit, float backgroundSelectShadowDy) {
-        setBackgroundSelectShadowDyRaw(applyDimension(unit, backgroundSelectShadowDy, getViewDisplayMetrics(this)));
+        setBackgroundSelectShadowDyRaw(convertToPX(backgroundSelectShadowDy, unit));
     }
 
     private void setBackgroundSelectShadowDyRaw(float backgroundSelectShadowDy) {
@@ -1336,7 +1788,7 @@ public class TView extends View {
     }
 
     public void setSrcNormal(int id) {
-        setSrcNormal(decodeBitmapResource(getContext(), id));
+        setSrcNormal(decodeBitmapResource(id));
     }
 
     public void setSrcNormal(Bitmap srcNormal) {
@@ -1352,7 +1804,7 @@ public class TView extends View {
     }
 
     public void setSrcPress(int id) {
-        setSrcPress(decodeBitmapResource(getContext(), id));
+        setSrcPress(decodeBitmapResource(id));
     }
 
     public void setSrcPress(Bitmap srcPress) {
@@ -1368,7 +1820,7 @@ public class TView extends View {
     }
 
     public void setSrcSelect(int id) {
-        setSrcSelect(decodeBitmapResource(getContext(), id));
+        setSrcSelect(decodeBitmapResource(id));
     }
 
     public void setSrcSelect(Bitmap srcSelect) {
@@ -1388,7 +1840,7 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowRadius(int unit, float srcNormalShadowRadius) {
-        setSrcNormalShadowRadiusRaw(applyDimension(unit, srcNormalShadowRadius, getViewDisplayMetrics(this)));
+        setSrcNormalShadowRadiusRaw(convertToPX(srcNormalShadowRadius, unit));
     }
 
     private void setSrcNormalShadowRadiusRaw(float srcNormalShadowRadius) {
@@ -1410,7 +1862,7 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowDx(int unit, float srcNormalShadowDx) {
-        setSrcNormalShadowDxRaw(applyDimension(unit, srcNormalShadowDx, getViewDisplayMetrics(this)));
+        setSrcNormalShadowDxRaw(convertToPX(srcNormalShadowDx, unit));
     }
 
     private void setSrcNormalShadowDxRaw(float srcNormalShadowDx) {
@@ -1432,7 +1884,7 @@ public class TView extends View {
     }
 
     public void setSrcNormalShadowDy(int unit, float srcNormalShadowDy) {
-        setSrcNormalShadowDyRaw(applyDimension(unit, srcNormalShadowDy, getViewDisplayMetrics(this)));
+        setSrcNormalShadowDyRaw(convertToPX(srcNormalShadowDy, unit));
     }
 
     private void setSrcNormalShadowDyRaw(float srcNormalShadowDy) {
@@ -1454,7 +1906,7 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowRadius(int unit, float srcPressShadowRadius) {
-        setSrcPressShadowRadiusRaw(applyDimension(unit, srcPressShadowRadius, getViewDisplayMetrics(this)));
+        setSrcPressShadowRadiusRaw(convertToPX(srcPressShadowRadius, unit));
     }
 
     private void setSrcPressShadowRadiusRaw(float srcPressShadowRadius) {
@@ -1476,7 +1928,7 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowDx(int unit, float srcPressShadowDx) {
-        setSrcPressShadowDxRaw(applyDimension(unit, srcPressShadowDx, getViewDisplayMetrics(this)));
+        setSrcPressShadowDxRaw(convertToPX(srcPressShadowDx, unit));
     }
 
     private void setSrcPressShadowDxRaw(float srcPressShadowDx) {
@@ -1498,7 +1950,7 @@ public class TView extends View {
     }
 
     public void setSrcPressShadowDy(int unit, float srcPressShadowDy) {
-        setSrcPressShadowDyRaw(applyDimension(unit, srcPressShadowDy, getViewDisplayMetrics(this)));
+        setSrcPressShadowDyRaw(convertToPX(srcPressShadowDy, unit));
     }
 
     private void setSrcPressShadowDyRaw(float srcPressShadowDy) {
@@ -1520,7 +1972,7 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowRadius(int unit, float srcSelectShadowRadius) {
-        setSrcSelectShadowRadiusRaw(applyDimension(unit, srcSelectShadowRadius, getViewDisplayMetrics(this)));
+        setSrcSelectShadowRadiusRaw(convertToPX(srcSelectShadowRadius, unit));
     }
 
     private void setSrcSelectShadowRadiusRaw(float srcSelectShadowRadius) {
@@ -1542,7 +1994,7 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowDx(int unit, float srcSelectShadowDx) {
-        setSrcSelectShadowDxRaw(applyDimension(unit, srcSelectShadowDx, getViewDisplayMetrics(this)));
+        setSrcSelectShadowDxRaw(convertToPX(srcSelectShadowDx, unit));
     }
 
     private void setSrcSelectShadowDxRaw(float srcSelectShadowDx) {
@@ -1564,7 +2016,7 @@ public class TView extends View {
     }
 
     public void setSrcSelectShadowDy(int unit, float srcSelectShadowDy) {
-        setSrcSelectShadowDyRaw(applyDimension(unit, srcSelectShadowDy, getViewDisplayMetrics(this)));
+        setSrcSelectShadowDyRaw(convertToPX(srcSelectShadowDy, unit));
     }
 
     private void setSrcSelectShadowDyRaw(float srcSelectShadowDy) {
@@ -1574,14 +2026,14 @@ public class TView extends View {
         }
     }
 
-    public static final int LEFT = 0x00000000;
-    public static final int CENTER_HORIZONTAL = 0x00000001;
-    public static final int RIGHT = CENTER_HORIZONTAL << 1;
-    public static final int TOP = 0x00000000;
-    public static final int CENTER_VERTICAL = RIGHT << 1;
-    public static final int BOTTOM = CENTER_VERTICAL << 1;
-    public static final int CENTER = CENTER_HORIZONTAL | CENTER_VERTICAL;
-    public static final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
+    protected final int LEFT = 0x00000000;
+    protected final int CENTER_HORIZONTAL = 0x00000001;
+    protected final int RIGHT = CENTER_HORIZONTAL << 1;
+    protected final int TOP = 0x00000000;
+    protected final int CENTER_VERTICAL = RIGHT << 1;
+    protected final int BOTTOM = CENTER_VERTICAL << 1;
+    protected final int CENTER = CENTER_HORIZONTAL | CENTER_VERTICAL;
+    protected final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
 
     //
     private int srcAnchorGravity;
@@ -1637,7 +2089,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalWidth(int unit, float srcAnchorNormalWidth) {
-        setSrcAnchorNormalWidthRaw(applyDimension(unit, srcAnchorNormalWidth, getViewDisplayMetrics(this)));
+        setSrcAnchorNormalWidthRaw(convertToPX(srcAnchorNormalWidth, unit));
     }
 
     private void setSrcAnchorNormalWidthRaw(float srcAnchorNormalWidth) {
@@ -1659,7 +2111,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalHeight(int unit, float srcAnchorNormalHeight) {
-        setSrcAnchorNormalHeightRaw(applyDimension(unit, srcAnchorNormalHeight, getViewDisplayMetrics(this)));
+        setSrcAnchorNormalHeightRaw(convertToPX(srcAnchorNormalHeight, unit));
     }
 
     private void setSrcAnchorNormalHeightRaw(float srcAnchorNormalHeight) {
@@ -1681,7 +2133,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalDx(int unit, float srcAnchorNormalDx) {
-        setSrcAnchorNormalDxRaw(applyDimension(unit, srcAnchorNormalDx, getViewDisplayMetrics(this)));
+        setSrcAnchorNormalDxRaw(convertToPX(srcAnchorNormalDx, unit));
     }
 
     private void setSrcAnchorNormalDxRaw(float srcAnchorNormalDx) {
@@ -1703,7 +2155,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorNormalDy(int unit, float srcAnchorNormalDy) {
-        setSrcAnchorNormalDyRaw(applyDimension(unit, srcAnchorNormalDy, getViewDisplayMetrics(this)));
+        setSrcAnchorNormalDyRaw(convertToPX(srcAnchorNormalDy, unit));
     }
 
     private void setSrcAnchorNormalDyRaw(float srcAnchorNormalDy) {
@@ -1736,7 +2188,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressWidth(int unit, float srcAnchorPressWidth) {
-        setSrcAnchorPressWidthRaw(applyDimension(unit, srcAnchorPressWidth, getViewDisplayMetrics(this)));
+        setSrcAnchorPressWidthRaw(convertToPX(srcAnchorPressWidth, unit));
     }
 
     private void setSrcAnchorPressWidthRaw(float srcAnchorPressWidth) {
@@ -1758,7 +2210,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressHeight(int unit, float srcAnchorPressHeight) {
-        setSrcAnchorPressHeightRaw(applyDimension(unit, srcAnchorPressHeight, getViewDisplayMetrics(this)));
+        setSrcAnchorPressHeightRaw(convertToPX(srcAnchorPressHeight, unit));
     }
 
     private void setSrcAnchorPressHeightRaw(float srcAnchorPressHeight) {
@@ -1780,7 +2232,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressDx(int unit, float srcAnchorPressDx) {
-        setSrcAnchorPressDxRaw(applyDimension(unit, srcAnchorPressDx, getViewDisplayMetrics(this)));
+        setSrcAnchorPressDxRaw(convertToPX(srcAnchorPressDx, unit));
     }
 
     private void setSrcAnchorPressDxRaw(float srcAnchorPressDx) {
@@ -1802,7 +2254,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorPressDy(int unit, float srcAnchorPressDy) {
-        setSrcAnchorPressDyRaw(applyDimension(unit, srcAnchorPressDy, getViewDisplayMetrics(this)));
+        setSrcAnchorPressDyRaw(convertToPX(srcAnchorPressDy, unit));
     }
 
     private void setSrcAnchorPressDyRaw(float srcAnchorPressDy) {
@@ -1835,7 +2287,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectWidth(int unit, float srcAnchorSelectWidth) {
-        setSrcAnchorSelectWidthRaw(applyDimension(unit, srcAnchorSelectWidth, getViewDisplayMetrics(this)));
+        setSrcAnchorSelectWidthRaw(convertToPX(srcAnchorSelectWidth, unit));
     }
 
     private void setSrcAnchorSelectWidthRaw(float srcAnchorSelectWidth) {
@@ -1857,7 +2309,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectHeight(int unit, float srcAnchorSelectHeight) {
-        setSrcAnchorSelectHeightRaw(applyDimension(unit, srcAnchorSelectHeight, getViewDisplayMetrics(this)));
+        setSrcAnchorSelectHeightRaw(convertToPX(srcAnchorSelectHeight, unit));
     }
 
     private void setSrcAnchorSelectHeightRaw(float srcAnchorSelectHeight) {
@@ -1879,7 +2331,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectDx(int unit, float srcAnchorSelectDx) {
-        setSrcAnchorSelectDxRaw(applyDimension(unit, srcAnchorSelectDx, getViewDisplayMetrics(this)));
+        setSrcAnchorSelectDxRaw(convertToPX(srcAnchorSelectDx, unit));
     }
 
     private void setSrcAnchorSelectDxRaw(float srcAnchorSelectDx) {
@@ -1901,7 +2353,7 @@ public class TView extends View {
     }
 
     public void setSrcAnchorSelectDy(int unit, float srcAnchorSelectDy) {
-        setSrcAnchorSelectDyRaw(applyDimension(unit, srcAnchorSelectDy, getViewDisplayMetrics(this)));
+        setSrcAnchorSelectDyRaw(convertToPX(srcAnchorSelectDy, unit));
     }
 
     private void setSrcAnchorSelectDyRaw(float srcAnchorSelectDy) {
@@ -1923,7 +2375,7 @@ public class TView extends View {
     }
 
     public void setStrokeWidthNormal(int unit, float strokeWidthNormal) {
-        setStrokeWidthNormalRaw(applyDimension(unit, strokeWidthNormal, getViewDisplayMetrics(this)));
+        setStrokeWidthNormalRaw(convertToPX(strokeWidthNormal, unit));
     }
 
     private void setStrokeWidthNormalRaw(float strokeWidthNormal) {
@@ -1956,7 +2408,7 @@ public class TView extends View {
     }
 
     public void setStrokeWidthPress(int unit, float strokeWidthPress) {
-        setStrokeWidthPressRaw(applyDimension(unit, strokeWidthPress, getViewDisplayMetrics(this)));
+        setStrokeWidthPressRaw(convertToPX(strokeWidthPress, unit));
     }
 
     private void setStrokeWidthPressRaw(float strokeWidthPress) {
@@ -1989,7 +2441,7 @@ public class TView extends View {
     }
 
     public void setStrokeWidthSelect(int unit, float strokeWidthSelect) {
-        setStrokeWidthSelectRaw(applyDimension(unit, strokeWidthSelect, getViewDisplayMetrics(this)));
+        setStrokeWidthSelectRaw(convertToPX(strokeWidthSelect, unit));
     }
 
     private void setStrokeWidthSelectRaw(float strokeWidthSelect) {
@@ -2022,7 +2474,7 @@ public class TView extends View {
     }
 
     public void setRadius(int unit, float radius) {
-        setRadiusRaw(applyDimension(unit, radius, getViewDisplayMetrics(this)));
+        setRadiusRaw(convertToPX(radius, unit));
     }
 
     private void setRadiusRaw(float radius) {
@@ -2045,7 +2497,7 @@ public class TView extends View {
     }
 
     public void setRadiusLeftTop(int unit, float radiusLeftTop) {
-        setRadiusLeftTopRaw(applyDimension(unit, radiusLeftTop, getViewDisplayMetrics(this)));
+        setRadiusLeftTopRaw(convertToPX(radiusLeftTop, unit));
     }
 
     private void setRadiusLeftTopRaw(float radiusLeftTop) {
@@ -2067,7 +2519,7 @@ public class TView extends View {
     }
 
     public void setRadiusLeftBottom(int unit, float radiusLeftBottom) {
-        setRadiusLeftBottomRaw(applyDimension(unit, radiusLeftBottom, getViewDisplayMetrics(this)));
+        setRadiusLeftBottomRaw(convertToPX(radiusLeftBottom, unit));
     }
 
     private void setRadiusLeftBottomRaw(float radiusLeftBottom) {
@@ -2089,7 +2541,7 @@ public class TView extends View {
     }
 
     public void setRadiusRightTop(int unit, float radiusRightTop) {
-        setRadiusRightTopRaw(applyDimension(unit, radiusRightTop, getViewDisplayMetrics(this)));
+        setRadiusRightTopRaw(convertToPX(radiusRightTop, unit));
     }
 
     private void setRadiusRightTopRaw(float radiusRightTop) {
@@ -2111,7 +2563,7 @@ public class TView extends View {
     }
 
     public void setRadiusRightBottom(int unit, float radiusRightBottom) {
-        setRadiusRightBottomRaw(applyDimension(unit, radiusRightBottom, getViewDisplayMetrics(this)));
+        setRadiusRightBottomRaw(convertToPX(radiusRightBottom, unit));
     }
 
     private void setRadiusRightBottomRaw(float radiusRightBottom) {
@@ -2147,11 +2599,9 @@ public class TView extends View {
     public void setTextMark(int textMarkRadiusUnit, float textMarkRadius, int textMarkColor, String textMarkTextValue, int textMarkTextSizeUnit,
                             float textMarkTextSize, int textMarkTextColor, int textMarkDxUnit, float textMarkDx, int textMarkDyUnit, float textMarkDy) {
 
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
-
-        setTextMarkRaw(applyDimension(textMarkRadiusUnit, textMarkRadius, displayMetrics), textMarkColor, textMarkTextValue,
-                applyDimension(textMarkTextSizeUnit, textMarkTextSize, displayMetrics), textMarkTextColor,
-                applyDimension(textMarkDxUnit, textMarkDx, displayMetrics), applyDimension(textMarkDyUnit, textMarkDy, displayMetrics));
+        setTextMarkRaw(convertToPX(textMarkRadius, textMarkRadiusUnit), textMarkColor, textMarkTextValue,
+                convertToPX(textMarkTextSize, textMarkTextSizeUnit), textMarkTextColor,
+                convertToPX(textMarkDx, textMarkDxUnit), convertToPX(textMarkDy, textMarkDyUnit));
     }
 
     private void setTextMarkRaw(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
@@ -2194,7 +2644,7 @@ public class TView extends View {
     }
 
     public void setTextMarkRadius(int unit, float textMarkRadius) {
-        setTextMarkRadiusRaw(applyDimension(unit, textMarkRadius, getViewDisplayMetrics(this)));
+        setTextMarkRadiusRaw(convertToPX(textMarkRadius, unit));
     }
 
     private void setTextMarkRadiusRaw(float textMarkRadius) {
@@ -2249,7 +2699,7 @@ public class TView extends View {
     }
 
     public void setTextMarkTextSize(int unit, float textMarkTextSize) {
-        setTextMarkTextSizeRaw(applyDimension(unit, textMarkTextSize, getViewDisplayMetrics(this)));
+        setTextMarkTextSizeRaw(convertToPX(textMarkTextSize, unit));
     }
 
     private void setTextMarkTextSizeRaw(float textMarkTextSize) {
@@ -2282,7 +2732,7 @@ public class TView extends View {
     }
 
     public void setTextMarkDx(int unit, float textMarkDx) {
-        setTextMarkDxRaw(applyDimension(unit, textMarkDx, getViewDisplayMetrics(this)));
+        setTextMarkDxRaw(convertToPX(textMarkDx, unit));
     }
 
     private void setTextMarkDxRaw(float textMarkDx) {
@@ -2304,7 +2754,7 @@ public class TView extends View {
     }
 
     public void setTextMarkDy(int unit, float textMarkDy) {
-        setTextMarkDyRaw(applyDimension(unit, textMarkDy, getViewDisplayMetrics(this)));
+        setTextMarkDyRaw(convertToPX(textMarkDy, unit));
     }
 
     private void setTextMarkDyRaw(float textMarkDy) {
@@ -2370,7 +2820,7 @@ public class TView extends View {
     }
 
     public void setTextSize(int unit, float textSize) {
-        setTextSizeRaw(applyDimension(unit, textSize, getViewDisplayMetrics(this)));
+        setTextSizeRaw(convertToPX(textSize, unit));
     }
 
     private void setTextSizeRaw(float textSize) {
@@ -2426,7 +2876,7 @@ public class TView extends View {
     }
 
     public void setTextPaddingLeft(int unit, float textPaddingLeft) {
-        setTextPaddingLeftRaw(applyDimension(unit, textPaddingLeft, getViewDisplayMetrics(this)));
+        setTextPaddingLeftRaw(convertToPX(textPaddingLeft, unit));
     }
 
     private void setTextPaddingLeftRaw(float textPaddingLeft) {
@@ -2449,7 +2899,7 @@ public class TView extends View {
     }
 
     public void setTextPaddingRight(int unit, float textPaddingRight) {
-        setTextPaddingRightRaw(applyDimension(unit, textPaddingRight, getViewDisplayMetrics(this)));
+        setTextPaddingRightRaw(convertToPX(textPaddingRight, unit));
     }
 
     private void setTextPaddingRightRaw(float textPaddingRight) {
@@ -2527,7 +2977,7 @@ public class TView extends View {
     }
 
     public void setTextDx(int unit, float textDx) {
-        setTextDxRaw(applyDimension(unit, textDx, getViewDisplayMetrics(this)));
+        setTextDxRaw(convertToPX(textDx, unit));
     }
 
     private void setTextDxRaw(float textDx) {
@@ -2549,7 +2999,7 @@ public class TView extends View {
     }
 
     public void setTextDy(int unit, float textDy) {
-        setTextDyRaw(applyDimension(unit, textDy, getViewDisplayMetrics(this)));
+        setTextDyRaw(convertToPX(textDy, unit));
     }
 
     private void setTextDyRaw(float textDy) {
@@ -2598,7 +3048,7 @@ public class TView extends View {
     }
 
     public void setTextShadowRadius(int unit, float textShadowRadius) {
-        setTextShadowRadiusRaw(applyDimension(unit, textShadowRadius, getViewDisplayMetrics(this)));
+        setTextShadowRadiusRaw(convertToPX(textShadowRadius, unit));
     }
 
     private void setTextShadowRadiusRaw(float textShadowRadius) {
@@ -2631,7 +3081,7 @@ public class TView extends View {
     }
 
     public void setTextShadowDx(int unit, float textShadowDx) {
-        setTextShadowDxRaw(applyDimension(unit, textShadowDx, getViewDisplayMetrics(this)));
+        setTextShadowDxRaw(convertToPX(textShadowDx, unit));
     }
 
     private void setTextShadowDxRaw(float textShadowDx) {
@@ -2653,7 +3103,7 @@ public class TView extends View {
     }
 
     public void setTextShadowDy(int unit, float textShadowDy) {
-        setTextShadowDyRaw(applyDimension(unit, textShadowDy, getViewDisplayMetrics(this)));
+        setTextShadowDyRaw(convertToPX(textShadowDy, unit));
     }
 
     private void setTextShadowDyRaw(float textShadowDy) {
@@ -2697,7 +3147,7 @@ public class TView extends View {
     }
 
     public void setContentSize(int unit, float contentSize) {
-        setContentSizeRaw(applyDimension(unit, contentSize, getViewDisplayMetrics(this)));
+        setContentSizeRaw(convertToPX(contentSize, unit));
     }
 
     private void setContentSizeRaw(float contentSize) {
@@ -2719,7 +3169,7 @@ public class TView extends View {
     }
 
     public void setContentShadowRadius(int unit, float contentShadowRadius) {
-        setContentShadowRadiusRaw(applyDimension(unit, contentShadowRadius, getViewDisplayMetrics(this)));
+        setContentShadowRadiusRaw(convertToPX(contentShadowRadius, unit));
     }
 
     private void setContentShadowRadiusRaw(float contentShadowRadius) {
@@ -2752,7 +3202,7 @@ public class TView extends View {
     }
 
     public void setContentShadowDx(int unit, float contentShadowDx) {
-        setContentShadowDxRaw(applyDimension(unit, contentShadowDx, getViewDisplayMetrics(this)));
+        setContentShadowDxRaw(convertToPX(contentShadowDx, unit));
     }
 
     private void setContentShadowDxRaw(float contentShadowDx) {
@@ -2774,7 +3224,7 @@ public class TView extends View {
     }
 
     public void setContentShadowDy(int unit, float contentShadowDy) {
-        setContentShadowDyRaw(applyDimension(unit, contentShadowDy, getViewDisplayMetrics(this)));
+        setContentShadowDyRaw(convertToPX(contentShadowDy, unit));
     }
 
     private void setContentShadowDyRaw(float contentShadowDy) {
@@ -2830,7 +3280,7 @@ public class TView extends View {
     }
 
     public void setContentPaddingLeft(int unit, float contentPaddingLeft) {
-        setContentPaddingLeftRaw(applyDimension(unit, contentPaddingLeft, getViewDisplayMetrics(this)));
+        setContentPaddingLeftRaw(convertToPX(contentPaddingLeft, unit));
     }
 
     private void setContentPaddingLeftRaw(float contentPaddingLeft) {
@@ -2853,7 +3303,7 @@ public class TView extends View {
     }
 
     public void setContentPaddingRight(int unit, float contentPaddingRight) {
-        setContentPaddingRightRaw(applyDimension(unit, contentPaddingRight, getViewDisplayMetrics(this)));
+        setContentPaddingRightRaw(convertToPX(contentPaddingRight, unit));
     }
 
     private void setContentPaddingRightRaw(float contentPaddingRight) {
@@ -2930,7 +3380,7 @@ public class TView extends View {
     }
 
     public void setContentDx(int unit, float contentDx) {
-        setContentDxRaw(applyDimension(unit, contentDx, getViewDisplayMetrics(this)));
+        setContentDxRaw(convertToPX(contentDx, unit));
     }
 
     private void setContentDxRaw(float contentDx) {
@@ -2952,7 +3402,7 @@ public class TView extends View {
     }
 
     public void setContentDy(int unit, float contentDy) {
-        setContentDyRaw(applyDimension(unit, contentDy, getViewDisplayMetrics(this)));
+        setContentDyRaw(convertToPX(contentDy, unit));
     }
 
     private void setContentDyRaw(float contentDy) {
@@ -3011,11 +3461,9 @@ public class TView extends View {
                                int contentMarkTextSizeUnit, float contentMarkTextSize, int contentMarkTextColor, int contentMarkDxUnit, float contentMarkDx,
                                int contentMarkDyUnit, float contentMarkDy) {
 
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(this);
-
-        setContentMarkRaw(applyDimension(contentMarkRadiusUnit, contentMarkRadius, displayMetrics), contentMarkColor, contentMarkTextValue,
-                applyDimension(contentMarkTextSizeUnit, contentMarkTextSize, displayMetrics), contentMarkTextColor,
-                applyDimension(contentMarkDxUnit, contentMarkDx, displayMetrics), applyDimension(contentMarkDyUnit, contentMarkDy, displayMetrics));
+        setContentMarkRaw(convertToPX(contentMarkRadius, contentMarkRadiusUnit), contentMarkColor, contentMarkTextValue,
+                convertToPX(contentMarkTextSize, contentMarkTextSizeUnit), contentMarkTextColor,
+                convertToPX(contentMarkDx, contentMarkDxUnit), convertToPX(contentMarkDy, contentMarkDyUnit));
     }
 
     private void setContentMarkRaw(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
@@ -3058,7 +3506,7 @@ public class TView extends View {
     }
 
     public void setContentMarkRadius(int unit, float contentMarkRadius) {
-        setContentMarkRadiusRaw(applyDimension(unit, contentMarkRadius, getViewDisplayMetrics(this)));
+        setContentMarkRadiusRaw(convertToPX(contentMarkRadius, unit));
     }
 
     private void setContentMarkRadiusRaw(float contentMarkRadius) {
@@ -3113,7 +3561,7 @@ public class TView extends View {
     }
 
     public void setContentMarkTextSize(int unit, float contentMarkTextSize) {
-        setContentMarkTextSizeRaw(applyDimension(unit, contentMarkTextSize, getViewDisplayMetrics(this)));
+        setContentMarkTextSizeRaw(convertToPX(contentMarkTextSize, unit));
     }
 
     private void setContentMarkTextSizeRaw(float contentMarkTextSize) {
@@ -3146,7 +3594,7 @@ public class TView extends View {
     }
 
     public void setContentMarkDx(int unit, float contentMarkDx) {
-        setContentMarkDxRaw(applyDimension(unit, contentMarkDx, getViewDisplayMetrics(this)));
+        setContentMarkDxRaw(convertToPX(contentMarkDx, unit));
     }
 
     private void setContentMarkDxRaw(float contentMarkDx) {
@@ -3168,7 +3616,7 @@ public class TView extends View {
     }
 
     public void setContentMarkDy(int unit, float contentMarkDy) {
-        setContentMarkDyRaw(applyDimension(unit, contentMarkDy, getViewDisplayMetrics(this)));
+        setContentMarkDyRaw(convertToPX(contentMarkDy, unit));
     }
 
     private void setContentMarkDyRaw(float contentMarkDy) {
@@ -3228,7 +3676,7 @@ public class TView extends View {
     }
 
     public void setSrcLeftWidth(int unit, float srcLeftWidth) {
-        setSrcLeftWidthRaw(applyDimension(unit, srcLeftWidth, getViewDisplayMetrics(this)));
+        setSrcLeftWidthRaw(convertToPX(srcLeftWidth, unit));
     }
 
     private void setSrcLeftWidthRaw(float srcLeftWidth) {
@@ -3250,7 +3698,7 @@ public class TView extends View {
     }
 
     public void setSrcLeftHeight(int unit, float srcLeftHeight) {
-        setSrcLeftHeightRaw(applyDimension(unit, srcLeftHeight, getViewDisplayMetrics(this)));
+        setSrcLeftHeightRaw(convertToPX(srcLeftHeight, unit));
     }
 
     private void setSrcLeftHeightRaw(float srcLeftHeight) {
@@ -3293,7 +3741,7 @@ public class TView extends View {
     }
 
     public void setSrcLeftPadding(int unit, float srcLeftPadding) {
-        setSrcLeftPaddingRaw(applyDimension(unit, srcLeftPadding, getViewDisplayMetrics(this)));
+        setSrcLeftPaddingRaw(convertToPX(srcLeftPadding, unit));
     }
 
     private void setSrcLeftPaddingRaw(float srcLeftPadding) {
@@ -3315,7 +3763,7 @@ public class TView extends View {
     }
 
     public void setSrcLeftDx(int unit, float srcLeftDx) {
-        setSrcLeftDxRaw(applyDimension(unit, srcLeftDx, getViewDisplayMetrics(this)));
+        setSrcLeftDxRaw(convertToPX(srcLeftDx, unit));
     }
 
     private void setSrcLeftDxRaw(float srcLeftDx) {
@@ -3337,7 +3785,7 @@ public class TView extends View {
     }
 
     public void setSrcLeftDy(int unit, float srcLeftDy) {
-        setSrcLeftDyRaw(applyDimension(unit, srcLeftDy, getViewDisplayMetrics(this)));
+        setSrcLeftDyRaw(convertToPX(srcLeftDy, unit));
     }
 
     private void setSrcLeftDyRaw(float srcLeftDy) {
@@ -3370,7 +3818,7 @@ public class TView extends View {
     }
 
     public void setSrcRightWidth(int unit, float srcRightWidth) {
-        setSrcRightWidthRaw(applyDimension(unit, srcRightWidth, getViewDisplayMetrics(this)));
+        setSrcRightWidthRaw(convertToPX(srcRightWidth, unit));
     }
 
     private void setSrcRightWidthRaw(float srcRightWidth) {
@@ -3392,7 +3840,7 @@ public class TView extends View {
     }
 
     public void setSrcRightHeight(int unit, float srcRightHeight) {
-        setSrcRightHeightRaw(applyDimension(unit, srcRightHeight, getViewDisplayMetrics(this)));
+        setSrcRightHeightRaw(convertToPX(srcRightHeight, unit));
     }
 
     private void setSrcRightHeightRaw(float srcRightHeight) {
@@ -3435,7 +3883,7 @@ public class TView extends View {
     }
 
     public void setSrcRightPadding(int unit, float srcRightPadding) {
-        setSrcRightPaddingRaw(applyDimension(unit, srcRightPadding, getViewDisplayMetrics(this)));
+        setSrcRightPaddingRaw(convertToPX(srcRightPadding, unit));
     }
 
     private void setSrcRightPaddingRaw(float srcRightPadding) {
@@ -3457,7 +3905,7 @@ public class TView extends View {
     }
 
     public void setSrcRightDx(int unit, float srcRightDx) {
-        setSrcRightDxRaw(applyDimension(unit, srcRightDx, getViewDisplayMetrics(this)));
+        setSrcRightDxRaw(convertToPX(srcRightDx, unit));
     }
 
     private void setSrcRightDxRaw(float srcRightDx) {
@@ -3479,7 +3927,7 @@ public class TView extends View {
     }
 
     public void setSrcRightDy(int unit, float srcRightDy) {
-        setSrcRightDyRaw(applyDimension(unit, srcRightDy, getViewDisplayMetrics(this)));
+        setSrcRightDyRaw(convertToPX(srcRightDy, unit));
     }
 
     private void setSrcRightDyRaw(float srcRightDy) {
@@ -3489,8 +3937,8 @@ public class TView extends View {
         }
     }
 
-    // attention porterDuffXfermode default 0 instead of -1!
-    protected PorterDuffXfermode porterDuffXfermode;
+    // attention TPorterDuffXfermode default 0 instead of -1!
+    protected PorterDuffXfermode TPorterDuffXfermode;
 
     public enum TPorterDuffXfermode {
         SRC_IN(0), SRC_OUT(1),
@@ -3502,14 +3950,14 @@ public class TView extends View {
         }
     }
 
-    public static final Mode[] porterDuffXfermodeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
+    protected final Mode[] porterDuffXfermodeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
 
-    public PorterDuffXfermode getPorterDuffXfermode() {
-        return porterDuffXfermode;
+    public PorterDuffXfermode getTPorterDuffXfermode() {
+        return TPorterDuffXfermode;
     }
 
-    public void setPorterDuffXfermode(PorterDuffXfermode porterDuffXfermode) {
-        this.porterDuffXfermode = porterDuffXfermode;
+    public void setTPorterDuffXfermode(PorterDuffXfermode tPorterDuffXfermode) {
+        this.TPorterDuffXfermode = tPorterDuffXfermode;
     }
 
     //
@@ -3724,7 +4172,7 @@ public class TView extends View {
     public TView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TView.class.getSimpleName();
+        tag = TView.class.getSimpleName();
 
         //
         debugable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
@@ -3747,11 +4195,11 @@ public class TView extends View {
         animationable = typedArray.getBoolean(R.styleable.TView_animationable, false);
         rotate = typedArray.getInt(R.styleable.TView_rotate, 0);
 
-        // xfermodeIndex default PorterDuff.Mode.SRC_IN
-        int xfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
+        // porterDuffXfermodeArrayIndex default PorterDuff.Mode.SRC_IN
+        int porterDuffXfermodeArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
 
         //
-        porterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[xfermodeIndex]);
+        TPorterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[porterDuffXfermodeArrayIndex]);
 
         origin = TView.class == this.getClass();
 
@@ -4042,7 +4490,7 @@ public class TView extends View {
         typedArray.recycle();
 
         //
-        DeviceTool.initDisplayMetrics(getContext());
+        DeviceTool.initDisplayMetrics();
     }
 
     @Override
@@ -4284,11 +4732,11 @@ public class TView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (textValue != null) {
             textValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
-                    textValue, PaintTool.initTextPaint(textSize), textPaddingLeft, textPaddingRight,
+                    textValue, initTextPaint(textSize), textPaddingLeft, textPaddingRight,
                     textRowSpaceRatio);
         } else {
             contentValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
-                    contentValue, PaintTool.initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
+                    contentValue, initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
                     contentRowSpaceRatio);
         }
     }
@@ -4306,8 +4754,8 @@ public class TView extends View {
         int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
         //
-        int measuredWidth = (int) convertToPX(96, this);
-        int measuredHeight = (int) convertToPX(48, this);
+        int measuredWidth = (int) convertToPX(TypedValue.COMPLEX_UNIT_DIP, 96);
+        int measuredHeight = (int) convertToPX(TypedValue.COMPLEX_UNIT_DIP, 48);
 
         //measureWidth
         //expressed hope that the size of the parent view subviews should be determined by the value of specSize
@@ -4340,7 +4788,7 @@ public class TView extends View {
         return ValueMeasureList;
     }
 
-    public static List<Integer> generateMeasureList(String textValue, Paint paint, float width, float paddingLeft, float paddingRight) {
+    protected List<Integer> generateMeasureList(String textValue, Paint paint, float width, float paddingLeft, float paddingRight) {
         List<Integer> measureList = new ArrayList<Integer>();
         int charatcerLength = textValue.length();
         float characterWidth = paint.measureText(textValue);
@@ -4517,7 +4965,7 @@ public class TView extends View {
                                 - backgroundNormalShadowDy, backgroundNormal, backgroundNormalShader, backgroundNormalShadowRadius,
                         backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal, radius);
 
-                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, PaintTool.initPaint(backgroundPress));
+                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
                 drawRectClassic(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
                         width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
@@ -4540,7 +4988,7 @@ public class TView extends View {
                         backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal,
                         radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
 
-                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, PaintTool.initPaint(backgroundPress));
+                canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
                 drawRectCustom(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
                         width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
@@ -4557,7 +5005,7 @@ public class TView extends View {
 
         // draw bitmap
         if (needSaveLayer) {
-            paint.setXfermode(porterDuffXfermode);
+            paint.setXfermode(TPorterDuffXfermode);
 
             // If they are offset backgroundShadow, mobile, is to draw on the background shadow,
             // without moving the bigger picture and the need to set the width and height
@@ -4569,7 +5017,7 @@ public class TView extends View {
             canvas.drawBitmap(
                     select ? srcSelect : press ? srcPress : srcNormal,
                     matrix,
-                    PaintTool.initPaint(paint, select ? srcSelectShadowRadius : press ? srcPressShadowRadius : srcNormalShadowRadius,
+                    initPaint(paint, select ? srcSelectShadowRadius : press ? srcPressShadowRadius : srcNormalShadowRadius,
                             select ? srcSelectShadowDx : press ? srcPressShadowDx : srcNormalShadowDx, select ? srcSelectShadowDy
                                     : press ? srcPressShadowDy : srcNormalShadowDy));
             canvas.translate(select ? -backgroundSelectShadowDx * 2f - srcSelectShadowRadius + srcSelectShadowDx : press ? -backgroundPressShadowDx * 2f
@@ -4702,7 +5150,7 @@ public class TView extends View {
         if (textMark) {
             drawTextMark(width, height,
                     canvas, textMarkRadius,
-                    PaintTool.initPaint(textMarkColor),
+                    initPaint(textMarkColor),
                     textMarkRadius,
                     textMarkDx, textMarkDy,
                     textDx + textEndOffsetCenterX + textMarkDx,
@@ -4717,7 +5165,7 @@ public class TView extends View {
         if (contentMark) {
             drawTextMark(width, height,
                     canvas, contentMarkRadius,
-                    PaintTool.initPaint(contentMarkColor),
+                    initPaint(contentMarkColor),
                     contentMarkRadius,
                     contentMarkDx, contentMarkDy,
                     contentDx + contentEndOffsetCenterX + contentMarkDx,

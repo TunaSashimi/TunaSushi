@@ -7,13 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DrawTool.drawRectClassic;
-import static com.tunasushi.tool.DrawTool.drawRectCustom;
-import static com.tunasushi.tool.DrawTool.drawText;
 
 
 /**
@@ -79,7 +73,7 @@ public class TDialog extends TView {
     public TDialog(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TDialog.class.getSimpleName();
+        tag = TDialog.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDialog);
 
@@ -112,11 +106,7 @@ public class TDialog extends TView {
         int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceTextValueArray, -1);
 
         if (dialogChoiceTextValueArrayId != -1) {
-            if (isInEditMode()) {
-                dialogChoiceTextValueArray = new String[]{"Confirm", "Cancel"};
-            } else {
-                dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
-            }
+            dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
             total = dialogChoiceTextValueArray.length;
             floatArray = new float[total];
         } else {
@@ -171,7 +161,7 @@ public class TDialog extends TView {
                 width >> 1,
                 dialogTitleTextSize * 0.5f + dialogTitleTextDy,
                 0, 0,
-                PaintTool.initTextPaint(Paint.Style.FILL, dialogTitleTextColor, dialogTitleTextSize, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, dialogTitleTextColor, dialogTitleTextSize, Paint.Align.CENTER));
 
         //drawDialogContentText
         drawText(
@@ -181,7 +171,7 @@ public class TDialog extends TView {
                 width >> 1,
                 (height >> 1) + dialogContentTextDy,
                 dialogContentTextPaddingLeft, dialogContentTextPaddingRight,
-                PaintTool.initTextPaint(Paint.Style.FILL, dialogContentTextColor, dialogContentTextSize, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, dialogContentTextColor, dialogContentTextSize, Paint.Align.CENTER));
 
         //draw Options
         for (int i = 0; i < total; i++) {
@@ -220,7 +210,7 @@ public class TDialog extends TView {
                     dialogChoiceHeight * 0.5f,
                     0,
                     0,
-                    PaintTool.initTextPaint(Paint.Style.FILL,
+                    initTextPaint(Paint.Style.FILL,
                             i == dialogChoiceIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
                             Paint.Align.CENTER));
             //

@@ -15,7 +15,6 @@ import java.util.Locale;
  * @Description
  */
 public class DateTool {
-
     /**
      * 时间日期格式化到年月日时分秒.
      */
@@ -74,7 +73,6 @@ public class DateTool {
         return dateFormat.format(date);
     }
 
-
     /**
      * 获取当前年.
      *
@@ -127,7 +125,6 @@ public class DateTool {
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.MINUTE);
     }
-
 
     /**
      * 获得当前时间的毫秒数

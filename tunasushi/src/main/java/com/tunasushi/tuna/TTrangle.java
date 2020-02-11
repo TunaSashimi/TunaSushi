@@ -6,13 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
@@ -72,7 +66,7 @@ public class TTrangle extends TView {
     public TTrangle(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TTrangle.class.getSimpleName();
+        tag = TTrangle.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangle);
 
@@ -177,7 +171,7 @@ public class TTrangle extends TView {
 
         path.close();
         canvas.drawPath(path,
-                PaintTool.initPaint(Paint.Style.FILL, trangleStrokeWidth != 0 ?
+                initPaint(Paint.Style.FILL, trangleStrokeWidth != 0 ?
                         trangleStrokeColor : select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal));
 
         //drawing  the inside triangle topCorner and draw clockwise

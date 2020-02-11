@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +32,10 @@ public class TViewActivity extends Activity {
         @Override
         public void touchUp(TView t) {
             switch (t.getId()) {
-                case R.id.radioGroup_DrackBrown_Left:
+                case R.id.tViewRadioGroupDrackBrownLeft:
                     Toast.makeText(TViewActivity.this, "金枪鱼刺身", Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.radioGroup_DrackBrown_Right:
+                case R.id.tViewRadioGroupDrackBrownRight:
                     Toast.makeText(TViewActivity.this, "TunaSashimi", Toast.LENGTH_SHORT).show();
                     break;
                 default:
@@ -57,7 +56,7 @@ public class TViewActivity extends Activity {
         textDeviceInfo.setText(deviceInfo.toString());
 
         //
-        TViewRectClassic01 = findViewById(R.id.rectClassic01);
+        TViewRectClassic01 = findViewById(R.id.tViewRectClassic01);
         TViewRectClassic01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
@@ -68,7 +67,7 @@ public class TViewActivity extends Activity {
         /**
          * 注意这里继承的是TView.OnClick事件
          */
-        TViewRectClassic02 = findViewById(R.id.rectClassic02);
+        TViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
         TViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(TView t) {
@@ -77,7 +76,7 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewMainButton01 = findViewById(R.id.shadowButton01);
+        TViewMainButton01 = findViewById(R.id.tViewShadowButton01);
         TViewMainButton01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
@@ -94,7 +93,7 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewMainButton02 = findViewById(R.id.shadowButton02);
+        TViewMainButton02 = findViewById(R.id.tViewShadowButton02);
         TViewMainButton02.setTextMark(
                 10,
                 Color.RED,
@@ -120,8 +119,8 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewRadioGroup_DrackBrown_Left = findViewById(R.id.radioGroup_DrackBrown_Left);
-        TViewRadioGroup_DrackBrown_Right = findViewById(R.id.radioGroup_DrackBrown_Right);
+        TViewRadioGroup_DrackBrown_Left = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
+        TViewRadioGroup_DrackBrown_Right = findViewById(R.id.tViewRadioGroupDrackBrownRight);
 
         TViewRadioGroup_DrackBrown_Left.setTouchUpListener(tunaTouchUpListener);
         TViewRadioGroup_DrackBrown_Right.setTouchUpListener(tunaTouchUpListener);

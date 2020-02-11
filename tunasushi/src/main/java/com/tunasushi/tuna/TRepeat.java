@@ -1,7 +1,6 @@
 package com.tunasushi.tuna;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,13 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DrawTool.drawText;
 
 
 /**
@@ -29,7 +22,7 @@ public class TRepeat extends TView {
     private float repeatItemFractionTop, repeatItemFractionBottom;
     private float repeatItemTextFractionTop, repeatItemTextFractionBottom;
 
-    private Bitmap repeatBitmapSrcNormal, repeatBitmapSrcSelect;
+    private Bitmap repeatSrcNormal, repeatSrcSelect;
 
     private int repeatIndex;
 
@@ -77,7 +70,7 @@ public class TRepeat extends TView {
     public TRepeat(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TRepeat.class.getSimpleName();
+        tag = TRepeat.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRepeat);
 
@@ -118,13 +111,13 @@ public class TRepeat extends TView {
         }
 
         if (repeatShapeType == RepeatShapeType.CUSTOM) {
-            int repeatBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcNormal, -1);
-            if (repeatBitmapSrcNormalId != -1) {
-                repeatBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), repeatBitmapSrcNormalId);
+            int repeatSrcNormalId = typedArray.getResourceId(R.styleable.TRepeat_repeatSrcNormal, -1);
+            if (repeatSrcNormalId != -1) {
+                repeatSrcNormal = BitmapFactory.decodeResource(getResources(), repeatSrcNormalId);
             }
-            int repeatBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TRepeat_repeatBitmapSrcSelect, -1);
-            if (repeatBitmapSrcSelectId != -1) {
-                repeatBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), repeatBitmapSrcSelectId);
+            int repeatSrcSelectId = typedArray.getResourceId(R.styleable.TRepeat_repeatSrcSelect, -1);
+            if (repeatSrcSelectId != -1) {
+                repeatSrcSelect = BitmapFactory.decodeResource(getResources(), repeatSrcSelectId);
             }
         } else if (repeatShapeType == RepeatShapeType.CIRCLE) {
             repeatItemBackgroundNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundNormal, Color.TRANSPARENT);
@@ -158,17 +151,17 @@ public class TRepeat extends TView {
 
 
         if (repeatShapeType == RepeatShapeType.CUSTOM) {
-            int repeatCustomBitmapSrcNormalWidth = repeatBitmapSrcNormal.getWidth();
-            int repeatCustomBitmapSrcNormalHeight = repeatBitmapSrcNormal.getHeight();
-            int repeatCustomBitmapSrcSelectWidth = repeatBitmapSrcSelect.getWidth();
-            int repeatCustomBitmapSrcSelectHeight = repeatBitmapSrcSelect.getHeight();
-            if (repeatCustomBitmapSrcNormalWidth != repeatCustomBitmapSrcSelectWidth || repeatCustomBitmapSrcNormalHeight != repeatCustomBitmapSrcSelectHeight) {
-                throw new IndexOutOfBoundsException("Both the width and height of the attribute repeatCustomBitmapSrcNormal and repeatCustomBitmapSrcSelect needed equal");
+            int repeatCustomSrcNormalWidth = repeatSrcNormal.getWidth();
+            int repeatCustomSrcNormalHeight = repeatSrcNormal.getHeight();
+            int repeatCustomSrcSelectWidth = repeatSrcSelect.getWidth();
+            int repeatCustomSrcSelectHeight = repeatSrcSelect.getHeight();
+            if (repeatCustomSrcNormalWidth != repeatCustomSrcSelectWidth || repeatCustomSrcNormalHeight != repeatCustomSrcSelectHeight) {
+                throw new IndexOutOfBoundsException("Both the width and height of the attribute repeatCustomSrcNormal and repeatCustomSrcSelect needed equal");
             }
 
             srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
-            srcWidthScale = srcHeightScale * repeatCustomBitmapSrcNormalWidth / repeatCustomBitmapSrcNormalHeight;
-            scale = srcHeightScale / repeatCustomBitmapSrcNormalWidth;
+            srcWidthScale = srcHeightScale * repeatCustomSrcNormalWidth / repeatCustomSrcNormalHeight;
+            scale = srcHeightScale / repeatCustomSrcNormalWidth;
 
             initMatrix(scale, scale);
 
@@ -205,7 +198,7 @@ public class TRepeat extends TView {
                     } else {
                         canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawBitmap(repeatBitmapSrcNormal, matrix, null);
+                    canvas.drawBitmap(repeatSrcNormal, matrix, null);
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
 
@@ -214,7 +207,7 @@ public class TRepeat extends TView {
                     for (int i = 0; i < stringArray.length; i++) {
                         drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
                                         * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
+                                initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
 
@@ -237,14 +230,14 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-                        canvas.drawBitmap(repeatBitmapSrcSelect, matrix, null);
+                        canvas.drawBitmap(repeatSrcSelect, matrix, null);
                     }
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
                     if (stringArray != null) {
                         for (int i = 0; i < stringArray.length; i++) {
                             drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
                                             * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
+                                    initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                     canvas.restore();
@@ -255,8 +248,8 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatBitmapSrcSelect
-                                : repeatBitmapSrcNormal : i == repeatIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
+                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatSrcSelect
+                                : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
                     }
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
                     if (stringArray != null) {
@@ -269,7 +262,7 @@ public class TRepeat extends TView {
                                     (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
                                     0,
                                     0,
-                                    PaintTool.initTextPaint(Paint.Style.FILL,
+                                    initTextPaint(Paint.Style.FILL,
                                             repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
                                                     : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                             repeatItemTextSize, Paint.Align.CENTER));
@@ -287,7 +280,7 @@ public class TRepeat extends TView {
                     } else {
                         canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatItemBackgroundNormal));
+                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatItemBackgroundNormal));
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
 
@@ -296,7 +289,7 @@ public class TRepeat extends TView {
                     for (int i = 0; i < stringArray.length; i++) {
                         drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
                                         * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
+                                initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
 
@@ -319,8 +312,8 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(repeatBitmapSrcSelect, matrix, null);
-                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatItemBackgroundSelect));
+//                        canvas.drawBitmap(repeatSrcSelect, matrix, null);
+                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatItemBackgroundSelect));
                     }
 
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
@@ -328,7 +321,7 @@ public class TRepeat extends TView {
                         for (int i = 0; i < stringArray.length; i++) {
                             drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
                                             * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    PaintTool.initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
+                                    initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
                         }
                     }
                     canvas.restore();
@@ -339,9 +332,9 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatIndex ? repeatBitmapSrcSelect
-//                                : repeatBitmapSrcNormal : i == repeatIndex ? repeatBitmapSrcSelect : repeatBitmapSrcNormal, matrix, null);
-                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, PaintTool.initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
+//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatIndex ? repeatSrcSelect
+//                                : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
+                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
                                 : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
                     }
                     canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
@@ -355,7 +348,7 @@ public class TRepeat extends TView {
                                     (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
                                     0,
                                     0,
-                                    PaintTool.initTextPaint(Paint.Style.FILL,
+                                    initTextPaint(Paint.Style.FILL,
                                             repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
                                                     : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                             repeatItemTextSize, Paint.Align.CENTER));

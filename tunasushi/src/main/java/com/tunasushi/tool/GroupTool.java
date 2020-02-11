@@ -9,8 +9,7 @@ import com.tunasushi.tuna.TView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
@@ -196,7 +195,7 @@ public class GroupTool {
                                LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
                                int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
+        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, (int) convertToPX(width, widthUnit), leftStyle, rightStyle,
                 centerStyle, itemStyle);
     }
 
@@ -206,7 +205,7 @@ public class GroupTool {
                                LinearLayout linearLayout, int widthUnit, int width, int leftStyle,
                                int rightStyle, int centerStyle, int itemStyle) {
 
-        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, (int) applyDimension(widthUnit, width, getViewDisplayMetrics(linearLayout)), leftStyle, rightStyle,
+        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, (int) convertToPX(width, widthUnit), leftStyle, rightStyle,
                 centerStyle, itemStyle);
     }
 

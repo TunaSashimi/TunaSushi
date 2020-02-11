@@ -8,12 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-
-import static com.tunasushi.tool.PaintTool.paint;
 
 /**
  * @author Tunasashimi
@@ -49,8 +44,8 @@ public class TRange extends TView {
         this.rangeDragRightIndex = rangeDragRightIndex;
     }
 
-    private Bitmap rangeDragLeftBitmapSrc;
-    private Bitmap rangeDragRightBitmapSrc;
+    private Bitmap rangeDragLeftSrc;
+    private Bitmap rangeDragRightSrc;
 
     //
     private float[] rangeCircleCentreXArray;
@@ -69,7 +64,7 @@ public class TRange extends TView {
     public TRange(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TRange.class.getSimpleName();
+        tag = TRange.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRange);
 
@@ -111,14 +106,14 @@ public class TRange extends TView {
         }
 
         //
-        int rangeDragLeftBitmapSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragLeftBitmapSrc, -1);
-        if (rangeDragLeftBitmapSrcId != -1) {
-            rangeDragLeftBitmapSrc = BitmapFactory.decodeResource(getResources(), rangeDragLeftBitmapSrcId);
+        int rangeDragLeftSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragLeftSrc, -1);
+        if (rangeDragLeftSrcId != -1) {
+            rangeDragLeftSrc = BitmapFactory.decodeResource(getResources(), rangeDragLeftSrcId);
         }
 
-        int rangeDragRightBitmapSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragRightBitmapSrc, rangeDragLeftBitmapSrcId);
-        if (rangeDragRightBitmapSrcId != -1) {
-            rangeDragRightBitmapSrc = BitmapFactory.decodeResource(getResources(), rangeDragRightBitmapSrcId);
+        int rangeDragRightSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragRightSrc, rangeDragLeftSrcId);
+        if (rangeDragRightSrcId != -1) {
+            rangeDragRightSrc = BitmapFactory.decodeResource(getResources(), rangeDragRightSrcId);
         }
         typedArray.recycle();
     }
@@ -143,31 +138,31 @@ public class TRange extends TView {
         super.onDraw(canvas);
 
         //draw rangeColorNormal
-        PaintTool.initPaint(Paint.Style.FILL, rangeColorNormal, rangeThink);
+        initPaint(Paint.Style.FILL, rangeColorNormal, rangeThink);
         canvas.drawLine(0, height >> 1, width, height >> 1, paint);
 
         // draw range dragLeft
-        PaintTool.initPaint(Paint.Style.FILL, rangeDragColor);
+        initPaint(Paint.Style.FILL, rangeDragColor);
         // Paint.Style.FILL
         canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
-            PaintTool.initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
+            initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
             //Paint.Style.STROKE is Diverge to both sides
             canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         // draw range dragRight
-        PaintTool.initPaint(Paint.Style.FILL, rangeDragColor);
+        initPaint(Paint.Style.FILL, rangeDragColor);
         canvas.drawCircle(rangeCircleCentreXArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
-            PaintTool.initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
+            initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
             canvas.drawCircle(rangeCircleCentreXArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         //draw rangeColorSelect
-        PaintTool.initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
+        initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
         canvas.drawLine(rangeCircleCentreXArray[rangeDragLeftIndex] + (height >> 1), height >> 1,
                 rangeCircleCentreXArray[rangeDragRightIndex] - (height >> 1), height >> 1, paint);
     }

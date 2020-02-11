@@ -23,10 +23,8 @@ import android.widget.RelativeLayout;
 
 import com.tuna.R;
 
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
-import static com.tunasushi.tuna.TView.initMatrix;
 
 
 /**
@@ -46,8 +44,19 @@ public class TLayout extends RelativeLayout {
     //
     protected Path layoutPath;
 
-    protected Matrix layoutMatrix;
+
     protected RectF layoutRectF;
+
+    //
+    protected Matrix layoutMatrix;
+    protected Matrix initMatrix(Matrix matrix, float sx, float sy) {
+        if (matrix == null) {
+            matrix = new Matrix();
+        }
+        matrix.reset();
+        matrix.setScale(sx, sy);
+        return matrix;
+    }
 
     // layoutBackgroundNormal in onLayout if backgroundNormal transparent and have drawn the case of default white shadow
     private int layoutBackgroundNormal;
@@ -115,7 +124,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowRadius(int unit, float layoutBackgroundNormalShadowRadius) {
-        setLayoutBackgroundNormalShadowRadiusRaw(applyDimension(unit, layoutBackgroundNormalShadowRadius, getViewDisplayMetrics(this)));
+        setLayoutBackgroundNormalShadowRadiusRaw(convertToPX(layoutBackgroundNormalShadowRadius, unit));
     }
 
     private void setLayoutBackgroundNormalShadowRadiusRaw(float layoutBackgroundNormalShadowRadius) {
@@ -148,7 +157,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowDx(int unit, float layoutBackgroundNormalShadowDx) {
-        setLayoutBackgroundNormalShadowDxRaw(applyDimension(unit, layoutBackgroundNormalShadowDx, getViewDisplayMetrics(this)));
+        setLayoutBackgroundNormalShadowDxRaw(convertToPX(layoutBackgroundNormalShadowDx, unit));
     }
 
     private void setLayoutBackgroundNormalShadowDxRaw(float layoutBackgroundNormalShadowDx) {
@@ -170,7 +179,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutBackgroundNormalShadowDy(int unit, float layoutBackgroundNormalShadowDy) {
-        setLayoutBackgroundNormalShadowDyRaw(applyDimension(unit, layoutBackgroundNormalShadowDy, getViewDisplayMetrics(this)));
+        setLayoutBackgroundNormalShadowDyRaw(convertToPX(layoutBackgroundNormalShadowDy, unit));
     }
 
     private void setLayoutBackgroundNormalShadowDyRaw(float layoutBackgroundNormalShadowDy) {
@@ -183,30 +192,30 @@ public class TLayout extends RelativeLayout {
     //
     private Bitmap layoutSrcNormal;
 
-    public Bitmap getLayoutBitmapSrcNormal() {
+    public Bitmap getLayoutSrcNormal() {
         return layoutSrcNormal;
     }
 
-    public void setLayoutBitmapSrcNormal(Bitmap layoutSrcNormal) {
+    public void setLayoutSrcNormal(Bitmap layoutSrcNormal) {
         this.layoutSrcNormal = layoutSrcNormal;
     }
 
     //
     private float layoutSrcNormalShadowRadius;
 
-    public float getLayoutBitmapSrcNormalShadowRadius() {
+    public float getLayoutSrcNormalShadowRadius() {
         return layoutSrcNormalShadowRadius;
     }
 
-    public void setLayoutBitmapSrcNormalShadowRadius(float layoutSrcNormalShadowRadius) {
-        setLayoutBitmapSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowRadius);
+    public void setLayoutSrcNormalShadowRadius(float layoutSrcNormalShadowRadius) {
+        setLayoutSrcNormalShadowRadius(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowRadius);
     }
 
-    public void setLayoutBitmapSrcNormalShadowRadius(int unit, float layoutSrcNormalShadowRadius) {
-        setLayoutBitmapSrcNormalShadowRadiusRaw(applyDimension(unit, layoutSrcNormalShadowRadius, getViewDisplayMetrics(this)));
+    public void setLayoutSrcNormalShadowRadius(int unit, float layoutSrcNormalShadowRadius) {
+        setLayoutSrcNormalShadowRadiusRaw(convertToPX(layoutSrcNormalShadowRadius, unit));
     }
 
-    private void setLayoutBitmapSrcNormalShadowRadiusRaw(float layoutSrcNormalShadowRadius) {
+    private void setLayoutSrcNormalShadowRadiusRaw(float layoutSrcNormalShadowRadius) {
         if (this.layoutSrcNormalShadowRadius != layoutSrcNormalShadowRadius) {
             this.layoutSrcNormalShadowRadius = layoutSrcNormalShadowRadius;
             invalidate();
@@ -216,19 +225,19 @@ public class TLayout extends RelativeLayout {
     //
     private float layoutSrcNormalShadowDx;
 
-    public float getLayoutBitmapSrcNormalShadowDx() {
+    public float getLayoutSrcNormalShadowDx() {
         return layoutSrcNormalShadowDx;
     }
 
-    public void setLayoutBitmapSrcNormalShadowDx(float layoutSrcNormalShadowDx) {
-        setLayoutBitmapSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDx);
+    public void setLayoutSrcNormalShadowDx(float layoutSrcNormalShadowDx) {
+        setLayoutSrcNormalShadowDx(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDx);
     }
 
-    public void setLayoutBitmapSrcNormalShadowDx(int unit, float layoutSrcNormalShadowDx) {
-        setLayoutBitmapSrcNormalShadowDxRaw(applyDimension(unit, layoutSrcNormalShadowDx, getViewDisplayMetrics(this)));
+    public void setLayoutSrcNormalShadowDx(int unit, float layoutSrcNormalShadowDx) {
+        setLayoutSrcNormalShadowDxRaw(convertToPX(layoutSrcNormalShadowDx, unit));
     }
 
-    private void setLayoutBitmapSrcNormalShadowDxRaw(float layoutSrcNormalShadowDx) {
+    private void setLayoutSrcNormalShadowDxRaw(float layoutSrcNormalShadowDx) {
         if (this.layoutSrcNormalShadowDx != layoutSrcNormalShadowDx) {
             this.layoutSrcNormalShadowDx = layoutSrcNormalShadowDx;
             invalidate();
@@ -243,14 +252,14 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutSrcNormalShadowDy(float layoutSrcNormalShadowDy) {
-        setLayoutBitmapSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDy);
+        setLayoutSrcNormalShadowDy(TypedValue.COMPLEX_UNIT_DIP, layoutSrcNormalShadowDy);
     }
 
-    public void setLayoutBitmapSrcNormalShadowDy(int unit, float layoutSrcNormalShadowDy) {
-        setLayoutBitmapSrcNormalShadowDyRaw(applyDimension(unit, layoutSrcNormalShadowDy, getViewDisplayMetrics(this)));
+    public void setLayoutSrcNormalShadowDy(int unit, float layoutSrcNormalShadowDy) {
+        setLayoutSrcNormalShadowDyRaw(convertToPX(layoutSrcNormalShadowDy, unit));
     }
 
-    private void setLayoutBitmapSrcNormalShadowDyRaw(float layoutSrcNormalShadowDy) {
+    private void setLayoutSrcNormalShadowDyRaw(float layoutSrcNormalShadowDy) {
         if (this.layoutSrcNormalShadowDy != layoutSrcNormalShadowDy) {
             this.layoutSrcNormalShadowDy = layoutSrcNormalShadowDy;
             invalidate();
@@ -292,7 +301,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutStrokeWidthNormal(int unit, float layoutStrokeWidthNormal) {
-        setLayoutStrokeWidthNormalRaw(applyDimension(unit, layoutStrokeWidthNormal, getViewDisplayMetrics(this)));
+        setLayoutStrokeWidthNormalRaw(convertToPX(layoutStrokeWidthNormal, unit));
     }
 
     private void setLayoutStrokeWidthNormalRaw(float layoutStrokeWidthNormal) {
@@ -325,7 +334,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadius(int unit, float layoutRadius) {
-        setLayoutRadiusRaw(applyDimension(unit, layoutRadius, getViewDisplayMetrics(this)));
+        setLayoutRadiusRaw(convertToPX(layoutRadius, unit));
     }
 
     private void setLayoutRadiusRaw(float layoutRadius) {
@@ -347,7 +356,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusLeftTop(int unit, float layoutRadiusLeftTop) {
-        setLayoutRadiusLeftTopRaw(applyDimension(unit, layoutRadiusLeftTop, getViewDisplayMetrics(this)));
+        setLayoutRadiusLeftTopRaw(convertToPX(layoutRadiusLeftTop, unit));
     }
 
     private void setLayoutRadiusLeftTopRaw(float layoutRadiusLeftTop) {
@@ -369,7 +378,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusLeftBottom(int unit, float layoutRadiusLeftBottom) {
-        setLayoutRadiusLeftBottomRaw(applyDimension(unit, layoutRadiusLeftBottom, getViewDisplayMetrics(this)));
+        setLayoutRadiusLeftBottomRaw(convertToPX(layoutRadiusLeftBottom, unit));
     }
 
     private void setLayoutRadiusLeftBottomRaw(float layoutRadiusLeftBottom) {
@@ -391,7 +400,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusRightTop(int unit, float layoutRadiusRightTop) {
-        setLayoutRadiusRightTopRaw(applyDimension(unit, layoutRadiusRightTop, getViewDisplayMetrics(this)));
+        setLayoutRadiusRightTopRaw(convertToPX(layoutRadiusRightTop, unit));
     }
 
     private void setLayoutRadiusRightTopRaw(float layoutRadiusRightTop) {
@@ -413,7 +422,7 @@ public class TLayout extends RelativeLayout {
     }
 
     public void setLayoutRadiusRightBottom(int unit, float layoutRadiusRightBottom) {
-        setLayoutRadiusRightBottomRaw(applyDimension(unit, layoutRadiusRightBottom, getViewDisplayMetrics(this)));
+        setLayoutRadiusRightBottomRaw(convertToPX(layoutRadiusRightBottom, unit));
     }
 
     private void setLayoutRadiusRightBottomRaw(float layoutRadiusRightBottom) {

@@ -7,10 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
-import static com.tunasushi.tool.DeviceTool.dpToPx;
+import static com.tunasushi.tool.ConvertTool.dpToPx;
 
 /**
  * @author Tunasashimi
@@ -54,11 +52,11 @@ public class TWave extends TView {
     public TWave(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TWave.class.getSimpleName();
+        tag = TWave.class.getSimpleName();
 
         // 将dp转化为px，用于控制不同分辨率上移动速度基本一致
-        waveXOffsetSpeedOne = dpToPx(context, WAVE_TRANSLATE_X_SPEED_ONE);
-        waveXOffsetSpeedTwo = dpToPx(context, WAVE_TRANSLATE_X_SPEED_TWO);
+        waveXOffsetSpeedOne = dpToPx(WAVE_TRANSLATE_X_SPEED_ONE);
+        waveXOffsetSpeedTwo = dpToPx(WAVE_TRANSLATE_X_SPEED_TWO);
 
         // 初始绘制波纹的画笔
         wavePaint = new Paint();

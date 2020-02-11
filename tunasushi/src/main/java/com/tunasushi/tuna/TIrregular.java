@@ -1,7 +1,6 @@
 package com.tunasushi.tuna;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,8 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-
-import static com.tunasushi.tool.DeviceTool.applyDimension;
 
 
 /**
@@ -22,38 +19,38 @@ import static com.tunasushi.tool.DeviceTool.applyDimension;
  */
 public class TIrregular extends TView {
 
-    private Bitmap irregularBitmapSrcNormal;
+    private Bitmap irregularSrcNormal;
 
-    public Bitmap getIrregularBitmapSrcNormal() {
-        return irregularBitmapSrcNormal;
+    public Bitmap getIrregularSrcNormal() {
+        return irregularSrcNormal;
     }
 
-    public void setIrregularBitmapSrcNormal(Bitmap irregularBitmapSrcNormal) {
-        this.irregularBitmapSrcNormal = irregularBitmapSrcNormal;
+    public void setIrregularSrcNormal(Bitmap irregularSrcNormal) {
+        this.irregularSrcNormal = irregularSrcNormal;
     }
 
-    private Bitmap irregularBitmapSrcSelect;
+    private Bitmap irregularSrcSelect;
 
-    public Bitmap getIrregularBitmapSrcSelect() {
-        return irregularBitmapSrcSelect;
+    public Bitmap getIrregularSrcSelect() {
+        return irregularSrcSelect;
     }
 
-    public void setIrregularBitmapSrcSelect(Bitmap irregularBitmapSrcSelect) {
-        this.irregularBitmapSrcSelect = irregularBitmapSrcSelect;
+    public void setIrregularSrcSelect(Bitmap irregularSrcSelect) {
+        this.irregularSrcSelect = irregularSrcSelect;
     }
 
-    protected IrregularChangeListener irregularChangeListener;
+    protected IrregularSelectListener irregularSelectListener;
 
-    public interface IrregularChangeListener {
-        void irregularChange(boolean b);
+    public interface IrregularSelectListener {
+        void onIrregularSelect(boolean b);
     }
 
-    public IrregularChangeListener getIrregularChangeListener() {
-        return irregularChangeListener;
+    public IrregularSelectListener getIrregularSelectListener() {
+        return irregularSelectListener;
     }
 
-    public void setIrregularChangeListener(IrregularChangeListener irregularChangeListener) {
-        this.irregularChangeListener = irregularChangeListener;
+    public void setIrregularSelectListener(IrregularSelectListener irregularSelectListener) {
+        this.irregularSelectListener = irregularSelectListener;
     }
 
     // irregularSelect default false
@@ -67,8 +64,8 @@ public class TIrregular extends TView {
         this.irregularSelect = irregularSelect;
         invalidate();
 
-        if (irregularChangeListener != null) {
-            irregularChangeListener.irregularChange(irregularSelect);
+        if (irregularSelectListener != null) {
+            irregularSelectListener.onIrregularSelect(irregularSelect);
         }
     }
 
@@ -83,18 +80,18 @@ public class TIrregular extends TView {
     public TIrregular(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        Tag = TIrregular.class.getSimpleName();
+        tag = TIrregular.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TIrregular);
 
-        int irregularBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcNormal, -1);
-        if (irregularBitmapSrcNormalId != -1) {
-            irregularBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), irregularBitmapSrcNormalId);
+        int irregularSrcNormalId = typedArray.getResourceId(R.styleable.TIrregular_irregularSrcNormal, -1);
+        if (irregularSrcNormalId != -1) {
+            irregularSrcNormal = BitmapFactory.decodeResource(getResources(), irregularSrcNormalId);
         }
 
-        int irregularBitmapSrcSelectId = typedArray.getResourceId(R.styleable.TIrregular_irregularBitmapSrcSelect, -1);
-        if (irregularBitmapSrcSelectId != -1) {
-            irregularBitmapSrcSelect = BitmapFactory.decodeResource(getResources(), irregularBitmapSrcSelectId);
+        int irregularSrcSelectId = typedArray.getResourceId(R.styleable.TIrregular_irregularSrcSelect, -1);
+        if (irregularSrcSelectId != -1) {
+            irregularSrcSelect = BitmapFactory.decodeResource(getResources(), irregularSrcSelectId);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -103,14 +100,24 @@ public class TIrregular extends TView {
     }
 
     @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        scaleSx = width * 1f / irregularSrcNormal.getWidth();
+        scaleSy = height * 1f / irregularSrcNormal.getHeight();
+
+        initMatrix(scaleSx, scaleSy);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         //
         if (irregularSelect) {
-            canvas.drawBitmap(irregularBitmapSrcSelect, 0, 0, null);
+            canvas.drawBitmap(irregularSrcSelect, matrix, null);
         } else {
-            canvas.drawBitmap(irregularBitmapSrcNormal, 0, 0, null);
+            canvas.drawBitmap(irregularSrcNormal, matrix, null);
         }
     }
 

@@ -276,8 +276,8 @@
         <attr name="buttonBackgroundPress" format="reference|color" />
         <attr name="buttonForegroundNormal" format="reference|color" />
         <attr name="buttonForegroundPress" format="reference|color" />
-        <attr name="buttonBitmapSrcNormal" format="reference" />
-        <attr name="buttonBitmapSrcPress" format="reference" />
+        <attr name="buttonSrcNormal" format="reference" />
+        <attr name="buttonSrcPress" format="reference" />
         <attr name="buttonBitmapFractionTop" format="fraction" />
         <attr name="buttonBitmapFractionBottom" format="fraction" />
         <attr name="buttonTextValue" format="string" />
@@ -366,8 +366,8 @@
     </declare-styleable>
 
     <declare-styleable name="TIrregular">
-        <attr name="irregularBitmapSrcNormal" format="reference|color" />
-        <attr name="irregularBitmapSrcSelect" format="reference|color" />
+        <attr name="irregularSrcNormal" format="reference|color" />
+        <attr name="irregularSrcSelect" format="reference|color" />
     </declare-styleable>
 
     <declare-styleable name="TLayout">
@@ -422,8 +422,8 @@
     <declare-styleable name="TProgress">
         <attr name="progressArcBackgroundNormal" format="reference|color" />
         <attr name="progressBoundBackgroundNormal" format="reference|color" />
-        <attr name="progressBitmapSrcBack" format="reference" />
-        <attr name="progressBitmapSrcFront" format="reference" />
+        <attr name="progressSrcBack" format="reference" />
+        <attr name="progressSrcFront" format="reference" />
         <attr name="progressShapeType">
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
@@ -446,8 +446,8 @@
         <attr name="rangeDragStrokeWidth" format="dimension" />
         <attr name="rangeDragLeftIndex" format="integer" />
         <attr name="rangeDragRightIndex" format="integer" />
-        <attr name="rangeDragLeftBitmapSrc" format="reference" />
-        <attr name="rangeDragRightBitmapSrc" format="reference" />
+        <attr name="rangeDragLeftSrc" format="reference" />
+        <attr name="rangeDragRightSrc" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TRepeat">
@@ -472,8 +472,8 @@
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
         </attr>
-        <attr name="repeatBitmapSrcNormal" format="reference" />
-        <attr name="repeatBitmapSrcSelect" format="reference" />
+        <attr name="repeatSrcNormal" format="reference" />
+        <attr name="repeatSrcSelect" format="reference" />
         <attr name="repeatIndex" format="integer" />
         <attr name="repeatItemTextValueArray" format="reference" />
 
@@ -569,7 +569,7 @@
         <attr name="seekDragBackgroundPress" format="reference|color" />
         <attr name="seekDragRadiusNormal" format="dimension" />
         <attr name="seekDragRadiusPress" format="dimension" />
-        <attr name="seekDragBitmapSrcPress" format="reference" />
+        <attr name="seekDragSrcPress" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TSign">

@@ -20,7 +20,7 @@ public class TSeekActivity extends Activity {
     private TView tViewTouchoutableReset, tViewTouchoutableGetIndex,
             tViewTouchoutUnableReset, tViewTouchoutUnableGetIndex;
 
-    private TView.TouchUpListener tunaTouchUpListener = new TView.TouchUpListener() {
+    private TView.TouchUpListener touchUpListener = new TView.TouchUpListener() {
         @Override
         public void touchUp(TView t) {
             switch (t.getId()) {
@@ -57,17 +57,17 @@ public class TSeekActivity extends Activity {
         tViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
         tViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
 
-        tViewTouchoutableReset.setTouchUpListener(tunaTouchUpListener);
-        tViewTouchoutableGetIndex.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutableReset.setTouchUpListener(touchUpListener);
+        tViewTouchoutableGetIndex.setTouchUpListener(touchUpListener);
 
-        tViewTouchoutUnableReset.setTouchUpListener(tunaTouchUpListener);
-        tViewTouchoutUnableGetIndex.setTouchUpListener(tunaTouchUpListener);
+        tViewTouchoutUnableReset.setTouchUpListener(touchUpListener);
+        tViewTouchoutUnableGetIndex.setTouchUpListener(touchUpListener);
 
         //
         tSeekTouchoutable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(t.getTouchEventX());
             }
         });
 
@@ -75,7 +75,7 @@ public class TSeekActivity extends Activity {
         tSeekTouchoutUnable.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(t.getTouchEventX());
             }
         });
     }

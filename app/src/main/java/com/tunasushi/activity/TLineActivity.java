@@ -3,9 +3,6 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
@@ -19,7 +16,7 @@ import com.tunasushi.tuna.TLine;
  */
 public class TLineActivity extends Activity {
     private TLine tLineAC, tLineMove;
-    private Button buttonCenterAC, buttonHiddenAC;
+    private TView tViewCenter, tViewHidden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,33 +30,33 @@ public class TLineActivity extends Activity {
         tLineAC = findViewById(R.id.tLineAC);
         tLineMove = findViewById(R.id.tLineMove);
 
-        buttonCenterAC = findViewById(R.id.buttonCenterAC);
-        buttonHiddenAC = findViewById(R.id.buttonHiddenAC);
+        tViewCenter = findViewById(R.id.tViewCenter);
+        tViewHidden = findViewById(R.id.tViewHidden);
 
         //
-        tLineAC.setX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineAC.setX(tuna_button_width);
 
         //
-        buttonCenterAC.setOnClickListener(new OnClickListener() {
+        tViewCenter.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(TView v) {
                 tLineAC.centerArrow();
             }
         });
 
-        buttonHiddenAC.setOnClickListener(new OnClickListener() {
+        tViewHidden.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(TView v) {
                 tLineAC.hideArrow();
             }
         });
 
-        tLineMove.setX(TypedValue.COMPLEX_UNIT_PX, tuna_button_width);
+        tLineMove.setX(tuna_button_width);
 
         tLineMove.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(t.getTouchEventX());
             }
         });
     }

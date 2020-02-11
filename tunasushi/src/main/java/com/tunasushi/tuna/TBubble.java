@@ -9,183 +9,178 @@ import android.graphics.Region.Op;
 import android.util.AttributeSet;
 
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
 
-import static com.tunasushi.tool.DrawTool.drawRectClassic;
-import static com.tunasushi.tool.DrawTool.drawText;
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:50
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TBubble extends TView {
 
     private int bubbleBackground;
 
-    public int getBubbleBackground() {
+    public int getTBubbleBackground() {
         return bubbleBackground;
     }
 
-    public void setBubbleBackground(int bubbleBackground) {
+    public void setTBubbleBackground(int bubbleBackground) {
         this.bubbleBackground = bubbleBackground;
     }
 
     private float bubbleRadius;
 
-    public float getBubbleRadius() {
+    public float getTBubbleRadius() {
         return bubbleRadius;
     }
 
-    public void setBubbleRadius(float bubbleRadius) {
+    public void setTBubbleRadius(float bubbleRadius) {
         this.bubbleRadius = bubbleRadius;
     }
 
     private float bubbleEdgeWidth;
 
-    public float getBubbleEdgeWidth() {
+    public float getTBubbleEdgeWidth() {
         return bubbleEdgeWidth;
     }
 
-    public void setBubbleEdgeWidth(float bubbleEdgeWidth) {
+    public void setTBubbleEdgeWidth(float bubbleEdgeWidth) {
         this.bubbleEdgeWidth = bubbleEdgeWidth;
     }
 
     private float bubbleEdgeHeight;
 
-    public float getBubbleEdgeHeight() {
+    public float getTBubbleEdgeHeight() {
         return bubbleEdgeHeight;
     }
 
-    public void setBubbleEdgeHeight(float bubbleEdgeHeight) {
+    public void setTBubbleEdgeHeight(float bubbleEdgeHeight) {
         this.bubbleEdgeHeight = bubbleEdgeHeight;
     }
 
     private String bubbleTextValue;
 
-    public String getBubbleTextValue() {
+    public String getTBubbleTextValue() {
         return bubbleTextValue;
     }
 
-    public void setBubbleTextValue(String bubbleTextValue) {
+    public void setTBubbleTextValue(String bubbleTextValue) {
         this.bubbleTextValue = bubbleTextValue;
         requestLayout();
     }
 
     private float bubbleTextSize;
 
-    public float getBubbleTextSize() {
+    public float getTBubbleTextSize() {
         return bubbleTextSize;
     }
 
-    public void setBubbleTextSize(float bubbleTextSize) {
+    public void setTBubbleTextSize(float bubbleTextSize) {
         this.bubbleTextSize = bubbleTextSize;
     }
 
     private int bubbleTextColorNormal;
 
-    public int getBubbleTextColorNormal() {
+    public int getTBubbleTextColorNormal() {
         return bubbleTextColorNormal;
     }
 
-    public void setBubbleTextColorNormal(int bubbleTextColorNormal) {
+    public void setTBubbleTextColorNormal(int bubbleTextColorNormal) {
         this.bubbleTextColorNormal = bubbleTextColorNormal;
     }
 
 
     private float bubbleTextPadding;
 
-    public float getBubbleTextPadding() {
+    public float getTBubbleTextPadding() {
         return bubbleTextPadding;
     }
 
-    public void setBubbleTextPadding(float bubbleTextPadding) {
+    public void setTBubbleTextPadding(float bubbleTextPadding) {
         this.bubbleTextPadding = bubbleTextPadding;
     }
 
-    private BubbleTowardType bubbleTowardType;
+    private TBubbleTowardType bubbleTowardType;
 
-    public BubbleTowardType getBubbleTowardType() {
+    public TBubbleTowardType getTBubbleTowardType() {
         return bubbleTowardType;
     }
 
-    public void setBubbleTowardType(BubbleTowardType bubbleTowardType) {
+    public void setTBubbleTowardType(TBubbleTowardType bubbleTowardType) {
         this.bubbleTowardType = bubbleTowardType;
     }
 
-    public enum BubbleTowardType {
+    public enum TBubbleTowardType {
         LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),
         ;
         final int nativeInt;
 
-        BubbleTowardType(int ni) {
+        TBubbleTowardType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final BubbleTowardType[] bubbleTowardTypeArray = {BubbleTowardType.LEFT, BubbleTowardType.TOP, BubbleTowardType.RIGHT,
-            BubbleTowardType.BOTTOM,};
+    private static final TBubbleTowardType[] bubbleTowardTypeArray = {TBubbleTowardType.LEFT, TBubbleTowardType.TOP, TBubbleTowardType.RIGHT,
+            TBubbleTowardType.BOTTOM,};
 
-    public static BubbleTowardType[] getbubbletowardtypeArray() {
+    public static TBubbleTowardType[] getTunabubbletowardtypeArray() {
         return bubbleTowardTypeArray;
     }
 
-    private BubbleLocationType bubbleLocationType;
+    private TBubbleLocationType bubbleLocationType;
 
-    public BubbleLocationType getBubbleLocationType() {
+    public TBubbleLocationType getTBubbleLocationType() {
         return bubbleLocationType;
     }
 
-    public void setBubbleTowardType(BubbleLocationType bubbleLocationType) {
+    public void setTBubbleTowardType(TBubbleLocationType bubbleLocationType) {
         this.bubbleLocationType = bubbleLocationType;
     }
 
-    public enum BubbleLocationType {
+    public enum TBubbleLocationType {
         LOW(0), MIDDLE(1), HIGH(2),
         ;
         final int nativeInt;
 
-        BubbleLocationType(int ni) {
+        TBubbleLocationType(int ni) {
             nativeInt = ni;
         }
     }
 
-    private static final BubbleLocationType[] bubbleLocationTypeArray = {BubbleLocationType.LOW, BubbleLocationType.MIDDLE, BubbleLocationType.HIGH,};
+    private static final TBubbleLocationType[] bubbleLocationTypeArray = {TBubbleLocationType.LOW, TBubbleLocationType.MIDDLE, TBubbleLocationType.HIGH,};
 
-    public static BubbleLocationType[] getBubbleLocationTypeArray() {
+    public static TBubbleLocationType[] getTTBubbleLocationTypeArray() {
         return bubbleLocationTypeArray;
     }
 
     private float bubbleOffset;
 
-    public float getBubbleOffset() {
+    public float getTBubbleOffset() {
         return bubbleOffset;
     }
 
-    public void setBubbleOffset(float bubbleOffset) {
+    public void setTBubbleOffset(float bubbleOffset) {
         this.bubbleOffset = bubbleOffset;
     }
 
     private int bubbleStrokeColor;
 
-    public int getBubbleStrokeColor() {
+    public int getTBubbleStrokeColor() {
         return bubbleStrokeColor;
     }
 
-    public void setBubbleStrokeColor(int bubbleStrokeColor) {
+    public void setTBubbleStrokeColor(int bubbleStrokeColor) {
         this.bubbleStrokeColor = bubbleStrokeColor;
     }
 
     private float bubbleStrokeWidth;
 
-    public float getBubbleStrokeWidth() {
+    public float getTBubbleStrokeWidth() {
         return bubbleStrokeWidth;
     }
 
-    public void setBubbleStrokeWidth(float bubbleStrokeWidth) {
+    public void setTBubbleStrokeWidth(float bubbleStrokeWidth) {
         this.bubbleStrokeWidth = bubbleStrokeWidth;
     }
 
@@ -200,7 +195,7 @@ public class TBubble extends TView {
     public TBubble(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TBubble.class.getSimpleName();
+        tag = TBubble.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubble);
 
@@ -265,7 +260,7 @@ public class TBubble extends TView {
         float inPolygonVertexX0 = 0;
         float inPolygonVertexY0 = 0;
         float inPolygonVertexX1 = 0;
-        float intPolygonVertexY1 = 0;
+        float inPolygonVertexY1 = 0;
         float inPolygonVertexX2 = 0;
         float inPolygonVertexY2 = 0;
         float inPolygonVertexX3 = 0;
@@ -321,9 +316,9 @@ public class TBubble extends TView {
                 inPolygonVertexX0 = bubbleStrokeWidth + offsetX;
                 inPolygonVertexY0 = (height >> 1) + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 + bubbleEdgeHeight;
-                intPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
+                inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
                 inPolygonVertexX2 = inPolygonVertexX1 + bubbleRadius;
-                inPolygonVertexY2 = intPolygonVertexY1;
+                inPolygonVertexY2 = inPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
                 inPolygonVertexY3 = inPolygonVertexY2 - bubbleEdgeWidth;
                 inPolygonVertexX4 = inPolygonVertexX1;
@@ -373,13 +368,13 @@ public class TBubble extends TView {
                 inPolygonVertexX0 = (width >> 1) + offsetX;
                 inPolygonVertexY0 = bubbleStrokeWidth + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                intPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeHeight;
+                inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = intPolygonVertexY1 + bubbleRadius;
+                inPolygonVertexY2 = inPolygonVertexY1 + bubbleRadius;
                 inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
-                inPolygonVertexY4 = intPolygonVertexY1;
+                inPolygonVertexY4 = inPolygonVertexY1;
 
                 outPolygonVertexX0 = (width >> 1) + offsetX;
                 outPolygonVertexY0 = offsetY;
@@ -425,9 +420,9 @@ public class TBubble extends TView {
                 inPolygonVertexX0 = width - bubbleStrokeWidth + offsetX;
                 inPolygonVertexY0 = (height >> 1) + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeHeight;
-                intPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
+                inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
                 inPolygonVertexX2 = inPolygonVertexX1 - bubbleRadius;
-                inPolygonVertexY2 = intPolygonVertexY1;
+                inPolygonVertexY2 = inPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
                 inPolygonVertexY3 = inPolygonVertexY2 + bubbleEdgeWidth;
                 inPolygonVertexX4 = inPolygonVertexX1;
@@ -477,13 +472,13 @@ public class TBubble extends TView {
                 inPolygonVertexX0 = (width >> 1) + offsetX;
                 inPolygonVertexY0 = height - bubbleStrokeWidth + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                intPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeHeight;
+                inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = intPolygonVertexY1 - bubbleRadius;
+                inPolygonVertexY2 = inPolygonVertexY1 - bubbleRadius;
                 inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
-                inPolygonVertexY4 = intPolygonVertexY1;
+                inPolygonVertexY4 = inPolygonVertexY1;
 
                 outPolygonVertexX0 = (width >> 1) + offsetX;
                 outPolygonVertexY0 = height + offsetY;
@@ -514,12 +509,12 @@ public class TBubble extends TView {
 
         //
         initPathMoveTo(inPolygonVertexX0, inPolygonVertexY0);
-        path.lineTo(inPolygonVertexX1, intPolygonVertexY1);
+        path.lineTo(inPolygonVertexX1, inPolygonVertexY1);
         path.lineTo(inPolygonVertexX2, inPolygonVertexY2);
         path.lineTo(inPolygonVertexX3, inPolygonVertexY3);
         path.lineTo(inPolygonVertexX4, inPolygonVertexY4);
         path.close();
-        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, bubbleBackground));
+        canvas.drawPath(path, initPaint(Paint.Style.FILL, bubbleBackground));
 
         //
         initPathMoveTo(outPolygonVertexX0, outPolygonVertexY0);
@@ -529,13 +524,12 @@ public class TBubble extends TView {
         path.lineTo(outPolygonVertexX4, outPolygonVertexY4);
         path.lineTo(outPolygonVertexX5, outPolygonVertexY5);
         path.close();
-        canvas.drawPath(path, PaintTool.initPaint(Paint.Style.FILL, bubbleStrokeColor));
+        canvas.drawPath(path, initPaint(Paint.Style.FILL, bubbleStrokeColor));
 
         //
         if (bubbleTextValue != null) {
             drawText(canvas, bubbleTextValue, textWidth, textCenterX, textCenterY, 0, 0,
-                    PaintTool.initTextPaint(Paint.Style.FILL, bubbleTextColorNormal, bubbleTextSize, Paint.Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, bubbleTextColorNormal, bubbleTextSize, Paint.Align.CENTER));
         }
-
     }
 }

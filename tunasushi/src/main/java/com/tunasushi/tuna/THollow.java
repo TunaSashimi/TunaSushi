@@ -10,12 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DrawTool.drawText;
-import static com.tunasushi.tool.PaintTool.paint;
 
 
 /**
@@ -28,7 +23,7 @@ public class THollow extends TView {
     private String hollowTextValue;
     private float hollowTextSize;
     private float hollowTextFractionVertical;
-    private Bitmap hollowSrcBitmap;
+    private Bitmap hollowSrc;
 
     public THollow(Context context) {
         this(context, null);
@@ -41,7 +36,7 @@ public class THollow extends TView {
     public THollow(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = THollow.class.getSimpleName();
+        tag = THollow.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.THollow);
 
@@ -68,10 +63,10 @@ public class THollow extends TView {
         dy = (int) (height * hollowTextFractionVertical);
 
         srcBitmap = Bitmap.createScaledBitmap(srcBitmap, width, height, false);
-        hollowSrcBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        hollowSrc = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-        canvas = new Canvas(hollowSrcBitmap);
-        drawText(canvas, hollowTextValue, width, width >> 1, dy, PaintTool.initTextPaint(Color.WHITE, hollowTextSize, Paint.Align.CENTER));
+        canvas = new Canvas(hollowSrc);
+        drawText(canvas, hollowTextValue, width, width >> 1, dy, initTextPaint(Color.WHITE, hollowTextSize, Paint.Align.CENTER));
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
         canvas.drawBitmap(srcBitmap, 0, 0, paint);
@@ -81,6 +76,6 @@ public class THollow extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(hollowSrcBitmap, 0, 0, null);
+        canvas.drawBitmap(hollowSrc, 0, 0, null);
     }
 }

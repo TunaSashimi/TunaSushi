@@ -3,12 +3,12 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TIrregular;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
@@ -30,14 +30,14 @@ public class TIrregularActivity extends Activity {
         tIrregular.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(t.getTouchEventX());
             }
         });
 
-        tIrregular.setIrregularChangeListener(new TIrregular.IrregularChangeListener() {
+        tIrregular.setIrregularSelectListener(new TIrregular.IrregularSelectListener() {
             @Override
-            public void irregularChange(boolean b) {
-                Toast.makeText(getApplication(), "Change==>" + b, Toast.LENGTH_SHORT).show();
+            public void onIrregularSelect(boolean irregularSelect) {
+                Toast.makeText(getApplication(), "irregularSelect==>" + irregularSelect, Toast.LENGTH_SHORT).show();
             }
         });
     }

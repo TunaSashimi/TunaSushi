@@ -7,11 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.util.AttributeSet;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PaintTool.paint;
 
 
 /**
@@ -61,7 +57,7 @@ public class TSign extends TView {
     public TSign(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TSign.class.getSimpleName();
+        tag = TSign.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSign);
 
@@ -97,9 +93,9 @@ public class TSign extends TView {
         super.onDraw(canvas);
 
         if (signCircleStrokeWidth != 0) {
-            PaintTool.initPaint(Paint.Style.STROKE, signCircleColorBefore, signCircleStrokeWidth);
+            initPaint(Paint.Style.STROKE, signCircleColorBefore, signCircleStrokeWidth);
         } else {
-            PaintTool.initPaint(Paint.Style.FILL, signCircleColorBefore);
+            initPaint(Paint.Style.FILL, signCircleColorBefore);
         }
 
         float circleCenterYBefore = signCircleRadius + signCircleMargin;

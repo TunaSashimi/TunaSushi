@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.tunasushi.R;
@@ -17,6 +15,7 @@ import com.tunasushi.tuna.TLine;
 import com.tunasushi.tuna.TRepeat;
 
 import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
+
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:53
@@ -27,7 +26,7 @@ public class TRepeatActivity extends Activity {
     private TLine tLine;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
 
-    private Button buttonEvaluation01;
+    private TView tViewEvaluation01;
     private Spinner spinnerEvaluation01;
 
     private String[] indexArray = {"-1", "0", "1", "2", "3"};
@@ -40,7 +39,7 @@ public class TRepeatActivity extends Activity {
 
         tLine = findViewById(R.id.tLine);
 
-        buttonEvaluation01 = findViewById(R.id.buttonEvaluation01);
+        tViewEvaluation01 = findViewById(R.id.tViewEvaluation01);
 
         tRepeatStar = findViewById(R.id.tRepeatStar);
         tRepeatCar = findViewById(R.id.tRepeatCar);
@@ -50,9 +49,9 @@ public class TRepeatActivity extends Activity {
                 new TView.TouchListener() {
                     @Override
                     public void touch(TView t) {
-                        t.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
-                        tRepeatCar.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
-                        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                        t.setX(tRepeatStar.getTouchEventX());
+                        tRepeatCar.setX(tRepeatStar.getTouchEventX());
+                        tLine.setX(tRepeatStar.getTouchEventX());
                     }
                 },
                 new TView.TouchDownListener() {
@@ -78,9 +77,9 @@ public class TRepeatActivity extends Activity {
                 new TView.TouchListener() {
                     @Override
                     public void touch(TView t) {
-                        t.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
-                        tRepeatStar.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
-                        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatCar.getTouchEventX());
+                        t.setX(tRepeatCar.getTouchEventX());
+                        tRepeatStar.setX(tRepeatCar.getTouchEventX());
+                        tLine.setX(tRepeatCar.getTouchEventX());
                     }
                 },
                 new TView.TouchDownListener() {
@@ -98,17 +97,17 @@ public class TRepeatActivity extends Activity {
                 }
         );
 
-        buttonEvaluation01.setOnClickListener(new OnClickListener() {
+        tViewEvaluation01.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if ("Unable".equals(buttonEvaluation01.getText().toString().trim())) {
+            public void onClick(TView v) {
+                if ("Unable".equals(tViewEvaluation01.getTextValue().trim())) {
                     tRepeatStar.setTouchType(TView.TouchType.NONE);
                     tRepeatCar.setTouchType(TView.TouchType.NONE);
-                    buttonEvaluation01.setText("Enable");
+                    tViewEvaluation01.setTextValue("Enable");
                 } else {
                     tRepeatStar.setTouchType(TView.TouchType.EDGE);
                     tRepeatCar.setTouchType(TView.TouchType.EDGE);
-                    buttonEvaluation01.setText("Unable");
+                    tViewEvaluation01.setTextValue("Unable");
                 }
             }
         });
@@ -122,7 +121,7 @@ public class TRepeatActivity extends Activity {
                 tRepeatCar.setRepeatIndex(position - 1);
                 float tunaTouchEventX = tRepeatStar.getTouchEventX();
                 if (tunaTouchEventX != 0) {
-                    tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getTouchEventX());
+                    tLine.setX(tRepeatStar.getTouchEventX());
                 }
             }
 
@@ -140,7 +139,7 @@ public class TRepeatActivity extends Activity {
                 new TView.TouchUpListener() {
                     @Override
                     public void touchUp(TView t) {
-                        t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                        t.setX(t.getTouchEventX());
                     }
                 });
     }
@@ -148,7 +147,7 @@ public class TRepeatActivity extends Activity {
     //
     private void afterChoice() {
         int repeatStarIndex = tRepeatStar.getRepeatIndex();
-        tLine.setX(TypedValue.COMPLEX_UNIT_PX, tRepeatStar.getRepeatX());
+        tLine.setX(tRepeatStar.getRepeatX());
         if (repeatStarIndex == 0) {
         } else if (repeatStarIndex == 1) {
         } else if (repeatStarIndex == 2) {

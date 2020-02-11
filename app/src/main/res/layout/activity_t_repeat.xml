@@ -105,8 +105,8 @@
         android:layout_below="@id/tLine"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        app:repeatBitmapSrcNormal="@drawable/iv_repeat_bg01"
-        app:repeatBitmapSrcSelect="@drawable/iv_repeat_bg02"
+        app:repeatSrcNormal="@drawable/iv_repeat_bg01"
+        app:repeatSrcSelect="@drawable/iv_repeat_bg02"
         app:repeatSelectType="connect"
         app:repeatShapeType="custom"
         app:repeatTotal="5"
@@ -120,8 +120,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
-        app:repeatBitmapSrcNormal="@drawable/iv_car_type01"
-        app:repeatBitmapSrcSelect="@drawable/iv_car_type02"
+        app:repeatSrcNormal="@drawable/iv_car_type01"
+        app:repeatSrcSelect="@drawable/iv_car_type02"
         app:repeatItemFractionBottom="50%"
         app:repeatItemTextColorNormal="#b2b2b2"
         app:repeatItemTextColorSelect="#000000"
@@ -162,14 +162,17 @@
         android:textColor="#000000"
         android:textSize="18dp" />
 
-    <Button
-        android:id="@+id/buttonEvaluation01"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/spinnerEvaluation01"
-        android:layout_marginLeft="10dp"
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewEvaluation01"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/tuna_button_height"
+        android:layout_alignTop="@id/spinnerEvaluation01"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
         android:layout_toRightOf="@id/spinnerEvaluation01"
-        android:text="Unable"
-        android:textSize="@dimen/checkbox_textSize" />
+        app:strokeColorNormal="#dedede"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#999999"
+        app:textSize="16dp"
+        app:textValue="Unable" />
 
 </RelativeLayout>

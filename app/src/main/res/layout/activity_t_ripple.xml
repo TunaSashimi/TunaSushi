@@ -8,24 +8,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/buttonPlay"
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewPlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Play" />
+            android:layout_height="@dimen/tuna_button_height"
+            android:layout_margin="@dimen/tuna_button_marginLeft"
+            app:strokeColorNormal="#bc7955"
+            app:strokeWidthNormal="1dp"
+            app:textColorNormal="#bc7955"
+            app:textSize="16dp"
+            app:textValue="Play" />
 
-        <Button
-            android:id="@+id/buttonChange"
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewChange"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonPlay"
-            android:text="Change" />
+            android:layout_height="@dimen/tuna_button_height"
+            android:layout_below="@id/tViewPlay"
+            android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+            android:layout_marginRight="@dimen/tuna_button_marginRight"
+            app:strokeColorNormal="#bc7955"
+            app:strokeWidthNormal="1dp"
+            app:textColorNormal="#bc7955"
+            app:textSize="16dp"
+            app:textValue="Change" />
+
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple01"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_below="@id/buttonChange"
+            android:layout_below="@id/tViewChange"
             app:rippleDuraction="1800"
             app:rippleInnerCircleColor="#fed136"
             app:rippleInnerCircleRadius="24dp"

@@ -12,14 +12,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
 
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
-import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
@@ -58,7 +54,7 @@ public class TDraw extends TView {
     }
 
     public void setDrawSrc(int id) {
-        setDrawSrc(decodeBitmapResource(getContext(), id));
+        setDrawSrc(decodeBitmapResource(id));
     }
 
     public void setDrawSrc(Bitmap bitmap) {
@@ -137,7 +133,7 @@ public class TDraw extends TView {
     public TDraw(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TDraw.class.getSimpleName();
+        tag = TDraw.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDraw);
 
@@ -185,7 +181,7 @@ public class TDraw extends TView {
         super.onLayout(changed, left, top, right, bottom);
 
         //When the parent class in onMeasure initialized paint in TView
-        PaintTool.initPaint(Paint.Style.STROKE, drawColor, drawWidth);
+        initPaint(Paint.Style.STROKE, drawColor, drawWidth);
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStrokeJoin(Paint.Join.ROUND);
@@ -208,35 +204,31 @@ public class TDraw extends TView {
             int shortSide = width >= height ? height : width;
             initPaintingDstMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-            if (isInEditMode()) {
-                drawDstBitmap = getCircleBitmap(shortSide);
-            } else {
-                switch (drawType) {
-                    case CIRCLE:
-                        drawDstBitmap = getCircleBitmap(shortSide);
-                        break;
-                    case STAR:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
-                        break;
-                    case HEART:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
-                        break;
-                    case FLOWER:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
-                        break;
-                    case PENTAGON:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
-                        break;
-                    case SIXTEENEDGE:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
-                        break;
-                    case FORTYEDGE:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
-                        break;
-                    case SNAIL:
-                        drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
-                        break;
-                }
+            switch (drawType) {
+                case CIRCLE:
+                    drawDstBitmap = getCircleBitmap(shortSide);
+                    break;
+                case STAR:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
+                    break;
+                case HEART:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
+                    break;
+                case FLOWER:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
+                    break;
+                case PENTAGON:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
+                    break;
+                case SIXTEENEDGE:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
+                    break;
+                case FORTYEDGE:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
+                    break;
+                case SNAIL:
+                    drawDstBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
+                    break;
             }
         }
     }
@@ -257,7 +249,7 @@ public class TDraw extends TView {
             if (drawSrc != null) {
                 canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
                 canvas.drawBitmap(drawDstBitmap, drawDstMatrix, paint);
-                paint.setXfermode(porterDuffXfermode);
+                paint.setXfermode(TPorterDuffXfermode);
                 canvas.drawBitmap(drawSrc, matrix, paint);
                 paint.setXfermode(null);
                 canvas.restore();
@@ -266,7 +258,7 @@ public class TDraw extends TView {
             //
             canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
             canvas.drawBitmap(drawDstBitmap, drawDstMatrix, drawPaint);
-            drawPaint.setXfermode(porterDuffXfermode);
+            drawPaint.setXfermode(TPorterDuffXfermode);
             canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
             drawPaint.setXfermode(null);
             canvas.restore();

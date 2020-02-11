@@ -14,8 +14,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 
-import static com.tunasushi.tool.DeviceTool.applyDimension;
-import static com.tunasushi.tool.DeviceTool.getViewDisplayMetrics;
+import static com.tunasushi.tool.ConvertTool.convertToPX;
 
 /**
  * @author Tunasashimi
@@ -32,10 +31,8 @@ public class ViewTool {
 
     //
     public static void setViewMargins(View view, int unit, int left, int top, int right, int bottom) {
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(view);
-
-        setViewMarginsRaw(view, (int) applyDimension(unit, left, displayMetrics), (int) applyDimension(unit, top, displayMetrics),
-                (int) applyDimension(unit, right, displayMetrics), (int) applyDimension(unit, bottom, displayMetrics));
+        setViewMarginsRaw(view, (int) convertToPX(unit, left), (int) convertToPX(unit, top),
+                (int) convertToPX(unit, right), (int) convertToPX(unit, bottom));
     }
 
     //
@@ -110,7 +107,7 @@ public class ViewTool {
     }
 
     public static void setLayoutByWidth(View view, int unit, float width) {
-        setLayoutByWidthRaw(view, applyDimension(unit, width, getViewDisplayMetrics(view)));
+        setLayoutByWidthRaw(view, convertToPX(width, unit));
     }
 
     public static void setLayoutByWidthRaw(View view, float width) {
@@ -125,7 +122,7 @@ public class ViewTool {
     }
 
     public static void setLayoutByHeight(View view, int unit, float height) {
-        setLayoutByHeightRaw(view, applyDimension(unit, height, getViewDisplayMetrics(view)));
+        setLayoutByHeightRaw(view, convertToPX(height, unit));
     }
 
     public static void setLayoutByHeightRaw(View view, float height) {
@@ -140,8 +137,7 @@ public class ViewTool {
     }
 
     public static void setLayout(View view, int unit, float width, float height) {
-        DisplayMetrics displayMetrics = getViewDisplayMetrics(view);
-        setLayoutRaw(view, applyDimension(unit, width, displayMetrics), applyDimension(unit, height, displayMetrics));
+        setLayoutRaw(view, convertToPX(width, unit), convertToPX(height, unit));
     }
 
     private static void setLayoutRaw(View view, float width, float height) {

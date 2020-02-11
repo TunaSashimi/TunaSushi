@@ -40,8 +40,8 @@
         app:lineArrowStrokeColor="#dedede"
         app:lineArrowStrokeWidth="2px"
         app:lineArrowWidth="22dp"
-        app:lineX="@dimen/tuna_button_width"
-        app:lineTowardType="top" />
+        app:lineTowardType="top"
+        app:lineX="@dimen/tuna_button_width" />
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLineBG"
@@ -55,8 +55,8 @@
         app:lineArrowStrokeWidth="2px"
         app:lineArrowWidth="22dp"
         app:lineBackgroundNormal="#f0eff5"
-        app:lineX="@dimen/tuna_button_width"
-        app:lineTowardType="top" />
+        app:lineTowardType="top"
+        app:lineX="@dimen/tuna_button_width" />
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLineAC"
@@ -71,28 +71,37 @@
         app:lineArrowWidth="22dp"
         app:lineTowardType="bottom" />
 
-    <Button
-        android:id="@+id/buttonCenterAC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewCenter"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/tuna_button_height"
         android:layout_below="@id/tLineAC"
-        android:layout_marginLeft="@dimen/tuna_button_margin"
-        android:layout_marginRight="@dimen/tuna_button_margin"
-        android:text="居中" />
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginRight="@dimen/tuna_button_marginRight"
+        app:strokeColorNormal="#dedede"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#dedede"
+        app:textSize="16dp"
+        app:textValue="居中" />
 
-    <Button
-        android:id="@+id/buttonHiddenAC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/buttonCenterAC"
-        android:layout_toRightOf="@id/buttonCenterAC"
-        android:text="隐藏" />
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewHidden"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/tuna_button_height"
+        android:layout_alignTop="@id/tViewCenter"
+        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_toRightOf="@id/tViewCenter"
+        app:strokeColorNormal="#dedede"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#dedede"
+        app:textSize="16dp"
+        app:textValue="隐藏" />
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLineMove"
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_below="@id/buttonCenterAC"
+        android:layout_below="@id/tViewCenter"
         android:layout_margin="@dimen/tuna_button_margin"
         app:lineArrowHeight="12dp"
         app:lineArrowStrokeColor="#dedede"

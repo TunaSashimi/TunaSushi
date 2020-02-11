@@ -5,13 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TRipple;
+import com.tunasushi.tuna.TView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,7 +22,7 @@ public class TRippleActivity extends Activity {
 
     private static final int PLAY_TUNARIPPLE_ANIMATION = 0;
 
-    private Button buttonPlay, buttonChange;
+    private TView tViewPlay, tViewChange;
     private TRipple tRipple01, tRipple02, tRipple03, tRipple04;
 
     private Timer timer;
@@ -56,10 +53,10 @@ public class TRippleActivity extends Activity {
         tRipple03 = findViewById(R.id.tRipple03);
         tRipple04 = findViewById(R.id.tRipple04);
 
-        buttonPlay = findViewById(R.id.buttonPlay);
-        buttonPlay.setOnClickListener(new OnClickListener() {
+        tViewPlay = findViewById(R.id.tViewPlay);
+        tViewPlay.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(TView v) {
                 if (timer == null) {
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
@@ -72,10 +69,10 @@ public class TRippleActivity extends Activity {
             }
         });
 
-        buttonChange = findViewById(R.id.buttonChange);
-        buttonChange.setOnClickListener(new OnClickListener() {
+        tViewChange = findViewById(R.id.tViewChange);
+        tViewChange.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(TView v) {
 
                 if ("^".equals(tRipple01.getRippleTextValue())) {
 

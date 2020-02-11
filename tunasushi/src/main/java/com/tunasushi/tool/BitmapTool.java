@@ -1,6 +1,7 @@
 package com.tunasushi.tool;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,7 +16,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+
 import java.util.HashMap;
+
+import static com.tunasushi.tool.SVGTool.getSVGFromInputStream;
 
 /**
  * @author Tunasashimi
@@ -29,12 +33,12 @@ public class BitmapTool {
     public static HashMap<String, Object> graphicsMap = new HashMap<String, Object>();
 
     //
-    public static Bitmap decodeBitmapResource(Context context, int id) {
-        return decodeBitmapResource(context, id, 1);
+    public static Bitmap decodeBitmapResource(int id) {
+        return decodeBitmapResource(id, 1);
     }
 
     //
-    public static Bitmap decodeBitmapResource(Context context, int id, int inSampleSize) {
+    public static Bitmap decodeBitmapResource(int id, int inSampleSize) {
         String stringId = String.valueOf(id);
         if (graphicsMap.containsKey(stringId)) {
             Object object = graphicsMap.get(stringId);
@@ -46,16 +50,16 @@ public class BitmapTool {
         if (inSampleSize > 1) {
             BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
             bitmapFactoryOptions.inSampleSize = inSampleSize;
-            bitmap = BitmapFactory.decodeResource(context.getResources(), id, bitmapFactoryOptions);
+            bitmap = BitmapFactory.decodeResource(Resources.getSystem(), id, bitmapFactoryOptions);
         } else {
-            bitmap = BitmapFactory.decodeResource(context.getResources(), id);
+            bitmap = BitmapFactory.decodeResource(Resources.getSystem(), id);
         }
         graphicsMap.put(stringId, bitmap);
         return bitmap;
     }
 
     //
-    public Movie decodeGifResource(Context context, int id) {
+    public Movie decodeGifResource(int id) {
         String stringId = String.valueOf(id);
         if (graphicsMap.containsKey(stringId)) {
             Object object = graphicsMap.get(stringId);
@@ -63,16 +67,16 @@ public class BitmapTool {
                 return (Movie) object;
             }
         }
-        return Movie.decodeStream(context.getResources().openRawResource(id));
+        return Movie.decodeStream(Resources.getSystem().openRawResource(id));
     }
 
     //
     public Object decodeGraphicsResource(Context context, int id) {
-        return decodeGraphicsResource(context, id, 1);
+        return decodeGraphicsResource(id, 1);
     }
 
     //
-    public Object decodeGraphicsResource(Context context, int id, int inSampleSize) {
+    public Object decodeGraphicsResource(int id, int inSampleSize) {
         String stringId = String.valueOf(id);
         if (graphicsMap.containsKey(stringId)) {
             Object object = graphicsMap.get(stringId);
@@ -80,11 +84,11 @@ public class BitmapTool {
                 return object;
             }
         }
-        Movie movie = decodeGifResource(context, id);
+        Movie movie = decodeGifResource(id);
         if (movie != null) {
             return movie;
         } else {
-            return decodeBitmapResource(context, id, inSampleSize);
+            return decodeBitmapResource(id, inSampleSize);
         }
     }
 
@@ -275,6 +279,7 @@ public class BitmapTool {
     }
 
     // SVG
+    // The resource files placed in raw need to be accessed through Contex!
     public static Bitmap getSVGBitmap(Context context, int width, int height, int svgResourceId) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -282,13 +287,12 @@ public class BitmapTool {
         paint.setColor(Color.BLACK);
 
         if (svgResourceId > 0) {
-            SVGTool.SVG svg = SVGTool.getSVGFromInputStream(
-                context.getResources().openRawResource(svgResourceId), width, height);
+            SVGTool.SVG svg = getSVGFromInputStream(
+                    context.getResources().openRawResource(svgResourceId), width, height);
             canvas.drawPicture(svg.getPicture());
         } else {
             canvas.drawRect(new RectF(0.0f, 0.0f, width, height), paint);
         }
-
         return bitmap;
     }
 

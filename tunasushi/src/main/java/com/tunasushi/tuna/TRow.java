@@ -10,11 +10,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.View;
-
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PaintTool.paint;
 
 /**
  * @author Tunasashimi
@@ -99,7 +95,7 @@ public class TRow extends TView {
     public TRow(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TRow.class.getSimpleName();
+        tag = TRow.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRow);
 
@@ -129,7 +125,7 @@ public class TRow extends TView {
                 break;
         }
 
-        PaintTool.initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
+        initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
     }
 
     @Override

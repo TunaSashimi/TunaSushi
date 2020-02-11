@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
-
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:58
@@ -31,7 +30,8 @@ public class TScale extends TView {
     public enum ScaleType {
         WIDTH_TOP(0),
         WIDTH_CENTER(1),
-        WIDTH_BOTTOM(2),;
+        WIDTH_BOTTOM(2),
+        ;
         final int nativeInt;
 
         ScaleType(int ni) {
@@ -56,7 +56,7 @@ public class TScale extends TView {
     public TScale(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TScale.class.getSimpleName();
+        tag = TScale.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TScale);
 
@@ -155,7 +155,7 @@ public class TScale extends TView {
         this.srcBitmap = srcBitmap;
     }
 
-    public void setScaleBitmapSrc(int srcBitmapId) {
+    public void setScaleSrc(int srcBitmapId) {
         srcBitmap = BitmapFactory.decodeResource(getResources(), srcBitmapId);
     }
 }

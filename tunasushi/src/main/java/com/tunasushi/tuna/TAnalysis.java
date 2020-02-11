@@ -6,12 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
-
 /**
  * @author Tunasashimi
  * @date 10/30/15 16:48
@@ -48,7 +42,7 @@ public class TAnalysis extends TView {
     public TAnalysis(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        Tag = TAnalysis.class.getSimpleName();
+        tag = TAnalysis.class.getSimpleName();
     }
 
 
@@ -56,7 +50,7 @@ public class TAnalysis extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        PaintTool.initPaint(Paint.Style.FILL, Color.RED);
+        initPaint(Paint.Style.FILL, Color.RED);
 
         int bezierCircleX = 150;
         int bezierCircley = 150;

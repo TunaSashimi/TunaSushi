@@ -10,11 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
-import static com.tunasushi.tool.PaintTool.paint;
 
 /**
  * @author Tunasashimi
@@ -25,14 +22,14 @@ import static com.tunasushi.tool.PaintTool.paint;
 public class TSVG extends TView {
 
     //
-    private Bitmap SVGSrcBitmap;
+    private Bitmap SVGSrc;
 
-    public Bitmap getSVGSrcBitmap() {
-        return SVGSrcBitmap;
+    public Bitmap getSVGSrc() {
+        return SVGSrc;
     }
 
-    public void setSVGSrcBitmap(Bitmap SVGSrcBitmap) {
-        this.SVGSrcBitmap = SVGSrcBitmap;
+    public void setSVGSrc(Bitmap SVGSrc) {
+        this.SVGSrc = SVGSrc;
     }
 
     //
@@ -97,7 +94,7 @@ public class TSVG extends TView {
     public TSVG(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TSVG.class.getSimpleName();
+        tag = TSVG.class.getSimpleName();
 
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSVG);
@@ -146,35 +143,31 @@ public class TSVG extends TView {
         int shortSide = width >= height ? height : width;
         initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-        if (isInEditMode()) {
-            SVGSrcBitmap = getCircleBitmap(shortSide);
-        } else {
-            switch (svgType) {
-                case CIRCLE:
-                    SVGSrcBitmap = getCircleBitmap(shortSide);
-                    break;
-                case STAR:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
-                    break;
-                case HEART:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
-                    break;
-                case FLOWER:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
-                    break;
-                case PENTAGON:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
-                    break;
-                case SIXTEENEDGE:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
-                    break;
-                case FORTYEDGE:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
-                    break;
-                case SNAIL:
-                    SVGSrcBitmap = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
-                    break;
-            }
+        switch (svgType) {
+            case CIRCLE:
+                SVGSrc = getCircleBitmap(shortSide);
+                break;
+            case STAR:
+                SVGSrc =getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_star);
+                break;
+            case HEART:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_heart);
+                break;
+            case FLOWER:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_flower);
+                break;
+            case PENTAGON:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_pentagon);
+                break;
+            case SIXTEENEDGE:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_sixteenedge);
+                break;
+            case FORTYEDGE:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_fortyedge);
+                break;
+            case SNAIL:
+                SVGSrc = getSVGBitmap(getContext(),shortSide, shortSide, R.raw.svg_snail);
+                break;
         }
     }
 
@@ -185,10 +178,10 @@ public class TSVG extends TView {
         canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
 
         //
-        canvas.drawBitmap(SVGSrcBitmap, SVGMatrix, PaintTool.initPaint());
+        canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
 
         //
-        paint.setXfermode(porterDuffXfermode);
+        paint.setXfermode(TPorterDuffXfermode);
         canvas.drawBitmap(srcBitmap, matrix, paint);
 
         paint.setXfermode(null);

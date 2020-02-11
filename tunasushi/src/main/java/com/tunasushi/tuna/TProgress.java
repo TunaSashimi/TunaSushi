@@ -12,10 +12,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PathTool.initPathMoveTo;
-import static com.tunasushi.tool.PathTool.path;
 
 /**
  * @author Tunasashimi
@@ -25,7 +21,7 @@ import static com.tunasushi.tool.PathTool.path;
  */
 public class TProgress extends TView {
     private int progressArcBackgroundNormal, progressBoundBackgroundNormal;
-    private Bitmap progressBitmapSrcBack, progressBitmapSrcFront;
+    private Bitmap progressSrcBack, progressSrcFront;
 
     private ProgressShapeType progressShapeType;
 
@@ -78,7 +74,7 @@ public class TProgress extends TView {
     public TProgress(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TProgress.class.getSimpleName();
+        tag = TProgress.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TProgress);
 
@@ -98,18 +94,18 @@ public class TProgress extends TView {
 
         if (progressShapeType == ProgressShapeType.CUSTOM) {
 
-            int progressBitmapSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcBack, -1);
-            if (progressBitmapSrcBackId != -1) {
-                progressBitmapSrcBack = BitmapFactory.decodeResource(getResources(), progressBitmapSrcBackId);
+            int progressSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressSrcBack, -1);
+            if (progressSrcBackId != -1) {
+                progressSrcBack = BitmapFactory.decodeResource(getResources(), progressSrcBackId);
             } else {
-                throw new IllegalArgumentException("The content attribute require a property named progressBitmapSrcBack");
+                throw new IllegalArgumentException("The content attribute require a property named progressSrcBack");
             }
 
-            int progressBitmapSrcFrontId = typedArray.getResourceId(R.styleable.TProgress_progressBitmapSrcFront, -1);
-            if (progressBitmapSrcFrontId != -1) {
-                progressBitmapSrcFront = BitmapFactory.decodeResource(getResources(), progressBitmapSrcFrontId);
+            int progressSrcFrontId = typedArray.getResourceId(R.styleable.TProgress_progressSrcFront, -1);
+            if (progressSrcFrontId != -1) {
+                progressSrcFront = BitmapFactory.decodeResource(getResources(), progressSrcFrontId);
             } else {
-                throw new IllegalArgumentException("The content attribute require a property named progressBitmapSrcFront");
+                throw new IllegalArgumentException("The content attribute require a property named progressSrcFront");
             }
         } else {
             progressArcBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressArcBackgroundNormal, Color.TRANSPARENT);
@@ -126,16 +122,16 @@ public class TProgress extends TView {
         super.onLayout(changed, left, top, right, bottom);
 
         if (progressShapeType == ProgressShapeType.CUSTOM) {
-            int progressBitmapSrcFrontWidth = progressBitmapSrcFront.getWidth();
-            int progressBitmapSrcFrontHeight = progressBitmapSrcFront.getHeight();
-            int progressBitmapSrcBackWidth = progressBitmapSrcBack.getWidth();
-            int progressBitmapSrcBackHeight = progressBitmapSrcBack.getHeight();
-            if (progressBitmapSrcFrontWidth != progressBitmapSrcBackWidth || progressBitmapSrcFrontHeight != progressBitmapSrcBackHeight) {
-                throw new IndexOutOfBoundsException("Both the width and height of the attribute progressBitmapSrcFront and progressBitmapSrcBack needed equal");
+            int progressSrcFrontWidth = progressSrcFront.getWidth();
+            int progressSrcFrontHeight = progressSrcFront.getHeight();
+            int progressSrcBackWidth = progressSrcBack.getWidth();
+            int progressSrcBackHeight = progressSrcBack.getHeight();
+            if (progressSrcFrontWidth != progressSrcBackWidth || progressSrcFrontHeight != progressSrcBackHeight) {
+                throw new IndexOutOfBoundsException("Both the width and height of the attribute progressSrcFront and progressSrcBack needed equal");
             }
 
             if (progressShapeType == ProgressShapeType.CUSTOM) {
-                scale = width * 1f / progressBitmapSrcBackWidth;
+                scale = width * 1f / progressSrcBackWidth;
             }
             initMatrix(scale, scale);
         }
@@ -149,7 +145,7 @@ public class TProgress extends TView {
         switch (progressShapeType) {
             case CUSTOM:
 
-                canvas.drawBitmap(progressBitmapSrcBack, matrix, null);
+                canvas.drawBitmap(progressSrcBack, matrix, null);
                 canvas.save();
 
                 switch (progressPromoteType) {
@@ -172,28 +168,28 @@ public class TProgress extends TView {
                         break;
                 }
 
-                canvas.drawBitmap(progressBitmapSrcFront, matrix, null);
+                canvas.drawBitmap(progressSrcFront, matrix, null);
                 canvas.restore();
 
                 break;
             case CIRCLE:
 
-                canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.STROKE, progressBoundBackgroundNormal));
+                canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.STROKE, progressBoundBackgroundNormal));
 
                 switch (progressPromoteType) {
                     case CLOCKWISE:
-                        canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, PaintTool.initPaint(Paint.Style.FILL, progressArcBackgroundNormal));
+                        canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, initPaint(Paint.Style.FILL, progressArcBackgroundNormal));
                         break;
                     case UPWARD:
                         canvas.save();
                         canvas.clipRect(initRect(0, (int) (height * (1 - percent)), width, height));
-                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
                         canvas.restore();
                         break;
                     case UPDOWN:
                         canvas.save();
                         canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.DIFFERENCE);
-                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, PaintTool.initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
                         canvas.restore();
                         break;
                     default:

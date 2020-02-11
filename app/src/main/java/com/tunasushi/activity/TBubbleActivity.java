@@ -16,6 +16,5 @@ public class TBubbleActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_t_bubble);
-
     }
 }

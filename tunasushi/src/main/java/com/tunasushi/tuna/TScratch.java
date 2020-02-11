@@ -19,11 +19,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.PaintTool.paint;
-import static com.tunasushi.tool.PathTool.initPath;
-import static com.tunasushi.tool.PathTool.path;
+import static com.tunasushi.tool.ConvertTool.convertToPX;
 
 
 /**
@@ -36,7 +32,7 @@ public class TScratch extends TView {
 
     private Paint scratchCoverPaint;
 
-    private Bitmap scratchCoverBitmap, scratchSrcBitmap;
+    private Bitmap scratchCoverBitmap, scratchSrc;
 
     //
     private int scratchTouchX, scratchTouchY;
@@ -79,22 +75,22 @@ public class TScratch extends TView {
     public TScratch(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TScratch.class.getSimpleName();
+        tag = TScratch.class.getSimpleName();
 
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TScratch);
         int scratchSrcId = typedArray.getResourceId(R.styleable.TScratch_scratchSrc, -1);
         if (scratchSrcId > -1) {
-            scratchSrcBitmap = BitmapFactory.decodeResource(getResources(), scratchSrcId);
+            scratchSrc = BitmapFactory.decodeResource(getResources(), scratchSrcId);
         }
 
-        scratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()));
+        scratchRadius = (int) typedArray.getDimension(R.styleable.TScratch_scratchRadius, convertToPX(TypedValue.COMPLEX_UNIT_DIP, 10));
         scratchCoverColor = typedArray.getColor(R.styleable.TScratch_scratchCoverColor, Color.parseColor("#c0c0c0"));
 
-        scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()));
+        scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, convertToPX(TypedValue.COMPLEX_UNIT_DIP, 20));
         scratchText = typedArray.getString(R.styleable.TScratch_scratchText);
 
-        scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 22, getResources().getDisplayMetrics()));
+        scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, convertToPX(TypedValue.COMPLEX_UNIT_SP, 22));
         scratchTextColor = typedArray.getColor(R.styleable.TScratch_scratchTextColor, Color.TRANSPARENT);
 
         typedArray.recycle();
@@ -131,11 +127,11 @@ public class TScratch extends TView {
         scratchCoverPaint.setStrokeWidth(scratchCoverStrokeWidth);
 
         //
-        PaintTool.initTextPaint(Style.FILL, scratchTextColor, scratchTextSize, Align.LEFT);
+        initTextPaint(Style.FILL, scratchTextColor, scratchTextSize, Align.LEFT);
         paint.getTextBounds(scratchText, 0, scratchText.length(), rect);
 
         canvas.drawRoundRect(new RectF(0, 0, width, height), scratchRadius, scratchRadius, scratchCoverPaint);
-        canvas.drawBitmap(scratchSrcBitmap, null, new Rect(0, 0, width, height), null);
+        canvas.drawBitmap(scratchSrc, null, new Rect(0, 0, width, height), null);
     }
 
     @Override

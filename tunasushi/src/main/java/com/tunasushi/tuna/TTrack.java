@@ -34,7 +34,7 @@ public class TTrack extends TView {
     public TTrack(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TTrack.class.getSimpleName();
+        tag = TTrack.class.getSimpleName();
 
         trackPaint = new Paint();
         trackPaint.setColor(Color.CYAN);

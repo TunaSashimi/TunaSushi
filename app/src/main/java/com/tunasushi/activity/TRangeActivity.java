@@ -29,7 +29,7 @@ public class TRangeActivity extends Activity {
         rRange.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                t.setX(TypedValue.COMPLEX_UNIT_PX, t.getTouchEventX());
+                t.setX(t.getTouchEventX());
             }
         });
     }

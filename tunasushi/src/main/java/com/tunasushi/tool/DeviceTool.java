@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -44,9 +45,9 @@ public class DeviceTool {
     public static final int stringBufferCapacity = 288;
 
     //
-    public static void initDisplayMetrics(Context context) {
+    public static void initDisplayMetrics() {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = Resources.getSystem().getDisplayMetrics();
             displayWidth = displayMetrics.widthPixels;
             displayHeight = displayMetrics.heightPixels;
             displayDensity = displayMetrics.density;
@@ -441,91 +442,6 @@ public class DeviceTool {
             return availableBlocks * blockSize;
         }
         return 0;
-    }
-
-    // Parameter need to float for example tunaStroke is float convert the value to dip or dp px values​​, to ensure constant size
-    public static float pxToDp(Context context, float pxValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics(context);
-        }
-        return pxValue / displayDensity;
-    }
-
-    // Parameter need to float for example tunaStroke is float convert the value to dip or dp px values​​, to ensure constant size
-    public static float pxToSp(Context context, float pxValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics(context);
-        }
-        return pxValue / displayScaledDensity;
-    }
-
-    // convert the value px sp values​​, to ensure constant size
-    public static int spToPx(Context context, float spValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics(context);
-        }
-        return (int) (spValue * displayScaledDensity + 0.5f);
-    }
-
-    // convert the value to px dp values​​, to ensure constant size
-    public static int dpToPx(Context context, float dpValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics(context);
-        }
-        return (int) (dpValue * displayDensity + 0.5f);
-    }
-
-    public static float convertToPX(float value, Activity activity) {
-        return convertToPX(value, TypedValue.COMPLEX_UNIT_DIP, activity);
-    }
-
-    public static float convertToPX(float value, int unit, Activity activity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return applyDimension(unit, value, dm);
-    }
-
-    public static float convertToPX(float value, View view) {
-        return convertToPX(value, TypedValue.COMPLEX_UNIT_DIP, view);
-    }
-
-    public static float convertToPX(float value, int unit, View view) {
-        return applyDimension(unit, value, getViewDisplayMetrics(view));
-    }
-
-    public static float applyDimension(int unit, float value, DisplayMetrics metrics) {
-        switch (unit) {
-            case TypedValue.COMPLEX_UNIT_PX:
-                return value;
-            case TypedValue.COMPLEX_UNIT_DIP:
-                return value * metrics.density;
-            case TypedValue.COMPLEX_UNIT_SP:
-                return value * metrics.scaledDensity;
-            case TypedValue.COMPLEX_UNIT_PT:
-                return value * metrics.xdpi * (1.0f / 72);
-            case TypedValue.COMPLEX_UNIT_IN:
-                return value * metrics.xdpi;
-            case TypedValue.COMPLEX_UNIT_MM:
-                return value * metrics.xdpi * (1.0f / 25.4f);
-        }
-        return 0;
-    }
-
-    //
-    public static DisplayMetrics getViewDisplayMetrics(View view) {
-        return getViewResources(view).getDisplayMetrics();
-    }
-
-    //
-    public static Resources getViewResources(View view) {
-        Resources resources;
-        Context context = view.getContext();
-        if (context == null) {
-            resources = Resources.getSystem();
-        } else {
-            resources = context.getResources();
-        }
-        return resources;
     }
 
 

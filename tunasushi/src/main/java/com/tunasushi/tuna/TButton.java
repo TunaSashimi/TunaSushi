@@ -9,9 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import com.tuna.R;
-import com.tunasushi.tool.PaintTool;
-
-import static com.tunasushi.tool.DrawTool.drawText;
 
 /**
  * @author Tunasashimi
@@ -40,7 +37,7 @@ public class TButton extends TView{
 	private float buttonTextSize;
 	private int buttonTextColorNormal;
 
-	private Bitmap buttonBitmapSrcNormal, buttonBitmapSrcPress;
+	private Bitmap buttonSrcNormal, buttonSrcPress;
 
     public TButton(Context context) {
         this(context, null);
@@ -53,7 +50,7 @@ public class TButton extends TView{
     public TButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-		Tag = TButton.class.getSimpleName();
+		tag = TButton.class.getSimpleName();
 
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TButton);
 
@@ -63,14 +60,14 @@ public class TButton extends TView{
 		buttonForegroundNormal = typedArray.getColor(R.styleable.TButton_buttonForegroundNormal, Color.TRANSPARENT);
 		buttonForegroundPress = typedArray.getColor(R.styleable.TButton_buttonForegroundPress, buttonForegroundNormal);
 
-		int buttonBitmapSrcNormalId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcNormal, -1);
-		if (buttonBitmapSrcNormalId != -1) {
-			buttonBitmapSrcNormal = BitmapFactory.decodeResource(getResources(), buttonBitmapSrcNormalId);
+		int buttonSrcNormalId = typedArray.getResourceId(R.styleable.TButton_buttonSrcNormal, -1);
+		if (buttonSrcNormalId != -1) {
+			buttonSrcNormal = BitmapFactory.decodeResource(getResources(), buttonSrcNormalId);
 		}
 
-		int buttonBitmapSrcPressId = typedArray.getResourceId(R.styleable.TButton_buttonBitmapSrcPress, buttonBitmapSrcNormalId);
-		if (buttonBitmapSrcPressId != -1) {
-			buttonBitmapSrcPress = BitmapFactory.decodeResource(getResources(), buttonBitmapSrcPressId);
+		int buttonSrcPressId = typedArray.getResourceId(R.styleable.TButton_buttonSrcPress, buttonSrcNormalId);
+		if (buttonSrcPressId != -1) {
+			buttonSrcPress = BitmapFactory.decodeResource(getResources(), buttonSrcPressId);
 		}
 
 		// depending on the type of fraction, the getFraction method multiples
@@ -96,18 +93,18 @@ public class TButton extends TView{
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom){
 		super.onLayout(changed, left, top, right, bottom);
 
-		int buttonBitmapSrcNormalWidth = buttonBitmapSrcNormal.getWidth();
-		int buttonBitmapSrcNormalHeight = buttonBitmapSrcNormal.getHeight();
-		int buttonBitmapSrcPressWidth = buttonBitmapSrcPress.getWidth();
-		int buttonBitmapSrcPressHeight = buttonBitmapSrcPress.getHeight();
+		int buttonSrcNormalWidth = buttonSrcNormal.getWidth();
+		int buttonSrcNormalHeight = buttonSrcNormal.getHeight();
+		int buttonSrcPressWidth = buttonSrcPress.getWidth();
+		int buttonSrcPressHeight = buttonSrcPress.getHeight();
 
-		if (buttonBitmapSrcNormalWidth != buttonBitmapSrcPressWidth || buttonBitmapSrcNormalHeight != buttonBitmapSrcPressHeight) {
-			throw new IllegalArgumentException("Both the width and height of the attribute buttonBitmapSrcNormal and buttonBitmapSrcPress needed equal");
+		if (buttonSrcNormalWidth != buttonSrcPressWidth || buttonSrcNormalHeight != buttonSrcPressHeight) {
+			throw new IllegalArgumentException("Both the width and height of the attribute buttonSrcNormal and buttonSrcPress needed equal");
 		}
 
-		scale = height * (buttonBitmapFractionBottom - buttonBitmapFractionTop) / buttonBitmapSrcNormalWidth;
+		scale = height * (buttonBitmapFractionBottom - buttonBitmapFractionTop) / buttonSrcNormalWidth;
 		dy = height * buttonBitmapFractionTop;
-		dx = (width - buttonBitmapSrcNormalWidth * scale) * 0.5f;
+		dx = (width - buttonSrcNormalWidth * scale) * 0.5f;
 
 		initMatrix(scale, scale);
 	}
@@ -119,11 +116,11 @@ public class TButton extends TView{
 
 		canvas.save();
 		canvas.translate(dx, dy);
-		canvas.drawBitmap(press ? buttonBitmapSrcPress : buttonBitmapSrcNormal, matrix, null);
+		canvas.drawBitmap(press ? buttonSrcPress : buttonSrcNormal, matrix, null);
 		canvas.translate(-dx, -dy);
 
 		drawText(canvas, buttonTextValue, width, width >> 1, (height * buttonTextFractionTop + height * buttonTextFractionBottom) * 0.5f, 0, 0,
-				PaintTool.initTextPaint(Paint.Style.FILL, buttonTextColorNormal, buttonTextSize, Paint.Align.CENTER));
+				initTextPaint(Paint.Style.FILL, buttonTextColorNormal, buttonTextSize, Paint.Align.CENTER));
 
 		canvas.drawColor(press ? buttonForegroundPress : buttonForegroundNormal);
 

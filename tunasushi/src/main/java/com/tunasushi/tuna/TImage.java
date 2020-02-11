@@ -166,14 +166,14 @@ public class TImage extends TView {
 
     private static final ImageReverse[] imageReverseArray = {ImageReverse.HORIZONTAL, ImageReverse.VERTICAL,};
 
-    private Bitmap imageSrcBitmap;
+    private Bitmap imageSrc;
 
-    public Bitmap getImageSrcBitmap() {
-        return imageSrcBitmap;
+    public Bitmap getImageSrc() {
+        return imageSrc;
     }
 
-    public void setImageSrcBitmap(Bitmap imageSrcBitmap) {
-        this.imageSrcBitmap = imageSrcBitmap;
+    public void setImageSrc(Bitmap imageSrc) {
+        this.imageSrc = imageSrc;
     }
 
     public TImage(Context context) {
@@ -187,7 +187,7 @@ public class TImage extends TView {
     public TImage(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        Tag = TImage.class.getSimpleName();
+        tag = TImage.class.getSimpleName();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TImage);
 
         int imageSrcIndex = typedArray.getResourceId(R.styleable.TImage_imageSrc, -1);
@@ -233,62 +233,62 @@ public class TImage extends TView {
         super.onDraw(canvas);
 
         //
-        imageSrcBitmap = srcBitmap;
+        imageSrc = srcBitmap;
 
         if (imageRadius > 0) {
-            imageSrcBitmap = getClassicRoundBitmap(srcBitmap, width);
+            imageSrc = getClassicRoundBitmap(srcBitmap, width);
         }
 
         if (imageAlpha != 1f) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getAlphaBitmap(srcBitmap, imageAlpha);
+            if (imageSrc == null) {
+                imageSrc = getAlphaBitmap(srcBitmap, imageAlpha);
             } else {
-                imageSrcBitmap = getAlphaBitmap(imageSrcBitmap, imageAlpha);
+                imageSrc = getAlphaBitmap(imageSrc, imageAlpha);
             }
         }
 
         if (imageSepia) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getSepiaBitmap(srcBitmap);
+            if (imageSrc == null) {
+                imageSrc = getSepiaBitmap(srcBitmap);
             } else {
-                imageSrcBitmap = getSepiaBitmap(imageSrcBitmap);
+                imageSrc = getSepiaBitmap(imageSrc);
             }
         }
 
         if (imageEmboss) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getEmbossBitmap(srcBitmap);
+            if (imageSrc == null) {
+                imageSrc = getEmbossBitmap(srcBitmap);
             } else {
-                imageSrcBitmap = getEmbossBitmap(imageSrcBitmap);
+                imageSrc = getEmbossBitmap(imageSrc);
             }
         }
 
         if (imageBacksheet) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getBacksheetBitmap(srcBitmap);
+            if (imageSrc == null) {
+                imageSrc = getBacksheetBitmap(srcBitmap);
             } else {
-                imageSrcBitmap = getBacksheetBitmap(imageSrcBitmap);
+                imageSrc = getBacksheetBitmap(imageSrc);
             }
         }
 
         if (imageSketch) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getSketchBitmap(srcBitmap);
+            if (imageSrc == null) {
+                imageSrc = getSketchBitmap(srcBitmap);
             } else {
-                imageSrcBitmap = getSketchBitmap(imageSrcBitmap);
+                imageSrc = getSketchBitmap(imageSrc);
             }
         }
 
         if (imageSunshineFractionX != 0 || imageSunshineFractionY != 0) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getSunshineBitmap(
+            if (imageSrc == null) {
+                imageSrc = getSunshineBitmap(
                         srcBitmap,
                         width * imageSunshineFractionX,
                         height * imageSunshineFractionY);
                 ;
             } else {
-                imageSrcBitmap = getSunshineBitmap(
-                        imageSrcBitmap,
+                imageSrc = getSunshineBitmap(
+                        imageSrc,
                         width * imageSunshineFractionX,
                         height * imageSunshineFractionY);
                 ;
@@ -296,20 +296,20 @@ public class TImage extends TView {
         }
 
         if (imageReverse != null) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = getReverseBitmap(srcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
+            if (imageSrc == null) {
+                imageSrc = getReverseBitmap(srcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
             } else {
-                imageSrcBitmap = getReverseBitmap(imageSrcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
+                imageSrc = getReverseBitmap(imageSrc, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
             }
         }
 
         if (imageBright != 1f || imageHue != 0f || imageSaturation != 1f) {
-            if (imageSrcBitmap == null) {
-                imageSrcBitmap = processBitmap(srcBitmap, imageBright, imageHue, imageSaturation);
+            if (imageSrc == null) {
+                imageSrc = processBitmap(srcBitmap, imageBright, imageHue, imageSaturation);
             } else {
-                imageSrcBitmap = processBitmap(imageSrcBitmap, imageBright, imageHue, imageSaturation);
+                imageSrc = processBitmap(imageSrc, imageBright, imageHue, imageSaturation);
             }
         }
-        canvas.drawBitmap(imageSrcBitmap, matrix, null);
+        canvas.drawBitmap(imageSrc, matrix, null);
     }
 }
