@@ -444,6 +444,8 @@ public class TLayout extends RelativeLayout {
     public TLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        tag = TLayout.class.getSimpleName();
+
         //By ViewGroup default, it is set to WILL_NOT_DRAW, which is from a performance consideration, so that, onDraw will not be called.
         //If we want a ViweGroup important onDraw method, there are two methods:
         //1, in the constructor function to set a color, such as # 00000000

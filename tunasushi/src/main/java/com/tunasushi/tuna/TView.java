@@ -4537,17 +4537,13 @@ public class TView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
         if (touchType == TouchType.NONE) {
             return super.dispatchTouchEvent(event);
         }
-
         //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScrollView will be used !
-
         if (touchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
         }
-
         touchEventX = event.getX();
         touchEventY = event.getY();
 

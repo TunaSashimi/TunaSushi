@@ -68,7 +68,6 @@ public class TMove extends TView {
 
         typedArray.recycle();
 
-
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

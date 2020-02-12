@@ -7,11 +7,9 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
-
 import java.util.ArrayList;
 
-public class TBezier extends View {
+public class TBezier extends TView {
 
     private Paint paint = new Paint();
 
@@ -33,7 +31,7 @@ public class TBezier extends View {
     public TBezier(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-//        tag = TBezier.class.getSimpleName();
+        tag = TBezier.class.getSimpleName();
 
         paint.setColor(0xff4db9ff);
         paint.setStyle(Paint.Style.FILL);
@@ -214,7 +212,6 @@ public class TBezier extends View {
         float d = x * x + y * y;
         return (float) Math.sqrt(d);
     }
-
 
     //测试用
     @Override

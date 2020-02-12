@@ -184,6 +184,7 @@ public class TImage extends TView {
         super(context, attrs, defStyle);
 
         tag = TImage.class.getSimpleName();
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TImage);
 
         int imageSrcIndex = typedArray.getResourceId(R.styleable.TImage_imageSrc, -1);

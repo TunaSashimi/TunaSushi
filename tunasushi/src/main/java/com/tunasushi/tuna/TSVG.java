@@ -99,6 +99,7 @@ public class TSVG extends TView {
 
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSVG);
+
         int SVGSrcId = typedArray.getResourceId(R.styleable.TSVG_SVGSrc, -1);
         if (SVGSrcId != -1) {
             srcBitmap = BitmapFactory.decodeResource(getResources(), SVGSrcId);

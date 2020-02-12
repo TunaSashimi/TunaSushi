@@ -1,8 +1,10 @@
 package com.tunasushi.activity;
+
 import android.app.Activity;
 import android.os.Bundle;
 
 import com.tunasushi.tuna.TPattern;
+import com.tunasushi.tuna.TView;
 
 /**
  * @author Tunasashimi
@@ -15,7 +17,13 @@ public class TPatternActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new TPattern(this));
+
+        //Note this configuration!
+        //tPattern.setTouchType(TView.TouchType.NONE);
+        TPattern tPattern = new TPattern(this);
+        tPattern.setTouchType(TView.TouchType.NONE);
+
+        setContentView(tPattern);
     }
 }
 

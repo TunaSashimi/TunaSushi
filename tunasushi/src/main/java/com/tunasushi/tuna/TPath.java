@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
+import android.util.AttributeSet;
 
 /**
  * @author Tunasashimi
@@ -49,7 +50,18 @@ public class TPath extends TView {
     }
 
     public TPath(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public TPath(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public TPath(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        tag = TPath.class.getSimpleName();
+
         setFocusable(true);
 
         mPaint = new Paint();
@@ -78,7 +90,6 @@ public class TPath extends TView {
         float[] pos = mPos;
 
         // draw the normal strings
-
         p.setColor(0x80FF0000);
         canvas.drawLine(x, y, x, y + DY * 3, p);
         p.setColor(Color.BLACK);
@@ -101,8 +112,7 @@ public class TPath extends TView {
 
         p.setColor(0xBB00FF00);
         for (int i = 0; i < pos.length / 2; i++) {
-            canvas.drawLine(pos[i * 2 + 0], pos[i * 2 + 1] - DY,
-                    pos[i * 2 + 0], pos[i * 2 + 1] + DY * 2, p);
+            canvas.drawLine(pos[i * 2 + 0], pos[i * 2 + 1] - DY, pos[i * 2 + 0], pos[i * 2 + 1] + DY * 2, p);
         }
         p.setColor(Color.BLACK);
 

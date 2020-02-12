@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.view.View;
+import android.util.AttributeSet;
 
 /**
  * @author Tunasashimi
@@ -27,7 +27,17 @@ public class TArc extends TView {
     private static final float START_INC = 15;
 
     public TArc(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public TArc(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public TArc(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        tag = TArc.class.getSimpleName();
 
         mPaints = new Paint[4];
         mUseCenters = new boolean[4];

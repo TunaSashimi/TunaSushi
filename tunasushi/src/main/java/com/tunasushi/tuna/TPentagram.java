@@ -31,9 +31,13 @@ public class TPentagram extends TView {
     public TPentagram(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        tag = TPentagram.class.getSimpleName();
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TPentagram);
-        this.pentagramColor = typedArray.getColor(R.styleable.TPentagram_pentagramColor, pentagramColor);
-        this.pentagramRadius = typedArray.getFloat(R.styleable.TPentagram_pentagramRadius, pentagramRadius);// 中间五边形的边长 200.0
+
+        pentagramColor = typedArray.getColor(R.styleable.TPentagram_pentagramColor, pentagramColor);
+        pentagramRadius = typedArray.getFloat(R.styleable.TPentagram_pentagramRadius, pentagramRadius);// 中间五边形的边长 200.0
+
         typedArray.recycle();
     }
 
@@ -60,7 +64,7 @@ public class TPentagram extends TView {
 
         path.lineTo((float) (pentagramRadius * Math.cos(radian / 2) + pentagramRadius * Math.sin(radian)), (float) (pentagramRadius + pentagramRadius * Math.cos(radian)));//五角星的最右下
 
-        path.lineTo((float) (pentagramRadius * Math.cos(radian / 2)),  (pentagramRadius + radius_in));
+        path.lineTo((float) (pentagramRadius * Math.cos(radian / 2)), (pentagramRadius + radius_in));
 
         path.lineTo((float) (pentagramRadius * Math.cos(radian / 2) - pentagramRadius * Math.sin(radian)), (float) (pentagramRadius + pentagramRadius * Math.cos(radian)));
 
@@ -75,5 +79,4 @@ public class TPentagram extends TView {
         paint.setColor(this.pentagramColor);
         canvas.drawPath(path, paint);
     }
-
 }

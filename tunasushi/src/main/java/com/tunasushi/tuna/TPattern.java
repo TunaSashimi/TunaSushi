@@ -11,8 +11,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Shader;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 /**
  * @author Tunasashimi
@@ -20,7 +20,7 @@ import android.view.View;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TPattern extends View {
+public class TPattern extends TView {
     private final Shader mShader1;
     private final Shader mShader2;
     private final Paint mPaint;
@@ -33,7 +33,18 @@ public class TPattern extends View {
     private DrawFilter mDF;
 
     public TPattern(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public TPattern(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public TPattern(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        tag = TPattern.class.getSimpleName();
+
         setFocusable(true);
         setFocusableInTouchMode(true);
 
@@ -107,5 +118,4 @@ public class TPattern extends View {
         c.drawCircle(32, 32, 27, p);
         return bm;
     }
-
 }

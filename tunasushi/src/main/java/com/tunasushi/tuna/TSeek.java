@@ -124,9 +124,9 @@ public class TSeek extends TView {
             seekDragSrcPress = BitmapFactory.decodeResource(getResources(), seekDragSrcPressId);
         }
 
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
         typedArray.recycle();
+
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
