@@ -1,6 +1,5 @@
 package com.tunasushi.tuna;
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -19,8 +18,6 @@ import static com.tunasushi.tool.BitmapTool.getSepiaBitmap;
 import static com.tunasushi.tool.BitmapTool.getSketchBitmap;
 import static com.tunasushi.tool.BitmapTool.getSunshineBitmap;
 import static com.tunasushi.tool.BitmapTool.processBitmap;
-
-
 /**
  * @author Tunasashimi
  * @date 11/20/15 10:46
@@ -215,6 +212,8 @@ public class TImage extends TView {
         if (imageReverseIndex >= 0) {
             imageReverse = imageReverseArray[imageReverseIndex];
         }
+
+        typedArray.recycle();
     }
 
     @Override

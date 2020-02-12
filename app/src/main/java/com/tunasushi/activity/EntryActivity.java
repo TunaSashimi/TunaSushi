@@ -26,7 +26,9 @@ public class EntryActivity extends Activity {
 
             //
             TAnalysisActivity.class,
+            TArcActivity.class,
 
+            TBezierActivity.class,
             TBubbleActivity.class,
             TButtonActivity.class,
 
@@ -44,6 +46,9 @@ public class EntryActivity extends Activity {
             TMaterialActivity.class,
             TMoveActivity.class,
 
+            TPathActivity.class,
+            TPatternActivity.class,
+            TPentagramActivity.class,
             TProgressActivity.class,
 
             TRangeActivity.class,
@@ -53,6 +58,7 @@ public class EntryActivity extends Activity {
 
             TScaleActivity.class,
             TScratchActivity.class,
+            TSectorActivity.class,
             TSeekActivity.class,
             TSignActivity.class,
             TSVGActivity.class,

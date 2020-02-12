@@ -8,7 +8,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.tuna.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,9 +84,9 @@ public class TWrap extends TView {
         if (wrapItemTextValueArrayId != -1) {
             wrapItemTextValueArray = typedArray.getResources().getStringArray(wrapItemTextValueArrayId);
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
-            typedArray.recycle();
         }
+
+        typedArray.recycle();
     }
 
     @Override

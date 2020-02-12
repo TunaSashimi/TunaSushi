@@ -419,6 +419,11 @@
         <attr name="moveDistance" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="TPentagram">
+        <attr name="pentagramColor" format="color" />
+        <attr name="pentagramRadius" format="float" />
+    </declare-styleable>
+
     <declare-styleable name="TProgress">
         <attr name="progressArcBackgroundNormal" format="reference|color" />
         <attr name="progressBoundBackgroundNormal" format="reference|color" />
@@ -550,6 +555,13 @@
         <attr name="scratchText" format="string" />
         <attr name="scratchTextColor" format="color" />
         <attr name="scratchTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TSector">
+        <attr name="sectorOutArcWidth" format="dimension" />
+        <attr name="sectorInArcWidth" format="dimension" />
+        <attr name="sectorSpaceWidth" format="dimension" />
+        <attr name="sectorDragRadius" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="TSeek">

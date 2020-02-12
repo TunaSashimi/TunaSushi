@@ -36,6 +36,7 @@
             android:layout_alignTop="@id/tViewRectClassic01"
             android:layout_toRightOf="@id/tViewRectClassic01"
             app:backgroundNormal="#cccccc"
+            app:rotate="15"
             app:textColorNormal="#ffffff"
             app:textSize="@dimen/tuna_text_textSize"
             app:textTypeFace="bold_italic"
@@ -47,6 +48,7 @@
             android:layout_alignTop="@id/tViewRectClassic02"
             android:layout_toRightOf="@id/tViewRectClassic02"
             app:backgroundNormal="#666666"
+            app:rotate="30"
             app:textColorNormal="#ffffff"
             app:textTypeFaceAssets="fonts/computerfont.ttf"
             app:textValue="#666666" />
@@ -56,8 +58,9 @@
             android:layout_alignTop="@id/tViewRectClassic03"
             android:layout_toRightOf="@id/tViewRectClassic03"
             app:backgroundNormal="#cccccc"
-            app:rotate="135"
+            app:rotate="15"
             app:textColorNormal="#ffffff"
+            app:textTypeFaceAssets="fonts/digital-7.ttf"
             app:textValue="#cccccc" />
 
         <TextView
