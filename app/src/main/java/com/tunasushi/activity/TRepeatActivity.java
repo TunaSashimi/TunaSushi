@@ -26,8 +26,8 @@ public class TRepeatActivity extends Activity {
     private TLine tLine;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
 
-    private TView tViewEvaluation01;
-    private Spinner spinnerEvaluation01;
+    private TView tView;
+    private Spinner spinner;
 
     private String[] indexArray = {"-1", "0", "1", "2", "3"};
 
@@ -39,120 +39,72 @@ public class TRepeatActivity extends Activity {
 
         tLine = findViewById(R.id.tLine);
 
-        tViewEvaluation01 = findViewById(R.id.tViewEvaluation01);
+        tView = findViewById(R.id.tView);
 
         tRepeatStar = findViewById(R.id.tRepeatStar);
         tRepeatCar = findViewById(R.id.tRepeatCar);
         tRepeatTips = findViewById(R.id.tRepeatTips);
 
-        tRepeatStar.setRepeatListener(
-                new TView.TouchListener() {
-                    @Override
-                    public void touch(TView t) {
-                        t.setX(tRepeatStar.getTouchEventX());
-                        tRepeatCar.setX(tRepeatStar.getTouchEventX());
-                        tLine.setX(tRepeatStar.getTouchEventX());
-                    }
-                },
-                new TView.TouchDownListener() {
-                    @Override
-                    public void touchDown(TView t) {
-                        tRepeatCar.setPress(true);
-                    }
-                },
-                new TView.TouchUpListener() {
-                    @Override
-                    public void touchUp(TView t) {
-                        afterChoice();
-                        tRepeatCar.setPress(false);
-                    }
-                }
-        );
+        //
+        tRepeatStar.setTouchListener(new TView.TouchListener() {
+            @Override
+            public void touch(TView t) {
+                float touchEventX = t.getTouchEventX();
+                t.setX(touchEventX);
+                tRepeatCar.setX(touchEventX);
+                tLine.setX(touchEventX);
+            }
+        });
 
         //
         tRepeatCar.setRepeatTotal(indexArray.length);
         tRepeatCar.setRepeatItemTextValueArray(indexArray);
+        tRepeatCar.setTouchListener(new TView.TouchListener() {
+            @Override
+            public void touch(TView t) {
+                float touchEventX = t.getTouchEventX();
+                t.setX(touchEventX);
+                tRepeatStar.setX(touchEventX);
+                tLine.setX(touchEventX);
+            }
+        });
 
-        tRepeatCar.setRepeatListener(
-                new TView.TouchListener() {
-                    @Override
-                    public void touch(TView t) {
-                        t.setX(tRepeatCar.getTouchEventX());
-                        tRepeatStar.setX(tRepeatCar.getTouchEventX());
-                        tLine.setX(tRepeatCar.getTouchEventX());
-                    }
-                },
-                new TView.TouchDownListener() {
-                    @Override
-                    public void touchDown(TView t) {
-                        tRepeatStar.setPress(true);
-                    }
-                },
-                new TView.TouchUpListener() {
-                    @Override
-                    public void touchUp(TView t) {
-                        afterChoice();
-                        tRepeatStar.setPress(false);
-                    }
-                }
-        );
+        //
+        tRepeatTips.setTouchListener(new TView.TouchListener() {
+            @Override
+            public void touch(TView t) {
+                t.setX(t.getTouchEventX());
+            }
+        });
+        //
+        setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
 
-        tViewEvaluation01.setOnClickListener(new TView.OnClickListener() {
+        tView.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(TView v) {
-                if ("Unable".equals(tViewEvaluation01.getTextValue().trim())) {
+                if ("Unable".equals(tView.getTextValue().trim())) {
                     tRepeatStar.setTouchType(TView.TouchType.NONE);
                     tRepeatCar.setTouchType(TView.TouchType.NONE);
-                    tViewEvaluation01.setTextValue("Enable");
+                    tView.setTextValue("Enable");
                 } else {
                     tRepeatStar.setTouchType(TView.TouchType.EDGE);
                     tRepeatCar.setTouchType(TView.TouchType.EDGE);
-                    tViewEvaluation01.setTextValue("Unable");
+                    tView.setTextValue("Unable");
                 }
             }
         });
 
-        spinnerEvaluation01 = findViewById(R.id.spinnerEvaluation01);
-        spinnerEvaluation01.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexArray));
-        spinnerEvaluation01.setOnItemSelectedListener(new OnItemSelectedListener() {
+        spinner = findViewById(R.id.spinner);
+        spinner.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexArray));
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tRepeatStar.setRepeatIndex(position - 1);
                 tRepeatCar.setRepeatIndex(position - 1);
-                float tunaTouchEventX = tRepeatStar.getTouchEventX();
-                if (tunaTouchEventX != 0) {
-                    tLine.setX(tRepeatStar.getTouchEventX());
-                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
-
-        //
-        tRepeatTips.setRepeatListener(
-                null,
-                null,
-                new TView.TouchUpListener() {
-                    @Override
-                    public void touchUp(TView t) {
-                        t.setX(t.getTouchEventX());
-                    }
-                });
-    }
-
-    //
-    private void afterChoice() {
-        int repeatStarIndex = tRepeatStar.getRepeatIndex();
-        tLine.setX(tRepeatStar.getRepeatX());
-        if (repeatStarIndex == 0) {
-        } else if (repeatStarIndex == 1) {
-        } else if (repeatStarIndex == 2) {
-        } else if (repeatStarIndex == 3) {
-        } else if (repeatStarIndex == 4) {
-        }
     }
 }

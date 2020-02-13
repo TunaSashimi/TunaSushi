@@ -200,7 +200,7 @@ public class TDialog extends TView {
             //
             canvas.translate(dx, dy);
             //
-            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal,
+            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
                     dialogChoiceStrokeWidth, dialogChoiceStrokeColor, 0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
             //
             drawText(

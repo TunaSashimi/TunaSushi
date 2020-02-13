@@ -4547,16 +4547,10 @@ public class TView extends View {
         touchEventX = event.getX();
         touchEventY = event.getY();
 
-        if (touchListener != null && (touchType == TouchType.ALWAYS || !touchOutBounds)) {
-            touchListener.touch(this);
-        }
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
                 //
                 if (debugable) {
-
                     if (touchDownCount == 0) {
                         touchDownCount = 1;
                         touchDownTimeStart = System.currentTimeMillis();
@@ -4658,6 +4652,7 @@ public class TView extends View {
 
                     press = true;
                     select = false;
+
                 } else if (!touchOutBounds && (touchEventX < 0 || touchEventX > width || touchEventY < 0 || touchEventY > height)) {
 
                     press = false;
@@ -4755,9 +4750,14 @@ public class TView extends View {
                 if (!touchOutBounds && touchCancelListener != null) {
                     touchCancelListener.touchCancel(this);
                 }
+
                 break;
             default:
                 break;
+        }
+
+        if (touchListener != null && (touchType == TouchType.ALWAYS || !touchOutBounds)) {
+            touchListener.touch(this);
         }
 
         if (!touchOutBounds) {

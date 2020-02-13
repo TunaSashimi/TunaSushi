@@ -18,12 +18,12 @@ import com.tuna.R;
  * @Description
  */
 public class TRange extends TView {
+    private String[] rangeValueArray;
+
     private float rangeThink;
 
     private int rangeColorNormal;
     private int rangeColorSelect;
-
-    private String[] rangeValueArray;
 
     private int rangeDragColor;
     private int rangeDragStrokeColor;
@@ -52,11 +52,44 @@ public class TRange extends TView {
     private Bitmap rangeDragLeftSrc;
     private Bitmap rangeDragRightSrc;
 
+
+    //
+    private float rangeCircleCentreX;
+
+    public float getRangeCircleCentreX() {
+        return rangeCircleCentreX;
+    }
+
+    public void setRangeCircleCentreX(float rangeCircleCentreX) {
+        this.rangeCircleCentreX = rangeCircleCentreX;
+    }
+
+
+    //
+    private String rangeValue;
+    public String getRangeValue() {
+        if (dx > 0) {
+            return rangeValueArray[rangeDragRightIndex];
+        } else {
+            return rangeValueArray[rangeDragLeftIndex];
+        }
+    }
+
+    public void setRangeValue(String rangeValue) {
+        this.rangeValue = rangeValue;
+    }
+
     //
     private float[] rangeCircleCentreXArray;
 
-    // Which circle is near
-    boolean rangeTouchNearLeft = false;
+    public float[] getRangeCircleCentreXArray() {
+        return rangeCircleCentreXArray;
+    }
+
+    public void setRangeCircleCentreXArray(float[] rangeCircleCentreXArray) {
+        this.rangeCircleCentreXArray = rangeCircleCentreXArray;
+    }
+
 
     public TRange(Context context) {
         this(context, null);
@@ -73,14 +106,6 @@ public class TRange extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRange);
 
-        rangeThink = typedArray.getDimension(R.styleable.TRange_rangeThink, 0);
-        if (rangeThink <= 0) {
-            throw new IllegalArgumentException("The content attribute rangeThink must be greater than 0 ");
-        }
-
-        rangeColorNormal = typedArray.getColor(R.styleable.TRange_rangeColorNormal, Color.TRANSPARENT);
-        rangeColorSelect = typedArray.getColor(R.styleable.TRange_rangeColorSelect, rangeColorNormal);
-
         int rangeValueArrayId = typedArray.getResourceId(R.styleable.TRange_rangeValueArray, -1);
         if (rangeValueArrayId != -1) {
             rangeValueArray = typedArray.getResources().getStringArray(rangeValueArrayId);
@@ -93,6 +118,14 @@ public class TRange extends TView {
         } else {
             throw new IllegalArgumentException("The content attribute require a property named rangeValueArray");
         }
+
+        rangeThink = typedArray.getDimension(R.styleable.TRange_rangeThink, 0);
+        if (rangeThink <= 0) {
+            throw new IllegalArgumentException("The content attribute rangeThink must be greater than 0 ");
+        }
+
+        rangeColorNormal = typedArray.getColor(R.styleable.TRange_rangeColorNormal, Color.TRANSPARENT);
+        rangeColorSelect = typedArray.getColor(R.styleable.TRange_rangeColorSelect, rangeColorNormal);
 
         rangeDragColor = typedArray.getColor(R.styleable.TRange_rangeDragColor, Color.TRANSPARENT);
         rangeDragStrokeColor = typedArray.getColor(R.styleable.TRange_rangeDragStrokeColor, Color.TRANSPARENT);
@@ -148,6 +181,7 @@ public class TRange extends TView {
 
         // draw range dragLeft
         initPaint(Paint.Style.FILL, rangeDragColor);
+
         // Paint.Style.FILL
         canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
@@ -177,21 +211,23 @@ public class TRange extends TView {
         this.x = x;
         float minDistence = width;
 
-        //Which circle is close
+        //If the circle on the right is closer, dx is greater than 0
         if (Math.abs(x - rangeCircleCentreXArray[rangeDragLeftIndex]) <= Math.abs(x - rangeCircleCentreXArray[rangeDragRightIndex])) {
-            rangeTouchNearLeft = true;
+            dx = -1;
         } else {
-            rangeTouchNearLeft = false;
+            dx = 1;
         }
 
         // Which interval is close
         for (int i = 0; i < total; i++) {
             float circleCentreDistance = Math.abs(x - rangeCircleCentreXArray[i]);
             if (circleCentreDistance < minDistence) {
-                if (rangeTouchNearLeft) {
-                    rangeDragLeftIndex = i;
-                } else {
+                if (dx > 0) {
                     rangeDragRightIndex = i;
+                    rangeCircleCentreX = rangeCircleCentreXArray[rangeDragRightIndex];
+                } else {
+                    rangeDragLeftIndex = i;
+                    rangeCircleCentreX = rangeCircleCentreXArray[rangeDragLeftIndex];
                 }
                 minDistence = circleCentreDistance;
             } else {

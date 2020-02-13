@@ -15,7 +15,9 @@ public class TArcActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(new TArc(this));
+
     }
 }
 

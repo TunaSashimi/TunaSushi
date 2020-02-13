@@ -313,7 +313,6 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(repeatSrcSelect, matrix, null);
                         canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatItemBackgroundSelect));
                     }
 
@@ -333,8 +332,6 @@ public class TRepeat extends TView {
                         } else {
                             canvas.translate(share + srcWidthScale, 0);
                         }
-//                        canvas.drawBitmap(repeatSelectType == repeatSelectType.CONNECT ? i <= repeatIndex ? repeatSrcSelect
-//                                : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
                         canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
                                 : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
                     }
@@ -356,9 +353,7 @@ public class TRepeat extends TView {
                         }
                     }
                 }
-
                 break;
-
             default:
                 break;
         }
@@ -385,9 +380,7 @@ public class TRepeat extends TView {
                 break;
             }
         }
-//        if (needInvalidate) {
         invalidate();
-//        }
     }
 
     public int getRepeatIndex() {
@@ -425,39 +418,5 @@ public class TRepeat extends TView {
 
     public void setRepeatItemTextValueArray(String[] repeatItemTextValueArray) {
         this.stringArray = repeatItemTextValueArray;
-    }
-
-    //
-    public void setRepeatListener(final TouchListener touchListener, final TouchDownListener touchDownListener, final TouchUpListener touchUpListener) {
-        this.setTouchListener(touchListener);
-        this.setTouchDownListener(touchDownListener);
-        this.setTouchUpListener(touchUpListener);
-        this.setTouchCancelListener(new TouchCancelListener() {
-            @Override
-            public void touchCancel(TView t) {
-                if (touchUpListener != null) {
-                    touchUpListener.touchUp(TRepeat.this);
-                }
-            }
-        });
-
-        this.setTouchOutListener(new TouchOutListener() {
-            @Override
-            public void touchOut(TView t) {
-                if (touchUpListener != null) {
-                    touchUpListener.touchUp(TRepeat.this);
-                }
-            }
-        });
-
-        this.setTouchInListener(new TouchInListener() {
-            @Override
-            public void touchIn(TView t) {
-                if (touchDownListener != null) {
-                    touchDownListener.touchDown(TRepeat.this);
-                }
-            }
-        });
-
     }
 }

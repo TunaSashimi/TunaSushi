@@ -5,15 +5,30 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <com.tunasushi.tuna.TBubble
+        android:id="@+id/tBubble"
+        android:layout_width="36dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:bubbleBackground="#000000"
+        app:bubbleEdgeHeight="6dp"
+        app:bubbleEdgeWidth="6dp"
+        app:bubbleLocationType="middle"
+        app:bubbleRadius="4dp"
+        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextSize="12dp"
+        app:bubbleTowardType="bottom" />
+
     <com.tunasushi.tuna.TRange
         android:id="@+id/tRange"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_marginTop="48dp"
+        android:layout_below="@id/tBubble"
+        android:layout_marginTop="8dp"
         app:rangeColorNormal="#dde2e8"
         app:rangeColorSelect="#0989ea"
         app:rangeDragColor="#ffffff"
-        app:rangeDragLeftIndex="1"
         app:rangeDragStrokeColor="#dde2e8"
         app:rangeDragStrokeWidth="2dp"
         app:rangeThink="2dp"

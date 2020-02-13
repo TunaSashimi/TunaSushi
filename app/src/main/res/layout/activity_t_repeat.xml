@@ -145,7 +145,7 @@
         app:repeatTotal="5" />
 
     <Spinner
-        android:id="@+id/spinnerEvaluation01"
+        android:id="@+id/spinner"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_below="@+id/tRepeatTips"
@@ -155,20 +155,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/spinnerEvaluation01"
+        android:layout_alignBaseline="@id/spinner"
         android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@id/spinnerEvaluation01"
+        android:layout_toLeftOf="@id/spinner"
         android:text="Choice"
         android:textColor="#000000"
         android:textSize="18dp" />
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tViewEvaluation01"
+        android:id="@+id/tView"
         android:layout_width="120dp"
         android:layout_height="@dimen/tuna_button_height"
-        android:layout_alignTop="@id/spinnerEvaluation01"
+        android:layout_alignTop="@id/spinner"
         android:layout_marginLeft="@dimen/tuna_button_marginLeft"
-        android:layout_toRightOf="@id/spinnerEvaluation01"
+        android:layout_toRightOf="@id/spinner"
         app:strokeColorNormal="#dedede"
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#999999"
