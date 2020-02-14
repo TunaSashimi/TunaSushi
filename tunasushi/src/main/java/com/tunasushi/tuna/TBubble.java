@@ -12,8 +12,8 @@ import com.tuna.R;
 
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:50
+ * @author TunaSashimi
+ * @date 2015-10-30 16:50
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
@@ -26,16 +26,6 @@ public class TBubble extends TView {
 
     public void setTBubbleBackground(int bubbleBackground) {
         this.bubbleBackground = bubbleBackground;
-    }
-
-    private float bubbleRadius;
-
-    public float getTBubbleRadius() {
-        return bubbleRadius;
-    }
-
-    public void setTBubbleRadius(float bubbleRadius) {
-        this.bubbleRadius = bubbleRadius;
     }
 
     private float bubbleEdgeWidth;
@@ -199,7 +189,6 @@ public class TBubble extends TView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TBubble);
 
         bubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
-        bubbleRadius = typedArray.getDimension(R.styleable.TBubble_bubbleRadius, 0);
 
         bubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeWidth, 0);
         bubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
@@ -316,7 +305,7 @@ public class TBubble extends TView {
                 inPolygonVertexY0 = (height >> 1) + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 + bubbleEdgeHeight;
                 inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 + bubbleRadius;
+                inPolygonVertexX2 = inPolygonVertexX1 + radius;
                 inPolygonVertexY2 = inPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
                 inPolygonVertexY3 = inPolygonVertexY2 - bubbleEdgeWidth;
@@ -369,7 +358,7 @@ public class TBubble extends TView {
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
                 inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = inPolygonVertexY1 + bubbleRadius;
+                inPolygonVertexY2 = inPolygonVertexY1 + radius;
                 inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
@@ -420,7 +409,7 @@ public class TBubble extends TView {
                 inPolygonVertexY0 = (height >> 1) + offsetY;
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeHeight;
                 inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 - bubbleRadius;
+                inPolygonVertexX2 = inPolygonVertexX1 - radius;
                 inPolygonVertexY2 = inPolygonVertexY1;
                 inPolygonVertexX3 = inPolygonVertexX2;
                 inPolygonVertexY3 = inPolygonVertexY2 + bubbleEdgeWidth;
@@ -473,7 +462,7 @@ public class TBubble extends TView {
                 inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
                 inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
-                inPolygonVertexY2 = inPolygonVertexY1 - bubbleRadius;
+                inPolygonVertexY2 = inPolygonVertexY1 - radius;
                 inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
@@ -503,7 +492,7 @@ public class TBubble extends TView {
         //
         canvas.save();
         canvas.clipRect(initRect((int) rectLeft, (int) rectTop, (int) rectRight, (int) rectBottom), Op.DIFFERENCE);
-        drawRectClassic(canvas, left, top, right, bottom, bubbleBackground, bubbleStrokeWidth, bubbleStrokeColor, bubbleRadius);
+        drawRectClassic(canvas, left, top, right, bottom, bubbleBackground, bubbleStrokeWidth, bubbleStrokeColor, radius);
         canvas.restore();
 
         //

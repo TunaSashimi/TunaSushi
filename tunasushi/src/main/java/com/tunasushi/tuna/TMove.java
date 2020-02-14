@@ -17,9 +17,9 @@ import java.util.TimerTask;
 
 
 /**
- * @author Tunasashimi
- * @date 11/5/15 15:49
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-11-05 15:49
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TMove extends TView {

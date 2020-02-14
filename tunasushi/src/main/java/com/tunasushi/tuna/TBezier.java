@@ -9,6 +9,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import java.util.ArrayList;
 
+/**
+ * @author TunaSashimi
+ * @date 2020-02-14 14:52
+ * @Copyright 2020 TunaSashimi. All rights reserved.
+ * @Description
+ */
 public class TBezier extends TView {
 
     private Paint paint = new Paint();

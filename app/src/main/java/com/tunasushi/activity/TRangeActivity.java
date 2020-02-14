@@ -13,9 +13,9 @@ import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:53
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2020-02-13 13:50
+ * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TRangeActivity extends Activity {
@@ -31,7 +31,6 @@ public class TRangeActivity extends Activity {
 
         rRange = findViewById(R.id.tRange);
         tBubble = findViewById(R.id.tBubble);
-
 
         rRange.setTouchListener(new TView.TouchListener() {
             @Override

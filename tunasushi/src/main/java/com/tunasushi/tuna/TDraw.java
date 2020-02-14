@@ -18,9 +18,9 @@ import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
 
 /**
- * @author Tunasashimi
- * @date 11/15/15 16:17
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-11-15 16:17
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TDraw extends TView {

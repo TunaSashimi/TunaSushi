@@ -13,9 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:51
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:51
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 

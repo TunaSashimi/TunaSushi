@@ -7,7 +7,7 @@ import com.tunasushi.tuna.TPattern;
 import com.tunasushi.tuna.TView;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-02-12 20:05
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description

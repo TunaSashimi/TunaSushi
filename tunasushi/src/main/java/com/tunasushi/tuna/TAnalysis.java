@@ -7,9 +7,9 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:48
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:48
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TAnalysis extends TView {

@@ -19,7 +19,7 @@ import android.util.AttributeSet;
 import com.tuna.R;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-02-12 18:03
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description

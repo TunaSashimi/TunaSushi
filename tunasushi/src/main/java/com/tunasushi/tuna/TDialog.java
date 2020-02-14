@@ -10,16 +10,14 @@ import android.view.View;
 
 import com.tuna.R;
 
-
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:52
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:52
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TDialog extends TView {
     private int dialogBackgroundNormal;
-    private float dialogRadius;
 
     private float dialogStrokeWidth;
     private int dialogStrokeColor;
@@ -79,7 +77,6 @@ public class TDialog extends TView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDialog);
 
         dialogBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogBackgroundNormal, Color.TRANSPARENT);
-        dialogRadius = typedArray.getDimension(R.styleable.TDialog_dialogRadius, 0);
 
         dialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
         dialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
@@ -152,7 +149,7 @@ public class TDialog extends TView {
                 dialogBackgroundNormal,
                 dialogStrokeWidth,
                 dialogStrokeColor,
-                dialogRadius);
+                radius);
 
 //		//drawDialogTitleText
         drawText(
@@ -177,14 +174,14 @@ public class TDialog extends TView {
         //draw Options
         for (int i = 0; i < total; i++) {
             if (i == 0) {
-                dialogRadiusLeftBottom = dialogRadius;
+                dialogRadiusLeftBottom = radius;
                 dx = share * i;
                 if (i != (total - 1)) {
                     dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
                     dialogRadiusRightBottom = 0;
                 } else {
                     dialogWidth = (int) (share + dialogChoiceStrokeWidth);
-                    dialogRadiusRightBottom = dialogRadius;
+                    dialogRadiusRightBottom = radius;
                 }
             } else {
                 dialogRadiusLeftBottom = 0;
@@ -194,7 +191,7 @@ public class TDialog extends TView {
                     dialogWidth = (int) (share + dialogChoiceStrokeWidth);
                 } else {
                     dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
-                    dialogRadiusRightBottom = dialogRadius;
+                    dialogRadiusRightBottom = radius;
                 }
             }
             //
@@ -224,7 +221,7 @@ public class TDialog extends TView {
                 Color.TRANSPARENT,
                 dialogStrokeWidth,
                 dialogStrokeColor,
-                dialogRadius);
+                radius);
     }
 
 

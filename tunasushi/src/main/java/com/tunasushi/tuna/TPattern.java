@@ -15,7 +15,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-02-12 20:06
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description

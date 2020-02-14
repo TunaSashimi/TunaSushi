@@ -10,11 +10,10 @@ import android.view.View;
 
 import com.tuna.R;
 
-
 /**
- * @author Tunasashimi
- * @date 8/31/16 16:11
- * @Copyright 2016 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2016-08-31 16:11
+ * @Copyright 2016 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TIrregular extends TView {

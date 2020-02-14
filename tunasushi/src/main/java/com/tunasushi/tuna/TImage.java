@@ -19,9 +19,9 @@ import static com.tunasushi.tool.BitmapTool.getSketchBitmap;
 import static com.tunasushi.tool.BitmapTool.getSunshineBitmap;
 import static com.tunasushi.tool.BitmapTool.processBitmap;
 /**
- * @author Tunasashimi
- * @date 11/20/15 10:46
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-11-20 10:46
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TImage extends TView {

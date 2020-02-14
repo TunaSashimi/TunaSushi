@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:53
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:53
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 
@@ -25,7 +25,6 @@ public class TWrap extends TView {
     private float wrapLineSpacing;
     private float wrapRowSpacing;
 
-    private float wrapRadius;
     private int wrapBackgroundNormal, wrapBackgroundSelect;
 
     private float wrapStrokeWidth;
@@ -66,8 +65,6 @@ public class TWrap extends TView {
 
         wrapLineSpacing = typedArray.getDimension(R.styleable.TWrap_wrapLineSpacing, 0);
         wrapRowSpacing = typedArray.getDimension(R.styleable.TWrap_wrapRowSpacing, 0);
-
-        wrapRadius = typedArray.getDimension(R.styleable.TWrap_wrapRadius, 0);
 
         wrapBackgroundNormal = typedArray.getColor(R.styleable.TWrap_wrapBackgroundNormal, Color.TRANSPARENT);
         wrapBackgroundSelect = typedArray.getColor(R.styleable.TWrap_wrapBackgroundSelect, wrapBackgroundNormal);
@@ -205,7 +202,7 @@ public class TWrap extends TView {
                 wrap.wrapSelect ? wrapBackgroundSelect : wrapBackgroundNormal,
                 wrapStrokeWidth,
                 wrap.wrapSelect ? wrapStrokeColorSelect : wrapStrokeColorNormal,
-                wrapRadius
+                radius
         );
 
         //

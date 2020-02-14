@@ -9,9 +9,9 @@ import com.tunasushi.R;
 import com.tunasushi.tuna.TRow;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:53
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:53
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TRowActivity extends Activity {

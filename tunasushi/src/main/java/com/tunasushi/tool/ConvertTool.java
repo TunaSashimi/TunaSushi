@@ -9,9 +9,9 @@ import static com.tunasushi.tool.DeviceTool.displayScaledDensity;
 import static com.tunasushi.tool.DeviceTool.initDisplayMetrics;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2019-11-19 15:25
- * @Copyright 2019 Sashimi. All rights reserved.
+ * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
 public class ConvertTool {

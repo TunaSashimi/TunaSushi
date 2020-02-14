@@ -24,9 +24,9 @@ import static com.tunasushi.tool.ConvertTool.convertToPX;
 
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:58
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:58
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TScratch extends TView {

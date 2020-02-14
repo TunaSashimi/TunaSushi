@@ -13,11 +13,10 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
-
 /**
- * @author Tunasashimi
- * @date 11/5/15 15:49
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-05-15 15:49
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class THollow extends TView {

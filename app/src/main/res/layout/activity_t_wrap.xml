@@ -14,7 +14,7 @@
         app:wrapBackgroundNormal="#ffffff"
         app:wrapBackgroundSelect="#ffffff"
         app:wrapLineSpacing="20dp"
-        app:wrapRadius="5dp"
+        app:radius="5dp"
         app:wrapRowSpacing="10dp"
         app:wrapStrokeColorNormal="#cccccc"
         app:wrapStrokeColorSelect="#ff9933"

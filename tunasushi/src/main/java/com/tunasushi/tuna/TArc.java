@@ -8,7 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-02-12 19:58
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description

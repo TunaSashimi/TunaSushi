@@ -12,9 +12,9 @@ import android.util.AttributeSet;
 import com.tuna.R;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:53
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2020-02-13 13:50
+ * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TRange extends TView {

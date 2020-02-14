@@ -26,16 +26,15 @@ import com.tuna.R;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
-
 /**
- * @author sashimi
- * @date 10/30/15 16:55
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:55
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TLayout extends RelativeLayout {
 
-    protected String tag = TLayout.class.getSimpleName();
+    protected String tag;
 
     protected int layoutWidth, layoutHeight;
     protected int layoutLayer;

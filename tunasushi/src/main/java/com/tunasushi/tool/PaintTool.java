@@ -1,9 +1,9 @@
 package com.tunasushi.tool;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-01-30 21:21
- * @Copyright 2020 Sashimi. All rights reserved.
+ * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
 public class PaintTool {

@@ -17,9 +17,9 @@ import android.view.WindowManager;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2019-11-19 19:43
- * @Copyright 2019 Sashimi. All rights reserved.
+ * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
 public class ViewTool {

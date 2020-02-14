@@ -8,9 +8,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * @author Tunasashimi
- * @date 10/30/15 16:50
- * @Copyright 2015 Sashimi. All rights reserved.
+ * @author TunaSashimi
+ * @date 2015-10-30 16:50
+ * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
 public class TTrack extends TView {

@@ -22,9 +22,9 @@ import java.util.HashMap;
 import static com.tunasushi.tool.SVGTool.getSVGFromInputStream;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2019-11-19 15:39
- * @Copyright 2019 Sashimi. All rights reserved.
+ * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
 public class BitmapTool {

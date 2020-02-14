@@ -15,7 +15,7 @@
         app:bubbleEdgeHeight="6dp"
         app:bubbleEdgeWidth="6dp"
         app:bubbleLocationType="middle"
-        app:bubbleRadius="4dp"
+        app:radius="4dp"
         app:bubbleTextColorNormal="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTowardType="bottom" />

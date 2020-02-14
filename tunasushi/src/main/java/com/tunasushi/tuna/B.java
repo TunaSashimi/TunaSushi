@@ -1,10 +1,10 @@
-package com.tunasushi.tool;
+package com.tunasushi.tuna;
 
 /**
  * @author TunaSashimi
- * @date 2020-02-02 19:49
+ * @date 2020-02-14 14:58
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class PathTool {
+public class B {
 }

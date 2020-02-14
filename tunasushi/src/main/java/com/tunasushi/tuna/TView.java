@@ -62,8 +62,8 @@ import static com.tunasushi.tool.ConvertTool.pxToDp;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
 /**
- * @author Tunasashimi
- * @date 11/4/15 17:25
+ * @author TunaSashimi
+ * @date 2015-11-04 17:25
  * @Copyright 2015 Tunasashimi. All rights reserved.
  * @Description
  */
@@ -1344,8 +1344,119 @@ public class TView extends View {
         this.subAnimateEndListener = subAnimateEndListener;
     }
 
+    // radius default 0
+    protected float radius;
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(float radius) {
+        setRadiusRaw(radius);
+    }
+
+    public void setRadius(float radius, int unit) {
+        setRadiusRaw(convertToPX(radius, unit));
+    }
+
+    private void setRadiusRaw(float radius) {
+        if (this.radius != radius) {
+            this.radius = radius;
+            invalidate();
+        }
+    }
+
+    // radius of draw custom roundRect
+    // radiusLeftTop,radiusLeftBottom,radiusRightTop,radiusRightBottom default 0
+    private float radiusLeftTop;
+
+    public float getRadiusLeftTop() {
+        return radiusLeftTop;
+    }
+
+    public void setRadiusLeftTop(float radiusLeftTop) {
+        setRadiusLeftTopRaw(radiusLeftTop);
+    }
+
+    public void setRadiusLeftTop(float radiusLeftTop, int unit) {
+        setRadiusLeftTopRaw(convertToPX(radiusLeftTop, unit));
+    }
+
+    private void setRadiusLeftTopRaw(float radiusLeftTop) {
+        if (this.radiusLeftTop != radiusLeftTop) {
+            this.radiusLeftTop = radiusLeftTop;
+            invalidate();
+        }
+    }
+
+    //
+    private float radiusLeftBottom;
+
+    public float getRadiusLeftBottom() {
+        return radiusLeftBottom;
+    }
+
+    public void setRadiusLeftBottom(float radiusLeftBottom) {
+        setRadiusLeftBottomRaw(radiusLeftBottom);
+    }
+
+    public void setRadiusLeftBottom(float radiusLeftBottom, int unit) {
+        setRadiusLeftBottomRaw(convertToPX(radiusLeftBottom, unit));
+    }
+
+    private void setRadiusLeftBottomRaw(float radiusLeftBottom) {
+        if (this.radiusLeftBottom != radiusLeftBottom) {
+            this.radiusLeftBottom = radiusLeftBottom;
+            invalidate();
+        }
+    }
+
+    //
+    private float radiusRightTop;
+
+    public float getRadiusRightTop() {
+        return radiusRightTop;
+    }
+
+    public void setRadiusRightTop(float radiusRightTop) {
+        setRadiusRightTopRaw(radiusRightTop);
+    }
+
+    public void setRadiusRightTop(float radiusRightTop, int unit) {
+        setRadiusRightTopRaw(convertToPX(radiusRightTop, unit));
+    }
+
+    private void setRadiusRightTopRaw(float radiusRightTop) {
+        if (this.radiusRightTop != radiusRightTop) {
+            this.radiusRightTop = radiusRightTop;
+            invalidate();
+        }
+    }
+
+    //
+    private float radiusRightBottom;
+
+    public float getRadiusRightBottom() {
+        return radiusRightBottom;
+    }
+
+    public void setRadiusRightBottom(float radiusRightBottom) {
+        setRadiusRightBottomRaw(radiusRightBottom);
+    }
+
+    public void setRadiusRightBottom(float radiusRightBottom, int unit) {
+        setRadiusRightBottomRaw(convertToPX(radiusRightBottom, unit));
+    }
+
+    private void setRadiusRightBottomRaw(float radiusRightBottom) {
+        if (this.radiusRightBottom != radiusRightBottom) {
+            this.radiusRightBottom = radiusRightBottom;
+            invalidate();
+        }
+    }
+
     /**
-     * The following fields and methods can be used only in the superclass
+     * The following fields and methods can be used only in the origin TView
      */
 
     // backgroundNormal in onLayout if backgroundNormal transparent and have drawn the case of default white shadow
@@ -2460,117 +2571,6 @@ public class TView extends View {
 
     public void setStrokeColorSelect(int strokeColorSelect) {
         this.strokeColorSelect = strokeColorSelect;
-    }
-
-    // radius default 0
-    private float radius;
-
-    public float getRadius() {
-        return radius;
-    }
-
-    public void setRadius(float radius) {
-        setRadiusRaw(radius);
-    }
-
-    public void setRadius(float radius, int unit) {
-        setRadiusRaw(convertToPX(radius, unit));
-    }
-
-    private void setRadiusRaw(float radius) {
-        if (this.radius != radius) {
-            this.radius = radius;
-            invalidate();
-        }
-    }
-
-    // radius of draw custom roundRect
-    // radiusLeftTop,radiusLeftBottom,radiusRightTop,radiusRightBottom default 0
-    private float radiusLeftTop;
-
-    public float getRadiusLeftTop() {
-        return radiusLeftTop;
-    }
-
-    public void setRadiusLeftTop(float radiusLeftTop) {
-        setRadiusLeftTopRaw(radiusLeftTop);
-    }
-
-    public void setRadiusLeftTop(float radiusLeftTop, int unit) {
-        setRadiusLeftTopRaw(convertToPX(radiusLeftTop, unit));
-    }
-
-    private void setRadiusLeftTopRaw(float radiusLeftTop) {
-        if (this.radiusLeftTop != radiusLeftTop) {
-            this.radiusLeftTop = radiusLeftTop;
-            invalidate();
-        }
-    }
-
-    //
-    private float radiusLeftBottom;
-
-    public float getRadiusLeftBottom() {
-        return radiusLeftBottom;
-    }
-
-    public void setRadiusLeftBottom(float radiusLeftBottom) {
-        setRadiusLeftBottomRaw(radiusLeftBottom);
-    }
-
-    public void setRadiusLeftBottom(float radiusLeftBottom, int unit) {
-        setRadiusLeftBottomRaw(convertToPX(radiusLeftBottom, unit));
-    }
-
-    private void setRadiusLeftBottomRaw(float radiusLeftBottom) {
-        if (this.radiusLeftBottom != radiusLeftBottom) {
-            this.radiusLeftBottom = radiusLeftBottom;
-            invalidate();
-        }
-    }
-
-    //
-    private float radiusRightTop;
-
-    public float getRadiusRightTop() {
-        return radiusRightTop;
-    }
-
-    public void setRadiusRightTop(float radiusRightTop) {
-        setRadiusRightTopRaw(radiusRightTop);
-    }
-
-    public void setRadiusRightTop(float radiusRightTop, int unit) {
-        setRadiusRightTopRaw(convertToPX(radiusRightTop, unit));
-    }
-
-    private void setRadiusRightTopRaw(float radiusRightTop) {
-        if (this.radiusRightTop != radiusRightTop) {
-            this.radiusRightTop = radiusRightTop;
-            invalidate();
-        }
-    }
-
-    //
-    private float radiusRightBottom;
-
-    public float getRadiusRightBottom() {
-        return radiusRightBottom;
-    }
-
-    public void setRadiusRightBottom(float radiusRightBottom) {
-        setRadiusRightBottomRaw(radiusRightBottom);
-    }
-
-    public void setRadiusRightBottom(float radiusRightBottom, int unit) {
-        setRadiusRightBottomRaw(convertToPX(radiusRightBottom, unit));
-    }
-
-    private void setRadiusRightBottomRaw(float radiusRightBottom) {
-        if (this.radiusRightBottom != radiusRightBottom) {
-            this.radiusRightBottom = radiusRightBottom;
-            invalidate();
-        }
     }
 
     // textMark default false
@@ -4229,6 +4229,16 @@ public class TView extends View {
         //
         TPorterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[porterDuffXfermodeArrayIndex]);
 
+        //
+        radius = typedArray.getDimension(R.styleable.TView_radius, 0);
+        radiusLeftTop = typedArray.getDimension(R.styleable.TView_radiusLeftTop, radius);
+        radiusLeftBottom = typedArray.getDimension(R.styleable.TView_radiusLeftBottom, radius);
+        radiusRightTop = typedArray.getDimension(R.styleable.TView_radiusRightTop, radius);
+        radiusRightBottom = typedArray.getDimension(R.styleable.TView_radiusRightBottom, radius);
+
+        classic = (radius == radiusLeftTop && radiusLeftTop == radiusLeftBottom && radiusLeftBottom == radiusRightTop && radiusRightTop == radiusRightBottom);
+
+
         origin = TView.class == this.getClass();
 
         if (origin) {
@@ -4419,15 +4429,6 @@ public class TView extends View {
             strokeColorPress = typedArray.getColor(R.styleable.TView_strokeColorPress, strokeColorNormal);
             strokeWidthSelect = typedArray.getDimension(R.styleable.TView_strokeWidthSelect, strokeWidthNormal);
             strokeColorSelect = typedArray.getColor(R.styleable.TView_strokeColorSelect, strokeColorNormal);
-
-            //
-            radius = typedArray.getDimension(R.styleable.TView_radius, 0);
-            radiusLeftTop = typedArray.getDimension(R.styleable.TView_radiusLeftTop, radius);
-            radiusLeftBottom = typedArray.getDimension(R.styleable.TView_radiusLeftBottom, radius);
-            radiusRightTop = typedArray.getDimension(R.styleable.TView_radiusRightTop, radius);
-            radiusRightBottom = typedArray.getDimension(R.styleable.TView_radiusRightBottom, radius);
-
-            classic = (radius == radiusLeftTop && radiusLeftTop == radiusLeftBottom && radiusLeftBottom == radiusRightTop && radiusRightTop == radiusRightBottom);
 
             //
             textValue = typedArray.getString(R.styleable.TView_textValue);

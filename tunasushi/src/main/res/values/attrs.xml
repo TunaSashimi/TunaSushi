@@ -246,7 +246,6 @@
 
     <declare-styleable name="TBubble">
         <attr name="bubbleBackground" format="reference|color" />
-        <attr name="bubbleRadius" format="dimension" />
         <attr name="bubbleEdgeWidth" format="dimension" />
         <attr name="bubbleEdgeHeight" format="dimension" />
         <attr name="bubbleTextValue" format="string" />
@@ -289,7 +288,6 @@
 
     <declare-styleable name="TDialog">
         <attr name="dialogBackgroundNormal" format="reference|color" />
-        <attr name="dialogRadius" format="dimension" />
 
         <attr name="dialogStrokeWidth" format="dimension" />
         <attr name="dialogStrokeColor" format="reference|color" />
@@ -637,7 +635,6 @@
     <declare-styleable name="TWrap">
         <attr name="wrapLineSpacing" format="dimension" />
         <attr name="wrapRowSpacing" format="dimension" />
-        <attr name="wrapRadius" format="dimension" />
         <attr name="wrapBackgroundNormal" format="reference|color" />
         <attr name="wrapBackgroundSelect" format="reference|color" />
         <attr name="wrapStrokeWidth" format="dimension" />

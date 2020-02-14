@@ -9,7 +9,7 @@ import com.tunasushi.tuna.TSector;
 import com.tunasushi.tuna.TView;
 
 /**
- * @author Tunasashimi
+ * @author TunaSashimi
  * @date 2020-02-12 18:02
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
