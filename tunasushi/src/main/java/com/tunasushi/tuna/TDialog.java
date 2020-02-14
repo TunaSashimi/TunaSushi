@@ -17,7 +17,11 @@ import com.tuna.R;
  * @Description
  */
 public class TDialog extends TView {
-    private int dialogBackgroundNormal;
+    private float dialogWidth;
+    private float dialogHeight;
+
+    private int dialogBackground;
+    private int dialogSurround;
 
     private float dialogStrokeWidth;
     private int dialogStrokeColor;
@@ -42,11 +46,20 @@ public class TDialog extends TView {
     private int dialogChoiceStrokeColor;
 
     private String[] dialogChoiceTextValueArray;
+
+    public String[] getDialogChoiceTextValueArray() {
+        return dialogChoiceTextValueArray;
+    }
+
+    public void setDialogChoiceTextValueArray(String[] dialogChoiceTextValueArray) {
+        this.dialogChoiceTextValueArray = dialogChoiceTextValueArray;
+    }
+
     private float dialogChoiceTextSize;
     private int dialogChoiceTextColorNormal;
     private int dialogChoiceTextColorPress;
 
-    private int dialogChoiceIndex;
+    private int dialogChoiceIndex = -1;
 
     public int getDialogChoiceIndex() {
         return dialogChoiceIndex;
@@ -59,7 +72,10 @@ public class TDialog extends TView {
     //
     private float dialogRadiusLeftBottom;
     private float dialogRadiusRightBottom;
-    private int dialogWidth;
+    private int dialogChoiceWidth;
+
+    private float dialogDx;
+    private float dialogDy;
 
     public TDialog(Context context) {
         this(context, null);
@@ -76,7 +92,18 @@ public class TDialog extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDialog);
 
-        dialogBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogBackgroundNormal, Color.TRANSPARENT);
+        dialogBackground = typedArray.getColor(R.styleable.TDialog_dialogBackground, Color.TRANSPARENT);
+        dialogSurround = typedArray.getColor(R.styleable.TDialog_dialogSurround, Color.TRANSPARENT);
+
+        dialogWidth = typedArray.getDimension(R.styleable.TDialog_dialogWidth, 0);
+        if (dialogWidth <= 0) {
+            throw new IllegalArgumentException("The content attribute dialogWidth length must be greater than 0");
+        }
+
+        dialogHeight = typedArray.getDimension(R.styleable.TDialog_dialogHeight, 0);
+        if (dialogHeight <= 0) {
+            throw new IllegalArgumentException("The content attribute dialogHeight length must be greater than 0");
+        }
 
         dialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
         dialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
@@ -130,12 +157,17 @@ public class TDialog extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        //
+        dx = (width - dialogWidth) / 2;
+        dy = (height - dialogHeight) / 2;
 
-        share = width * 1f / total;
-        dy = height - dialogChoiceHeight;
+        //
+        share = dialogWidth * 1f / total;
+        dialogDy = dialogHeight - dialogChoiceHeight;
 
+        //floatArray means dialogChoiceArrayCenterX
         for (int i = 0; i < total; i++) {
-            floatArray[i] = share * 0.5f + share * i;
+            floatArray[i] = share * i + share * 0.5f + dx;
         }
     }
 
@@ -143,10 +175,13 @@ public class TDialog extends TView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        canvas.drawColor(dialogSurround);
+        canvas.translate(dx, dy);
+
         //
         drawRectClassic(canvas,
-                width, height,
-                dialogBackgroundNormal,
+                dialogWidth, dialogHeight,
+                dialogBackground,
                 dialogStrokeWidth,
                 dialogStrokeColor,
                 radius);
@@ -155,19 +190,20 @@ public class TDialog extends TView {
         drawText(
                 canvas,
                 dialogTitleTextValue,
-                width,
-                width >> 1,
+                dialogWidth,
+                dialogWidth / 2,
                 dialogTitleTextSize * 0.5f + dialogTitleTextDy,
                 0, 0,
                 initTextPaint(Paint.Style.FILL, dialogTitleTextColor, dialogTitleTextSize, Paint.Align.CENTER));
+
 
         //drawDialogContentText
         drawText(
                 canvas,
                 dialogContentTextValue,
-                width,
-                width >> 1,
-                (height >> 1) + dialogContentTextDy,
+                dialogWidth,
+                dialogWidth / 2,
+                dialogHeight / 2 + dialogContentTextDy,
                 dialogContentTextPaddingLeft, dialogContentTextPaddingRight,
                 initTextPaint(Paint.Style.FILL, dialogContentTextColor, dialogContentTextSize, Paint.Align.CENTER));
 
@@ -175,36 +211,36 @@ public class TDialog extends TView {
         for (int i = 0; i < total; i++) {
             if (i == 0) {
                 dialogRadiusLeftBottom = radius;
-                dx = share * i;
+                dialogDx = share * i;
                 if (i != (total - 1)) {
-                    dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
+                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
                     dialogRadiusRightBottom = 0;
                 } else {
-                    dialogWidth = (int) (share + dialogChoiceStrokeWidth);
+                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth);
                     dialogRadiusRightBottom = radius;
                 }
             } else {
                 dialogRadiusLeftBottom = 0;
-                dx = share * i - dialogChoiceStrokeWidth * 0.5f;
+                dialogDx = share * i - dialogChoiceStrokeWidth * 0.5f;
                 if (i != (total - 1)) {
                     dialogRadiusRightBottom = 0;
-                    dialogWidth = (int) (share + dialogChoiceStrokeWidth);
+                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth);
                 } else {
-                    dialogWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
+                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
                     dialogRadiusRightBottom = radius;
                 }
             }
             //
-            canvas.translate(dx, dy);
+            canvas.translate(dialogDx, dialogDy);
             //
-            drawRectCustom(canvas, dialogWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
+            drawRectCustom(canvas, dialogChoiceWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
                     dialogChoiceStrokeWidth, dialogChoiceStrokeColor, 0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
             //
             drawText(
                     canvas,
                     dialogChoiceTextValueArray[i],
-                    width,
-                    dialogWidth * 0.5f,
+                    dialogWidth,
+                    dialogChoiceWidth * 0.5f,
                     dialogChoiceHeight * 0.5f,
                     0,
                     0,
@@ -212,47 +248,41 @@ public class TDialog extends TView {
                             i == dialogChoiceIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
                             Paint.Align.CENTER));
             //
-            canvas.translate(-dx, -dy);
+            canvas.translate(-dialogDx, -dialogDy);
         }
 
 //		//Then draw a border line again
         drawRectClassic(canvas,
-                width, height,
+                dialogWidth, dialogHeight,
                 Color.TRANSPARENT,
                 dialogStrokeWidth,
                 dialogStrokeColor,
                 radius);
+
+        canvas.translate(-dx, -dy);
     }
 
 
-    public void setDialogXY(float dialogX, float dialogY) {
+    public void setDialogXY(float TouchEventX, float TouchEventY) {
         //calculate index
-        if (dialogY >= dy) {
-
-            float minDistence = width;
-
+        if (TouchEventY >= dialogDy + dy
+                && TouchEventY <= dialogDy + dy + dialogChoiceHeight
+                && TouchEventX >= dx
+                && TouchEventX <= width - dx
+        ) {
+            float minDistence = dialogWidth;
             //From 0 to judge one by one, if the distance farther on the end of the cycle
             for (int i = 0; i < total; i++) {
-                float centreDistance = Math.abs(dialogX - floatArray[i]);
-
+                float centreDistance = Math.abs(TouchEventX - floatArray[i]);
                 if (centreDistance < minDistence) {
                     dialogChoiceIndex = i;
                     minDistence = centreDistance;
-
                 } else {
                     break;
                 }
             }
         } else {
             dialogChoiceIndex = -1;
-        }
-    }
-
-    public String getDialogChoiceTextValue() {
-        if (dialogChoiceIndex >= 0) {
-            return dialogChoiceTextValueArray[dialogChoiceIndex];
-        } else {
-            return null;
         }
     }
 }

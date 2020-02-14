@@ -287,7 +287,11 @@
     </declare-styleable>
 
     <declare-styleable name="TDialog">
-        <attr name="dialogBackgroundNormal" format="reference|color" />
+
+        <attr name="dialogWidth" format="dimension" />
+        <attr name="dialogHeight" format="dimension" />
+        <attr name="dialogBackground" format="reference|color" />
+        <attr name="dialogSurround" format="reference|color" />
 
         <attr name="dialogStrokeWidth" format="dimension" />
         <attr name="dialogStrokeColor" format="reference|color" />
