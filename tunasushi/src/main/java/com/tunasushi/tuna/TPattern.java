@@ -24,10 +24,7 @@ public class TPattern extends TView {
     private final Shader mShader1;
     private final Shader mShader2;
     private final Paint mPaint;
-    private final DrawFilter mFastDF;
 
-    private float mTouchStartX;
-    private float mTouchStartY;
     private float mTouchCurrX;
     private float mTouchCurrY;
     private DrawFilter mDF;
@@ -48,8 +45,6 @@ public class TPattern extends TView {
         setFocusable(true);
         setFocusableInTouchMode(true);
 
-        mFastDF = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG | Paint.DITHER_FLAG, 0);
-
         mShader1 = new BitmapShader(makeBitmap1(), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         mShader2 = new BitmapShader(makeBitmap2(), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
@@ -67,36 +62,10 @@ public class TPattern extends TView {
         mPaint.setShader(mShader1);
         canvas.drawPaint(mPaint);
 
-        canvas.translate(mTouchCurrX - mTouchStartX,
-                mTouchCurrY - mTouchStartY);
+        canvas.translate(mTouchCurrX, mTouchCurrY);
 
         mPaint.setShader(mShader2);
         canvas.drawPaint(mPaint);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mTouchStartX = mTouchCurrX = x;
-                mTouchStartY = mTouchCurrY = y;
-                mDF = mFastDF;
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                mTouchCurrX = x;
-                mTouchCurrY = y;
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                mDF = null;
-                invalidate();
-                break;
-        }
-        return true;
     }
 
     private static Bitmap makeBitmap1() {
@@ -117,5 +86,16 @@ public class TPattern extends TView {
         p.setAlpha(0xCC);
         c.drawCircle(32, 32, 27, p);
         return bm;
+    }
+
+    @Override
+    public void setTouchXY(float touchX, float touchY) {
+        if (press) {
+            mTouchCurrX = touchX;
+            mTouchCurrY = touchY;
+        } else if (touchUp) {
+            mDF = null;
+        }
+        invalidate();
     }
 }

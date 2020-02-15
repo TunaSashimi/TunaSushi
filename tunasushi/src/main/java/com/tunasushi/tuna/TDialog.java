@@ -56,10 +56,9 @@ public class TDialog extends TView {
     }
 
     private float dialogChoiceTextSize;
-    private int dialogChoiceTextColorNormal;
-    private int dialogChoiceTextColorPress;
+    private int dialogChoiceTextColor;
 
-    private int dialogChoiceIndex = -1;
+    private int dialogChoiceIndex;
 
     public int getDialogChoiceIndex() {
         return dialogChoiceIndex;
@@ -144,9 +143,7 @@ public class TDialog extends TView {
         }
 
         dialogChoiceTextSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceTextSize, 0);
-        dialogChoiceTextColorNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorNormal, Color.TRANSPARENT);
-        dialogChoiceTextColorPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColorPress, dialogChoiceTextColorNormal);
-
+        dialogChoiceTextColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColor, Color.TRANSPARENT);
         dialogChoiceIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceIndex, -1);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -245,7 +242,8 @@ public class TDialog extends TView {
                     0,
                     0,
                     initTextPaint(Paint.Style.FILL,
-                            i == dialogChoiceIndex ? dialogChoiceTextColorPress : dialogChoiceTextColorNormal, dialogChoiceTextSize,
+                            dialogChoiceTextColor,
+                            dialogChoiceTextSize,
                             Paint.Align.CENTER));
             //
             canvas.translate(-dialogDx, -dialogDy);
@@ -262,21 +260,22 @@ public class TDialog extends TView {
         canvas.translate(-dx, -dy);
     }
 
-
-    public void setDialogXY(float TouchEventX, float TouchEventY) {
-        //calculate index
-        if (TouchEventY >= dialogDy + dy
-                && TouchEventY <= dialogDy + dy + dialogChoiceHeight
-                && TouchEventX >= dx
-                && TouchEventX <= width - dx
+    @Override
+    public void setTouchXYRaw(float touchX, float touchY) {
+        x = touchX;
+        y = touchY;
+        if (y >= dialogDy + dy
+                && y <= dialogDy + dy + dialogChoiceHeight
+                && x >= dx
+                && x <= width - dx
         ) {
-            float minDistence = dialogWidth;
+            float distenceMin = dialogWidth;
             //From 0 to judge one by one, if the distance farther on the end of the cycle
             for (int i = 0; i < total; i++) {
-                float centreDistance = Math.abs(TouchEventX - floatArray[i]);
-                if (centreDistance < minDistence) {
+                float centreDistance = Math.abs(x - floatArray[i]);
+                if (centreDistance < distenceMin) {
                     dialogChoiceIndex = i;
-                    minDistence = centreDistance;
+                    distenceMin = centreDistance;
                 } else {
                     break;
                 }
@@ -284,5 +283,6 @@ public class TDialog extends TView {
         } else {
             dialogChoiceIndex = -1;
         }
+        invalidate();
     }
 }

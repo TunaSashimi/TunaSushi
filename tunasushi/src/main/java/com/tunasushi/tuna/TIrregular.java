@@ -121,11 +121,12 @@ public class TIrregular extends TView {
     }
 
     @Override
-    public void setXRaw(float x) {
-        this.x = x;
+    public void setTouchXYRaw(float touchX, float touchY) {
+        x = touchX;
         boolean selected = x >= (width >> 1);
         if (irregularSelect ^ selected) {
             setIrregularSelect(selected);
         }
+        invalidate();
     }
 }

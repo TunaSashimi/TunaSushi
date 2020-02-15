@@ -299,14 +299,14 @@ public class TDraw extends TView {
         setTouchDownListener(new TouchDownListener() {
             @Override
             public void touchDown(TView t) {
-                drawTouchDown(getTouchEventX(), getTouchEventY());
+                drawTouchDown(getTouchX(), getTouchY());
             }
         });
 
         setTouchMoveListener(new TouchMoveListener() {
             @Override
             public void touchMove(TView t) {
-                drawTouchMove(getTouchEventX(), getTouchEventY());
+                drawTouchMove(getTouchX(), getTouchY());
             }
         });
 

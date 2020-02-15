@@ -125,4 +125,9 @@ public class TButton extends TView {
         canvas.drawColor(press ? buttonForegroundPress : buttonForegroundNormal);
 
     }
+
+    @Override
+    public void setTouchXY(float touchX, float touchY) {
+        invalidate();
+    }
 }

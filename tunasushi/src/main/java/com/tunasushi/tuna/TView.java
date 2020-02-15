@@ -565,38 +565,22 @@ public class TView extends View {
         return path;
     }
 
-
     //
     public float x;
-
-    //Default unit px
-    public void setX(float x) {
-        setXRaw(x);
-    }
-
-    public void setX(float x, int unit) {
-        setXRaw(convertToPX(x, unit));
-    }
-
-    public void setXRaw(float x) {
-    }
-
-
     //
     public float y;
 
-    //Default unit px
-    public void setY(float y) {
-        setYRaw(y);
+    public void setTouchXY(float touchX, float touchY) {
+        setTouchXYRaw(touchX, touchY);
     }
 
-    public void setY(float y, int unit) {
-        setYRaw(convertToPX(y, unit));
+    public void setTouchXY(float touchX, float touchY, int unit) {
+        setTouchXYRaw(convertToPX(touchX, unit), convertToPX(touchY, unit));
     }
 
-    private void setYRaw(float y) {
+    //There are also cases of external calls, so the assignment should be placed in the subclass rather than the parent class!
+    public void setTouchXYRaw(float touchX, float touchY) {
     }
-
 
     protected Rect rect;
 
@@ -1010,6 +994,11 @@ public class TView extends View {
         this.touchIntercept = touchIntercept;
     }
 
+    protected boolean touchDown;
+    protected boolean touchMove;
+    protected boolean touchUp;
+    protected boolean touchCancel;
+
     // press default false
     protected boolean press;
 
@@ -1085,25 +1074,25 @@ public class TView extends View {
     }
 
     //
-    protected float touchEventX;
+    protected float touchX;
 
-    public float getTouchEventX() {
-        return touchEventX;
+    public float getTouchX() {
+        return touchX;
     }
 
-    public void setTouchEventX(float touchEventEventX) {
-        this.touchEventX = touchEventEventX;
+    public void setTouchX(float touchEventEventX) {
+        this.touchX = touchEventEventX;
     }
 
     //
-    protected float touchEventY;
+    protected float touchY;
 
-    public float getTouchEventY() {
-        return touchEventY;
+    public float getTouchY() {
+        return touchY;
     }
 
-    public void setTouchEventY(float touchEventEventY) {
-        this.touchEventY = touchEventEventY;
+    public void setTouchY(float touchEventEventY) {
+        this.touchY = touchEventEventY;
     }
 
     // default false
@@ -4545,8 +4534,8 @@ public class TView extends View {
         if (touchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
         }
-        touchEventX = event.getX();
-        touchEventY = event.getY();
+        touchX = event.getX();
+        touchY = event.getY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -4575,6 +4564,13 @@ public class TView extends View {
                     }
                 }
 
+                //
+                touchDown = true;
+                touchMove = false;
+                touchUp = false;
+                touchCancel = false;
+
+                //
                 press = true;
                 select = false;
 
@@ -4648,13 +4644,19 @@ public class TView extends View {
 
                 break;
             case MotionEvent.ACTION_MOVE:
+
+                touchDown = false;
+                touchMove = true;
+                touchUp = false;
+                touchCancel = false;
+
                 //
                 if (touchType == TouchType.ALWAYS) {
 
                     press = true;
                     select = false;
 
-                } else if (!touchOutBounds && (touchEventX < 0 || touchEventX > width || touchEventY < 0 || touchEventY > height)) {
+                } else if (!touchOutBounds && (touchX < 0 || touchX > width || touchY < 0 || touchY > height)) {
 
                     press = false;
                     select = false;
@@ -4666,13 +4668,11 @@ public class TView extends View {
                         contentMark = false;
                     }
 
-                    invalidate();
-
                     touchOutBounds = true;
                     if (touchOutListener != null) {
                         touchOutListener.touchOut(this);
                     }
-                } else if (touchOutBounds && (touchEventX >= 0 && touchEventX <= width && touchEventY >= 0 && touchEventY <= height)) {
+                } else if (touchOutBounds && (touchX >= 0 && touchX <= width && touchY >= 0 && touchY <= height)) {
 
                     press = true;
                     select = false;
@@ -4698,6 +4698,12 @@ public class TView extends View {
 
                 break;
             case MotionEvent.ACTION_UP:
+
+                touchDown = false;
+                touchMove = false;
+                touchUp = true;
+                touchCancel = false;
+
                 //
                 press = false;
                 switch (selectType) {
@@ -4738,6 +4744,14 @@ public class TView extends View {
 
                 break;
             case MotionEvent.ACTION_CANCEL:
+
+                //
+                touchDown = false;
+                touchMove = false;
+                touchUp = false;
+                touchCancel = true;
+
+                //
                 press = false;
                 select = false;
 
@@ -4757,11 +4771,14 @@ public class TView extends View {
                 break;
         }
 
+        //
+        setTouchXY(touchX, touchY);
+
         if (touchListener != null && (touchType == TouchType.ALWAYS || !touchOutBounds)) {
             touchListener.touch(this);
         }
 
-        if (!touchOutBounds) {
+        if (isOrigin() && !touchOutBounds) {
             invalidate();
         }
         return true;

@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
 import java.util.ArrayList;
 
 /**
@@ -219,23 +220,12 @@ public class TBezier extends TView {
         return (float) Math.sqrt(d);
     }
 
-    //测试用
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Circle circle = circlePaths.get(0);
-        circle.center[0] = event.getX();
-        circle.center[1] = event.getY();
-        invalidate();
-        return true;
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (circlePaths.size() == 0) {
             initMetaballs();
         }
-
 
         final Circle circle1 = circlePaths.get(0);
         RectF ball1 = new RectF();
@@ -248,5 +238,14 @@ public class TBezier extends TView {
         for (int i = 1; i < circlePaths.size(); i++) {
             metaball(canvas, i, 0, mv, handleLenRate, maxDistance);
         }
+    }
+
+    @Override
+    public void setTouchXYRaw(float touchX, float touchY) {
+        Circle circle = circlePaths.get(0);
+        circle.center[0] = touchX;
+        circle.center[1] = touchY;
+        invalidate();
+        invalidate();
     }
 }

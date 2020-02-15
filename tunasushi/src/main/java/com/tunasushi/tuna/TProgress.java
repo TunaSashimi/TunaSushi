@@ -20,7 +20,8 @@ import com.tuna.R;
  * @Description
  */
 public class TProgress extends TView {
-    private int progressArcBackgroundNormal, progressBoundBackgroundNormal;
+    private int progressArcBackground;
+    private int progressBoundBackground;
     private Bitmap progressSrcBack, progressSrcFront;
 
     private ProgressShapeType progressShapeType;
@@ -108,8 +109,8 @@ public class TProgress extends TView {
                 throw new IllegalArgumentException("The content attribute require a property named progressSrcFront");
             }
         } else {
-            progressArcBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressArcBackgroundNormal, Color.TRANSPARENT);
-            progressBoundBackgroundNormal = typedArray.getColor(R.styleable.TProgress_progressBoundBackgroundNormal, Color.TRANSPARENT);
+            progressArcBackground = typedArray.getColor(R.styleable.TProgress_progressArcBackground, Color.TRANSPARENT);
+            progressBoundBackground = typedArray.getColor(R.styleable.TProgress_progressBoundBackground, Color.TRANSPARENT);
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -174,22 +175,22 @@ public class TProgress extends TView {
                 break;
             case CIRCLE:
 
-                canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.STROKE, progressBoundBackgroundNormal));
+                canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.STROKE, progressBoundBackground));
 
                 switch (progressPromoteType) {
                     case CLOCKWISE:
-                        canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, initPaint(Paint.Style.FILL, progressArcBackgroundNormal));
+                        canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, initPaint(Paint.Style.FILL, progressArcBackground));
                         break;
                     case UPWARD:
                         canvas.save();
                         canvas.clipRect(initRect(0, (int) (height * (1 - percent)), width, height));
-                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackground));
                         canvas.restore();
                         break;
                     case UPDOWN:
                         canvas.save();
                         canvas.clipRect(initRect(0, (int) (height * percent * 0.5f), width, (int) (height * (1 - percent * 0.5f))), Op.DIFFERENCE);
-                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackgroundNormal));
+                        canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.FILL, progressBoundBackground));
                         canvas.restore();
                         break;
                     default:

@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
-
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:57
@@ -103,7 +102,6 @@ public class TRepeat extends TView {
             throw new IndexOutOfBoundsException("The content attribute repeatItemFractionBottom must be greater than repeatItemFractionTop");
         }
 
-
         int repeatShapeTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatShapeType, -1);
         if (repeatShapeTypeIndex >= 0) {
             repeatShapeType = repeatShapeTypeArray[repeatShapeTypeIndex];
@@ -124,7 +122,6 @@ public class TRepeat extends TView {
             repeatItemBackgroundNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundNormal, Color.TRANSPARENT);
             repeatItemBackgroundSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundSelect, repeatItemBackgroundNormal);
         }
-
 
         int repeatSelectTypeIndex = typedArray.getInt(R.styleable.TRepeat_repeatSelectType, -1);
         if (repeatSelectTypeIndex >= 0) {
@@ -150,7 +147,6 @@ public class TRepeat extends TView {
             throw new IndexOutOfBoundsException("The content attribute repeatIndex length must be no less than -1 and smaller than the total length minus 1");
         }
 
-
         if (repeatShapeType == RepeatShapeType.CUSTOM) {
             int repeatCustomSrcNormalWidth = repeatSrcNormal.getWidth();
             int repeatCustomSrcNormalHeight = repeatSrcNormal.getHeight();
@@ -169,7 +165,6 @@ public class TRepeat extends TView {
         } else if (repeatShapeType == RepeatShapeType.CIRCLE) {
             srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
             srcWidthScale = srcHeightScale;
-
         }
 
         dy = height * repeatItemFractionTop;
@@ -212,62 +207,30 @@ public class TRepeat extends TView {
                     }
                 }
 
-                // in order to draw a map of the effect of the half, drawing overlay
-                if (press) {
-                    canvas.save();
-                    switch (repeatSelectType) {
-                        case CONNECT:
-                            canvas.clipRect(0, 0, x, height);
-                            break;
-                        case CURRENT:
-                            canvas.clipRect(x - srcWidthScale, 0, x, height);
-                            break;
-                        default:
-                            break;
+                for (int i = 0; i < total; i++) {
+                    if (i == 0) {
+                        canvas.translate(share, dy);
+                    } else {
+                        canvas.translate(share + srcWidthScale, 0);
                     }
-                    for (int i = 0; i < total; i++) {
-                        if (i == 0) {
-                            canvas.translate(share, dy);
-                        } else {
-                            canvas.translate(share + srcWidthScale, 0);
-                        }
-                        canvas.drawBitmap(repeatSrcSelect, matrix, null);
-                    }
-                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
-                    if (stringArray != null) {
-                        for (int i = 0; i < stringArray.length; i++) {
-                            drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
-                                            * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
-                        }
-                    }
-                    canvas.restore();
-                } else {
-                    for (int i = 0; i < total; i++) {
-                        if (i == 0) {
-                            canvas.translate(share, dy);
-                        } else {
-                            canvas.translate(share + srcWidthScale, 0);
-                        }
-                        canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatSrcSelect
-                                : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
-                    }
-                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
-                    if (stringArray != null) {
-                        for (int i = 0; i < stringArray.length; i++) {
-                            drawText(
-                                    canvas,
-                                    stringArray[i],
-                                    width,
-                                    floatArray[i],
-                                    (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
-                                    0,
-                                    0,
-                                    initTextPaint(Paint.Style.FILL,
-                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
-                                                    : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
-                                            repeatItemTextSize, Paint.Align.CENTER));
-                        }
+                    canvas.drawBitmap(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatSrcSelect
+                            : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
+                }
+                canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                if (stringArray != null) {
+                    for (int i = 0; i < stringArray.length; i++) {
+                        drawText(
+                                canvas,
+                                stringArray[i],
+                                width,
+                                floatArray[i],
+                                (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
+                                0,
+                                0,
+                                initTextPaint(Paint.Style.FILL,
+                                        repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                                : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                        repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
                 break;
@@ -293,64 +256,30 @@ public class TRepeat extends TView {
                                 initTextPaint(Paint.Style.FILL, repeatItemTextColorNormal, repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
-
-                // in order to draw a map of the effect of the half, drawing overlay
-                if (press) {
-                    canvas.save();
-                    switch (repeatSelectType) {
-                        case CONNECT:
-                            canvas.clipRect(0, 0, x, height);
-                            break;
-                        case CURRENT:
-                            canvas.clipRect(x - srcWidthScale, 0, x, height);
-                            break;
-                        default:
-                            break;
+                for (int i = 0; i < total; i++) {
+                    if (i == 0) {
+                        canvas.translate(share, dy);
+                    } else {
+                        canvas.translate(share + srcWidthScale, 0);
                     }
-                    for (int i = 0; i < total; i++) {
-                        if (i == 0) {
-                            canvas.translate(share, dy);
-                        } else {
-                            canvas.translate(share + srcWidthScale, 0);
-                        }
-                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatItemBackgroundSelect));
-                    }
-
-                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
-                    if (stringArray != null) {
-                        for (int i = 0; i < stringArray.length; i++) {
-                            drawText(canvas, stringArray[i], width, floatArray[i], (height * repeatItemTextFractionTop + height
-                                            * repeatItemTextFractionBottom) * 0.5f, 0, 0,
-                                    initTextPaint(Paint.Style.FILL, repeatItemTextColorSelect, repeatItemTextSize, Paint.Align.CENTER));
-                        }
-                    }
-                    canvas.restore();
-                } else {
-                    for (int i = 0; i < total; i++) {
-                        if (i == 0) {
-                            canvas.translate(share, dy);
-                        } else {
-                            canvas.translate(share + srcWidthScale, 0);
-                        }
-                        canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
-                                : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
-                    }
-                    canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
-                    if (stringArray != null) {
-                        for (int i = 0; i < stringArray.length; i++) {
-                            drawText(
-                                    canvas,
-                                    stringArray[i],
-                                    width,
-                                    floatArray[i],
-                                    (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
-                                    0,
-                                    0,
-                                    initTextPaint(Paint.Style.FILL,
-                                            repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
-                                                    : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
-                                            repeatItemTextSize, Paint.Align.CENTER));
-                        }
+                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
+                            : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
+                }
+                canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
+                if (stringArray != null) {
+                    for (int i = 0; i < stringArray.length; i++) {
+                        drawText(
+                                canvas,
+                                stringArray[i],
+                                width,
+                                floatArray[i],
+                                (height * repeatItemTextFractionTop + height * repeatItemTextFractionBottom) * 0.5f,
+                                0,
+                                0,
+                                initTextPaint(Paint.Style.FILL,
+                                        repeatSelectType == RepeatSelectType.CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                                : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
+                                        repeatItemTextSize, Paint.Align.CENTER));
                     }
                 }
                 break;
@@ -359,23 +288,15 @@ public class TRepeat extends TView {
         }
     }
 
-    //
-    public float getRepeatX() {
-        return floatArray[repeatIndex];
-    }
-
     @Override
-    public void setXRaw(float x) {
-        this.x = x;
-        // calculate index
-        float minDistence = width;
-        // From 0 to judge one by one, if the distance farther on the end of the
-        // cycle
+    public void setTouchXYRaw(float touchX, float touchY) {
+        x = touchX;
+        float distenceMin = width;
         for (int i = 0; i < total; i++) {
             float centreDistance = Math.abs(x - floatArray[i]);
-            if (centreDistance < minDistence) {
+            if (centreDistance < distenceMin) {
                 repeatIndex = i;
-                minDistence = centreDistance;
+                distenceMin = centreDistance;
             } else {
                 break;
             }

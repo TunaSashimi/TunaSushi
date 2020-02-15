@@ -21,14 +21,14 @@ import com.tuna.R;
  */
 public class TRow extends TView {
 
-    private int rowBackgroundNormal;
+    private int rowBackground;
 
-    public int getRowBackgroundNormal() {
-        return rowBackgroundNormal;
+    public int getRowBackground() {
+        return rowBackground;
     }
 
-    public void setRowBackgroundNormal(int rowBackgroundNormal) {
-        this.rowBackgroundNormal = rowBackgroundNormal;
+    public void setRowBackground(int rowBackground) {
+        this.rowBackground = rowBackground;
     }
 
     private int rowDuraction;
@@ -100,7 +100,7 @@ public class TRow extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TRow);
 
-        rowBackgroundNormal = typedArray.getColor(R.styleable.TRow_rowBackgroundNormal, Color.TRANSPARENT);
+        rowBackground = typedArray.getColor(R.styleable.TRow_rowBackground, Color.TRANSPARENT);
         rowDuraction = typedArray.getInt(R.styleable.TRow_rowDuraction, 1000);
 
         int rowDirectionIndex = typedArray.getInt(R.styleable.TRow_rowDirection, 0);
@@ -126,7 +126,7 @@ public class TRow extends TView {
                 break;
         }
 
-        initPaint(Paint.Style.FILL, rowBackgroundNormal, width);
+        initPaint(Paint.Style.FILL, rowBackground, width);
     }
 
     @Override

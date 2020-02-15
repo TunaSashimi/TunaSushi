@@ -51,8 +51,6 @@ public class TRange extends TView {
 
     private Bitmap rangeDragLeftSrc;
     private Bitmap rangeDragRightSrc;
-
-
     //
     private float rangeCircleCentreX;
 
@@ -67,6 +65,7 @@ public class TRange extends TView {
 
     //
     private String rangeValue;
+
     public String getRangeValue() {
         if (dx > 0) {
             return rangeValueArray[rangeDragRightIndex];
@@ -78,18 +77,6 @@ public class TRange extends TView {
     public void setRangeValue(String rangeValue) {
         this.rangeValue = rangeValue;
     }
-
-    //
-    private float[] rangeCircleCentreXArray;
-
-    public float[] getRangeCircleCentreXArray() {
-        return rangeCircleCentreXArray;
-    }
-
-    public void setRangeCircleCentreXArray(float[] rangeCircleCentreXArray) {
-        this.rangeCircleCentreXArray = rangeCircleCentreXArray;
-    }
-
 
     public TRange(Context context) {
         this(context, null);
@@ -113,7 +100,7 @@ public class TRange extends TView {
             if (total < 2) {
                 throw new IndexOutOfBoundsException("The content attribute rangeValueArray length must be at least 2");
             } else {
-                rangeCircleCentreXArray = new float[total];
+                floatArray = new float[total];
             }
         } else {
             throw new IllegalArgumentException("The content attribute require a property named rangeValueArray");
@@ -167,7 +154,7 @@ public class TRange extends TView {
             share = surplus * 1f / (total - 1);
         }
         for (int i = 0; i < total; i++) {
-            rangeCircleCentreXArray[i] = share * i + (height >> 1);
+            floatArray[i] = share * i + (height >> 1);
         }
     }
 
@@ -183,56 +170,53 @@ public class TRange extends TView {
         initPaint(Paint.Style.FILL, rangeDragColor);
 
         // Paint.Style.FILL
-        canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
+        canvas.drawCircle(floatArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
             initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
             //Paint.Style.STROKE is Diverge to both sides
-            canvas.drawCircle(rangeCircleCentreXArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
+            canvas.drawCircle(floatArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         // draw range dragRight
         initPaint(Paint.Style.FILL, rangeDragColor);
-        canvas.drawCircle(rangeCircleCentreXArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
+        canvas.drawCircle(floatArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
             initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
-            canvas.drawCircle(rangeCircleCentreXArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
+            canvas.drawCircle(floatArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         //draw rangeColorSelect
         initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
-        canvas.drawLine(rangeCircleCentreXArray[rangeDragLeftIndex] + (height >> 1), height >> 1,
-                rangeCircleCentreXArray[rangeDragRightIndex] - (height >> 1), height >> 1, paint);
+        canvas.drawLine(floatArray[rangeDragLeftIndex] + (height >> 1), height >> 1,
+                floatArray[rangeDragRightIndex] - (height >> 1), height >> 1, paint);
     }
 
     @Override
-    public void setXRaw(float x) {
-        this.x = x;
-        float minDistence = width;
-
-        //If the circle on the right is closer, dx is greater than 0
-        if (Math.abs(x - rangeCircleCentreXArray[rangeDragLeftIndex]) <= Math.abs(x - rangeCircleCentreXArray[rangeDragRightIndex])) {
+    public void setTouchXYRaw(float touchX, float touchY) {
+        x = touchX;
+        float distenceMin = width;
+        if (Math.abs(x - floatArray[rangeDragLeftIndex]) <= Math.abs(x - floatArray[rangeDragRightIndex])) {
             dx = -1;
         } else {
             dx = 1;
         }
-
-        // Which interval is close
         for (int i = 0; i < total; i++) {
-            float circleCentreDistance = Math.abs(x - rangeCircleCentreXArray[i]);
-            if (circleCentreDistance < minDistence) {
+            float circlecentreDx = Math.abs(x - floatArray[i]);
+            if (circlecentreDx < distenceMin) {
                 if (dx > 0) {
                     rangeDragRightIndex = i;
-                    rangeCircleCentreX = rangeCircleCentreXArray[rangeDragRightIndex];
+                    rangeCircleCentreX = floatArray[rangeDragRightIndex];
                 } else {
                     rangeDragLeftIndex = i;
-                    rangeCircleCentreX = rangeCircleCentreXArray[rangeDragLeftIndex];
+                    rangeCircleCentreX = floatArray[rangeDragLeftIndex];
                 }
-                minDistence = circleCentreDistance;
+                distenceMin = circlecentreDx;
             } else {
                 break;
             }
         }
+        invalidate();
     }
 }

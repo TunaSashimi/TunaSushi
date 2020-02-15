@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.tunasushi.tuna.TPattern;
-import com.tunasushi.tuna.TView;
 
 /**
  * @author TunaSashimi

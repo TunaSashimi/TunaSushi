@@ -48,6 +48,22 @@ public class TWrap extends TView {
     private List<Wrap> wrapList;
     private boolean[] wrapSelect;
 
+    public boolean[] getWrapSelect() {
+        return wrapSelect;
+    }
+
+    public class Wrap {
+        public RectF wrapRect;
+        public boolean wrapSelect;
+        public String wrapString;
+
+        public Wrap(RectF wrapRect, boolean wrapSelect, String wrapString) {
+            this.wrapRect = wrapRect;
+            this.wrapSelect = wrapSelect;
+            this.wrapString = wrapString;
+        }
+    }
+
     public TWrap(Context context) {
         this(context, null);
     }
@@ -185,7 +201,6 @@ public class TWrap extends TView {
 
 
     private void drawDetail(Canvas canvas, float dx, float dy, float itemWidth, float rowHeight, int i) {
-
         //
         if (wrapList.size() <= i) {
             wrapList.add(new Wrap(new RectF(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapItemTextValueArray[i]));
@@ -218,29 +233,21 @@ public class TWrap extends TView {
 
     }
 
-    public void setWrapXY(float wrapX, float wrapY) {
-        for (int i = 0; i <= total - 1; i++) {
-            Wrap wrap = wrapList.get(i);
-            if (wrap.wrapRect.contains((int) wrapX, (int) wrapY)) {
-                wrap.wrapSelect = !wrap.wrapSelect;
-                wrapSelect[i] = wrap.wrapSelect;
+    @Override
+    public void setTouchXY(float touchX, float touchY) {
+        //MotionEvent.ACTION_DOWN press = true;
+        //MotionEvent.ACTION_MOVE press = true;
+        //MotionEvent.ACTION_UP press = false;
+        //MotionEvent.ACTION_CANCEL press = false;
+        if (!press) {
+            for (int i = 0; i <= total - 1; i++) {
+                Wrap wrap = wrapList.get(i);
+                if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
+                    wrap.wrapSelect = !wrap.wrapSelect;
+                    wrapSelect[i] = wrap.wrapSelect;
+                }
             }
-        }
-    }
-
-    public boolean[] getWrapSelect() {
-        return wrapSelect;
-    }
-
-    public class Wrap {
-        public RectF wrapRect;
-        public boolean wrapSelect;
-        public String wrapString;
-
-        public Wrap(RectF wrapRect, boolean wrapSelect, String wrapString) {
-            this.wrapRect = wrapRect;
-            this.wrapSelect = wrapSelect;
-            this.wrapString = wrapString;
+            invalidate();
         }
     }
 }

@@ -44,7 +44,6 @@ public class TSeek extends TView {
     private Bitmap seekDragSrcPress;
 
     private RectF[] seekCircleRectFArray;
-    private float[] seekCircleCentreXArray;
 
     private int seekIndex;
 
@@ -85,7 +84,7 @@ public class TSeek extends TView {
             if (total < 2) {
                 throw new IndexOutOfBoundsException("The content attribute seekTextValueArray length must be at least 2");
             } else {
-                seekCircleCentreXArray = new float[total];
+                floatArray = new float[total];
                 seekCircleRectFArray = new RectF[total];
                 for (int i = 0; i < total; i++) {
                     seekCircleRectFArray[i] = new RectF();
@@ -153,7 +152,7 @@ public class TSeek extends TView {
 
         // seekCircleCentreXArray avoid generating with new
         for (int i = 0; i < total; i++) {
-            seekCircleCentreXArray[i] = (seekCircleNormalDiameter + share) * i + seekCircleNormalDiameter * 0.5f + seekStrokeWidth * 0.5f;
+            floatArray[i] = (seekCircleNormalDiameter + share) * i + seekCircleNormalDiameter * 0.5f + seekStrokeWidth * 0.5f;
         }
     }
 
@@ -172,13 +171,13 @@ public class TSeek extends TView {
             if (i == 0) {
                 path.addArc(seekCircleRectFArray[i], seekAngle * 0.5f, 360 - seekAngle);
             } else {
-                path.lineTo(seekCircleCentreXArray[i] - seekCircleNormalDiameter * 0.5f + dx, (height >> 1) - dy);
+                path.lineTo(floatArray[i] - seekCircleNormalDiameter * 0.5f + dx, (height >> 1) - dy);
                 path.addArc(seekCircleRectFArray[i], 180 + seekAngle * 0.5f, i != total - 1 ? 180 - seekAngle : 360 - seekAngle);
             }
         }
 
         for (int i = total - 2; i >= 0; i--) {
-            path.lineTo(seekCircleCentreXArray[i] + seekCircleNormalDiameter * 0.5f - dx, (height >> 1) + dy);
+            path.lineTo(floatArray[i] + seekCircleNormalDiameter * 0.5f - dx, (height >> 1) + dy);
             if (i != 0) {
                 path.addArc(seekCircleRectFArray[i], seekAngle * 0.5f, 180 - seekAngle);
             }
@@ -192,7 +191,7 @@ public class TSeek extends TView {
         for (int i = 0; i < total; i++) {
 
             // draw bottom circle
-            canvas.drawCircle(seekCircleCentreXArray[i], height >> 1, seekCircleNormalDiameter * 0.5f - seekDragStrokeWidth, paint);
+            canvas.drawCircle(floatArray[i], height >> 1, seekCircleNormalDiameter * 0.5f - seekDragStrokeWidth, paint);
 
             if (i != total - 1) {
                 // Normally rectangle from the top left corner should be
@@ -206,7 +205,7 @@ public class TSeek extends TView {
                 // To the right:seekCircleCentreXArray [i] + circleDiameter
                 // / 2 + share + dx * 5
 
-                seekCircleRectFArray[0].set(seekCircleCentreXArray[i] + seekCircleNormalDiameter * 0.5f - dx * 5, (height >> 1) - dy, seekCircleCentreXArray[i]
+                seekCircleRectFArray[0].set(floatArray[i] + seekCircleNormalDiameter * 0.5f - dx * 5, (height >> 1) - dy, floatArray[i]
                         + seekCircleNormalDiameter * 0.5f + share + dx * 5, (height >> 1) + dy);
 
                 // draw bottom rect
@@ -217,7 +216,7 @@ public class TSeek extends TView {
         // draw bottom text
         initTextPaint(Paint.Style.FILL, seekTextColorNormal, seekTextSize, Align.CENTER);
         for (int i = 0; i < total; i++) {
-            drawText(canvas, seekTextValueArray[i], width, seekCircleCentreXArray[i], height >> 1, 0, 0, paint);
+            drawText(canvas, seekTextValueArray[i], width, floatArray[i], height >> 1, 0, 0, paint);
         }
 
         // draw drag
@@ -282,7 +281,7 @@ public class TSeek extends TView {
                     initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
 
         } else {
-            float adjuestX = seekCircleCentreXArray[seekIndex];
+            float adjuestX = floatArray[seekIndex];
 
             // draw response circle
             canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal, initPaint(Paint.Style.FILL, seekDragStrokeColorNormal));
@@ -295,19 +294,18 @@ public class TSeek extends TView {
     }
 
     @Override
-    public void setXRaw(float x) {
-        this.x = x;
-        // calculate index
-        float minDistence = width;
-        // From 0 to judge one by one, if the distance farther on the end of the cycle
+    public void setTouchXYRaw(float touchX, float touchY) {
+        x = touchX;
+        float distenceMin = width;
         for (int i = 0; i < total; i++) {
-            float circleCentreDistance = Math.abs(x - seekCircleCentreXArray[i]);
-            if (circleCentreDistance < minDistence) {
+            float dx = Math.abs(x - floatArray[i]);
+            if (dx < distenceMin) {
                 seekIndex = i;
-                minDistence = circleCentreDistance;
+                distenceMin = dx;
             } else {
                 break;
             }
         }
+        invalidate();
     }
 }

@@ -317,9 +317,7 @@
 
         <attr name="dialogChoiceTextValueArray" format="reference" />
         <attr name="dialogChoiceTextSize" format="dimension" />
-        <attr name="dialogChoiceTextColorNormal" format="reference|color" />
-        <attr name="dialogChoiceTextColorPress" format="reference|color" />
-
+        <attr name="dialogChoiceTextColor" format="reference|color" />
         <attr name="dialogChoiceIndex" format="integer" />
     </declare-styleable>
 
@@ -403,7 +401,6 @@
     </declare-styleable>
 
     <declare-styleable name="TLine">
-        <attr name="lineBackgroundNormal" format="reference|color" />
         <attr name="lineArrowWidth" format="dimension" />
         <attr name="lineArrowHeight" format="dimension" />
         <attr name="lineArrowStrokeWidth" format="dimension" />
@@ -414,6 +411,7 @@
             <enum name="bottom" value="1" />
         </attr>
         <attr name="lineX" format="dimension" />
+        <attr name="lineSurround" format="reference|color" />
     </declare-styleable>
 
     <declare-styleable name="TMove">
@@ -427,8 +425,8 @@
     </declare-styleable>
 
     <declare-styleable name="TProgress">
-        <attr name="progressArcBackgroundNormal" format="reference|color" />
-        <attr name="progressBoundBackgroundNormal" format="reference|color" />
+        <attr name="progressArcBackground" format="reference|color" />
+        <attr name="progressBoundBackground" format="reference|color" />
         <attr name="progressSrcBack" format="reference" />
         <attr name="progressSrcFront" format="reference" />
         <attr name="progressShapeType">
@@ -527,7 +525,7 @@
     </declare-styleable>
 
     <declare-styleable name="TRow">
-        <attr name="rowBackgroundNormal" format="reference|color" />
+        <attr name="rowBackground" format="reference|color" />
         <attr name="rowDuraction" format="integer" />
         <attr name="rowDirection">
             <enum name="top" value="0" />
