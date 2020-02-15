@@ -33,14 +33,13 @@
             app:seekDragStrokeColorPress="#a3a3a3"
             app:seekDragStrokeWidth="1px"
             app:seekDragTextColor="#592d2e"
-            app:seekIndex="3"
             app:seekFillColor="#f0f0f0"
+            app:seekIndex="3"
             app:seekStrokeColor="#a3a3a3"
             app:seekStrokeWidth="1px"
             app:seekTextColorNormal="#cccccc"
             app:seekTextSize="17dp"
             app:seekTextValueArray="@array/seek_text_value_array"
-            app:touchIntercept="true"
             app:touchType="always" />
 
         <com.tunasushi.tuna.TView
@@ -104,14 +103,13 @@
             app:seekDragStrokeColorPress="#a3a3a3"
             app:seekDragStrokeWidth="1px"
             app:seekDragTextColor="#592d2e"
-            app:seekIndex="3"
             app:seekFillColor="#f0f0f0"
+            app:seekIndex="3"
             app:seekStrokeColor="#a3a3a3"
             app:seekStrokeWidth="1px"
             app:seekTextColorNormal="#cccccc"
             app:seekTextSize="17dp"
-            app:seekTextValueArray="@array/seek_text_value_array"
-            app:touchIntercept="true" />
+            app:seekTextValueArray="@array/seek_text_value_array" />
 
         <!--From bottom to top of layout-->
 

@@ -62,21 +62,5 @@ public class TSeekActivity extends Activity {
 
         tViewTouchoutUnableReset.setTouchUpListener(touchUpListener);
         tViewTouchoutUnableGetIndex.setTouchUpListener(touchUpListener);
-
-        //
-        tSeekTouchoutable.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                t.setX(t.getTouchEventX());
-            }
-        });
-
-        //
-        tSeekTouchoutUnable.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                t.setX(t.getTouchEventX());
-            }
-        });
     }
 }

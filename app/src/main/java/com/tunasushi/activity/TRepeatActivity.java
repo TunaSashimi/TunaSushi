@@ -46,36 +46,31 @@ public class TRepeatActivity extends Activity {
         tRepeatTips = findViewById(R.id.tRepeatTips);
 
         //
+        tRepeatCar.setRepeatTotal(indexArray.length);
+        tRepeatCar.setRepeatItemTextValueArray(indexArray);
+
+        //
         tRepeatStar.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                float touchEventX = t.getTouchEventX();
-                t.setX(touchEventX);
-                tRepeatCar.setX(touchEventX);
-                tLine.setX(touchEventX);
+                float touchEventX = t.getTouchX();
+                float touchEventY = t.getTouchY();
+                tRepeatCar.setTouchXYRaw(touchEventX, touchEventY);
+                tLine.setTouchXYRaw(touchEventX, touchEventY);
             }
         });
 
-        //
-        tRepeatCar.setRepeatTotal(indexArray.length);
-        tRepeatCar.setRepeatItemTextValueArray(indexArray);
+
         tRepeatCar.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
-                float touchEventX = t.getTouchEventX();
-                t.setX(touchEventX);
-                tRepeatStar.setX(touchEventX);
-                tLine.setX(touchEventX);
+                float touchEventX = t.getTouchX();
+                float touchEventY = t.getTouchY();
+                tRepeatStar.setTouchXYRaw(touchEventX, touchEventY);
+                tLine.setTouchXYRaw(touchEventX, touchEventY);
             }
         });
 
-        //
-        tRepeatTips.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                t.setX(t.getTouchEventX());
-            }
-        });
         //
         setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
 
@@ -102,6 +97,7 @@ public class TRepeatActivity extends Activity {
                 tRepeatStar.setRepeatIndex(position - 1);
                 tRepeatCar.setRepeatIndex(position - 1);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

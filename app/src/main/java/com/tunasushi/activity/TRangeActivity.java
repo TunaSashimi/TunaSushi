@@ -21,7 +21,7 @@ import static com.tunasushi.tool.ViewTool.setViewMargins;
 public class TRangeActivity extends Activity {
     private TBubble tBubble;
     private TRange rRange;
-    int dx;
+    private int dx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,6 @@ public class TRangeActivity extends Activity {
             @Override
             public void touch(TView t) {
                 //
-                t.setX(t.getTouchEventX());
-                //
                 tBubble.setTBubbleTextValue(rRange.getRangeValue());
                 //
                 if (dx == 0) {
@@ -46,7 +44,7 @@ public class TRangeActivity extends Activity {
                 //
                 if (t.isPress()) {
                     tBubble.setVisibility(View.VISIBLE);
-                    setViewMargins(tBubble, (int) rRange.getRangeCircleCentreX() - dx, dpToPx(16), 0, 0);
+                    tBubble.setX((int) rRange.getRangeCircleCentreX() - dx);
                 } else {
                     tBubble.setVisibility(View.INVISIBLE);
                 }

@@ -95,7 +95,7 @@
         app:lineArrowStrokeColor="#b2b2b2"
         app:lineArrowStrokeWidth="2px"
         app:lineArrowWidth="22dp"
-        app:lineBackgroundNormal="#f0eff5"
+        app:lineSurround="#f0eff5"
         app:lineTowardType="bottom" />
 
     <com.tunasushi.tuna.TRepeat

@@ -48,13 +48,6 @@ public class TDialogActivity extends Activity {
         });
 
         //
-        tDialogConfirm.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                tDialogConfirm.setDialogXY(t.getTouchEventX(), t.getTouchEventY());
-            }
-        });
-        //
         tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
@@ -70,14 +63,7 @@ public class TDialogActivity extends Activity {
             }
         });
 
-
         //
-        tDialogChoice.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                tDialogChoice.setDialogXY(t.getTouchEventX(), t.getTouchEventY());
-            }
-        });
         tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {

@@ -26,14 +26,6 @@ public class TIrregularActivity extends Activity {
         setContentView(R.layout.activity_t_iregular);
 
         tIrregular = findViewById(R.id.tIrregular);
-
-        tIrregular.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                t.setX(t.getTouchEventX());
-            }
-        });
-
         tIrregular.setIrregularSelectListener(new TIrregular.IrregularSelectListener() {
             @Override
             public void onIrregularSelect(boolean irregularSelect) {

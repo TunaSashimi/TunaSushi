@@ -18,11 +18,7 @@ public class TPatternActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Note this configuration!
-        //tPattern.setTouchType(TView.TouchType.NONE);
         TPattern tPattern = new TPattern(this);
-        tPattern.setTouchType(TView.TouchType.NONE);
-
         setContentView(tPattern);
     }
 }

@@ -19,8 +19,8 @@
         android:layout_height="80dp"
         android:layout_below="@id/text"
         android:layout_margin="10dp"
-        app:progressArcBackgroundNormal="#ffcb17"
-        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressArcBackground="#ffcb17"
+        app:progressBoundBackground="#ffcb17"
         app:progressPromoteType="clockWise"
         app:progressShapeType="circle" />
 
@@ -30,8 +30,8 @@
         android:layout_height="80dp"
         android:layout_alignTop="@id/tProgressCircleClockWise"
         android:layout_toRightOf="@id/tProgressCircleClockWise"
-        app:progressArcBackgroundNormal="#ffcb17"
-        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressArcBackground="#ffcb17"
+        app:progressBoundBackground="#ffcb17"
         app:progressPromoteType="upWard"
         app:progressShapeType="circle" />
 
@@ -42,8 +42,8 @@
         android:layout_alignTop="@id/tProgressCircleClockWise"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/tProgressCircleUpWard"
-        app:progressArcBackgroundNormal="#ffcb17"
-        app:progressBoundBackgroundNormal="#ffcb17"
+        app:progressArcBackground="#ffcb17"
+        app:progressBoundBackground="#ffcb17"
         app:progressPromoteType="upDown"
         app:progressShapeType="circle" />
 

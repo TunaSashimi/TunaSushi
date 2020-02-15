@@ -6,6 +6,11 @@
         <item>@string/cancel</item>
     </string-array>
 
+    <string-array name="dialog_text_size_array_choice">
+        <item>15</item>
+        <item>15</item>
+    </string-array>
+
     <item name="confirm" type="string">确定</item>
     <item name="cancel" type="string">取消</item>
 

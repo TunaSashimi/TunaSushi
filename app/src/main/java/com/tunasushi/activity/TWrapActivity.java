@@ -32,13 +32,6 @@ public class TWrapActivity extends Activity {
                         " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
                 });
 
-        tWrap.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tWrap.setWrapXY(tWrap.getTouchEventX(), tWrap.getTouchEventY());
-            }
-        });
-
         TView tView = findViewById(R.id.tView);
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override

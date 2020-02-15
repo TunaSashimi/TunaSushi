@@ -9,7 +9,7 @@
         android:layout_width="2dp"
         android:layout_height="200dp"
         android:layout_margin="16dp"
-        app:rowBackgroundNormal="#ff0000"
+        app:rowBackground="#ff0000"
         app:rowDirection="bottom"
         app:rowDuraction="1000" />
 </RelativeLayout>

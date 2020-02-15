@@ -34,8 +34,8 @@ public class TLineActivity extends Activity {
         tViewHidden = findViewById(R.id.tViewHidden);
 
         //
-        tLineAC.setX(tuna_button_width);
-
+        tLineAC.setLineX(tuna_button_width);
+        tLineMove.setLineX(tuna_button_width);
         //
         tViewCenter.setOnClickListener(new TView.OnClickListener() {
             @Override
@@ -48,15 +48,6 @@ public class TLineActivity extends Activity {
             @Override
             public void onClick(TView v) {
                 tLineAC.hideArrow();
-            }
-        });
-
-        tLineMove.setX(tuna_button_width);
-
-        tLineMove.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                t.setX(t.getTouchEventX());
             }
         });
     }
