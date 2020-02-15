@@ -13,7 +13,7 @@
 
     <!-- Exclusive TView or any of its subclasses use -->
 
-    <style name="TView_Button" >
+    <style name="TView_Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/tuna_button_height</item>
         <item name="textSize">@dimen/tuna_button_textSize</item>
@@ -112,8 +112,6 @@
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
         <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
-
-
     </style>
 
     <style name="TView_RadioGroup_LightGray_Right" parent="TView_RadioGroup_LightGray">
@@ -126,7 +124,6 @@
         <item name="radiusRightBottom">@dimen/tuna_radius</item>
         <item name="radiusRightTop">@dimen/tuna_radius</item>
 
-        <!--  -->
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
 
@@ -166,5 +163,40 @@
         <item name="radiusRightTop">@dimen/tuna_radius</item>
         <item name="radiusRightBottom">@dimen/tuna_radius</item>
 
+    </style>
+
+    <style name="TDialog_Choice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="dialogWidth">280dp</item>
+        <item name="dialogHeight">150dp</item>
+        <item name="dialogBackground">#ffffff</item>
+        <item name="dialogSurround">#80000000</item>
+
+        <item name="dialogStrokeWidth">2dp</item>
+        <item name="dialogStrokeColor">#dddddd</item>
+
+        <item name="dialogTextSize">17dp</item>
+        <item name="dialogTextColor">#333333</item>
+        <item name="dialogTextDy">20dp</item>
+        <item name="dialogTextTypeFace">bold</item>
+
+        <item name="dialogContentSize">14dp</item>
+        <item name="dialogContentColor">#62636c</item>
+        <item name="dialogContentDy">-10dp</item>
+
+        <item name="dialogContentPaddingLeft">60dp</item>
+        <item name="dialogContentPaddingRight">60dp</item>
+
+
+        <item name="dialogChoiceBackgroundNormal">#ffffff</item>
+        <item name="dialogChoiceHeight">50dp</item>
+
+        <item name="dialogChoiceSize">16dp</item>
+        <item name="dialogChoiceColor">#1b307c</item>
+
+        <item name="radius">4dp</item>
+
+        <item name="android:visibility">invisible</item>
     </style>
 </resources>

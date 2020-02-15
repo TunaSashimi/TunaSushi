@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">TunaSushi</string>
+
+    <item name="confirm" type="string">确定</item>
+    <item name="cancel" type="string">取消</item>
 </resources>

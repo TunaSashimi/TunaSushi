@@ -16,6 +16,7 @@ import android.graphics.SweepGradient;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+
 import com.tuna.R;
 
 /**
@@ -91,11 +92,11 @@ public class TSector extends TView {
         sectorPaintBitmap.setStyle(Paint.Style.FILL);
         sectorPaintBitmap.setAntiAlias(true);
 
-        yellowColor = Color.parseColor("#4acc75");
-        pinkRedColor = Color.parseColor("#3597d0");
-        redColor = Color.parseColor("#3597d0");
-        deepRedColor = Color.parseColor("#3597d0");
-        grayColor = Color.parseColor("#F0F0F0");
+        yellowColor = 0xff4acc75;
+        pinkRedColor = 0xff3597d0;
+        redColor = 0xff3597d0;
+        deepRedColor = 0xff3597d0;
+        grayColor = 0xfff0f0f0;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSector);
 

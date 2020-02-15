@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -17,33 +18,76 @@ import com.tuna.R;
  * @Description
  */
 public class TDialog extends TView {
+
     private float dialogWidth;
     private float dialogHeight;
-
     private int dialogBackground;
     private int dialogSurround;
 
     private float dialogStrokeWidth;
     private int dialogStrokeColor;
 
-    private String dialogTitleTextValue;
-    private float dialogTitleTextSize;
-    private int dialogTitleTextColor;
-    private float dialogTitleTextDy;
+    private String dialogTextValue;
+    private float dialogTextSize;
+    private int dialogTextColor;
+    private float dialogTextDy;
 
-    private String dialogContentTextValue;
-    private float dialogContentTextSize;
-    private int dialogContentTextColor;
-    private float dialogContentTextPaddingLeft;
-    private float dialogContentTextPaddingRight;
-    private float dialogContentTextDy;
+    //
+    private Typeface dialogTextTypeFace;
+
+    public enum DialogTextTypeFace {
+        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
+        final int nativeInt;
+
+        DialogTextTypeFace(int ni) {
+            nativeInt = ni;
+        }
+    }
+
+    private static final int[] dialogTextTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+
+    public Typeface getDialogTextTypeFace() {
+        return dialogTextTypeFace;
+    }
+
+    public void setDialogTextTypeFace(Typeface dialogTextTypeFace) {
+        this.dialogTextTypeFace = dialogTextTypeFace;
+    }
+
+    //
+    private String dialogContentValue;
+    private float dialogContentSize;
+    private int dialogContentColor;
+    private float dialogContentDy;
+
+    //
+    private Typeface dialogContentTypeFace;
+
+    public enum DialogContentTypeFace {
+        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
+        final int nativeInt;
+
+        DialogContentTypeFace(int ni) {
+            nativeInt = ni;
+        }
+    }
+
+    private static final int[] dialogContentTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+
+    public Typeface getDialogContentTypeFace() {
+        return dialogContentTypeFace;
+    }
+
+    public void setDialogContentTypeFace(Typeface dialogContentTypeFace) {
+        this.dialogContentTypeFace = dialogContentTypeFace;
+    }
+
+    private float dialogContentPaddingLeft;
+    private float dialogContentPaddingRight;
 
     private int dialogChoiceBackgroundNormal;
     private int dialogChoiceBackgroundPress;
-
     private float dialogChoiceHeight;
-    private float dialogChoiceStrokeWidth;
-    private int dialogChoiceStrokeColor;
 
     private String[] dialogChoiceTextValueArray;
 
@@ -55,8 +99,29 @@ public class TDialog extends TView {
         this.dialogChoiceTextValueArray = dialogChoiceTextValueArray;
     }
 
-    private float dialogChoiceTextSize;
-    private int dialogChoiceTextColor;
+    private float dialogChoiceSize;
+    //Because there are only string-array and integer-array, it cannot be defined in xml
+    private float[] dialogChoiceSizeArray;
+
+    private int dialogChoiceColor;
+    //Because there are only string-array and integer-array, it cannot be defined in xml
+    private int[] dialogChoiceColorArray;
+
+    public int[] getDialogChoiceColorArray() {
+        return dialogChoiceColorArray;
+    }
+
+    public void setDialogChoiceColorArray(int[] dialogChoiceColorArray) {
+        this.dialogChoiceColorArray = dialogChoiceColorArray;
+    }
+
+    public float[] getDialogChoiceSizeArray() {
+        return dialogChoiceSizeArray;
+    }
+
+    public void setDialogChoiceSizeArray(float[] dialogChoiceSizeArray) {
+        this.dialogChoiceSizeArray = dialogChoiceSizeArray;
+    }
 
     private int dialogChoiceIndex;
 
@@ -69,12 +134,13 @@ public class TDialog extends TView {
     }
 
     //
+    private float dialogRadiusLeftTop;
     private float dialogRadiusLeftBottom;
+    private float dialogRadiusRightTop;
     private float dialogRadiusRightBottom;
-    private int dialogChoiceWidth;
-
-    private float dialogDx;
-    private float dialogDy;
+    private float dialogChoiceWidth;
+    private float dialogChoiceDx;
+    private float dialogChoiceDy;
 
     public TDialog(Context context) {
         this(context, null);
@@ -107,27 +173,33 @@ public class TDialog extends TView {
         dialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
         dialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
 
-        dialogTitleTextValue = typedArray.getString(R.styleable.TDialog_dialogTitleTextValue);
-        dialogTitleTextSize = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextSize, 0);
-        dialogTitleTextColor = typedArray.getColor(R.styleable.TDialog_dialogTitleTextColor, Color.TRANSPARENT);
-        dialogTitleTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTitleTextDy, 0);
+        dialogTextValue = typedArray.getString(R.styleable.TDialog_dialogTextValue);
+        dialogTextSize = typedArray.getDimension(R.styleable.TDialog_dialogTextSize, 0);
+        dialogTextColor = typedArray.getColor(R.styleable.TDialog_dialogTextColor, Color.TRANSPARENT);
+        dialogTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTextDy, 0);
 
-        dialogContentTextValue = typedArray.getString(R.styleable.TDialog_dialogContentTextValue);
-        dialogContentTextSize = typedArray.getDimension(R.styleable.TDialog_dialogContentTextSize, 0);
-        dialogContentTextColor = typedArray.getColor(R.styleable.TDialog_dialogContentTextColor, Color.TRANSPARENT);
+        int dialogTextTypeFaceIndex = typedArray.getInt(R.styleable.TDialog_dialogTextTypeFace, 0);
+        if (dialogTextTypeFaceIndex >= 0) {
+            dialogTextTypeFace = Typeface.create(Typeface.DEFAULT, dialogTextTypeFaceArray[dialogTextTypeFaceIndex]);
+        }
 
-        dialogContentTextPaddingLeft = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingLeft, 0);
-        dialogContentTextPaddingRight = typedArray.getDimension(R.styleable.TDialog_dialogContentTextPaddingRight, 0);
+        dialogContentValue = typedArray.getString(R.styleable.TDialog_dialogContentValue);
+        dialogContentSize = typedArray.getDimension(R.styleable.TDialog_dialogContentSize, 0);
+        dialogContentColor = typedArray.getColor(R.styleable.TDialog_dialogContentColor, Color.TRANSPARENT);
+        dialogContentDy = typedArray.getDimension(R.styleable.TDialog_dialogContentDy, 0);
 
-        dialogContentTextDy = typedArray.getDimension(R.styleable.TDialog_dialogContentTextDy, 0);
+        int dialogContentTypeFaceIndex = typedArray.getInt(R.styleable.TDialog_dialogContentTypeFace, 0);
+        if (dialogContentTypeFaceIndex >= 0) {
+            dialogContentTypeFace = Typeface.create(Typeface.DEFAULT, dialogContentTypeFaceArray[dialogContentTypeFaceIndex]);
+        }
+
+        dialogContentPaddingLeft = typedArray.getDimension(R.styleable.TDialog_dialogContentPaddingLeft, 0);
+        dialogContentPaddingRight = typedArray.getDimension(R.styleable.TDialog_dialogContentPaddingRight, 0);
 
         dialogChoiceBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundNormal, Color.TRANSPARENT);
         dialogChoiceBackgroundPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundPress, dialogChoiceBackgroundNormal);
 
-        dialogChoiceStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogChoiceStrokeWidth, 0);
-        dialogChoiceStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceStrokeColor, Color.TRANSPARENT);
-
-        int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceTextValueArray, -1);
+        int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceValueArray, -1);
 
         if (dialogChoiceTextValueArrayId != -1) {
             dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
@@ -142,8 +214,21 @@ public class TDialog extends TView {
             throw new IndexOutOfBoundsException("The content attribute dialogChoiceHeight length must be greater than 0");
         }
 
-        dialogChoiceTextSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceTextSize, 0);
-        dialogChoiceTextColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceTextColor, Color.TRANSPARENT);
+        //
+        dialogChoiceSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceSize, 0);
+        dialogChoiceSizeArray = new float[total];
+        for (int i = 0; i < total; i++) {
+            dialogChoiceSizeArray[i] = dialogChoiceSize;
+        }
+
+        //
+        dialogChoiceColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceColor, Color.TRANSPARENT);
+        dialogChoiceColorArray = new int[total];
+        for (int i = 0; i < total; i++) {
+            dialogChoiceColorArray[i] = dialogChoiceColor;
+        }
+
+        //
         dialogChoiceIndex = typedArray.getInt(R.styleable.TDialog_dialogChoiceIndex, -1);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -159,12 +244,12 @@ public class TDialog extends TView {
         dy = (height - dialogHeight) / 2;
 
         //
-        share = dialogWidth * 1f / total;
-        dialogDy = dialogHeight - dialogChoiceHeight;
+        share = dialogWidth / total;
+        dialogChoiceDy = dialogHeight - dialogChoiceHeight;
 
         //floatArray means dialogChoiceArrayCenterX
         for (int i = 0; i < total; i++) {
-            floatArray[i] = share * i + share * 0.5f + dx;
+            floatArray[i] = share * i + share / 2;
         }
     }
 
@@ -177,86 +262,85 @@ public class TDialog extends TView {
 
         //
         drawRectClassic(canvas,
-                dialogWidth, dialogHeight,
+                dialogWidth + dialogStrokeWidth * 2,
+                dialogHeight,
                 dialogBackground,
                 dialogStrokeWidth,
                 dialogStrokeColor,
                 radius);
 
-//		//drawDialogTitleText
+        //drawDialogText
         drawText(
                 canvas,
-                dialogTitleTextValue,
+                dialogTextValue,
                 dialogWidth,
                 dialogWidth / 2,
-                dialogTitleTextSize * 0.5f + dialogTitleTextDy,
+                dialogTextSize * 0.5f + dialogTextDy,
                 0, 0,
-                initTextPaint(Paint.Style.FILL, dialogTitleTextColor, dialogTitleTextSize, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, dialogTextColor, dialogTextSize, dialogTextTypeFace, Paint.Align.CENTER));
 
-
-        //drawDialogContentText
+        //drawDialogContent
         drawText(
                 canvas,
-                dialogContentTextValue,
+                dialogContentValue,
                 dialogWidth,
                 dialogWidth / 2,
-                dialogHeight / 2 + dialogContentTextDy,
-                dialogContentTextPaddingLeft, dialogContentTextPaddingRight,
-                initTextPaint(Paint.Style.FILL, dialogContentTextColor, dialogContentTextSize, Paint.Align.CENTER));
+                dialogHeight / 2 + dialogContentDy,
+                dialogContentPaddingLeft, dialogContentPaddingRight,
+                initTextPaint(Paint.Style.FILL, dialogContentColor, dialogContentSize, dialogContentTypeFace, Paint.Align.CENTER));
 
-        //draw Options
+        //draw Choice
+        //Longer in the middle and shorter choices on the left and right!
         for (int i = 0; i < total; i++) {
-            if (i == 0) {
+            if (i == 0 && i == total - 1) {
                 dialogRadiusLeftBottom = radius;
-                dialogDx = share * i;
-                if (i != (total - 1)) {
-                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
-                    dialogRadiusRightBottom = 0;
-                } else {
-                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth);
-                    dialogRadiusRightBottom = radius;
-                }
+                dialogRadiusRightBottom = radius;
+                dialogChoiceWidth = dialogWidth + dialogStrokeWidth * 2;
+                dialogChoiceDx = 0;
+                //Left
+            } else if (i == 0) {
+                dialogRadiusLeftBottom = radius;
+                dialogRadiusRightBottom = 0;
+                dialogChoiceWidth = share + dialogStrokeWidth * 2;
+                dialogChoiceDx = 0;
+                //Right
+            } else if (i == total - 1) {
+                dialogRadiusLeftBottom = 0;
+                dialogRadiusRightBottom = radius;
+                dialogChoiceWidth = share + dialogStrokeWidth * 2;
+                dialogChoiceDx = share * i;
             } else {
                 dialogRadiusLeftBottom = 0;
-                dialogDx = share * i - dialogChoiceStrokeWidth * 0.5f;
-                if (i != (total - 1)) {
-                    dialogRadiusRightBottom = 0;
-                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth);
-                } else {
-                    dialogChoiceWidth = (int) (share + dialogChoiceStrokeWidth * 0.5f);
-                    dialogRadiusRightBottom = radius;
-                }
+                dialogRadiusRightBottom = 0;
+                dialogChoiceWidth = share + dialogStrokeWidth * 2;
+                dialogChoiceDx = share * i - dialogStrokeWidth;
             }
+
             //
-            canvas.translate(dialogDx, dialogDy);
+            canvas.translate(dialogChoiceDx, dialogChoiceDy);
+
             //
-            drawRectCustom(canvas, dialogChoiceWidth, (int) dialogChoiceHeight, i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
-                    dialogChoiceStrokeWidth, dialogChoiceStrokeColor, 0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
+            drawRectCustom(canvas,
+                    (int) dialogChoiceWidth, (int) dialogChoiceHeight,
+                    i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
+                    dialogStrokeWidth, dialogStrokeColor,
+                    dialogRadiusLeftTop, dialogRadiusLeftBottom, dialogRadiusRightTop, dialogRadiusRightBottom);
             //
             drawText(
                     canvas,
                     dialogChoiceTextValueArray[i],
                     dialogWidth,
-                    dialogChoiceWidth * 0.5f,
-                    dialogChoiceHeight * 0.5f,
+                    share / 2,
+                    dialogChoiceHeight / 2,
                     0,
                     0,
                     initTextPaint(Paint.Style.FILL,
-                            dialogChoiceTextColor,
-                            dialogChoiceTextSize,
+                            dialogChoiceColorArray[i],
+                            dialogChoiceSizeArray[i],
                             Paint.Align.CENTER));
             //
-            canvas.translate(-dialogDx, -dialogDy);
+            canvas.translate(-dialogChoiceDx, -dialogChoiceDy);
         }
-
-//		//Then draw a border line again
-        drawRectClassic(canvas,
-                dialogWidth, dialogHeight,
-                Color.TRANSPARENT,
-                dialogStrokeWidth,
-                dialogStrokeColor,
-                radius);
-
         canvas.translate(-dx, -dy);
     }
 
@@ -264,8 +348,8 @@ public class TDialog extends TView {
     public void setTouchXYRaw(float touchX, float touchY) {
         x = touchX;
         y = touchY;
-        if (y >= dialogDy + dy
-                && y <= dialogDy + dy + dialogChoiceHeight
+        if (y >= dialogChoiceDy + dy
+                && y <= dialogChoiceDy + dy + dialogChoiceHeight
                 && x >= dx
                 && x <= width - dx
         ) {

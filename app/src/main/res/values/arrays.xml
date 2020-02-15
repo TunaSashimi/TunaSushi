@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="dialog_text_value_array_confirm">
+        <item>知道了</item>
+    </string-array>
 
     <string-array name="dialog_text_value_array_choice">
-        <item>@string/confirm</item>
-        <item>@string/cancel</item>
+        <item>确认取消</item>
+        <item>点错了</item>
     </string-array>
 
-    <string-array name="dialog_text_size_array_choice">
-        <item>15</item>
-        <item>15</item>
-    </string-array>
-
-    <item name="confirm" type="string">确定</item>
-    <item name="cancel" type="string">取消</item>
-
-    <string-array name="dialog_text_value_array_confirm">
-        <item>确定</item>
+    <string-array name="dialog_text_value_array_select">
+        <item>选项一</item>
+        <item>选项二</item>
+        <item>选项三</item>
     </string-array>
 
     <string-array name="seek_text_value_array">
@@ -49,5 +46,4 @@
         <item>¥950</item>
         <item>¥1000</item>
     </string-array>
-
 </resources>

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="backgroundNormal设置常规背景色\ntextTypeFace设置文字字体类型\nrotate设置旋转角度" />
+            android:text="backgroundNormal设置常规背景色\ntextTypeFace设置文字类型\ntextTypeFaceCustom设置自定义类型\nrotate设置旋转角度" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRectClassic01"
@@ -50,7 +50,7 @@
             app:backgroundNormal="#666666"
             app:rotate="30"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceAssets="fonts/computerfont.ttf"
+            app:textTypeFaceCustom="fonts/computerfont.ttf"
             app:textValue="#666666" />
 
         <com.tunasushi.tuna.TView
@@ -60,7 +60,7 @@
             app:backgroundNormal="#cccccc"
             app:rotate="15"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceAssets="fonts/digital-7.ttf"
+            app:textTypeFaceCustom="fonts/digital-7.ttf"
             app:textValue="#cccccc" />
 
         <TextView

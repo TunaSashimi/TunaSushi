@@ -12,6 +12,7 @@ import com.tunasushi.tuna.TView;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53
@@ -81,10 +82,10 @@ public class TRippleActivity extends Activity {
                     tRipple03.setRippleTextValue("&");
                     tRipple04.setRippleTextValue("&");
 
-                    tRipple01.setRippleInnerCircleColor(Color.parseColor("#ff9900"));
-                    tRipple02.setRippleOuterCircleColor(270, Color.parseColor("#fed136"), Color.parseColor("#ff9900"));
-                    tRipple03.setRippleInnerCircleColor(Color.parseColor("#fed136"));
-                    tRipple03.setRippleOuterCircleColor(Color.parseColor("#fed136"));
+                    tRipple01.setRippleInnerCircleColor(0xffff9900);
+                    tRipple02.setRippleOuterCircleColor(270, 0xfffed136, 0xffff9900);
+                    tRipple03.setRippleInnerCircleColor(0xfffed136);
+                    tRipple03.setRippleOuterCircleColor(0xfffed136);
                     tRipple04.setRippleInnerCircleAngle(90);
                     tRipple04.setRippleOuterCircleAngle(90);
                 } else {
@@ -94,8 +95,8 @@ public class TRippleActivity extends Activity {
                     tRipple03.setRippleTextValue("^");
                     tRipple04.setRippleTextValue("^");
 
-                    tRipple01.setRippleInnerCircleColor(Color.parseColor("#fed136"));
-                    tRipple02.setRippleOuterCircleColor(Color.parseColor("#ff9900"));
+                    tRipple01.setRippleInnerCircleColor(0xfffed136);
+                    tRipple02.setRippleOuterCircleColor(0xffff9900);
                     tRipple03.setRippleInnerCircleColor(Color.WHITE, Color.BLUE);
                     tRipple03.setRippleOuterCircleColor(Color.WHITE, Color.BLUE);
                     tRipple04.setRippleInnerCircleColor(270, Color.WHITE, Color.BLUE);

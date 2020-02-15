@@ -126,7 +126,7 @@
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="textTypeFaceAssets" format="string" />
+        <attr name="textTypeFaceCustom" format="string" />
         <attr name="textDx" format="dimension" />
         <attr name="textDy" format="dimension" />
         <attr name="textFractionDx" format="fraction" />
@@ -287,7 +287,6 @@
     </declare-styleable>
 
     <declare-styleable name="TDialog">
-
         <attr name="dialogWidth" format="dimension" />
         <attr name="dialogHeight" format="dimension" />
         <attr name="dialogBackground" format="reference|color" />
@@ -296,28 +295,38 @@
         <attr name="dialogStrokeWidth" format="dimension" />
         <attr name="dialogStrokeColor" format="reference|color" />
 
-        <attr name="dialogTitleTextValue" format="string" />
-        <attr name="dialogTitleTextSize" format="dimension" />
-        <attr name="dialogTitleTextColor" format="reference|color" />
-        <attr name="dialogTitleTextDy" format="dimension" />
+        <attr name="dialogTextValue" format="string" />
+        <attr name="dialogTextSize" format="dimension" />
+        <attr name="dialogTextColor" format="reference|color" />
+        <attr name="dialogTextDy" format="dimension" />
+        <attr name="dialogTextTypeFace">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
 
-        <attr name="dialogContentTextValue" format="string" />
-        <attr name="dialogContentTextSize" format="dimension" />
-        <attr name="dialogContentTextColor" format="reference|color" />
-        <attr name="dialogContentTextPaddingLeft" format="dimension" />
-        <attr name="dialogContentTextPaddingRight" format="dimension" />
+        <attr name="dialogContentValue" format="string" />
+        <attr name="dialogContentSize" format="dimension" />
+        <attr name="dialogContentColor" format="reference|color" />
+        <attr name="dialogContentDy" format="dimension" />
+        <attr name="dialogContentTypeFace">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
 
-        <attr name="dialogContentTextDy" format="dimension" />
+        <attr name="dialogContentPaddingLeft" format="dimension" />
+        <attr name="dialogContentPaddingRight" format="dimension" />
 
         <attr name="dialogChoiceBackgroundNormal" format="reference|color" />
         <attr name="dialogChoiceBackgroundPress" format="reference|color" />
         <attr name="dialogChoiceHeight" format="dimension" />
-        <attr name="dialogChoiceStrokeWidth" format="dimension" />
-        <attr name="dialogChoiceStrokeColor" format="reference|color" />
 
-        <attr name="dialogChoiceTextValueArray" format="reference" />
-        <attr name="dialogChoiceTextSize" format="dimension" />
-        <attr name="dialogChoiceTextColor" format="reference|color" />
+        <attr name="dialogChoiceValueArray" format="reference" />
+        <attr name="dialogChoiceSize" format="dimension" />
+        <attr name="dialogChoiceColor" format="reference|color" />
         <attr name="dialogChoiceIndex" format="integer" />
     </declare-styleable>
 

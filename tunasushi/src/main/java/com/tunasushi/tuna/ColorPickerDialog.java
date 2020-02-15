@@ -75,8 +75,8 @@ public class ColorPickerDialog extends Dialog {
 
             mColorSelectListener = l;
             mColors = new int[]{
-                    0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00,
-                    0xFFFFFF00, 0xFFFF0000
+                    0xffff0000, 0xffff00ff, 0xff0000ff, 0xff00ffff, 0xff00ff00,
+                    0xffffff00, 0xffff0000
             };
 
             displayDensity = getResources().getDisplayMetrics().density;

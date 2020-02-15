@@ -13,7 +13,7 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#4a4a4a"
         app:textSize="16dp"
-        app:textValue="SHOW CONFIRM DIALOG" />
+        app:textValue="SHOW DIALOG CONFIRM" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewDialogChoice"
@@ -25,69 +25,39 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#4a4a4a"
         app:textSize="16dp"
-        app:textValue="SHOW CHOICE DIALOG" />
+        app:textValue="SHOW DIALOG CHOICE" />
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewDialogSelect"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/tViewDialogChoice"
+        android:layout_marginTop="6dp"
+        app:strokeColorNormal="#4a4a4a"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#4a4a4a"
+        app:textSize="16dp"
+        app:textValue="SHOW DIALOG SELECT" />
 
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        app:dialogBackground="#ffffff"
-        app:dialogChoiceBackgroundNormal="#ffffff"
-        app:dialogChoiceBackgroundPress="#b69f6a"
-        app:dialogChoiceHeight="50dp"
-        app:dialogChoiceStrokeColor="#ececec"
-        app:dialogChoiceStrokeWidth="2dp"
-        app:dialogChoiceTextColor="#4a4a4a"
-        app:dialogChoiceTextSize="15dp"
-        app:dialogChoiceTextValueArray="@array/dialog_text_value_array_confirm"
-        app:dialogContentTextColor="#796f6d"
-        app:dialogContentTextDy="-10dp"
-        app:dialogContentTextPaddingLeft="60dp"
-        app:dialogContentTextPaddingRight="60dp"
-        app:dialogContentTextSize="15dp"
-        app:dialogContentTextValue="可开取发票"
-        app:dialogHeight="180dp"
-        app:dialogStrokeColor="#ffffff"
-        app:dialogStrokeWidth="2dp"
-        app:dialogSurround="#80666666"
-        app:dialogTitleTextColor="#000000"
-        app:dialogTitleTextDy="20dp"
-        app:dialogTitleTextSize="20dp"
-        app:dialogTitleTextValue="立即结算"
-        app:dialogWidth="280dp"
-        app:radius="6dp" />
+        style="@style/TDialog_Choice"
+        app:dialogChoiceValueArray="@array/dialog_text_value_array_confirm"
+        app:dialogContentValue="多数订单会在10分钟内确认，请耐心等待。"
+        app:dialogTextValue="温馨提示" />
 
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogChoice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layerType="software"
-        android:visibility="invisible"
-        app:dialogBackground="#ffffff"
-        app:dialogChoiceBackgroundNormal="#ffffff"
-        app:dialogChoiceBackgroundPress="#b69f6a"
-        app:dialogChoiceHeight="50dp"
-        app:dialogChoiceStrokeColor="#ececec"
-        app:dialogChoiceStrokeWidth="2dp"
-        app:dialogChoiceTextColor="#4a4a4a"
-        app:dialogChoiceTextSize="15dp"
-        app:dialogChoiceTextValueArray="@array/dialog_text_value_array_choice"
-        app:dialogContentTextColor="#796f6d"
-        app:dialogContentTextDy="-10dp"
-        app:dialogContentTextPaddingLeft="60dp"
-        app:dialogContentTextPaddingRight="60dp"
-        app:dialogContentTextSize="15dp"
-        app:dialogContentTextValue="请问立即充值吗?"
-        app:dialogHeight="180dp"
-        app:dialogStrokeColor="#ffffff"
-        app:dialogStrokeWidth="2dp"
-        app:dialogSurround="#80666666"
-        app:dialogTitleTextColor="#000000"
-        app:dialogTitleTextDy="20dp"
-        app:dialogTitleTextSize="20dp"
-        app:dialogTitleTextValue="立即结算"
-        app:dialogWidth="280dp"
-        app:radius="6dp" />
+        style="@style/TDialog_Choice"
+        app:dialogChoiceValueArray="@array/dialog_text_value_array_choice"
+        app:dialogContentValue="您正在取消订单，确认要取消吗？"
+        app:dialogTextValue="温馨提示" />
+
+    <com.tunasushi.tuna.TDialog
+        android:id="@+id/tDialogSelect"
+        style="@style/TDialog_Choice"
+        app:dialogChoiceValueArray="@array/dialog_text_value_array_select"
+        app:dialogContentValue="您正在取消订单，确认要取消吗？"
+        app:dialogTextValue="温馨提示" />
 
 </RelativeLayout>
