@@ -188,7 +188,6 @@
         <item name="dialogContentPaddingLeft">60dp</item>
         <item name="dialogContentPaddingRight">60dp</item>
 
-
         <item name="dialogChoiceBackgroundNormal">#ffffff</item>
         <item name="dialogChoiceHeight">50dp</item>
 

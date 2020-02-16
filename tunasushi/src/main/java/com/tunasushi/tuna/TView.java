@@ -265,6 +265,13 @@ public class TView extends View {
     }
 
     // 10
+    protected void drawRectCustom(Canvas canvas, int left, int top, int right, int bottom, int fillColor, float radiusLeftTop, float radiusLeftBottom,
+                                  float radiusRightTop, float radiusRightBottom) {
+        drawRectCustom(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
+                radiusRightBottom);
+    }
+
+    // 10
     protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
                                   float radiusRightTop, float radiusRightBottom) {
         drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,

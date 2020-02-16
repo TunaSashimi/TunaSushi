@@ -134,13 +134,12 @@ public class TDialog extends TView {
     }
 
     //
-    private float dialogRadiusLeftTop;
     private float dialogRadiusLeftBottom;
-    private float dialogRadiusRightTop;
     private float dialogRadiusRightBottom;
-    private float dialogChoiceWidth;
-    private float dialogChoiceDx;
-    private float dialogChoiceDy;
+    private int dialogChoiceLeft;
+    private int dialogChoiceTop;
+    private int dialogChoiceRight;
+    private int dialogChoiceBottom;
 
     public TDialog(Context context) {
         this(context, null);
@@ -245,11 +244,13 @@ public class TDialog extends TView {
 
         //
         share = dialogWidth / total;
-        dialogChoiceDy = dialogHeight - dialogChoiceHeight;
-
         //floatArray means dialogChoiceArrayCenterX
+
+        dialogChoiceTop = (int) (dialogHeight - dialogChoiceHeight + dialogStrokeWidth * 0.5f);
+        dialogChoiceBottom = (int) (dialogHeight - dialogStrokeWidth);
+
         for (int i = 0; i < total; i++) {
-            floatArray[i] = share * i + share / 2;
+            floatArray[i] = share * (i + 0.5f) + dx;
         }
     }
 
@@ -262,7 +263,7 @@ public class TDialog extends TView {
 
         //
         drawRectClassic(canvas,
-                dialogWidth + dialogStrokeWidth * 2,
+                dialogWidth,
                 dialogHeight,
                 dialogBackground,
                 dialogStrokeWidth,
@@ -290,56 +291,81 @@ public class TDialog extends TView {
                 initTextPaint(Paint.Style.FILL, dialogContentColor, dialogContentSize, dialogContentTypeFace, Paint.Align.CENTER));
 
         //draw Choice
-        //Longer in the middle and shorter choices on the left and right!
         for (int i = 0; i < total; i++) {
+            //Only one
             if (i == 0 && i == total - 1) {
+                //draw choice separate line horizontal
+                canvas.drawLine(0, dialogHeight - dialogChoiceHeight, dialogWidth, dialogHeight - dialogChoiceHeight,
+                        initPaint(Paint.Style.FILL, dialogStrokeColor, dialogStrokeWidth));
+
                 dialogRadiusLeftBottom = radius;
                 dialogRadiusRightBottom = radius;
-                dialogChoiceWidth = dialogWidth + dialogStrokeWidth * 2;
-                dialogChoiceDx = 0;
+
+                dialogChoiceLeft = (int) (share * i + dialogStrokeWidth);
+                dialogChoiceRight = (int) (share * (i + 1) - dialogStrokeWidth);
+
                 //Left
             } else if (i == 0) {
+                //draw choice separate line horizontal
+                canvas.drawLine(0, dialogHeight - dialogChoiceHeight, dialogWidth, dialogHeight - dialogChoiceHeight,
+                        initPaint(Paint.Style.FILL, dialogStrokeColor, dialogStrokeWidth));
+
                 dialogRadiusLeftBottom = radius;
                 dialogRadiusRightBottom = 0;
-                dialogChoiceWidth = share + dialogStrokeWidth * 2;
-                dialogChoiceDx = 0;
+
+                dialogChoiceLeft = (int) (share * i + dialogStrokeWidth);
+                dialogChoiceRight = (int) (share * (i + 1) - dialogStrokeWidth / 2);
+
                 //Right
             } else if (i == total - 1) {
+                //draw choice separate line vertical
+                canvas.drawLine(share * i, dialogHeight - dialogChoiceHeight, share * i, dialogHeight,
+                        initPaint(Paint.Style.FILL, dialogStrokeColor, dialogStrokeWidth)
+                );
+
                 dialogRadiusLeftBottom = 0;
                 dialogRadiusRightBottom = radius;
-                dialogChoiceWidth = share + dialogStrokeWidth * 2;
-                dialogChoiceDx = share * i;
+
+                dialogChoiceLeft = (int) (share * i + dialogStrokeWidth / 2);
+                dialogChoiceRight = (int) (share * (i + 1) - dialogStrokeWidth);
+
+                //Center
             } else {
+                //draw choice separate line vertical
+                canvas.drawLine(share * i, dialogHeight - dialogChoiceHeight, share * i, dialogHeight,
+                        initPaint(Paint.Style.FILL, dialogStrokeColor, dialogStrokeWidth)
+                );
+
                 dialogRadiusLeftBottom = 0;
                 dialogRadiusRightBottom = 0;
-                dialogChoiceWidth = share + dialogStrokeWidth * 2;
-                dialogChoiceDx = share * i - dialogStrokeWidth;
+
+                dialogChoiceLeft = (int) (share * i + dialogStrokeWidth / 2);
+                dialogChoiceRight = (int) (share * (i + 1) - dialogStrokeWidth / 2);
             }
 
             //
-            canvas.translate(dialogChoiceDx, dialogChoiceDy);
-
-            //
-            drawRectCustom(canvas,
-                    (int) dialogChoiceWidth, (int) dialogChoiceHeight,
+            drawRectCustom(
+                    canvas,
+                    dialogChoiceLeft,
+                    dialogChoiceTop,
+                    dialogChoiceRight,
+                    dialogChoiceBottom,
                     i == dialogChoiceIndex ? isPress() ? dialogChoiceBackgroundPress : dialogChoiceBackgroundNormal : dialogChoiceBackgroundNormal,
-                    dialogStrokeWidth, dialogStrokeColor,
-                    dialogRadiusLeftTop, dialogRadiusLeftBottom, dialogRadiusRightTop, dialogRadiusRightBottom);
+                    0, dialogRadiusLeftBottom, 0, dialogRadiusRightBottom);
+
             //
             drawText(
                     canvas,
                     dialogChoiceTextValueArray[i],
                     dialogWidth,
-                    share / 2,
-                    dialogChoiceHeight / 2,
+                    share * (i + 0.5f),
+                    dialogHeight - dialogChoiceHeight * 0.5f,
                     0,
                     0,
                     initTextPaint(Paint.Style.FILL,
                             dialogChoiceColorArray[i],
                             dialogChoiceSizeArray[i],
                             Paint.Align.CENTER));
-            //
-            canvas.translate(-dialogChoiceDx, -dialogChoiceDy);
         }
         canvas.translate(-dx, -dy);
     }
@@ -348,13 +374,12 @@ public class TDialog extends TView {
     public void setTouchXYRaw(float touchX, float touchY) {
         x = touchX;
         y = touchY;
-        if (y >= dialogChoiceDy + dy
-                && y <= dialogChoiceDy + dy + dialogChoiceHeight
+        if (y >= dialogHeight - dialogChoiceHeight + dy
+                && y <= dialogHeight - dialogChoiceHeight + dy + dialogChoiceHeight
                 && x >= dx
                 && x <= width - dx
         ) {
             float distenceMin = dialogWidth;
-            //From 0 to judge one by one, if the distance farther on the end of the cycle
             for (int i = 0; i < total; i++) {
                 float centreDistance = Math.abs(x - floatArray[i]);
                 if (centreDistance < distenceMin) {
