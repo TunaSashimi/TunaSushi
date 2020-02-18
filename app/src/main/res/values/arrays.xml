@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <integer-array name="dialog_text_color_array_confirm">
+        <item>0xff999999</item>
+    </integer-array>
+
+    <integer-array name="dialog_text_color_array_choice">
+        <item>0xff999999</item>
+        <item>0xff1b307c</item>
+    </integer-array>
+
+    <integer-array name="dialog_text_color_array_select">
+        <item>0xff999999</item>
+        <item>0xff999999</item>
+        <item>0xff1b307c</item>
+    </integer-array>
+
     <string-array name="dialog_text_value_array_confirm">
         <item>知道了</item>
     </string-array>

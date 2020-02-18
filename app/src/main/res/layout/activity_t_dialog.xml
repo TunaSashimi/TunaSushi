@@ -42,6 +42,7 @@
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogConfirm"
         style="@style/TDialog_Choice"
+
         app:dialogChoiceValueArray="@array/dialog_text_value_array_confirm"
         app:dialogContentValue="多数订单会在10分钟内确认，请耐心等待。"
         app:dialogTextValue="温馨提示" />
@@ -49,6 +50,7 @@
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogChoice"
         style="@style/TDialog_Choice"
+        app:dialogChoiceColorArray="@array/dialog_text_color_array_choice"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_choice"
         app:dialogContentValue="您正在取消订单，确认要取消吗？"
         app:dialogTextValue="温馨提示" />
@@ -56,6 +58,7 @@
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogSelect"
         style="@style/TDialog_Choice"
+        app:dialogChoiceColorArray="@array/dialog_text_color_array_select"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_select"
         app:dialogContentValue="您正在取消订单，确认要取消吗？"
         app:dialogTextValue="温馨提示" />

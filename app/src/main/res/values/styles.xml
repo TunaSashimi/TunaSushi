@@ -173,7 +173,7 @@
         <item name="dialogBackground">#ffffff</item>
         <item name="dialogSurround">#80000000</item>
 
-        <item name="dialogStrokeWidth">2dp</item>
+        <item name="dialogStrokeWidth">1dp</item>
         <item name="dialogStrokeColor">#dddddd</item>
 
         <item name="dialogTextSize">17dp</item>

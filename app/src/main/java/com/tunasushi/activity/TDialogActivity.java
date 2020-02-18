@@ -18,8 +18,6 @@ import com.tunasushi.tuna.TView;
 public class TDialogActivity extends Activity {
     private TView tViewDialogConfirm, tViewDialogChoice, tViewDialogSelect;
     private TDialog tDialogChoice, tDialogConfirm, tDialogSelect;
-    private int[] colorArrayChoice = {0xff999999, 0xff1b307c};
-    private int[] colorArraySelect = {0xff999999, 0xff999999, 0xff1b307c};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,7 @@ public class TDialogActivity extends Activity {
 
         setContentView(R.layout.activity_t_dialog);
 
+        //
         tViewDialogConfirm = findViewById(R.id.tViewDialogConfirm);
         tViewDialogChoice = findViewById(R.id.tViewDialogChoice);
         tViewDialogSelect = findViewById(R.id.tViewDialogSelect);
@@ -57,10 +56,6 @@ public class TDialogActivity extends Activity {
         tDialogConfirm = findViewById(R.id.tDialogConfirm);
         tDialogChoice = findViewById(R.id.tDialogChoice);
         tDialogSelect = findViewById(R.id.tDialogSelect);
-
-        //
-        tDialogChoice.setDialogChoiceColorArray(colorArrayChoice);
-        tDialogSelect.setDialogChoiceColorArray(colorArraySelect);
 
         //
         tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {

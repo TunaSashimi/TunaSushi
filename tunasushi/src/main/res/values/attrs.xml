@@ -126,7 +126,7 @@
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="textTypeFaceCustom" format="string" />
+        <attr name="textTypeFaceFromAsset" format="string" />
         <attr name="textDx" format="dimension" />
         <attr name="textDy" format="dimension" />
         <attr name="textFractionDx" format="fraction" />
@@ -327,6 +327,7 @@
         <attr name="dialogChoiceValueArray" format="reference" />
         <attr name="dialogChoiceSize" format="dimension" />
         <attr name="dialogChoiceColor" format="reference|color" />
+        <attr name="dialogChoiceColorArray" format="reference" />
         <attr name="dialogChoiceIndex" format="integer" />
     </declare-styleable>
 

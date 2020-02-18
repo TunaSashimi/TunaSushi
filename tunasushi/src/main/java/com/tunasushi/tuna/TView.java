@@ -2965,14 +2965,14 @@ public class TView extends View {
         this.textTypeFace = textTypeFace;
     }
 
-    private String textTypeFaceCustom;
+    private String textTypeFaceFromAsset;
 
-    public String getTextTypeFaceCustom() {
-        return textTypeFaceCustom;
+    public String getTextTypeFaceFromAsset() {
+        return textTypeFaceFromAsset;
     }
 
-    public void setTextTypeFaceCustom(String textTypeFaceCustom) {
-        this.textTypeFaceCustom = textTypeFaceCustom;
+    public void setTextTypeFaceFromAsset(String textTypeFaceFromAsset) {
+        this.textTypeFaceFromAsset = textTypeFaceFromAsset;
     }
 
     // attention that textDx is the width of the base , textDy is the
@@ -4444,10 +4444,10 @@ public class TView extends View {
                 textGravity = textGravityArray[textGravityIndex];
             }
 
-            // If textTypeFaceCustom is set then textTypeFace will be replaced!
-            textTypeFaceCustom = typedArray.getString(R.styleable.TView_textTypeFaceCustom);
-            if (textTypeFaceCustom != null) {
-                textTypeFace = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceCustom);
+            // If textTypeFaceFromAsset is set then textTypeFace will be replaced!
+            textTypeFaceFromAsset = typedArray.getString(R.styleable.TView_textTypeFaceFromAsset);
+            if (textTypeFaceFromAsset != null) {
+                textTypeFace = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceFromAsset);
             } else {
                 //
                 int textTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);

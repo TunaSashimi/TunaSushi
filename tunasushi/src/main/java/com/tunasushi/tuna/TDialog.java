@@ -100,8 +100,6 @@ public class TDialog extends TView {
     }
 
     private float dialogChoiceSize;
-    //Because there are only string-array and integer-array, it cannot be defined in xml
-    private float[] dialogChoiceSizeArray;
 
     private int dialogChoiceColor;
     //Because there are only string-array and integer-array, it cannot be defined in xml
@@ -115,13 +113,6 @@ public class TDialog extends TView {
         this.dialogChoiceColorArray = dialogChoiceColorArray;
     }
 
-    public float[] getDialogChoiceSizeArray() {
-        return dialogChoiceSizeArray;
-    }
-
-    public void setDialogChoiceSizeArray(float[] dialogChoiceSizeArray) {
-        this.dialogChoiceSizeArray = dialogChoiceSizeArray;
-    }
 
     private int dialogChoiceIndex;
 
@@ -199,7 +190,6 @@ public class TDialog extends TView {
         dialogChoiceBackgroundPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundPress, dialogChoiceBackgroundNormal);
 
         int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceValueArray, -1);
-
         if (dialogChoiceTextValueArrayId != -1) {
             dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
             total = dialogChoiceTextValueArray.length;
@@ -215,16 +205,17 @@ public class TDialog extends TView {
 
         //
         dialogChoiceSize = typedArray.getDimension(R.styleable.TDialog_dialogChoiceSize, 0);
-        dialogChoiceSizeArray = new float[total];
-        for (int i = 0; i < total; i++) {
-            dialogChoiceSizeArray[i] = dialogChoiceSize;
-        }
 
-        //
-        dialogChoiceColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceColor, Color.TRANSPARENT);
-        dialogChoiceColorArray = new int[total];
-        for (int i = 0; i < total; i++) {
-            dialogChoiceColorArray[i] = dialogChoiceColor;
+        // If dialogChoiceColorArray is set then dialogChoiceColor will be replaced!
+        int dialogChoiceColorArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceColorArray, -1);
+        if (dialogChoiceColorArrayId != -1) {
+            dialogChoiceColorArray = typedArray.getResources().getIntArray(dialogChoiceColorArrayId);
+        } else {
+            dialogChoiceColor = typedArray.getColor(R.styleable.TDialog_dialogChoiceColor, Color.TRANSPARENT);
+            dialogChoiceColorArray = new int[total];
+            for (int i = 0; i < total; i++) {
+                dialogChoiceColorArray[i] = dialogChoiceColor;
+            }
         }
 
         //
@@ -364,7 +355,7 @@ public class TDialog extends TView {
                     0,
                     initTextPaint(Paint.Style.FILL,
                             dialogChoiceColorArray[i],
-                            dialogChoiceSizeArray[i],
+                            dialogChoiceSize,
                             Paint.Align.CENTER));
         }
         canvas.translate(-dx, -dy);

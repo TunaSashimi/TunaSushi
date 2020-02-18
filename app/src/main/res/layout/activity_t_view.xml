@@ -50,7 +50,7 @@
             app:backgroundNormal="#666666"
             app:rotate="30"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceCustom="fonts/computerfont.ttf"
+            app:textTypeFaceFromAsset="fonts/computerfont.ttf"
             app:textValue="#666666" />
 
         <com.tunasushi.tuna.TView
@@ -60,7 +60,7 @@
             app:backgroundNormal="#cccccc"
             app:rotate="15"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceCustom="fonts/digital-7.ttf"
+            app:textTypeFaceFromAsset="fonts/digital-7.ttf"
             app:textValue="#cccccc" />
 
         <TextView
