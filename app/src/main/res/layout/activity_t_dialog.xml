@@ -42,7 +42,6 @@
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogConfirm"
         style="@style/TDialog_Choice"
-
         app:dialogChoiceValueArray="@array/dialog_text_value_array_confirm"
         app:dialogContentValue="多数订单会在10分钟内确认，请耐心等待。"
         app:dialogTextValue="温馨提示" />

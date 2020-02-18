@@ -13,7 +13,6 @@ import com.tunasushi.tuna.TScale;
  * @Description
  */
 public class TScaleActivity extends Activity {
-
     private TScale tScaleBitmapSetBitmap;
 
     @Override

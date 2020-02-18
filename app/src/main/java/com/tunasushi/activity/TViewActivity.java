@@ -25,9 +25,9 @@ import static com.tunasushi.tool.GroupTool.dynamic;
  * @Description
  */
 public class TViewActivity extends Activity {
-    private TView TViewRectClassic01, TViewRectClassic02;
-    private TView TViewMainButton01, TViewMainButton02;
-    private TView TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right;
+    private TView tViewRectClassic01, tViewRectClassic02;
+    private TView tViewMainButton01, tViewMainButton02;
+    private TView tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right;
 
     private TouchUpListener tunaTouchUpListener = new TouchUpListener() {
         @Override
@@ -57,8 +57,8 @@ public class TViewActivity extends Activity {
         textDeviceInfo.setText(deviceInfo.toString());
 
         //
-        TViewRectClassic01 = findViewById(R.id.tViewRectClassic01);
-        TViewRectClassic01.setTouchUpListener(new TouchUpListener() {
+        tViewRectClassic01 = findViewById(R.id.tViewRectClassic01);
+        tViewRectClassic01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 Toast.makeText(TViewActivity.this, "TouchUp", Toast.LENGTH_SHORT).show();
@@ -68,8 +68,8 @@ public class TViewActivity extends Activity {
         /**
          * 注意这里继承的是TView.OnClick事件
          */
-        TViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
-        TViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
+        tViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
+        tViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(TView t) {
                 Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
@@ -77,11 +77,11 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewMainButton01 = findViewById(R.id.tViewShadowButton01);
-        TViewMainButton01.setTouchUpListener(new TouchUpListener() {
+        tViewMainButton01 = findViewById(R.id.tViewShadowButton01);
+        tViewMainButton01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                TViewMainButton01.setTextMark(
+                tViewMainButton01.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
@@ -94,8 +94,8 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewMainButton02 = findViewById(R.id.tViewShadowButton02);
-        TViewMainButton02.setTextMark(
+        tViewMainButton02 = findViewById(R.id.tViewShadowButton02);
+        tViewMainButton02.setTextMark(
                 10, TypedValue.COMPLEX_UNIT_DIP,
                 Color.RED,
                 "10",
@@ -104,10 +104,10 @@ public class TViewActivity extends Activity {
                 0, TypedValue.COMPLEX_UNIT_DIP,
                 0, TypedValue.COMPLEX_UNIT_DIP
         );
-        TViewMainButton02.setTouchUpListener(new TouchUpListener() {
+        tViewMainButton02.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                TViewMainButton02.setTextMark(
+                tViewMainButton02.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
@@ -120,18 +120,18 @@ public class TViewActivity extends Activity {
         });
 
         //
-        TViewRadioGroup_DrackBrown_Left = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
-        TViewRadioGroup_DrackBrown_Right = findViewById(R.id.tViewRadioGroupDrackBrownRight);
+        tViewRadioGroup_DrackBrown_Left = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
+        tViewRadioGroup_DrackBrown_Right = findViewById(R.id.tViewRadioGroupDrackBrownRight);
 
-        TViewRadioGroup_DrackBrown_Left.setTouchUpListener(tunaTouchUpListener);
-        TViewRadioGroup_DrackBrown_Right.setTouchUpListener(tunaTouchUpListener);
+        tViewRadioGroup_DrackBrown_Left.setTouchUpListener(tunaTouchUpListener);
+        tViewRadioGroup_DrackBrown_Right.setTouchUpListener(tunaTouchUpListener);
 
         //if you want a different TView link, you can put an array of incoming associate methods
 
-        //	TView.associate(new TView[]{TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right});
+        //	TView.associate(new TView[]{tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right});
 
         //or  can be placed on a list of incoming associate method
-        associate(Arrays.asList(TViewRadioGroup_DrackBrown_Left, TViewRadioGroup_DrackBrown_Right));
+        associate(Arrays.asList(tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right));
 
         //
         String radioGroupTitleArray[] = {

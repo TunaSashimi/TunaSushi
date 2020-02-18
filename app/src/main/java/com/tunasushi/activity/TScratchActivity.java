@@ -13,7 +13,6 @@ import com.tunasushi.tuna.TScratch;
  * @Description
  */
 public class TScratchActivity extends Activity {
-
     private TScratch tScratch;
 
     @Override

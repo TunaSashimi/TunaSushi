@@ -12,7 +12,6 @@ import com.tunasushi.R;
  * @Description
  */
 public class TLayoutActivity extends Activity{
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);

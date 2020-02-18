@@ -14,7 +14,6 @@ import com.tunasushi.tuna.TImage;
  * @Description
  */
 public class TImageActivity extends Activity {
-
     private TImage tImage;
 
     @Override

@@ -19,7 +19,6 @@ import com.tunasushi.tuna.TDraw;
  * @Description
  */
 public class TDrawActivity extends Activity {
-
     private static final int COLOR_MENU_ID = Menu.FIRST;
     private static final int EMBOSS_MENU_ID = Menu.FIRST + 1;
     private static final int BLUR_MENU_ID = Menu.FIRST + 2;

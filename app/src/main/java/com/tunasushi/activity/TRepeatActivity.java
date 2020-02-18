@@ -24,11 +24,10 @@ import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
  */
 public class TRepeatActivity extends Activity {
     private TLine tLine;
+    private TView tView;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
 
-    private TView tView;
     private Spinner spinner;
-
     private String[] indexArray = {"-1", "0", "1", "2", "3"};
 
     @Override

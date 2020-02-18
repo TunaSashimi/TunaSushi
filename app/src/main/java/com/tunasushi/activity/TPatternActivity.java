@@ -12,7 +12,6 @@ import com.tunasushi.tuna.TPattern;
  * @Description
  */
 public class TPatternActivity extends Activity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

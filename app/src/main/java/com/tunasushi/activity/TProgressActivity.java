@@ -15,7 +15,6 @@ import com.tunasushi.tuna.TProgress;
  * @Description
  */
 public class TProgressActivity extends Activity {
-
     private TProgress tProgressCircleClockWise, tProgressCircleUpWard, tProgressCircleUpDown,
             tProgressCustomClockWise, tProgressCustomUpWard, tProgressCustomUpDown;
 

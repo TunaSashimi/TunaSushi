@@ -16,7 +16,6 @@ import com.tunasushi.tuna.TIrregular;
  * @Description
  */
 public class TIrregularActivity extends Activity {
-
     private TIrregular tIrregular;
 
     @Override

@@ -12,8 +12,7 @@ import com.tunasushi.tuna.TView;
  * @Description
  */
 public class TTrangleActivity extends Activity {
-
-    private TView TViewButton, TViewBox;
+    private TView tView, tViewBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +20,16 @@ public class TTrangleActivity extends Activity {
 
         setContentView(R.layout.activity_t_trangle);
 
-        TViewButton = findViewById(R.id.tViewButton);
-        TViewBox = findViewById(R.id.tViewBox);
+        tView = findViewById(R.id.tView);
+        tViewBox = findViewById(R.id.tViewBox);
 
-        TViewButton.setTouchUpListener(new TView.TouchUpListener() {
+        tView.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                if ("TunaSashimi".equals(TViewBox.getTextValue())) {
-                    TViewBox.setTextValue("金枪鱼刺身");
+                if ("TunaSashimi".equals(tViewBox.getTextValue())) {
+                    tViewBox.setTextValue("金枪鱼刺身");
                 } else {
-                    TViewBox.setTextValue("TunaSashimi");
+                    tViewBox.setTextValue("TunaSashimi");
                 }
             }
         });

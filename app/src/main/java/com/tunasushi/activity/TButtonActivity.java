@@ -15,7 +15,6 @@ import com.tunasushi.tuna.TView;
  * @Description
  */
 public class TButtonActivity extends Activity {
-
     private TButton tButton01, tButton02, tButton03;
 
     @Override

@@ -20,7 +20,6 @@ import java.util.TimerTask;
  * @Description
  */
 public class TRippleActivity extends Activity {
-
     private static final int PLAY_TUNARIPPLE_ANIMATION = 0;
 
     private TView tViewPlay, tViewChange;

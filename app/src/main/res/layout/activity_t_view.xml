@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="backgroundNormal设置常规背景色\ntextTypeFace设置文字类型\ntextTypeFaceCustom设置自定义类型\nrotate设置旋转角度" />
+            android:text="backgroundNormal设置常规背景\ntextTypeFace设置字体\ntextTypeFaceFromAsset设置自定义字体\nrotate设置旋转角度" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRectClassic01"
@@ -50,7 +50,7 @@
             app:backgroundNormal="#666666"
             app:rotate="30"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceFromAsset="fonts/computerfont.ttf"
+            app:textTypeFaceFromAsset="fonts/computer.ttf"
             app:textValue="#666666" />
 
         <com.tunasushi.tuna.TView
@@ -70,7 +70,7 @@
             android:layout_below="@id/tViewRectClassic01"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="backgroundPress设置按下背景色\nbackgroundSelect设置选中背景色(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorNormalWidth设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔bottom|right)" />
+            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorNormalWidth设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔bottom|right)" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSelect01"
@@ -174,7 +174,7 @@
             android:layout_marginLeft="@dimen/tuna_button_marginLeft"
             android:layout_marginRight="@dimen/tuna_button_marginRight"
             android:color="#434343"
-            android:text="textShadowRadius设置文字阴影半径\ntextShadowColor设置文字阴影颜色\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\nstrokeWidth设置描边宽度\nstrokeColorNormal设置描边颜色\ntextMarkRadius设置标识半径\ntextMarkColor设置标识颜色\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识颜色\ntextMarkTouchable禁止标识隐藏" />
+            android:text="textShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\nstrokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadowButton01"
@@ -200,7 +200,7 @@
             app:textShadowDy="2dp"
             app:textShadowRadius="3dp"
             app:textSize="14dp"
-            app:textValue="字体#ffff00背景#e1e1e1描边#999999字体阴影颜色#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
+            app:textValue="背景#e1e1e1描边#999999字体阴影#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadowButton02"
@@ -225,7 +225,7 @@
             app:textPaddingLeft="4dp"
             app:textPaddingRight="4dp"
             app:textSize="@dimen/tuna_button_textSize"
-            app:textValue="字体#592d2d背景#fae500描边#ac9696背景阴影颜色#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
+            app:textValue="背景#fae500描边#ac9696背景阴影#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadowButton03"
@@ -244,7 +244,8 @@
             app:textPaddingLeft="8dp"
             app:textPaddingRight="8dp"
             app:textSize="@dimen/tuna_button_textSize"
-            app:textValue="字体#ffffff背景#0000ff背景阴影颜色#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
+            app:textTypeFaceFromAsset="fonts/simsun.ttf"
+            app:textValue="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
 
         <TextView
             android:id="@+id/textGradientButton"
@@ -253,7 +254,7 @@
             android:layout_below="@id/tViewShadowButton03"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="backgroundGradientDirection设置渐变方向\nbackgroundGradientStart设置渐变开始颜色\nbackgroundGradientEnd设置渐变结束颜色" />
+            android:text="backgroundGradientDirection设置渐变方向\nbackgroundGradientStart设置渐变开始\nbackgroundGradientEnd设置渐变结束" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewMainButton03"
@@ -427,7 +428,7 @@
             android:layout_below="@id/tViewSecondaryButton05"
             android:layout_margin="@dimen/tuna_button_margin"
             android:color="#434343"
-            android:text="srcNormalShadowRadius设置背景图阴影半径,注意设置的时候一定要把父控件的背景色作为backgroundNormal传入\nsrcNormalShadowDx设置背景图阴影横向偏移\nsrcNormalShadowDx设置背景图阴影纵向偏移\n针对backgroundShadow偏移,移动的是背景图上阴影的绘制" />
+            android:text="srcNormalShadowRadius设置背景图阴影半径,注意设置的时候一定要把父控件的背景作为backgroundNormal传入\nsrcNormalShadowDx设置背景图阴影横向偏移\nsrcNormalShadowDx设置背景图阴影纵向偏移\n针对backgroundShadow偏移,移动的是背景图上阴影的绘制" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSecondaryButton08"

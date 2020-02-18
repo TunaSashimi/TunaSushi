@@ -12,7 +12,6 @@ import com.tunasushi.R;
  * @Description
  */
 public class TSVGActivity extends Activity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
