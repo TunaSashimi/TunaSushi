@@ -5,67 +5,70 @@
     android:layout_height="match_parent"
     android:background="#f0eff5">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <com.tunasushi.tuna.TLayout
+        android:id="@+id/tLayout"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/repeat_relativelayout_bg">
+        app:layoutBackground="#ffffff"
+        app:layoutRadius="5dp"
+        app:layoutStrokeColor="#b2b2b2"
+        app:layoutStrokeWidth="1dp">
 
         <CheckBox
             android:id="@+id/checkReason01"
-            android:layout_width="@dimen/checkbox_width"
+            android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/repeat_checkbox_bg01"
+            android:background="@drawable/xml_cb_repeat_bg01"
             android:button="@null"
             android:gravity="center"
             android:text="服务态度不好"
             android:textColor="#666666"
-            android:textSize="@dimen/checkbox_textSize" />
+            android:textSize="14dp" />
 
         <CheckBox
-            android:layout_width="@dimen/checkbox_width"
+            android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason01"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/repeat_checkbox_bg01"
+            android:background="@drawable/xml_cb_repeat_bg01"
             android:button="@null"
             android:gravity="center"
             android:text="司机不熟悉路况"
             android:textColor="#666666"
-            android:textSize="@dimen/checkbox_textSize" />
+            android:textSize="14dp" />
 
         <CheckBox
             android:id="@+id/checkReason03"
-            android:layout_width="@dimen/checkbox_width"
+            android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_below="@id/checkReason01"
             android:layout_margin="20dp"
-            android:background="@drawable/repeat_checkbox_bg01"
+            android:background="@drawable/xml_cb_repeat_bg01"
             android:button="@null"
             android:gravity="center"
             android:text="司机迟到"
             android:textColor="#666666"
-            android:textSize="@dimen/checkbox_textSize" />
+            android:textSize="14dp" />
 
         <CheckBox
-            android:layout_width="@dimen/checkbox_width"
+            android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason03"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/repeat_checkbox_bg01"
+            android:background="@drawable/xml_cb_repeat_bg01"
             android:button="@null"
             android:gravity="center"
             android:text="车型车牌不符"
             android:textColor="#666666"
-            android:textSize="@dimen/checkbox_textSize" />
+            android:textSize="14dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -74,19 +77,19 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/repeat_edittext_bg"
+            android:background="@drawable/xml_et_repeat_bg"
             android:gravity="top|left"
             android:hint="请输入原因...(非必填)"
             android:padding="20dp"
             android:textColor="#666666"
-            android:textSize="@dimen/checkbox_textSize" />
-    </RelativeLayout>
+            android:textSize="14dp" />
+    </com.tunasushi.tuna.TLayout>
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLine"
         android:layout_width="match_parent"
         android:layout_height="18dp"
-        android:layout_below="@id/relativeLayout"
+        android:layout_below="@id/tLayout"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="-3px"
         android:layout_marginRight="25dp"
@@ -105,10 +108,10 @@
         android:layout_below="@id/tLine"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        app:repeatSrcNormal="@drawable/iv_repeat_bg01"
-        app:repeatSrcSelect="@drawable/iv_repeat_bg02"
         app:repeatSelectType="connect"
         app:repeatShapeType="custom"
+        app:repeatSrcNormal="@drawable/iv_trepeat_bg01"
+        app:repeatSrcSelect="@drawable/iv_trepeat_bg02"
         app:repeatTotal="5"
         app:touchType="always" />
 
@@ -120,8 +123,6 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
-        app:repeatSrcNormal="@drawable/iv_car_type01"
-        app:repeatSrcSelect="@drawable/iv_car_type02"
         app:repeatItemFractionBottom="50%"
         app:repeatItemTextColorNormal="#b2b2b2"
         app:repeatItemTextColorSelect="#000000"
@@ -129,7 +130,9 @@
         app:repeatItemTextFractionTop="72%"
         app:repeatItemTextSize="14dp"
         app:repeatSelectType="current"
-        app:repeatShapeType="custom" />
+        app:repeatShapeType="custom"
+        app:repeatSrcNormal="@drawable/iv_trepeat_car_type01"
+        app:repeatSrcSelect="@drawable/iv_trepeat_car_type02" />
 
     <com.tunasushi.tuna.TRepeat
         android:id="@+id/tRepeatTips"
@@ -165,9 +168,9 @@
     <com.tunasushi.tuna.TView
         android:id="@+id/tView"
         android:layout_width="120dp"
-        android:layout_height="@dimen/tuna_button_height"
+        android:layout_height="48dp"
         android:layout_alignTop="@id/spinner"
-        android:layout_marginLeft="@dimen/tuna_button_marginLeft"
+        android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/spinner"
         app:strokeColorNormal="#dedede"
         app:strokeWidthNormal="1dp"

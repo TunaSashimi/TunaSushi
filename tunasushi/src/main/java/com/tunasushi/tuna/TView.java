@@ -59,6 +59,7 @@ import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.ConvertTool.pxToDp;
+import static com.tunasushi.tool.DrawTool.drawAnchor;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
 /**
@@ -1527,100 +1528,100 @@ public class TView extends View {
     protected final int DIRECTION_BOTTOM = DIRECTION_TOP << 1;
     protected final int DIRECTION_MASK = DIRECTION_LEFT | DIRECTION_RIGHT | DIRECTION_TOP | DIRECTION_BOTTOM;
 
-    private int backgroundNormalAngle;
+    private int backgroundAngleNormal;
 
-    public int getBackgroundNormalAngle() {
-        return backgroundNormalAngle;
+    public int getBackgroundAngleNormal() {
+        return backgroundAngleNormal;
     }
 
-    public void setBackgroundNormalAngle(int backgroundNormalAngle) {
-        this.backgroundNormalAngle = backgroundNormalAngle;
+    public void setBackgroundAngleNormal(int backgroundAngleNormal) {
+        this.backgroundAngleNormal = backgroundAngleNormal;
     }
 
-    private int backgroundPressAngle;
+    private int backgroundAnglePress;
 
-    public int getBackgroundPressAngle() {
-        return backgroundPressAngle;
+    public int getBackgroundAnglePress() {
+        return backgroundAnglePress;
     }
 
-    public void setBackgroundPressAngle(int backgroundPressAngle) {
-        this.backgroundPressAngle = backgroundPressAngle;
+    public void setBackgroundAnglePress(int backgroundAnglePress) {
+        this.backgroundAnglePress = backgroundAnglePress;
     }
 
-    private int backgroundSelectAngle;
+    private int backgroundAngleSelect;
 
-    public int getBackgroundSelectAngle() {
-        return backgroundSelectAngle;
+    public int getBackgroundAngleSelect() {
+        return backgroundAngleSelect;
     }
 
-    public void setBackgroundSelectAngle(int backgroundSelectAngle) {
-        this.backgroundSelectAngle = backgroundSelectAngle;
+    public void setBackgroundAngleSelect(int backgroundAngleSelect) {
+        this.backgroundAngleSelect = backgroundAngleSelect;
     }
 
-    // backgroundNormalGradientStart default backgroundNormal
-    private int backgroundNormalGradientStart;
+    // backgroundGradientStartNormal default backgroundNormal
+    private int backgroundGradientStartNormal;
 
-    public int getBackgroundNormalGradientStart() {
-        return backgroundNormalGradientStart;
+    public int getBackgroundGradientStartNormal() {
+        return backgroundGradientStartNormal;
     }
 
-    public void setBackgroundNormalGradientStart(int backgroundNormalGradientStart) {
-        this.backgroundNormalGradientStart = backgroundNormalGradientStart;
+    public void setBackgroundGradientStartNormal(int backgroundGradientStartNormal) {
+        this.backgroundGradientStartNormal = backgroundGradientStartNormal;
     }
 
-    // backgroundNormalGradientEnd default backgroundNormal
-    private int backgroundNormalGradientEnd;
+    // backgroundGradientEndNormal default backgroundNormal
+    private int backgroundGradientEndNormal;
 
-    public int getBackgroundNormalGradientEnd() {
-        return backgroundNormalGradientEnd;
+    public int getBackgroundGradientEndNormal() {
+        return backgroundGradientEndNormal;
     }
 
-    public void setBackgroundNormalGradientEnd(int backgroundNormalGradientEnd) {
-        this.backgroundNormalGradientEnd = backgroundNormalGradientEnd;
+    public void setBackgroundGradientEndNormal(int backgroundGradientEndNormal) {
+        this.backgroundGradientEndNormal = backgroundGradientEndNormal;
     }
 
-    // backgroundPressGradientStart default backgroundPress
-    private int backgroundPressGradientStart;
+    // backgroundGradientStartPress default backgroundPress
+    private int backgroundGradientStartPress;
 
-    public int getBackgroundPressGradientStart() {
-        return backgroundPressGradientStart;
+    public int getBackgroundGradientStartPress() {
+        return backgroundGradientStartPress;
     }
 
-    public void setBackgroundPressGradientStart(int backgroundPressGradientStart) {
-        this.backgroundPressGradientStart = backgroundPressGradientStart;
+    public void setBackgroundGradientStartPress(int backgroundGradientStartPress) {
+        this.backgroundGradientStartPress = backgroundGradientStartPress;
     }
 
-    // backgroundPressGradientEnd default backgroundPress
-    private int backgroundPressGradientEnd;
+    // backgroundGradientEndPress default backgroundPress
+    private int backgroundGradientEndPress;
 
-    public int getBackgroundPressGradientEnd() {
-        return backgroundPressGradientEnd;
+    public int getBackgroundGradientEndPress() {
+        return backgroundGradientEndPress;
     }
 
-    public void setBackgroundPressGradientEnd(int backgroundPressGradientEnd) {
-        this.backgroundPressGradientEnd = backgroundPressGradientEnd;
+    public void setBackgroundGradientEndPress(int backgroundGradientEndPress) {
+        this.backgroundGradientEndPress = backgroundGradientEndPress;
     }
 
-    // backgroundSelectGradientStart default backgroundSelect
-    private int backgroundSelectGradientStart;
+    // backgroundGradientStartSelect default backgroundSelect
+    private int backgroundGradientStartSelect;
 
-    public int getBackgroundSelectGradientStart() {
-        return backgroundSelectGradientStart;
+    public int getBackgroundGradientStartSelect() {
+        return backgroundGradientStartSelect;
     }
 
-    public void setBackgroundSelectGradientStart(int backgroundSelectGradientStart) {
-        this.backgroundSelectGradientStart = backgroundSelectGradientStart;
+    public void setBackgroundGradientStartSelect(int backgroundGradientStartSelect) {
+        this.backgroundGradientStartSelect = backgroundGradientStartSelect;
     }
 
-    // backgroundSelectGradientEnd default backgroundSelect
-    private int backgroundSelectGradientEnd;
+    // backgroundGradientEndSelect default backgroundSelect
+    private int backgroundGradientEndSelect;
 
-    public int getBackgroundSelectGradientEnd() {
-        return backgroundSelectGradientEnd;
+    public int getBackgroundGradientEndSelect() {
+        return backgroundGradientEndSelect;
     }
 
-    public void setBackgroundSelectGradientEnd(int backgroundSelectGradientEnd) {
-        this.backgroundSelectGradientEnd = backgroundSelectGradientEnd;
+    public void setBackgroundGradientEndSelect(int backgroundGradientEndSelect) {
+        this.backgroundGradientEndSelect = backgroundGradientEndSelect;
     }
 
     // backgroundNormalShader default null
@@ -1657,23 +1658,23 @@ public class TView extends View {
     }
 
     //
-    private float backgroundNormalShadowRadius;
+    private float backgroundShadowRadiusNormal;
 
-    public float getBackgroundNormalShadowRadius() {
-        return backgroundNormalShadowRadius;
+    public float getBackgroundShadowRadiusNormal() {
+        return backgroundShadowRadiusNormal;
     }
 
-    public void setBackgroundNormalShadowRadius(float backgroundNormalShadowRadius) {
-        setBackgroundNormalShadowRadiusRaw(backgroundNormalShadowRadius);
+    public void setBackgroundShadowRadiusNormal(float backgroundShadowRadiusNormal) {
+        setBackgroundShadowRadiusNormalRaw(backgroundShadowRadiusNormal);
     }
 
-    public void setBackgroundNormalShadowRadius(float backgroundNormalShadowRadius, int unit) {
-        setBackgroundNormalShadowRadiusRaw(convertToPX(backgroundNormalShadowRadius, unit));
+    public void setBackgroundShadowRadiusNormal(float backgroundShadowRadiusNormal, int unit) {
+        setBackgroundShadowRadiusNormalRaw(convertToPX(backgroundShadowRadiusNormal, unit));
     }
 
-    private void setBackgroundNormalShadowRadiusRaw(float backgroundNormalShadowRadius) {
-        if (this.backgroundNormalShadowRadius != backgroundNormalShadowRadius) {
-            this.backgroundNormalShadowRadius = backgroundNormalShadowRadius;
+    private void setBackgroundShadowRadiusNormalRaw(float backgroundShadowRadiusNormal) {
+        if (this.backgroundShadowRadiusNormal != backgroundShadowRadiusNormal) {
+            this.backgroundShadowRadiusNormal = backgroundShadowRadiusNormal;
             invalidate();
         }
     }
@@ -1690,67 +1691,67 @@ public class TView extends View {
     }
 
     //
-    private float backgroundNormalShadowDx;
+    private float backgroundShadowDxNormal;
 
-    public float getBackgroundNormalShadowDx() {
-        return backgroundNormalShadowDx;
+    public float getBackgroundShadowDxNormal() {
+        return backgroundShadowDxNormal;
     }
 
-    public void setBackgroundNormalShadowDx(float backgroundNormalShadowDx) {
-        setBackgroundNormalShadowDxRaw(backgroundNormalShadowDx);
+    public void setBackgroundShadowDxNormal(float backgroundShadowDxNormal) {
+        setBackgroundShadowDxNormalRaw(backgroundShadowDxNormal);
     }
 
-    public void setBackgroundNormalShadowDx(float backgroundNormalShadowDx, int unit) {
-        setBackgroundNormalShadowDxRaw(convertToPX(backgroundNormalShadowDx, unit));
+    public void setBackgroundShadowDxNormal(float backgroundShadowDxNormal, int unit) {
+        setBackgroundShadowDxNormalRaw(convertToPX(backgroundShadowDxNormal, unit));
     }
 
-    private void setBackgroundNormalShadowDxRaw(float backgroundNormalShadowDx) {
-        if (this.backgroundNormalShadowDx != backgroundNormalShadowDx) {
-            this.backgroundNormalShadowDx = backgroundNormalShadowDx;
+    private void setBackgroundShadowDxNormalRaw(float backgroundShadowDxNormal) {
+        if (this.backgroundShadowDxNormal != backgroundShadowDxNormal) {
+            this.backgroundShadowDxNormal = backgroundShadowDxNormal;
             invalidate();
         }
     }
 
     //
-    private float backgroundNormalShadowDy;
+    private float backgroundShadowDyNormal;
 
-    public float getBackgroundNormalShadowDy() {
-        return backgroundNormalShadowDy;
+    public float getBackgroundShadowDyNormal() {
+        return backgroundShadowDyNormal;
     }
 
-    public void setBackgroundNormalShadowDy(float backgroundNormalShadowDy) {
-        setBackgroundNormalShadowDyRaw(backgroundNormalShadowDy);
+    public void setBackgroundShadowDyNormal(float backgroundShadowDyNormal) {
+        setBackgroundShadowDyNormalRaw(backgroundShadowDyNormal);
     }
 
-    public void setBackgroundNormalShadowDy(float backgroundNormalShadowDy, int unit) {
-        setBackgroundNormalShadowDyRaw(convertToPX(backgroundNormalShadowDy, unit));
+    public void setBackgroundShadowDyNormal(float backgroundShadowDyNormal, int unit) {
+        setBackgroundShadowDyNormalRaw(convertToPX(backgroundShadowDyNormal, unit));
     }
 
-    private void setBackgroundNormalShadowDyRaw(float backgroundNormalShadowDy) {
-        if (this.backgroundNormalShadowDy != backgroundNormalShadowDy) {
-            this.backgroundNormalShadowDy = backgroundNormalShadowDy;
+    private void setBackgroundShadowDyNormalRaw(float backgroundShadowDyNormal) {
+        if (this.backgroundShadowDyNormal != backgroundShadowDyNormal) {
+            this.backgroundShadowDyNormal = backgroundShadowDyNormal;
             invalidate();
         }
     }
 
-    // default backgroundNormalShadowRadius
-    private float backgroundPressShadowRadius;
+    // default backgroundShadowRadiusNormal
+    private float backgroundShadowRadiusPress;
 
-    public float getBackgroundPressShadowRadius() {
-        return backgroundPressShadowRadius;
+    public float getBackgroundShadowRadiusPress() {
+        return backgroundShadowRadiusPress;
     }
 
-    public void setBackgroundPressShadowRadius(float backgroundPressShadowRadius) {
-        setBackgroundPressShadowRadiusRaw(backgroundPressShadowRadius);
+    public void setBackgroundShadowRadiusPress(float backgroundShadowRadiusPress) {
+        setBackgroundShadowRadiusPressRaw(backgroundShadowRadiusPress);
     }
 
-    public void setBackgroundPressShadowRadius(float backgroundPressShadowRadius, int unit) {
-        setBackgroundPressShadowRadiusRaw(convertToPX(backgroundPressShadowRadius, unit));
+    public void setBackgroundShadowRadiusPress(float backgroundShadowRadiusPress, int unit) {
+        setBackgroundShadowRadiusPressRaw(convertToPX(backgroundShadowRadiusPress, unit));
     }
 
-    private void setBackgroundPressShadowRadiusRaw(float backgroundPressShadowRadius) {
-        if (this.backgroundPressShadowRadius != backgroundPressShadowRadius) {
-            this.backgroundPressShadowRadius = backgroundPressShadowRadius;
+    private void setBackgroundShadowRadiusPressRaw(float backgroundShadowRadiusPress) {
+        if (this.backgroundShadowRadiusPress != backgroundShadowRadiusPress) {
+            this.backgroundShadowRadiusPress = backgroundShadowRadiusPress;
             invalidate();
         }
     }
@@ -1766,68 +1767,68 @@ public class TView extends View {
         this.backgroundPressShadowColor = backgroundPressShadowColor;
     }
 
-    // default backgroundNormalShadowDx
-    private float backgroundPressShadowDx;
+    // default backgroundShadowDxNormal
+    private float backgroundShadowDxPress;
 
-    public float getBackgroundPressShadowDx() {
-        return backgroundPressShadowDx;
+    public float getBackgroundShadowDxPress() {
+        return backgroundShadowDxPress;
     }
 
-    public void setBackgroundPressShadowDx(float backgroundPressShadowDx) {
-        setBackgroundPressShadowDxRaw(backgroundPressShadowDx);
+    public void setBackgroundShadowDxPress(float backgroundShadowDxPress) {
+        setBackgroundShadowDxPressRaw(backgroundShadowDxPress);
     }
 
-    public void setBackgroundPressShadowDx(float backgroundPressShadowDx, int unit) {
-        setBackgroundPressShadowDxRaw(convertToPX(backgroundPressShadowDx, unit));
+    public void setBackgroundShadowDxPress(float backgroundShadowDxPress, int unit) {
+        setBackgroundShadowDxPressRaw(convertToPX(backgroundShadowDxPress, unit));
     }
 
-    private void setBackgroundPressShadowDxRaw(float backgroundPressShadowDx) {
-        if (this.backgroundPressShadowDx != backgroundPressShadowDx) {
-            this.backgroundPressShadowDx = backgroundPressShadowDx;
+    private void setBackgroundShadowDxPressRaw(float backgroundShadowDxPress) {
+        if (this.backgroundShadowDxPress != backgroundShadowDxPress) {
+            this.backgroundShadowDxPress = backgroundShadowDxPress;
             invalidate();
         }
     }
 
-    // default backgroundNormalShadowDy
-    private float backgroundPressShadowDy;
+    // default backgroundShadowDyNormal
+    private float backgroundShadowDyPress;
 
-    public float getBackgroundPressShadowDy() {
-        return backgroundPressShadowDy;
+    public float getBackgroundShadowDyPress() {
+        return backgroundShadowDyPress;
     }
 
-    public void setBackgroundPressShadowDy(float backgroundPressShadowDy) {
-        setBackgroundPressShadowDyRaw(backgroundPressShadowDy);
+    public void setBackgroundShadowDyPress(float backgroundShadowDyPress) {
+        setBackgroundShadowDyPressRaw(backgroundShadowDyPress);
     }
 
-    public void setBackgroundPressShadowDy(float backgroundPressShadowDy, int unit) {
-        setBackgroundPressShadowDyRaw(convertToPX(backgroundPressShadowDy, unit));
+    public void setBackgroundShadowDyPress(float backgroundShadowDyPress, int unit) {
+        setBackgroundShadowDyPressRaw(convertToPX(backgroundShadowDyPress, unit));
     }
 
-    private void setBackgroundPressShadowDyRaw(float backgroundPressShadowDy) {
-        if (this.backgroundPressShadowDy != backgroundPressShadowDy) {
-            this.backgroundPressShadowDy = backgroundPressShadowDy;
+    private void setBackgroundShadowDyPressRaw(float backgroundShadowDyPress) {
+        if (this.backgroundShadowDyPress != backgroundShadowDyPress) {
+            this.backgroundShadowDyPress = backgroundShadowDyPress;
             invalidate();
         }
     }
 
-    // default backgroundNormalShadowRadius
-    private float backgroundSelectShadowRadius;
+    // default backgroundShadowRadiusNormal
+    private float backgroundShadowRadiusSelect;
 
-    public float getBackgroundSelectShadowRadius() {
-        return backgroundSelectShadowRadius;
+    public float getBackgroundShadowRadiusSelect() {
+        return backgroundShadowRadiusSelect;
     }
 
-    public void setBackgroundSelectShadowRadius(float backgroundSelectShadowRadius) {
-        setBackgroundSelectShadowRadiusRaw(backgroundSelectShadowRadius);
+    public void setBackgroundShadowRadiusSelect(float backgroundShadowRadiusSelect) {
+        setBackgroundShadowRadiusSelectRaw(backgroundShadowRadiusSelect);
     }
 
-    public void setBackgroundSelectShadowRadius(float backgroundSelectShadowRadius, int unit) {
-        setBackgroundSelectShadowRadiusRaw(convertToPX(backgroundSelectShadowRadius, unit));
+    public void setBackgroundShadowRadiusSelect(float backgroundShadowRadiusSelect, int unit) {
+        setBackgroundShadowRadiusSelectRaw(convertToPX(backgroundShadowRadiusSelect, unit));
     }
 
-    private void setBackgroundSelectShadowRadiusRaw(float backgroundSelectShadowRadius) {
-        if (this.backgroundSelectShadowRadius != backgroundSelectShadowRadius) {
-            this.backgroundSelectShadowRadius = backgroundSelectShadowRadius;
+    private void setBackgroundShadowRadiusSelectRaw(float backgroundShadowRadiusSelect) {
+        if (this.backgroundShadowRadiusSelect != backgroundShadowRadiusSelect) {
+            this.backgroundShadowRadiusSelect = backgroundShadowRadiusSelect;
             invalidate();
         }
     }
@@ -1843,46 +1844,46 @@ public class TView extends View {
         this.backgroundSelectShadowColor = backgroundSelectShadowColor;
     }
 
-    // default backgroundNormalShadowDx
-    private float backgroundSelectShadowDx;
+    // default backgroundShadowDxNormal
+    private float backgroundShadowDxSelect;
 
-    public float getBackgroundSelectShadowDx() {
-        return backgroundSelectShadowDx;
+    public float getBackgroundShadowDxSelect() {
+        return backgroundShadowDxSelect;
     }
 
-    public void setBackgroundSelectShadowDx(float backgroundSelectShadowDx) {
-        setBackgroundSelectShadowDxRaw(backgroundSelectShadowDx);
+    public void setBackgroundShadowDxSelect(float backgroundShadowDxSelect) {
+        setBackgroundShadowDxSelectRaw(backgroundShadowDxSelect);
     }
 
-    public void setBackgroundSelectShadowDx(float backgroundSelectShadowDx, int unit) {
-        setBackgroundSelectShadowDxRaw(convertToPX(backgroundSelectShadowDx, unit));
+    public void setBackgroundShadowDxSelect(float backgroundShadowDxSelect, int unit) {
+        setBackgroundShadowDxSelectRaw(convertToPX(backgroundShadowDxSelect, unit));
     }
 
-    private void setBackgroundSelectShadowDxRaw(float backgroundSelectShadowDx) {
-        if (this.backgroundSelectShadowDx != backgroundSelectShadowDx) {
-            this.backgroundSelectShadowDx = backgroundSelectShadowDx;
+    private void setBackgroundShadowDxSelectRaw(float backgroundShadowDxSelect) {
+        if (this.backgroundShadowDxSelect != backgroundShadowDxSelect) {
+            this.backgroundShadowDxSelect = backgroundShadowDxSelect;
             invalidate();
         }
     }
 
-    // default backgroundNormalShadowDy
-    private float backgroundSelectShadowDy;
+    // default backgroundShadowDyNormal
+    private float backgroundShadowDySelect;
 
-    public float getBackgroundSelectShadowDy() {
-        return backgroundSelectShadowDy;
+    public float getBackgroundShadowDySelect() {
+        return backgroundShadowDySelect;
     }
 
-    public void setBackgroundSelectShadowDy(float backgroundSelectShadowDy) {
-        setBackgroundSelectShadowDyRaw(backgroundSelectShadowDy);
+    public void setBackgroundShadowDySelect(float backgroundShadowDySelect) {
+        setBackgroundShadowDySelectRaw(backgroundShadowDySelect);
     }
 
-    public void setBackgroundSelectShadowDy(float backgroundSelectShadowDy, int unit) {
-        setBackgroundSelectShadowDyRaw(convertToPX(backgroundSelectShadowDy, unit));
+    public void setBackgroundShadowDySelect(float backgroundShadowDySelect, int unit) {
+        setBackgroundShadowDySelectRaw(convertToPX(backgroundShadowDySelect, unit));
     }
 
-    private void setBackgroundSelectShadowDyRaw(float backgroundSelectShadowDy) {
-        if (this.backgroundSelectShadowDy != backgroundSelectShadowDy) {
-            this.backgroundSelectShadowDy = backgroundSelectShadowDy;
+    private void setBackgroundShadowDySelectRaw(float backgroundShadowDySelect) {
+        if (this.backgroundShadowDySelect != backgroundShadowDySelect) {
+            this.backgroundShadowDySelect = backgroundShadowDySelect;
             invalidate();
         }
     }
@@ -1936,211 +1937,211 @@ public class TView extends View {
     }
 
     //
-    private float srcNormalShadowRadius;
+    private float srcShadowRadiusNormal;
 
-    public float getSrcNormalShadowRadius() {
-        return srcNormalShadowRadius;
+    public float getSrcShadowRadiusNormal() {
+        return srcShadowRadiusNormal;
     }
 
-    public void setSrcNormalShadowRadius(float srcNormalShadowRadius) {
-        setSrcNormalShadowRadiusRaw(srcNormalShadowRadius);
+    public void setSrcShadowRadiusNormal(float srcShadowRadiusNormal) {
+        setSrcShadowRadiusNormalRaw(srcShadowRadiusNormal);
     }
 
-    public void setSrcNormalShadowRadius(float srcNormalShadowRadius, int unit) {
-        setSrcNormalShadowRadiusRaw(convertToPX(srcNormalShadowRadius, unit));
+    public void setSrcShadowRadiusNormal(float srcShadowRadiusNormal, int unit) {
+        setSrcShadowRadiusNormalRaw(convertToPX(srcShadowRadiusNormal, unit));
     }
 
-    private void setSrcNormalShadowRadiusRaw(float srcNormalShadowRadius) {
-        if (this.srcNormalShadowRadius != srcNormalShadowRadius) {
-            this.srcNormalShadowRadius = srcNormalShadowRadius;
+    private void setSrcShadowRadiusNormalRaw(float srcShadowRadiusNormal) {
+        if (this.srcShadowRadiusNormal != srcShadowRadiusNormal) {
+            this.srcShadowRadiusNormal = srcShadowRadiusNormal;
             invalidate();
         }
     }
 
     //
-    private float srcNormalShadowDx;
+    private float srcShadowDxNormal;
 
-    public float getSrcNormalShadowDx() {
-        return srcNormalShadowDx;
+    public float getSrcShadowDxNormal() {
+        return srcShadowDxNormal;
     }
 
-    public void setSrcNormalShadowDx(float srcNormalShadowDx) {
-        setSrcNormalShadowDxRaw(srcNormalShadowDx);
+    public void setSrcShadowDxNormal(float srcShadowDxNormal) {
+        setSrcShadowDxNormalRaw(srcShadowDxNormal);
     }
 
-    public void setSrcNormalShadowDx(float srcNormalShadowDx, int unit) {
-        setSrcNormalShadowDxRaw(convertToPX(srcNormalShadowDx, unit));
+    public void setSrcShadowDxNormal(float srcShadowDxNormal, int unit) {
+        setSrcShadowDxNormalRaw(convertToPX(srcShadowDxNormal, unit));
     }
 
-    private void setSrcNormalShadowDxRaw(float srcNormalShadowDx) {
-        if (this.srcNormalShadowDx != srcNormalShadowDx) {
-            this.srcNormalShadowDx = srcNormalShadowDx;
+    private void setSrcShadowDxNormalRaw(float srcShadowDxNormal) {
+        if (this.srcShadowDxNormal != srcShadowDxNormal) {
+            this.srcShadowDxNormal = srcShadowDxNormal;
             invalidate();
         }
     }
 
     //
-    private float srcNormalShadowDy;
+    private float srcShadowDyNormal;
 
-    public float getSrcNormalShadowDy() {
-        return srcNormalShadowDy;
+    public float getSrcShadowDyNormal() {
+        return srcShadowDyNormal;
     }
 
-    public void setSrcNormalShadowDy(float srcNormalShadowDy) {
-        setSrcNormalShadowDyRaw(srcNormalShadowDy);
+    public void setSrcShadowDyNormal(float srcShadowDyNormal) {
+        setSrcShadowDyNormalRaw(srcShadowDyNormal);
     }
 
-    public void setSrcNormalShadowDy(float srcNormalShadowDy, int unit) {
-        setSrcNormalShadowDyRaw(convertToPX(srcNormalShadowDy, unit));
+    public void setSrcShadowDyNormal(float srcShadowDyNormal, int unit) {
+        setSrcShadowDyNormalRaw(convertToPX(srcShadowDyNormal, unit));
     }
 
-    private void setSrcNormalShadowDyRaw(float srcNormalShadowDy) {
-        if (this.srcNormalShadowDy != srcNormalShadowDy) {
-            this.srcNormalShadowDy = srcNormalShadowDy;
+    private void setSrcShadowDyNormalRaw(float srcShadowDyNormal) {
+        if (this.srcShadowDyNormal != srcShadowDyNormal) {
+            this.srcShadowDyNormal = srcShadowDyNormal;
             invalidate();
         }
     }
 
-    // default srcNormalShadowRadius
-    private float srcPressShadowRadius;
+    // default srcShadowRadiusNormal
+    private float srcShadowRadiusPress;
 
-    public float getSrcPressShadowRadius() {
-        return srcPressShadowRadius;
+    public float getSrcShadowRadiusPress() {
+        return srcShadowRadiusPress;
     }
 
-    public void setSrcPressShadowRadius(float srcPressShadowRadius) {
-        setSrcPressShadowRadiusRaw(srcPressShadowRadius);
+    public void setSrcShadowRadiusPress(float srcShadowRadiusPress) {
+        setSrcShadowRadiusPressRaw(srcShadowRadiusPress);
     }
 
-    public void setSrcPressShadowRadius(float srcPressShadowRadius, int unit) {
-        setSrcPressShadowRadiusRaw(convertToPX(srcPressShadowRadius, unit));
+    public void setSrcShadowRadiusPress(float srcShadowRadiusPress, int unit) {
+        setSrcShadowRadiusPressRaw(convertToPX(srcShadowRadiusPress, unit));
     }
 
-    private void setSrcPressShadowRadiusRaw(float srcPressShadowRadius) {
-        if (this.srcPressShadowRadius != srcPressShadowRadius) {
-            this.srcPressShadowRadius = srcPressShadowRadius;
+    private void setSrcShadowRadiusPressRaw(float srcShadowRadiusPress) {
+        if (this.srcShadowRadiusPress != srcShadowRadiusPress) {
+            this.srcShadowRadiusPress = srcShadowRadiusPress;
             invalidate();
         }
     }
 
-    // default srcNormalShadowDx
-    private float srcPressShadowDx;
+    // default srcShadowDxNormal
+    private float srcShadowDxPress;
 
-    public float getSrcPressShadowDx() {
-        return srcPressShadowDx;
+    public float getSrcShadowDxPress() {
+        return srcShadowDxPress;
     }
 
-    public void setSrcPressShadowDx(float srcPressShadowDx) {
-        setSrcPressShadowDxRaw(srcPressShadowDx);
+    public void setSrcShadowDxPress(float srcShadowDxPress) {
+        setSrcShadowDxPressRaw(srcShadowDxPress);
     }
 
-    public void setSrcPressShadowDx(float srcPressShadowDx, int unit) {
-        setSrcPressShadowDxRaw(convertToPX(srcPressShadowDx, unit));
+    public void setSrcShadowDxPress(float srcShadowDxPress, int unit) {
+        setSrcShadowDxPressRaw(convertToPX(srcShadowDxPress, unit));
     }
 
-    private void setSrcPressShadowDxRaw(float srcPressShadowDx) {
-        if (this.srcPressShadowDx != srcPressShadowDx) {
-            this.srcPressShadowDx = srcPressShadowDx;
+    private void setSrcShadowDxPressRaw(float srcShadowDxPress) {
+        if (this.srcShadowDxPress != srcShadowDxPress) {
+            this.srcShadowDxPress = srcShadowDxPress;
             invalidate();
         }
     }
 
-    // default srcNormalShadowDy
-    private float srcPressShadowDy;
+    // default srcShadowDyNormal
+    private float srcShadowDyPress;
 
-    public float getSrcPressShadowDy() {
-        return srcPressShadowDy;
+    public float getSrcShadowDyPress() {
+        return srcShadowDyPress;
     }
 
-    public void setSrcPressShadowDy(float srcPressShadowDy) {
-        setSrcPressShadowDyRaw(srcPressShadowDy);
+    public void setSrcShadowDyPress(float srcShadowDyPress) {
+        setSrcShadowDyPressRaw(srcShadowDyPress);
     }
 
-    public void setSrcPressShadowDy(float srcPressShadowDy, int unit) {
-        setSrcPressShadowDyRaw(convertToPX(srcPressShadowDy, unit));
+    public void setSrcShadowDyPress(float srcShadowDyPress, int unit) {
+        setSrcShadowDyPressRaw(convertToPX(srcShadowDyPress, unit));
     }
 
-    private void setSrcPressShadowDyRaw(float srcPressShadowDy) {
-        if (this.srcPressShadowDy != srcPressShadowDy) {
-            this.srcPressShadowDy = srcPressShadowDy;
+    private void setSrcShadowDyPressRaw(float srcShadowDyPress) {
+        if (this.srcShadowDyPress != srcShadowDyPress) {
+            this.srcShadowDyPress = srcShadowDyPress;
             invalidate();
         }
     }
 
-    // default srcNormalShadowRadius
-    private float srcSelectShadowRadius;
+    // default srcShadowRadiusNormal
+    private float srcShadowRadiusSelect;
 
-    public float getSrcSelectShadowRadius() {
-        return srcSelectShadowRadius;
+    public float getSrcShadowRadiusSelect() {
+        return srcShadowRadiusSelect;
     }
 
-    public void setSrcSelectShadowRadius(float srcSelectShadowRadius) {
-        setSrcSelectShadowRadiusRaw(srcSelectShadowRadius);
+    public void setSrcShadowRadiusSelect(float srcShadowRadiusSelect) {
+        setSrcShadowRadiusSelectRaw(srcShadowRadiusSelect);
     }
 
-    public void setSrcSelectShadowRadius(float srcSelectShadowRadius, int unit) {
-        setSrcSelectShadowRadiusRaw(convertToPX(srcSelectShadowRadius, unit));
+    public void setSrcShadowRadiusSelect(float srcShadowRadiusSelect, int unit) {
+        setSrcShadowRadiusSelectRaw(convertToPX(srcShadowRadiusSelect, unit));
     }
 
-    private void setSrcSelectShadowRadiusRaw(float srcSelectShadowRadius) {
-        if (this.srcSelectShadowRadius != srcSelectShadowRadius) {
-            this.srcSelectShadowRadius = srcSelectShadowRadius;
+    private void setSrcShadowRadiusSelectRaw(float srcShadowRadiusSelect) {
+        if (this.srcShadowRadiusSelect != srcShadowRadiusSelect) {
+            this.srcShadowRadiusSelect = srcShadowRadiusSelect;
             invalidate();
         }
     }
 
-    // default srcNormalShadowDx
-    private float srcSelectShadowDx;
+    // default srcShadowDxNormal
+    private float srcShadowDxSelect;
 
-    public float getSrcSelectShadowDx() {
-        return srcSelectShadowDx;
+    public float getSrcShadowDxSelect() {
+        return srcShadowDxSelect;
     }
 
-    public void setSrcSelectShadowDx(float srcSelectShadowDx) {
-        setSrcSelectShadowDxRaw(srcSelectShadowDx);
+    public void setSrcShadowDxSelect(float srcShadowDxSelect) {
+        setSrcShadowDxSelectRaw(srcShadowDxSelect);
     }
 
-    public void setSrcSelectShadowDx(float srcSelectShadowDx, int unit) {
-        setSrcSelectShadowDxRaw(convertToPX(srcSelectShadowDx, unit));
+    public void setSrcShadowDxSelect(float srcShadowDxSelect, int unit) {
+        setSrcShadowDxSelectRaw(convertToPX(srcShadowDxSelect, unit));
     }
 
-    private void setSrcSelectShadowDxRaw(float srcSelectShadowDx) {
-        if (this.srcSelectShadowDx != srcSelectShadowDx) {
-            this.srcSelectShadowDx = srcSelectShadowDx;
+    private void setSrcShadowDxSelectRaw(float srcShadowDxSelect) {
+        if (this.srcShadowDxSelect != srcShadowDxSelect) {
+            this.srcShadowDxSelect = srcShadowDxSelect;
             invalidate();
         }
     }
 
-    // default srcNormalShadowDy
-    private float srcSelectShadowDy;
+    // default srcShadowDyNormal
+    private float srcShadowDySelect;
 
-    public float getSrcSelectShadowDy() {
-        return srcSelectShadowDy;
+    public float getSrcShadowDySelect() {
+        return srcShadowDySelect;
     }
 
-    public void setSrcSelectShadowDy(float srcSelectShadowDy) {
-        setSrcSelectShadowDyRaw(srcSelectShadowDy);
+    public void setSrcShadowDySelect(float srcShadowDySelect) {
+        setSrcShadowDySelectRaw(srcShadowDySelect);
     }
 
-    public void setSrcSelectShadowDy(float srcSelectShadowDy, int unit) {
-        setSrcSelectShadowDyRaw(convertToPX(srcSelectShadowDy, unit));
+    public void setSrcShadowDySelect(float srcShadowDySelect, int unit) {
+        setSrcShadowDySelectRaw(convertToPX(srcShadowDySelect, unit));
     }
 
-    private void setSrcSelectShadowDyRaw(float srcSelectShadowDy) {
-        if (this.srcSelectShadowDy != srcSelectShadowDy) {
-            this.srcSelectShadowDy = srcSelectShadowDy;
+    private void setSrcShadowDySelectRaw(float srcShadowDySelect) {
+        if (this.srcShadowDySelect != srcShadowDySelect) {
+            this.srcShadowDySelect = srcShadowDySelect;
             invalidate();
         }
     }
 
-    protected final int LEFT = 0x00000000;
-    protected final int CENTER_HORIZONTAL = 0x00000001;
-    protected final int RIGHT = CENTER_HORIZONTAL << 1;
-    protected final int TOP = 0x00000000;
-    protected final int CENTER_VERTICAL = RIGHT << 1;
-    protected final int BOTTOM = CENTER_VERTICAL << 1;
-    protected final int CENTER = CENTER_HORIZONTAL | CENTER_VERTICAL;
-    protected final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
+    public static final int LEFT = 0x00000000;
+    public static final int CENTER_HORIZONTAL = 0x00000001;
+    public static final int RIGHT = CENTER_HORIZONTAL << 1;
+    public static final int TOP = 0x00000000;
+    public static final int CENTER_VERTICAL = RIGHT << 1;
+    public static final int BOTTOM = CENTER_VERTICAL << 1;
+    public static final int CENTER = CENTER_HORIZONTAL | CENTER_VERTICAL;
+    public static final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
 
     //
     private int srcAnchorGravity;
@@ -2154,23 +2155,17 @@ public class TView extends View {
     }
 
     // anchor Normal,Press,Select use one Matrix
-    protected Matrix anchorMatrix;
+    protected Matrix anchorMatrixNormal;
+    protected Matrix anchorMatrixPress;
+    protected Matrix anchorMatrixSelect;
 
-    public Matrix getAnchorMatrix() {
-        return anchorMatrix;
-    }
-
-    public void setAnchorMatrix(Matrix anchorMatrix) {
-        this.anchorMatrix = anchorMatrix;
-    }
-
-    protected Matrix initanchorMatrix(float sx, float sy) {
-        if (anchorMatrix == null) {
-            anchorMatrix = new Matrix();
+    protected Matrix initAnchorMatrix(Matrix matrix, float sx, float sy) {
+        if (matrix == null) {
+            matrix = new Matrix();
         }
-        anchorMatrix.reset();
-        anchorMatrix.setScale(sx, sy);
-        return anchorMatrix;
+        matrix.reset();
+        matrix.setScale(sx, sy);
+        return matrix;
     }
 
     //
@@ -2185,89 +2180,89 @@ public class TView extends View {
     }
 
     //
-    private float srcAnchorNormalWidth;
+    private float srcAnchorWidthNormal;
 
-    public float getSrcAnchorNormalWidth() {
-        return srcAnchorNormalWidth;
+    public float getSrcAnchorWidthNormal() {
+        return srcAnchorWidthNormal;
     }
 
-    public void setSrcAnchorNormalWidth(float srcAnchorNormalWidth) {
-        setSrcAnchorNormalWidthRaw(srcAnchorNormalWidth);
+    public void setSrcAnchorWidthNormal(float srcAnchorWidthNormal) {
+        setSrcAnchorWidthNormalRaw(srcAnchorWidthNormal);
     }
 
-    public void setSrcAnchorNormalWidth(float srcAnchorNormalWidth, int unit) {
-        setSrcAnchorNormalWidthRaw(convertToPX(srcAnchorNormalWidth, unit));
+    public void setSrcAnchorWidthNormal(float srcAnchorWidthNormal, int unit) {
+        setSrcAnchorWidthNormalRaw(convertToPX(srcAnchorWidthNormal, unit));
     }
 
-    private void setSrcAnchorNormalWidthRaw(float srcAnchorNormalWidth) {
-        if (this.srcAnchorNormalWidth != srcAnchorNormalWidth) {
-            this.srcAnchorNormalWidth = srcAnchorNormalWidth;
+    private void setSrcAnchorWidthNormalRaw(float srcAnchorWidthNormal) {
+        if (this.srcAnchorWidthNormal != srcAnchorWidthNormal) {
+            this.srcAnchorWidthNormal = srcAnchorWidthNormal;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorNormalHeight;
+    private float srcAnchorHeightNormal;
 
-    public float getSrcAnchorNormalHeight() {
-        return srcAnchorNormalHeight;
+    public float getSrcAnchorHeightNormal() {
+        return srcAnchorHeightNormal;
     }
 
-    public void setSrcAnchorNormalHeight(float srcAnchorNormalHeight) {
-        setSrcAnchorNormalHeightRaw(srcAnchorNormalHeight);
+    public void setSrcAnchorHeightNormal(float srcAnchorHeightNormal) {
+        setSrcAnchorHeightNormalRaw(srcAnchorHeightNormal);
     }
 
     public void setSrcAnchorNormalHeight(float srcAnchorNormalHeight, int unit) {
-        setSrcAnchorNormalHeightRaw(convertToPX(srcAnchorNormalHeight, unit));
+        setSrcAnchorHeightNormalRaw(convertToPX(srcAnchorNormalHeight, unit));
     }
 
-    private void setSrcAnchorNormalHeightRaw(float srcAnchorNormalHeight) {
-        if (this.srcAnchorNormalHeight != srcAnchorNormalHeight) {
-            this.srcAnchorNormalHeight = srcAnchorNormalHeight;
+    private void setSrcAnchorHeightNormalRaw(float srcAnchorNormalHeight) {
+        if (this.srcAnchorHeightNormal != srcAnchorNormalHeight) {
+            this.srcAnchorHeightNormal = srcAnchorNormalHeight;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorNormalDx;
+    private float srcAnchorDxNormal;
 
-    public float getSrcAnchorNormalDx() {
-        return srcAnchorNormalDx;
+    public float getSrcAnchorDxNormal() {
+        return srcAnchorDxNormal;
     }
 
-    public void setSrcAnchorNormalDx(float srcAnchorNormalDx) {
-        setSrcAnchorNormalDxRaw(srcAnchorNormalDx);
+    public void setSrcAnchorDxNormal(float srcAnchorDxNormal) {
+        setSrcAnchorDxNormalRaw(srcAnchorDxNormal);
     }
 
-    public void setSrcAnchorNormalDx(float srcAnchorNormalDx, int unit) {
-        setSrcAnchorNormalDxRaw(convertToPX(srcAnchorNormalDx, unit));
+    public void setSrcAnchorDxNormal(float srcAnchorDxNormal, int unit) {
+        setSrcAnchorDxNormalRaw(convertToPX(srcAnchorDxNormal, unit));
     }
 
-    private void setSrcAnchorNormalDxRaw(float srcAnchorNormalDx) {
-        if (this.srcAnchorNormalDx != srcAnchorNormalDx) {
-            this.srcAnchorNormalDx = srcAnchorNormalDx;
+    private void setSrcAnchorDxNormalRaw(float srcAnchorDxNormal) {
+        if (this.srcAnchorDxNormal != srcAnchorDxNormal) {
+            this.srcAnchorDxNormal = srcAnchorDxNormal;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorNormalDy;
+    private float srcAnchorDyNormal;
 
     public float getSrcAnchorNormalDy() {
-        return srcAnchorNormalDy;
+        return srcAnchorDyNormal;
     }
 
-    public void setSrcAnchorNormalDy(float srcAnchorNormalDy) {
-        setSrcAnchorNormalDyRaw(srcAnchorNormalDy);
+    public void setSrcAnchorNormalDy(float srcAnchorDyNormal) {
+        setSrcAnchorNormalDyRaw(srcAnchorDyNormal);
     }
 
-    public void setSrcAnchorNormalDy(float srcAnchorNormalDy, int unit) {
-        setSrcAnchorNormalDyRaw(convertToPX(srcAnchorNormalDy, unit));
+    public void setSrcAnchorNormalDy(float srcAnchorDyNormal, int unit) {
+        setSrcAnchorNormalDyRaw(convertToPX(srcAnchorDyNormal, unit));
     }
 
-    private void setSrcAnchorNormalDyRaw(float srcAnchorNormalDy) {
-        if (this.srcAnchorNormalDy != srcAnchorNormalDy) {
-            this.srcAnchorNormalDy = srcAnchorNormalDy;
+    private void setSrcAnchorNormalDyRaw(float srcAnchorDyNormal) {
+        if (this.srcAnchorDyNormal != srcAnchorDyNormal) {
+            this.srcAnchorDyNormal = srcAnchorDyNormal;
             invalidate();
         }
     }
@@ -2284,58 +2279,58 @@ public class TView extends View {
     }
 
     //
-    private float srcAnchorPressWidth;
+    private float srcAnchorWidthPress;
 
-    public float getSrcAnchorPressWidth() {
-        return srcAnchorPressWidth;
+    public float getSrcAnchorWidthPress() {
+        return srcAnchorWidthPress;
     }
 
-    public void setSrcAnchorPressWidth(float srcAnchorPressWidth) {
-        setSrcAnchorPressWidthRaw(srcAnchorPressWidth);
+    public void setSrcAnchorWidthPress(float srcAnchorWidthPress) {
+        setSrcAnchorWidthPressRaw(srcAnchorWidthPress);
     }
 
     public void setSrcAnchorPressWidth(float srcAnchorPressWidth, int unit) {
-        setSrcAnchorPressWidthRaw(convertToPX(srcAnchorPressWidth, unit));
+        setSrcAnchorWidthPressRaw(convertToPX(srcAnchorPressWidth, unit));
     }
 
-    private void setSrcAnchorPressWidthRaw(float srcAnchorPressWidth) {
-        if (this.srcAnchorPressWidth != srcAnchorPressWidth) {
-            this.srcAnchorPressWidth = srcAnchorPressWidth;
+    private void setSrcAnchorWidthPressRaw(float srcAnchorPressWidth) {
+        if (this.srcAnchorWidthPress != srcAnchorPressWidth) {
+            this.srcAnchorWidthPress = srcAnchorPressWidth;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorPressHeight;
+    private float srcAnchorHeightPress;
 
-    public float getSrcAnchorPressHeight() {
-        return srcAnchorPressHeight;
+    public float getSrcAnchorHeightPress() {
+        return srcAnchorHeightPress;
     }
 
-    public void setSrcAnchorPressHeight(float srcAnchorPressHeight) {
-        setSrcAnchorPressHeightRaw(srcAnchorPressHeight);
+    public void setSrcAnchorHeightPress(float srcAnchorHeightPress) {
+        setSrcAnchorHeightPressRaw(srcAnchorHeightPress);
     }
 
     public void setSrcAnchorPressHeight(float srcAnchorPressHeight, int unit) {
-        setSrcAnchorPressHeightRaw(convertToPX(srcAnchorPressHeight, unit));
+        setSrcAnchorHeightPressRaw(convertToPX(srcAnchorPressHeight, unit));
     }
 
-    private void setSrcAnchorPressHeightRaw(float srcAnchorPressHeight) {
-        if (this.srcAnchorPressHeight != srcAnchorPressHeight) {
-            this.srcAnchorPressHeight = srcAnchorPressHeight;
+    private void setSrcAnchorHeightPressRaw(float srcAnchorPressHeight) {
+        if (this.srcAnchorHeightPress != srcAnchorPressHeight) {
+            this.srcAnchorHeightPress = srcAnchorPressHeight;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorPressDx;
+    private float srcAnchorDxPress;
 
-    public float getSrcAnchorPressDx() {
-        return srcAnchorPressDx;
+    public float getSrcAnchorDxPress() {
+        return srcAnchorDxPress;
     }
 
-    public void setSrcAnchorPressDx(float srcAnchorPressDx) {
-        setSrcAnchorPressDxRaw(srcAnchorPressDx);
+    public void setSrcAnchorDxPress(float srcAnchorDxPress) {
+        setSrcAnchorPressDxRaw(srcAnchorDxPress);
     }
 
     public void setSrcAnchorPressDx(float srcAnchorPressDx, int unit) {
@@ -2343,21 +2338,21 @@ public class TView extends View {
     }
 
     private void setSrcAnchorPressDxRaw(float srcAnchorPressDx) {
-        if (this.srcAnchorPressDx != srcAnchorPressDx) {
-            this.srcAnchorPressDx = srcAnchorPressDx;
+        if (this.srcAnchorDxPress != srcAnchorPressDx) {
+            this.srcAnchorDxPress = srcAnchorPressDx;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorPressDy;
+    private float srcAnchorDyPress;
 
-    public float getSrcAnchorPressDy() {
-        return srcAnchorPressDy;
+    public float getSrcAnchorDyPress() {
+        return srcAnchorDyPress;
     }
 
-    public void setSrcAnchorPressDy(float srcAnchorPressDy) {
-        setSrcAnchorPressDyRaw(srcAnchorPressDy);
+    public void setSrcAnchorDyPress(float srcAnchorDyPress) {
+        setSrcAnchorPressDyRaw(srcAnchorDyPress);
     }
 
     public void setSrcAnchorPressDy(float srcAnchorPressDy, int unit) {
@@ -2365,8 +2360,8 @@ public class TView extends View {
     }
 
     private void setSrcAnchorPressDyRaw(float srcAnchorPressDy) {
-        if (this.srcAnchorPressDy != srcAnchorPressDy) {
-            this.srcAnchorPressDy = srcAnchorPressDy;
+        if (this.srcAnchorDyPress != srcAnchorPressDy) {
+            this.srcAnchorDyPress = srcAnchorPressDy;
             invalidate();
         }
     }
@@ -2383,58 +2378,58 @@ public class TView extends View {
     }
 
     //
-    private float srcAnchorSelectWidth;
+    private float srcAnchorWidthSelect;
 
-    public float getSrcAnchorSelectWidth() {
-        return srcAnchorSelectWidth;
+    public float getSrcAnchorWidthSelect() {
+        return srcAnchorWidthSelect;
     }
 
-    public void setSrcAnchorSelectWidth(float srcAnchorSelectWidth) {
-        setSrcAnchorSelectWidthRaw(srcAnchorSelectWidth);
+    public void setSrcAnchorWidthSelect(float srcAnchorWidthSelect) {
+        setSrcAnchorWidthSelectRaw(srcAnchorWidthSelect);
     }
 
-    public void setSrcAnchorSelectWidth(float srcAnchorSelectWidth, int unit) {
-        setSrcAnchorSelectWidthRaw(convertToPX(srcAnchorSelectWidth, unit));
+    public void setSrcAnchorWidthSelect(float srcAnchorWidthSelect, int unit) {
+        setSrcAnchorWidthSelectRaw(convertToPX(srcAnchorWidthSelect, unit));
     }
 
-    private void setSrcAnchorSelectWidthRaw(float srcAnchorSelectWidth) {
-        if (this.srcAnchorSelectWidth != srcAnchorSelectWidth) {
-            this.srcAnchorSelectWidth = srcAnchorSelectWidth;
+    private void setSrcAnchorWidthSelectRaw(float srcAnchorWidthSelect) {
+        if (this.srcAnchorWidthSelect != srcAnchorWidthSelect) {
+            this.srcAnchorWidthSelect = srcAnchorWidthSelect;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorSelectHeight;
+    private float srcAnchorHeightSelect;
 
-    public float getSrcAnchorSelectHeight() {
-        return srcAnchorSelectHeight;
+    public float getSrcAnchorHeightSelect() {
+        return srcAnchorHeightSelect;
     }
 
-    public void setSrcAnchorSelectHeight(float srcAnchorSelectHeight) {
-        setSrcAnchorSelectHeightRaw(srcAnchorSelectHeight);
+    public void setSrcAnchorHeightSelect(float srcAnchorHeightSelect) {
+        setSrcAnchorHeightSelectRaw(srcAnchorHeightSelect);
     }
 
-    public void setSrcAnchorSelectHeight(float srcAnchorSelectHeight, int unit) {
-        setSrcAnchorSelectHeightRaw(convertToPX(srcAnchorSelectHeight, unit));
+    public void setSrcAnchorHeightSelect(float srcAnchorHeightSelect, int unit) {
+        setSrcAnchorHeightSelectRaw(convertToPX(srcAnchorHeightSelect, unit));
     }
 
-    private void setSrcAnchorSelectHeightRaw(float srcAnchorSelectHeight) {
-        if (this.srcAnchorSelectHeight != srcAnchorSelectHeight) {
-            this.srcAnchorSelectHeight = srcAnchorSelectHeight;
+    private void setSrcAnchorHeightSelectRaw(float srcAnchorHeightSelect) {
+        if (this.srcAnchorHeightSelect != srcAnchorHeightSelect) {
+            this.srcAnchorHeightSelect = srcAnchorHeightSelect;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorSelectDx;
+    private float srcAnchorDxSelect;
 
-    public float getSrcAnchorSelectDx() {
-        return srcAnchorSelectDx;
+    public float getSrcAnchorDxSelect() {
+        return srcAnchorDxSelect;
     }
 
-    public void setSrcAnchorSelectDx(float srcAnchorSelectDx) {
-        setSrcAnchorSelectDxRaw(srcAnchorSelectDx);
+    public void setSrcAnchorDxSelect(float srcAnchorDxSelect) {
+        setSrcAnchorSelectDxRaw(srcAnchorDxSelect);
     }
 
     public void setSrcAnchorSelectDx(float srcAnchorSelectDx, int unit) {
@@ -2442,21 +2437,21 @@ public class TView extends View {
     }
 
     private void setSrcAnchorSelectDxRaw(float srcAnchorSelectDx) {
-        if (this.srcAnchorSelectDx != srcAnchorSelectDx) {
-            this.srcAnchorSelectDx = srcAnchorSelectDx;
+        if (this.srcAnchorDxSelect != srcAnchorSelectDx) {
+            this.srcAnchorDxSelect = srcAnchorSelectDx;
             invalidate();
         }
     }
 
     //
-    private float srcAnchorSelectDy;
+    private float srcAnchorDySelect;
 
-    public float getSrcAnchorSelectDy() {
-        return srcAnchorSelectDy;
+    public float getSrcAnchorDySelect() {
+        return srcAnchorDySelect;
     }
 
-    public void setSrcAnchorSelectDy(float srcAnchorSelectDy) {
-        setSrcAnchorSelectDyRaw(srcAnchorSelectDy);
+    public void setSrcAnchorDySelect(float srcAnchorDySelect) {
+        setSrcAnchorSelectDyRaw(srcAnchorDySelect);
     }
 
     public void setSrcAnchorSelectDy(float srcAnchorSelectDy, int unit) {
@@ -2464,8 +2459,8 @@ public class TView extends View {
     }
 
     private void setSrcAnchorSelectDyRaw(float srcAnchorSelectDy) {
-        if (this.srcAnchorSelectDy != srcAnchorSelectDy) {
-            this.srcAnchorSelectDy = srcAnchorSelectDy;
+        if (this.srcAnchorDySelect != srcAnchorSelectDy) {
+            this.srcAnchorDySelect = srcAnchorSelectDy;
             invalidate();
         }
     }
@@ -4249,46 +4244,46 @@ public class TView extends View {
             foregroundSelect = typedArray.getColor(R.styleable.TView_foregroundSelect, foregroundNormal);
 
             //
-            backgroundNormalAngle = typedArray.getInt(R.styleable.TView_backgroundNormalAngle, Integer.MAX_VALUE);
-            if (backgroundNormalAngle != Integer.MAX_VALUE) {
-                backgroundNormalGradientStart = typedArray.getColor(R.styleable.TView_backgroundNormalGradientStart, backgroundNormal);
-                backgroundNormalGradientEnd = typedArray.getColor(R.styleable.TView_backgroundNormalGradientEnd, backgroundNormal);
+            backgroundAngleNormal = typedArray.getInt(R.styleable.TView_backgroundAngleNormal, Integer.MAX_VALUE);
+            if (backgroundAngleNormal != Integer.MAX_VALUE) {
+                backgroundGradientStartNormal = typedArray.getColor(R.styleable.TView_backgroundGradientStartNormal, backgroundNormal);
+                backgroundGradientEndNormal = typedArray.getColor(R.styleable.TView_backgroundGradientEndNormal, backgroundNormal);
             }
 
-            backgroundPressAngle = typedArray.getInt(R.styleable.TView_backgroundPressAngle, Integer.MAX_VALUE);
-            if (backgroundPressAngle != Integer.MAX_VALUE) {
-                backgroundPressGradientStart = typedArray.getColor(R.styleable.TView_backgroundPressGradientStart, backgroundPress);
-                backgroundPressGradientEnd = typedArray.getColor(R.styleable.TView_backgroundPressGradientEnd, backgroundPress);
+            backgroundAnglePress = typedArray.getInt(R.styleable.TView_backgroundAnglePress, Integer.MAX_VALUE);
+            if (backgroundAnglePress != Integer.MAX_VALUE) {
+                backgroundGradientStartPress = typedArray.getColor(R.styleable.TView_backgroundGradientStartPress, backgroundPress);
+                backgroundGradientEndPress = typedArray.getColor(R.styleable.TView_backgroundGradientEndPress, backgroundPress);
             }
 
-            backgroundSelectAngle = typedArray.getInt(R.styleable.TView_backgroundSelectAngle, Integer.MAX_VALUE);
-            if (backgroundSelectAngle != Integer.MAX_VALUE) {
-                backgroundSelectGradientStart = typedArray.getColor(R.styleable.TView_backgroundSelectGradientStart, backgroundSelect);
-                backgroundSelectGradientEnd = typedArray.getColor(R.styleable.TView_backgroundSelectGradientEnd, backgroundSelect);
+            backgroundAngleSelect = typedArray.getInt(R.styleable.TView_backgroundAngleSelect, Integer.MAX_VALUE);
+            if (backgroundAngleSelect != Integer.MAX_VALUE) {
+                backgroundGradientStartSelect = typedArray.getColor(R.styleable.TView_backgroundGradientStartSelect, backgroundSelect);
+                backgroundGradientEndSelect = typedArray.getColor(R.styleable.TView_backgroundGradientEndSelect, backgroundSelect);
             }
 
             //Note background Normal ShadowRadius and srcNormal ShadowRadius are two values!
-            backgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowRadius, 0);
-            if (backgroundNormalShadowRadius > 0) {
+            backgroundShadowRadiusNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusNormal, 0);
+            if (backgroundShadowRadiusNormal > 0) {
                 backgroundNormalShadowColor = typedArray.getColor(R.styleable.TView_backgroundNormalShadowColor, Color.TRANSPARENT);
-                backgroundNormalShadowDx = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDx, 0);
-                backgroundNormalShadowDy = typedArray.getDimension(R.styleable.TView_backgroundNormalShadowDy, 0);
+                backgroundShadowDxNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowDxNormal, 0);
+                backgroundShadowDyNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowDyNormal, 0);
             }
 
             //
-            backgroundPressShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundPressShadowRadius, backgroundNormalShadowRadius);
-            if (backgroundPressShadowRadius > 0) {
+            backgroundShadowRadiusPress = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusPress, backgroundShadowRadiusNormal);
+            if (backgroundShadowRadiusPress > 0) {
                 backgroundPressShadowColor = typedArray.getColor(R.styleable.TView_backgroundPressShadowColor, backgroundNormalShadowColor);
-                backgroundPressShadowDx = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDx, backgroundNormalShadowDx);
-                backgroundPressShadowDy = typedArray.getDimension(R.styleable.TView_backgroundPressShadowDy, backgroundNormalShadowDy);
+                backgroundShadowDxPress = typedArray.getDimension(R.styleable.TView_backgroundShadowDxPress, backgroundShadowDxNormal);
+                backgroundShadowDyPress = typedArray.getDimension(R.styleable.TView_backgroundShadowDyPress, backgroundShadowDyNormal);
             }
 
             //
-            backgroundSelectShadowRadius = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowRadius, backgroundNormalShadowRadius);
-            if (backgroundSelectShadowRadius > 0) {
+            backgroundShadowRadiusSelect = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusSelect, backgroundShadowRadiusNormal);
+            if (backgroundShadowRadiusSelect > 0) {
                 backgroundSelectShadowColor = typedArray.getColor(R.styleable.TView_backgroundSelectShadowColor, backgroundNormalShadowColor);
-                backgroundSelectShadowDx = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDx, backgroundNormalShadowDx);
-                backgroundSelectShadowDy = typedArray.getDimension(R.styleable.TView_backgroundSelectShadowDy, backgroundNormalShadowDy);
+                backgroundShadowDxSelect = typedArray.getDimension(R.styleable.TView_backgroundShadowDxSelect, backgroundShadowDxNormal);
+                backgroundShadowDySelect = typedArray.getDimension(R.styleable.TView_backgroundShadowDySelect, backgroundShadowDyNormal);
             }
 
             //
@@ -4312,62 +4307,68 @@ public class TView extends View {
                     srcSelect = srcNormal;
                 }
 
-                srcNormalShadowRadius = typedArray.getDimension(R.styleable.TView_srcNormalShadowRadius, 0);
-                if (srcNormalShadowRadius > 0) {
-                    srcNormalShadowDx = typedArray.getDimension(R.styleable.TView_srcNormalShadowDx, 0);
-                    srcNormalShadowDy = typedArray.getDimension(R.styleable.TView_srcNormalShadowDy, 0);
+                srcShadowRadiusNormal = typedArray.getDimension(R.styleable.TView_srcShadowRadiusNormal, 0);
+                if (srcShadowRadiusNormal > 0) {
+                    srcShadowDxNormal = typedArray.getDimension(R.styleable.TView_srcShadowDxNormal, 0);
+                    srcShadowDyNormal = typedArray.getDimension(R.styleable.TView_srcShadowDyNormal, 0);
                 }
                 //
-                srcPressShadowRadius = typedArray.getDimension(R.styleable.TView_srcPressShadowRadius, srcNormalShadowRadius);
-                if (srcPressShadowRadius > 0) {
-                    srcPressShadowDx = typedArray.getDimension(R.styleable.TView_srcPressShadowDx, srcNormalShadowDx);
-                    srcPressShadowDy = typedArray.getDimension(R.styleable.TView_srcPressShadowDy, srcNormalShadowDy);
+                srcShadowRadiusPress = typedArray.getDimension(R.styleable.TView_srcShadowRadiusPress, srcShadowRadiusNormal);
+                if (srcShadowRadiusPress > 0) {
+                    srcShadowDxPress = typedArray.getDimension(R.styleable.TView_srcShadowDxPress, srcShadowDxNormal);
+                    srcShadowDyPress = typedArray.getDimension(R.styleable.TView_srcShadowDyPress, srcShadowDyNormal);
                 }
                 //
-                srcSelectShadowRadius = typedArray.getDimension(R.styleable.TView_srcSelectShadowRadius, srcNormalShadowRadius);
-                if (srcSelectShadowRadius > 0) {
-                    srcSelectShadowDx = typedArray.getDimension(R.styleable.TView_srcSelectShadowDx, srcNormalShadowDx);
-                    srcSelectShadowDy = typedArray.getDimension(R.styleable.TView_srcSelectShadowDy, srcNormalShadowDy);
+                srcShadowRadiusSelect = typedArray.getDimension(R.styleable.TView_srcShadowRadiusSelect, srcShadowRadiusNormal);
+                if (srcShadowRadiusSelect > 0) {
+                    srcShadowDxSelect = typedArray.getDimension(R.styleable.TView_srcShadowDxSelect, srcShadowDxNormal);
+                    srcShadowDySelect = typedArray.getDimension(R.styleable.TView_srcShadowDySelect, srcShadowDyNormal);
                 }
             }
+
+            //
+            srcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
+
             //
             int srcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_srcAnchorNormal, -1);
             if (srcAnchorNormalId != -1) {
-
-                //
                 srcAnchorNormal = BitmapFactory.decodeResource(getResources(), srcAnchorNormalId);
-                srcAnchorNormalWidth = typedArray.getDimension(R.styleable.TView_srcAnchorNormalWidth, 0);
-                srcAnchorNormalHeight = typedArray.getDimension(R.styleable.TView_srcAnchorNormalHeight, 0);
-                srcAnchorNormalDx = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDx, 0);
-                srcAnchorNormalDy = typedArray.getDimension(R.styleable.TView_srcAnchorNormalDy, 0);
-                //
-                srcAnchorPressWidth = typedArray.getDimension(R.styleable.TView_srcAnchorPressWidth, srcAnchorNormalWidth);
-                srcAnchorPressHeight = typedArray.getDimension(R.styleable.TView_srcAnchorPressHeight, srcAnchorNormalHeight);
-                srcAnchorPressDx = typedArray.getDimension(R.styleable.TView_srcAnchorPressDx, srcAnchorNormalDx);
-                srcAnchorPressDy = typedArray.getDimension(R.styleable.TView_srcAnchorPressDy, srcAnchorNormalDy);
-                //
-                srcAnchorSelectWidth = typedArray.getDimension(R.styleable.TView_srcAnchorSelectWidth, srcAnchorNormalWidth);
-                srcAnchorSelectHeight = typedArray.getDimension(R.styleable.TView_srcAnchorSelectHeight, srcAnchorNormalHeight);
-                srcAnchorSelectDx = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDx, srcAnchorNormalDx);
-                srcAnchorSelectDy = typedArray.getDimension(R.styleable.TView_srcAnchorSelectDy, srcAnchorNormalDy);
+                srcAnchorWidthNormal = typedArray.getDimension(R.styleable.TView_srcAnchorWidthNormal, 0);
+                srcAnchorHeightNormal = typedArray.getDimension(R.styleable.TView_srcAnchorHeightNormal, 0);
+                srcAnchorDxNormal = typedArray.getDimension(R.styleable.TView_srcAnchorDxNormal, 0);
+                srcAnchorDyNormal = typedArray.getDimension(R.styleable.TView_srcAnchorDyNormal, 0);
+            }
 
-                //
-                int srcAnchorPressId = typedArray.getResourceId(R.styleable.TView_srcAnchorPress, -1);
-                if (srcAnchorPressId != -1) {
-                    srcAnchorPress = BitmapFactory.decodeResource(getResources(), srcAnchorPressId);
-                } else {
-                    srcAnchorPress = srcAnchorNormal;
-                }
-                //
-                int srcAnchorSelectId = typedArray.getResourceId(R.styleable.TView_srcAnchorSelect, -1);
-                if (srcAnchorSelectId != -1) {
-                    srcAnchorSelect = BitmapFactory.decodeResource(getResources(), srcAnchorSelectId);
-                } else {
-                    srcAnchorSelect = srcAnchorNormal;
-                }
+            //
+            int srcAnchorPressId = typedArray.getResourceId(R.styleable.TView_srcAnchorPress, -1);
+            if (srcAnchorPressId != -1) {
+                srcAnchorPress = BitmapFactory.decodeResource(getResources(), srcAnchorPressId);
+                srcAnchorWidthPress = typedArray.getDimension(R.styleable.TView_srcAnchorWidthPress, srcAnchorWidthNormal);
+                srcAnchorHeightPress = typedArray.getDimension(R.styleable.TView_srcAnchorHeightPress, srcAnchorHeightNormal);
+                srcAnchorDxPress = typedArray.getDimension(R.styleable.TView_srcAnchorDxPress, srcAnchorDxNormal);
+                srcAnchorDyPress = typedArray.getDimension(R.styleable.TView_srcAnchorDyPress, srcAnchorDyNormal);
+            } else {
+                srcAnchorPress = srcAnchorNormal;
+                srcAnchorWidthPress = srcAnchorWidthNormal;
+                srcAnchorHeightPress = srcAnchorHeightNormal;
+                srcAnchorDxPress = srcAnchorDxNormal;
+                srcAnchorDyPress = srcAnchorDyNormal;
+            }
 
-                //
-                srcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
+            //
+            int srcAnchorSelectId = typedArray.getResourceId(R.styleable.TView_srcAnchorSelect, -1);
+            if (srcAnchorSelectId != -1) {
+                srcAnchorSelect = BitmapFactory.decodeResource(getResources(), srcAnchorSelectId);
+                srcAnchorWidthSelect = typedArray.getDimension(R.styleable.TView_srcAnchorWidthSelect, srcAnchorWidthNormal);
+                srcAnchorHeightSelect = typedArray.getDimension(R.styleable.TView_srcAnchorHeightSelect, srcAnchorHeightNormal);
+                srcAnchorDxSelect = typedArray.getDimension(R.styleable.TView_srcAnchorDxSelect, srcAnchorDxNormal);
+                srcAnchorDySelect = typedArray.getDimension(R.styleable.TView_srcAnchorDySelect, srcAnchorDyNormal);
+            } else {
+                srcAnchorSelect = srcAnchorNormal;
+                srcAnchorWidthSelect = srcAnchorWidthNormal;
+                srcAnchorHeightSelect = srcAnchorHeightNormal;
+                srcAnchorDxSelect = srcAnchorDxNormal;
+                srcAnchorDySelect = srcAnchorDyNormal;
             }
 
             //
@@ -4500,9 +4501,6 @@ public class TView extends View {
             }
 
             contentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);
-
-            System.out.println("contentDx==>" + contentDx);
-
             contentDy = typedArray.getDimension(R.styleable.TView_contentDy, 0);
             contentFractionDx = typedArray.getFraction(R.styleable.TView_contentFractionDx, 1, 1, 0);
             contentFractionDy = typedArray.getFraction(R.styleable.TView_contentFractionDy, 1, 1, 0);
@@ -4889,9 +4887,9 @@ public class TView extends View {
         }
 
         if (foregroundNormal != Color.TRANSPARENT || foregroundPress != Color.TRANSPARENT || foregroundSelect != Color.TRANSPARENT || srcNormal != null
-                || srcPress != null || srcSelect != null || srcNormalShadowRadius > 0 || srcPressShadowRadius > 0 || srcSelectShadowRadius > 0
-                || backgroundNormalShadowRadius > 0 || backgroundPressShadowRadius > 0 || backgroundSelectShadowRadius > 0 || backgroundNormalAngle != Integer.MAX_VALUE
-                || backgroundPressAngle != Integer.MAX_VALUE || backgroundSelectAngle != Integer.MAX_VALUE || srcAnchorNormal != null || srcAnchorPress != null
+                || srcPress != null || srcSelect != null || srcShadowRadiusNormal > 0 || srcShadowRadiusPress > 0 || srcShadowRadiusSelect > 0
+                || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0 || backgroundAngleNormal != Integer.MAX_VALUE
+                || backgroundAnglePress != Integer.MAX_VALUE || backgroundAngleSelect != Integer.MAX_VALUE || srcAnchorNormal != null || srcAnchorPress != null
                 || srcAnchorSelect != null
 
         ) {
@@ -4901,7 +4899,7 @@ public class TView extends View {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
-        if (srcNormal != null || srcPress != null || srcSelect != null || backgroundNormalShadowRadius > 0 || backgroundPressShadowRadius > 0 || backgroundSelectShadowRadius > 0) {
+        if (srcNormal != null || srcPress != null || srcSelect != null || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0) {
             if (backgroundNormal == Color.TRANSPARENT) {
                 backgroundNormal = Color.WHITE;
             }
@@ -4922,24 +4920,24 @@ public class TView extends View {
         textMarkDy += height * textMarkFractionDy;
 
         //
-        if (backgroundNormalAngle != Integer.MAX_VALUE) {
-            backgroundNormalShader = getLinearGradient(width, height, backgroundNormalAngle, backgroundNormalGradientStart, backgroundNormalGradientEnd);
+        if (backgroundAngleNormal != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundGradientStartNormal, backgroundGradientEndNormal);
         }
-        if (backgroundPressAngle != Integer.MAX_VALUE) {
-            backgroundPressShader = getLinearGradient(width, height, backgroundPressAngle, backgroundPressGradientStart, backgroundPressGradientEnd);
+        if (backgroundAnglePress != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundGradientStartPress, backgroundGradientEndPress);
         }
-        if (backgroundSelectAngle != Integer.MAX_VALUE) {
-            backgroundSelectShader = getLinearGradient(width, height, backgroundSelectAngle, backgroundSelectGradientStart, backgroundSelectGradientEnd);
+        if (backgroundAngleSelect != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundGradientStartSelect, backgroundGradientEndSelect);
         }
 
         //
-        int srcNormalWidthRaw = 0, srcNormalHeightRaw = 0, srcPressWidthRaw = 0, srcPressHeightRaw = 0, srcSelectWidthRaw = 0, srcSelectHeightRaw = 0;
+        int srcNormalWidthRaw = 0, srcNormalHeightRaw = 0, srcPressWidthRaw = 0, srcPressHeightRaw = 0, srcWidthSelectRaw = 0, srcHeightSelectRaw = 0;
         if (srcNormal != null) {
             srcNormalWidthRaw = srcNormal.getWidth();
             srcNormalHeightRaw = srcNormal.getHeight();
 
-            initMatrix((width - srcNormalShadowRadius * 2f - backgroundNormalShadowRadius * 2f - backgroundNormalShadowDx * 2f) / srcNormalWidthRaw,
-                    (height - srcNormalShadowRadius * 2f - backgroundNormalShadowRadius * 2f - backgroundNormalShadowDy * 2f) / srcNormalHeightRaw);
+            initMatrix((width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f) / srcNormalWidthRaw,
+                    (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f) / srcNormalHeightRaw);
         }
 
         if (srcPress != null) {
@@ -4948,38 +4946,37 @@ public class TView extends View {
         }
 
         if (srcSelect != null) {
-            srcSelectWidthRaw = srcSelect.getWidth();
-            srcSelectHeightRaw = srcSelect.getHeight();
+            srcWidthSelectRaw = srcSelect.getWidth();
+            srcHeightSelectRaw = srcSelect.getHeight();
         }
 
-        if (srcNormalWidthRaw != srcPressWidthRaw || srcNormalHeightRaw != srcPressHeightRaw || srcPressWidthRaw != srcSelectWidthRaw
-                || srcPressHeightRaw != srcSelectHeightRaw) {
+        if (srcNormalWidthRaw != srcPressWidthRaw || srcNormalHeightRaw != srcPressHeightRaw || srcPressWidthRaw != srcWidthSelectRaw
+                || srcPressHeightRaw != srcHeightSelectRaw) {
             throw new IndexOutOfBoundsException("Both the width and height of the attribute srcNormal ,srcPress and srcSelect needed equal");
         }
 
         //
-        int srcAnchorNormalWidthRaw = 0, srcAnchorNormalHeightRaw = 0, srcAnchorPressWidthRaw = 0, srcAnchorPressHeightRaw = 0, srcAnchorSelectWidthRaw = 0, srcAnchorSelectHeightRaw = 0;
+        int srcAnchorWidthNormalRaw = 0, srcAnchorHeightNormalRaw = 0, srcAnchorWidthPressRaw = 0, srcAnchorHeightPressRaw = 0, srcAnchorWidthSelectRaw = 0, srcAnchorHeightSelectRaw = 0;
 
         if (srcAnchorNormal != null) {
-            srcAnchorNormalWidthRaw = srcAnchorNormal.getWidth();
-            srcAnchorNormalHeightRaw = srcAnchorNormal.getHeight();
+            srcAnchorWidthNormalRaw = srcAnchorNormal.getWidth();
+            srcAnchorHeightNormalRaw = srcAnchorNormal.getHeight();
 
-            initanchorMatrix(srcAnchorNormalWidth / srcAnchorNormalWidthRaw, srcAnchorNormalHeight / srcAnchorNormalHeightRaw);
+            anchorMatrixNormal = initAnchorMatrix(anchorMatrixNormal, srcAnchorWidthNormal / srcAnchorWidthNormalRaw, srcAnchorHeightNormal / srcAnchorHeightNormalRaw);
         }
 
         if (srcAnchorPress != null) {
-            srcAnchorPressWidthRaw = srcAnchorPress.getWidth();
-            srcAnchorPressHeightRaw = srcAnchorPress.getHeight();
+            srcAnchorWidthPressRaw = srcAnchorPress.getWidth();
+            srcAnchorHeightPressRaw = srcAnchorPress.getHeight();
+
+            anchorMatrixPress = initAnchorMatrix(anchorMatrixPress, srcAnchorWidthPress / srcAnchorWidthPressRaw, srcAnchorHeightPress / srcAnchorHeightPressRaw);
         }
 
         if (srcAnchorSelect != null) {
-            srcAnchorSelectWidthRaw = srcAnchorSelect.getWidth();
-            srcAnchorSelectHeightRaw = srcAnchorSelect.getHeight();
-        }
+            srcAnchorWidthSelectRaw = srcAnchorSelect.getWidth();
+            srcAnchorHeightSelectRaw = srcAnchorSelect.getHeight();
 
-        if (srcAnchorNormalWidthRaw != srcAnchorPressWidthRaw || srcAnchorNormalHeightRaw != srcAnchorPressHeightRaw
-                || srcAnchorPressWidthRaw != srcAnchorSelectWidthRaw || srcAnchorPressHeightRaw != srcAnchorSelectHeightRaw) {
-            throw new IndexOutOfBoundsException("Both the width and height of the attribute srcAnchorNormal ,srcAnchorPress and srcAnchorSelect needed equal");
+            anchorMatrixSelect = initAnchorMatrix(anchorMatrixSelect, srcAnchorWidthSelect / srcAnchorWidthSelectRaw, srcAnchorHeightSelect / srcAnchorHeightSelectRaw);
         }
 
         //
@@ -5020,26 +5017,26 @@ public class TView extends View {
             layer = canvas.saveLayer(0, 0, width, height, null);
         }
 
-        // dst, note that when srcSelectShadowRadius > 0, the parent background color must take incoming as backgroundNormal!
+        // dst, note that when srcShadowRadiusSelect > 0, the parent background color must take incoming as backgroundNormal!
 
         if (classic) {
 
             if (materialPlay) {
-                drawRectClassic(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
-                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
-                                - backgroundNormalShadowDy, backgroundNormal, backgroundNormalShader, backgroundNormalShadowRadius,
-                        backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal, radius);
+                drawRectClassic(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
+                                - backgroundShadowDyNormal, backgroundNormal, backgroundNormalShader, backgroundShadowRadiusNormal,
+                        backgroundNormalShadowColor, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal, radius);
 
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
-                drawRectClassic(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
-                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
-                                - backgroundNormalShadowDy, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
+                drawRectClassic(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
+                                - backgroundShadowDyNormal, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
                         select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
-                        select ? backgroundSelectShadowRadius : press ? backgroundPressShadowRadius : backgroundNormalShadowRadius,
+                        select ? backgroundShadowRadiusSelect : press ? backgroundShadowRadiusPress : backgroundShadowRadiusNormal,
                         select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
-                        select ? backgroundSelectShadowDx : press ? backgroundPressShadowDx : backgroundNormalShadowDx,
-                        select ? backgroundSelectShadowDy : press ? backgroundPressShadowDy : backgroundNormalShadowDy, select ? strokeWidthSelect
+                        select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
+                        select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal, select ? strokeWidthSelect
                                 : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
                                 : strokeColorNormal, radius);
             }
@@ -5047,22 +5044,22 @@ public class TView extends View {
 
             // draw MaterialDesign Effect
             if (materialPlay) {
-                drawRectCustom(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
-                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
-                                - backgroundNormalShadowDy, backgroundNormal, backgroundNormalShader, backgroundNormalShadowRadius,
-                        backgroundNormalShadowColor, backgroundNormalShadowDx, backgroundNormalShadowDy, strokeWidthNormal, strokeColorNormal,
+                drawRectCustom(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
+                                - backgroundShadowDyNormal, backgroundNormal, backgroundNormalShader, backgroundShadowRadiusNormal,
+                        backgroundNormalShadowColor, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal,
                         radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
 
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
-                drawRectCustom(canvas, backgroundNormalShadowRadius + backgroundNormalShadowDx, backgroundNormalShadowRadius + backgroundNormalShadowDy,
-                        width - backgroundNormalShadowRadius - backgroundNormalShadowDx, height - backgroundNormalShadowRadius
-                                - backgroundNormalShadowDy, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
+                drawRectCustom(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
+                                - backgroundShadowDyNormal, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
                         select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
-                        select ? backgroundSelectShadowRadius : press ? backgroundPressShadowRadius : backgroundNormalShadowRadius,
+                        select ? backgroundShadowRadiusSelect : press ? backgroundShadowRadiusPress : backgroundShadowRadiusNormal,
                         select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
-                        select ? backgroundSelectShadowDx : press ? backgroundPressShadowDx : backgroundNormalShadowDx,
-                        select ? backgroundSelectShadowDy : press ? backgroundPressShadowDy : backgroundNormalShadowDy, select ? strokeWidthSelect
+                        select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
+                        select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal, select ? strokeWidthSelect
                                 : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
                                 : strokeColorNormal, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
             }
@@ -5075,20 +5072,20 @@ public class TView extends View {
             // If they are offset backgroundShadow, mobile, is to draw on the background shadow,
             // without moving the bigger picture and the need to set the width and height
 
-            canvas.translate(select ? backgroundSelectShadowDx * 2f + srcSelectShadowRadius - srcSelectShadowDx : press ? backgroundPressShadowDx * 2f
-                            + srcPressShadowRadius - srcPressShadowDx : backgroundNormalShadowDx * 2f + srcNormalShadowRadius - srcNormalShadowDx,
-                    select ? backgroundSelectShadowDy * 2f + srcSelectShadowRadius - srcSelectShadowDy : press ? backgroundPressShadowDy * 2f
-                            + srcPressShadowRadius - srcPressShadowDy : backgroundNormalShadowDy * 2f + srcNormalShadowRadius - srcNormalShadowDy);
+            canvas.translate(select ? backgroundShadowDxSelect * 2f + srcShadowRadiusSelect - srcShadowDxSelect : press ? backgroundShadowDxPress * 2f
+                            + srcShadowRadiusPress - srcShadowDxPress : backgroundShadowDxNormal * 2f + srcShadowRadiusNormal - srcShadowDxNormal,
+                    select ? backgroundShadowDySelect * 2f + srcShadowRadiusSelect - srcShadowDySelect : press ? backgroundShadowDyPress * 2f
+                            + srcShadowRadiusPress - srcShadowDyPress : backgroundShadowDyNormal * 2f + srcShadowRadiusNormal - srcShadowDyNormal);
             canvas.drawBitmap(
                     select ? srcSelect : press ? srcPress : srcNormal,
                     matrix,
-                    initPaint(paint, select ? srcSelectShadowRadius : press ? srcPressShadowRadius : srcNormalShadowRadius,
-                            select ? srcSelectShadowDx : press ? srcPressShadowDx : srcNormalShadowDx, select ? srcSelectShadowDy
-                                    : press ? srcPressShadowDy : srcNormalShadowDy));
-            canvas.translate(select ? -backgroundSelectShadowDx * 2f - srcSelectShadowRadius + srcSelectShadowDx : press ? -backgroundPressShadowDx * 2f
-                            - srcPressShadowRadius + srcPressShadowDx : -backgroundNormalShadowDx * 2f - srcNormalShadowRadius + srcNormalShadowDx,
-                    select ? -backgroundSelectShadowDy * 2f - srcSelectShadowRadius + srcSelectShadowDy : press ? -backgroundPressShadowDy * 2f
-                            - srcPressShadowRadius + srcPressShadowDy : -backgroundNormalShadowDy * 2f - srcNormalShadowRadius + srcNormalShadowDy);
+                    initPaint(paint, select ? srcShadowRadiusSelect : press ? srcShadowRadiusPress : srcShadowRadiusNormal,
+                            select ? srcShadowDxSelect : press ? srcShadowDxPress : srcShadowDxNormal, select ? srcShadowDySelect
+                                    : press ? srcShadowDyPress : srcShadowDyNormal));
+            canvas.translate(select ? -backgroundShadowDxSelect * 2f - srcShadowRadiusSelect + srcShadowDxSelect : press ? -backgroundShadowDxPress * 2f
+                            - srcShadowRadiusPress + srcShadowDxPress : -backgroundShadowDxNormal * 2f - srcShadowRadiusNormal + srcShadowDxNormal,
+                    select ? -backgroundShadowDySelect * 2f - srcShadowRadiusSelect + srcShadowDySelect : press ? -backgroundShadowDyPress * 2f
+                            - srcShadowRadiusPress + srcShadowDyPress : -backgroundShadowDyNormal * 2f - srcShadowRadiusNormal + srcShadowDyNormal);
 
             paint.setXfermode(null);
 
@@ -5096,51 +5093,12 @@ public class TView extends View {
         }
 
         // draw anchor
-        if (srcAnchorNormal != null) {
-
-            float anchorDx = 0, anchorDy = 0;
-            switch (srcAnchorGravity & GRAVITY_MASK) {
-                case LEFT:
-                    break;
-                case CENTER_HORIZONTAL:
-                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
-                    break;
-                case RIGHT:
-                    anchorDx = width - srcAnchorNormalWidth;
-                    break;
-                case CENTER_VERTICAL:
-                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
-                    break;
-                case CENTER:
-                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
-                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
-                    break;
-                case RIGHT | CENTER_VERTICAL:
-                    anchorDx = width - srcAnchorNormalWidth;
-                    anchorDy = (height >> 1) - srcAnchorNormalHeight * 0.5f;
-                    break;
-                case BOTTOM:
-                    anchorDy = height - srcAnchorNormalHeight;
-                    break;
-                case BOTTOM | CENTER_HORIZONTAL:
-                    anchorDx = (width >> 1) - srcAnchorNormalWidth * 0.5f;
-                    anchorDy = height - srcAnchorNormalHeight;
-                    break;
-                case BOTTOM | RIGHT:
-                    anchorDx = width - srcAnchorNormalWidth;
-                    anchorDy = height - srcAnchorNormalHeight;
-                    break;
-                default:
-                    break;
-            }
-
-            canvas.translate(anchorDx + (select ? srcAnchorSelectDx : press ? srcAnchorPressDx : srcAnchorNormalDx), anchorDy
-                    + (select ? srcAnchorSelectDy : press ? srcAnchorPressDy : srcAnchorNormalDy));
-
-            canvas.drawBitmap(select ? srcAnchorSelect : press ? srcAnchorPress : srcAnchorNormal, anchorMatrix, paint);
-
-            canvas.translate(-anchorDx + (select ? -srcAnchorSelectDx : press ? -srcAnchorPressDx : -srcAnchorNormalDx), -anchorDy
-                    + (select ? -srcAnchorSelectDy : press ? -srcAnchorPressDy : -srcAnchorNormalDy));
+        if (select && srcAnchorSelect != null) {
+            drawAnchor(canvas, paint, srcAnchorSelect, anchorMatrixSelect, width, height, srcAnchorGravity, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
+        } else if (press && srcAnchorPress != null) {
+            drawAnchor(canvas, paint, srcAnchorPress, anchorMatrixPress, width, height, srcAnchorGravity, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
+        } else if (srcAnchorNormal != null) {
+            drawAnchor(canvas, paint, srcAnchorNormal, anchorMatrixNormal, width, height, srcAnchorGravity, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
         }
 
         // draw text

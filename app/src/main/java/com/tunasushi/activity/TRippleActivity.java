@@ -81,12 +81,12 @@ public class TRippleActivity extends Activity {
                     tRipple03.setRippleTextValue("&");
                     tRipple04.setRippleTextValue("&");
 
-                    tRipple01.setRippleInnerCircleColor(0xffff9900);
-                    tRipple02.setRippleOuterCircleColor(270, 0xfffed136, 0xffff9900);
-                    tRipple03.setRippleInnerCircleColor(0xfffed136);
-                    tRipple03.setRippleOuterCircleColor(0xfffed136);
-                    tRipple04.setRippleInnerCircleAngle(90);
-                    tRipple04.setRippleOuterCircleAngle(90);
+                    tRipple01.setRippleCircleColorInner(0xffff9900);
+                    tRipple02.setRippleCircleColorOuter(270, 0xfffed136, 0xffff9900);
+                    tRipple03.setRippleCircleColorInner(0xfffed136);
+                    tRipple03.setRippleCircleColorOuter(0xfffed136);
+                    tRipple04.setRippleCircleAngleInner(90);
+                    tRipple04.setRippleCircleAngleOuter(90);
                 } else {
 
                     tRipple01.setRippleTextValue("^");
@@ -94,12 +94,12 @@ public class TRippleActivity extends Activity {
                     tRipple03.setRippleTextValue("^");
                     tRipple04.setRippleTextValue("^");
 
-                    tRipple01.setRippleInnerCircleColor(0xfffed136);
-                    tRipple02.setRippleOuterCircleColor(0xffff9900);
-                    tRipple03.setRippleInnerCircleColor(Color.WHITE, Color.BLUE);
-                    tRipple03.setRippleOuterCircleColor(Color.WHITE, Color.BLUE);
-                    tRipple04.setRippleInnerCircleColor(270, Color.WHITE, Color.BLUE);
-                    tRipple04.setRippleOuterCircleColor(270, Color.RED, Color.BLUE);
+                    tRipple01.setRippleCircleColorInner(0xfffed136);
+                    tRipple02.setRippleCircleColorOuter(0xffff9900);
+                    tRipple03.setRippleCircleColorInner(Color.WHITE, Color.BLUE);
+                    tRipple03.setRippleCircleColorOuter(Color.WHITE, Color.BLUE);
+                    tRipple04.setRippleCircleColorInner(270, Color.WHITE, Color.BLUE);
+                    tRipple04.setRippleCircleColorOuter(270, Color.RED, Color.BLUE);
                 }
             }
         });

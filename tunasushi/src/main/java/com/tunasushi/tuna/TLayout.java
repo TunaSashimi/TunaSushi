@@ -17,7 +17,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -58,210 +57,175 @@ public class TLayout extends RelativeLayout {
         return matrix;
     }
 
-    // layoutBackgroundNormal in onLayout if backgroundNormal transparent and have drawn the case of default white shadow
-    private int layoutBackgroundNormal;
+    // layoutBackground in onLayout if background transparent and have drawn the case of default white shadow
+    private int layoutBackground;
 
-    public int getBackgroundNormal() {
-        return layoutBackgroundNormal;
-    }
 
-    public void setBackgroundNormal(int layoutBackgroundNormal) {
-        this.layoutBackgroundNormal = layoutBackgroundNormal;
-    }
+    private int layoutBackgroundAngle;
 
-    private int layoutBackgroundNormalAngle;
 
-    public int getLayoutBackgroundNormalAngle() {
-        return layoutBackgroundNormalAngle;
-    }
+    // layoutBackgroundGradientStart default layoutBackground
+    private int layoutBackgroundGradientStart;
 
-    public void setLayoutBackgroundNormalAngle(int layuotBackgroundNormalAngle) {
-        this.layoutBackgroundNormalAngle = layuotBackgroundNormalAngle;
-    }
 
-    // layoutBackgroundNormalGradientStart default layoutBackgroundNormal
-    private int layoutBackgroundNormalGradientStart;
+    // layoutBackgroundGradientEnd default background
+    private int layoutBackgroundGradientEnd;
 
-    public int getLayoutBackgroundNormalGradientStart() {
-        return layoutBackgroundNormalGradientStart;
-    }
 
-    public void setBackgroundNormalGradientStart(int layoutBackgroundNormalGradientStart) {
-        this.layoutBackgroundNormalGradientStart = layoutBackgroundNormalGradientStart;
-    }
+    // layoutBackgroundShader default null
+    private Shader layoutBackgroundShader;
 
-    // layoutBackgroundNormalGradientEnd default backgroundNormal
-    private int layoutBackgroundNormalGradientEnd;
-
-    public int getBackgroundNormalGradientEnd() {
-        return layoutBackgroundNormalGradientEnd;
-    }
-
-    public void setBackgroundNormalGradientEnd(int layoutBackgroundNormalGradientEnd) {
-        this.layoutBackgroundNormalGradientEnd = layoutBackgroundNormalGradientEnd;
-    }
-
-    // layoutBackgroundNormalShader default null
-    private Shader layoutBackgroundNormalShader;
-
-    public Shader getLayoutBackgroundNormalShader() {
-        return layoutBackgroundNormalShader;
-    }
-
-    public void setLayoutBackgroundNormalShader(Shader layoutBackgroundNormalShader) {
-        this.layoutBackgroundNormalShader = layoutBackgroundNormalShader;
-    }
 
     //
-    private float layoutBackgroundNormalShadowRadius;
+    private float layoutBackgroundShadowRadius;
 
-    public float getLayoutBackgroundNormalShadowRadius() {
-        return layoutBackgroundNormalShadowRadius;
+    public float getLayoutBackgroundShadowRadius() {
+        return layoutBackgroundShadowRadius;
     }
 
-    public void setLayoutBackgroundNormalShadowRadius(float layoutBackgroundNormalShadowRadius) {
-        setLayoutBackgroundNormalShadowRadiusRaw(layoutBackgroundNormalShadowRadius);
+    public void setLayoutBackgroundShadowRadius(float layoutBackgroundShadowRadius) {
+        setLayoutBackgroundShadowRadiusRaw(layoutBackgroundShadowRadius);
     }
 
-    public void setLayoutBackgroundNormalShadowRadius(float layoutBackgroundNormalShadowRadius, int unit) {
-        setLayoutBackgroundNormalShadowRadiusRaw(convertToPX(layoutBackgroundNormalShadowRadius, unit));
+    public void setLayoutBackgroundShadowRadius(float layoutBackgroundShadowRadius, int unit) {
+        setLayoutBackgroundShadowRadiusRaw(convertToPX(layoutBackgroundShadowRadius, unit));
     }
 
-    private void setLayoutBackgroundNormalShadowRadiusRaw(float layoutBackgroundNormalShadowRadius) {
-        if (this.layoutBackgroundNormalShadowRadius != layoutBackgroundNormalShadowRadius) {
-            this.layoutBackgroundNormalShadowRadius = layoutBackgroundNormalShadowRadius;
+    private void setLayoutBackgroundShadowRadiusRaw(float layoutBackgroundShadowRadius) {
+        if (this.layoutBackgroundShadowRadius != layoutBackgroundShadowRadius) {
+            this.layoutBackgroundShadowRadius = layoutBackgroundShadowRadius;
             invalidate();
         }
     }
 
     //
-    private int layoutBackgroundNormalShadowColor;
+    private int layoutBackgroundShadowColor;
 
-    public int getLayoutBackgroundNormalShadowColor() {
-        return layoutBackgroundNormalShadowColor;
+    public int getLayoutBackgroundShadowColor() {
+        return layoutBackgroundShadowColor;
     }
 
-    public void setLayoutBackgroundNormalShadowColor(int layoutBackgroundNormalShadowColor) {
-        this.layoutBackgroundNormalShadowColor = layoutBackgroundNormalShadowColor;
+    public void setLayoutBackgroundShadowColor(int layoutBackgroundShadowColor) {
+        this.layoutBackgroundShadowColor = layoutBackgroundShadowColor;
     }
 
     //
-    private float layoutBackgroundNormalShadowDx;
+    private float layoutBackgroundShadowDx;
 
-    public float getLayoutBackgroundNormalShadowDx() {
-        return layoutBackgroundNormalShadowDx;
+    public float getLayoutBackgroundShadowDx() {
+        return layoutBackgroundShadowDx;
     }
 
-    public void setLayoutBackgroundNormalShadowDx(float layoutBackgroundNormalShadowDx) {
-        setLayoutBackgroundNormalShadowDxRaw(layoutBackgroundNormalShadowDx);
+    public void setLayoutBackgroundShadowDx(float layoutBackgroundShadowDx) {
+        setLayoutBackgroundShadowDxRaw(layoutBackgroundShadowDx);
     }
 
-    public void setLayoutBackgroundNormalShadowDx(float layoutBackgroundNormalShadowDx, int unit) {
-        setLayoutBackgroundNormalShadowDxRaw(convertToPX(layoutBackgroundNormalShadowDx, unit));
+    public void setLayoutBackgroundShadowDx(float layoutBackgroundShadowDx, int unit) {
+        setLayoutBackgroundShadowDxRaw(convertToPX(layoutBackgroundShadowDx, unit));
     }
 
-    private void setLayoutBackgroundNormalShadowDxRaw(float layoutBackgroundNormalShadowDx) {
-        if (this.layoutBackgroundNormalShadowDx != layoutBackgroundNormalShadowDx) {
-            this.layoutBackgroundNormalShadowDx = layoutBackgroundNormalShadowDx;
+    private void setLayoutBackgroundShadowDxRaw(float layoutBackgroundShadowDx) {
+        if (this.layoutBackgroundShadowDx != layoutBackgroundShadowDx) {
+            this.layoutBackgroundShadowDx = layoutBackgroundShadowDx;
             invalidate();
         }
     }
 
     //
-    private float layoutBackgroundNormalShadowDy;
+    private float layoutBackgroundShadowDy;
 
-    public float getLayoutBackgroundNormalShadowDy() {
-        return layoutBackgroundNormalShadowDy;
+    public float getLayoutBackgroundShadowDy() {
+        return layoutBackgroundShadowDy;
     }
 
-    public void setLayoutBackgroundNormalShadowDy(float layoutBackgroundNormalShadowDy) {
-        setLayoutBackgroundNormalShadowDyRaw(layoutBackgroundNormalShadowDy);
+    public void setLayoutBackgroundShadowDy(float layoutBackgroundShadowDy) {
+        setLayoutBackgroundShadowDyRaw(layoutBackgroundShadowDy);
     }
 
-    public void setLayoutBackgroundNormalShadowDy(float layoutBackgroundNormalShadowDy, int unit) {
-        setLayoutBackgroundNormalShadowDyRaw(convertToPX(layoutBackgroundNormalShadowDy, unit));
+    public void setLayoutBackgroundShadowDy(float layoutBackgroundShadowDy, int unit) {
+        setLayoutBackgroundShadowDyRaw(convertToPX(layoutBackgroundShadowDy, unit));
     }
 
-    private void setLayoutBackgroundNormalShadowDyRaw(float layoutBackgroundNormalShadowDy) {
-        if (this.layoutBackgroundNormalShadowDy != layoutBackgroundNormalShadowDy) {
-            this.layoutBackgroundNormalShadowDy = layoutBackgroundNormalShadowDy;
+    private void setLayoutBackgroundShadowDyRaw(float layoutBackgroundShadowDy) {
+        if (this.layoutBackgroundShadowDy != layoutBackgroundShadowDy) {
+            this.layoutBackgroundShadowDy = layoutBackgroundShadowDy;
             invalidate();
         }
     }
 
     //
-    private Bitmap layoutSrcNormal;
+    private Bitmap layoutSrc;
 
-    public Bitmap getLayoutSrcNormal() {
-        return layoutSrcNormal;
+    public Bitmap getLayoutSrc() {
+        return layoutSrc;
     }
 
-    public void setLayoutSrcNormal(Bitmap layoutSrcNormal) {
-        this.layoutSrcNormal = layoutSrcNormal;
+    public void setLayoutSrc(Bitmap layoutSrc) {
+        this.layoutSrc = layoutSrc;
     }
 
     //
-    private float layoutSrcNormalShadowRadius;
+    private float layoutSrcShadowRadius;
 
-    public float getLayoutSrcNormalShadowRadius() {
-        return layoutSrcNormalShadowRadius;
+    public float getLayoutSrcShadowRadius() {
+        return layoutSrcShadowRadius;
     }
 
-    public void setLayoutSrcNormalShadowRadius(float layoutSrcNormalShadowRadius) {
-        setLayoutSrcNormalShadowRadiusRaw(layoutSrcNormalShadowRadius);
+    public void setLayoutSrcShadowRadius(float layoutSrcShadowRadius) {
+        setLayoutSrcShadowRadiusRaw(layoutSrcShadowRadius);
     }
 
-    public void setLayoutSrcNormalShadowRadius(float layoutSrcNormalShadowRadius, int unit) {
-        setLayoutSrcNormalShadowRadiusRaw(convertToPX(layoutSrcNormalShadowRadius, unit));
+    public void setLayoutSrcShadowRadius(float layoutSrcShadowRadius, int unit) {
+        setLayoutSrcShadowRadiusRaw(convertToPX(layoutSrcShadowRadius, unit));
     }
 
-    private void setLayoutSrcNormalShadowRadiusRaw(float layoutSrcNormalShadowRadius) {
-        if (this.layoutSrcNormalShadowRadius != layoutSrcNormalShadowRadius) {
-            this.layoutSrcNormalShadowRadius = layoutSrcNormalShadowRadius;
+    private void setLayoutSrcShadowRadiusRaw(float layoutSrcShadowRadius) {
+        if (this.layoutSrcShadowRadius != layoutSrcShadowRadius) {
+            this.layoutSrcShadowRadius = layoutSrcShadowRadius;
             invalidate();
         }
     }
 
     //
-    private float layoutSrcNormalShadowDx;
+    private float layoutSrcShadowDx;
 
-    public float getLayoutSrcNormalShadowDx() {
-        return layoutSrcNormalShadowDx;
+    public float getLayoutSrcShadowDx() {
+        return layoutSrcShadowDx;
     }
 
-    public void setLayoutSrcNormalShadowDx(float layoutSrcNormalShadowDx) {
-        setLayoutSrcNormalShadowDxRaw(layoutSrcNormalShadowDx);
+    public void setLayoutSrcShadowDx(float layoutSrcShadowDx) {
+        setLayoutSrcShadowDxRaw(layoutSrcShadowDx);
     }
 
-    public void setLayoutSrcNormalShadowDx(float layoutSrcNormalShadowDx, int unit) {
-        setLayoutSrcNormalShadowDxRaw(convertToPX(layoutSrcNormalShadowDx, unit));
+    public void setLayoutSrcShadowDx(float layoutSrcShadowDx, int unit) {
+        setLayoutSrcShadowDxRaw(convertToPX(layoutSrcShadowDx, unit));
     }
 
-    private void setLayoutSrcNormalShadowDxRaw(float layoutSrcNormalShadowDx) {
-        if (this.layoutSrcNormalShadowDx != layoutSrcNormalShadowDx) {
-            this.layoutSrcNormalShadowDx = layoutSrcNormalShadowDx;
+    private void setLayoutSrcShadowDxRaw(float layoutSrcShadowDx) {
+        if (this.layoutSrcShadowDx != layoutSrcShadowDx) {
+            this.layoutSrcShadowDx = layoutSrcShadowDx;
             invalidate();
         }
     }
 
     //
-    private float layoutSrcNormalShadowDy;
+    private float layoutSrcShadowDy;
 
-    public float getLayoutSrcNormalShadowDy() {
-        return layoutSrcNormalShadowDy;
+    public float getLayoutSrcShadowDy() {
+        return layoutSrcShadowDy;
     }
 
-    public void setLayoutSrcNormalShadowDy(float layoutSrcNormalShadowDy) {
-        setLayoutSrcNormalShadowDyRaw(layoutSrcNormalShadowDy);
+    public void setLayoutSrcShadowDy(float layoutSrcShadowDy) {
+        setLayoutSrcShadowDyRaw(layoutSrcShadowDy);
     }
 
-    public void setLayoutSrcNormalShadowDy(float layoutSrcNormalShadowDy, int unit) {
-        setLayoutSrcNormalShadowDyRaw(convertToPX(layoutSrcNormalShadowDy, unit));
+    public void setLayoutSrcShadowDy(float layoutSrcShadowDy, int unit) {
+        setLayoutSrcShadowDyRaw(convertToPX(layoutSrcShadowDy, unit));
     }
 
-    private void setLayoutSrcNormalShadowDyRaw(float layoutSrcNormalShadowDy) {
-        if (this.layoutSrcNormalShadowDy != layoutSrcNormalShadowDy) {
-            this.layoutSrcNormalShadowDy = layoutSrcNormalShadowDy;
+    private void setLayoutSrcShadowDyRaw(float layoutSrcShadowDy) {
+        if (this.layoutSrcShadowDy != layoutSrcShadowDy) {
+            this.layoutSrcShadowDy = layoutSrcShadowDy;
             invalidate();
         }
     }
@@ -289,37 +253,37 @@ public class TLayout extends RelativeLayout {
         this.layoutPorterDuffXfermode = new PorterDuffXfermode(layoutPorterDuffXfermodeArray[layoutXfermode.nativeInt]);
     }
 
-    // layoutStrokeWidthNormal default 0
-    private float layoutStrokeWidthNormal;
+    // layoutStrokeWidth default 0
+    private float layoutStrokeWidth;
 
-    public float getLayoutStrokeWidthNormal() {
-        return layoutStrokeWidthNormal;
+    public float getLayoutStrokeWidth() {
+        return layoutStrokeWidth;
     }
 
-    public void setLayoutStrokeWidthNormal(float layoutStrokeWidthNormal) {
-        setLayoutStrokeWidthNormalRaw(layoutStrokeWidthNormal);
+    public void setLayoutStrokeWidth(float layoutStrokeWidth) {
+        setLayoutStrokeWidthRaw(layoutStrokeWidth);
     }
 
-    public void setLayoutStrokeWidthNormal(float layoutStrokeWidthNormal, int unit) {
-        setLayoutStrokeWidthNormalRaw(convertToPX(layoutStrokeWidthNormal, unit));
+    public void setLayoutStrokeWidth(float layoutStrokeWidth, int unit) {
+        setLayoutStrokeWidthRaw(convertToPX(layoutStrokeWidth, unit));
     }
 
-    private void setLayoutStrokeWidthNormalRaw(float layoutStrokeWidthNormal) {
-        if (this.layoutStrokeWidthNormal != layoutStrokeWidthNormal) {
-            this.layoutStrokeWidthNormal = layoutStrokeWidthNormal;
+    private void setLayoutStrokeWidthRaw(float layoutStrokeWidth) {
+        if (this.layoutStrokeWidth != layoutStrokeWidth) {
+            this.layoutStrokeWidth = layoutStrokeWidth;
             invalidate();
         }
     }
 
-    // layoutStrokeColorNormal default transparent
-    private int layoutStrokeColorNormal;
+    // layoutStrokeColor default transparent
+    private int layoutStrokeColor;
 
-    public int getLayoutStrokeColorNormal() {
-        return layoutStrokeColorNormal;
+    public int getLayoutStrokeColor() {
+        return layoutStrokeColor;
     }
 
-    public void setLayoutStrokeColorNormal(int layoutStrokeColorNormal) {
-        this.layoutStrokeColorNormal = layoutStrokeColorNormal;
+    public void setLayoutStrokeColor(int layoutStrokeColor) {
+        this.layoutStrokeColor = layoutStrokeColor;
     }
 
     // layoutRadius default 0
@@ -454,46 +418,46 @@ public class TLayout extends RelativeLayout {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TLayout, 0, defStyle);
 
-        layoutBackgroundNormal = typedArray.getColor(R.styleable.TLayout_layoutBackgroundNormal, Color.TRANSPARENT);
+        layoutBackground = typedArray.getColor(R.styleable.TLayout_layoutBackground, Color.TRANSPARENT);
 
         //
-        layoutBackgroundNormalAngle = typedArray.getInt(R.styleable.TLayout_layoutBackgroundNormalAngle, Integer.MAX_VALUE);
-        if (layoutBackgroundNormalAngle != Integer.MAX_VALUE) {
-            layoutBackgroundNormalGradientStart = typedArray.getColor(R.styleable.TLayout_layoutBackgroundNormalGradientStart, layoutBackgroundNormal);
-            layoutBackgroundNormalGradientEnd = typedArray.getColor(R.styleable.TLayout_layoutBackgroundNormalGradientEnd, layoutBackgroundNormal);
+        layoutBackgroundAngle = typedArray.getInt(R.styleable.TLayout_layoutBackgroundAngle, Integer.MAX_VALUE);
+        if (layoutBackgroundAngle != Integer.MAX_VALUE) {
+            layoutBackgroundGradientStart = typedArray.getColor(R.styleable.TLayout_layoutBackgroundGradientStart, layoutBackground);
+            layoutBackgroundGradientEnd = typedArray.getColor(R.styleable.TLayout_layoutBackgroundGradientEnd, layoutBackground);
 
         }
 
         //
-        layoutBackgroundNormalShadowRadius = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundNormalShadowRadius, 0);
-        if (layoutBackgroundNormalShadowRadius > 0) {
-            layoutBackgroundNormalShadowColor = typedArray.getColor(R.styleable.TLayout_layoutBackgroundNormalShadowColor, Color.TRANSPARENT);
-            layoutBackgroundNormalShadowDx = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundNormalShadowDx, 0);
-            layoutBackgroundNormalShadowDy = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundNormalShadowDy, 0);
+        layoutBackgroundShadowRadius = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundShadowRadius, 0);
+        if (layoutBackgroundShadowRadius > 0) {
+            layoutBackgroundShadowColor = typedArray.getColor(R.styleable.TLayout_layoutBackgroundShadowColor, Color.TRANSPARENT);
+            layoutBackgroundShadowDx = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundShadowDx, 0);
+            layoutBackgroundShadowDy = typedArray.getDimension(R.styleable.TLayout_layoutBackgroundShadowDy, 0);
         }
 
         //
-        int layoutSrcNormalId = typedArray.getResourceId(R.styleable.TLayout_layoutSrcNormal, -1);
-        if (layoutSrcNormalId != -1) {
+        int layoutSrcId = typedArray.getResourceId(R.styleable.TLayout_layoutSrc, -1);
+        if (layoutSrcId != -1) {
 
             // layoutXfermodeIndex default PorterDuff.Mode.SRC_IN
             int layoutXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
             layoutPorterDuffXfermode = new PorterDuffXfermode(layoutPorterDuffXfermodeArray[layoutXfermodeIndex]);
 
             //
-            layoutSrcNormal = BitmapFactory.decodeResource(getResources(), layoutSrcNormalId);
+            layoutSrc = BitmapFactory.decodeResource(getResources(), layoutSrcId);
 
             //
-            layoutSrcNormalShadowRadius = typedArray.getDimension(R.styleable.TLayout_layoutSrcNormalShadowRadius, 0);
-            if (layoutSrcNormalShadowRadius > 0) {
-                layoutSrcNormalShadowDx = typedArray.getDimension(R.styleable.TLayout_layoutSrcNormalShadowDx, 0);
-                layoutSrcNormalShadowDy = typedArray.getDimension(R.styleable.TLayout_layoutSrcNormalShadowDy, 0);
+            layoutSrcShadowRadius = typedArray.getDimension(R.styleable.TLayout_layoutSrcShadowRadius, 0);
+            if (layoutSrcShadowRadius > 0) {
+                layoutSrcShadowDx = typedArray.getDimension(R.styleable.TLayout_layoutSrcShadowDx, 0);
+                layoutSrcShadowDy = typedArray.getDimension(R.styleable.TLayout_layoutSrcShadowDy, 0);
             }
         }
 
         //
-        layoutStrokeWidthNormal = typedArray.getDimension(R.styleable.TLayout_layoutStrokeWidthNormal, 0);
-        layoutStrokeColorNormal = typedArray.getColor(R.styleable.TLayout_layoutStrokeColorNormal, Color.TRANSPARENT);
+        layoutStrokeWidth = typedArray.getDimension(R.styleable.TLayout_layoutStrokeWidth, 0);
+        layoutStrokeColor = typedArray.getColor(R.styleable.TLayout_layoutStrokeColor, Color.TRANSPARENT);
 
         //
         layoutRadius = typedArray.getDimension(R.styleable.TLayout_layoutRadius, 0);
@@ -513,27 +477,27 @@ public class TLayout extends RelativeLayout {
         layoutWidth = getWidth();
         layoutHeight = getHeight();
 
-        if (layoutSrcNormal != null || layoutSrcNormalShadowRadius > 0 || layoutBackgroundNormalShadowRadius > 0 || layoutBackgroundNormalAngle != Integer.MAX_VALUE) {
+        if (layoutSrc != null || layoutSrcShadowRadius > 0 || layoutBackgroundShadowRadius > 0 || layoutBackgroundAngle != Integer.MAX_VALUE) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
-        if ((layoutSrcNormal != null || layoutBackgroundNormalShadowRadius > 0) && layoutBackgroundNormal == Color.TRANSPARENT) {
-            layoutBackgroundNormal = Color.WHITE;
+        if ((layoutSrc != null || layoutBackgroundShadowRadius > 0) && layoutBackground == Color.TRANSPARENT) {
+            layoutBackground = Color.WHITE;
         }
 
         //
-        if (layoutBackgroundNormalAngle != Integer.MAX_VALUE) {
-            layoutBackgroundNormalShader = getLinearGradient(layoutWidth, layoutHeight, layoutBackgroundNormalAngle, layoutBackgroundNormalGradientStart, layoutBackgroundNormalGradientEnd);
+        if (layoutBackgroundAngle != Integer.MAX_VALUE) {
+            layoutBackgroundShader = getLinearGradient(layoutWidth, layoutHeight, layoutBackgroundAngle, layoutBackgroundGradientStart, layoutBackgroundGradientEnd);
         }
 
         //
-        int layoutSrcNormalWidthRaw = 0, layoutSrcNormalHeightRaw = 0;
-        if (layoutSrcNormal != null) {
-            layoutSrcNormalWidthRaw = layoutSrcNormal.getWidth();
-            layoutSrcNormalHeightRaw = layoutSrcNormal.getHeight();
+        int layoutSrcWidthRaw = 0, layoutSrcHeightRaw = 0;
+        if (layoutSrc != null) {
+            layoutSrcWidthRaw = layoutSrc.getWidth();
+            layoutSrcHeightRaw = layoutSrc.getHeight();
 
-            initMatrix(layoutMatrix, (layoutWidth - layoutSrcNormalShadowRadius * 2f - layoutBackgroundNormalShadowRadius * 2f - layoutBackgroundNormalShadowDx * 2f) / layoutSrcNormalWidthRaw,
-                    (layoutHeight - layoutSrcNormalShadowRadius * 2f - layoutBackgroundNormalShadowRadius * 2f - layoutBackgroundNormalShadowDy * 2f) / layoutSrcNormalHeightRaw);
+            initMatrix(layoutMatrix, (layoutWidth - layoutSrcShadowRadius * 2f - layoutBackgroundShadowRadius * 2f - layoutBackgroundShadowDx * 2f) / layoutSrcWidthRaw,
+                    (layoutHeight - layoutSrcShadowRadius * 2f - layoutBackgroundShadowRadius * 2f - layoutBackgroundShadowDy * 2f) / layoutSrcHeightRaw);
         }
 
     }
@@ -541,36 +505,36 @@ public class TLayout extends RelativeLayout {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        boolean needSaveLayer = (layoutSrcNormal != null);
+        boolean needSaveLayer = (layoutSrc != null);
         if (needSaveLayer) {
             // draw the src/dst example into our offscreen bitmap
             layoutLayer = canvas.saveLayer(0, 0, layoutWidth, layoutHeight, null);
         }
 //		
-        drawRectCustom(canvas, layoutBackgroundNormalShadowRadius + layoutBackgroundNormalShadowDx, layoutBackgroundNormalShadowRadius + layoutBackgroundNormalShadowDy,
-                layoutWidth - layoutBackgroundNormalShadowRadius - layoutBackgroundNormalShadowDx, layoutHeight - layoutBackgroundNormalShadowRadius
-                        - layoutBackgroundNormalShadowDy, layoutBackgroundNormal,
-                layoutBackgroundNormalShader,
-                layoutBackgroundNormalShadowRadius,
-                layoutBackgroundNormalShadowColor,
-                layoutBackgroundNormalShadowDx,
-                layoutBackgroundNormalShadowDy,
-                layoutStrokeWidthNormal,
-                layoutStrokeColorNormal, layoutRadiusLeftTop, layoutRadiusLeftBottom, layoutRadiusRightTop, layoutRadiusRightBottom);
+        drawRectCustom(canvas, layoutBackgroundShadowRadius + layoutBackgroundShadowDx, layoutBackgroundShadowRadius + layoutBackgroundShadowDy,
+                layoutWidth - layoutBackgroundShadowRadius - layoutBackgroundShadowDx, layoutHeight - layoutBackgroundShadowRadius
+                        - layoutBackgroundShadowDy, layoutBackground,
+                layoutBackgroundShader,
+                layoutBackgroundShadowRadius,
+                layoutBackgroundShadowColor,
+                layoutBackgroundShadowDx,
+                layoutBackgroundShadowDy,
+                layoutStrokeWidth,
+                layoutStrokeColor, layoutRadiusLeftTop, layoutRadiusLeftBottom, layoutRadiusRightTop, layoutRadiusRightBottom);
 
         // draw layoutBitmap
         if (needSaveLayer) {
             layoutPaint.setXfermode(layoutPorterDuffXfermode);
 
-            canvas.translate(layoutBackgroundNormalShadowDx * 2f + layoutSrcNormalShadowRadius - layoutSrcNormalShadowDx,
-                    layoutBackgroundNormalShadowDy * 2f + layoutSrcNormalShadowRadius - layoutSrcNormalShadowDy);
+            canvas.translate(layoutBackgroundShadowDx * 2f + layoutSrcShadowRadius - layoutSrcShadowDx,
+                    layoutBackgroundShadowDy * 2f + layoutSrcShadowRadius - layoutSrcShadowDy);
             canvas.drawBitmap(
-                    layoutSrcNormal,
+                    layoutSrc,
                     layoutMatrix,
-                    initPaint(layoutPaint, layoutSrcNormalShadowRadius,
-                            layoutSrcNormalShadowDx, layoutSrcNormalShadowDy));
-            canvas.translate(-layoutBackgroundNormalShadowDx * 2f - layoutSrcNormalShadowRadius + layoutSrcNormalShadowDx,
-                    -layoutBackgroundNormalShadowDy * 2f - layoutSrcNormalShadowRadius + layoutSrcNormalShadowDy);
+                    initPaint(layoutPaint, layoutSrcShadowRadius,
+                            layoutSrcShadowDx, layoutSrcShadowDy));
+            canvas.translate(-layoutBackgroundShadowDx * 2f - layoutSrcShadowRadius + layoutSrcShadowDx,
+                    -layoutBackgroundShadowDy * 2f - layoutSrcShadowRadius + layoutSrcShadowDy);
 
             layoutPaint.setXfermode(null);
 

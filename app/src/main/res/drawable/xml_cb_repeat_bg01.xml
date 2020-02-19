@@ -24,7 +24,7 @@
             <item>
                 <bitmap 
                     android:gravity="bottom|right" 
-                    android:src="@drawable/repeat_checkbox_bg02" />
+                    android:src="@drawable/xml_cb_repeat_bg02" />
             </item>
         </layer-list>
     </item>

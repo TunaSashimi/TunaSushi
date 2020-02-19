@@ -150,9 +150,9 @@ public class TRepeat extends TView {
         if (repeatShapeType == RepeatShapeType.CUSTOM) {
             int repeatCustomSrcNormalWidth = repeatSrcNormal.getWidth();
             int repeatCustomSrcNormalHeight = repeatSrcNormal.getHeight();
-            int repeatCustomSrcSelectWidth = repeatSrcSelect.getWidth();
-            int repeatCustomSrcSelectHeight = repeatSrcSelect.getHeight();
-            if (repeatCustomSrcNormalWidth != repeatCustomSrcSelectWidth || repeatCustomSrcNormalHeight != repeatCustomSrcSelectHeight) {
+            int repeatCustomSrcWidthSelect = repeatSrcSelect.getWidth();
+            int repeatCustomSrcHeightSelect = repeatSrcSelect.getHeight();
+            if (repeatCustomSrcNormalWidth != repeatCustomSrcWidthSelect || repeatCustomSrcNormalHeight != repeatCustomSrcHeightSelect) {
                 throw new IndexOutOfBoundsException("Both the width and height of the attribute repeatCustomSrcNormal and repeatCustomSrcSelect needed equal");
             }
 

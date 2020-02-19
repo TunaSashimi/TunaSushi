@@ -32,9 +32,9 @@ public class TSector extends TView {
     //半径
     private int radius;
     //外圆弧的宽度
-    private float sectorOutArcWidth;
+    private float sectorArcWidthOut;
     //内部大圆弧的宽度
-    private float sectorInArcWidth;
+    private float sectorArcWidthIn;
     //两圆弧中间间隔距离
     private float sectorSpaceWidth;
     private float sectorDragRadius;
@@ -100,8 +100,8 @@ public class TSector extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSector);
 
-        sectorOutArcWidth = typedArray.getDimension(R.styleable.TSector_sectorOutArcWidth, 0);
-        sectorInArcWidth = typedArray.getDimension(R.styleable.TSector_sectorInArcWidth, 0);
+        sectorArcWidthOut = typedArray.getDimension(R.styleable.TSector_sectorArcWidthOut, 0);
+        sectorArcWidthIn = typedArray.getDimension(R.styleable.TSector_sectorArcWidthIn, 0);
         sectorSpaceWidth = typedArray.getDimension(R.styleable.TSector_sectorSpaceWidth, 0);
         sectorDragRadius = typedArray.getDimension(R.styleable.TSector_sectorDragRadius, 0);
 
@@ -115,13 +115,13 @@ public class TSector extends TView {
 
         //画线的底色
         sectorPaint.setColor(grayColor);
-        sectorPaint.setStrokeWidth(sectorOutArcWidth);//sectorOutArcWidth
+        sectorPaint.setStrokeWidth(sectorArcWidthOut);//sectorArcWidthOut
         sectorPaint.setStyle(Paint.Style.STROKE);
         sectorPaint.setStrokeCap(Paint.Cap.ROUND);//设置为圆角
         sectorPaint.setAntiAlias(true);
 
         //绘制里层大宽度弧形底色
-        sectorPaint.setStrokeWidth(sectorInArcWidth);
+        sectorPaint.setStrokeWidth(sectorArcWidthIn);
         sectorPaint.setStyle(Paint.Style.STROKE);
         canvas.drawArc(new RectF((width >> 1) - insideArcRadius, radius - insideArcRadius, (width >> 1) + insideArcRadius, radius + insideArcRadius),
                 (float) (180 - floatAngel),
@@ -180,7 +180,7 @@ public class TSector extends TView {
      * @param canvas 画布
      */
     private void drawInsideArc(float formDegree, float toDegree, Canvas canvas, int color) {
-        sectorPaintShader.setStrokeWidth(sectorInArcWidth);
+        sectorPaintShader.setStrokeWidth(sectorArcWidthIn);
         sectorPaintShader.setStyle(Paint.Style.STROKE);
         //内弧半径
         insideArea = new RectF((width >> 1) - insideArcRadius, radius - insideArcRadius, (width >> 1) + insideArcRadius, radius + insideArcRadius);

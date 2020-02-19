@@ -8,6 +8,8 @@ import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TLine;
 
+import static com.tunasushi.tool.ConvertTool.dpToPx;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53
@@ -24,8 +26,7 @@ public class TLineActivity extends Activity {
 
         setContentView(R.layout.activity_t_line);
 
-        float tuna_button_width = getResources().getDimension(
-                R.dimen.tuna_button_width);
+        float tuna_button_width = dpToPx(120);
 
         tLineAC = findViewById(R.id.tLineAC);
         tLineMove = findViewById(R.id.tLineMove);

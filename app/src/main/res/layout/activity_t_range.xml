@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentBottom="true"
-        app:layoutBackgroundNormal="#ffffff"
+        app:layoutBackground="#ffffff"
         app:layoutRadiusLeftTop="10dp"
         app:layoutRadiusRightTop="10dp">
 
@@ -95,6 +95,106 @@
             android:text="星级(多选)"
             android:textColor="#62636c"
             android:textSize="14dp" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewNoLimit"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_star"
+            android:layout_alignLeft="@id/tv_star"
+            android:layout_marginTop="16dp"
+            app:backgroundNormal="#f5f6fb"
+            app:backgroundSelect="#dcecfc"
+            app:radius="4dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="bottom|right"
+            app:srcAnchorHeightSelect="15dp"
+            app:srcAnchorSelect="@drawable/iv_tview_select03_bg"
+            app:srcAnchorWidthSelect="15dp"
+            app:textColorNormal="#444344"
+            app:textColorSelect="#0e82f6"
+            app:textSize="13dp"
+            app:textValue="不限" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewStarTwo"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@id/tViewNoLimit"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/tViewNoLimit"
+            app:backgroundNormal="#f5f6fb"
+            app:backgroundSelect="#dcecfc"
+            app:radius="4dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="bottom|right"
+            app:srcAnchorHeightSelect="15dp"
+            app:srcAnchorSelect="@drawable/iv_tview_select03_bg"
+            app:srcAnchorWidthSelect="15dp"
+            app:textColorNormal="#444344"
+            app:textColorSelect="#0e82f6"
+            app:textSize="13dp"
+            app:textValue="二星连锁" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewStarThree"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@id/tViewStarTwo"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/tViewStarTwo"
+            app:backgroundNormal="#f5f6fb"
+            app:backgroundSelect="#dcecfc"
+            app:radius="4dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="bottom|right"
+            app:srcAnchorHeightSelect="15dp"
+            app:srcAnchorSelect="@drawable/iv_tview_select03_bg"
+            app:srcAnchorWidthSelect="15dp"
+            app:textColorNormal="#444344"
+            app:textColorSelect="#0e82f6"
+            app:textSize="13dp"
+            app:textValue="三星舒适" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewStarFour"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@id/tViewStarThree"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/tViewStarThree"
+            app:backgroundNormal="#f5f6fb"
+            app:backgroundSelect="#dcecfc"
+            app:radius="4dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="bottom|right"
+            app:srcAnchorHeightSelect="15dp"
+            app:srcAnchorSelect="@drawable/iv_tview_select03_bg"
+            app:srcAnchorWidthSelect="15dp"
+            app:textColorNormal="#444344"
+            app:textColorSelect="#0e82f6"
+            app:textSize="13dp"
+            app:textValue="四星高档" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewStarFive"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@id/tViewStarFour"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/tViewStarFour"
+            app:backgroundNormal="#f5f6fb"
+            app:backgroundSelect="#dcecfc"
+            app:radius="4dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="bottom|right"
+            app:srcAnchorHeightSelect="15dp"
+            app:srcAnchorSelect="@drawable/iv_tview_select03_bg"
+            app:srcAnchorWidthSelect="15dp"
+            app:textColorNormal="#444344"
+            app:textColorSelect="#0e82f6"
+            app:textSize="13dp"
+            app:textValue="五星豪华" />
 
     </com.tunasushi.tuna.TLayout>
 </RelativeLayout>

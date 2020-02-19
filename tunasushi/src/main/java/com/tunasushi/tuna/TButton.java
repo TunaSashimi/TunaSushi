@@ -35,7 +35,7 @@ public class TButton extends TView {
     }
 
     private float buttonTextSize;
-    private int buttonTextColorNormal;
+    private int buttonTextColor;
 
     private Bitmap buttonSrcNormal, buttonSrcPress;
 
@@ -81,7 +81,7 @@ public class TButton extends TView {
 
         buttonTextValue = typedArray.getString(R.styleable.TButton_buttonTextValue);
         buttonTextSize = typedArray.getDimension(R.styleable.TButton_buttonTextSize, 0);
-        buttonTextColorNormal = typedArray.getColor(R.styleable.TButton_buttonTextColorNormal, Color.TRANSPARENT);
+        buttonTextColor = typedArray.getColor(R.styleable.TButton_buttonTextColor, Color.TRANSPARENT);
 
         buttonTextFractionTop = typedArray.getFraction(R.styleable.TButton_buttonTextFractionTop, 1, 1, 0);
         buttonTextFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonTextFractionBottom, 1, 1, 1);
@@ -120,7 +120,7 @@ public class TButton extends TView {
         canvas.translate(-dx, -dy);
 
         drawText(canvas, buttonTextValue, width, width >> 1, (height * buttonTextFractionTop + height * buttonTextFractionBottom) * 0.5f, 0, 0,
-                initTextPaint(Paint.Style.FILL, buttonTextColorNormal, buttonTextSize, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, buttonTextColor, buttonTextSize, Paint.Align.CENTER));
 
         canvas.drawColor(press ? buttonForegroundPress : buttonForegroundNormal);
 

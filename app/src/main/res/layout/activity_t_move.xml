@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/iv_scale_bg02">
+    android:background="@drawable/iv_tscale_bg02">
 
     <com.tunasushi.tuna.TMove
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:moveBitmap="@drawable/iv_move_bg"
+        app:moveBitmap="@drawable/iv_tmove_bg"
         app:moveDistance="1dp" />
 </merge>

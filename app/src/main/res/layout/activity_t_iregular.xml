@@ -10,6 +10,6 @@
         android:layout_width="224dp"
         android:layout_height="32dp"
         android:layout_margin="16dp"
-        app:irregularSrcNormal="@drawable/iv_dialog_switch01"
-        app:irregularSrcSelect="@drawable/iv_dialog_switch02" />
+        app:irregularSrcNormal="@drawable/iv_tirregular_switch01"
+        app:irregularSrcSelect="@drawable/iv_tirregular_switch02" />
 </RelativeLayout>

@@ -29,28 +29,28 @@ public class TRange extends TView {
     private int rangeDragStrokeColor;
     private float rangeDragStrokeWidth;
 
-    private int rangeDragLeftIndex;
+    private int rangeDragIndexLeft;
 
-    public int getRangeDragLeftIndex() {
-        return rangeDragLeftIndex;
+    public int getRangeDragIndexLeft() {
+        return rangeDragIndexLeft;
     }
 
-    public void setRangeDragLeftIndex(int rangeDragLeftIndex) {
-        this.rangeDragLeftIndex = rangeDragLeftIndex;
+    public void setRangeDragIndexLeft(int rangeDragIndexLeft) {
+        this.rangeDragIndexLeft = rangeDragIndexLeft;
     }
 
-    private int rangeDragRightIndex;
+    private int rangeDragIndexRight;
 
-    public int getRangeDragRightIndex() {
-        return rangeDragRightIndex;
+    public int getRangeDragIndexRight() {
+        return rangeDragIndexRight;
     }
 
-    public void setRangeDragRightIndex(int rangeDragRightIndex) {
-        this.rangeDragRightIndex = rangeDragRightIndex;
+    public void setRangeDragIndexRight(int rangeDragIndexRight) {
+        this.rangeDragIndexRight = rangeDragIndexRight;
     }
 
-    private Bitmap rangeDragLeftSrc;
-    private Bitmap rangeDragRightSrc;
+    private Bitmap rangeDragSrcLeft;
+    private Bitmap rangeDragSrcRight;
     //
     private float rangeCircleCentreX;
 
@@ -68,9 +68,9 @@ public class TRange extends TView {
 
     public String getRangeValue() {
         if (dx > 0) {
-            return rangeValueArray[rangeDragRightIndex];
+            return rangeValueArray[rangeDragIndexRight];
         } else {
-            return rangeValueArray[rangeDragLeftIndex];
+            return rangeValueArray[rangeDragIndexLeft];
         }
     }
 
@@ -79,11 +79,11 @@ public class TRange extends TView {
     }
 
     public String getRangeValueLeft() {
-        return rangeValueArray[rangeDragLeftIndex];
+        return rangeValueArray[rangeDragIndexLeft];
     }
 
     public String getRangeValueRight() {
-        return rangeValueArray[rangeDragRightIndex];
+        return rangeValueArray[rangeDragIndexRight];
     }
 
     public TRange(Context context) {
@@ -127,26 +127,26 @@ public class TRange extends TView {
         rangeDragStrokeWidth = typedArray.getDimension(R.styleable.TRange_rangeDragStrokeWidth, 0);
 
         //0
-        rangeDragLeftIndex = typedArray.getInt(R.styleable.TRange_rangeDragLeftIndex, 0);
-        if (rangeDragLeftIndex < 0 || rangeDragLeftIndex > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute rangeDragLeftIndex must be no less than 0 and no greater than rangeValueArray length");
+        rangeDragIndexLeft = typedArray.getInt(R.styleable.TRange_rangeDragIndexLeft, 0);
+        if (rangeDragIndexLeft < 0 || rangeDragIndexLeft > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexLeft must be no less than 0 and no greater than rangeValueArray length");
         }
 
         //rangeValueArray.length - 1
-        rangeDragRightIndex = typedArray.getInt(R.styleable.TRange_rangeDragRightIndex, total - 1);
-        if (rangeDragRightIndex < 0 || rangeDragRightIndex > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute rangeDragRightIndex must be no less than 0 and no greater than rangeValueArray length");
+        rangeDragIndexRight = typedArray.getInt(R.styleable.TRange_rangeDragIndexRight, total - 1);
+        if (rangeDragIndexRight < 0 || rangeDragIndexRight > total - 1) {
+            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexRight must be no less than 0 and no greater than rangeValueArray length");
         }
 
         //
-        int rangeDragLeftSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragLeftSrc, -1);
-        if (rangeDragLeftSrcId != -1) {
-            rangeDragLeftSrc = BitmapFactory.decodeResource(getResources(), rangeDragLeftSrcId);
+        int rangeDragSrcLeftId = typedArray.getResourceId(R.styleable.TRange_rangeDragSrcLeft, -1);
+        if (rangeDragSrcLeftId != -1) {
+            rangeDragSrcLeft = BitmapFactory.decodeResource(getResources(), rangeDragSrcLeftId);
         }
 
-        int rangeDragRightSrcId = typedArray.getResourceId(R.styleable.TRange_rangeDragRightSrc, rangeDragLeftSrcId);
-        if (rangeDragRightSrcId != -1) {
-            rangeDragRightSrc = BitmapFactory.decodeResource(getResources(), rangeDragRightSrcId);
+        int rangeDragSrcRightId = typedArray.getResourceId(R.styleable.TRange_rangeDragSrcRight, rangeDragSrcLeftId);
+        if (rangeDragSrcRightId != -1) {
+            rangeDragSrcRight = BitmapFactory.decodeResource(getResources(), rangeDragSrcRightId);
         }
         typedArray.recycle();
     }
@@ -178,34 +178,34 @@ public class TRange extends TView {
         initPaint(Paint.Style.FILL, rangeDragColor);
 
         // Paint.Style.FILL
-        canvas.drawCircle(floatArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
+        canvas.drawCircle(floatArray[rangeDragIndexLeft], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
             initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
             //Paint.Style.STROKE is Diverge to both sides
-            canvas.drawCircle(floatArray[rangeDragLeftIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
+            canvas.drawCircle(floatArray[rangeDragIndexLeft], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         // draw range dragRight
         initPaint(Paint.Style.FILL, rangeDragColor);
-        canvas.drawCircle(floatArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
+        canvas.drawCircle(floatArray[rangeDragIndexRight], height >> 1, (height >> 1) - rangeDragStrokeWidth, paint);
 
         if (rangeDragStrokeWidth > 0) {
             initPaint(Paint.Style.STROKE, rangeDragStrokeColor, rangeDragStrokeWidth);
-            canvas.drawCircle(floatArray[rangeDragRightIndex], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
+            canvas.drawCircle(floatArray[rangeDragIndexRight], height >> 1, (height >> 1) - rangeDragStrokeWidth / 2, paint);
         }
 
         //draw rangeColorSelect
         initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
-        canvas.drawLine(floatArray[rangeDragLeftIndex] + (height >> 1), height >> 1,
-                floatArray[rangeDragRightIndex] - (height >> 1), height >> 1, paint);
+        canvas.drawLine(floatArray[rangeDragIndexLeft] + (height >> 1), height >> 1,
+                floatArray[rangeDragIndexRight] - (height >> 1), height >> 1, paint);
     }
 
     @Override
     public void setTouchXYRaw(float touchX, float touchY) {
         x = touchX;
         float distenceMin = width;
-        if (Math.abs(x - floatArray[rangeDragLeftIndex]) <= Math.abs(x - floatArray[rangeDragRightIndex])) {
+        if (Math.abs(x - floatArray[rangeDragIndexLeft]) <= Math.abs(x - floatArray[rangeDragIndexRight])) {
             dx = -1;
         } else {
             dx = 1;
@@ -214,11 +214,11 @@ public class TRange extends TView {
             float circlecentreDx = Math.abs(x - floatArray[i]);
             if (circlecentreDx < distenceMin) {
                 if (dx > 0) {
-                    rangeDragRightIndex = i;
-                    rangeCircleCentreX = floatArray[rangeDragRightIndex];
+                    rangeDragIndexRight = i;
+                    rangeCircleCentreX = floatArray[rangeDragIndexRight];
                 } else {
-                    rangeDragLeftIndex = i;
-                    rangeCircleCentreX = floatArray[rangeDragLeftIndex];
+                    rangeDragIndexLeft = i;
+                    rangeCircleCentreX = floatArray[rangeDragIndexLeft];
                 }
                 distenceMin = circlecentreDx;
             } else {

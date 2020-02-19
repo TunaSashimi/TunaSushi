@@ -27,11 +27,11 @@ public class TSeek extends TView {
 
     private String[] seekTextValueArray;
     private int seekAngle;
-    private int seekFillColor;
+    private int seekColorFill;
     private float seekStrokeWidth;
     private int seekStrokeColor;
     private float seekTextSize;
-    private int seekTextColorNormal;
+    private int seekTextColor;
 
     private int seekDragBackgroundNormal, seekDragBackgroundPress;
 
@@ -100,11 +100,11 @@ public class TSeek extends TView {
         }
 
         seekAngle = typedArray.getInt(R.styleable.TSeek_seekAngle, 30);
-        seekFillColor = typedArray.getColor(R.styleable.TSeek_seekFillColor, Color.TRANSPARENT);
+        seekColorFill = typedArray.getColor(R.styleable.TSeek_seekColorFill, Color.TRANSPARENT);
         seekStrokeWidth = typedArray.getDimension(R.styleable.TSeek_seekStrokeWidth, 0);
         seekStrokeColor = typedArray.getColor(R.styleable.TSeek_seekStrokeColor, Color.TRANSPARENT);
         seekTextSize = typedArray.getDimension(R.styleable.TSeek_seekTextSize, 18);
-        seekTextColorNormal = typedArray.getColor(R.styleable.TSeek_seekTextColorNormal, Color.TRANSPARENT);
+        seekTextColor = typedArray.getColor(R.styleable.TSeek_seekTextColor, Color.TRANSPARENT);
 
         seekDragBackgroundNormal = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundNormal, Color.TRANSPARENT);
         seekDragBackgroundPress = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundPress, seekDragBackgroundNormal);
@@ -186,7 +186,7 @@ public class TSeek extends TView {
         // draw bottom stroke
         canvas.drawPath(path, initPaint(Paint.Style.STROKE, seekStrokeColor, seekStrokeWidth));
 
-        initPaint(Paint.Style.FILL, seekFillColor);
+        initPaint(Paint.Style.FILL, seekColorFill);
 
         for (int i = 0; i < total; i++) {
 
@@ -214,7 +214,7 @@ public class TSeek extends TView {
         }
 
         // draw bottom text
-        initTextPaint(Paint.Style.FILL, seekTextColorNormal, seekTextSize, Align.CENTER);
+        initTextPaint(Paint.Style.FILL, seekTextColor, seekTextSize, Align.CENTER);
         for (int i = 0; i < total; i++) {
             drawText(canvas, seekTextValueArray[i], width, floatArray[i], height >> 1, 0, 0, paint);
         }

@@ -13,17 +13,17 @@
             android:id="@+id/textMaterial01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tuna_button_margin"
+            android:layout_margin="16dp"
             android:text="material设置启用MaterialDesign效果\nmaterialDuraction设置动画时长\nmaterialTimeInterpolator设置插补器\nmaterialSpread设置中心偏移"
             android:textColor="#434343" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewMaterial01"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tuna_button_height"
+            android:layout_height="48dp"
             android:layout_below="@id/textMaterial01"
-            android:layout_marginLeft="@dimen/tuna_button_marginLeft"
-            android:layout_marginRight="@dimen/tuna_button_marginRight"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#bc7955"
             app:material="spread"
@@ -35,9 +35,9 @@
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewMaterial02"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tuna_button_height"
+            android:layout_height="48dp"
             android:layout_below="@id/tViewMaterial01"
-            android:layout_margin="@dimen/tuna_button_margin"
+            android:layout_margin="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#bc7955"
             app:material="spread"
@@ -50,10 +50,10 @@
         <RelativeLayout
             android:id="@+id/relativeMaterial"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tuna_button_height"
+            android:layout_height="48dp"
             android:layout_below="@id/tViewMaterial02"
-            android:layout_marginLeft="@dimen/tuna_button_marginLeft"
-            android:layout_marginRight="@dimen/tuna_button_marginRight">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
 
             <View
                 android:id="@+id/viewRadioGroupDrackBrownAnchor"
@@ -66,7 +66,7 @@
                 app:material="spread"
                 app:select="true"
                 app:textMarkColor="#ff0000"
-                app:textMarkRadius="@dimen/tuna_textmark_radius"
+                app:textMarkRadius="5dp"
                 app:textValue="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
@@ -76,7 +76,7 @@
                 app:material="spread"
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
-                app:textMarkRadius="@dimen/tuna_textmark_radius"
+                app:textMarkRadius="5dp"
                 app:textValue="TunaSashimi" />
         </RelativeLayout>
 
@@ -84,7 +84,7 @@
             android:layout_width="288dp"
             android:layout_height="288dp"
             android:layout_below="@id/relativeMaterial"
-            android:layout_margin="@dimen/tuna_button_margin"
+            android:layout_margin="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#000000"
             app:material="spread"

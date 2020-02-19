@@ -2,60 +2,22 @@
 
     <!-- Default screen margins, per the Android Design guidelines. -->
 
-
     <!-- Activity use -->
 
-
     <!-- Buttom represents the clickable area -->
-    <dimen name="tuna_button_margin">16dp</dimen>
-    <dimen name="tuna_button_marginTop">16dp</dimen>
-    <dimen name="tuna_button_marginBottom">16dp</dimen>
-    <dimen name="tuna_button_marginLeft">16dp</dimen>
-    <dimen name="tuna_button_marginRight">16dp</dimen>
-    <dimen name="tuna_button_marginBetween">6dp</dimen>
-    <dimen name="tuna_button_width">120dp</dimen>
-    <dimen name="tuna_button_height">48dp</dimen>
-    <dimen name="tuna_button_textSize">14dp</dimen>
 
     <!-- Spinner represents the clickable area -->
-    <dimen name="tuna_spinner_width">100dp</dimen>
-    <dimen name="tuna_spinner_height">60dp</dimen>
 
     <!-- Layout represents the block or complex area -->
-    <dimen name="tuna_layout_marginTop">19dp</dimen>
-    <dimen name="tuna_layout_marginLeft">13dp</dimen>
-    <dimen name="tuna_layout_marginRight">13dp</dimen>
-    <dimen name="tuna_layout_marginBetween">4dp</dimen>
-    <dimen name="tuna_layout_marginTop_Adjust">15dp</dimen>
-    <dimen name="tuna_layout_height">160dp</dimen>
 
     <!-- Text represents the unclickable area -->
-    <dimen name="tuna_text_textSize">12dp</dimen>
 
     <!-- Title represents the title bar area -->
 
-    <!--  -->
-    <dimen name="tuna_radius">5dp</dimen>
-
-    <!--  -->
-    <dimen name="tuna_stroke_width">2px</dimen>
-    <dimen name="tuna_stroke_mask">-2px</dimen>
-
     <!-- Exclusive TView or any of its subclasses use -->
 
-    <dimen name="tuna_textmark_radius">4dp</dimen>
-    <dimen name="tuna_textmark_tipsRadius">10dp</dimen>
-    <dimen name="tuna_textmark_textSize">10dp</dimen>
-
     <!-- Other use -->
-    <dimen name="relative_marginBottom_hideHeight">-100dp</dimen>
-    <dimen name="checkbox_textSize">14dp</dimen>
-    <dimen name="checkbox_width">118dp</dimen>
-    <dimen name="multitaglayouttestchain_radiobutton01">0dp</dimen>
-    <dimen name="multitaglayouttestchain_radiobutton02">100dp</dimen>
-    <dimen name="multitaglayouttestchain_radiobutton03">200dp</dimen>
-    <dimen name="multitaglayouttestchain_radiobutton04">300dp</dimen>
-    <dimen name="multitaglayouttestchain_radiobutton05">400dp</dimen>
-    <dimen name="qrcodetest_imageview_width">300dp</dimen>
+
+    <!--  -->
 
 </resources>

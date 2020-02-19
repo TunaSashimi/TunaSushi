@@ -11,8 +11,8 @@
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         app:sectorDragRadius="4dp"
-        app:sectorInArcWidth="12dp"
-        app:sectorOutArcWidth="2dp"
+        app:sectorArcWidthIn="12dp"
+        app:sectorArcWidthOut="2dp"
         app:sectorSpaceWidth="12dp" />
 
     <com.tunasushi.tuna.TView

@@ -22,8 +22,8 @@ import java.util.List;
  */
 
 public class TWrap extends TView {
-    private float wrapLineSpacing;
-    private float wrapRowSpacing;
+    private float wrapSpaceLine;
+    private float wrapSpaceRow;
 
     private int wrapBackgroundNormal, wrapBackgroundSelect;
 
@@ -79,8 +79,8 @@ public class TWrap extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TWrap);
 
-        wrapLineSpacing = typedArray.getDimension(R.styleable.TWrap_wrapLineSpacing, 0);
-        wrapRowSpacing = typedArray.getDimension(R.styleable.TWrap_wrapRowSpacing, 0);
+        wrapSpaceLine = typedArray.getDimension(R.styleable.TWrap_wrapSpaceLine, 0);
+        wrapSpaceRow = typedArray.getDimension(R.styleable.TWrap_wrapSpaceRow, 0);
 
         wrapBackgroundNormal = typedArray.getColor(R.styleable.TWrap_wrapBackgroundNormal, Color.TRANSPARENT);
         wrapBackgroundSelect = typedArray.getColor(R.styleable.TWrap_wrapBackgroundSelect, wrapBackgroundNormal);
@@ -143,11 +143,11 @@ public class TWrap extends TView {
                 //
                 if (i != 0) {
                     float itemWidth = paint.measureText(wrapItemTextValueArray[i]);
-                    characterWidth += wrapLineSpacing + itemWidth;
+                    characterWidth += wrapSpaceLine + itemWidth;
                 }
                 if (characterWidth > specSizeWidth) {
                     characterWidth = 0;
-                    measuredHeight += wrapRowSpacing + rowHeight;
+                    measuredHeight += wrapSpaceRow + rowHeight;
                 } else {
                 }
             }
@@ -179,22 +179,22 @@ public class TWrap extends TView {
         for (int i = 0; i <= total - 1; i++) {
             float itemWidth = paint.measureText(wrapItemTextValueArray[i]);
             if (i != 0) {
-                characterWidth += wrapLineSpacing + itemWidth;
+                characterWidth += wrapSpaceLine + itemWidth;
             }
             if (characterWidth > width) {
                 //
                 dx = 0;
-                dy += wrapRowSpacing + rowHeight;
+                dy += wrapSpaceRow + rowHeight;
                 //
                 drawDetail(canvas, dx, dy, itemWidth, rowHeight, i);
                 //
-                dx += wrapLineSpacing + itemWidth;
+                dx += wrapSpaceLine + itemWidth;
                 characterWidth = itemWidth;
             } else {
                 //
                 drawDetail(canvas, dx, dy, itemWidth, rowHeight, i);
                 //
-                dx += wrapLineSpacing + itemWidth;
+                dx += wrapSpaceLine + itemWidth;
             }
         }
     }

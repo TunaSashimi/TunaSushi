@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:drawColor="#ffff00"
-        app:drawSrc="@drawable/iv_hollow_bg"
+        app:drawSrc="@drawable/iv_thollow_bg"
         app:drawWidth="8dp" />
 </RelativeLayout>

@@ -25,43 +25,43 @@
         <attr name="foregroundNormal" format="reference|color" />
         <attr name="foregroundPress" format="reference|color" />
         <attr name="foregroundSelect" format="reference|color" />
-        <attr name="backgroundNormalAngle" format="integer" />
-        <attr name="backgroundPressAngle" format="integer" />
-        <attr name="backgroundSelectAngle" format="integer" />
-        <attr name="backgroundNormalGradientStart" format="reference|color" />
-        <attr name="backgroundNormalGradientEnd" format="reference|color" />
-        <attr name="backgroundPressGradientStart" format="reference|color" />
-        <attr name="backgroundPressGradientEnd" format="reference|color" />
-        <attr name="backgroundSelectGradientStart" format="reference|color" />
-        <attr name="backgroundSelectGradientEnd" format="reference|color" />
-        <attr name="backgroundNormalShadowRadius" format="dimension" />
+        <attr name="backgroundAngleNormal" format="integer" />
+        <attr name="backgroundAnglePress" format="integer" />
+        <attr name="backgroundAngleSelect" format="integer" />
+        <attr name="backgroundGradientStartNormal" format="reference|color" />
+        <attr name="backgroundGradientEndNormal" format="reference|color" />
+        <attr name="backgroundGradientStartPress" format="reference|color" />
+        <attr name="backgroundGradientEndPress" format="reference|color" />
+        <attr name="backgroundGradientStartSelect" format="reference|color" />
+        <attr name="backgroundGradientEndSelect" format="reference|color" />
+        <attr name="backgroundShadowRadiusNormal" format="dimension" />
         <attr name="backgroundNormalShadowColor" format="reference|color" />
-        <attr name="backgroundNormalShadowDx" format="dimension" />
-        <attr name="backgroundNormalShadowDy" format="dimension" />
-        <attr name="backgroundPressShadowRadius" format="dimension" />
+        <attr name="backgroundShadowDxNormal" format="dimension" />
+        <attr name="backgroundShadowDyNormal" format="dimension" />
+        <attr name="backgroundShadowRadiusPress" format="dimension" />
         <attr name="backgroundPressShadowColor" format="reference|color" />
-        <attr name="backgroundPressShadowDx" format="dimension" />
-        <attr name="backgroundPressShadowDy" format="dimension" />
-        <attr name="backgroundSelectShadowRadius" format="dimension" />
+        <attr name="backgroundShadowDxPress" format="dimension" />
+        <attr name="backgroundShadowDyPress" format="dimension" />
+        <attr name="backgroundShadowRadiusSelect" format="dimension" />
         <attr name="backgroundSelectShadowColor" format="reference|color" />
-        <attr name="backgroundSelectShadowDx" format="dimension" />
-        <attr name="backgroundSelectShadowDy" format="dimension" />
+        <attr name="backgroundShadowDxSelect" format="dimension" />
+        <attr name="backgroundShadowDySelect" format="dimension" />
 
         <attr name="srcNormal" format="reference" />
         <attr name="srcPress" format="reference" />
         <attr name="srcSelect" format="reference" />
 
-        <attr name="srcNormalShadowRadius" format="dimension" />
-        <attr name="srcNormalShadowDx" format="dimension" />
-        <attr name="srcNormalShadowDy" format="dimension" />
+        <attr name="srcShadowRadiusNormal" format="dimension" />
+        <attr name="srcShadowDxNormal" format="dimension" />
+        <attr name="srcShadowDyNormal" format="dimension" />
 
-        <attr name="srcPressShadowRadius" format="dimension" />
-        <attr name="srcPressShadowDx" format="dimension" />
-        <attr name="srcPressShadowDy" format="dimension" />
+        <attr name="srcShadowRadiusPress" format="dimension" />
+        <attr name="srcShadowDxPress" format="dimension" />
+        <attr name="srcShadowDyPress" format="dimension" />
 
-        <attr name="srcSelectShadowRadius" format="dimension" />
-        <attr name="srcSelectShadowDx" format="dimension" />
-        <attr name="srcSelectShadowDy" format="dimension" />
+        <attr name="srcShadowRadiusSelect" format="dimension" />
+        <attr name="srcShadowDxSelect" format="dimension" />
+        <attr name="srcShadowDySelect" format="dimension" />
 
         <attr name="srcAnchorGravity">
             <flag name="left" value="0x00" />
@@ -74,22 +74,22 @@
         </attr>
 
         <attr name="srcAnchorNormal" format="reference" />
-        <attr name="srcAnchorNormalWidth" format="dimension" />
-        <attr name="srcAnchorNormalHeight" format="dimension" />
-        <attr name="srcAnchorNormalDx" format="dimension" />
-        <attr name="srcAnchorNormalDy" format="dimension" />
+        <attr name="srcAnchorWidthNormal" format="dimension" />
+        <attr name="srcAnchorHeightNormal" format="dimension" />
+        <attr name="srcAnchorDxNormal" format="dimension" />
+        <attr name="srcAnchorDyNormal" format="dimension" />
 
         <attr name="srcAnchorPress" format="reference" />
-        <attr name="srcAnchorPressWidth" format="dimension" />
-        <attr name="srcAnchorPressHeight" format="dimension" />
-        <attr name="srcAnchorPressDx" format="dimension" />
-        <attr name="srcAnchorPressDy" format="dimension" />
+        <attr name="srcAnchorWidthPress" format="dimension" />
+        <attr name="srcAnchorHeightPress" format="dimension" />
+        <attr name="srcAnchorDxPress" format="dimension" />
+        <attr name="srcAnchorDyPress" format="dimension" />
 
         <attr name="srcAnchorSelect" format="reference" />
-        <attr name="srcAnchorSelectWidth" format="dimension" />
-        <attr name="srcAnchorSelectHeight" format="dimension" />
-        <attr name="srcAnchorSelectDx" format="dimension" />
-        <attr name="srcAnchorSelectDy" format="dimension" />
+        <attr name="srcAnchorWidthSelect" format="dimension" />
+        <attr name="srcAnchorHeightSelect" format="dimension" />
+        <attr name="srcAnchorDxSelect" format="dimension" />
+        <attr name="srcAnchorDySelect" format="dimension" />
 
         <attr name="strokeWidthNormal" format="dimension" />
         <attr name="strokeColorNormal" format="reference|color" />
@@ -250,7 +250,7 @@
         <attr name="bubbleEdgeHeight" format="dimension" />
         <attr name="bubbleTextValue" format="string" />
         <attr name="bubbleTextSize" format="dimension" />
-        <attr name="bubbleTextColorNormal" format="reference|color" />
+        <attr name="bubbleTextColor" format="reference|color" />
         <attr name="bubbleTextPadding" format="dimension" />
 
         <attr name="bubbleTowardType">
@@ -280,8 +280,8 @@
         <attr name="buttonBitmapFractionTop" format="fraction" />
         <attr name="buttonBitmapFractionBottom" format="fraction" />
         <attr name="buttonTextValue" format="string" />
+        <attr name="buttonTextColor" format="reference|color" />
         <attr name="buttonTextSize" format="dimension" />
-        <attr name="buttonTextColorNormal" format="reference|color" />
         <attr name="buttonTextFractionTop" format="fraction" />
         <attr name="buttonTextFractionBottom" format="fraction" />
     </declare-styleable>
@@ -292,8 +292,8 @@
         <attr name="dialogBackground" format="reference|color" />
         <attr name="dialogSurround" format="reference|color" />
 
-        <attr name="dialogStrokeWidth" format="dimension" />
         <attr name="dialogStrokeColor" format="reference|color" />
+        <attr name="dialogStrokeWidth" format="dimension" />
 
         <attr name="dialogTextValue" format="string" />
         <attr name="dialogTextSize" format="dimension" />
@@ -325,9 +325,9 @@
         <attr name="dialogChoiceHeight" format="dimension" />
 
         <attr name="dialogChoiceValueArray" format="reference" />
-        <attr name="dialogChoiceSize" format="dimension" />
         <attr name="dialogChoiceColor" format="reference|color" />
         <attr name="dialogChoiceColorArray" format="reference" />
+        <attr name="dialogChoiceSize" format="dimension" />
         <attr name="dialogChoiceIndex" format="integer" />
     </declare-styleable>
 
@@ -381,27 +381,27 @@
     </declare-styleable>
 
     <declare-styleable name="TLayout">
-        <attr name="layoutBackgroundNormal" format="reference|color" />
-        <attr name="layoutBackgroundNormalAngle" format="integer" />
-        <attr name="layoutBackgroundNormalGradientStart" format="reference|color" />
-        <attr name="layoutBackgroundNormalGradientEnd" format="reference|color" />
-        <attr name="layoutBackgroundNormalShadowRadius" format="dimension" />
-        <attr name="layoutBackgroundNormalShadowColor" format="reference|color" />
-        <attr name="layoutBackgroundNormalShadowDx" format="dimension" />
-        <attr name="layoutBackgroundNormalShadowDy" format="dimension" />
+        <attr name="layoutBackground" format="reference|color" />
+        <attr name="layoutBackgroundAngle" format="integer" />
+        <attr name="layoutBackgroundGradientStart" format="reference|color" />
+        <attr name="layoutBackgroundGradientEnd" format="reference|color" />
+        <attr name="layoutBackgroundShadowRadius" format="dimension" />
+        <attr name="layoutBackgroundShadowColor" format="reference|color" />
+        <attr name="layoutBackgroundShadowDx" format="dimension" />
+        <attr name="layoutBackgroundShadowDy" format="dimension" />
 
-        <attr name="layoutSrcNormal" format="reference" />
-        <attr name="layoutSrcNormalShadowRadius" format="dimension" />
-        <attr name="layoutSrcNormalShadowDx" format="dimension" />
-        <attr name="layoutSrcNormalShadowDy" format="dimension" />
+        <attr name="layoutSrc" format="reference" />
+        <attr name="layoutSrcShadowRadius" format="dimension" />
+        <attr name="layoutSrcShadowDx" format="dimension" />
+        <attr name="layoutSrcShadowDy" format="dimension" />
 
         <attr name="layoutPorterDuffXfermode">
             <enum name="layout_src_in" value="0" />
             <enum name="layout_src_out" value="1" />
         </attr>
 
-        <attr name="layoutStrokeWidthNormal" format="dimension" />
-        <attr name="layoutStrokeColorNormal" format="reference|color" />
+        <attr name="layoutStrokeWidth" format="dimension" />
+        <attr name="layoutStrokeColor" format="reference|color" />
 
         <attr name="layoutRadius" format="dimension" />
         <attr name="layoutRadiusLeftTop" format="dimension" />
@@ -413,8 +413,8 @@
     <declare-styleable name="TLine">
         <attr name="lineArrowWidth" format="dimension" />
         <attr name="lineArrowHeight" format="dimension" />
-        <attr name="lineArrowStrokeWidth" format="dimension" />
         <attr name="lineArrowStrokeColor" format="reference|color" />
+        <attr name="lineArrowStrokeWidth" format="dimension" />
         <attr name="lineArrowColor" format="reference|color" />
         <attr name="lineTowardType">
             <enum name="top" value="0" />
@@ -459,10 +459,10 @@
         <attr name="rangeDragColor" format="reference|color" />
         <attr name="rangeDragStrokeColor" format="reference|color" />
         <attr name="rangeDragStrokeWidth" format="dimension" />
-        <attr name="rangeDragLeftIndex" format="integer" />
-        <attr name="rangeDragRightIndex" format="integer" />
-        <attr name="rangeDragLeftSrc" format="reference" />
-        <attr name="rangeDragRightSrc" format="reference" />
+        <attr name="rangeDragIndexLeft" format="integer" />
+        <attr name="rangeDragIndexRight" format="integer" />
+        <attr name="rangeDragSrcLeft" format="reference" />
+        <attr name="rangeDragSrcRight" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TRepeat">
@@ -476,9 +476,9 @@
         <attr name="repeatItemTextColorSelect" format="reference|color" />
         <attr name="repeatItemBackgroundNormal" format="reference|color" />
         <attr name="repeatItemBackgroundSelect" format="reference|color" />
-        <attr name="repeatItemStrokeWidth" format="dimension" />
         <attr name="repeatItemStrokeColorNormal" format="reference|color" />
         <attr name="repeatItemStrokeColorSelect" format="reference|color" />
+        <attr name="repeatItemStrokeWidth" format="dimension" />
         <attr name="repeatSelectType">
             <enum name="connect" value="0" />
             <enum name="current" value="1" />
@@ -495,23 +495,23 @@
     </declare-styleable>
 
     <declare-styleable name="TRipple">
-        <attr name="rippleInnerCircleRadius" format="dimension" />
-        <attr name="rippleInnerCircleColor" format="reference|color" />
-        <attr name="rippleOuterCircleColor" format="reference|color" />
-        <attr name="rippleTextSize" format="dimension" />
+        <attr name="rippleCircleRadiusInner" format="dimension" />
+        <attr name="rippleCircleColorInner" format="reference|color" />
+        <attr name="rippleCircleColorOuter" format="reference|color" />
         <attr name="rippleTextColor" format="reference|color" />
+        <attr name="rippleTextSize" format="dimension" />
         <attr name="rippleTextValue" format="string" />
         <attr name="rippleTextDx" format="dimension" />
         <attr name="rippleTextDy" format="dimension" />
         <attr name="rippleTextFractionDx" format="fraction" />
         <attr name="rippleTextFractionDy" format="fraction" />
         <attr name="rippleDuraction" format="integer" />
-        <attr name="rippleInnerCircleAngle" format="integer" />
-        <attr name="rippleOuterCircleAngle" format="integer" />
-        <attr name="rippleInnerCircleColorGradientStart" format="reference|color" />
-        <attr name="rippleInnerCircleColorGradientEnd" format="reference|color" />
-        <attr name="rippleOuterCircleColorGradientStart" format="reference|color" />
-        <attr name="rippleOuterCircleColorGradientEnd" format="reference|color" />
+        <attr name="rippleCircleAngleInner" format="integer" />
+        <attr name="rippleCircleAngleOuter" format="integer" />
+        <attr name="rippleCircleColorGradientStartInner" format="reference|color" />
+        <attr name="rippleCircleColorGradientEndInner" format="reference|color" />
+        <attr name="rippleCircleColorGradientStartOuter" format="reference|color" />
+        <attr name="rippleCircleColorGradientEndOuter" format="reference|color" />
         <attr name="rippleTimeInterpolator">
             <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
             <enum name="accelerateDecelerateInterpolator" value="0" />
@@ -568,25 +568,25 @@
     </declare-styleable>
 
     <declare-styleable name="TSector">
-        <attr name="sectorOutArcWidth" format="dimension" />
-        <attr name="sectorInArcWidth" format="dimension" />
+        <attr name="sectorArcWidthOut" format="dimension" />
+        <attr name="sectorArcWidthIn" format="dimension" />
         <attr name="sectorSpaceWidth" format="dimension" />
         <attr name="sectorDragRadius" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="TSeek">
-        <attr name="seekStrokeWidth" format="dimension" />
         <attr name="seekStrokeColor" format="reference|color" />
+        <attr name="seekStrokeWidth" format="dimension" />
+        <attr name="seekTextColor" format="reference|color" />
         <attr name="seekTextSize" format="dimension" />
-        <attr name="seekTextColorNormal" format="reference|color" />
         <attr name="seekTextValueArray" format="reference" />
         <attr name="seekAngle" format="integer" />
-        <attr name="seekFillColor" format="reference|color" />
+        <attr name="seekColorFill" format="reference|color" />
         <attr name="seekIndex" format="integer" />
         <attr name="seekDragTextColor" format="reference|color" />
-        <attr name="seekDragStrokeWidth" format="dimension" />
         <attr name="seekDragStrokeColorNormal" format="reference|color" />
         <attr name="seekDragStrokeColorPress" format="reference|color" />
+        <attr name="seekDragStrokeWidth" format="dimension" />
         <attr name="seekDragBackgroundNormal" format="reference|color" />
         <attr name="seekDragBackgroundPress" format="reference|color" />
         <attr name="seekDragRadiusNormal" format="dimension" />
@@ -633,8 +633,8 @@
         <attr name="trangleBackgroundNormal" format="reference|color" />
         <attr name="trangleBackgroundPress" format="reference|color" />
         <attr name="trangleBackgroundSelect" format="reference|color" />
-        <attr name="trangleStrokeWidth" format="dimension" />
         <attr name="trangleStrokeColor" format="reference|color" />
+        <attr name="trangleStrokeWidth" format="dimension" />
         <attr name="trangleHideEdge" format="boolean" />
         <attr name="trangleTowardType">
             <enum name="top" value="0" />
@@ -645,16 +645,16 @@
     </declare-styleable>
 
     <declare-styleable name="TWrap">
-        <attr name="wrapLineSpacing" format="dimension" />
-        <attr name="wrapRowSpacing" format="dimension" />
+        <attr name="wrapSpaceLine" format="dimension" />
+        <attr name="wrapSpaceRow" format="dimension" />
         <attr name="wrapBackgroundNormal" format="reference|color" />
         <attr name="wrapBackgroundSelect" format="reference|color" />
-        <attr name="wrapStrokeWidth" format="dimension" />
         <attr name="wrapStrokeColorNormal" format="reference|color" />
         <attr name="wrapStrokeColorSelect" format="reference|color" />
-        <attr name="wrapTextSize" format="dimension" />
+        <attr name="wrapStrokeWidth" format="dimension" />
         <attr name="wrapTextColorNormal" format="reference|color" />
         <attr name="wrapTextColorSelect" format="reference|color" />
+        <attr name="wrapTextSize" format="dimension" />
         <attr name="wrapItemTextValueArray" format="reference" />
     </declare-styleable>
 

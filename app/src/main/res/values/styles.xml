@@ -15,19 +15,19 @@
 
     <style name="TView_Button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/tuna_button_height</item>
-        <item name="textSize">@dimen/tuna_button_textSize</item>
-        <item name="radius">@dimen/tuna_radius</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="textSize">14dp</item>
+        <item name="radius">5dp</item>
     </style>
 
     <style name="TView_TextMark_Red_Horizontal" parent="TView_Button">
-        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
+        <item name="textMarkRadius">4dp</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMark">true</item>
     </style>
 
     <style name="TView_TextMark_Red_Top" parent="TView_Button">
-        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
+        <item name="textMarkRadius">4dp</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-2dp</item>
         <item name="textMark">true</item>
@@ -36,7 +36,7 @@
     <style name="TView_Text">
         <item name="android:layout_width">84dp</item>
         <item name="android:layout_height">40dp</item>
-        <item name="textSize">@dimen/tuna_text_textSize</item>
+        <item name="textSize">12dp</item>
     </style>
 
     <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
@@ -47,7 +47,7 @@
         <item name="backgroundNormal">#ffffff</item>
         <item name="backgroundPress">#bc7955</item>
         <item name="backgroundSelect">#592d2d</item>
-        <item name="strokeWidthNormal">@dimen/tuna_stroke_width</item>
+        <item name="strokeWidthNormal">1dp</item>
         <item name="strokeColorNormal">#592d2d</item>
         <item name="textColorNormal">#592d2d</item>
         <item name="textColorPress">#ffffff</item>
@@ -64,7 +64,7 @@
         <item name="backgroundNormal">#ffffff</item>
         <item name="backgroundPress">#9c9c9c</item>
         <item name="backgroundSelect">#574d4c</item>
-        <item name="strokeWidthNormal">@dimen/tuna_stroke_width</item>
+        <item name="strokeWidthNormal">1dp</item>
         <item name="strokeColorNormal">#574d4c</item>
         <item name="textColorNormal">#574d4c</item>
         <item name="textColorPress">#ffffff</item>
@@ -77,9 +77,9 @@
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">@dimen/tuna_stroke_mask</item>
-        <item name="radiusLeftTop">@dimen/tuna_radius</item>
-        <item name="radiusLeftBottom">@dimen/tuna_radius</item>
+        <item name="android:layout_marginRight">-1dp</item>
+        <item name="radiusLeftTop">5dp</item>
+        <item name="radiusLeftBottom">5dp</item>
         <item name="radiusRightTop">0dp</item>
         <item name="radiusRightBottom">0dp</item>
     </style>
@@ -87,21 +87,21 @@
     <style name="TView_RadioGroup_DrackBrown_Right" parent="TView_RadioGroup_DrackBrown">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">@dimen/tuna_stroke_mask</item>
+        <item name="android:layout_marginLeft">-1dp</item>
         <item name="android:layout_marginRight">0dp</item>
         <item name="radiusLeftTop">0dp</item>
         <item name="radiusLeftBottom">0dp</item>
-        <item name="radiusRightTop">@dimen/tuna_radius</item>
-        <item name="radiusRightBottom">@dimen/tuna_radius</item>
+        <item name="radiusRightTop">5dp</item>
+        <item name="radiusRightBottom">5dp</item>
     </style>
 
     <style name="TView_RadioGroup_LightGray_Left" parent="TView_RadioGroup_LightGray">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">@dimen/tuna_stroke_mask</item>
-        <item name="radiusLeftTop">@dimen/tuna_radius</item>
-        <item name="radiusLeftBottom">@dimen/tuna_radius</item>
+        <item name="android:layout_marginRight">-1dp</item>
+        <item name="radiusLeftTop">5dp</item>
+        <item name="radiusLeftBottom">5dp</item>
         <item name="radiusRightTop">0dp</item>
         <item name="radiusRightBottom">0dp</item>
 
@@ -111,25 +111,25 @@
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
+        <item name="textMarkRadius">4dp</item>
     </style>
 
     <style name="TView_RadioGroup_LightGray_Right" parent="TView_RadioGroup_LightGray">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">@dimen/tuna_stroke_mask</item>
+        <item name="android:layout_marginLeft">-1dp</item>
         <item name="android:layout_marginRight">0dp</item>
         <item name="radiusLeftBottom">0dp</item>
         <item name="radiusLeftTop">0dp</item>
-        <item name="radiusRightBottom">@dimen/tuna_radius</item>
-        <item name="radiusRightTop">@dimen/tuna_radius</item>
+        <item name="radiusRightBottom">5dp</item>
+        <item name="radiusRightTop">5dp</item>
 
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
+        <item name="textMarkRadius">4dp</item>
 
     </style>
 
@@ -149,7 +149,7 @@
 
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">@dimen/tuna_textmark_radius</item>
+        <item name="textMarkRadius">4dp</item>
 
     </style>
 
@@ -158,10 +158,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftTop">@dimen/tuna_radius</item>
-        <item name="radiusLeftBottom">@dimen/tuna_radius</item>
-        <item name="radiusRightTop">@dimen/tuna_radius</item>
-        <item name="radiusRightBottom">@dimen/tuna_radius</item>
+        <item name="radiusLeftTop">5dp</item>
+        <item name="radiusLeftBottom">5dp</item>
+        <item name="radiusRightTop">5dp</item>
+        <item name="radiusRightBottom">5dp</item>
 
     </style>
 

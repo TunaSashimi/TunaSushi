@@ -69,16 +69,7 @@ public class TBubble extends TView {
         this.bubbleTextSize = bubbleTextSize;
     }
 
-    private int bubbleTextColorNormal;
-
-    public int getTBubbleTextColorNormal() {
-        return bubbleTextColorNormal;
-    }
-
-    public void setTBubbleTextColorNormal(int bubbleTextColorNormal) {
-        this.bubbleTextColorNormal = bubbleTextColorNormal;
-    }
-
+    private int bubbleTextColor;
 
     private float bubbleTextPadding;
 
@@ -195,7 +186,7 @@ public class TBubble extends TView {
 
         bubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
         bubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, 0);
-        bubbleTextColorNormal = typedArray.getColor(R.styleable.TBubble_bubbleTextColorNormal, Color.TRANSPARENT);
+        bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, Color.TRANSPARENT);
         bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
         int bubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);
@@ -517,7 +508,7 @@ public class TBubble extends TView {
         //
         if (bubbleTextValue != null) {
             drawText(canvas, bubbleTextValue, textWidth, textCenterX, textCenterY, 0, 0,
-                    initTextPaint(Paint.Style.FILL, bubbleTextColorNormal, bubbleTextSize, Paint.Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, bubbleTextColor, bubbleTextSize, Paint.Align.CENTER));
         }
     }
 }

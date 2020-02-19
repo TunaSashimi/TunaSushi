@@ -142,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/tTrangleBox"
-        android:layout_margin="@dimen/tuna_button_margin"
+        android:layout_margin="16dp"
         app:backgroundNormal="#592d2d"
         app:backgroundPress="#bc7955"
         app:radius="5dp"
