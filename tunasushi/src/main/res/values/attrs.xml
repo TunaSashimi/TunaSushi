@@ -115,8 +115,8 @@
         <attr name="textPaddingRight" format="dimension" />
         <attr name="textRowSpaceRatio" format="fraction" />
         <attr name="textGravity">
-            <enum name="all_center" value="0" />
-            <enum name="all_left" value="1" />
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>
@@ -158,8 +158,8 @@
         <attr name="contentPaddingRight" format="dimension" />
         <attr name="contentRowSpaceRatio" format="fraction" />
         <attr name="contentGravity">
-            <enum name="all_center" value="0" />
-            <enum name="all_left" value="1" />
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>

@@ -275,7 +275,7 @@
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="@dimen/tuna_stroke_width"
             app:textColorNormal="#ffffff"
-            app:textGravity="all_left"
+            app:textGravity="left"
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="backgroundNormalGradientDirection设置top,backgroundNormalGradientStart设置#ffca00,backgroundNormalGradientEnd设置#592d2d" />
 
@@ -295,7 +295,7 @@
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="@dimen/tuna_stroke_width"
             app:textColorNormal="#ffffff"
-            app:textGravity="all_left"
+            app:textGravity="left"
             app:textSize="@dimen/tuna_button_textSize"
             app:textValue="backgroundNormalGradientDirection设置left_top,backgroundNormalGradientStart设置#ffca00,backgroundNormalGradientEnd设置#ffca00" />
 
@@ -371,7 +371,7 @@
             app:srcNormal="@drawable/iv_clippitcure01_bg"
             app:srcPress="@drawable/iv_clippitcure02_bg"
             app:textColorNormal="#ffffff"
-            app:textGravity="all_center"
+            app:textGravity="center"
             app:textValue="mark=true&amp;textGravity=center" />
 
         <com.tunasushi.tuna.TView
@@ -385,7 +385,7 @@
             app:srcNormal="@drawable/iv_clippitcure01_bg"
             app:srcPress="@drawable/iv_clippitcure02_bg"
             app:textColorNormal="#ffffff"
-            app:textGravity="all_left"
+            app:textGravity="left"
             app:textRowSpaceRatio="200%"
             app:textValue="mark=true&amp;textGravity=left" />
 
@@ -473,7 +473,7 @@
             app:backgroundNormal="#e1e1e1"
             app:contentColorNormal="#999999"
             app:contentDy="-28dp"
-            app:contentGravity="all_left"
+            app:contentGravity="left"
             app:contentPaddingLeft="8dp"
             app:contentSize="@dimen/tuna_button_textSize"
             app:contentValue="1."
@@ -481,7 +481,7 @@
             app:strokeWidthNormal="@dimen/tuna_stroke_width"
             app:textColorNormal="#999999"
             app:textDy="6dp"
-            app:textGravity="all_left"
+            app:textGravity="left"
             app:textMark="true"
             app:textMarkColor="#ff0000"
             app:textMarkRadius="@dimen/tuna_textmark_tipsRadius"

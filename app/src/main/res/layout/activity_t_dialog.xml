@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tViewDialogConfirm"
+        android:id="@+id/tViewConfirm"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginTop="6dp"
@@ -16,10 +16,10 @@
         app:textValue="SHOW DIALOG CONFIRM" />
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tViewDialogChoice"
+        android:id="@+id/tViewChoice"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_below="@id/tViewDialogConfirm"
+        android:layout_below="@id/tViewConfirm"
         android:layout_marginTop="6dp"
         app:strokeColorNormal="#4a4a4a"
         app:strokeWidthNormal="1dp"
@@ -28,10 +28,10 @@
         app:textValue="SHOW DIALOG CHOICE" />
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tViewDialogSelect"
+        android:id="@+id/tViewSelect"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_below="@id/tViewDialogChoice"
+        android:layout_below="@id/tViewChoice"
         android:layout_marginTop="6dp"
         app:strokeColorNormal="#4a4a4a"
         app:strokeWidthNormal="1dp"

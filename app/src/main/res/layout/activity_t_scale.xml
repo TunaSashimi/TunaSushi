@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <com.tunasushi.tuna.TScale
-            android:id="@+id/tScaleWidthTop"
+            android:id="@+id/tScaleTop"
             android:layout_width="320dp"
             android:layout_height="320dp"
             android:layout_margin="10dp"
@@ -18,28 +18,28 @@
             app:scaleType="width_top" />
 
         <com.tunasushi.tuna.TScale
-            android:id="@+id/tScaleWidthCenter"
+            android:id="@+id/tScaleCenter"
             android:layout_width="320dp"
             android:layout_height="320dp"
-            android:layout_below="@id/tScaleWidthTop"
+            android:layout_below="@id/tScaleTop"
             android:layout_marginLeft="10dp"
             app:scaleBitmap="@drawable/iv_scale_bg02"
             app:scaleType="width_center" />
 
         <com.tunasushi.tuna.TScale
-            android:id="@+id/tScaleWidthBottom"
+            android:id="@+id/tScaleBottom"
             android:layout_width="320dp"
             android:layout_height="320dp"
-            android:layout_below="@id/tScaleWidthCenter"
+            android:layout_below="@id/tScaleCenter"
             android:layout_margin="10dp"
             app:scaleBitmap="@drawable/iv_scale_bg02"
             app:scaleType="width_bottom" />
 
         <com.tunasushi.tuna.TScale
-            android:id="@+id/tScaleBitmapSetBitmap"
+            android:id="@+id/tScaleSetBitmap"
             android:layout_width="320dp"
             android:layout_height="320dp"
-            android:layout_below="@id/tScaleWidthBottom"
+            android:layout_below="@id/tScaleBottom"
             android:layout_margin="10dp"
             app:scaleType="width_center" />
     </RelativeLayout>

@@ -3,36 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#80000000">
 
-    <com.tunasushi.tuna.TBubble
-        android:id="@+id/tBubble"
-        android:layout_width="36dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:bubbleBackground="#000000"
-        app:bubbleEdgeHeight="6dp"
-        app:bubbleEdgeWidth="6dp"
-        app:bubbleLocationType="middle"
-        app:radius="4dp"
-        app:bubbleTextColorNormal="#ffffff"
-        app:bubbleTextSize="12dp"
-        app:bubbleTowardType="bottom" />
-
-    <com.tunasushi.tuna.TRange
-        android:id="@+id/tRange"
+    <com.tunasushi.tuna.TLayout
+        android:id="@+id/tl"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_below="@id/tBubble"
-        android:layout_marginTop="8dp"
-        app:rangeColorNormal="#dde2e8"
-        app:rangeColorSelect="#0989ea"
-        app:rangeDragColor="#ffffff"
-        app:rangeDragStrokeColor="#dde2e8"
-        app:rangeDragStrokeWidth="2dp"
-        app:rangeThink="2dp"
-        app:rangeValueArray="@array/range_value_array"
-        app:touchIntercept="true"
-        app:touchType="always" />
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        app:layoutBackgroundNormal="#ffffff"
+        app:layoutRadiusLeftTop="10dp"
+        app:layoutRadiusRightTop="10dp">
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            app:contentColorNormal="#1b307c"
+            app:contentGravity="left"
+            app:contentPaddingLeft="50dp"
+            app:contentSize="13dp"
+            app:textColorNormal="#62636c"
+            app:textGravity="left"
+            app:textSize="14dp"
+            app:textValue="价格" />
+
+        <TextView
+            android:id="@+id/tv_price_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tView"
+            android:layout_marginLeft="29dp"
+            android:layout_marginTop="16dp"
+            android:text="¥0"
+            android:textColor="#62636c"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_price_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_price_start"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"
+            android:text="不限"
+            android:textColor="#62636c"
+            android:textSize="14dp" />
+
+        <com.tunasushi.tuna.TBubble
+            android:id="@+id/tBubble"
+            android:layout_width="36dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/tView"
+            android:layout_marginTop="14dp"
+            android:visibility="invisible"
+            app:bubbleBackground="#000000"
+            app:bubbleEdgeHeight="6dp"
+            app:bubbleEdgeWidth="6dp"
+            app:bubbleLocationType="middle"
+            app:bubbleTextColorNormal="#ffffff"
+            app:bubbleTextSize="12dp"
+            app:bubbleTowardType="bottom"
+            app:radius="4dp" />
+
+        <com.tunasushi.tuna.TRange
+            android:id="@+id/tRange"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@id/tBubble"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            app:rangeColorNormal="#dde2e8"
+            app:rangeColorSelect="#0989ea"
+            app:rangeDragColor="#ffffff"
+            app:rangeDragStrokeColor="#dde2e8"
+            app:rangeDragStrokeWidth="2dp"
+            app:rangeThink="2dp"
+            app:rangeValueArray="@array/range_value_array"
+            app:touchIntercept="true"
+            app:touchType="always" />
+
+        <TextView
+            android:id="@+id/tv_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tRange"
+            android:layout_alignLeft="@id/tView"
+            android:layout_marginTop="16dp"
+            android:text="星级(多选)"
+            android:textColor="#62636c"
+            android:textSize="14dp" />
+
+    </com.tunasushi.tuna.TLayout>
 </RelativeLayout>

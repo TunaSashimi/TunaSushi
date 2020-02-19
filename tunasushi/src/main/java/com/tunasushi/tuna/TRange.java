@@ -78,6 +78,14 @@ public class TRange extends TView {
         this.rangeValue = rangeValue;
     }
 
+    public String getRangeValueLeft() {
+        return rangeValueArray[rangeDragLeftIndex];
+    }
+
+    public String getRangeValueRight() {
+        return rangeValueArray[rangeDragRightIndex];
+    }
+
     public TRange(Context context) {
         this(context, null);
     }

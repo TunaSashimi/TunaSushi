@@ -9,5 +9,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:moveBitmap="@drawable/iv_move_bg"
-        app:moveDistance="2px" />
+        app:moveDistance="1dp" />
 </merge>

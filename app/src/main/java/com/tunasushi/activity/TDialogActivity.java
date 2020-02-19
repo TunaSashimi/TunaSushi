@@ -16,7 +16,7 @@ import com.tunasushi.tuna.TView;
  * @Description
  */
 public class TDialogActivity extends Activity {
-    private TView tViewDialogConfirm, tViewDialogChoice, tViewDialogSelect;
+    private TView tViewConfirm, tViewChoice, tViewSelect;
     private TDialog tDialogChoice, tDialogConfirm, tDialogSelect;
 
     @Override
@@ -26,25 +26,25 @@ public class TDialogActivity extends Activity {
         setContentView(R.layout.activity_t_dialog);
 
         //
-        tViewDialogConfirm = findViewById(R.id.tViewDialogConfirm);
-        tViewDialogChoice = findViewById(R.id.tViewDialogChoice);
-        tViewDialogSelect = findViewById(R.id.tViewDialogSelect);
+        tViewConfirm = findViewById(R.id.tViewConfirm);
+        tViewChoice = findViewById(R.id.tViewChoice);
+        tViewSelect = findViewById(R.id.tViewSelect);
 
         //
-        tViewDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
+        tViewConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 tDialogConfirm.setVisibility(View.VISIBLE);
             }
         });
-        tViewDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
+        tViewChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 tDialogChoice.setVisibility(View.VISIBLE);
             }
         });
         //
-        tViewDialogSelect.setTouchUpListener(new TView.TouchUpListener() {
+        tViewSelect.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 tDialogSelect.setVisibility(View.VISIBLE);

@@ -10,185 +10,185 @@
         android:layout_height="wrap_content">
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG01"
+            android:id="@+id/tSVG01"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
             android:layout_margin="@dimen/tuna_button_margin"
             app:SVGSrc="@drawable/ic_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG02"
+            android:id="@+id/tSVG02"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG01"
-            android:layout_toRightOf="@id/TSVG01"
+            android:layout_alignTop="@id/tSVG01"
+            android:layout_toRightOf="@id/tSVG01"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG03"
+            android:id="@+id/tSVG03"
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG02"
+            android:layout_alignTop="@id/tSVG02"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG02"
+            android:layout_toRightOf="@id/tSVG02"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="circle"
             app:porterDuffXfermode="src_in" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG04"
+            android:id="@+id/tSVG04"
             android:layout_width="@dimen/tuna_spinner_width"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG03"
+            android:layout_alignTop="@id/tSVG03"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG03"
+            android:layout_toRightOf="@id/tSVG03"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="circle"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG05"
+            android:id="@+id/tSVG05"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_below="@id/TSVG01"
-            android:layout_alignLeft="@id/TSVG01"
+            android:layout_below="@id/tSVG01"
+            android:layout_alignLeft="@id/tSVG01"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="star" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG06"
+            android:id="@+id/tSVG06"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG05"
+            android:layout_alignTop="@id/tSVG05"
             android:layout_marginLeft="@dimen/tuna_button_marginLeft"
-            android:layout_toRightOf="@id/TSVG05"
+            android:layout_toRightOf="@id/tSVG05"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="star"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG07"
+            android:id="@+id/tSVG07"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG06"
+            android:layout_alignTop="@id/tSVG06"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG06"
+            android:layout_toRightOf="@id/tSVG06"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="heart" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG08"
+            android:id="@+id/tSVG08"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG07"
+            android:layout_alignTop="@id/tSVG07"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG07"
+            android:layout_toRightOf="@id/tSVG07"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="heart"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG09"
+            android:id="@+id/tSVG09"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_below="@id/TSVG05"
-            android:layout_alignLeft="@id/TSVG05"
+            android:layout_below="@id/tSVG05"
+            android:layout_alignLeft="@id/tSVG05"
             android:layout_marginTop="@dimen/tuna_button_margin"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="flower" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG10"
+            android:id="@+id/tSVG10"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG09"
+            android:layout_alignTop="@id/tSVG09"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG09"
+            android:layout_toRightOf="@id/tSVG09"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="flower"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG11"
+            android:id="@+id/tSVG11"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG10"
+            android:layout_alignTop="@id/tSVG10"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG10"
+            android:layout_toRightOf="@id/tSVG10"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="pentagon" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG12"
+            android:id="@+id/tSVG12"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG11"
+            android:layout_alignTop="@id/tSVG11"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG11"
+            android:layout_toRightOf="@id/tSVG11"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="pentagon"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG13"
+            android:id="@+id/tSVG13"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_below="@id/TSVG09"
-            android:layout_alignLeft="@id/TSVG09"
+            android:layout_below="@id/tSVG09"
+            android:layout_alignLeft="@id/tSVG09"
             android:layout_marginTop="@dimen/tuna_button_margin"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="sixteenedge" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG14"
+            android:id="@+id/tSVG14"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG13"
+            android:layout_alignTop="@id/tSVG13"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG13"
+            android:layout_toRightOf="@id/tSVG13"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="sixteenedge"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG15"
+            android:id="@+id/tSVG15"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG14"
+            android:layout_alignTop="@id/tSVG14"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG14"
+            android:layout_toRightOf="@id/tSVG14"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="fortyedge" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG16"
+            android:id="@+id/tSVG16"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG15"
+            android:layout_alignTop="@id/tSVG15"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG15"
+            android:layout_toRightOf="@id/tSVG15"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="fortyedge"
             app:porterDuffXfermode="src_out" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG17"
+            android:id="@+id/tSVG17"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_below="@id/TSVG13"
-            android:layout_alignLeft="@id/TSVG13"
+            android:layout_below="@id/tSVG13"
+            android:layout_alignLeft="@id/tSVG13"
             android:layout_marginTop="@dimen/tuna_button_margin"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="snail" />
 
         <com.tunasushi.tuna.TSVG
-            android:id="@+id/TSVG18"
+            android:id="@+id/tSVG18"
             android:layout_width="@dimen/tuna_spinner_height"
             android:layout_height="@dimen/tuna_spinner_height"
-            android:layout_alignTop="@id/TSVG17"
+            android:layout_alignTop="@id/tSVG17"
             android:layout_marginLeft="@dimen/tuna_button_margin"
-            android:layout_toRightOf="@id/TSVG17"
+            android:layout_toRightOf="@id/tSVG17"
             app:SVGSrc="@drawable/ic_tunasashimi"
             app:SVGType="snail"
             app:porterDuffXfermode="src_out" />

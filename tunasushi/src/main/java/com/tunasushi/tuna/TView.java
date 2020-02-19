@@ -379,18 +379,18 @@ public class TView extends View {
 
     // 6
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TView.TextGravity.ALL_CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TView.TextGravity.CENTER, 1.0f, null);
     }
 
     // 8
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.ALL_CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.CENTER, 1.0f, null);
     }
 
     // 9
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
                                float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.ALL_CENTER, textRowSpaceRatio, valueMeasureList);
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.CENTER, textRowSpaceRatio, valueMeasureList);
     }
 
     // 10
@@ -424,10 +424,10 @@ public class TView extends View {
 
             if (i != valueMeasureListSize - 1) {
                 switch (textGravity) {
-                    case ALL_CENTER:
+                    case CENTER:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
                         break;
-                    case ALL_LEFT:
+                    case LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         break;
                     case CENTER_LEFT:
@@ -442,10 +442,10 @@ public class TView extends View {
             } else {
                 float availableWidth = width - paddingLeft - paddingRight;
                 switch (textGravity) {
-                    case ALL_CENTER:
+                    case CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
                         return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case ALL_LEFT:
+                    case LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
                     case CENTER_LEFT:
@@ -2925,7 +2925,7 @@ public class TView extends View {
     private TextGravity textGravity;
 
     public enum TextGravity {
-        ALL_CENTER(0), ALL_LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
+        CENTER(0), LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
         final int nativeInt;
 
         TextGravity(int ni) {
@@ -2933,7 +2933,7 @@ public class TView extends View {
         }
     }
 
-    private static final TextGravity[] textGravityArray = {TextGravity.ALL_CENTER, TextGravity.ALL_LEFT, TextGravity.CENTER_LEFT, TextGravity.LEFT_CENTER,};
+    private static final TextGravity[] textGravityArray = {TextGravity.CENTER, TextGravity.LEFT, TextGravity.CENTER_LEFT, TextGravity.LEFT_CENTER,};
 
     public TextGravity getTextGravity() {
         return textGravity;
@@ -3338,7 +3338,7 @@ public class TView extends View {
     private ContentGravity contentGravity;
 
     public enum ContentGravity {
-        ALL_CENTER(0), ALL_LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
+        CENTER(0), LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
         final int nativeInt;
 
         ContentGravity(int ni) {
@@ -3346,7 +3346,7 @@ public class TView extends View {
         }
     }
 
-    private static final ContentGravity[] contentGravityArray = {ContentGravity.ALL_CENTER, ContentGravity.ALL_LEFT, ContentGravity.CENTER_LEFT, ContentGravity.LEFT_CENTER,};
+    private static final ContentGravity[] contentGravityArray = {ContentGravity.CENTER, ContentGravity.LEFT, ContentGravity.CENTER_LEFT, ContentGravity.LEFT_CENTER,};
 
     public ContentGravity getContentGravity() {
         return contentGravity;
@@ -4500,6 +4500,9 @@ public class TView extends View {
             }
 
             contentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);
+
+            System.out.println("contentDx==>" + contentDx);
+
             contentDy = typedArray.getDimension(R.styleable.TView_contentDy, 0);
             contentFractionDx = typedArray.getFraction(R.styleable.TView_contentFractionDx, 1, 1, 0);
             contentFractionDy = typedArray.getFraction(R.styleable.TView_contentFractionDy, 1, 1, 0);

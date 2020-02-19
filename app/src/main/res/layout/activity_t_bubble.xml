@@ -7,7 +7,7 @@
     android:layerType="software">
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleLowLeft"
+        android:id="@+id/bubbleLeftLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
@@ -25,11 +25,11 @@
         app:bubbleTowardType="left" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleLowTop"
+        android:id="@+id/bubbleTopLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleLowLeft"
-        android:layout_alignLeft="@id/bubbleLowLeft"
+        android:layout_below="@id/bubbleLeftLow"
+        android:layout_alignLeft="@id/bubbleLeftLow"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
         app:bubbleEdgeWidth="20dp"
@@ -43,11 +43,11 @@
         app:bubbleTowardType="top" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleLowRight"
+        android:id="@+id/bubbleRightLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleLowTop"
-        android:layout_alignLeft="@id/bubbleLowTop"
+        android:layout_below="@id/bubbleTopLow"
+        android:layout_alignLeft="@id/bubbleTopLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -62,11 +62,11 @@
         app:bubbleTowardType="right" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleLowBottom"
+        android:id="@+id/bubbleBottomLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleLowRight"
-        android:layout_alignLeft="@id/bubbleLowRight"
+        android:layout_below="@id/bubbleRightLow"
+        android:layout_alignLeft="@id/bubbleRightLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -83,8 +83,8 @@
     <com.tunasushi.tuna.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleLowBottom"
-        android:layout_alignLeft="@id/bubbleLowBottom"
+        android:layout_below="@id/bubbleBottomLow"
+        android:layout_alignLeft="@id/bubbleBottomLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -100,11 +100,11 @@
         app:bubbleTowardType="top" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleMiddleLeft"
+        android:id="@+id/bubbleLeftMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignTop="@id/bubbleLowLeft"
-        android:layout_toRightOf="@id/bubbleLowLeft"
+        android:layout_alignTop="@id/bubbleLeftLow"
+        android:layout_toRightOf="@id/bubbleLeftLow"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
         app:bubbleEdgeWidth="20dp"
@@ -118,11 +118,11 @@
         app:bubbleTowardType="left" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleMiddleTop"
+        android:id="@+id/bubbleTopMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleMiddleLeft"
-        android:layout_alignLeft="@id/bubbleMiddleLeft"
+        android:layout_below="@id/bubbleLeftMiddle"
+        android:layout_alignLeft="@id/bubbleLeftMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -137,11 +137,11 @@
         app:bubbleTowardType="top" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleMiddleRight"
+        android:id="@+id/bubbleRightMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleMiddleTop"
-        android:layout_alignLeft="@id/bubbleMiddleTop"
+        android:layout_below="@id/bubbleTopMiddle"
+        android:layout_alignLeft="@id/bubbleTopMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -156,11 +156,11 @@
         app:bubbleTowardType="right" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleMiddleBottom"
+        android:id="@+id/bubbleBottomMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleMiddleRight"
-        android:layout_alignLeft="@id/bubbleMiddleRight"
+        android:layout_below="@id/bubbleRightMiddle"
+        android:layout_alignLeft="@id/bubbleRightMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -177,8 +177,8 @@
     <com.tunasushi.tuna.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleMiddleBottom"
-        android:layout_alignLeft="@id/bubbleMiddleBottom"
+        android:layout_below="@id/bubbleBottomMiddle"
+        android:layout_alignLeft="@id/bubbleBottomMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -194,12 +194,12 @@
         app:bubbleTowardType="top" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleHighLeft"
+        android:id="@+id/bubbleLeftHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignTop="@id/bubbleMiddleLeft"
+        android:layout_alignTop="@id/bubbleLeftMiddle"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/bubbleMiddleLeft"
+        android:layout_toRightOf="@id/bubbleLeftMiddle"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
         app:bubbleEdgeWidth="20dp"
@@ -213,11 +213,11 @@
         app:bubbleTowardType="left" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleHighTop"
+        android:id="@+id/bubbleTopHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleHighLeft"
-        android:layout_alignLeft="@id/bubbleHighLeft"
+        android:layout_below="@id/bubbleLeftHigh"
+        android:layout_alignLeft="@id/bubbleLeftHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -232,11 +232,11 @@
         app:bubbleTowardType="top" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleHighRight"
+        android:id="@+id/bubbleRightHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleHighTop"
-        android:layout_alignLeft="@id/bubbleHighTop"
+        android:layout_below="@id/bubbleTopHigh"
+        android:layout_alignLeft="@id/bubbleTopHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -251,11 +251,11 @@
         app:bubbleTowardType="right" />
 
     <com.tunasushi.tuna.TBubble
-        android:id="@+id/bubbleHighBottom"
+        android:id="@+id/bubbleBottomHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleHighRight"
-        android:layout_alignLeft="@id/bubbleHighRight"
+        android:layout_below="@id/bubbleRightHigh"
+        android:layout_alignLeft="@id/bubbleRightHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"
@@ -272,8 +272,8 @@
     <com.tunasushi.tuna.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/bubbleHighBottom"
-        android:layout_alignLeft="@id/bubbleHighBottom"
+        android:layout_below="@id/bubbleBottomHigh"
+        android:layout_alignLeft="@id/bubbleBottomHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
         app:bubbleEdgeHeight="20dp"

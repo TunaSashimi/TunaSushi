@@ -9,6 +9,7 @@ import com.tunasushi.tuna.TBubble;
 import com.tunasushi.tuna.TRange;
 import com.tunasushi.tuna.TView;
 
+import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
@@ -18,6 +19,7 @@ import static com.tunasushi.tool.ViewTool.setViewMargins;
  * @Description
  */
 public class TRangeActivity extends Activity {
+    private TView tView;
     private TBubble tBubble;
     private TRange tRange;
     private int dx;
@@ -28,6 +30,7 @@ public class TRangeActivity extends Activity {
 
         setContentView(R.layout.activity_t_range);
 
+        tView = findViewById(R.id.tView);
         tRange = findViewById(R.id.tRange);
         tBubble = findViewById(R.id.tBubble);
 
@@ -43,11 +46,15 @@ public class TRangeActivity extends Activity {
                 tBubble.setTBubbleTextValue(tRange.getRangeValue());
                 //
                 if (t.isPress()) {
+
                     tBubble.setVisibility(View.VISIBLE);
-                    tBubble.setX((int) tRange.getRangeCircleCentreX() - dx);
+                    //Need to add marginLift of tRange!
+                    tBubble.setX((int) tRange.getRangeCircleCentreX() - dx + dpToPx(20));
                 } else {
                     tBubble.setVisibility(View.INVISIBLE);
                 }
+                //
+                tView.setContentValue(tRange.getRangeValueLeft() + " - " + tRange.getRangeValueRight());
             }
         });
     }

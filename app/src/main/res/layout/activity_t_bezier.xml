@@ -9,25 +9,25 @@
     android:paddingBottom="16dp">
 
     <com.tunasushi.tuna.TBezier
-        android:id="@+id/metaball"
+        android:id="@+id/tBezier01"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true" />
 
     <com.tunasushi.tuna.TBezier
-        android:id="@+id/debug_metaball"
+        android:id="@+id/tBezier02"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/metaball"
-        android:layout_alignEnd="@+id/metaball"
-        android:layout_alignRight="@+id/metaball"
+        android:layout_below="@+id/tBezier01"
+        android:layout_alignEnd="@+id/tBezier01"
+        android:layout_alignRight="@+id/tBezier01"
         android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/debug_metaball"
+        android:layout_alignTop="@+id/tBezier02"
         android:layout_alignParentRight="true"
         android:text="Debug test"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -47,7 +47,7 @@
             android:textColor="@android:color/white" />
 
         <SeekBar
-            android:id="@+id/seekBar"
+            android:id="@+id/seekBar01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
             android:textColor="@android:color/white" />
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/seekBar02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="200" />
@@ -72,7 +72,7 @@
             android:textColor="@android:color/white" />
 
         <SeekBar
-            android:id="@+id/seekBar3"
+            android:id="@+id/seekBar03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="500" />

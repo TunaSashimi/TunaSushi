@@ -31,7 +31,7 @@
                 app:buttonTextValue="马上用车" />
 
             <View
-                android:layout_width="1px"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 
@@ -52,7 +52,7 @@
                 app:buttonTextValue="预约用车" />
 
             <View
-                android:layout_width="1px"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 

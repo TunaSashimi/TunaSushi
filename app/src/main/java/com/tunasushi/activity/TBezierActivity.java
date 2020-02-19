@@ -15,7 +15,7 @@ import com.tunasushi.tuna.TBezier;
  */
 public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
     private TBezier tBezier;
-    private SeekBar seekBar, seekBar2, seekBar3;
+    private SeekBar seekBar01, seekBar02, seekBar03;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +25,27 @@ public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChange
 
         //Note this configuration!
         //app:touchType="none"
-        tBezier = findViewById(R.id.debug_metaball);
+        tBezier = findViewById(R.id.tBezier02);
 
-        seekBar = findViewById(R.id.seekBar);
-        seekBar2 = findViewById(R.id.seekBar2);
-        seekBar3 = findViewById(R.id.seekBar3);
-        seekBar.setOnSeekBarChangeListener(this);
-        seekBar2.setOnSeekBarChangeListener(this);
-        seekBar3.setOnSeekBarChangeListener(this);
+        seekBar01 = findViewById(R.id.seekBar01);
+        seekBar02 = findViewById(R.id.seekBar02);
+        seekBar03 = findViewById(R.id.seekBar03);
+        seekBar01.setOnSeekBarChangeListener(this);
+        seekBar02.setOnSeekBarChangeListener(this);
+        seekBar03.setOnSeekBarChangeListener(this);
     }
 
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
-            case R.id.seekBar:
+            case R.id.seekBar01:
                 tBezier.setMaxDistance(progress);
                 break;
-            case R.id.seekBar2:
+            case R.id.seekBar02:
                 tBezier.setMv(progress / 100f);
                 break;
-            case R.id.seekBar3:
+            case R.id.seekBar03:
                 tBezier.setHandleLenRate(progress / 100f);
                 break;
         }
