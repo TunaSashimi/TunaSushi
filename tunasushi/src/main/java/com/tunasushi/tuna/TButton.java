@@ -80,8 +80,8 @@ public class TButton extends TView {
         buttonBitmapFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonBitmapFractionBottom, 1, 1, 1);
 
         buttonTextValue = typedArray.getString(R.styleable.TButton_buttonTextValue);
-        buttonTextSize = typedArray.getDimension(R.styleable.TButton_buttonTextSize, 0);
-        buttonTextColor = typedArray.getColor(R.styleable.TButton_buttonTextColor, Color.TRANSPARENT);
+        buttonTextSize = typedArray.getDimension(R.styleable.TButton_buttonTextSize, textSizeDefault);
+        buttonTextColor = typedArray.getColor(R.styleable.TButton_buttonTextColor, textColorDefault);
 
         buttonTextFractionTop = typedArray.getFraction(R.styleable.TButton_buttonTextFractionTop, 1, 1, 0);
         buttonTextFractionBottom = typedArray.getFraction(R.styleable.TButton_buttonTextFractionBottom, 1, 1, 1);
@@ -106,7 +106,7 @@ public class TButton extends TView {
         dy = height * buttonBitmapFractionTop;
         dx = (width - buttonSrcNormalWidth * scale) * 0.5f;
 
-        initMatrix(scale, scale);
+        matrix = initMatrix(matrix, scale, scale);
     }
 
     @Override

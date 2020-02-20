@@ -23,7 +23,7 @@
             android:layout_height="100dp"
             android:layout_below="@id/textView"
             android:layout_marginLeft="16dp"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <com.tunasushi.tuna.TImage
             android:id="@+id/tImage02"
@@ -33,7 +33,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tImage01"
             app:imageReverse="horizontal"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03"
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03"
             app:imageSunshineFractionX="50%"
             app:imageSunshineFractionY="50%" />
 
@@ -45,7 +45,7 @@
             android:layout_toRightOf="@id/tImage02"
             app:imageAlpha="80%"
             app:imageRadius="10dp"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <com.tunasushi.tuna.TImage
             android:id="@+id/tImage04"
@@ -55,7 +55,7 @@
             android:layout_alignLeft="@id/tImage01"
             android:layout_marginTop="16dp"
             app:imageSepia="true"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <com.tunasushi.tuna.TImage
             android:layout_width="100dp"
@@ -64,7 +64,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tImage04"
             app:imageBacksheet="true"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <com.tunasushi.tuna.TImage
             android:id="@+id/tImage06"
@@ -74,7 +74,7 @@
             android:layout_alignLeft="@id/tImage04"
             android:layout_marginTop="16dp"
             app:imageSketch="true"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <com.tunasushi.tuna.TImage
             android:layout_width="100dp"
@@ -83,7 +83,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tImage06"
             app:imageEmboss="true"
-            app:imageSrc="@drawable/drawable_tview_srcnormal03" />
+            app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
         <SeekBar
             android:id="@+id/seekBar01"

@@ -38,7 +38,6 @@ public class EntryActivity extends Activity {
             THollowActivity.class,
 
             TImageActivity.class,
-            TIrregularActivity.class,
 
             TLayoutActivity.class,
             TLineActivity.class,
@@ -63,6 +62,7 @@ public class EntryActivity extends Activity {
             TSignActivity.class,
             TSVGActivity.class,
 
+            TToggleActivity.class,
             TTrackActivity.class,
             TTrangleActivity.class,
 

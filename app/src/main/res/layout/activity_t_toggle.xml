@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <com.tunasushi.tuna.TToggle
+        android:id="@+id/tToggle01"
+        android:layout_width="224dp"
+        android:layout_height="32dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        app:toggleSrcNormal="@drawable/bitmap_ttoggle_normal01"
+        app:toggleSrcToggle="@drawable/bitmap_ttoggle_select01"
+        app:toggleTextColorLeftNormal="#ffffff"
+        app:toggleTextColorLeftToggle="#fa8919"
+        app:toggleTextColorRightNormal="#fa8919"
+        app:toggleTextColorRightToggle="#ffffff"
+        app:toggleTextFractionRightDx="-2%"
+        app:toggleTextSizeLeftNormal="12dp"
+        app:toggleTextSizeLeftToggle="12dp"
+        app:toggleTextSizeRightNormal="12dp"
+        app:toggleTextSizeRightToggle="12dp"
+        app:toggleTextValueLeft="按关键字查询"
+        app:toggleTextValueRight="按日期查询" />
+
+    <com.tunasushi.tuna.TToggle
+        android:id="@+id/tToggle02"
+        android:layout_width="355dp"
+        android:layout_height="43dp"
+        android:layout_below="@id/tToggle01"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:toggleSrcNormal="@drawable/bitmap_ttoggle_normal02"
+        app:toggleSrcToggle="@drawable/bitmap_ttoggle_select02"
+        app:toggleTextColorLeftNormal="#eeeeee"
+        app:toggleTextColorLeftToggle="#ffffff"
+        app:toggleTextColorRightNormal="#ffffff"
+        app:toggleTextColorRightToggle="#eeeeee"
+        app:toggleTextFractionLeftDy="2%"
+        app:toggleTextFractionRightDy="2%"
+        app:toggleTextSizeLeftNormal="16dp"
+        app:toggleTextSizeLeftToggle="16dp"
+        app:toggleTextSizeRightNormal="16dp"
+        app:toggleTextSizeRightToggle="16dp"
+        app:toggleTextValueLeft="按关键字查询"
+        app:toggleTextValueRight="按日期查询" />
+</RelativeLayout>

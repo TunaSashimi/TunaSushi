@@ -27,7 +27,7 @@ import static com.tunasushi.tool.GroupTool.dynamic;
 public class TViewActivity extends Activity {
     private TView tViewRectClassic01, tViewRectClassic02;
     private TView tViewMainButton01, tViewMainButton02;
-    private TView tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right;
+    private TView tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight;
 
     private TouchUpListener tunaTouchUpListener = new TouchUpListener() {
         @Override
@@ -120,18 +120,18 @@ public class TViewActivity extends Activity {
         });
 
         //
-        tViewRadioGroup_DrackBrown_Left = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
-        tViewRadioGroup_DrackBrown_Right = findViewById(R.id.tViewRadioGroupDrackBrownRight);
+        tViewRadioGroupDrackBrownLeft = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
+        tViewRadioGroupDrackBrownRight = findViewById(R.id.tViewRadioGroupDrackBrownRight);
 
-        tViewRadioGroup_DrackBrown_Left.setTouchUpListener(tunaTouchUpListener);
-        tViewRadioGroup_DrackBrown_Right.setTouchUpListener(tunaTouchUpListener);
+        tViewRadioGroupDrackBrownLeft.setTouchUpListener(tunaTouchUpListener);
+        tViewRadioGroupDrackBrownRight.setTouchUpListener(tunaTouchUpListener);
 
         //if you want a different TView link, you can put an array of incoming associate methods
 
-        //	TView.associate(new TView[]{tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right});
+        //	TView.associate(new TView[]{tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight});
 
         //or  can be placed on a list of incoming associate method
-        associate(Arrays.asList(tViewRadioGroup_DrackBrown_Left, tViewRadioGroup_DrackBrown_Right));
+        associate(Arrays.asList(tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight));
 
         //
         String radioGroupTitleArray[] = {

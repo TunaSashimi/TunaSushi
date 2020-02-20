@@ -83,12 +83,12 @@
             app:backgroundSelect="#000000"
             app:radius="5dp"
             app:selectType="same"
-            app:srcAnchorNormal="@drawable/drawable_tview_anchor_normal"
+            app:srcAnchorNormal="@drawable/bitmap_tview_anchor_normal"
             app:srcAnchorDxNormal="5dp"
             app:srcAnchorDyNormal="5dp"
             app:srcAnchorHeightNormal="7dp"
             app:srcAnchorWidthNormal="10dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_normal"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_normal"
             app:strokeColorSelect="#dedede"
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
@@ -107,10 +107,10 @@
             app:radius="5dp"
             app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
-            app:srcAnchorNormal="@drawable/drawable_tview_anchor_normal"
+            app:srcAnchorNormal="@drawable/bitmap_tview_anchor_normal"
             app:srcAnchorHeightNormal="7dp"
             app:srcAnchorWidthNormal="10dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select"
             app:strokeColorSelect="#dedede"
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
@@ -269,9 +269,9 @@
             app:backgroundAnglePress="0"
             app:backgroundGradientEndPress="#ffca00"
             app:backgroundGradientStartPress="#592d2d"
-            app:radiusLeftBottom="5dp"
-            app:radiusLeftTop="5dp"
-            app:radiusRightTop="5dp"
+            app:radiusBottomLeft="5dp"
+            app:radiusTopLeft="5dp"
+            app:radiusTopRight="5dp"
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
@@ -307,7 +307,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
-            android:text="radiusLeftTop,radiusLeftBottom,radiusRightTop,radiusRightBottom设置矩形4个角弧度" />
+            android:text="radiusTopLeft,radiusBottomLeft,radiusTopRight,radiusBottomRight设置矩形4个角弧度" />
 
         <View
             android:id="@+id/tViewAnchorSecondaryButton01"
@@ -337,8 +337,8 @@
             android:layout_toRightOf="@id/tViewAnchorSecondaryButton01"
             app:backgroundNormal="#fae500"
             app:foregroundPress="#50444444"
-            app:radiusLeftBottom="5dp"
-            app:radiusLeftTop="5dp"
+            app:radiusBottomLeft="5dp"
+            app:radiusTopLeft="5dp"
             app:strokeColorNormal="#592d2d"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
@@ -366,10 +366,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@id/viewAnchorSecondaryButton02"
-            app:radiusLeftBottom="5dp"
-            app:radiusLeftTop="5dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal01"
-            app:srcPress="@drawable/drawable_tview_srcnormal02"
+            app:radiusBottomLeft="5dp"
+            app:radiusTopLeft="5dp"
+            app:srcNormal="@drawable/bitmap_tview_srcnormal01"
+            app:srcPress="@drawable/bitmap_tview_srcnormal02"
             app:textColorNormal="#ffffff"
             app:textGravity="center"
             app:textValue="mark=true&amp;textGravity=center" />
@@ -380,10 +380,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/viewAnchorSecondaryButton02"
-            app:radiusRightBottom="5dp"
-            app:radiusRightTop="5dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal01"
-            app:srcPress="@drawable/drawable_tview_srcnormal02"
+            app:radiusBottomRight="5dp"
+            app:radiusTopRight="5dp"
+            app:srcNormal="@drawable/bitmap_tview_srcnormal01"
+            app:srcPress="@drawable/bitmap_tview_srcnormal02"
             app:textColorNormal="#ffffff"
             app:textGravity="left"
             app:textRowSpaceRatio="200%"
@@ -397,8 +397,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal03"
-            app:srcPress="@drawable/drawable_tview_srcnormal04" />
+            app:srcNormal="@drawable/bitmap_tview_srcnormal03"
+            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSecondaryButton06"
@@ -408,8 +408,8 @@
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tViewSecondaryButton05"
             app:radius="24dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal03"
-            app:srcPress="@drawable/drawable_tview_srcnormal04" />
+            app:srcNormal="@drawable/bitmap_tview_srcnormal03"
+            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="100dp"
@@ -418,8 +418,8 @@
             android:layout_toRightOf="@id/tViewSecondaryButton06"
             app:porterDuffXfermode="src_out"
             app:radius="24dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal03"
-            app:srcPress="@drawable/drawable_tview_srcnormal04" />
+            app:srcNormal="@drawable/bitmap_tview_srcnormal03"
+            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
             android:id="@+id/textTunaShadow"
@@ -438,9 +438,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#c1eaee"
-            app:srcNormal="@drawable/drawable_tview_srcnormal03"
+            app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcShadowRadiusNormal="4dp"
-            app:srcPress="@drawable/drawable_tview_srcnormal04" />
+            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="100dp"
@@ -451,8 +451,8 @@
             app:backgroundShadowDxNormal="2dp"
             app:backgroundShadowDyNormal="2dp"
             app:backgroundShadowRadiusNormal="2dp"
-            app:srcNormal="@drawable/drawable_tview_srcnormal03"
-            app:srcPress="@drawable/drawable_tview_srcnormal04" />
+            app:srcNormal="@drawable/bitmap_tview_srcnormal03"
+            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
             android:id="@+id/textcontext"
@@ -511,7 +511,7 @@
             android:layout_marginRight="16dp"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcLeft="@drawable/drawable_tview_src_rmb"
+            app:srcLeft="@drawable/bitmap_tview_src_rmb"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftWidth="9dp"
@@ -529,7 +529,7 @@
             android:layout_toRightOf="@id/tViewSrcLeft"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcLeft="@drawable/drawable_tview_src_rmb"
+            app:srcLeft="@drawable/bitmap_tview_src_rmb"
             app:srcLeftDy="1dp"
             app:srcLeftHeight="10dp"
             app:srcLeftPadding="8dp"
@@ -558,7 +558,7 @@
             android:layout_margin="16dp"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcRight="@drawable/drawable_tview_src_rmb"
+            app:srcRight="@drawable/bitmap_tview_src_rmb"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"
             app:srcRightWidth="9dp"
@@ -576,7 +576,7 @@
             android:layout_toRightOf="@id/tViewSrcRight"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcRight="@drawable/drawable_tview_src_rmb"
+            app:srcRight="@drawable/bitmap_tview_src_rmb"
             app:srcRightDx="8dp"
             app:srcRightDy="1dp"
             app:srcRightHeight="10dp"

@@ -89,8 +89,8 @@ public class TWrap extends TView {
         wrapStrokeColorNormal = typedArray.getColor(R.styleable.TWrap_wrapStrokeColorNormal, Color.TRANSPARENT);
         wrapStrokeColorSelect = typedArray.getColor(R.styleable.TWrap_wrapStrokeColorSelect, wrapStrokeColorNormal);
 
-        wrapTextSize = typedArray.getDimension(R.styleable.TWrap_wrapTextSize, 0);
-        wrapTextColorNormal = typedArray.getColor(R.styleable.TWrap_wrapTextColorNormal, Color.TRANSPARENT);
+        wrapTextSize = typedArray.getDimension(R.styleable.TWrap_wrapTextSize, textSizeDefault);
+        wrapTextColorNormal = typedArray.getColor(R.styleable.TWrap_wrapTextColorNormal, textColorDefault);
         wrapTextColorSelect = typedArray.getColor(R.styleable.TWrap_wrapTextColorSelect, wrapTextColorNormal);
 
         int wrapItemTextValueArrayId = typedArray.getResourceId(R.styleable.TWrap_wrapItemTextValueArray, -1);

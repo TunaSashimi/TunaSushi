@@ -185,8 +185,8 @@ public class TBubble extends TView {
         bubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
 
         bubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
-        bubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, 0);
-        bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, Color.TRANSPARENT);
+        bubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, textSizeDefault);
+        bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, textColorDefault);
         bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
         int bubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);

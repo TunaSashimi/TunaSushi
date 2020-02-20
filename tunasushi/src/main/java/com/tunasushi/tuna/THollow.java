@@ -46,7 +46,7 @@ public class THollow extends TView {
         }
 
         hollowTextValue = typedArray.getString(R.styleable.THollow_hollowTextValue);
-        hollowTextSize = typedArray.getDimension(R.styleable.THollow_hollowTextSize, 0);
+        hollowTextSize = typedArray.getDimension(R.styleable.THollow_hollowTextSize, textSizeDefault);
         hollowTextFractionVertical = typedArray.getFraction(R.styleable.THollow_hollowTextFractionVertical, 1, 1, 0.5f);
 
         typedArray.recycle();

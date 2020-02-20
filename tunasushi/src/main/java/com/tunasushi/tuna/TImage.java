@@ -18,6 +18,7 @@ import static com.tunasushi.tool.BitmapTool.getSepiaBitmap;
 import static com.tunasushi.tool.BitmapTool.getSketchBitmap;
 import static com.tunasushi.tool.BitmapTool.getSunshineBitmap;
 import static com.tunasushi.tool.BitmapTool.processBitmap;
+
 /**
  * @author TunaSashimi
  * @date 2015-11-20 10:46
@@ -224,7 +225,7 @@ public class TImage extends TView {
         scaleSx = width * 1f / srcBitmap.getWidth();
         scaleSy = height * 1f / srcBitmap.getHeight();
 
-        initMatrix(scaleSx, scaleSy);
+        matrix = initMatrix(matrix, scaleSx, scaleSy);
     }
 
     @Override

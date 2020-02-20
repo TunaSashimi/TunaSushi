@@ -231,7 +231,7 @@ public class BitmapTool {
     }
 
     //
-    public static Bitmap getCustomRoundBitmap(Bitmap sourceBitmap, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+    public static Bitmap getCustomRoundBitmap(Bitmap sourceBitmap, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
         Bitmap roundCustomBitmap = Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(roundCustomBitmap);
         Paint paint = new Paint();
@@ -241,7 +241,7 @@ public class BitmapTool {
         RectF rectF = new RectF(rect);
 
         Path path = new Path();
-        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
+        float[] radii = {radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft};
         path.addRoundRect(rectF, radii, Path.Direction.CW);
 
         canvas.drawPath(path, paint);

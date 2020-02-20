@@ -308,90 +308,90 @@ public class TLayout extends RelativeLayout {
         }
     }
 
-    // layoutRadiusLeftTop default 0
-    private float layoutRadiusLeftTop;
+    // layoutRadiusTopLeft default 0
+    private float layoutRadiusTopLeft;
 
-    public float getLayoutRadiusLeftTop() {
-        return layoutRadiusLeftTop;
+    public float getLayoutRadiusTopLeft() {
+        return layoutRadiusTopLeft;
     }
 
-    public void setLayoutRadiusLeftTop(float layoutRadiusLeftTop) {
-        setLayoutRadiusLeftTopRaw(layoutRadiusLeftTop);
+    public void setLayoutRadiusTopLeft(float layoutRadiusTopLeft) {
+        setLayoutRadiusTopLeftRaw(layoutRadiusTopLeft);
     }
 
-    public void setLayoutRadiusLeftTop(float layoutRadiusLeftTop, int unit) {
-        setLayoutRadiusLeftTopRaw(convertToPX(layoutRadiusLeftTop, unit));
+    public void setLayoutRadiusTopLeft(float layoutRadiusTopLeft, int unit) {
+        setLayoutRadiusTopLeftRaw(convertToPX(layoutRadiusTopLeft, unit));
     }
 
-    private void setLayoutRadiusLeftTopRaw(float layoutRadiusLeftTop) {
-        if (this.layoutRadiusLeftTop != layoutRadiusLeftTop) {
-            this.layoutRadiusLeftTop = layoutRadiusLeftTop;
+    private void setLayoutRadiusTopLeftRaw(float layoutRadiusTopLeft) {
+        if (this.layoutRadiusTopLeft != layoutRadiusTopLeft) {
+            this.layoutRadiusTopLeft = layoutRadiusTopLeft;
             invalidate();
         }
     }
 
-    // layoutRadiusLeftBottom default 0
-    private float layoutRadiusLeftBottom;
+    // layoutRadiusBottomLeft default 0
+    private float layoutRadiusBottomLeft;
 
-    public float getLayoutRadiusLeftBottom() {
-        return layoutRadiusLeftBottom;
+    public float getLayoutRadiusBottomLeft() {
+        return layoutRadiusBottomLeft;
     }
 
-    public void setLayoutRadiusLeftBottom(float layoutRadiusLeftBottom) {
-        setLayoutRadiusLeftBottomRaw(layoutRadiusLeftBottom);
+    public void setLayoutRadiusBottomLeft(float layoutRadiusBottomLeft) {
+        setLayoutRadiusBottomLeftRaw(layoutRadiusBottomLeft);
     }
 
-    public void setLayoutRadiusLeftBottom(float layoutRadiusLeftBottom, int unit) {
-        setLayoutRadiusLeftBottomRaw(convertToPX(layoutRadiusLeftBottom, unit));
+    public void setLayoutRadiusBottomLeft(float layoutRadiusBottomLeft, int unit) {
+        setLayoutRadiusBottomLeftRaw(convertToPX(layoutRadiusBottomLeft, unit));
     }
 
-    private void setLayoutRadiusLeftBottomRaw(float layoutRadiusLeftBottom) {
-        if (this.layoutRadiusLeftBottom != layoutRadiusLeftBottom) {
-            this.layoutRadiusLeftBottom = layoutRadiusLeftBottom;
+    private void setLayoutRadiusBottomLeftRaw(float layoutRadiusBottomLeft) {
+        if (this.layoutRadiusBottomLeft != layoutRadiusBottomLeft) {
+            this.layoutRadiusBottomLeft = layoutRadiusBottomLeft;
             invalidate();
         }
     }
 
-    // layoutRadiusRightTop default 0
-    private float layoutRadiusRightTop;
+    // layoutRadiusTopRight default 0
+    private float layoutRadiusTopRight;
 
-    public float getLayoutRadiusRightTop() {
-        return layoutRadiusRightTop;
+    public float getLayoutRadiusTopRight() {
+        return layoutRadiusTopRight;
     }
 
-    public void setLayoutRadiusRightTop(float layoutRadiusRightTop) {
-        setLayoutRadiusRightTopRaw(layoutRadiusRightTop);
+    public void setLayoutRadiusTopRight(float layoutRadiusTopRight) {
+        setLayoutRadiusTopRightRaw(layoutRadiusTopRight);
     }
 
-    public void setLayoutRadiusRightTop(float layoutRadiusRightTop, int unit) {
-        setLayoutRadiusRightTopRaw(convertToPX(layoutRadiusRightTop, unit));
+    public void setLayoutRadiusTopRight(float layoutRadiusTopRight, int unit) {
+        setLayoutRadiusTopRightRaw(convertToPX(layoutRadiusTopRight, unit));
     }
 
-    private void setLayoutRadiusRightTopRaw(float layoutRadiusRightTop) {
-        if (this.layoutRadiusRightTop != layoutRadiusRightTop) {
-            this.layoutRadiusRightTop = layoutRadiusRightTop;
+    private void setLayoutRadiusTopRightRaw(float layoutRadiusTopRight) {
+        if (this.layoutRadiusTopRight != layoutRadiusTopRight) {
+            this.layoutRadiusTopRight = layoutRadiusTopRight;
             invalidate();
         }
     }
 
-    // layoutRadiusRightBottom default 0
-    private float layoutRadiusRightBottom;
+    // layoutRadiusBottomRight default 0
+    private float layoutRadiusBottomRight;
 
-    public float getLayoutRadiusRightBottom() {
-        return layoutRadiusRightBottom;
+    public float getLayoutRadiusBottomRight() {
+        return layoutRadiusBottomRight;
     }
 
-    public void setLayoutRadiusRightBottom(float layoutRadiusRightBottom) {
-        setLayoutRadiusRightBottomRaw(layoutRadiusRightBottom);
+    public void setLayoutRadiusBottomRight(float layoutRadiusBottomRight) {
+        setLayoutRadiusBottomRightRaw(layoutRadiusBottomRight);
     }
 
-    public void setLayoutRadiusRightBottom(float layoutRadiusRightBottom, int unit) {
-        setLayoutRadiusRightBottomRaw(convertToPX(layoutRadiusRightBottom, unit));
+    public void setLayoutRadiusBottomRight(float layoutRadiusBottomRight, int unit) {
+        setLayoutRadiusBottomRightRaw(convertToPX(layoutRadiusBottomRight, unit));
     }
 
-    private void setLayoutRadiusRightBottomRaw(float layoutRadiusRightBottom) {
-        if (this.layoutRadiusRightBottom != layoutRadiusRightBottom) {
-            this.layoutRadiusRightBottom = layoutRadiusRightBottom;
+    private void setLayoutRadiusBottomRightRaw(float layoutRadiusBottomRight) {
+        if (this.layoutRadiusBottomRight != layoutRadiusBottomRight) {
+            this.layoutRadiusBottomRight = layoutRadiusBottomRight;
             invalidate();
         }
     }
@@ -461,10 +461,10 @@ public class TLayout extends RelativeLayout {
 
         //
         layoutRadius = typedArray.getDimension(R.styleable.TLayout_layoutRadius, 0);
-        layoutRadiusLeftTop = typedArray.getDimension(R.styleable.TLayout_layoutRadiusLeftTop, layoutRadius);
-        layoutRadiusLeftBottom = typedArray.getDimension(R.styleable.TLayout_layoutRadiusLeftBottom, layoutRadius);
-        layoutRadiusRightTop = typedArray.getDimension(R.styleable.TLayout_layoutRadiusRightTop, layoutRadius);
-        layoutRadiusRightBottom = typedArray.getDimension(R.styleable.TLayout_layoutRadiusRightBottom, layoutRadius);
+        layoutRadiusTopLeft = typedArray.getDimension(R.styleable.TLayout_layoutRadiusTopLeft, layoutRadius);
+        layoutRadiusBottomLeft = typedArray.getDimension(R.styleable.TLayout_layoutRadiusBottomLeft, layoutRadius);
+        layoutRadiusTopRight = typedArray.getDimension(R.styleable.TLayout_layoutRadiusTopRight, layoutRadius);
+        layoutRadiusBottomRight = typedArray.getDimension(R.styleable.TLayout_layoutRadiusBottomRight, layoutRadius);
 
         typedArray.recycle();
 
@@ -520,7 +520,7 @@ public class TLayout extends RelativeLayout {
                 layoutBackgroundShadowDx,
                 layoutBackgroundShadowDy,
                 layoutStrokeWidth,
-                layoutStrokeColor, layoutRadiusLeftTop, layoutRadiusLeftBottom, layoutRadiusRightTop, layoutRadiusRightBottom);
+                layoutStrokeColor, layoutRadiusTopLeft, layoutRadiusBottomLeft, layoutRadiusTopRight, layoutRadiusBottomRight);
 
         // draw layoutBitmap
         if (needSaveLayer) {
@@ -543,42 +543,42 @@ public class TLayout extends RelativeLayout {
 
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
 
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft, radiusTopRight,
+                radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
 
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
+                radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
 
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
+                radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
 
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
-                radiusLeftBottom, radiusRightTop, radiusRightBottom);
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft,
+                radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 15
     protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
+                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
 
-        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
+        float[] radii = {radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft};
         if (strokeWidth > 0) {
             canvas.drawPath(
                     initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,

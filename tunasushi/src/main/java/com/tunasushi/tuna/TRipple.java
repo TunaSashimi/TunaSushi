@@ -420,8 +420,8 @@ public class TRipple extends TView {
 
         rippleCircleColorOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorOuter, rippleCircleColorInner);
 
-        rippleTextSize = typedArray.getDimension(R.styleable.TRipple_rippleTextSize, 0);
-        rippleTextColor = typedArray.getColor(R.styleable.TRipple_rippleTextColor, Color.TRANSPARENT);
+        rippleTextSize = typedArray.getDimension(R.styleable.TRipple_rippleTextSize, textSizeDefault);
+        rippleTextColor = typedArray.getColor(R.styleable.TRipple_rippleTextColor, textColorDefault);
 
         rippleTextValue = typedArray.getString(R.styleable.TRipple_rippleTextValue);
 

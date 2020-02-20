@@ -93,7 +93,7 @@ public class TScale extends TView {
 
         scale = width * 1f / srcBitmap.getWidth();
 
-        initMatrix(scale, scale);
+        matrix = initMatrix(matrix, scale, scale);
 
         srcWidthScale = srcBitmap.getWidth() * scale;
         srcHeightScale = srcBitmap.getHeight() * scale;

@@ -91,8 +91,8 @@ public class TScratch extends TView {
         scratchCoverStrokeWidth = (int) typedArray.getDimension(R.styleable.TScratch_scratchCoverStrokeWidth, convertToPX(20, TypedValue.COMPLEX_UNIT_DIP));
         scratchText = typedArray.getString(R.styleable.TScratch_scratchText);
 
-        scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, convertToPX(TypedValue.COMPLEX_UNIT_SP, 22));
-        scratchTextColor = typedArray.getColor(R.styleable.TScratch_scratchTextColor, Color.TRANSPARENT);
+        scratchTextSize = (int) typedArray.getDimension(R.styleable.TScratch_scratchTextSize, textSizeDefault);
+        scratchTextColor = typedArray.getColor(R.styleable.TScratch_scratchTextColor, textColorDefault);
 
         typedArray.recycle();
 

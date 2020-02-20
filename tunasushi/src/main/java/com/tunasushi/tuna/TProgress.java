@@ -134,7 +134,7 @@ public class TProgress extends TView {
             if (progressShapeType == ProgressShapeType.CUSTOM) {
                 scale = width * 1f / progressSrcBackWidth;
             }
-            initMatrix(scale, scale);
+            matrix = initMatrix(matrix, scale, scale);
         }
     }
 

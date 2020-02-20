@@ -38,7 +38,7 @@
         android:layout_margin="16dp"
         app:lineArrowHeight="12dp"
         app:lineArrowStrokeColor="#dedede"
-        app:lineArrowStrokeWidth="2px"
+        app:lineArrowStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineTowardType="top"
         app:lineX="120dp" />
@@ -52,7 +52,7 @@
         android:layout_marginRight="16dp"
         app:lineArrowHeight="12dp"
         app:lineArrowStrokeColor="#dedede"
-        app:lineArrowStrokeWidth="2px"
+        app:lineArrowStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineSurround="#f0eff5"
         app:lineTowardType="top"
@@ -67,7 +67,7 @@
         app:lineArrowColor="#f0eff5"
         app:lineArrowHeight="12dp"
         app:lineArrowStrokeColor="#dedede"
-        app:lineArrowStrokeWidth="2px"
+        app:lineArrowStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineTowardType="bottom" />
 
@@ -105,7 +105,7 @@
         android:layout_margin="16dp"
         app:lineArrowHeight="12dp"
         app:lineArrowStrokeColor="#dedede"
-        app:lineArrowStrokeWidth="2px"
+        app:lineArrowStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineTowardType="bottom" />
 </RelativeLayout>

@@ -140,7 +140,7 @@ public class TSVG extends TView {
 
         scaleSx = width * 1f / srcBitmap.getWidth();
         scaleSy = height * 1f / srcBitmap.getHeight();
-        initMatrix(scaleSx, scaleSy);
+        matrix = initMatrix(matrix, scaleSx, scaleSy);
 
         int shortSide = width >= height ? height : width;
         initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);

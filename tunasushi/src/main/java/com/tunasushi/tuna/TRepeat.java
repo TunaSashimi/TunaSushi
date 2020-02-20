@@ -84,8 +84,8 @@ public class TRepeat extends TView {
             }
         }
 
-        repeatItemTextSize = typedArray.getDimension(R.styleable.TRepeat_repeatItemTextSize, 0);
-        repeatItemTextColorNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorNormal, Color.TRANSPARENT);
+        repeatItemTextSize = typedArray.getDimension(R.styleable.TRepeat_repeatItemTextSize, textSizeDefault);
+        repeatItemTextColorNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorNormal, textColorDefault);
         repeatItemTextColorSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemTextColorSelect, repeatItemTextColorNormal);
 
         repeatItemTextFractionTop = typedArray.getFraction(R.styleable.TRepeat_repeatItemTextFractionTop, 1, 1, 0);
@@ -160,7 +160,7 @@ public class TRepeat extends TView {
             srcWidthScale = srcHeightScale * repeatCustomSrcNormalWidth / repeatCustomSrcNormalHeight;
             scale = srcHeightScale / repeatCustomSrcNormalWidth;
 
-            initMatrix(scale, scale);
+            matrix = initMatrix(matrix, scale, scale);
 
         } else if (repeatShapeType == RepeatShapeType.CIRCLE) {
             srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);

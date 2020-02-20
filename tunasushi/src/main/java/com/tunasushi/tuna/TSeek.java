@@ -41,6 +41,8 @@ public class TSeek extends TView {
     private float seekDragRadiusNormal, seekDragRadiusPress;
 
     private int seekDragTextColor;
+    private float seekDragTextSize;
+
     private Bitmap seekDragSrcPress;
 
     private RectF[] seekCircleRectFArray;
@@ -103,8 +105,9 @@ public class TSeek extends TView {
         seekColorFill = typedArray.getColor(R.styleable.TSeek_seekColorFill, Color.TRANSPARENT);
         seekStrokeWidth = typedArray.getDimension(R.styleable.TSeek_seekStrokeWidth, 0);
         seekStrokeColor = typedArray.getColor(R.styleable.TSeek_seekStrokeColor, Color.TRANSPARENT);
-        seekTextSize = typedArray.getDimension(R.styleable.TSeek_seekTextSize, 18);
-        seekTextColor = typedArray.getColor(R.styleable.TSeek_seekTextColor, Color.TRANSPARENT);
+
+        seekTextColor = typedArray.getColor(R.styleable.TSeek_seekTextColor,textColorDefault);
+        seekTextSize = typedArray.getDimension(R.styleable.TSeek_seekTextSize, textSizeDefault);
 
         seekDragBackgroundNormal = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundNormal, Color.TRANSPARENT);
         seekDragBackgroundPress = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundPress, seekDragBackgroundNormal);
@@ -116,7 +119,8 @@ public class TSeek extends TView {
         seekDragRadiusNormal = typedArray.getDimension(R.styleable.TSeek_seekDragRadiusNormal, 0);
         seekDragRadiusPress = typedArray.getDimension(R.styleable.TSeek_seekDragRadiusPress, seekDragRadiusNormal);
 
-        seekDragTextColor = typedArray.getColor(R.styleable.TSeek_seekDragTextColor, Color.TRANSPARENT);
+        seekDragTextColor = typedArray.getColor(R.styleable.TSeek_seekDragTextColor, textColorDefault);
+        seekDragTextSize = typedArray.getDimension(R.styleable.TSeek_seekDragTextSize, textSizeDefault);
 
         int seekDragSrcPressId = typedArray.getResourceId(R.styleable.TSeek_seekDragSrcPress, -1);
         if (seekDragSrcPressId != -1) {
@@ -278,7 +282,7 @@ public class TSeek extends TView {
             }
 
             drawText(canvas, seekTextValueArray[seekIndex], width, x, height >> 1, 0, 0,
-                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekDragTextSize, Align.CENTER));
 
         } else {
             float adjuestX = floatArray[seekIndex];
@@ -289,7 +293,7 @@ public class TSeek extends TView {
 
             // draw response text
             drawText(canvas, seekTextValueArray[seekIndex], width, adjuestX, height >> 1, 0, 0,
-                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekTextSize, Align.CENTER));
+                    initTextPaint(Paint.Style.FILL, seekDragTextColor, seekDragTextSize, Align.CENTER));
         }
     }
 

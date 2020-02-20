@@ -53,8 +53,8 @@
         android:layout_height="80dp"
         android:layout_below="@id/tProgressCircleUpDown"
         android:layout_margin="10dp"
-        app:progressSrcBack="@drawable/drawable_tprogress_back"
-        app:progressSrcFront="@drawable/drawable_tprogress_front"
+        app:progressSrcBack="@drawable/bitmap_tprogress_back"
+        app:progressSrcFront="@drawable/bitmap_tprogress_front"
         app:progressPromoteType="clockWise"
         app:progressShapeType="custom" />
 
@@ -64,8 +64,8 @@
         android:layout_height="80dp"
         android:layout_alignTop="@id/tProgressCustomClockWise"
         android:layout_toRightOf="@id/tProgressCustomClockWise"
-        app:progressSrcBack="@drawable/drawable_tprogress_back"
-        app:progressSrcFront="@drawable/drawable_tprogress_front"
+        app:progressSrcBack="@drawable/bitmap_tprogress_back"
+        app:progressSrcFront="@drawable/bitmap_tprogress_front"
         app:progressPromoteType="upWard"
         app:progressShapeType="custom" />
 
@@ -76,8 +76,8 @@
         android:layout_alignTop="@id/tProgressCustomUpWard"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/tProgressCustomUpWard"
-        app:progressSrcBack="@drawable/drawable_tprogress_back"
-        app:progressSrcFront="@drawable/drawable_tprogress_front"
+        app:progressSrcBack="@drawable/bitmap_tprogress_back"
+        app:progressSrcFront="@drawable/bitmap_tprogress_front"
         app:progressPromoteType="upDown"
         app:progressShapeType="custom" />
 

@@ -196,7 +196,7 @@ public class TDraw extends TView {
         if (drawSrc != null) {
             scaleSx = width * 1f / drawSrc.getWidth();
             scaleSy = height * 1f / drawSrc.getHeight();
-            initMatrix(scaleSx, scaleSy);
+            matrix = initMatrix(matrix, scaleSx, scaleSy);
         }
 
         //

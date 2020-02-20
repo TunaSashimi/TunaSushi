@@ -14,8 +14,8 @@
         <attr name="select" format="boolean" />
         <attr name="selectType">
             <enum name="none" value="0" />
-            <enum name="reverse" value="2" />
             <enum name="same" value="1" />
+            <enum name="reverse" value="2" />
         </attr>
         <attr name="rotate" format="integer" />
         <attr name="animationable" format="boolean" />
@@ -101,10 +101,10 @@
         <attr name="strokeColorSelect" format="reference|color" />
 
         <attr name="radius" format="dimension" />
-        <attr name="radiusLeftTop" format="dimension" />
-        <attr name="radiusLeftBottom" format="dimension" />
-        <attr name="radiusRightTop" format="dimension" />
-        <attr name="radiusRightBottom" format="dimension" />
+        <attr name="radiusTopLeft" format="dimension" />
+        <attr name="radiusTopRight" format="dimension" />
+        <attr name="radiusBottomLeft" format="dimension" />
+        <attr name="radiusBottomRight" format="dimension" />
 
         <attr name="textValue" format="string" />
         <attr name="textSize" format="dimension" />
@@ -375,11 +375,6 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="TIrregular">
-        <attr name="irregularSrcNormal" format="reference|color" />
-        <attr name="irregularSrcSelect" format="reference|color" />
-    </declare-styleable>
-
     <declare-styleable name="TLayout">
         <attr name="layoutBackground" format="reference|color" />
         <attr name="layoutBackgroundAngle" format="integer" />
@@ -404,10 +399,10 @@
         <attr name="layoutStrokeColor" format="reference|color" />
 
         <attr name="layoutRadius" format="dimension" />
-        <attr name="layoutRadiusLeftTop" format="dimension" />
-        <attr name="layoutRadiusLeftBottom" format="dimension" />
-        <attr name="layoutRadiusRightTop" format="dimension" />
-        <attr name="layoutRadiusRightBottom" format="dimension" />
+        <attr name="layoutRadiusTopLeft" format="dimension" />
+        <attr name="layoutRadiusBottomLeft" format="dimension" />
+        <attr name="layoutRadiusTopRight" format="dimension" />
+        <attr name="layoutRadiusBottomRight" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="TLine">
@@ -584,6 +579,7 @@
         <attr name="seekColorFill" format="reference|color" />
         <attr name="seekIndex" format="integer" />
         <attr name="seekDragTextColor" format="reference|color" />
+        <attr name="seekDragTextSize" format="dimension" />
         <attr name="seekDragStrokeColorNormal" format="reference|color" />
         <attr name="seekDragStrokeColorPress" format="reference|color" />
         <attr name="seekDragStrokeWidth" format="dimension" />
@@ -629,6 +625,29 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="TToggle">
+        <attr name="toggleSrcNormal" format="reference|color" />
+        <attr name="toggleSrcToggle" format="reference|color" />
+
+        <attr name="toggleTextValueLeft" format="string" />
+        <attr name="toggleTextValueRight" format="string" />
+
+        <attr name="toggleTextColorLeftNormal" format="reference|color" />
+        <attr name="toggleTextSizeLeftNormal" format="dimension" />
+        <attr name="toggleTextColorLeftToggle" format="reference|color" />
+        <attr name="toggleTextSizeLeftToggle" format="dimension" />
+
+        <attr name="toggleTextColorRightNormal" format="reference|color" />
+        <attr name="toggleTextSizeRightNormal" format="dimension" />
+        <attr name="toggleTextColorRightToggle" format="reference|color" />
+        <attr name="toggleTextSizeRightToggle" format="dimension" />
+
+        <attr name="toggleTextFractionLeftDx" format="fraction" />
+        <attr name="toggleTextFractionLeftDy" format="fraction" />
+        <attr name="toggleTextFractionRightDx" format="fraction" />
+        <attr name="toggleTextFractionRightDy" format="fraction" />
+    </declare-styleable>
+
     <declare-styleable name="TTrangle">
         <attr name="trangleBackgroundNormal" format="reference|color" />
         <attr name="trangleBackgroundPress" format="reference|color" />
@@ -657,5 +676,4 @@
         <attr name="wrapTextSize" format="dimension" />
         <attr name="wrapItemTextValueArray" format="reference" />
     </declare-styleable>
-
 </resources>

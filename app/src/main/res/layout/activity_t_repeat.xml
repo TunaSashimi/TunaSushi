@@ -29,7 +29,7 @@
             app:selectType="reverse"
             app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
@@ -50,7 +50,7 @@
             app:selectType="reverse"
             app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
@@ -70,7 +70,7 @@
             app:selectType="reverse"
             app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
@@ -90,7 +90,7 @@
             app:selectType="reverse"
             app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
-            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
@@ -119,12 +119,12 @@
         android:layout_height="18dp"
         android:layout_below="@id/tLayout"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="-3px"
+        android:layout_marginTop="-2dp"
         android:layout_marginRight="25dp"
         app:lineArrowColor="#ffffff"
         app:lineArrowHeight="16dp"
         app:lineArrowStrokeColor="#b2b2b2"
-        app:lineArrowStrokeWidth="2px"
+        app:lineArrowStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineSurround="#f0eff5"
         app:lineTowardType="bottom" />
@@ -138,8 +138,8 @@
         android:layout_marginRight="25dp"
         app:repeatSelectType="connect"
         app:repeatShapeType="custom"
-        app:repeatSrcNormal="@drawable/drawable_trepeat_star_normal"
-        app:repeatSrcSelect="@drawable/drawable_trepeat_star_select"
+        app:repeatSrcNormal="@drawable/bitmap_trepeat_star_normal"
+        app:repeatSrcSelect="@drawable/bitmap_trepeat_star_select"
         app:repeatTotal="5"
         app:touchType="always" />
 
@@ -159,8 +159,8 @@
         app:repeatItemTextSize="14dp"
         app:repeatSelectType="current"
         app:repeatShapeType="custom"
-        app:repeatSrcNormal="@drawable/drawable_trepeat_car_normal"
-        app:repeatSrcSelect="@drawable/drawable_trepeat_car_select" />
+        app:repeatSrcNormal="@drawable/bitmap_trepeat_car_normal"
+        app:repeatSrcSelect="@drawable/bitmap_trepeat_car_select" />
 
     <com.tunasushi.tuna.TRepeat
         android:id="@+id/tRepeatTips"

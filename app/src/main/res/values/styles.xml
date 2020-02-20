@@ -78,10 +78,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">-1dp</item>
-        <item name="radiusLeftTop">5dp</item>
-        <item name="radiusLeftBottom">5dp</item>
-        <item name="radiusRightTop">0dp</item>
-        <item name="radiusRightBottom">0dp</item>
+        <item name="radiusTopLeft">5dp</item>
+        <item name="radiusBottomLeft">5dp</item>
+        <item name="radiusTopRight">0dp</item>
+        <item name="radiusBottomRight">0dp</item>
     </style>
 
     <style name="TView_RadioGroup_DrackBrown_Right" parent="TView_RadioGroup_DrackBrown">
@@ -89,10 +89,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">-1dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftTop">0dp</item>
-        <item name="radiusLeftBottom">0dp</item>
-        <item name="radiusRightTop">5dp</item>
-        <item name="radiusRightBottom">5dp</item>
+        <item name="radiusTopLeft">0dp</item>
+        <item name="radiusBottomLeft">0dp</item>
+        <item name="radiusTopRight">5dp</item>
+        <item name="radiusBottomRight">5dp</item>
     </style>
 
     <style name="TView_RadioGroup_LightGray_Left" parent="TView_RadioGroup_LightGray">
@@ -100,10 +100,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">-1dp</item>
-        <item name="radiusLeftTop">5dp</item>
-        <item name="radiusLeftBottom">5dp</item>
-        <item name="radiusRightTop">0dp</item>
-        <item name="radiusRightBottom">0dp</item>
+        <item name="radiusTopLeft">5dp</item>
+        <item name="radiusBottomLeft">5dp</item>
+        <item name="radiusTopRight">0dp</item>
+        <item name="radiusBottomRight">0dp</item>
 
         <!--  -->
         <item name="android:layout_width">0dp</item>
@@ -119,10 +119,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">-1dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftBottom">0dp</item>
-        <item name="radiusLeftTop">0dp</item>
-        <item name="radiusRightBottom">5dp</item>
-        <item name="radiusRightTop">5dp</item>
+        <item name="radiusBottomLeft">0dp</item>
+        <item name="radiusTopLeft">0dp</item>
+        <item name="radiusBottomRight">5dp</item>
+        <item name="radiusTopRight">5dp</item>
 
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -138,10 +138,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftTop">0dp</item>
-        <item name="radiusLeftBottom">0dp</item>
-        <item name="radiusRightTop">0dp</item>
-        <item name="radiusRightBottom">0dp</item>
+        <item name="radiusTopLeft">0dp</item>
+        <item name="radiusBottomLeft">0dp</item>
+        <item name="radiusTopRight">0dp</item>
+        <item name="radiusBottomRight">0dp</item>
 
         <!--  -->
         <item name="android:layout_width">0dp</item>
@@ -158,10 +158,10 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusLeftTop">5dp</item>
-        <item name="radiusLeftBottom">5dp</item>
-        <item name="radiusRightTop">5dp</item>
-        <item name="radiusRightBottom">5dp</item>
+        <item name="radiusTopLeft">5dp</item>
+        <item name="radiusBottomLeft">5dp</item>
+        <item name="radiusTopRight">5dp</item>
+        <item name="radiusBottomRight">5dp</item>
 
     </style>
 

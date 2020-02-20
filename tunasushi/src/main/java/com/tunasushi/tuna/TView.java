@@ -95,8 +95,11 @@ public class TView extends View {
     protected float[] floatArray;
     protected String[] stringArray;
 
-    //paint cannot be used as a static method!
-    //Multithreading can go wrong!
+    //
+    protected float textSizeDefault = dpToPx(16);
+    protected int textColorDefault = 0xff999999;
+
+    //paint cannot be used as a static method! Multithreading can go wrong!
     protected Paint paint;
 
     protected Paint getPaint() {
@@ -259,51 +262,51 @@ public class TView extends View {
 
 
     // 8
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight,
+                radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int left, int top, int right, int bottom, int fillColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
+    protected void drawRectCustom(Canvas canvas, int left, int top, int right, int bottom, int fillColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight,
+                radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom, radiusRightTop,
-                radiusRightBottom);
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft, radiusTopRight,
+                radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom,
-                                  float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
+                                  float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
+                radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop, radiusLeftBottom,
-                radiusRightTop, radiusRightBottom);
+                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
+                radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusLeftTop,
-                radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft,
+                radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 15
     protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusLeftTop, float radiusLeftBottom, float radiusRightTop, float radiusRightBottom) {
-        float[] radii = {radiusLeftTop, radiusLeftTop, radiusRightTop, radiusRightTop, radiusRightBottom, radiusRightBottom, radiusLeftBottom, radiusLeftBottom};
+                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        float[] radii = {radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft};
         if (strokeWidth > 0) {
             canvas.drawPath(
                     initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
@@ -640,27 +643,9 @@ public class TView extends View {
         this.canvas = canvas;
     }
 
-    //
-    protected Matrix matrix;
-
     //The parent class has the method getTMatrix !
     //Cannot write a method with the same name or the xml cannot be previewed!
-    public Matrix getTMatrix() {
-        return matrix;
-    }
-
-    public void setTMatrix(Matrix matrix) {
-        this.matrix = matrix;
-    }
-
-    protected Matrix initMatrix(float sx, float sy) {
-        if (matrix == null) {
-            matrix = new Matrix();
-        }
-        matrix.reset();
-        matrix.setScale(sx, sy);
-        return matrix;
-    }
+    protected Matrix matrix;
 
     protected Matrix initMatrix(Matrix matrix, float sx, float sy) {
         if (matrix == null) {
@@ -1364,90 +1349,90 @@ public class TView extends View {
     }
 
     // radius of draw custom roundRect
-    // radiusLeftTop,radiusLeftBottom,radiusRightTop,radiusRightBottom default 0
-    private float radiusLeftTop;
+    // radiusTopLeft,radiusBottomLeft,radiusTopRight,radiusBottomRight default 0
+    private float radiusTopLeft;
 
-    public float getRadiusLeftTop() {
-        return radiusLeftTop;
+    public float getRadiusTopLeft() {
+        return radiusTopLeft;
     }
 
-    public void setRadiusLeftTop(float radiusLeftTop) {
-        setRadiusLeftTopRaw(radiusLeftTop);
+    public void setRadiusTopLeft(float radiusTopLeft) {
+        setRadiusTopLeftRaw(radiusTopLeft);
     }
 
-    public void setRadiusLeftTop(float radiusLeftTop, int unit) {
-        setRadiusLeftTopRaw(convertToPX(radiusLeftTop, unit));
+    public void setRadiusTopLeft(float radiusTopLeft, int unit) {
+        setRadiusTopLeftRaw(convertToPX(radiusTopLeft, unit));
     }
 
-    private void setRadiusLeftTopRaw(float radiusLeftTop) {
-        if (this.radiusLeftTop != radiusLeftTop) {
-            this.radiusLeftTop = radiusLeftTop;
+    private void setRadiusTopLeftRaw(float radiusTopLeft) {
+        if (this.radiusTopLeft != radiusTopLeft) {
+            this.radiusTopLeft = radiusTopLeft;
             invalidate();
         }
     }
 
     //
-    private float radiusLeftBottom;
+    private float radiusTopRight;
 
-    public float getRadiusLeftBottom() {
-        return radiusLeftBottom;
+    public float getRadiusTopRight() {
+        return radiusTopRight;
     }
 
-    public void setRadiusLeftBottom(float radiusLeftBottom) {
-        setRadiusLeftBottomRaw(radiusLeftBottom);
+    public void setRadiusTopRight(float radiusTopRight) {
+        setRadiusTopRightRaw(radiusTopRight);
     }
 
-    public void setRadiusLeftBottom(float radiusLeftBottom, int unit) {
-        setRadiusLeftBottomRaw(convertToPX(radiusLeftBottom, unit));
+    public void setRadiusTopRight(float radiusTopRight, int unit) {
+        setRadiusTopRightRaw(convertToPX(radiusTopRight, unit));
     }
 
-    private void setRadiusLeftBottomRaw(float radiusLeftBottom) {
-        if (this.radiusLeftBottom != radiusLeftBottom) {
-            this.radiusLeftBottom = radiusLeftBottom;
+    private void setRadiusTopRightRaw(float radiusTopRight) {
+        if (this.radiusTopRight != radiusTopRight) {
+            this.radiusTopRight = radiusTopRight;
             invalidate();
         }
     }
 
     //
-    private float radiusRightTop;
+    private float radiusBottomLeft;
 
-    public float getRadiusRightTop() {
-        return radiusRightTop;
+    public float getRadiusBottomLeft() {
+        return radiusBottomLeft;
     }
 
-    public void setRadiusRightTop(float radiusRightTop) {
-        setRadiusRightTopRaw(radiusRightTop);
+    public void setRadiusBottomLeft(float radiusBottomLeft) {
+        setRadiusBottomLeftRaw(radiusBottomLeft);
     }
 
-    public void setRadiusRightTop(float radiusRightTop, int unit) {
-        setRadiusRightTopRaw(convertToPX(radiusRightTop, unit));
+    public void setRadiusBottomLeft(float radiusBottomLeft, int unit) {
+        setRadiusBottomLeftRaw(convertToPX(radiusBottomLeft, unit));
     }
 
-    private void setRadiusRightTopRaw(float radiusRightTop) {
-        if (this.radiusRightTop != radiusRightTop) {
-            this.radiusRightTop = radiusRightTop;
+    private void setRadiusBottomLeftRaw(float radiusBottomLeft) {
+        if (this.radiusBottomLeft != radiusBottomLeft) {
+            this.radiusBottomLeft = radiusBottomLeft;
             invalidate();
         }
     }
 
     //
-    private float radiusRightBottom;
+    private float radiusBottomRight;
 
-    public float getRadiusRightBottom() {
-        return radiusRightBottom;
+    public float getRadiusBottomRight() {
+        return radiusBottomRight;
     }
 
-    public void setRadiusRightBottom(float radiusRightBottom) {
-        setRadiusRightBottomRaw(radiusRightBottom);
+    public void setRadiusBottomRight(float radiusBottomRight) {
+        setRadiusBottomRightRaw(radiusBottomRight);
     }
 
-    public void setRadiusRightBottom(float radiusRightBottom, int unit) {
-        setRadiusRightBottomRaw(convertToPX(radiusRightBottom, unit));
+    public void setRadiusBottomRight(float radiusBottomRight, int unit) {
+        setRadiusBottomRightRaw(convertToPX(radiusBottomRight, unit));
     }
 
-    private void setRadiusRightBottomRaw(float radiusRightBottom) {
-        if (this.radiusRightBottom != radiusRightBottom) {
-            this.radiusRightBottom = radiusRightBottom;
+    private void setRadiusBottomRightRaw(float radiusBottomRight) {
+        if (this.radiusBottomRight != radiusBottomRight) {
+            this.radiusBottomRight = radiusBottomRight;
             invalidate();
         }
     }
@@ -2155,18 +2140,9 @@ public class TView extends View {
     }
 
     // anchor Normal,Press,Select use one Matrix
-    protected Matrix anchorMatrixNormal;
-    protected Matrix anchorMatrixPress;
-    protected Matrix anchorMatrixSelect;
-
-    protected Matrix initAnchorMatrix(Matrix matrix, float sx, float sy) {
-        if (matrix == null) {
-            matrix = new Matrix();
-        }
-        matrix.reset();
-        matrix.setScale(sx, sy);
-        return matrix;
-    }
+    protected Matrix matrixNormal;
+    protected Matrix matrixPress;
+    protected Matrix matrixSelect;
 
     //
     private Bitmap srcAnchorNormal;
@@ -3728,25 +3704,7 @@ public class TView extends View {
     }
 
     //
-    protected Matrix leftMatrix;
-
-    public Matrix getLeftMatrix() {
-        return leftMatrix;
-    }
-
-    public void setLeftMatrix(Matrix leftMatrix) {
-        this.leftMatrix = leftMatrix;
-    }
-
-    protected Matrix initLeftMatrix(float sx, float sy) {
-        if (leftMatrix == null) {
-            leftMatrix = new Matrix();
-        }
-        leftMatrix.reset();
-        leftMatrix.setScale(sx, sy);
-        return leftMatrix;
-    }
-
+    protected Matrix matrixLeft;
     // srcLeftPadding means distance between srcLeft and textview,note
     // about the textPaddingLeft
     private float srcLeftPadding;
@@ -3870,25 +3828,7 @@ public class TView extends View {
     }
 
     //
-    protected Matrix rightMatrix;
-
-    public Matrix getRightMatrix() {
-        return rightMatrix;
-    }
-
-    public void setRightMatrix(Matrix rightMatrix) {
-        this.rightMatrix = rightMatrix;
-    }
-
-    protected Matrix initrightMatrix(float sx, float sy) {
-        if (rightMatrix == null) {
-            rightMatrix = new Matrix();
-        }
-        rightMatrix.reset();
-        rightMatrix.setScale(sx, sy);
-        return rightMatrix;
-    }
-
+    protected Matrix matrixRight;
     // srcRightPadding means distance between srcRight and textview,note
     // about the textPaddingRight
     private float srcRightPadding;
@@ -4222,12 +4162,12 @@ public class TView extends View {
 
         //
         radius = typedArray.getDimension(R.styleable.TView_radius, 0);
-        radiusLeftTop = typedArray.getDimension(R.styleable.TView_radiusLeftTop, radius);
-        radiusLeftBottom = typedArray.getDimension(R.styleable.TView_radiusLeftBottom, radius);
-        radiusRightTop = typedArray.getDimension(R.styleable.TView_radiusRightTop, radius);
-        radiusRightBottom = typedArray.getDimension(R.styleable.TView_radiusRightBottom, radius);
+        radiusTopLeft = typedArray.getDimension(R.styleable.TView_radiusTopLeft, radius);
+        radiusTopRight = typedArray.getDimension(R.styleable.TView_radiusTopRight, radius);
+        radiusBottomLeft = typedArray.getDimension(R.styleable.TView_radiusBottomLeft, radius);
+        radiusBottomRight = typedArray.getDimension(R.styleable.TView_radiusBottomRight, radius);
 
-        classic = (radius == radiusLeftTop && radiusLeftTop == radiusLeftBottom && radiusLeftBottom == radiusRightTop && radiusRightTop == radiusRightBottom);
+        classic = (radius == radiusTopLeft && radiusTopLeft == radiusBottomLeft && radiusBottomLeft == radiusTopRight && radiusTopRight == radiusBottomRight);
 
 
         origin = TView.class == this.getClass();
@@ -4407,8 +4347,8 @@ public class TView extends View {
             textMarkRadius = typedArray.getDimension(R.styleable.TView_textMarkRadius, 0);
             textMarkColor = typedArray.getColor(R.styleable.TView_textMarkColor, Color.TRANSPARENT);
             textMarkTextValue = typedArray.getString(R.styleable.TView_textMarkTextValue);
-            textMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, 0);
-            textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor, Color.TRANSPARENT);
+            textMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, textSizeDefault);
+            textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor,textColorDefault);
 
             //
             contentMark = typedArray.getBoolean(R.styleable.TView_contentMark, false);
@@ -4416,8 +4356,8 @@ public class TView extends View {
             contentMarkRadius = typedArray.getDimension(R.styleable.TView_contentMarkRadius, 0);
             contentMarkColor = typedArray.getColor(R.styleable.TView_contentMarkColor, Color.TRANSPARENT);
             contentMarkTextValue = typedArray.getString(R.styleable.TView_contentMarkTextValue);
-            contentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, 0);
-            contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor, Color.TRANSPARENT);
+            contentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, textSizeDefault);
+            contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor,textColorDefault);
 
             //
             strokeWidthNormal = typedArray.getDimension(R.styleable.TView_strokeWidthNormal, 0);
@@ -4429,9 +4369,9 @@ public class TView extends View {
 
             //
             textValue = typedArray.getString(R.styleable.TView_textValue);
-            textSize = typedArray.getDimension(R.styleable.TView_textSize, 0);
+            textSize = typedArray.getDimension(R.styleable.TView_textSize, textSizeDefault);
 
-            textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, Color.TRANSPARENT);
+            textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, textColorDefault);
             textColorPress = typedArray.getColor(R.styleable.TView_textColorPress, textColorNormal);
             textColorSelect = typedArray.getColor(R.styleable.TView_textColorSelect, textColorNormal);
 
@@ -4472,9 +4412,9 @@ public class TView extends View {
 
             //
             contentValue = typedArray.getString(R.styleable.TView_contentValue);
-            contentSize = typedArray.getDimension(R.styleable.TView_contentSize, 0);
+            contentSize = typedArray.getDimension(R.styleable.TView_contentSize, textSizeDefault);
 
-            contentColorNormal = typedArray.getColor(R.styleable.TView_contentColorNormal, Color.TRANSPARENT);
+            contentColorNormal = typedArray.getColor(R.styleable.TView_contentColorNormal, textColorDefault);
             contentColorPress = typedArray.getColor(R.styleable.TView_contentColorPress, contentColorNormal);
             contentColorSelect = typedArray.getColor(R.styleable.TView_contentColorSelect, contentColorNormal);
 
@@ -4936,7 +4876,7 @@ public class TView extends View {
             srcNormalWidthRaw = srcNormal.getWidth();
             srcNormalHeightRaw = srcNormal.getHeight();
 
-            initMatrix((width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f) / srcNormalWidthRaw,
+            matrix = initMatrix(matrix, (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f) / srcNormalWidthRaw,
                     (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f) / srcNormalHeightRaw);
         }
 
@@ -4962,34 +4902,34 @@ public class TView extends View {
             srcAnchorWidthNormalRaw = srcAnchorNormal.getWidth();
             srcAnchorHeightNormalRaw = srcAnchorNormal.getHeight();
 
-            anchorMatrixNormal = initAnchorMatrix(anchorMatrixNormal, srcAnchorWidthNormal / srcAnchorWidthNormalRaw, srcAnchorHeightNormal / srcAnchorHeightNormalRaw);
+            matrixNormal = initMatrix(matrixNormal, srcAnchorWidthNormal / srcAnchorWidthNormalRaw, srcAnchorHeightNormal / srcAnchorHeightNormalRaw);
         }
 
         if (srcAnchorPress != null) {
             srcAnchorWidthPressRaw = srcAnchorPress.getWidth();
             srcAnchorHeightPressRaw = srcAnchorPress.getHeight();
 
-            anchorMatrixPress = initAnchorMatrix(anchorMatrixPress, srcAnchorWidthPress / srcAnchorWidthPressRaw, srcAnchorHeightPress / srcAnchorHeightPressRaw);
+            matrixPress = initMatrix(matrixPress, srcAnchorWidthPress / srcAnchorWidthPressRaw, srcAnchorHeightPress / srcAnchorHeightPressRaw);
         }
 
         if (srcAnchorSelect != null) {
             srcAnchorWidthSelectRaw = srcAnchorSelect.getWidth();
             srcAnchorHeightSelectRaw = srcAnchorSelect.getHeight();
 
-            anchorMatrixSelect = initAnchorMatrix(anchorMatrixSelect, srcAnchorWidthSelect / srcAnchorWidthSelectRaw, srcAnchorHeightSelect / srcAnchorHeightSelectRaw);
+            matrixSelect = initMatrix(matrixSelect, srcAnchorWidthSelect / srcAnchorWidthSelectRaw, srcAnchorHeightSelect / srcAnchorHeightSelectRaw);
         }
 
         //
         if (srcLeft != null) {
             int srcLeftWidthRaw = srcLeft.getWidth();
             int srcLeftHeightRaw = srcLeft.getHeight();
-            initLeftMatrix(srcLeftWidth / srcLeftWidthRaw, srcLeftHeight / srcLeftHeightRaw);
+            matrixLeft = initMatrix(matrixLeft, srcLeftWidth / srcLeftWidthRaw, srcLeftHeight / srcLeftHeightRaw);
         }
 
         if (srcRight != null) {
             int srcRightWidthRaw = srcRight.getWidth();
             int srcRightHeightRaw = srcRight.getHeight();
-            initrightMatrix(srcRightWidth / srcRightWidthRaw, srcRightHeight / srcRightHeightRaw);
+            matrixRight = initMatrix(matrixRight, srcRightWidth / srcRightWidthRaw, srcRightHeight / srcRightHeightRaw);
         }
 
         if (layoutListener != null) {
@@ -5048,7 +4988,7 @@ public class TView extends View {
                         width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
                                 - backgroundShadowDyNormal, backgroundNormal, backgroundNormalShader, backgroundShadowRadiusNormal,
                         backgroundNormalShadowColor, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal,
-                        radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                        radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
 
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
@@ -5061,7 +5001,7 @@ public class TView extends View {
                         select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
                         select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal, select ? strokeWidthSelect
                                 : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
-                                : strokeColorNormal, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                                : strokeColorNormal, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
             }
         }
 
@@ -5094,11 +5034,11 @@ public class TView extends View {
 
         // draw anchor
         if (select && srcAnchorSelect != null) {
-            drawAnchor(canvas, paint, srcAnchorSelect, anchorMatrixSelect, width, height, srcAnchorGravity, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
+            drawAnchor(canvas, paint, srcAnchorSelect, matrixSelect, width, height, srcAnchorGravity, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
         } else if (press && srcAnchorPress != null) {
-            drawAnchor(canvas, paint, srcAnchorPress, anchorMatrixPress, width, height, srcAnchorGravity, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
+            drawAnchor(canvas, paint, srcAnchorPress, matrixPress, width, height, srcAnchorGravity, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
         } else if (srcAnchorNormal != null) {
-            drawAnchor(canvas, paint, srcAnchorNormal, anchorMatrixNormal, width, height, srcAnchorGravity, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
+            drawAnchor(canvas, paint, srcAnchorNormal, matrixNormal, width, height, srcAnchorGravity, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
         }
 
         // draw text
@@ -5155,7 +5095,7 @@ public class TView extends View {
             float dy = (height >> 1) - srcLeftHeight * 0.5f + srcLeftDy;
 
             canvas.translate(dx, dy);
-            canvas.drawBitmap(srcLeft, leftMatrix, paint);
+            canvas.drawBitmap(srcLeft, matrixLeft, paint);
             canvas.translate(-dx, -dy);
         }
 
@@ -5165,7 +5105,7 @@ public class TView extends View {
             float dy = (height >> 1) - srcRightHeight * 0.5f + srcRightDy;
 
             canvas.translate(dx, dy);
-            canvas.drawBitmap(srcRight, rightMatrix, paint);
+            canvas.drawBitmap(srcRight, matrixRight, paint);
             canvas.translate(-dx, -dy);
         }
 
@@ -5204,19 +5144,19 @@ public class TView extends View {
             if (classic) {
                 drawRectClassic(canvas, width, height, foregroundSelect, radius);
             } else {
-                drawRectCustom(canvas, width, height, foregroundSelect, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundSelect, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
             }
         } else if (press && foregroundPress != Color.TRANSPARENT) {
             if (classic) {
                 drawRectClassic(canvas, width, height, foregroundPress, radius);
             } else {
-                drawRectCustom(canvas, width, height, foregroundPress, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundPress, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
             }
         } else if (foregroundNormal != Color.TRANSPARENT) {
             if (classic) {
                 drawRectClassic(canvas, width, height, foregroundNormal, radius);
             } else {
-                drawRectCustom(canvas, width, height, foregroundNormal, 0, Color.TRANSPARENT, radiusLeftTop, radiusLeftBottom, radiusRightTop, radiusRightBottom);
+                drawRectCustom(canvas, width, height, foregroundNormal, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
             }
         }
         if (rotate != 0) {

@@ -71,10 +71,10 @@ public class TSign extends TView {
         signCircleRadius = typedArray.getDimension(R.styleable.TSign_signCircleRadius, 2);
         signCircleMargin = typedArray.getDimension(R.styleable.TSign_signCircleMargin, 2);
         signCircleStrokeWidth = typedArray.getDimension(R.styleable.TSign_signCircleStrokeWidth, 2);
-        signCircleColorBefore = typedArray.getColor(R.styleable.TSign_signCircleColorBefore, Color.TRANSPARENT);
-        signCircleColorAfter = typedArray.getColor(R.styleable.TSign_signCircleColorAfter, Color.TRANSPARENT);
+        signCircleColorBefore = typedArray.getColor(R.styleable.TSign_signCircleColorBefore, textColorDefault);
+        signCircleColorAfter = typedArray.getColor(R.styleable.TSign_signCircleColorAfter, textColorDefault);
 
-        signTextSize = typedArray.getDimension(R.styleable.TSign_signTextSize, 2);
+        signTextSize = typedArray.getDimension(R.styleable.TSign_signTextSize, textSizeDefault);
         signTextStrokeWidth = typedArray.getDimension(R.styleable.TSign_signTextStrokeWidth, 2);
         signTextValueBefore = typedArray.getString(R.styleable.TSign_signTextValueBefore);
         signTextValueAfter = typedArray.getString(R.styleable.TSign_signTextValueAfter);
