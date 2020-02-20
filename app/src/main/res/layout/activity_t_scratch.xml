@@ -14,7 +14,7 @@
         app:scratchCoverColor="#000000"
         app:scratchCoverStrokeWidth="20dp"
         app:scratchRadius="10dp"
-        app:scratchSrc="@drawable/iv_tprogress_bg02"
+        app:scratchSrc="@drawable/drawable_tprogress_front"
         app:scratchText="TunaSashimi"
         app:scratchTextColor="#0000ff"
         app:scratchTextSize="22sp" />

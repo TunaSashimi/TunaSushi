@@ -17,58 +17,86 @@
         app:layoutStrokeColor="#b2b2b2"
         app:layoutStrokeWidth="1dp">
 
-        <CheckBox
+        <com.tunasushi.tuna.TView
             android:id="@+id/checkReason01"
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/xml_cb_repeat_bg01"
-            android:button="@null"
-            android:gravity="center"
-            android:text="服务态度不好"
-            android:textColor="#666666"
-            android:textSize="14dp" />
+            app:backgroundNormal="#f0eff5"
+            app:backgroundSelect="#ffffff"
+            app:radius="5dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorHeightSelect="11dp"
+            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorWidthSelect="12dp"
+            app:strokeColorSelect="#fed136"
+            app:strokeWidthSelect="1dp"
+            app:textColorNormal="#666666"
+            app:textSize="14dp"
+            app:textValue="服务态度不好" />
 
-        <CheckBox
+        <com.tunasushi.tuna.TView
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason01"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/xml_cb_repeat_bg01"
-            android:button="@null"
-            android:gravity="center"
-            android:text="司机不熟悉路况"
-            android:textColor="#666666"
-            android:textSize="14dp" />
+            app:backgroundNormal="#f0eff5"
+            app:backgroundSelect="#ffffff"
+            app:radius="5dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorHeightSelect="11dp"
+            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorWidthSelect="12dp"
+            app:strokeColorSelect="#fed136"
+            app:strokeWidthSelect="1dp"
+            app:textColorNormal="#666666"
+            app:textSize="14dp"
+            app:textValue="服务态度不好" />
 
-        <CheckBox
+        <com.tunasushi.tuna.TView
             android:id="@+id/checkReason03"
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_below="@id/checkReason01"
             android:layout_margin="20dp"
-            android:background="@drawable/xml_cb_repeat_bg01"
-            android:button="@null"
-            android:gravity="center"
-            android:text="司机迟到"
-            android:textColor="#666666"
-            android:textSize="14dp" />
+            app:backgroundNormal="#f0eff5"
+            app:backgroundSelect="#ffffff"
+            app:radius="5dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorHeightSelect="11dp"
+            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorWidthSelect="12dp"
+            app:strokeColorSelect="#fed136"
+            app:strokeWidthSelect="1dp"
+            app:textColorNormal="#666666"
+            app:textSize="14dp"
+            app:textValue="服务态度不好" />
 
-        <CheckBox
+        <com.tunasushi.tuna.TView
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason03"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/xml_cb_repeat_bg01"
-            android:button="@null"
-            android:gravity="center"
-            android:text="车型车牌不符"
-            android:textColor="#666666"
-            android:textSize="14dp" />
+            app:backgroundNormal="#f0eff5"
+            app:backgroundSelect="#ffffff"
+            app:radius="5dp"
+            app:selectType="reverse"
+            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorHeightSelect="11dp"
+            app:srcAnchorSelect="@drawable/drawable_tview_anchor_select02"
+            app:srcAnchorWidthSelect="12dp"
+            app:strokeColorSelect="#fed136"
+            app:strokeWidthSelect="1dp"
+            app:textColorNormal="#666666"
+            app:textSize="14dp"
+            app:textValue="服务态度不好" />
 
         <EditText
             android:layout_width="match_parent"
@@ -110,8 +138,8 @@
         android:layout_marginRight="25dp"
         app:repeatSelectType="connect"
         app:repeatShapeType="custom"
-        app:repeatSrcNormal="@drawable/iv_trepeat_bg01"
-        app:repeatSrcSelect="@drawable/iv_trepeat_bg02"
+        app:repeatSrcNormal="@drawable/drawable_trepeat_star_normal"
+        app:repeatSrcSelect="@drawable/drawable_trepeat_star_select"
         app:repeatTotal="5"
         app:touchType="always" />
 
@@ -131,8 +159,8 @@
         app:repeatItemTextSize="14dp"
         app:repeatSelectType="current"
         app:repeatShapeType="custom"
-        app:repeatSrcNormal="@drawable/iv_trepeat_car_type01"
-        app:repeatSrcSelect="@drawable/iv_trepeat_car_type02" />
+        app:repeatSrcNormal="@drawable/drawable_trepeat_car_normal"
+        app:repeatSrcSelect="@drawable/drawable_trepeat_car_select" />
 
     <com.tunasushi.tuna.TRepeat
         android:id="@+id/tRepeatTips"

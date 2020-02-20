@@ -18,7 +18,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextPadding="20dp"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
@@ -37,7 +37,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
@@ -56,7 +56,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
@@ -75,7 +75,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
@@ -94,7 +94,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
@@ -112,7 +112,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="left" />
@@ -131,7 +131,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
@@ -150,7 +150,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
@@ -169,7 +169,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
@@ -188,7 +188,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
@@ -207,7 +207,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="left" />
@@ -226,7 +226,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
@@ -245,7 +245,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="right" />
@@ -264,7 +264,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="bottom" />
@@ -283,7 +283,7 @@
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
-        app:bubbleTextColorNormal="#ffffff"
+        app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
         app:bubbleTextValue="TunaBubble"
         app:bubbleTowardType="top" />
