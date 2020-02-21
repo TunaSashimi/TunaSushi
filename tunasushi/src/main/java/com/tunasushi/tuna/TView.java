@@ -27,6 +27,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.text.method.Touch;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.util.TypedValue;
@@ -1169,7 +1170,7 @@ public class TView extends View {
     protected TouchDownListener touchDownListener;
 
     public interface TouchDownListener {
-        void touchDown(View view);
+        void touchDown(TView t);
     }
 
     public TouchDownListener getTouchDownListener() {
@@ -1184,7 +1185,7 @@ public class TView extends View {
     protected TouchMoveListener touchMoveListener;
 
     public interface TouchMoveListener {
-        void touchMove(View view);
+        void touchMove(TView t);
     }
 
     public TouchMoveListener getTouchMoveListener() {
@@ -1199,7 +1200,7 @@ public class TView extends View {
     protected TouchUpListener touchUpListener;
 
     public interface TouchUpListener {
-        void touchUp(View view);
+        void touchUp(TView t);
     }
 
     public TouchUpListener getTouchUpListener() {
@@ -1215,24 +1216,24 @@ public class TView extends View {
      * named click handling method from a parent or ancestor context.
      */
     private static class DeclaredTouchUpListener implements TouchUpListener {
-        private final View mHostView;
+        private final TView mHostView;
         private final String mMethodName;
 
         private Method mResolvedMethod;
         private Context mResolvedContext;
 
-        public DeclaredTouchUpListener(@NonNull View hostView, @NonNull String methodName) {
+        public DeclaredTouchUpListener(@NonNull TView hostView, @NonNull String methodName) {
             mHostView = hostView;
             mMethodName = methodName;
         }
 
         @Override
-        public void touchUp(View view) {
+        public void touchUp(TView t) {
             if (mResolvedMethod == null) {
                 resolveMethod(mHostView.getContext(), mMethodName);
             }
             try {
-                mResolvedMethod.invoke(mResolvedContext, view);
+                mResolvedMethod.invoke(mResolvedContext, t);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Could not execute non-public method for app:touchUp", e);
             } catch (InvocationTargetException e) {
@@ -1245,7 +1246,7 @@ public class TView extends View {
             while (context != null) {
                 try {
                     if (!context.isRestricted()) {
-                        final Method method = context.getClass().getMethod(name, View.class);
+                        final Method method = context.getClass().getMethod(name, TView.class);
                         if (method != null) {
                             mResolvedMethod = method;
                             mResolvedContext = context;
@@ -1273,7 +1274,9 @@ public class TView extends View {
     }
 
     /**
-     * 增加常用的OnClickListener赋予TouchUpListener同样的触发
+     * Add a common OnClickListener to give TouchUpListener the same trigger!
+     *
+     * Only the onClickListener parameter is View, and the other Touch interface parameters are TView!
      */
     protected OnClickListener onClickListener;
 
@@ -1355,7 +1358,7 @@ public class TView extends View {
     protected TouchCancelListener touchCancelListener;
 
     public interface TouchCancelListener {
-        void touchCancel(View view);
+        void touchCancel(TView t);
     }
 
     public TouchCancelListener getTouchCancelListener() {
@@ -1370,7 +1373,7 @@ public class TView extends View {
     protected TouchOutListener touchOutListener;
 
     public interface TouchOutListener {
-        void touchOut(View view);
+        void touchOut(TView t);
     }
 
     public TouchOutListener getTouchOutListener() {
@@ -1385,7 +1388,7 @@ public class TView extends View {
     protected TouchInListener touchInListener;
 
     public interface TouchInListener {
-        void touchIn(View view);
+        void touchIn(TView t);
     }
 
     public TouchInListener getTouchInListener() {
@@ -4600,7 +4603,7 @@ public class TView extends View {
             if (handlerNameTouchUp != null) {
                 setTouchUpListener(new DeclaredTouchUpListener(this, handlerNameTouchUp));
             }
-            //
+            //The onClick method is the only interface that is passed into View. The other touch methods are TView interfaces.
             final String handlerNameOnClick = typedArray.getString(R.styleable.TView_onClick);
             if (handlerNameOnClick != null) {
                 setOnClickListener(new DeclaredOnClickListener(this, handlerNameOnClick));

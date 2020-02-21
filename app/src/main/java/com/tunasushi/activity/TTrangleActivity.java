@@ -26,7 +26,7 @@ public class TTrangleActivity extends Activity {
 
         tView.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View t) {
+            public void touchUp(TView t) {
                 if ("TunaSashimi".equals(tViewBox.getTextValue())) {
                     tViewBox.setTextValue("金枪鱼刺身");
                 } else {

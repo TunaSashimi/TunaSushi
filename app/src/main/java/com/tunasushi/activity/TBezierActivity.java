@@ -35,7 +35,6 @@ public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChange
         seekBar03.setOnSeekBarChangeListener(this);
     }
 
-
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
@@ -49,7 +48,6 @@ public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChange
                 tBezier.setHandleLenRate(progress / 100f);
                 break;
         }
-
     }
 
     @Override

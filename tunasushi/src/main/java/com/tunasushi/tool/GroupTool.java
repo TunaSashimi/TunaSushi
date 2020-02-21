@@ -39,7 +39,7 @@ public class GroupTool {
             });
             TViewArray[i].setTouchCancelListener(new TView.TouchCancelListener() {
                 @Override
-                public void touchCancel(View view) {
+                public void touchCancel(TView t) {
                     for (int j = 0; j < arraySize; j++) {
                         switch (finalI) {
                             case 0:
@@ -83,7 +83,7 @@ public class GroupTool {
             });
             TViewList.get(i).setTouchCancelListener(new TView.TouchCancelListener() {
                 @Override
-                public void touchCancel(View view) {
+                public void touchCancel(TView t) {
                     for (int j = 0; j < listSize; j++) {
                         switch (finalI) {
                             case 0:

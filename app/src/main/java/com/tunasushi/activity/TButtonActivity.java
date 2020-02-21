@@ -30,19 +30,19 @@ public class TButtonActivity extends Activity {
 
         tButton01.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View view) {
+            public void touchUp(TView t) {
                 Toast.makeText(TButtonActivity.this, tButton01.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
         tButton02.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View view) {
+            public void touchUp(TView t) {
                 Toast.makeText(TButtonActivity.this, tButton02.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
         tButton03.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(View view) {
+            public void touchUp(TView t) {
                 Toast.makeText(TButtonActivity.this, tButton03.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });

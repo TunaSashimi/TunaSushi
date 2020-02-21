@@ -23,7 +23,7 @@ public class TSeekActivity extends Activity {
 
     private TView.TouchUpListener touchUpListener = new TView.TouchUpListener() {
         @Override
-        public void touchUp(View t) {
+        public void touchUp(TView t) {
             switch (t.getId()) {
                 case R.id.tViewTouchoutableReset:
                     tSeekTouchoutable.setSeekIndex(0);
