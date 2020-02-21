@@ -242,6 +242,9 @@
             <!-- Thrown forward certain value and then return to its original position -->
             <enum name="overshootInterpolator" value="8" />
         </attr>
+
+        <attr name="touchUp" format="string" />
+        <attr name="onClick" format="string" />
     </declare-styleable>
 
     <declare-styleable name="TBubble">

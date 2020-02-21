@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public class TViewActivity extends Activity {
         tViewRectClassic01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                Toast.makeText(TViewActivity.this, "TouchUp", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -160,5 +161,15 @@ public class TViewActivity extends Activity {
                 R.style.TView_RadioGroup_LightGray_Right,
                 R.style.TView_RadioGroup_LightGray_Horizontal,
                 R.style.TView_RadioGroup_LightGray_Whole);
+    }
+
+    //Defined in xml
+    public void touchUp(TView t) {
+        Toast.makeText(TViewActivity.this, "app:touchUp=\"touchUp\"", Toast.LENGTH_SHORT).show();
+    }
+
+    //Defined in xml
+    public void onClick(TView t) {
+        Toast.makeText(TViewActivity.this, "app:onClick=\"onClick\"", Toast.LENGTH_SHORT).show();
     }
 }

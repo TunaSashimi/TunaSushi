@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.res.TypedArray;
@@ -52,8 +53,13 @@ import android.widget.ToggleButton;
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
@@ -1205,6 +1211,68 @@ public class TView extends View {
     }
 
     /**
+     * An implementation of OnClickListener that attempts to lazily load a
+     * named click handling method from a parent or ancestor context.
+     */
+    private static class DeclaredTouchUpListener implements TouchUpListener {
+        private final TView mHostView;
+        private final String mMethodName;
+
+        private Method mResolvedMethod;
+        private Context mResolvedContext;
+
+        public DeclaredTouchUpListener(@NonNull TView hostView, @NonNull String methodName) {
+            mHostView = hostView;
+            mMethodName = methodName;
+        }
+
+        @Override
+        public void touchUp(TView t) {
+            if (mResolvedMethod == null) {
+                resolveMethod(mHostView.getContext(), mMethodName);
+            }
+            try {
+                mResolvedMethod.invoke(mResolvedContext, t);
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("Could not execute non-public method for app:touchUp", e);
+            } catch (InvocationTargetException e) {
+                throw new IllegalStateException("Could not execute method for app:touchUp", e);
+            }
+        }
+
+        @NonNull
+        private void resolveMethod(@Nullable Context context, @NonNull String name) {
+            while (context != null) {
+                try {
+                    if (!context.isRestricted()) {
+                        final Method method = context.getClass().getMethod(name, TView.class);
+                        if (method != null) {
+                            mResolvedMethod = method;
+                            mResolvedContext = context;
+                            return;
+                        }
+                    }
+                } catch (NoSuchMethodException e) {
+                    // Failed to find method, keep searching up the hierarchy.
+                }
+                if (context instanceof ContextWrapper) {
+                    context = ((ContextWrapper) context).getBaseContext();
+                } else {
+                    // Can't search up the hierarchy, null out and fail.
+                    context = null;
+                }
+            }
+
+            final int id = mHostView.getId();
+            final String idText = id == NO_ID ? "" : " with id '" +
+                    mHostView.getContext().getResources().getResourceEntryName(id) + "'";
+            throw new IllegalStateException("Could not find method " + mMethodName
+                    + "(TView) in a parent or ancestor Context for app:touchUp "
+                    + "attribute defined on view " + mHostView.getClass() + idText);
+        }
+    }
+
+    /**
      * 增加常用的OnClickListener赋予TouchUpListener同样的触发
      */
     protected OnClickListener onClickListener;
@@ -1220,6 +1288,69 @@ public class TView extends View {
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
+
+    /**
+     * An implementation of OnClickListener that attempts to lazily load a
+     * named click handling method from a parent or ancestor context.
+     */
+    private static class DeclaredOnClickListener implements OnClickListener {
+        private final TView mHostView;
+        private final String mMethodName;
+
+        private Method mResolvedMethod;
+        private Context mResolvedContext;
+
+        public DeclaredOnClickListener(@NonNull TView hostView, @NonNull String methodName) {
+            mHostView = hostView;
+            mMethodName = methodName;
+        }
+
+        @Override
+        public void onClick(TView t) {
+            if (mResolvedMethod == null) {
+                resolveMethod(mHostView.getContext(), mMethodName);
+            }
+            try {
+                mResolvedMethod.invoke(mResolvedContext, t);
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("Could not execute non-public method for app:onClick", e);
+            } catch (InvocationTargetException e) {
+                throw new IllegalStateException("Could not execute method for app:onClick", e);
+            }
+        }
+
+        @NonNull
+        private void resolveMethod(@Nullable Context context, @NonNull String name) {
+            while (context != null) {
+                try {
+                    if (!context.isRestricted()) {
+                        final Method method = context.getClass().getMethod(name, TView.class);
+                        if (method != null) {
+                            mResolvedMethod = method;
+                            mResolvedContext = context;
+                            return;
+                        }
+                    }
+                } catch (NoSuchMethodException e) {
+                    // Failed to find method, keep searching up the hierarchy.
+                }
+                if (context instanceof ContextWrapper) {
+                    context = ((ContextWrapper) context).getBaseContext();
+                } else {
+                    // Can't search up the hierarchy, null out and fail.
+                    context = null;
+                }
+            }
+
+            final int id = mHostView.getId();
+            final String idText = id == NO_ID ? "" : " with id '" +
+                    mHostView.getContext().getResources().getResourceEntryName(id) + "'";
+            throw new IllegalStateException("Could not find method " + mMethodName
+                    + "(TView) in a parent or ancestor Context for app:onClick "
+                    + "attribute defined on view " + mHostView.getClass() + idText);
+        }
+    }
+
 
     //
     protected TouchCancelListener touchCancelListener;
@@ -4348,7 +4479,7 @@ public class TView extends View {
             textMarkColor = typedArray.getColor(R.styleable.TView_textMarkColor, Color.TRANSPARENT);
             textMarkTextValue = typedArray.getString(R.styleable.TView_textMarkTextValue);
             textMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, textSizeDefault);
-            textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor,textColorDefault);
+            textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor, textColorDefault);
 
             //
             contentMark = typedArray.getBoolean(R.styleable.TView_contentMark, false);
@@ -4357,7 +4488,7 @@ public class TView extends View {
             contentMarkColor = typedArray.getColor(R.styleable.TView_contentMarkColor, Color.TRANSPARENT);
             contentMarkTextValue = typedArray.getString(R.styleable.TView_contentMarkTextValue);
             contentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, textSizeDefault);
-            contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor,textColorDefault);
+            contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor, textColorDefault);
 
             //
             strokeWidthNormal = typedArray.getDimension(R.styleable.TView_strokeWidthNormal, 0);
@@ -4463,6 +4594,17 @@ public class TView extends View {
             int materialIndex = typedArray.getInt(R.styleable.TView_material, -1);
             if (materialIndex > -1) {
                 material = materialArray[materialIndex];
+            }
+
+            //
+            final String handlerNameTouchUp = typedArray.getString(R.styleable.TView_touchUp);
+            if (handlerNameTouchUp != null) {
+                setTouchUpListener(new DeclaredTouchUpListener(this, handlerNameTouchUp));
+            }
+            //
+            final String handlerNameOnClick = typedArray.getString(R.styleable.TView_onClick);
+            if (handlerNameOnClick != null) {
+                setOnClickListener(new DeclaredOnClickListener(this, handlerNameOnClick));
             }
         }
 

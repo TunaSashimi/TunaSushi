@@ -34,8 +34,8 @@ public class TToggleActivity extends Activity {
         });
         tToggle02.setToggleListener(new TToggle.ToggleListener() {
             @Override
-            public void onToggle(boolean isToggle) {
-                Toast.makeText(getApplication(), "toggleSelect02==>" + isToggle, Toast.LENGTH_SHORT).show();
+            public void onToggle(boolean toggle) {
+                Toast.makeText(getApplication(), "toggleSelect02==>" + toggle, Toast.LENGTH_SHORT).show();
             }
         });
     }

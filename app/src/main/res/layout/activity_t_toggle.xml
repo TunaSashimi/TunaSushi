@@ -44,6 +44,6 @@
         app:toggleTextSizeLeftToggle="16dp"
         app:toggleTextSizeRightNormal="16dp"
         app:toggleTextSizeRightToggle="16dp"
-        app:toggleTextValueLeft="按关键字查询"
-        app:toggleTextValueRight="按日期查询" />
+        app:toggleTextValueLeft="酒店"
+        app:toggleTextValueRight="机票" />
 </RelativeLayout>
