@@ -17,7 +17,6 @@ public class TArcActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(new TArc(this));
-
     }
 }
 

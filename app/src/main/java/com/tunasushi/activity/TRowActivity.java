@@ -15,6 +15,7 @@ import com.tunasushi.tuna.TRow;
  * @Description
  */
 public class TRowActivity extends Activity {
+    private TRow tRow;
     private final static int TUNAROW_PLAY = 0;
     private Handler handler = new Handler() {
         @Override
@@ -28,7 +29,7 @@ public class TRowActivity extends Activity {
             }
         }
     };
-    private TRow tRow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

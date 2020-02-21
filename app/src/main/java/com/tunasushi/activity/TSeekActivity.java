@@ -3,6 +3,7 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
@@ -22,7 +23,7 @@ public class TSeekActivity extends Activity {
 
     private TView.TouchUpListener touchUpListener = new TView.TouchUpListener() {
         @Override
-        public void touchUp(TView t) {
+        public void touchUp(View t) {
             switch (t.getId()) {
                 case R.id.tViewTouchoutableReset:
                     tSeekTouchoutable.setSeekIndex(0);

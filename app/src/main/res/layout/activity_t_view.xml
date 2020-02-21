@@ -48,19 +48,19 @@
             android:layout_alignTop="@id/tViewRectClassic02"
             android:layout_toRightOf="@id/tViewRectClassic02"
             app:backgroundNormal="#666666"
-            app:touchUp="touchUp"
             app:rotate="30"
             app:textColorNormal="#ffffff"
             app:textTypeFaceFromAsset="fonts/computer.ttf"
-            app:textValue="#666666" />
+            app:textValue="#666666"
+            app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
             style="@style/TView_Text"
             android:layout_alignTop="@id/tViewRectClassic03"
             android:layout_toRightOf="@id/tViewRectClassic03"
             app:backgroundNormal="#cccccc"
-            app:rotate="15"
             app:onClick="onClick"
+            app:rotate="15"
             app:textColorNormal="#ffffff"
             app:textTypeFaceFromAsset="fonts/digital-7.ttf"
             app:textValue="#cccccc" />
@@ -615,6 +615,5 @@
             android:layout_below="@id/textDeviceInfo"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
-
     </RelativeLayout>
 </ScrollView>

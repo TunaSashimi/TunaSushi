@@ -3,6 +3,7 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
@@ -40,14 +41,14 @@ public class TLineActivity extends Activity {
         //
         tViewCenter.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
                 tLineAC.centerArrow();
             }
         });
 
         tViewHidden.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
                 tLineAC.hideArrow();
             }
         });

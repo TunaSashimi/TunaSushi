@@ -2,6 +2,7 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
@@ -29,19 +30,19 @@ public class TButtonActivity extends Activity {
 
         tButton01.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 Toast.makeText(TButtonActivity.this, tButton01.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
         tButton02.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 Toast.makeText(TButtonActivity.this, tButton02.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });
         tButton03.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 Toast.makeText(TButtonActivity.this, tButton03.getButtonTextValue(), Toast.LENGTH_SHORT).show();
             }
         });

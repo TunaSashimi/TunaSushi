@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TScratch;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53
@@ -22,7 +23,6 @@ public class TScratchActivity extends Activity {
         setContentView(R.layout.activity_t_scratch);
 
         tScratch = findViewById(R.id.tScratch);
-
         tScratch.setOnScratchCompleteListener(new TScratch.onScratchCompleteListener() {
             @Override
             public void onScratchComplete() {

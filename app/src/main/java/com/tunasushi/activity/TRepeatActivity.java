@@ -59,7 +59,6 @@ public class TRepeatActivity extends Activity {
             }
         });
 
-
         tRepeatCar.setTouchListener(new TView.TouchListener() {
             @Override
             public void touch(TView t) {
@@ -75,7 +74,7 @@ public class TRepeatActivity extends Activity {
 
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
                 if ("Unable".equals(tView.getTextValue().trim())) {
                     tRepeatStar.setTouchType(TView.TouchType.NONE);
                     tRepeatCar.setTouchType(TView.TouchType.NONE);

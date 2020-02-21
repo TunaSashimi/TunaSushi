@@ -1169,7 +1169,7 @@ public class TView extends View {
     protected TouchDownListener touchDownListener;
 
     public interface TouchDownListener {
-        void touchDown(TView t);
+        void touchDown(View view);
     }
 
     public TouchDownListener getTouchDownListener() {
@@ -1184,7 +1184,7 @@ public class TView extends View {
     protected TouchMoveListener touchMoveListener;
 
     public interface TouchMoveListener {
-        void touchMove(TView t);
+        void touchMove(View view);
     }
 
     public TouchMoveListener getTouchMoveListener() {
@@ -1199,7 +1199,7 @@ public class TView extends View {
     protected TouchUpListener touchUpListener;
 
     public interface TouchUpListener {
-        void touchUp(TView t);
+        void touchUp(View view);
     }
 
     public TouchUpListener getTouchUpListener() {
@@ -1215,24 +1215,24 @@ public class TView extends View {
      * named click handling method from a parent or ancestor context.
      */
     private static class DeclaredTouchUpListener implements TouchUpListener {
-        private final TView mHostView;
+        private final View mHostView;
         private final String mMethodName;
 
         private Method mResolvedMethod;
         private Context mResolvedContext;
 
-        public DeclaredTouchUpListener(@NonNull TView hostView, @NonNull String methodName) {
+        public DeclaredTouchUpListener(@NonNull View hostView, @NonNull String methodName) {
             mHostView = hostView;
             mMethodName = methodName;
         }
 
         @Override
-        public void touchUp(TView t) {
+        public void touchUp(View view) {
             if (mResolvedMethod == null) {
                 resolveMethod(mHostView.getContext(), mMethodName);
             }
             try {
-                mResolvedMethod.invoke(mResolvedContext, t);
+                mResolvedMethod.invoke(mResolvedContext, view);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Could not execute non-public method for app:touchUp", e);
             } catch (InvocationTargetException e) {
@@ -1245,7 +1245,7 @@ public class TView extends View {
             while (context != null) {
                 try {
                     if (!context.isRestricted()) {
-                        final Method method = context.getClass().getMethod(name, TView.class);
+                        final Method method = context.getClass().getMethod(name, View.class);
                         if (method != null) {
                             mResolvedMethod = method;
                             mResolvedContext = context;
@@ -1278,7 +1278,7 @@ public class TView extends View {
     protected OnClickListener onClickListener;
 
     public interface OnClickListener {
-        void onClick(TView t);
+        void onClick(View view);
     }
 
     public OnClickListener getOnClickListener() {
@@ -1294,24 +1294,24 @@ public class TView extends View {
      * named click handling method from a parent or ancestor context.
      */
     private static class DeclaredOnClickListener implements OnClickListener {
-        private final TView mHostView;
+        private final View mHostView;
         private final String mMethodName;
 
         private Method mResolvedMethod;
         private Context mResolvedContext;
 
-        public DeclaredOnClickListener(@NonNull TView hostView, @NonNull String methodName) {
+        public DeclaredOnClickListener(@NonNull View hostView, @NonNull String methodName) {
             mHostView = hostView;
             mMethodName = methodName;
         }
 
         @Override
-        public void onClick(TView t) {
+        public void onClick(View view) {
             if (mResolvedMethod == null) {
                 resolveMethod(mHostView.getContext(), mMethodName);
             }
             try {
-                mResolvedMethod.invoke(mResolvedContext, t);
+                mResolvedMethod.invoke(mResolvedContext, view);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Could not execute non-public method for app:onClick", e);
             } catch (InvocationTargetException e) {
@@ -1324,7 +1324,7 @@ public class TView extends View {
             while (context != null) {
                 try {
                     if (!context.isRestricted()) {
-                        final Method method = context.getClass().getMethod(name, TView.class);
+                        final Method method = context.getClass().getMethod(name, View.class);
                         if (method != null) {
                             mResolvedMethod = method;
                             mResolvedContext = context;
@@ -1343,8 +1343,7 @@ public class TView extends View {
             }
 
             final int id = mHostView.getId();
-            final String idText = id == NO_ID ? "" : " with id '" +
-                    mHostView.getContext().getResources().getResourceEntryName(id) + "'";
+            final String idText = id == NO_ID ? "" : " with id '" +  mHostView.getContext().getResources().getResourceEntryName(id) + "'";
             throw new IllegalStateException("Could not find method " + mMethodName
                     + "(TView) in a parent or ancestor Context for app:onClick "
                     + "attribute defined on view " + mHostView.getClass() + idText);
@@ -1356,7 +1355,7 @@ public class TView extends View {
     protected TouchCancelListener touchCancelListener;
 
     public interface TouchCancelListener {
-        void touchCancel(TView t);
+        void touchCancel(View view);
     }
 
     public TouchCancelListener getTouchCancelListener() {
@@ -1371,7 +1370,7 @@ public class TView extends View {
     protected TouchOutListener touchOutListener;
 
     public interface TouchOutListener {
-        void touchOut(TView t);
+        void touchOut(View view);
     }
 
     public TouchOutListener getTouchOutListener() {
@@ -1386,7 +1385,7 @@ public class TView extends View {
     protected TouchInListener touchInListener;
 
     public interface TouchInListener {
-        void touchIn(TView t);
+        void touchIn(View view);
     }
 
     public TouchInListener getTouchInListener() {

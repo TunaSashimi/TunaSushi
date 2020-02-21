@@ -32,7 +32,7 @@ public class TViewActivity extends Activity {
 
     private TouchUpListener tunaTouchUpListener = new TouchUpListener() {
         @Override
-        public void touchUp(TView t) {
+        public void touchUp(View t) {
             switch (t.getId()) {
                 case R.id.tViewRadioGroupDrackBrownLeft:
                     Toast.makeText(TViewActivity.this, "金枪鱼刺身", Toast.LENGTH_SHORT).show();
@@ -61,7 +61,7 @@ public class TViewActivity extends Activity {
         tViewRectClassic01 = findViewById(R.id.tViewRectClassic01);
         tViewRectClassic01.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
             }
         });
@@ -72,7 +72,7 @@ public class TViewActivity extends Activity {
         tViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
         tViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView t) {
+            public void onClick(View t) {
                 Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
             }
         });
@@ -81,7 +81,7 @@ public class TViewActivity extends Activity {
         tViewMainButton01 = findViewById(R.id.tViewShadowButton01);
         tViewMainButton01.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 tViewMainButton01.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
@@ -107,7 +107,7 @@ public class TViewActivity extends Activity {
         );
         tViewMainButton02.setTouchUpListener(new TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 tViewMainButton02.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
@@ -145,7 +145,7 @@ public class TViewActivity extends Activity {
         LinearLayout linearRadioGroupLightGray = findViewById(R.id.linearRadioGroupLightGray);
         TouchUpListener touchUpListener = new TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 Toast.makeText(TViewActivity.this, ((TView) t).getTextValue(), Toast.LENGTH_SHORT).show();
             }
         };
@@ -164,12 +164,12 @@ public class TViewActivity extends Activity {
     }
 
     //Defined in xml
-    public void touchUp(TView t) {
+    public void touchUp(View view) {
         Toast.makeText(TViewActivity.this, "app:touchUp=\"touchUp\"", Toast.LENGTH_SHORT).show();
     }
 
     //Defined in xml
-    public void onClick(TView t) {
+    public void onClick(View view) {
         Toast.makeText(TViewActivity.this, "app:onClick=\"onClick\"", Toast.LENGTH_SHORT).show();
     }
 }

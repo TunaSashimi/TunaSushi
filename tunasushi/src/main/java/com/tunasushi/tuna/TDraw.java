@@ -298,21 +298,21 @@ public class TDraw extends TView {
     public void setPaintingListener() {
         setTouchDownListener(new TouchDownListener() {
             @Override
-            public void touchDown(TView t) {
+            public void touchDown(View view) {
                 drawTouchDown(getTouchX(), getTouchY());
             }
         });
 
         setTouchMoveListener(new TouchMoveListener() {
             @Override
-            public void touchMove(TView t) {
+            public void touchMove(View view) {
                 drawTouchMove(getTouchX(), getTouchY());
             }
         });
 
         setTouchUpListener(new TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 drawTouchUp();
             }
         });

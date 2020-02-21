@@ -15,6 +15,7 @@ public class TPentagramActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_t_pentagram);
     }
 }

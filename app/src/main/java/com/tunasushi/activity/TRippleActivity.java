@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TRipple;
@@ -56,7 +57,7 @@ public class TRippleActivity extends Activity {
         tViewPlay = findViewById(R.id.tViewPlay);
         tViewPlay.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
                 if (timer == null) {
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
@@ -72,7 +73,7 @@ public class TRippleActivity extends Activity {
         tViewChange = findViewById(R.id.tViewChange);
         tViewChange.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
 
                 if ("^".equals(tRipple01.getRippleTextValue())) {
 

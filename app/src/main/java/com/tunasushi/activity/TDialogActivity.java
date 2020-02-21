@@ -33,20 +33,20 @@ public class TDialogActivity extends Activity {
         //
         tViewConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 tDialogConfirm.setVisibility(View.VISIBLE);
             }
         });
         tViewChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 tDialogChoice.setVisibility(View.VISIBLE);
             }
         });
         //
         tViewSelect.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View t) {
                 tDialogSelect.setVisibility(View.VISIBLE);
             }
         });
@@ -60,7 +60,7 @@ public class TDialogActivity extends Activity {
         //
         tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 int choiceIndex = tDialogConfirm.getDialogChoiceIndex();
                 String valueArray[] = tDialogConfirm.getDialogChoiceTextValueArray();
                 if (-1 == choiceIndex) {
@@ -74,7 +74,7 @@ public class TDialogActivity extends Activity {
         });
         tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 int choiceIndex = tDialogChoice.getDialogChoiceIndex();
                 String valueArray[] = tDialogChoice.getDialogChoiceTextValueArray();
                 if (-1 == choiceIndex) {
@@ -88,7 +88,7 @@ public class TDialogActivity extends Activity {
         });
         tDialogSelect.setTouchUpListener(new TView.TouchUpListener() {
             @Override
-            public void touchUp(TView t) {
+            public void touchUp(View view) {
                 int choiceIndex = tDialogSelect.getDialogChoiceIndex();
                 String valueArray[] = tDialogSelect.getDialogChoiceTextValueArray();
                 if (-1 == choiceIndex) {

@@ -2,6 +2,7 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
@@ -35,7 +36,7 @@ public class TWrapActivity extends Activity {
         TView tView = findViewById(R.id.tView);
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(TView v) {
+            public void onClick(View view) {
                 Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapSelect()), Toast.LENGTH_LONG).show();
             }
         });
