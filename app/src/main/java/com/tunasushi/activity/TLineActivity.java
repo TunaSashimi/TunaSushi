@@ -41,14 +41,14 @@ public class TLineActivity extends Activity {
         //
         tViewCenter.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 tLineAC.centerArrow();
             }
         });
 
         tViewHidden.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 tLineAC.hideArrow();
             }
         });

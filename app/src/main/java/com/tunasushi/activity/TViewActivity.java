@@ -72,7 +72,7 @@ public class TViewActivity extends Activity {
         tViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
         tViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
             }
         });
@@ -170,7 +170,7 @@ public class TViewActivity extends Activity {
         Toast.makeText(TViewActivity.this, "app:touchUp=\"touchUp\"", Toast.LENGTH_SHORT).show();
     }
 
-    public void onClick(View view) {
+    public void onClick(View v) {
         Toast.makeText(TViewActivity.this, "app:onClick=\"onClick\"", Toast.LENGTH_SHORT).show();
     }
 }

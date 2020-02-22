@@ -57,7 +57,7 @@ public class TRippleActivity extends Activity {
         tViewPlay = findViewById(R.id.tViewPlay);
         tViewPlay.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (timer == null) {
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
@@ -73,10 +73,8 @@ public class TRippleActivity extends Activity {
         tViewChange = findViewById(R.id.tViewChange);
         tViewChange.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View v) {
                 if ("^".equals(tRipple01.getRippleTextValue())) {
-
                     tRipple01.setRippleTextValue("&");
                     tRipple02.setRippleTextValue("&");
                     tRipple03.setRippleTextValue("&");

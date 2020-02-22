@@ -75,10 +75,9 @@ import static com.tunasushi.tool.ViewTool.getLinearGradient;
  * @Copyright 2015 Tunasashimi. All rights reserved.
  * @Description
  */
-
 public class TView extends View {
     /**
-     * The following fields and methods of the parent class and subclass can always use
+     * The following fields and methods of the parent class and subclass can always use!
      */
     protected String tag;
 
@@ -842,7 +841,7 @@ public class TView extends View {
                         public void colorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
                             edit_backgroundNormal.setTextColor(color);
-                            edit_backgroundNormal.setText(String.valueOf(Integer.toHexString(color)));
+                            edit_backgroundNormal.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
@@ -851,7 +850,7 @@ public class TView extends View {
                         public void colorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
                             edit_backgroundPress.setTextColor(color);
-                            edit_backgroundPress.setText(String.valueOf(Integer.toHexString(color)));
+                            edit_backgroundPress.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
@@ -860,7 +859,7 @@ public class TView extends View {
                         public void colorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
                             edit_backgroundSelect.setTextColor(color);
-                            edit_backgroundSelect.setText(String.valueOf(Integer.toHexString(color)));
+                            edit_backgroundSelect.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
@@ -869,7 +868,7 @@ public class TView extends View {
                         public void colorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
                             edit_textColorNormal.setTextColor(color);
-                            edit_textColorNormal.setText(String.valueOf(Integer.toHexString(color)));
+                            edit_textColorNormal.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
@@ -878,7 +877,7 @@ public class TView extends View {
                         public void colorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);
                             edit_strokeColor.setTextColor(color);
-                            edit_strokeColor.setText(String.valueOf(Integer.toHexString(color)));
+                            edit_strokeColor.setText(Integer.toHexString(color));
                         }
                     }).show();
                 }
@@ -1275,13 +1274,13 @@ public class TView extends View {
 
     /**
      * Add a common OnClickListener to give TouchUpListener the same trigger!
-     *
+     * <p>
      * Only the onClickListener parameter is View, and the other Touch interface parameters are TView!
      */
     protected OnClickListener onClickListener;
 
     public interface OnClickListener {
-        void onClick(View view);
+        void onClick(View v);
     }
 
     public OnClickListener getOnClickListener() {
@@ -1309,12 +1308,12 @@ public class TView extends View {
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View v) {
             if (mResolvedMethod == null) {
                 resolveMethod(mHostView.getContext(), mMethodName);
             }
             try {
-                mResolvedMethod.invoke(mResolvedContext, view);
+                mResolvedMethod.invoke(mResolvedContext, v);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Could not execute non-public method for app:onClick", e);
             } catch (InvocationTargetException e) {
@@ -1346,7 +1345,7 @@ public class TView extends View {
             }
 
             final int id = mHostView.getId();
-            final String idText = id == NO_ID ? "" : " with id '" +  mHostView.getContext().getResources().getResourceEntryName(id) + "'";
+            final String idText = id == NO_ID ? "" : " with id '" + mHostView.getContext().getResources().getResourceEntryName(id) + "'";
             throw new IllegalStateException("Could not find method " + mMethodName
                     + "(TView) in a parent or ancestor Context for app:onClick "
                     + "attribute defined on view " + mHostView.getClass() + idText);

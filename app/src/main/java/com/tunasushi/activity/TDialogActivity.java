@@ -51,7 +51,6 @@ public class TDialogActivity extends Activity {
             }
         });
 
-
         //
         tDialogConfirm = findViewById(R.id.tDialogConfirm);
         tDialogChoice = findViewById(R.id.tDialogChoice);

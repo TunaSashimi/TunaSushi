@@ -36,7 +36,7 @@ public class TWrapActivity extends Activity {
         TView tView = findViewById(R.id.tView);
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapSelect()), Toast.LENGTH_LONG).show();
             }
         });

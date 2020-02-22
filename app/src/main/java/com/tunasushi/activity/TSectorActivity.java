@@ -40,7 +40,7 @@ public class TSectorActivity extends Activity {
         //
         tViewAdd.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 progress += 1;
                 if (progress > 99) {
                     progress = 100;
@@ -53,7 +53,7 @@ public class TSectorActivity extends Activity {
         //
         tViewSubtract.setOnClickListener(new TView.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 progress -= 1;
                 if (progress < 0) {
                     progress = 0;
