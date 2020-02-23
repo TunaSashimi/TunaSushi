@@ -54,6 +54,7 @@ import androidx.annotation.Nullable;
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ConvertTool.dpToPx;
+import static com.tunasushi.tool.DeviceTool.showProperties;
 import static com.tunasushi.tool.DrawTool.drawAnchor;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
@@ -70,7 +71,7 @@ public class TView extends View {
     protected String tag;
 
     // the width and height of the TView(put together to save the number of rows)
-    protected int width, height;
+    public int width, height;
 
     //
     protected int layer;
@@ -652,7 +653,7 @@ public class TView extends View {
 
     protected LayoutParams layoutParams;
 
-    protected void setLayout(int width, int height) {
+    public void setLayout(int width, int height) {
         if (layoutParams == null) {
             layoutParams = getLayoutParams();
         }
@@ -4410,7 +4411,7 @@ public class TView extends View {
                         touchDownCount = 0;
                         touchDownTimeEnd = System.currentTimeMillis();
                         if ((touchDownTimeEnd - touchDownTimeStart) <= SHOW_PROPERTY_MAX_TIME_MILLIS) {
-                            PropertyView.showProperties(this);
+                            showProperties(this);
                         }
                     } else {
                         touchDownCount++;
