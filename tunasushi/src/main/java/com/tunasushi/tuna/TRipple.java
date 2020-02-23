@@ -479,8 +479,6 @@ public class TRipple extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         if (rippleCircleRadiusInner > 0) {
             // The latter part of the judge to modify the contents added to initPaint in
             canvas.drawCircle(width >> 1, height >> 1, rippleCircleRadiusInner,

@@ -5,11 +5,8 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.DialogInterface;
-import android.content.pm.ApplicationInfo;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,11 +24,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.text.method.Touch;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -44,12 +39,6 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
@@ -65,7 +54,6 @@ import androidx.annotation.Nullable;
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ConvertTool.dpToPx;
-import static com.tunasushi.tool.ConvertTool.pxToDp;
 import static com.tunasushi.tool.DrawTool.drawAnchor;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
@@ -662,12 +650,7 @@ public class TView extends View {
         return matrix;
     }
 
-    protected LayoutInflater initLayoutInflater() {
-        if (layoutInflater == null) {
-            layoutInflater = LayoutInflater.from(getContext());
-        }
-        return layoutInflater;
-    }
+    protected LayoutParams layoutParams;
 
     protected void setLayout(int width, int height) {
         if (layoutParams == null) {
@@ -711,220 +694,6 @@ public class TView extends View {
         }
     }
 
-    //
-    protected View propertiesView;
-    protected LayoutParams layoutParams;
-    protected LayoutInflater layoutInflater;
-
-    protected void showProperties() {
-
-        propertiesView = initLayoutInflater().inflate(R.layout.properties, null);
-
-        final TextView text_display = propertiesView.findViewById(R.id.text_display);
-
-        final EditText edit_width = propertiesView.findViewById(R.id.edit_width);
-        final EditText edit_height = propertiesView.findViewById(R.id.edit_height);
-
-        final EditText edit_backgroundNormal = propertiesView.findViewById(R.id.edit_backgroundNormal);
-        final EditText edit_backgroundPress = propertiesView.findViewById(R.id.edit_backgroundPress);
-        final EditText edit_backgroundSelect = propertiesView.findViewById(R.id.edit_backgroundSelect);
-
-        final EditText edit_textSize = propertiesView.findViewById(R.id.edit_textSize);
-        final EditText edit_textColorNormal = propertiesView.findViewById(R.id.edit_textColorNormal);
-
-        final EditText edit_strokeWidth = propertiesView.findViewById(R.id.edit_strokeWidth);
-        final EditText edit_strokeColor = propertiesView.findViewById(R.id.edit_strokeColor);
-
-        final Button btn_width_pius = propertiesView.findViewById(R.id.btn_width_pius);
-        final Button btn_width_minus = propertiesView.findViewById(R.id.btn_width_minus);
-        final Button btn_height_pius = propertiesView.findViewById(R.id.btn_height_pius);
-        final Button btn_height_minus = propertiesView.findViewById(R.id.btn_height_minus);
-
-        final Button btn_textSize_pius = propertiesView.findViewById(R.id.btn_textSize_pius);
-        final Button btn_textSize_minus = propertiesView.findViewById(R.id.btn_textSize_minus);
-
-        final Button btn_strokeWidth_pius = propertiesView.findViewById(R.id.btn_strokeWidth_pius);
-        final Button btn_strokeWidth_minus = propertiesView.findViewById(R.id.btn_strokeWidth_minus);
-
-        final Button btn_backgroundNormal = propertiesView.findViewById(R.id.btn_backgroundNormal);
-        final Button btn_backgroundPress = propertiesView.findViewById(R.id.btn_backgroundPress);
-        final Button btn_backgroundSelect = propertiesView.findViewById(R.id.btn_backgroundSelect);
-
-        final Button btn_textColorNormal = propertiesView.findViewById(R.id.btn_textColorNormal);
-
-        final Button btn_strokeColor = propertiesView.findViewById(R.id.btn_strokeColor);
-
-        final ToggleButton toogle_mark = propertiesView.findViewById(R.id.toogle_mark);
-        final TextView text_mark = propertiesView.findViewById(R.id.text_mark);
-
-        final ToggleButton toogle_thisHardwareAccelerated = propertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
-        final TextView text_thisHardwareAccelerated = propertiesView.findViewById(R.id.text_thisHardwareAccelerated);
-
-        final ToggleButton toogle_canvasHardwareAccelerated = propertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
-        final TextView text_canvasHardwareAccelerated = propertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
-
-
-        DeviceTool.initDisplayMetrics();
-        text_display.setText(DeviceTool.stringBuffer);
-
-        edit_width.setText(String.valueOf(pxToDp(width)));
-        edit_height.setText(String.valueOf(pxToDp(height)));
-
-        edit_backgroundNormal.setText(backgroundNormal != 0 ? Integer.toHexString(backgroundNormal) : "00000000");
-        edit_backgroundPress.setText(backgroundPress != 0 ? Integer.toHexString(backgroundPress) : "00000000");
-        edit_backgroundSelect.setText(backgroundSelect != 0 ? Integer.toHexString(backgroundSelect) : "00000000");
-
-        edit_textSize.setText(String.valueOf(pxToDp(textSize)));
-        edit_textColorNormal.setText(textColorNormal != 0 ? Integer.toHexString(textColorNormal) : "00000000");
-
-        edit_strokeWidth.setText(String.valueOf(pxToDp(strokeWidthNormal)));
-        edit_strokeColor.setText(strokeColorNormal != 0 ? Integer.toHexString(strokeColorNormal) : "00000000");
-
-        //
-        edit_backgroundNormal.setTextColor(backgroundNormal);
-        edit_backgroundPress.setTextColor(backgroundPress);
-        edit_backgroundSelect.setTextColor(backgroundSelect);
-        edit_strokeColor.setTextColor(strokeColorNormal);
-        edit_textColorNormal.setTextColor(textColorNormal);
-
-        btn_backgroundNormal.setBackgroundColor(backgroundNormal);
-        btn_backgroundPress.setBackgroundColor(backgroundPress);
-        btn_backgroundSelect.setBackgroundColor(backgroundSelect);
-        btn_strokeColor.setBackgroundColor(strokeColorNormal);
-        btn_textColorNormal.setBackgroundColor(textColorNormal);
-
-        toogle_mark.setChecked(textMark);
-        text_mark.setText(String.valueOf(textMark));
-
-        isHardwareAccelerated = this.isHardwareAccelerated();
-        toogle_thisHardwareAccelerated.setChecked(isHardwareAccelerated);
-        text_thisHardwareAccelerated.setText(String.valueOf(isHardwareAccelerated));
-
-        toogle_canvasHardwareAccelerated.setChecked(canvasHardwareAccelerated);
-        text_canvasHardwareAccelerated.setText(String.valueOf(canvasHardwareAccelerated));
-
-        //
-        toogle_mark.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                text_mark.setText(String.valueOf(isChecked));
-            }
-        });
-
-        //
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /**
-                 * adt14 will lib where R in the file ID to the final tag removed All you want to set library package, which the switch ... case statement can only be changed if ... else for the job
-                 */
-                int viewId = view.getId();
-                if (viewId == R.id.btn_width_pius) {
-                    edit_width.setText(String.valueOf(Float.parseFloat(edit_width.getText().toString().trim()) + 1));
-                } else if (viewId == R.id.btn_width_minus) {
-                    edit_width.setText(String.valueOf(Float.parseFloat(edit_width.getText().toString().trim()) - 1));
-                } else if (viewId == R.id.btn_height_pius) {
-                    edit_height.setText(String.valueOf(Float.parseFloat(edit_height.getText().toString().trim()) + 1));
-                } else if (viewId == R.id.btn_height_minus) {
-                    edit_height.setText(String.valueOf(Float.parseFloat(edit_height.getText().toString().trim()) - 1));
-                } else if (viewId == R.id.btn_textSize_pius) {
-                    edit_textSize.setText(String.valueOf(Float.parseFloat(edit_textSize.getText().toString().trim()) + 1));
-                } else if (viewId == R.id.btn_textSize_minus) {
-                    edit_textSize.setText(String.valueOf(Float.parseFloat(edit_textSize.getText().toString().trim()) - 1));
-                } else if (viewId == R.id.btn_strokeWidth_pius) {
-                    edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) + 1));
-                } else if (viewId == R.id.btn_strokeWidth_minus) {
-                    edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
-                } else if (viewId == R.id.btn_backgroundNormal) {
-                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            btn_backgroundNormal.setBackgroundColor(color);
-                            edit_backgroundNormal.setTextColor(color);
-                            edit_backgroundNormal.setText(Integer.toHexString(color));
-                        }
-                    }).show();
-                } else if (viewId == R.id.btn_backgroundPress) {
-                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            btn_backgroundPress.setBackgroundColor(color);
-                            edit_backgroundPress.setTextColor(color);
-                            edit_backgroundPress.setText(Integer.toHexString(color));
-                        }
-                    }).show();
-                } else if (viewId == R.id.btn_backgroundSelect) {
-                    new ColorPickerDialog(getContext(), backgroundNormal, new ColorPickerDialog.colorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            btn_backgroundSelect.setBackgroundColor(color);
-                            edit_backgroundSelect.setTextColor(color);
-                            edit_backgroundSelect.setText(Integer.toHexString(color));
-                        }
-                    }).show();
-                } else if (viewId == R.id.btn_textColorNormal) {
-                    new ColorPickerDialog(getContext(), strokeColorNormal, new ColorPickerDialog.colorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            btn_textColorNormal.setBackgroundColor(color);
-                            edit_textColorNormal.setTextColor(color);
-                            edit_textColorNormal.setText(Integer.toHexString(color));
-                        }
-                    }).show();
-                } else if (viewId == R.id.btn_strokeColor) {
-                    new ColorPickerDialog(getContext(), strokeColorNormal, new ColorPickerDialog.colorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            btn_strokeColor.setBackgroundColor(color);
-                            edit_strokeColor.setTextColor(color);
-                            edit_strokeColor.setText(Integer.toHexString(color));
-                        }
-                    }).show();
-                }
-            }
-        };
-
-        btn_width_pius.setOnClickListener(onClickListener);
-        btn_width_minus.setOnClickListener(onClickListener);
-        btn_height_pius.setOnClickListener(onClickListener);
-        btn_height_minus.setOnClickListener(onClickListener);
-        btn_textSize_pius.setOnClickListener(onClickListener);
-        btn_textSize_minus.setOnClickListener(onClickListener);
-        btn_strokeWidth_pius.setOnClickListener(onClickListener);
-        btn_strokeWidth_minus.setOnClickListener(onClickListener);
-
-        btn_backgroundNormal.setOnClickListener(onClickListener);
-        btn_backgroundPress.setOnClickListener(onClickListener);
-        btn_backgroundSelect.setOnClickListener(onClickListener);
-
-        btn_textColorNormal.setOnClickListener(onClickListener);
-        btn_strokeColor.setOnClickListener(onClickListener);
-
-        new AlertDialog.Builder(getContext(), android.R.style.Theme_Holo_Light)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setView(propertiesView)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //
-                        backgroundNormal = Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim());
-                        backgroundPress = Color.parseColor("#" + edit_backgroundPress.getText().toString().trim());
-                        backgroundSelect = Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim());
-                        strokeColorNormal = Color.parseColor("#" + edit_strokeColor.getText().toString().trim());
-                        textColorNormal = Color.parseColor("#" + edit_textColorNormal.getText().toString().trim());
-
-                        textSize = dpToPx(Float.parseFloat(edit_textSize.getText().toString().trim()));
-
-                        strokeWidthNormal = dpToPx(Float.parseFloat(edit_strokeWidth.getText().toString().trim()));
-
-                        textMark = text_mark.getText().toString().trim().equals("true") ? true : false;
-
-                        setLayout(dpToPx(Float.parseFloat(edit_width.getText().toString().trim())), dpToPx(Float.parseFloat(edit_height.getText().toString().trim())));
-                    }
-                }).setNegativeButton("Cancel", null).create().show();
-    }
-
-    // Hardware accelerated this
-    protected boolean isHardwareAccelerated;
     // Hardware accelerated canvas
     protected boolean canvasHardwareAccelerated;
 
@@ -971,15 +740,15 @@ public class TView extends View {
         this.classic = classic;
     }
 
-    // can modify the properties when debug is true
-    protected boolean debugable;
+    // can modify the properties when adjust is true
+    protected boolean adjust;
 
-    public boolean isDebugable() {
-        return debugable;
+    public boolean isAdjust() {
+        return adjust;
     }
 
-    public void setDebugable(boolean debugable) {
-        this.debugable = debugable;
+    public void setAdjust(boolean adjust) {
+        this.adjust = adjust;
     }
 
     // touchIntercept default false
@@ -4243,7 +4012,6 @@ public class TView extends View {
     private int touchDownCount;
     private long touchDownTimeStart, touchDownTimeEnd;
     private static final int TOUCH_DOWN_TIMES = 3;
-    private static final int SHOW_PROPERTY_MAX_DISTANCE_DP = 10;
 
     // in response to the dispathtouch event: need touch TOUCH_DOWN_TIMES
     // consecutive times within SHOW_PROPERTY_MAX_TIME_MILLIS ,
@@ -4265,8 +4033,6 @@ public class TView extends View {
 
         tag = TView.class.getSimpleName();
 
-        //
-        debugable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
@@ -4299,9 +4065,13 @@ public class TView extends View {
         radiusBottomLeft = typedArray.getDimension(R.styleable.TView_radiusBottomLeft, radius);
         radiusBottomRight = typedArray.getDimension(R.styleable.TView_radiusBottomRight, radius);
 
+        //
         classic = (radius == radiusTopLeft && radiusTopLeft == radiusBottomLeft && radiusBottomLeft == radiusTopRight && radiusTopRight == radiusBottomRight);
 
+        //
+        adjust = typedArray.getBoolean(R.styleable.TView_adjust, false);
 
+        //
         origin = TView.class == this.getClass();
 
         if (origin) {
@@ -4629,28 +4399,24 @@ public class TView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 //
-                if (debugable) {
-                    if (touchDownCount == 0) {
-                        touchDownCount = 1;
-                        touchDownTimeStart = System.currentTimeMillis();
-                    } else if (touchDownCount == TOUCH_DOWN_TIMES - 1) {
+                touchDownEventX = event.getX();
+                touchDownEventY = event.getY();
+
+                //
+                if (adjust) {
+                    if (touchDownCount >= TOUCH_DOWN_TIMES - 1) {
+                        touchDownCount = 0;
                         touchDownTimeEnd = System.currentTimeMillis();
-                        if ((touchDownTimeEnd - touchDownTimeStart) < SHOW_PROPERTY_MAX_TIME_MILLIS) {
-                            showProperties();
+                        if ((touchDownTimeEnd - touchDownTimeStart) <= SHOW_PROPERTY_MAX_TIME_MILLIS) {
+                            PropertyView.showProperties(this);
                         }
-                        touchDownCount = 0;
                     } else {
-                        float touchDownTimeDistanceX = Math.abs(touchDownEventX - event.getX());
-                        float touchDownTimeDistanceY = Math.abs(touchDownEventY - event.getY());
-                        if (touchDownTimeDistanceX < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity && touchDownTimeDistanceY < SHOW_PROPERTY_MAX_DISTANCE_DP * DeviceTool.displayDensity) {
-                            touchDownCount++;
+                        touchDownCount++;
+                        if (touchDownCount == 1) {
+                            touchDownTimeStart = System.currentTimeMillis();
                         }
-                    }
-                    touchDownEventX = event.getX();
-                    touchDownEventY = event.getY();
-                    if ((System.currentTimeMillis() - touchDownTimeStart) >= SHOW_PROPERTY_MAX_TIME_MILLIS) {
-                        touchDownCount = 0;
                     }
                 }
 

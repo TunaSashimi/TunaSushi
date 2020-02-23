@@ -142,8 +142,6 @@ public class TToggle extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //
         if (toggle) {
             canvas.drawBitmap(toggleSrcToggle, matrixSelect, null);

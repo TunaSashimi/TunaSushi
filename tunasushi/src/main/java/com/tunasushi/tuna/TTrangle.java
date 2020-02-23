@@ -112,7 +112,6 @@ public class TTrangle extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         //start drawing from the outside triangle topCorner and draw clockwise
         //attention! direct coverage on some models will be the sideline, the way to avoid the use of painted area
         switch (trangleTowardType) {

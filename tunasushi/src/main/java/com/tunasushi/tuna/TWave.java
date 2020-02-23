@@ -72,8 +72,6 @@ public class TWave extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
 //		正弦水波纹效果，每次在ondraw的时候其实可以不用重新都拷贝2个数组，直接通过mYPositions利用相应的偏移量就可以获得两个波浪的数据，说简单点就是可以不使用
 //		mResetOneYPositions和mResetTwoYPositions直接通过mYPositions获取两个波浪数据，从而节约每次拷贝的时间提高性能。总体来说博主的文章还是非常棒的。
 

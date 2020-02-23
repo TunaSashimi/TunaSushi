@@ -223,8 +223,6 @@ public class TBubble extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //By default center offset to adjust the position!
         float left = 0;
         float top = 0;

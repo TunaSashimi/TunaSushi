@@ -50,6 +50,7 @@
         android:layout_height="60dp"
         android:layout_alignTop="@id/tTrangleBottom"
         android:layout_toRightOf="@id/tTrangleBottom"
+        app:adjust="true"
         app:selectType="same"
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"

@@ -222,7 +222,6 @@ public class TBezier extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         if (circlePaths.size() == 0) {
             initMetaballs();
         }

@@ -48,8 +48,6 @@ public class TAnalysis extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         initPaint(Paint.Style.FILL, Color.RED);
 
         int bezierCircleX = 150;

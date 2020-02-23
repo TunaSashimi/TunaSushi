@@ -230,9 +230,6 @@ public class TImage extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        //
         imageSrc = srcBitmap;
 
         if (imageRadius > 0) {

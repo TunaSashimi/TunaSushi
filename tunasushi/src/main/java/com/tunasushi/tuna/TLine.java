@@ -98,8 +98,6 @@ public class TLine extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.drawColor(lineSurround);
 
         if (lineArrowStrokeWidth > 0) {

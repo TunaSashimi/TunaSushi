@@ -141,8 +141,6 @@ public class TProgress extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         switch (progressShapeType) {
             case CUSTOM:
 

@@ -131,7 +131,6 @@ public class TRow extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         //
         switch (rowDirection) {
             case TOP:

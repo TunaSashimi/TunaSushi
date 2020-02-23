@@ -181,8 +181,6 @@ public class TRepeat extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //
         switch (repeatShapeType) {
             case CUSTOM:

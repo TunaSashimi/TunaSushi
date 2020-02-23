@@ -245,6 +245,8 @@
 
         <attr name="touchUp" format="string" />
         <attr name="onClick" format="string" />
+
+        <attr name="adjust" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TBubble">
@@ -548,11 +550,11 @@
             <enum name="width_center" value="1" />
             <enum name="width_bottom" value="2" />
         </attr>
-        <attr name="scaleTouchRectangleable" format="boolean" />
-        <attr name="scaleTouchRectangleFractionTop" format="fraction" />
-        <attr name="scaleTouchRectangleFractionLeft" format="fraction" />
-        <attr name="scaleTouchRectangleFractionRight" format="fraction" />
-        <attr name="scaleTouchRectangleFractionBottom" format="fraction" />
+        <attr name="scaleCrop" format="boolean" />
+        <attr name="scaleCropFractionTop" format="fraction" />
+        <attr name="scaleCropFractionLeft" format="fraction" />
+        <attr name="scaleCropFractionRight" format="fraction" />
+        <attr name="scaleCropFractionBottom" format="fraction" />
     </declare-styleable>
 
     <declare-styleable name="TScratch">

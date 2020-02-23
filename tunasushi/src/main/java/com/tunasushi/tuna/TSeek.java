@@ -162,8 +162,6 @@ public class TSeek extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         for (int i = 0; i < total; i++) {
             seekCircleRectFArray[i].set((seekCircleNormalDiameter + share) * i + seekStrokeWidth * 0.5f, (height - seekCircleNormalDiameter) * 0.5f,
                     (seekCircleNormalDiameter + share) * i + seekCircleNormalDiameter + seekStrokeWidth * 0.5f, (height - seekCircleNormalDiameter) * 0.5f + seekCircleNormalDiameter);

@@ -168,8 +168,6 @@ public class TRange extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //draw rangeColorNormal
         initPaint(Paint.Style.FILL, rangeColorNormal, rangeThink);
         canvas.drawLine(0, height >> 1, width, height >> 1, paint);

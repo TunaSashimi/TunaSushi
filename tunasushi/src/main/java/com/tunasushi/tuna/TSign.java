@@ -91,8 +91,6 @@ public class TSign extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         if (signCircleStrokeWidth != 0) {
             initPaint(Paint.Style.STROKE, signCircleColorBefore, signCircleStrokeWidth);
         } else {

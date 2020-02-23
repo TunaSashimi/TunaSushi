@@ -20,8 +20,8 @@ import java.util.List;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-
 public class TWrap extends TView {
+
     private float wrapSpaceLine;
     private float wrapSpaceRow;
 
@@ -148,7 +148,6 @@ public class TWrap extends TView {
                 if (characterWidth > specSizeWidth) {
                     characterWidth = 0;
                     measuredHeight += wrapSpaceRow + rowHeight;
-                } else {
                 }
             }
         } else if (specModeHeight == MeasureSpec.EXACTLY) {// match_parent
@@ -159,16 +158,8 @@ public class TWrap extends TView {
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
 
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent;
         float characterWidth = paint.measureText(wrapItemTextValueArray[0]);//At least one field

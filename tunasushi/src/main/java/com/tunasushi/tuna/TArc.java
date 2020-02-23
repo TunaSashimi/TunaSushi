@@ -84,7 +84,6 @@ public class TArc extends TView {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
-
         drawArcs(canvas, mBigOval, mUseCenters[mBigIndex], mPaints[mBigIndex]);
 
         for (int i = 0; i < 4; i++) {

@@ -74,8 +74,6 @@ public class THollow extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.drawBitmap(hollowSrc, 0, 0, null);
     }
 }

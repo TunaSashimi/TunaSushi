@@ -94,8 +94,6 @@ public class TMove extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //
         canvas.drawBitmap(Bitmap.createBitmap(moveSrc, 0, moveSrcStartY, width, height), 0, 0, null);
     }

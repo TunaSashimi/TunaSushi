@@ -247,8 +247,6 @@ public class TDialog extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.drawColor(dialogSurround);
         canvas.translate(dx, dy);
 

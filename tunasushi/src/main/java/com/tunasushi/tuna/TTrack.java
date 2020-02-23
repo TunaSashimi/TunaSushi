@@ -73,8 +73,6 @@ public class TTrack extends TView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.drawCircle(trackX, trackY, 80, trackPaint);
 
         if (trackIntervalTime > 0) {

@@ -111,7 +111,6 @@ public class TButton extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         canvas.drawColor(press ? buttonBackgroundPress : buttonBackgroundNormal);
 
         canvas.save();

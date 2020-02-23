@@ -504,7 +504,6 @@ public class TLayout extends RelativeLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         boolean needSaveLayer = (layoutSrc != null);
         if (needSaveLayer) {
             // draw the src/dst example into our offscreen bitmap

@@ -43,8 +43,6 @@ public class TPentagram extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         Paint paint = new Paint();
         Path path = new Path();
 

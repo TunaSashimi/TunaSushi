@@ -175,13 +175,9 @@ public class TSVG extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
-
         //
         canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
-
         //
         paint.setXfermode(TPorterDuffXfermode);
         canvas.drawBitmap(srcBitmap, matrix, paint);
