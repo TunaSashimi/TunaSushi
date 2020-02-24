@@ -4143,7 +4143,7 @@ public class TView extends View {
                     srcPress = srcNormal;
                 }
                 //
-                int srcSelectId = typedArray.getResourceId(R.styleable.TView_srcPress, -1);
+                int srcSelectId = typedArray.getResourceId(R.styleable.TView_srcSelect, -1);
                 if (srcSelectId != -1) {
                     srcSelect = BitmapFactory.decodeResource(getResources(), srcSelectId);
                 } else {
