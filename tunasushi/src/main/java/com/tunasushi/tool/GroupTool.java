@@ -50,7 +50,7 @@ public class GroupTool {
             TViewList.get(i).setAssociateListener(new TView.associateListener() {
                 @Override
                 public void associate(TView t) {
-                    //任何一个TView的associate方法就是把其他的TView的状态设为false
+                    //The associate method of any TView is to set the status of other TViews to false!
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
                             TViewList.get(j).setStatus(false, false);
@@ -198,7 +198,8 @@ public class GroupTool {
 
         Context context = linearLayout.getContext();
 
-        int margin = -2;    //-2px
+        //The unit is PX
+        int margin = -2;
 
         List<TView> TViewList = new ArrayList();
 
