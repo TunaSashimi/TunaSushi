@@ -16,6 +16,7 @@ import com.tunasushi.tuna.TView.TouchUpListener;
 
 import java.util.Arrays;
 
+import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.GroupTool.associate;
 import static com.tunasushi.tool.GroupTool.dynamic;
 
@@ -131,7 +132,7 @@ public class TViewActivity extends Activity {
                 "枪",
                 touchUpListener,
                 linearGroup,
-                60, TypedValue.COMPLEX_UNIT_DIP,
+                dpToPx(60),
                 R.style.TView_RadioGroup_LightGray_Srart,
                 R.style.TView_RadioGroup_LightGray_End,
                 R.style.TView_RadioGroup_LightGray_Other
