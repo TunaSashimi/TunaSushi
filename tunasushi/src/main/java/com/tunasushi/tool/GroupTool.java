@@ -134,7 +134,7 @@ public class GroupTool {
     public static void dynamic(String[] stringArray, int index, TView.TouchUpListener touchUpListener, LinearLayout linearLayout, int width, int styleStart, int styleEnd,
                                int styleOther) {
 
-        dynamic(stringArray, index, touchUpListener, linearLayout, width, styleStart, styleEnd, styleOther);
+        dynamicRaw(stringArray, index, touchUpListener,null, linearLayout, width, styleStart, styleEnd, styleOther);
     }
 
     //9
@@ -147,7 +147,7 @@ public class GroupTool {
                                int styleEnd,
                                int styleOther) {
 
-        dynamic(stringArray, index, onClickListener, linearLayout, width, styleStart, styleEnd, styleOther);
+        dynamicRaw(stringArray, index,null, onClickListener, linearLayout, width, styleStart, styleEnd, styleOther);
     }
 
     //10
