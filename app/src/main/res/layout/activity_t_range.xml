@@ -82,8 +82,7 @@
             app:rangeDragStrokeWidth="2dp"
             app:rangeThink="2dp"
             app:rangeValueArray="@array/range_value_array"
-            app:touchIntercept="true"
-            app:touchType="always" />
+            app:touchIntercept="true" />
 
         <TextView
             android:id="@+id/tv_star"
@@ -106,7 +105,6 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
-            app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
@@ -126,7 +124,6 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
-            app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
@@ -146,7 +143,6 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
-            app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
@@ -166,7 +162,6 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
-            app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
@@ -186,7 +181,6 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
-            app:selectType="reverse"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"

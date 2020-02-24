@@ -1,154 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <com.tunasushi.tuna.TSeek
+        android:id="@+id/tSeek"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="44dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        app:seekAngle="16"
+        app:seekColorFill="#f0f0f0"
+        app:seekDragBackgroundNormal="#ffffff"
+        app:seekDragBackgroundPress="#ffffff"
+        app:seekDragRadiusNormal="18dp"
+        app:seekDragRadiusPress="22dp"
+        app:seekDragStrokeColorNormal="#a3a3a3"
+        app:seekDragStrokeColorPress="#a3a3a3"
+        app:seekDragStrokeWidth="1px"
+        app:seekDragTextColor="#592d2e"
+        app:seekDragTextSize="17dp"
+        app:seekIndex="3"
+        app:seekStrokeColor="#a3a3a3"
+        app:seekStrokeWidth="1dp"
+        app:seekTextColor="#cccccc"
+        app:seekTextSize="17dp"
+        app:seekTextValueArray="@array/seek_text_value_array" />
 
-        <TextView
-            android:id="@+id/textTouchoutable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="touchType设置always滑出控件边缘依然响应\ntouchType设置edge(默认)滑出控件边缘认为抬起"
-            android:textColor="#434343" />
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewReset"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/tSeek"
+        android:layout_alignLeft="@id/tSeek"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        app:backgroundNormal="#592d2d"
+        app:backgroundPress="#bc7955"
+        app:strokeColorNormal="#592d2d"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#ffffff"
+        app:textSize="14dp"
+        app:textValue="下标重置" />
 
-        <com.tunasushi.tuna.TSeek
-            android:id="@+id/tSeekTouchoutable"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_below="@id/textTouchoutable"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:seekAngle="16"
-            app:seekColorFill="#f0f0f0"
-            app:seekDragBackgroundNormal="#ffffff"
-            app:seekDragBackgroundPress="#ffffff"
-            app:seekDragRadiusNormal="18dp"
-            app:seekDragRadiusPress="22dp"
-            app:seekDragStrokeColorNormal="#a3a3a3"
-            app:seekDragStrokeColorPress="#a3a3a3"
-            app:seekDragStrokeWidth="1px"
-            app:seekDragTextColor="#592d2e"
-            app:seekDragTextSize="17dp"
-            app:seekIndex="3"
-            app:seekStrokeColor="#a3a3a3"
-            app:seekStrokeWidth="1dp"
-            app:seekTextColor="#cccccc"
-            app:seekTextSize="17dp"
-            app:seekTextValueArray="@array/seek_text_value_array"
-            app:touchType="always" />
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewIndex"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/tViewReset"
+        android:layout_toRightOf="@id/tViewReset"
+        app:backgroundNormal="#592d2d"
+        app:backgroundPress="#bc7955"
+        app:radiusBottomRight="0dp"
+        app:radiusTopLeft="4dp"
+        app:radiusTopRight="0dp"
+        app:strokeColorNormal="#592d2d"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#ffffff"
+        app:textMark="true"
+        app:textMarkColor="#ff0000"
+        app:textMarkRadius="4dp"
+        app:textSize="14dp"
+        app:textValue="获取下标" />
 
-        <com.tunasushi.tuna.TView
-            android:id="@+id/tViewTouchoutableReset"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/tSeekTouchoutable"
-            android:layout_alignLeft="@id/tSeekTouchoutable"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            app:backgroundNormal="#592d2d"
-            app:backgroundPress="#bc7955"
-            app:strokeColorNormal="#592d2d"
-            app:strokeWidthNormal="1dp"
-            app:textColorNormal="#ffffff"
-            app:textSize="14dp"
-            app:textValue="下标重置" />
-
-        <com.tunasushi.tuna.TView
-            android:id="@+id/tViewTouchoutableGetIndex"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_alignTop="@id/tViewTouchoutableReset"
-            android:layout_toRightOf="@id/tViewTouchoutableReset"
-            app:backgroundNormal="#592d2d"
-            app:backgroundPress="#bc7955"
-            app:radiusBottomRight="0dp"
-            app:radiusTopLeft="4dp"
-            app:radiusTopRight="0dp"
-            app:strokeColorNormal="#592d2d"
-            app:strokeWidthNormal="1dp"
-            app:textColorNormal="#ffffff"
-            app:textMark="true"
-            app:textMarkColor="#ff0000"
-            app:textMarkRadius="4dp"
-            app:textSize="14dp"
-            app:textValue="获取下标" />
-
-        <TextView
-            android:id="@+id/textTouchoutUnable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tViewTouchoutableReset"
-            android:layout_margin="16dp"
-            android:text="seekAngle管道角度\nseekDragBackgroundNormal设置小球常规背景\nseekDragBackgroundPress设置小球按下背景\nseekDragRadiusNormal设置小球常规半径\nseekDragRadiusPress设置小球按下半径\nseekDragStrokeColorNormal设置小球边框线常规颜色\nseekDragStrokeColorPress设置小球边框线按下颜色\nseekDragTextColor设置小球上字体颜色\nseekIndex选中下标\nseekColorFill填充颜色\nseekStrokeColor设置边框线颜色\nseekStrokeWidth设置边框线宽度\nseekTextColor设置默认字体颜色\nseekTextSize设置字体大小\nseekTextValueArray选择项数组"
-            android:textColor="#434343" />
-
-        <com.tunasushi.tuna.TSeek
-            android:id="@+id/tSeekTouchoutUnable"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_below="@id/textTouchoutUnable"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:seekAngle="16"
-            app:seekColorFill="#f0f0f0"
-            app:seekDragBackgroundNormal="#ffffff"
-            app:seekDragBackgroundPress="#ffffff"
-            app:seekDragRadiusNormal="18dp"
-            app:seekDragRadiusPress="22dp"
-            app:seekDragStrokeColorNormal="#a3a3a3"
-            app:seekDragStrokeColorPress="#a3a3a3"
-            app:seekDragStrokeWidth="1dp"
-            app:seekDragTextColor="#592d2e"
-            app:seekDragTextSize="17dp"
-            app:seekIndex="3"
-            app:seekStrokeColor="#a3a3a3"
-            app:seekStrokeWidth="1px"
-            app:seekTextColor="#cccccc"
-            app:seekTextSize="17dp"
-            app:seekTextValueArray="@array/seek_text_value_array" />
-
-        <!--From bottom to top of layout-->
-
-        <com.tunasushi.tuna.TView
-            android:id="@+id/tViewTouchoutUnableReset"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/tSeekTouchoutUnable"
-            android:layout_margin="16dp"
-            app:backgroundNormal="#592d2d"
-            app:backgroundPress="#bc7955"
-            app:strokeColorNormal="#592d2d"
-            app:strokeWidthNormal="1dp"
-            app:textColorNormal="#ffffff"
-            app:textSize="14dp"
-            app:textValue="下标重置" />
-
-        <com.tunasushi.tuna.TView
-            android:id="@+id/tViewTouchoutUnableGetIndex"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_alignTop="@id/tViewTouchoutUnableReset"
-            android:layout_toRightOf="@id/tViewTouchoutUnableReset"
-            app:backgroundNormal="#592d2d"
-            app:backgroundPress="#bc7955"
-            app:radiusBottomRight="0dp"
-            app:radiusTopLeft="4dp"
-            app:radiusTopRight="0dp"
-            app:strokeColorNormal="#592d2d"
-            app:strokeWidthNormal="1dp"
-            app:textColorNormal="#ffffff"
-            app:textMark="true"
-            app:textMarkColor="#ff0000"
-            app:textMarkRadius="4dp"
-            app:textSize="14dp"
-            app:textValue="获取下标" />
-
-    </RelativeLayout>
-
-</ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tViewReset"
+        android:layout_margin="16dp"
+        android:text="seekAngle管道角度\nseekDragBackgroundNormal设置小球常规背景\nseekDragBackgroundPress设置小球按下背景\nseekDragRadiusNormal设置小球常规半径\nseekDragRadiusPress设置小球按下半径\nseekDragStrokeColorNormal设置小球边框线常规颜色\nseekDragStrokeColorPress设置小球边框线按下颜色\nseekDragTextColor设置小球上字体颜色\nseekIndex选中下标\nseekColorFill填充颜色\nseekStrokeColor设置边框线颜色\nseekStrokeWidth设置边框线宽度\nseekTextColor设置默认字体颜色\nseekTextSize设置字体大小\nseekTextValueArray选择项数组"
+        android:textColor="#434343" />
+</RelativeLayout>

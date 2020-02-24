@@ -698,29 +698,6 @@ public class TView extends View {
     // Hardware accelerated canvas
     protected boolean canvasHardwareAccelerated;
 
-    // default edge
-    private TouchType touchType;
-
-    public enum TouchType {
-        EDGE(0), ALWAYS(1), NONE(2),
-        ;
-        final int nativeInt;
-
-        TouchType(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final TouchType[] touchTypeArray = {TouchType.EDGE, TouchType.ALWAYS, TouchType.NONE,};
-
-    public TouchType getTouchType() {
-        return touchType;
-    }
-
-    public void setTouchType(TouchType touchType) {
-        this.touchType = touchType;
-    }
-
     private boolean origin;
 
     public boolean isOrigin() {
@@ -777,6 +754,7 @@ public class TView extends View {
 
     public void setPress(boolean press) {
         this.press = press;
+        invalidate();
     }
 
     // select default false
@@ -792,13 +770,11 @@ public class TView extends View {
     }
 
     //
-    protected boolean selectRaw;
-
     // default none
     private SelectType selectType;
 
     public enum SelectType {
-        NONE(0), SAME(1), REVERSE(2),
+        REVERSE(0), ALWAYS(1),
         ;
         final int nativeInt;
 
@@ -807,7 +783,7 @@ public class TView extends View {
         }
     }
 
-    private static final SelectType[] selectTypeArray = {SelectType.NONE, SelectType.SAME, SelectType.REVERSE,};
+    private static final SelectType[] selectTypeArray = {SelectType.REVERSE, SelectType.ALWAYS,};
 
     public SelectType getSelectType() {
         return selectType;
@@ -862,17 +838,6 @@ public class TView extends View {
 
     public void setTouchY(float touchEventEventY) {
         this.touchY = touchEventEventY;
-    }
-
-    // default false
-    protected boolean touchOutBounds;
-
-    public boolean isTouchOutBounds() {
-        return touchOutBounds;
-    }
-
-    public void setTouchOutBounds(boolean touchOutBounds) {
-        this.touchOutBounds = touchOutBounds;
     }
 
     //
@@ -4037,16 +4002,13 @@ public class TView extends View {
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
-        // touchType default edge
-        int touchTypeIndex = typedArray.getInt(R.styleable.TView_touchType, 0);
-        touchType = touchTypeArray[touchTypeIndex];
-
+        //
         touchIntercept = typedArray.getBoolean(R.styleable.TView_touchIntercept, false);
 
         press = typedArray.getBoolean(R.styleable.TView_press, false);
         select = typedArray.getBoolean(R.styleable.TView_select, false);
 
-        // selectType default none
+        // selectType default reverse
         int selectTypeIndex = typedArray.getInt(R.styleable.TView_selectType, 0);
         selectType = selectTypeArray[selectTypeIndex];
 
@@ -4388,9 +4350,6 @@ public class TView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (touchType == TouchType.NONE) {
-            return super.dispatchTouchEvent(event);
-        }
         //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScrollView will be used !
         if (touchIntercept) {
             getParent().requestDisallowInterceptTouchEvent(true);
@@ -4400,37 +4359,19 @@ public class TView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
-                //
-                touchDownEventX = event.getX();
-                touchDownEventY = event.getY();
-
-                //
-                if (adjust) {
-                    if (touchDownCount >= TOUCH_DOWN_TIMES - 1) {
-                        touchDownCount = 0;
-                        touchDownTimeEnd = System.currentTimeMillis();
-                        if ((touchDownTimeEnd - touchDownTimeStart) <= SHOW_PROPERTY_MAX_TIME_MILLIS) {
-                            showProperties(this);
-                        }
-                    } else {
-                        touchDownCount++;
-                        if (touchDownCount == 1) {
-                            touchDownTimeStart = System.currentTimeMillis();
-                        }
-                    }
-                }
-
-                //
                 touchDown = true;
                 touchMove = false;
                 touchUp = false;
                 touchCancel = false;
-
+                touchDownEventX = event.getX();
+                touchDownEventY = event.getY();
                 //
                 press = true;
-                select = false;
+                if (selectType == SelectType.ALWAYS) {
+                    select = false;
+                }
 
+                //
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
@@ -4439,14 +4380,15 @@ public class TView extends View {
                     contentMark = false;
                 }
 
-                if (!touchOutBounds && associateListener != null) {
+                if (associateListener != null) {
                     associateListener.associate(this);
                 }
 
-                if (!touchOutBounds && touchDownListener != null) {
+                if (touchDownListener != null) {
                     touchDownListener.touchDown(this);
                 }
 
+                //
                 if (material != null) {
                     switch (material) {
                         case SPREAD:
@@ -4499,63 +4441,45 @@ public class TView extends View {
                     }
                 }
 
+                //
+                if (adjust) {
+                    if (touchDownCount >= TOUCH_DOWN_TIMES - 1) {
+                        touchDownCount = 0;
+                        touchDownTimeEnd = System.currentTimeMillis();
+                        if ((touchDownTimeEnd - touchDownTimeStart) <= SHOW_PROPERTY_MAX_TIME_MILLIS) {
+                            showProperties(this);
+                        }
+                    } else {
+                        touchDownCount++;
+                        if (touchDownCount == 1) {
+                            touchDownTimeStart = System.currentTimeMillis();
+                        }
+                    }
+                }
+
                 break;
             case MotionEvent.ACTION_MOVE:
-
                 touchDown = false;
                 touchMove = true;
                 touchUp = false;
                 touchCancel = false;
 
                 //
-                if (touchType == TouchType.ALWAYS) {
-
-                    press = true;
-                    select = false;
-
-                } else if (!touchOutBounds && (touchX < 0 || touchX > width || touchY < 0 || touchY > height)) {
-
-                    press = false;
-                    select = false;
-
-                    if (!textMarkTouchable) {
-                        textMark = false;
-                    }
-                    if (!contentMarkTouchable) {
-                        contentMark = false;
-                    }
-
-                    touchOutBounds = true;
-                    if (touchOutListener != null) {
-                        touchOutListener.touchOut(this);
-                    }
-                } else if (touchOutBounds && (touchX >= 0 && touchX <= width && touchY >= 0 && touchY <= height)) {
-
-                    press = true;
-                    select = false;
-
-                    if (!textMarkTouchable) {
-                        textMark = false;
-                    }
-
-                    if (!contentMarkTouchable) {
-                        contentMark = false;
-                    }
-
-                    touchOutBounds = false;
-                    if (touchInListener != null) {
-                        touchInListener.touchIn(this);
-                    }
+                press = true;
+                if (!textMarkTouchable) {
+                    textMark = false;
                 }
-
-                //
-                if (!touchOutBounds && touchMoveListener != null) {
+                if (!contentMarkTouchable) {
+                    contentMark = false;
+                }
+                if (touchInListener != null) {
+                    touchInListener.touchIn(this);
+                }
+                if (touchMoveListener != null) {
                     touchMoveListener.touchMove(this);
                 }
-
                 break;
             case MotionEvent.ACTION_UP:
-
                 touchDown = false;
                 touchMove = false;
                 touchUp = true;
@@ -4563,19 +4487,11 @@ public class TView extends View {
 
                 //
                 press = false;
-                switch (selectType) {
-                    case NONE:
-                        select = false;
-                        break;
-                    case SAME:
-                        select = true;
-                        break;
-                    case REVERSE:
-                        selectRaw = !selectRaw;
-                        select = selectRaw;
-                        break;
-                    default:
-                        break;
+
+                if (selectType == SelectType.ALWAYS) {
+                    select = true;
+                } else {
+                    select = !select;
                 }
 
                 if (!textMarkTouchable) {
@@ -4585,24 +4501,19 @@ public class TView extends View {
                     contentMark = false;
                 }
 
-                if (!touchOutBounds && associateListener != null) {
+                if (associateListener != null) {
                     associateListener.associate(this);
                 }
 
-                if (!touchOutBounds && touchUpListener != null) {
+                if (touchUpListener != null) {
                     touchUpListener.touchUp(this);
                 }
 
-                if (!touchOutBounds && onClickListener != null) {
+                if (onClickListener != null) {
                     onClickListener.onClick(this);
                 }
-
-                touchOutBounds = false;
-
                 break;
             case MotionEvent.ACTION_CANCEL:
-
-                //
                 touchDown = false;
                 touchMove = false;
                 touchUp = false;
@@ -4610,19 +4521,20 @@ public class TView extends View {
 
                 //
                 press = false;
-                select = false;
-
+                if (selectType == SelectType.ALWAYS) {
+                    select = true;
+                } else {
+                    select = !select;
+                }
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
                 if (!contentMarkTouchable) {
                     contentMark = false;
                 }
-
-                if (!touchOutBounds && touchCancelListener != null) {
+                if (touchCancelListener != null) {
                     touchCancelListener.touchCancel(this);
                 }
-
                 break;
             default:
                 break;
@@ -4631,11 +4543,11 @@ public class TView extends View {
         //
         setTouchXY(touchX, touchY);
 
-        if (touchListener != null && (touchType == TouchType.ALWAYS || !touchOutBounds)) {
+        if (touchListener != null) {
             touchListener.touch(this);
         }
 
-        if (isOrigin() && !touchOutBounds) {
+        if (isOrigin()) {
             invalidate();
         }
         return true;

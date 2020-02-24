@@ -3,19 +3,12 @@
 
     <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
-        <!-- edge and always means you can touch ,the difference is edge not available out of the edge when you move out of time-->
-        <attr name="touchType">
-            <enum name="edge" value="0" />
-            <enum name="always" value="1" />
-            <enum name="none" value="2" />
-        </attr>
         <attr name="touchIntercept" format="boolean" />
         <attr name="press" format="boolean" />
         <attr name="select" format="boolean" />
         <attr name="selectType">
-            <enum name="none" value="0" />
-            <enum name="same" value="1" />
-            <enum name="reverse" value="2" />
+            <enum name="reverse" value="0" />
+            <enum name="always" value="1" />
         </attr>
         <attr name="rotate" format="integer" />
         <attr name="animationable" format="boolean" />

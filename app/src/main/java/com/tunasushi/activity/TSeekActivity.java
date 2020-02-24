@@ -2,8 +2,6 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
@@ -17,25 +15,18 @@ import com.tunasushi.tuna.TSeek;
  * @Description
  */
 public class TSeekActivity extends Activity {
-    private TSeek tSeekTouchoutable, tSeekTouchoutUnable;
-    private TView tViewTouchoutableReset, tViewTouchoutableGetIndex,
-            tViewTouchoutUnableReset, tViewTouchoutUnableGetIndex;
+    private TSeek tSeek;
+    private TView tViewReset, tViewIndex;
 
     private TView.TouchUpListener touchUpListener = new TView.TouchUpListener() {
         @Override
         public void touchUp(TView t) {
             switch (t.getId()) {
-                case R.id.tViewTouchoutableReset:
-                    tSeekTouchoutable.setSeekIndex(0);
+                case R.id.tViewReset:
+                    tSeek.setSeekIndex(0);
                     break;
-                case R.id.tViewTouchoutableGetIndex:
-                    Toast.makeText(TSeekActivity.this, "TSeekTouchoutable下标为" + tSeekTouchoutable.getSeekIndex(), Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.tViewTouchoutUnableReset:
-                    tSeekTouchoutUnable.setSeekIndex(0);
-                    break;
-                case R.id.tViewTouchoutUnableGetIndex:
-                    Toast.makeText(TSeekActivity.this, "TSeekTouchoutUnable下标为" + tSeekTouchoutUnable.getSeekIndex(), Toast.LENGTH_SHORT).show();
+                case R.id.tViewIndex:
+                    Toast.makeText(TSeekActivity.this, "TSeek下标==>" + tSeek.getSeekIndex(), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -49,19 +40,12 @@ public class TSeekActivity extends Activity {
 
         setContentView(R.layout.activity_t_seek);
 
-        tSeekTouchoutable = findViewById(R.id.tSeekTouchoutable);
-        tSeekTouchoutUnable = findViewById(R.id.tSeekTouchoutUnable);
+        tSeek = findViewById(R.id.tSeek);
 
-        tViewTouchoutableReset = findViewById(R.id.tViewTouchoutableReset);
-        tViewTouchoutableGetIndex = findViewById(R.id.tViewTouchoutableGetIndex);
+        tViewReset = findViewById(R.id.tViewReset);
+        tViewIndex = findViewById(R.id.tViewIndex);
 
-        tViewTouchoutUnableReset = findViewById(R.id.tViewTouchoutUnableReset);
-        tViewTouchoutUnableGetIndex = findViewById(R.id.tViewTouchoutUnableGetIndex);
-
-        tViewTouchoutableReset.setTouchUpListener(touchUpListener);
-        tViewTouchoutableGetIndex.setTouchUpListener(touchUpListener);
-
-        tViewTouchoutUnableReset.setTouchUpListener(touchUpListener);
-        tViewTouchoutUnableGetIndex.setTouchUpListener(touchUpListener);
+        tViewReset.setTouchUpListener(touchUpListener);
+        tViewIndex.setTouchUpListener(touchUpListener);
     }
 }

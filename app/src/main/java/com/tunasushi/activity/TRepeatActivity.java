@@ -76,12 +76,8 @@ public class TRepeatActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if ("Unable".equals(tView.getTextValue().trim())) {
-                    tRepeatStar.setTouchType(TView.TouchType.NONE);
-                    tRepeatCar.setTouchType(TView.TouchType.NONE);
                     tView.setTextValue("Enable");
                 } else {
-                    tRepeatStar.setTouchType(TView.TouchType.EDGE);
-                    tRepeatCar.setTouchType(TView.TouchType.EDGE);
                     tView.setTextValue("Unable");
                 }
             }

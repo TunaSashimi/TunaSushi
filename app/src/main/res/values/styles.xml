@@ -53,7 +53,7 @@
         <item name="textColorPress">#ffffff</item>
         <item name="textColorSelect">#ffffff</item>
         <item name="textSize">16dp</item>
-        <item name="selectType">same</item>
+        <item name="selectType">always</item>
     </style>
 
     <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
@@ -70,7 +70,7 @@
         <item name="textColorPress">#ffffff</item>
         <item name="textColorSelect">#ffffff</item>
         <item name="textSize">16dp</item>
-        <item name="selectType">same</item>
+        <item name="selectType">always</item>
     </style>
 
     <style name="TView_RadioGroup_DrackBrown_Left" parent="TView_RadioGroup_DrackBrown">

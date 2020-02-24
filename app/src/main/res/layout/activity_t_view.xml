@@ -27,8 +27,7 @@
             app:backgroundNormal="#444444"
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
-            app:textValue="#444444"
-            app:touchType="edge" />
+            app:textValue="#444444" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRectClassic02"
@@ -88,7 +87,8 @@
             app:backgroundPress="#cccccc"
             app:backgroundSelect="#000000"
             app:radius="5dp"
-            app:selectType="same"
+
+            app:selectType="reverse"
             app:srcAnchorDxNormal="5dp"
             app:srcAnchorDyNormal="5dp"
             app:srcAnchorHeightNormal="7dp"
@@ -99,7 +99,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectType=same" />
+            app:textValue="selectType=reverse" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="170dp"
@@ -111,7 +111,7 @@
             app:backgroundPress="#cccccc"
             app:backgroundSelect="#000000"
             app:radius="5dp"
-            app:selectType="reverse"
+            app:selectType="always"
             app:srcAnchorGravity="bottom|right"
             app:srcAnchorHeightNormal="7dp"
             app:srcAnchorNormal="@drawable/bitmap_tview_anchor_normal"
@@ -121,7 +121,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectType=reverse" />
+            app:textValue="selectType=always" />
 
         <TextView
             android:id="@+id/textFunctionManu"
