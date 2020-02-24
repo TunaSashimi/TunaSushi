@@ -3,7 +3,6 @@
 
     <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
-        <attr name="touchIntercept" format="boolean" />
         <attr name="press" format="boolean" />
         <attr name="select" format="boolean" />
         <attr name="selectType">

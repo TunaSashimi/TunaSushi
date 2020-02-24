@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textMatchColors"
+            android:id="@+id/textPrompt01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -18,10 +18,10 @@
             android:text="backgroundNormal设置常规背景\ntextTypeFace设置字体\ntextTypeFaceFromAsset设置自定义字体\nrotate设置旋转角度" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewRectClassic01"
+            android:id="@+id/tViewRect01"
             android:layout_width="84dp"
             android:layout_height="40dp"
-            android:layout_below="@id/textMatchColors"
+            android:layout_below="@id/textPrompt01"
             android:layout_marginLeft="16dp"
             app:adjust="true"
             app:backgroundNormal="#444444"
@@ -30,11 +30,11 @@
             app:textValue="#444444" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewRectClassic02"
+            android:id="@+id/tViewRect02"
             android:layout_width="84dp"
             android:layout_height="40dp"
-            android:layout_alignTop="@id/tViewRectClassic01"
-            android:layout_toRightOf="@id/tViewRectClassic01"
+            android:layout_alignTop="@id/tViewRect01"
+            android:layout_toRightOf="@id/tViewRect01"
             app:adjust="true"
             app:backgroundNormal="#cccccc"
             app:rotate="15"
@@ -44,10 +44,10 @@
             app:textValue="#444444" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewRectClassic03"
-            style="@style/TView_Text"
-            android:layout_alignTop="@id/tViewRectClassic02"
-            android:layout_toRightOf="@id/tViewRectClassic02"
+            android:id="@+id/tViewRect03"
+            style="@style/TViewRect04"
+            android:layout_alignTop="@id/tViewRect02"
+            android:layout_toRightOf="@id/tViewRect02"
             app:adjust="true"
             app:backgroundNormal="#666666"
             app:rotate="30"
@@ -57,9 +57,9 @@
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
-            style="@style/TView_Text"
-            android:layout_alignTop="@id/tViewRectClassic03"
-            android:layout_toRightOf="@id/tViewRectClassic03"
+            style="@style/TViewRect04"
+            android:layout_alignTop="@id/tViewRect03"
+            android:layout_toRightOf="@id/tViewRect03"
             app:adjust="true"
             app:backgroundNormal="#cccccc"
             app:onClick="onClick"
@@ -69,10 +69,10 @@
             app:textValue="#cccccc" />
 
         <TextView
-            android:id="@+id/textSelectType"
+            android:id="@+id/textPrompt02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewRectClassic01"
+            android:layout_below="@id/tViewRect01"
             android:layout_margin="16dp"
             android:color="#434343"
             android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔bottom|right)" />
@@ -81,13 +81,12 @@
             android:id="@+id/tViewSelect01"
             android:layout_width="170dp"
             android:layout_height="48dp"
-            android:layout_below="@id/textSelectType"
+            android:layout_below="@id/textPrompt02"
             android:layout_marginLeft="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#cccccc"
             app:backgroundSelect="#000000"
             app:radius="5dp"
-
             app:selectType="reverse"
             app:srcAnchorDxNormal="5dp"
             app:srcAnchorDyNormal="5dp"
@@ -124,7 +123,7 @@
             app:textValue="selectType=always" />
 
         <TextView
-            android:id="@+id/textFunctionManu"
+            android:id="@+id/textPrompt03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tViewSelect01"
@@ -133,30 +132,30 @@
             android:text="android:layerType=software(关闭硬件加速)\n使用TView.associate关联相应TView控件" />
 
         <RelativeLayout
-            android:id="@+id/relativeRadioGroupDrackBrown"
+            android:id="@+id/relative01"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/textFunctionManu"
+            android:layout_below="@id/textPrompt03"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
             <View
-                android:id="@+id/viewRadioGroupDrackBrownAnchor"
+                android:id="@+id/viewAnchor01"
                 style="@style/Tuna_Anchor" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewRadioGroupDrackBrownLeft"
+                android:id="@+id/tViewGroupLeft"
                 style="@style/TView_RadioGroup_DrackBrown_Left"
-                android:layout_toLeftOf="@id/viewRadioGroupDrackBrownAnchor"
+                android:layout_toLeftOf="@id/viewAnchor01"
                 app:select="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="4dp"
                 app:textValue="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewRadioGroupDrackBrownRight"
+                android:id="@+id/tViewGroupRight"
                 style="@style/TView_RadioGroup_DrackBrown_Right"
-                android:layout_toRightOf="@id/viewRadioGroupDrackBrownAnchor"
+                android:layout_toRightOf="@id/viewAnchor01"
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="4dp"
@@ -164,29 +163,28 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/linearRadioGroupLightGray"
+            android:id="@+id/linearGroup"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_below="@id/relativeRadioGroupDrackBrown"
+            android:layout_below="@id/relative01"
             android:layout_margin="16dp"
-            android:layerType="software"
             android:orientation="horizontal" />
 
         <TextView
-            android:id="@+id/textShadowButton"
+            android:id="@+id/textPrompt04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearRadioGroupLightGray"
+            android:layout_below="@id/linearGroup"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
             android:text="textShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\nstrokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewShadowButton01"
+            android:id="@+id/tViewShadow01"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@id/textShadowButton"
+            android:layout_below="@id/textPrompt04"
             android:layout_margin="16dp"
             app:backgroundNormal="#e1e1e1"
             app:strokeColorNormal="#999999"
@@ -209,10 +207,10 @@
             app:textValue="背景#e1e1e1描边#999999字体阴影#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewShadowButton02"
+            android:id="@+id/tViewShadow02"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@id/tViewShadowButton01"
+            android:layout_below="@id/tViewShadow01"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
@@ -234,10 +232,10 @@
             app:textValue="背景#fae500描边#ac9696背景阴影#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewShadowButton03"
+            android:id="@+id/tViewShadow03"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@id/tViewShadowButton02"
+            android:layout_below="@id/tViewShadow02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#0000ff"
@@ -254,19 +252,19 @@
             app:textValue="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
 
         <TextView
-            android:id="@+id/textGradientButton"
+            android:id="@+id/textPrompt05"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewShadowButton03"
+            android:layout_below="@id/tViewShadow03"
             android:layout_margin="16dp"
             android:color="#434343"
             android:text="backgroundGradientDirection设置渐变方向\nbackgroundGradientStart设置渐变开始\nbackgroundGradientEnd设置渐变结束" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewMainButton03"
+            android:id="@+id/tView01"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@id/textGradientButton"
+            android:layout_below="@id/textPrompt05"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundAngleNormal="270"
@@ -286,10 +284,10 @@
             app:textValue="backgroundNormalGradientDirection设置top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#592d2d" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewMainButton04"
+            android:id="@+id/tView02"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_below="@id/tViewMainButton03"
+            android:layout_below="@id/tView01"
             android:layout_margin="16dp"
             app:backgroundAngleNormal="315"
             app:backgroundAnglePress="270"
@@ -306,10 +304,10 @@
             app:textValue="backgroundNormalGradientDirection设置left_top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#ffca00" />
 
         <TextView
-            android:id="@+id/textSecondaryButton"
+            android:id="@+id/textPrompt06"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewMainButton04"
+            android:layout_below="@id/tView02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
@@ -318,13 +316,13 @@
         <View
             android:id="@+id/tViewAnchorSecondaryButton01"
             style="@style/Tuna_Anchor"
-            android:layout_below="@id/textSecondaryButton"
+            android:layout_below="@id/textPrompt06"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewSecondaryButton01"
+            android:id="@+id/tView03"
             style="@style/TView_TextMark_Red_Horizontal"
             android:layout_alignTop="@id/tViewAnchorSecondaryButton01"
             android:layout_marginLeft="16dp"
@@ -355,7 +353,7 @@
             android:id="@+id/clipButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewSecondaryButton01"
+            android:layout_below="@id/tView03"
             android:layout_margin="16dp"
             android:color="#434343"
             android:text="srcNormal设置常规图片(根据形状进行截取)\nsrcPress设置按下图片\nbitmapSrcSelect设置选中图片(selectable设置true)" />
@@ -366,7 +364,7 @@
             android:layout_below="@id/clipButton" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewSecondaryButton03"
+            android:id="@+id/tView04"
             style="@style/TView_TextMark_Red_Horizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
             android:layout_marginLeft="16dp"
@@ -396,10 +394,10 @@
             app:textValue="mark=true&amp;textGravity=left" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewSecondaryButton05"
+            android:id="@+id/tView05"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_below="@id/tViewSecondaryButton03"
+            android:layout_below="@id/tView04"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
@@ -407,12 +405,12 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewSecondaryButton06"
+            android:id="@+id/tView06"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignTop="@id/tViewSecondaryButton05"
+            android:layout_alignTop="@id/tView05"
             android:layout_marginRight="16dp"
-            android:layout_toRightOf="@id/tViewSecondaryButton05"
+            android:layout_toRightOf="@id/tView05"
             app:radius="24dp"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
@@ -420,27 +418,27 @@
         <com.tunasushi.tuna.TView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignTop="@id/tViewSecondaryButton06"
-            android:layout_toRightOf="@id/tViewSecondaryButton06"
+            android:layout_alignTop="@id/tView06"
+            android:layout_toRightOf="@id/tView06"
             app:porterDuffXfermode="src_out"
             app:radius="24dp"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
-            android:id="@+id/textTunaShadow"
+            android:id="@+id/textPrompt07"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewSecondaryButton05"
+            android:layout_below="@id/tView05"
             android:layout_margin="16dp"
             android:color="#434343"
             android:text="srcShadowRadiusNormal设置背景图阴影半径,注意设置的时候一定要把父控件的背景作为backgroundNormal传入\nsrcShadowDxNormal设置背景图阴影横向偏移\nsrcShadowDxNormal设置背景图阴影纵向偏移\n针对backgroundShadow偏移,移动的是背景图上阴影的绘制" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tViewSecondaryButton08"
+            android:id="@+id/tView08"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_below="@id/textTunaShadow"
+            android:layout_below="@id/textPrompt07"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#c1eaee"
@@ -451,8 +449,8 @@
         <com.tunasushi.tuna.TView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignTop="@id/tViewSecondaryButton08"
-            android:layout_toRightOf="@id/tViewSecondaryButton08"
+            android:layout_alignTop="@id/tView08"
+            android:layout_toRightOf="@id/tView08"
             app:backgroundNormalShadowColor="#998383"
             app:backgroundShadowDxNormal="2dp"
             app:backgroundShadowDyNormal="2dp"
@@ -461,10 +459,10 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
-            android:id="@+id/textcontext"
+            android:id="@+id/textPrompt08"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewSecondaryButton08"
+            android:layout_below="@id/tView08"
             android:layout_margin="16dp"
             android:color="#434343"
             android:text="contentValue和textValue用法相同" />
@@ -473,7 +471,7 @@
             android:id="@+id/tViewContent"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:layout_below="@id/textcontext"
+            android:layout_below="@id/textPrompt08"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#e1e1e1"
@@ -500,7 +498,7 @@
             app:textValue="同时设置contentValue和textValue通过设置不同的contentPaddingLeft,textPaddingLeft,contentDy及textDy来实现标题缩进的效果" />
 
         <TextView
-            android:id="@+id/textSrcLeft"
+            android:id="@+id/textPrompt09"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tViewContent"
@@ -512,7 +510,7 @@
             android:id="@+id/tViewSrcLeft"
             android:layout_width="80dp"
             android:layout_height="48dp"
-            android:layout_below="@id/textSrcLeft"
+            android:layout_below="@id/textPrompt09"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#00000000"
@@ -606,7 +604,7 @@
             android:text="srcRightPadding和Dx设置10dp(Dx为偏移)" />
 
         <TextView
-            android:id="@+id/textDeviceInfo"
+            android:id="@+id/textPrompt10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tViewSrcRight"
@@ -616,7 +614,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_below="@id/textDeviceInfo"
+            android:layout_below="@id/textPrompt10"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
     </RelativeLayout>

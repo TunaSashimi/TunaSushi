@@ -16,8 +16,7 @@ public class TPatternActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TPattern tPattern = new TPattern(this);
-        setContentView(tPattern);
+        setContentView(new TPattern(this));
     }
 }
 

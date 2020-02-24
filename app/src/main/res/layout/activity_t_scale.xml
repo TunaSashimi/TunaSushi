@@ -36,7 +36,7 @@
             app:scaleType="width_bottom" />
 
         <com.tunasushi.tuna.TScale
-            android:id="@+id/tScaleSetBitmap"
+            android:id="@+id/tScale"
             android:layout_width="320dp"
             android:layout_height="320dp"
             android:layout_below="@id/tScaleBottom"

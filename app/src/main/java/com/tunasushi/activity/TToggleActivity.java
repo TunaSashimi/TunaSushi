@@ -29,13 +29,13 @@ public class TToggleActivity extends Activity {
         tToggle01.setToggleListener(new TToggle.ToggleListener() {
             @Override
             public void onToggle(boolean isToggle) {
-                Toast.makeText(getApplication(), "toggleSelect01==>" + isToggle, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "tToggle01==>" + isToggle, Toast.LENGTH_SHORT).show();
             }
         });
         tToggle02.setToggleListener(new TToggle.ToggleListener() {
             @Override
             public void onToggle(boolean toggle) {
-                Toast.makeText(getApplication(), "toggleSelect02==>" + toggle, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "tToggle02==>" + toggle, Toast.LENGTH_SHORT).show();
             }
         });
     }

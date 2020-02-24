@@ -673,13 +673,13 @@ public class TView extends View {
     }
 
     //
+    public void setStatus(boolean press, boolean select) {
+        setStatus(press, select, false);
+    }
+
+    //
     public void setStatus(boolean press, boolean select, boolean textMark) {
-        if (this.press != press || this.select != select || this.textMark != textMark) {
-            this.press = press;
-            this.select = select;
-            this.textMark = textMark;
-            invalidate();
-        }
+        setStatus(press, select, textMark, false);
     }
 
     //
@@ -727,17 +727,6 @@ public class TView extends View {
 
     public void setAdjust(boolean adjust) {
         this.adjust = adjust;
-    }
-
-    // touchIntercept default false
-    protected boolean touchIntercept;
-
-    public boolean isTouchIntercept() {
-        return touchIntercept;
-    }
-
-    public void setTouchIntercept(boolean touchIntercept) {
-        this.touchIntercept = touchIntercept;
     }
 
     protected boolean touchDown;
@@ -1101,36 +1090,6 @@ public class TView extends View {
 
     public void setTouchCancelListener(TouchCancelListener touchCancelListener) {
         this.touchCancelListener = touchCancelListener;
-    }
-
-    //
-    protected TouchOutListener touchOutListener;
-
-    public interface TouchOutListener {
-        void touchOut(TView t);
-    }
-
-    public TouchOutListener getTouchOutListener() {
-        return touchOutListener;
-    }
-
-    public void setTouchOutListener(TouchOutListener touchOutListener) {
-        this.touchOutListener = touchOutListener;
-    }
-
-    //
-    protected TouchInListener touchInListener;
-
-    public interface TouchInListener {
-        void touchIn(TView t);
-    }
-
-    public TouchInListener getTouchInListener() {
-        return touchInListener;
-    }
-
-    public void setTouchInListener(TouchInListener touchInListener) {
-        this.touchInListener = touchInListener;
     }
 
     // associateListener is written in onTouchUp
@@ -4003,8 +3962,6 @@ public class TView extends View {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
         //
-        touchIntercept = typedArray.getBoolean(R.styleable.TView_touchIntercept, false);
-
         press = typedArray.getBoolean(R.styleable.TView_press, false);
         select = typedArray.getBoolean(R.styleable.TView_select, false);
 
@@ -4350,10 +4307,6 @@ public class TView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        //This sentence is telling the parent control, my own event handling! when Drag and other views nested inside the ScrollView will be used !
-        if (touchIntercept) {
-            getParent().requestDisallowInterceptTouchEvent(true);
-        }
         touchX = event.getX();
         touchY = event.getY();
 
@@ -4370,24 +4323,18 @@ public class TView extends View {
                 if (selectType == SelectType.ALWAYS) {
                     select = false;
                 }
-
-                //
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
-
                 if (!contentMarkTouchable) {
                     contentMark = false;
                 }
-
-                if (associateListener != null) {
-                    associateListener.associate(this);
-                }
-
                 if (touchDownListener != null) {
                     touchDownListener.touchDown(this);
                 }
-
+                if (associateListener != null) {
+                    associateListener.associate(this);
+                }
                 //
                 if (material != null) {
                     switch (material) {
@@ -4440,7 +4387,6 @@ public class TView extends View {
                             break;
                     }
                 }
-
                 //
                 if (adjust) {
                     if (touchDownCount >= TOUCH_DOWN_TIMES - 1) {
@@ -4456,14 +4402,13 @@ public class TView extends View {
                         }
                     }
                 }
-
                 break;
+            //
             case MotionEvent.ACTION_MOVE:
                 touchDown = false;
                 touchMove = true;
                 touchUp = false;
                 touchCancel = false;
-
                 //
                 press = true;
                 if (!textMarkTouchable) {
@@ -4472,11 +4417,11 @@ public class TView extends View {
                 if (!contentMarkTouchable) {
                     contentMark = false;
                 }
-                if (touchInListener != null) {
-                    touchInListener.touchIn(this);
-                }
                 if (touchMoveListener != null) {
                     touchMoveListener.touchMove(this);
+                }
+                if (associateListener != null) {
+                    associateListener.associate(this);
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -4484,33 +4429,27 @@ public class TView extends View {
                 touchMove = false;
                 touchUp = true;
                 touchCancel = false;
-
                 //
                 press = false;
-
                 if (selectType == SelectType.ALWAYS) {
                     select = true;
                 } else {
                     select = !select;
                 }
-
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
                 if (!contentMarkTouchable) {
                     contentMark = false;
                 }
-
-                if (associateListener != null) {
-                    associateListener.associate(this);
-                }
-
                 if (touchUpListener != null) {
                     touchUpListener.touchUp(this);
                 }
-
                 if (onClickListener != null) {
                     onClickListener.onClick(this);
+                }
+                if (associateListener != null) {
+                    associateListener.associate(this);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -4518,7 +4457,6 @@ public class TView extends View {
                 touchMove = false;
                 touchUp = false;
                 touchCancel = true;
-
                 //
                 press = false;
                 if (selectType == SelectType.ALWAYS) {
@@ -4535,11 +4473,13 @@ public class TView extends View {
                 if (touchCancelListener != null) {
                     touchCancelListener.touchCancel(this);
                 }
+                if (associateListener != null) {
+                    associateListener.associate(this);
+                }
                 break;
             default:
                 break;
         }
-
         //
         setTouchXY(touchX, touchY);
 

@@ -33,7 +33,7 @@
         <item name="textMark">true</item>
     </style>
 
-    <style name="TView_Text">
+    <style name="TViewRect04">
         <item name="android:layout_width">84dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="textSize">12dp</item>
@@ -95,7 +95,7 @@
         <item name="radiusBottomRight">5dp</item>
     </style>
 
-    <style name="TView_RadioGroup_LightGray_Left" parent="TView_RadioGroup_LightGray">
+    <style name="TView_RadioGroup_LightGray_Srart" parent="TView_RadioGroup_LightGray">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
@@ -114,7 +114,7 @@
         <item name="textMarkRadius">4dp</item>
     </style>
 
-    <style name="TView_RadioGroup_LightGray_Right" parent="TView_RadioGroup_LightGray">
+    <style name="TView_RadioGroup_LightGray_End" parent="TView_RadioGroup_LightGray">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">-1dp</item>
@@ -133,7 +133,7 @@
 
     </style>
 
-    <style name="TView_RadioGroup_LightGray_Horizontal" parent="TView_RadioGroup_LightGray">
+    <style name="TView_RadioGroup_LightGray_Other" parent="TView_RadioGroup_LightGray">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
@@ -150,18 +150,6 @@
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-3dp</item>
         <item name="textMarkRadius">4dp</item>
-
-    </style>
-
-    <style name="TView_RadioGroup_LightGray_Whole" parent="TView_RadioGroup_LightGray">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusTopLeft">5dp</item>
-        <item name="radiusBottomLeft">5dp</item>
-        <item name="radiusTopRight">5dp</item>
-        <item name="radiusBottomRight">5dp</item>
 
     </style>
 

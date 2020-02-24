@@ -81,8 +81,7 @@
             app:rangeDragStrokeColor="#dde2e8"
             app:rangeDragStrokeWidth="2dp"
             app:rangeThink="2dp"
-            app:rangeValueArray="@array/range_value_array"
-            app:touchIntercept="true" />
+            app:rangeValueArray="@array/range_value_array" />
 
         <TextView
             android:id="@+id/tv_star"

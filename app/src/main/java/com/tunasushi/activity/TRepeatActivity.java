@@ -24,7 +24,6 @@ import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
  */
 public class TRepeatActivity extends Activity {
     private TLine tLine;
-    private TView tView;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
 
     private Spinner spinner;
@@ -37,8 +36,6 @@ public class TRepeatActivity extends Activity {
         setContentView(R.layout.activity_t_repeat);
 
         tLine = findViewById(R.id.tLine);
-
-        tView = findViewById(R.id.tView);
 
         tRepeatStar = findViewById(R.id.tRepeatStar);
         tRepeatCar = findViewById(R.id.tRepeatCar);
@@ -71,17 +68,6 @@ public class TRepeatActivity extends Activity {
 
         //
         setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
-
-        tView.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ("Unable".equals(tView.getTextValue().trim())) {
-                    tView.setTextValue("Enable");
-                } else {
-                    tView.setTextValue("Unable");
-                }
-            }
-        });
 
         spinner = findViewById(R.id.spinner);
         spinner.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexArray));

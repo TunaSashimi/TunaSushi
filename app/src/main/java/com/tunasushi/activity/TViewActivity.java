@@ -26,25 +26,9 @@ import static com.tunasushi.tool.GroupTool.dynamic;
  * @Description
  */
 public class TViewActivity extends Activity {
-    private TView tViewRectClassic01, tViewRectClassic02;
-    private TView tViewMainButton01, tViewMainButton02;
-    private TView tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight;
-
-    private TouchUpListener tunaTouchUpListener = new TouchUpListener() {
-        @Override
-        public void touchUp(TView t) {
-            switch (t.getId()) {
-                case R.id.tViewRadioGroupDrackBrownLeft:
-                    Toast.makeText(TViewActivity.this, "金枪鱼刺身", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.tViewRadioGroupDrackBrownRight:
-                    Toast.makeText(TViewActivity.this, "TunaSashimi", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    private TView tViewRect01, tViewClassic02;
+    private TView tViewShadow01, tViewShadow02;
+    private TView tViewGroupLeft, tViewGroupRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +38,12 @@ public class TViewActivity extends Activity {
 
         //
         DeviceTool.DeviceInfo deviceInfo = DeviceTool.getDeviceInfo(this);
-        TextView textDeviceInfo = findViewById(R.id.textDeviceInfo);
-        textDeviceInfo.setText(deviceInfo.toString());
+        TextView textPrompt10 = findViewById(R.id.textPrompt10);
+        textPrompt10.setText(deviceInfo.toString());
 
         //
-        tViewRectClassic01 = findViewById(R.id.tViewRectClassic01);
-        tViewRectClassic01.setTouchUpListener(new TouchUpListener() {
+        tViewRect01 = findViewById(R.id.tViewRect01);
+        tViewRect01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
                 Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
@@ -69,8 +53,8 @@ public class TViewActivity extends Activity {
         /**
          * 注意这里继承的是TView.OnClick事件
          */
-        tViewRectClassic02 = findViewById(R.id.tViewRectClassic02);
-        tViewRectClassic02.setOnClickListener(new TView.OnClickListener() {
+        tViewClassic02 = findViewById(R.id.tViewRect02);
+        tViewClassic02.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
@@ -78,11 +62,11 @@ public class TViewActivity extends Activity {
         });
 
         //
-        tViewMainButton01 = findViewById(R.id.tViewShadowButton01);
-        tViewMainButton01.setTouchUpListener(new TouchUpListener() {
+        tViewShadow01 = findViewById(R.id.tViewShadow01);
+        tViewShadow01.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                tViewMainButton01.setTextMark(
+                tViewShadow01.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
@@ -95,8 +79,8 @@ public class TViewActivity extends Activity {
         });
 
         //
-        tViewMainButton02 = findViewById(R.id.tViewShadowButton02);
-        tViewMainButton02.setTextMark(
+        tViewShadow02 = findViewById(R.id.tViewShadow02);
+        tViewShadow02.setTextMark(
                 10, TypedValue.COMPLEX_UNIT_DIP,
                 Color.RED,
                 "10",
@@ -105,10 +89,10 @@ public class TViewActivity extends Activity {
                 0, TypedValue.COMPLEX_UNIT_DIP,
                 0, TypedValue.COMPLEX_UNIT_DIP
         );
-        tViewMainButton02.setTouchUpListener(new TouchUpListener() {
+        tViewShadow02.setTouchUpListener(new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                tViewMainButton02.setTextMark(
+                tViewShadow02.setTextMark(
                         4, TypedValue.COMPLEX_UNIT_DIP,
                         Color.RED,
                         null,
@@ -121,46 +105,37 @@ public class TViewActivity extends Activity {
         });
 
         //
-        tViewRadioGroupDrackBrownLeft = findViewById(R.id.tViewRadioGroupDrackBrownLeft);
-        tViewRadioGroupDrackBrownRight = findViewById(R.id.tViewRadioGroupDrackBrownRight);
-
-        tViewRadioGroupDrackBrownLeft.setTouchUpListener(tunaTouchUpListener);
-        tViewRadioGroupDrackBrownRight.setTouchUpListener(tunaTouchUpListener);
+        tViewGroupLeft = findViewById(R.id.tViewGroupLeft);
+        tViewGroupRight = findViewById(R.id.tViewGroupRight);
 
         //if you want a different TView link, you can put an array of incoming associate methods
-
-        //	TView.associate(new TView[]{tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight});
-
-        //or  can be placed on a list of incoming associate method
-        associate(Arrays.asList(tViewRadioGroupDrackBrownLeft, tViewRadioGroupDrackBrownRight));
+        //	TView.associate(new TView[]{tViewGroupLeft, tViewGroupRight});
+        //	or
+        //	can be placed on a list of incoming associate method
+        associate(Arrays.asList(tViewGroupLeft, tViewGroupRight));
 
         //
-        String radioGroupTitleArray[] = {
-                "金",
-                "枪",
-                "鱼",
-                "刺",
-                "身"
-        };
-        LinearLayout linearRadioGroupLightGray = findViewById(R.id.linearRadioGroupLightGray);
+        String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};
+
+        LinearLayout linearGroup = findViewById(R.id.linearGroup);
         TouchUpListener touchUpListener = new TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                Toast.makeText(TViewActivity.this, ((TView) t).getTextValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TViewActivity.this, t.getTextValue(), Toast.LENGTH_SHORT).show();
             }
         };
 
         //String[] stringArray, int index(下标默认0), TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        dynamic(radioGroupTitleArray,
+        dynamic(groupTitleArray,
                 "枪",
                 touchUpListener,
-                linearRadioGroupLightGray,
+                linearGroup,
                 60, TypedValue.COMPLEX_UNIT_DIP,
-                R.style.TView_RadioGroup_LightGray_Left,
-                R.style.TView_RadioGroup_LightGray_Right,
-                R.style.TView_RadioGroup_LightGray_Horizontal,
-                R.style.TView_RadioGroup_LightGray_Whole);
+                R.style.TView_RadioGroup_LightGray_Srart,
+                R.style.TView_RadioGroup_LightGray_End,
+                R.style.TView_RadioGroup_LightGray_Other
+        );
     }
 
     //Defined in xml

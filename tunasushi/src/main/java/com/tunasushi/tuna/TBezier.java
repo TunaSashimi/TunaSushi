@@ -102,10 +102,10 @@ public class TBezier extends TView {
     }
 
     /**
-     * @param canvas          画布
+     * @param canvas 画布
      * @param j
      * @param i
-     * @param v               控制两个圆连接时候长度，间接控制连接线的粗细，该值为1的时候连接线为直线
+     * @param v 控制两个圆连接时候长度，间接控制连接线的粗细，该值为1的时候连接线为直线
      * @param handle_len_rate
      * @param maxDistance
      */

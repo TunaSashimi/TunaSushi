@@ -23,8 +23,6 @@ public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChange
 
         setContentView(R.layout.activity_t_bezier);
 
-        //Note this configuration!
-        //app:touchType="none"
         tBezier = findViewById(R.id.tBezier02);
 
         seekBar01 = findViewById(R.id.seekBar01);
