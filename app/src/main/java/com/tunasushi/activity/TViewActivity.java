@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tool.DeviceTool;
+import com.tunasushi.tool.GroupTool;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TView.TouchUpListener;
 
@@ -131,7 +132,7 @@ public class TViewActivity extends Activity {
                 "枪",
                 touchUpListener,
                 linearGroup,
-                dpToPx(60),LinearLayout.LayoutParams.MATCH_PARENT,
+                dpToPx(60), LinearLayout.LayoutParams.MATCH_PARENT,
                 R.style.TViewGroupLightGraySrart,
                 R.style.TViewGroupLightGrayEnd,
                 R.style.TViewGroupLightGrayOther
