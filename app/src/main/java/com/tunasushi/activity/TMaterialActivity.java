@@ -27,8 +27,8 @@ public class TMaterialActivity extends Activity {
         setContentView(R.layout.activity_t_materlai);
 
         //
-        tViewMaterialRadio01 = findViewById(R.id.tViewMaterialRadio01);
-        tViewMaterialRadio02 = findViewById(R.id.tViewMaterialRadio02);
+        tViewMaterialRadio01 = findViewById(R.id.tViewGroupMaterial01);
+        tViewMaterialRadio02 = findViewById(R.id.tViewGroupMaterial02);
 
         associate(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
     }

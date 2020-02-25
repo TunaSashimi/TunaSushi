@@ -45,7 +45,7 @@
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect03"
-            style="@style/TViewRect04"
+            style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect02"
             android:layout_toRightOf="@id/tViewRect02"
             app:adjust="true"
@@ -57,7 +57,7 @@
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
-            style="@style/TViewRect04"
+            style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect03"
             android:layout_toRightOf="@id/tViewRect03"
             app:adjust="true"
@@ -141,11 +141,13 @@
 
             <View
                 android:id="@+id/viewAnchor01"
-                style="@style/Tuna_Anchor" />
+                style="@style/ViewAnchor" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewGroupLeft"
-                style="@style/TView_RadioGroup_DrackBrown_Left"
+                android:id="@+id/tViewGroupStart"
+                style="@style/TViewGroupDrackBrownStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/viewAnchor01"
                 app:select="true"
                 app:textMarkColor="#ff0000"
@@ -153,8 +155,10 @@
                 app:textValue="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewGroupRight"
-                style="@style/TView_RadioGroup_DrackBrown_Right"
+                android:id="@+id/tViewGroupEnd"
+                style="@style/TViewGroupDrackBrownEnd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_toRightOf="@id/viewAnchor01"
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
@@ -315,7 +319,7 @@
 
         <View
             android:id="@+id/tViewAnchorSecondaryButton01"
-            style="@style/Tuna_Anchor"
+            style="@style/ViewAnchor"
             android:layout_below="@id/textPrompt06"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
@@ -323,7 +327,7 @@
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView03"
-            style="@style/TView_TextMark_Red_Horizontal"
+            style="@style/TViewTextMarkRedHorizontal"
             android:layout_alignTop="@id/tViewAnchorSecondaryButton01"
             android:layout_marginLeft="16dp"
             android:layout_toLeftOf="@id/tViewAnchorSecondaryButton01"
@@ -335,7 +339,7 @@
             app:textValue="背景按下#d9c700" />
 
         <com.tunasushi.tuna.TView
-            style="@style/TView_TextMark_Red_Top"
+            style="@style/TViewTextMarkRedTop"
             android:layout_alignTop="@id/tViewAnchorSecondaryButton01"
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tViewAnchorSecondaryButton01"
@@ -360,12 +364,12 @@
 
         <View
             android:id="@+id/viewAnchorSecondaryButton02"
-            style="@style/Tuna_Anchor"
+            style="@style/ViewAnchor"
             android:layout_below="@id/clipButton" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView04"
-            style="@style/TView_TextMark_Red_Horizontal"
+            style="@style/TViewTextMarkRedHorizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -379,7 +383,7 @@
             app:textValue="mark=true&amp;textGravity=center" />
 
         <com.tunasushi.tuna.TView
-            style="@style/TView_TextMark_Red_Horizontal"
+            style="@style/TViewTextMarkRedHorizontal"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"

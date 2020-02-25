@@ -29,14 +29,13 @@ import static com.tunasushi.tool.GroupTool.dynamic;
 public class TViewActivity extends Activity {
     private TView tViewRect01, tViewClassic02;
     private TView tViewShadow01, tViewShadow02;
-    private TView tViewGroupLeft, tViewGroupRight;
+    private TView tViewGroupStart, tViewGroupEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_t_view);
-
         //
         DeviceTool.DeviceInfo deviceInfo = DeviceTool.getDeviceInfo(this);
         TextView textPrompt10 = findViewById(R.id.textPrompt10);
@@ -106,14 +105,14 @@ public class TViewActivity extends Activity {
         });
 
         //
-        tViewGroupLeft = findViewById(R.id.tViewGroupLeft);
-        tViewGroupRight = findViewById(R.id.tViewGroupRight);
+        tViewGroupStart = findViewById(R.id.tViewGroupStart);
+        tViewGroupEnd = findViewById(R.id.tViewGroupEnd);
 
         //if you want a different TView link, you can put an array of incoming associate methods
-        //	TView.associate(new TView[]{tViewGroupLeft, tViewGroupRight});
+        //	TView.associate(new TView[]{tViewGroupStart, tViewGroupEnd});
         //	or
         //	can be placed on a list of incoming associate method
-        associate(Arrays.asList(tViewGroupLeft, tViewGroupRight));
+        associate(Arrays.asList(tViewGroupStart, tViewGroupEnd));
 
         //
         String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};
@@ -132,10 +131,10 @@ public class TViewActivity extends Activity {
                 "枪",
                 touchUpListener,
                 linearGroup,
-                dpToPx(60),
-                R.style.TView_RadioGroup_LightGray_Srart,
-                R.style.TView_RadioGroup_LightGray_End,
-                R.style.TView_RadioGroup_LightGray_Other
+                dpToPx(60),LinearLayout.LayoutParams.MATCH_PARENT,
+                R.style.TViewGroupLightGraySrart,
+                R.style.TViewGroupLightGrayEnd,
+                R.style.TViewGroupLightGrayOther
         );
     }
 

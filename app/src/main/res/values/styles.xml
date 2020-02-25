@@ -5,45 +5,41 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Tuna_Anchor">
+    <style name="ViewAnchor">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 
     <!-- Exclusive TView or any of its subclasses use -->
-
-    <style name="TView_Button">
+    <style name="TViewButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="textSize">14dp</item>
         <item name="radius">5dp</item>
     </style>
 
-    <style name="TView_TextMark_Red_Horizontal" parent="TView_Button">
+    <style name="TViewTextMarkRedHorizontal" parent="TViewButton">
         <item name="textMarkRadius">4dp</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMark">true</item>
     </style>
 
-    <style name="TView_TextMark_Red_Top" parent="TView_Button">
+    <style name="TViewTextMarkRedTop" parent="TViewButton">
         <item name="textMarkRadius">4dp</item>
         <item name="textMarkColor">#ff0000</item>
         <item name="textMarkDy">-2dp</item>
         <item name="textMark">true</item>
     </style>
 
-    <style name="TViewRect04">
+    <style name="TViewRect">
         <item name="android:layout_width">84dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="textSize">12dp</item>
     </style>
 
-    <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
-    <style name="TView_RadioGroup_DrackBrown">
+    <style name="TViewGroupDrackBrown">
         <item name="android:layerType">software</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="backgroundNormal">#ffffff</item>
         <item name="backgroundPress">#bc7955</item>
         <item name="backgroundSelect">#592d2d</item>
@@ -56,11 +52,18 @@
         <item name="selectType">always</item>
     </style>
 
-    <!-- Considering only a layer arrangement ,according to the pattern is top, bottom, left, right, horizontal, vertical, in and out -->
-    <style name="TView_RadioGroup_LightGray">
+    <style name="TViewGroupDrackBrownStart" parent="TViewGroupDrackBrown">
+        <item name="radiusTopLeft">5dp</item>
+        <item name="radiusBottomLeft">5dp</item>
+    </style>
+
+    <style name="TViewGroupDrackBrownEnd" parent="TViewGroupDrackBrown">
+        <item name="radiusTopRight">5dp</item>
+        <item name="radiusBottomRight">5dp</item>
+    </style>
+
+    <style name="TViewGroupLightGray">
         <item name="android:layerType">software</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="backgroundNormal">#ffffff</item>
         <item name="backgroundPress">#9c9c9c</item>
         <item name="backgroundSelect">#574d4c</item>
@@ -73,87 +76,19 @@
         <item name="selectType">always</item>
     </style>
 
-    <style name="TView_RadioGroup_DrackBrown_Left" parent="TView_RadioGroup_DrackBrown">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">-1dp</item>
+    <style name="TViewGroupLightGraySrart" parent="TViewGroupLightGray">
         <item name="radiusTopLeft">5dp</item>
         <item name="radiusBottomLeft">5dp</item>
-        <item name="radiusTopRight">0dp</item>
-        <item name="radiusBottomRight">0dp</item>
     </style>
 
-    <style name="TView_RadioGroup_DrackBrown_Right" parent="TView_RadioGroup_DrackBrown">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">-1dp</item>
-        <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusTopLeft">0dp</item>
-        <item name="radiusBottomLeft">0dp</item>
-        <item name="radiusTopRight">5dp</item>
-        <item name="radiusBottomRight">5dp</item>
-    </style>
-
-    <style name="TView_RadioGroup_LightGray_Srart" parent="TView_RadioGroup_LightGray">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">-1dp</item>
-        <item name="radiusTopLeft">5dp</item>
-        <item name="radiusBottomLeft">5dp</item>
-        <item name="radiusTopRight">0dp</item>
-        <item name="radiusBottomRight">0dp</item>
-
-        <!--  -->
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-
-        <item name="textMarkColor">#ff0000</item>
-        <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">4dp</item>
-    </style>
-
-    <style name="TView_RadioGroup_LightGray_End" parent="TView_RadioGroup_LightGray">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">-1dp</item>
-        <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusBottomLeft">0dp</item>
-        <item name="radiusTopLeft">0dp</item>
+    <style name="TViewGroupLightGrayEnd" parent="TViewGroupLightGray">
         <item name="radiusBottomRight">5dp</item>
         <item name="radiusTopRight">5dp</item>
-
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-
-        <item name="textMarkColor">#ff0000</item>
-        <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">4dp</item>
-
     </style>
 
-    <style name="TView_RadioGroup_LightGray_Other" parent="TView_RadioGroup_LightGray">
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginRight">0dp</item>
-        <item name="radiusTopLeft">0dp</item>
-        <item name="radiusBottomLeft">0dp</item>
-        <item name="radiusTopRight">0dp</item>
-        <item name="radiusBottomRight">0dp</item>
+    <style name="TViewGroupLightGrayOther" parent="TViewGroupLightGray" />
 
-        <!--  -->
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-
-        <item name="textMarkColor">#ff0000</item>
-        <item name="textMarkDy">-3dp</item>
-        <item name="textMarkRadius">4dp</item>
-
-    </style>
-
-    <style name="TDialog_Choice">
+    <style name="TDialogChoice">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="dialogWidth">280dp</item>

@@ -57,11 +57,13 @@
 
             <View
                 android:id="@+id/viewAnchor01"
-                style="@style/Tuna_Anchor" />
+                style="@style/ViewAnchor" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewMaterialRadio01"
-                style="@style/TView_RadioGroup_DrackBrown_Left"
+                android:id="@+id/tViewGroupMaterial01"
+                style="@style/TViewGroupDrackBrownStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/viewAnchor01"
                 app:material="spread"
                 app:select="true"
@@ -70,8 +72,10 @@
                 app:textValue="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewMaterialRadio02"
-                style="@style/TView_RadioGroup_DrackBrown_Right"
+                android:id="@+id/tViewGroupMaterial02"
+                style="@style/TViewGroupDrackBrownEnd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_toRightOf="@id/viewAnchor01"
                 app:material="spread"
                 app:textMark="true"
