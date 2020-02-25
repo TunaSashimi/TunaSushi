@@ -11,15 +11,15 @@ import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tool.DeviceTool;
-import com.tunasushi.tool.GroupTool;
+import com.tunasushi.tuna.TGroup;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TView.TouchUpListener;
 
 import java.util.Arrays;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
-import static com.tunasushi.tool.GroupTool.associate;
-import static com.tunasushi.tool.GroupTool.dynamic;
+import static com.tunasushi.tuna.TGroup.link;
+import static com.tunasushi.tuna.TGroup.create;
 
 /**
  * @author TunaSashimi
@@ -109,11 +109,11 @@ public class TViewActivity extends Activity {
         tViewGroupStart = findViewById(R.id.tViewGroupStart);
         tViewGroupEnd = findViewById(R.id.tViewGroupEnd);
 
-        //if you want a different TView link, you can put an array of incoming associate methods
-        //	TView.associate(new TView[]{tViewGroupStart, tViewGroupEnd});
+        //if you want a different TView link, you can put an array of incoming link methods
+        //	TView.link(new TView[]{tViewGroupStart, tViewGroupEnd});
         //	or
-        //	can be placed on a list of incoming associate method
-        associate(Arrays.asList(tViewGroupStart, tViewGroupEnd));
+        //	can be placed on a list of incoming link method
+        link(Arrays.asList(tViewGroupStart, tViewGroupEnd));
 
         //
         String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};
@@ -128,7 +128,7 @@ public class TViewActivity extends Activity {
 
         //String[] stringArray, int index(下标默认0), TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
         //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
-        dynamic(groupTitleArray,
+        TGroup.create(groupTitleArray,
                 "枪",
                 touchUpListener,
                 linearGroup,

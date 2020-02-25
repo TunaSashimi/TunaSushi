@@ -9,7 +9,7 @@ import com.tunasushi.tuna.TView;
 
 import java.util.Arrays;
 
-import static com.tunasushi.tool.GroupTool.associate;
+import static com.tunasushi.tuna.TGroup.link;
 
 /**
  * @author TunaSashimi
@@ -30,6 +30,6 @@ public class TMaterialActivity extends Activity {
         tViewMaterialRadio01 = findViewById(R.id.tViewGroupMaterial01);
         tViewMaterialRadio02 = findViewById(R.id.tViewGroupMaterial02);
 
-        associate(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
+        link(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
     }
 }

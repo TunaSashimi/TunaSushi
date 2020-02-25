@@ -1,10 +1,7 @@
-package com.tunasushi.tool;
+package com.tunasushi.tuna;
 
 import android.content.Context;
 import android.widget.LinearLayout;
-
-import com.tunasushi.tuna.TView;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ import androidx.annotation.IntDef;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class GroupTool {
+public class TGroup {
 
     //@IntDef的使用
     @IntDef({HORIZONTAL, VERTICAL})
@@ -30,7 +27,7 @@ public class GroupTool {
 
 
     //
-    public static void associate(final TView[] TViewArray) {
+    public static void link(final TView[] TViewArray) {
         if (TViewArray == null) {
             return;
         }
@@ -51,7 +48,7 @@ public class GroupTool {
     }
 
     //
-    public static void associate(final List<TView> TViewList) {
+    public static void link(final List<TView> TViewList) {
         if (TViewList == null) {
             return;
         }
@@ -61,7 +58,7 @@ public class GroupTool {
             TViewList.get(i).setAssociateListener(new TView.associateListener() {
                 @Override
                 public void associate(TView t) {
-                    //The associate method of any TView is to set the status of other TViews to false!
+                    //The link method of any TView is to set the status of other TViews to false!
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
                             TViewList.get(j).setStatus(false, false);
@@ -73,13 +70,13 @@ public class GroupTool {
     }
 
     //10
-    public static void dynamic(String[] stringArray,
-                               String string,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              String string,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -91,12 +88,12 @@ public class GroupTool {
     }
 
     //9
-    public static void dynamic(String[] stringArray,
-                               String string,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              String string,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -108,13 +105,13 @@ public class GroupTool {
     }
 
     //10
-    public static void dynamic(String[] stringArray,
-                               String string,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              String string,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -126,12 +123,12 @@ public class GroupTool {
     }
 
     //9
-    public static void dynamic(String[] stringArray,
-                               String string,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              String string,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -144,89 +141,89 @@ public class GroupTool {
 
 
     //9
-    public static void dynamic(String[] stringArray,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
 
         dynamicRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //8
-    public static void dynamic(String[] stringArray,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
 
         dynamicRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //9
-    public static void dynamic(String[] stringArray,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
 
         dynamicRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //8
-    public static void dynamic(String[] stringArray,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
 
         dynamicRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
-    public static void dynamic(String[] stringArray,
-                               int index,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              int index,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
 
         dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
-    public static void dynamic(String[] stringArray,
-                               int index,
-                               TView.TouchUpListener touchUpListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              int index,
+                              TView.TouchUpListener touchUpListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
 
         dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
-    public static void dynamic(String[] stringArray,
-                               int index,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther,
-                               @OrientationMode int mode) {
+    public static void create(String[] stringArray,
+                              int index,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther,
+                              @OrientationMode int mode) {
 
         dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
-    public static void dynamic(String[] stringArray,
-                               int index,
-                               TView.OnClickListener onClickListener,
-                               LinearLayout linearLayout,
-                               int width, int height,
-                               int styleStart, int styleEnd, int styleOther) {
+    public static void create(String[] stringArray,
+                              int index,
+                              TView.OnClickListener onClickListener,
+                              LinearLayout linearLayout,
+                              int width, int height,
+                              int styleStart, int styleEnd, int styleOther) {
 
         dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
@@ -281,7 +278,7 @@ public class GroupTool {
                 }
                 linearLayout.addView(t, layoutParams);
             }
-            associate(TViewList);
+            link(TViewList);
         }
     }
 }
