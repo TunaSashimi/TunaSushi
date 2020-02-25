@@ -18,8 +18,6 @@ import com.tunasushi.tuna.TView.TouchUpListener;
 import java.util.Arrays;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
-import static com.tunasushi.tuna.TGroup.link;
-import static com.tunasushi.tuna.TGroup.create;
 
 /**
  * @author TunaSashimi
@@ -113,7 +111,7 @@ public class TViewActivity extends Activity {
         //	TView.link(new TView[]{tViewGroupStart, tViewGroupEnd});
         //	or
         //	can be placed on a list of incoming link method
-        link(Arrays.asList(tViewGroupStart, tViewGroupEnd));
+        TGroup.link(Arrays.asList(tViewGroupStart, tViewGroupEnd));
 
         //
         String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};
