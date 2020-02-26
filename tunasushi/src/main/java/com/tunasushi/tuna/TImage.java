@@ -9,6 +9,11 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 import static com.tunasushi.tool.BitmapTool.getAlphaBitmap;
 import static com.tunasushi.tool.BitmapTool.getBacksheetBitmap;
 import static com.tunasushi.tool.BitmapTool.getClassicRoundBitmap;
@@ -140,28 +145,17 @@ public class TImage extends TView {
         invalidate();
     }
 
-    private ImageReverse imageReverse;
-
-    public enum ImageReverse {
-        HORIZONTAL(0),
-        VERTICAL(1),
-        ;
-        final int nativeInt;
-
-        ImageReverse(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({NORMAL, HORIZONTAL, VERTICAL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface imageReverseMode {
     }
 
-    public ImageReverse getImageReverse() {
-        return imageReverse;
-    }
-
-    public void setImageReverse(ImageReverse imageReverse) {
-        this.imageReverse = imageReverse;
-    }
-
-    private static final ImageReverse[] imageReverseArray = {ImageReverse.HORIZONTAL, ImageReverse.VERTICAL,};
+    public static final int NORMAL = 0;
+    public static final int HORIZONTAL = 1;
+    public static final int VERTICAL = 2;
+    private static final int[] imageReverseModeArray = {NORMAL, HORIZONTAL, VERTICAL,};
+    private @imageReverseMode
+    int imageReverseMode;
 
     private Bitmap imageSrc;
 
@@ -210,9 +204,9 @@ public class TImage extends TView {
         imageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0f);
         imageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1f);
 
-        int imageReverseIndex = typedArray.getInt(R.styleable.TImage_imageReverse, -1);
-        if (imageReverseIndex >= 0) {
-            imageReverse = imageReverseArray[imageReverseIndex];
+        int imageReverseModeIndex = typedArray.getInt(R.styleable.TImage_imageReverseMode, -1);
+        if (imageReverseModeIndex >= 0) {
+            imageReverseMode = imageReverseModeArray[imageReverseModeIndex];
         }
 
         typedArray.recycle();
@@ -292,11 +286,11 @@ public class TImage extends TView {
             }
         }
 
-        if (imageReverse != null) {
+        if (imageReverseMode != NORMAL) {
             if (imageSrc == null) {
-                imageSrc = getReverseBitmap(srcBitmap, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
+                imageSrc = getReverseBitmap(srcBitmap, imageReverseMode == HORIZONTAL ? 0 : 1);
             } else {
-                imageSrc = getReverseBitmap(imageSrc, imageReverse == ImageReverse.HORIZONTAL ? 0 : 1);
+                imageSrc = getReverseBitmap(imageSrc, imageReverseMode == HORIZONTAL ? 0 : 1);
             }
         }
 

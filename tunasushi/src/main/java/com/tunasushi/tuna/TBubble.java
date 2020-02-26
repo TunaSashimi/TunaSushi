@@ -10,6 +10,11 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 
 /**
  * @author TunaSashimi
@@ -81,58 +86,32 @@ public class TBubble extends TView {
         this.bubbleTextPadding = bubbleTextPadding;
     }
 
-    private TBubbleTowardType bubbleTowardType;
-
-    public TBubbleTowardType getTBubbleTowardType() {
-        return bubbleTowardType;
+    @IntDef({LEFT, TOP, RIGHT, BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface bubbleTowardMode {
     }
 
-    public void setTBubbleTowardType(TBubbleTowardType bubbleTowardType) {
-        this.bubbleTowardType = bubbleTowardType;
+    public static final int LEFT = 0;
+    public static final int TOP = 1;
+    public static final int RIGHT = 2;
+    public static final int BOTTOM = 3;
+    private static final int[] bubbleTowardModeArray = {LEFT, TOP, RIGHT, BOTTOM,};
+    private @bubbleTowardMode
+    int bubbleTowardMode;
+
+
+    @IntDef({LOW, MIDDLE, HIGH})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface bubblePositionMode {
     }
 
-    public enum TBubbleTowardType {
-        LEFT(0), TOP(1), RIGHT(2), BOTTOM(3),
-        ;
-        final int nativeInt;
+    public static final int LOW = 0;
+    public static final int MIDDLE = 1;
+    public static final int HIGH = 2;
+    private static final int[] bubblePositionModeArray = {LOW, MIDDLE, HIGH,};
+    private @bubblePositionMode
+    int bubblePositionMode;
 
-        TBubbleTowardType(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final TBubbleTowardType[] bubbleTowardTypeArray = {TBubbleTowardType.LEFT, TBubbleTowardType.TOP, TBubbleTowardType.RIGHT,
-            TBubbleTowardType.BOTTOM,};
-
-    public static TBubbleTowardType[] getTunabubbletowardtypeArray() {
-        return bubbleTowardTypeArray;
-    }
-
-    private TBubbleLocationType bubbleLocationType;
-
-    public TBubbleLocationType getTBubbleLocationType() {
-        return bubbleLocationType;
-    }
-
-    public void setTBubbleTowardType(TBubbleLocationType bubbleLocationType) {
-        this.bubbleLocationType = bubbleLocationType;
-    }
-
-    public enum TBubbleLocationType {
-        LOW(0), MIDDLE(1), HIGH(2),
-        ;
-        final int nativeInt;
-
-        TBubbleLocationType(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final TBubbleLocationType[] bubbleLocationTypeArray = {TBubbleLocationType.LOW, TBubbleLocationType.MIDDLE, TBubbleLocationType.HIGH,};
-
-    public static TBubbleLocationType[] getTTBubbleLocationTypeArray() {
-        return bubbleLocationTypeArray;
-    }
 
     private float bubbleOffset;
 
@@ -189,18 +168,18 @@ public class TBubble extends TView {
         bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, textColorDefault);
         bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
-        int bubbleTowardTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardType, 0);
-        if (bubbleTowardTypeIndex >= 0) {
-            bubbleTowardType = bubbleTowardTypeArray[bubbleTowardTypeIndex];
+        int bubbleTowardModeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardMode, 0);
+        if (bubbleTowardModeIndex >= 0) {
+            bubbleTowardMode = bubbleTowardModeArray[bubbleTowardModeIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute bubbleTowardType type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubbleTowardMode type it does not conform to the rules");
         }
 
-        int bubbleLocationTypeIndex = typedArray.getInt(R.styleable.TBubble_bubbleLocationType, 0);
-        if (bubbleLocationTypeIndex >= 0) {
-            bubbleLocationType = bubbleLocationTypeArray[bubbleLocationTypeIndex];
+        int bubblePositionModeIndex = typedArray.getInt(R.styleable.TBubble_bubblePositionMode, 0);
+        if (bubblePositionModeIndex >= 0) {
+            bubblePositionMode = bubblePositionModeArray[bubblePositionModeIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute bubbleLocationType type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubblePositionMode type it does not conform to the rules");
         }
 
         bubbleOffset = typedArray.getDimension(R.styleable.TBubble_bubbleOffset, 0);
@@ -265,10 +244,10 @@ public class TBubble extends TView {
         float textCenterX = width >> 1;
         float textCenterY = height >> 1;
 
-        switch (bubbleTowardType) {
+        switch (bubbleTowardMode) {
             case LEFT:
 
-                switch (bubbleLocationType) {
+                switch (bubblePositionMode) {
                     case LOW:
                         offsetY = (height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
                         offsetY += bubbleOffset;
@@ -320,7 +299,7 @@ public class TBubble extends TView {
                 break;
 
             case TOP:
-                switch (bubbleLocationType) {
+                switch (bubblePositionMode) {
                     case LOW:
                         offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;
@@ -372,7 +351,7 @@ public class TBubble extends TView {
                 break;
 
             case RIGHT:
-                switch (bubbleLocationType) {
+                switch (bubblePositionMode) {
                     case LOW:
                         offsetY = ((height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetY += bubbleOffset;
@@ -424,7 +403,7 @@ public class TBubble extends TView {
                 break;
 
             case BOTTOM:
-                switch (bubbleLocationType) {
+                switch (bubblePositionMode) {
                     case LOW:
                         offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;

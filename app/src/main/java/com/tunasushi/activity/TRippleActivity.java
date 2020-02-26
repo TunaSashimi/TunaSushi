@@ -81,7 +81,10 @@ public class TRippleActivity extends Activity {
                     tRipple04.setRippleTextValue("&");
 
                     tRipple01.setRippleCircleColorInner(0xffff9900);
-                    tRipple02.setRippleCircleColorOuter(270, 0xfffed136, 0xffff9900);
+                    tRipple02.setRippleCircleColorOuter(
+                            270,
+                            0xfffed136,
+                            0xffff9900);
                     tRipple03.setRippleCircleColorInner(0xfffed136);
                     tRipple03.setRippleCircleColorOuter(0xfffed136);
                     tRipple04.setRippleCircleAngleInner(90);

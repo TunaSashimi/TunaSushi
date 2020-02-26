@@ -33,7 +33,7 @@ public class TWrapActivity extends Activity {
                         " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
                 });
 
-        TView tView = findViewById(R.id.tView);
+        TView tView = findViewById(R.id.tView01);
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {

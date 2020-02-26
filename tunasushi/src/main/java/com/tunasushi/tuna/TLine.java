@@ -10,6 +10,11 @@ import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:55
@@ -23,8 +28,8 @@ public class TLine extends TView {
     private float lineArrowHeight;
     private int lineArrowColor;
 
-    private float lineArrowStrokeWidth;
-    private int lineArrowStrokeColor;
+    private float lineStrokeWidth;
+    private int lineStrokeColor;
 
     private float lineX;
 
@@ -36,23 +41,31 @@ public class TLine extends TView {
         this.lineX = lineX;
     }
 
-    private LineTowardType lineTowardType;
 
-    public enum LineTowardType {
-        TOP(0),
-        BOTTOM(1),
-        ;
-        final int nativeInt;
-
-        LineTowardType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({TOP, BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface lineArrowMode {
     }
 
-    private static final LineTowardType[] lineTowardTypeArray = {
-            LineTowardType.TOP,
-            LineTowardType.BOTTOM,
-    };
+    public static final int TOP = 0;
+    public static final int BOTTOM = 1;
+    private static final int[] lineArrowModeArray = {TOP, BOTTOM,};
+    private @lineArrowMode
+    int lineArrowMode;
+
+
+    @IntDef({HORIZONTAL, SLASH, SLASHBACK})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface lineMode {
+    }
+
+    public static final int HORIZONTAL = 0;
+    public static final int SLASH = 1;
+    public static final int SLASHBACK = 2;
+    private static final int[] lineModeArray = {HORIZONTAL, SLASH, SLASHBACK};
+    private @lineMode
+    int lineMode;
+
 
     public TLine(Context context) {
         this(context, null);
@@ -74,8 +87,8 @@ public class TLine extends TView {
 
         lineArrowColor = typedArray.getColor(R.styleable.TLine_lineArrowColor, Color.TRANSPARENT);
 
-        lineArrowStrokeWidth = typedArray.getDimension(R.styleable.TLine_lineArrowStrokeWidth, 0);
-        lineArrowStrokeColor = typedArray.getColor(R.styleable.TLine_lineArrowStrokeColor, Color.TRANSPARENT);
+        lineStrokeWidth = typedArray.getDimension(R.styleable.TLine_lineStrokeWidth, 0);
+        lineStrokeColor = typedArray.getColor(R.styleable.TLine_lineStrokeColor, Color.TRANSPARENT);
 
         //If 0 is hidden
         lineX = typedArray.getDimension(R.styleable.TLine_lineX, 0);
@@ -84,11 +97,16 @@ public class TLine extends TView {
         }
         lineSurround = typedArray.getColor(R.styleable.TLine_lineSurround, Color.TRANSPARENT);
 
-        int lineTowardTypeIndex = typedArray.getInt(R.styleable.TLine_lineTowardType, -1);
-        if (lineTowardTypeIndex >= 0) {
-            lineTowardType = lineTowardTypeArray[lineTowardTypeIndex];
+        int lineModeIndex = typedArray.getInt(R.styleable.TLine_lineMode, 0);
+        if (lineModeIndex >= 0) {
+            lineMode = lineModeArray[lineModeIndex];
+        }
+
+        int lineArrowModeIndex = typedArray.getInt(R.styleable.TLine_lineArrowMode, 0);
+        if (lineArrowModeIndex >= 0) {
+            lineArrowMode = lineArrowModeArray[lineArrowModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute lineTowardType type must be given");
+//            throw new IllegalArgumentException("The content attribute lineArrowMode type must be given");
         }
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -100,16 +118,26 @@ public class TLine extends TView {
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(lineSurround);
 
-        if (lineArrowStrokeWidth > 0) {
-            switch (lineTowardType) {
+        //
+        if (lineMode == SLASH) {
+            canvas.drawLine(0, 0, width, height, initPaint(Paint.Style.FILL, lineStrokeColor, lineStrokeWidth));
+            return;
+        } else if (lineMode == SLASHBACK) {
+            canvas.drawLine(width, 0, 0, height, initPaint(Paint.Style.FILL, lineStrokeColor, lineStrokeWidth));
+            return;
+        }
+
+        //
+        if (lineStrokeWidth > 0) {
+            switch (lineArrowMode) {
                 case TOP:
                     drawArrow(
                             canvas,
                             width, height,
                             lineX,
                             lineArrowWidth, lineArrowHeight,
-                            lineArrowStrokeWidth,
-                            lineArrowStrokeColor,
+                            lineStrokeWidth,
+                            lineStrokeColor,
                             true);
                     break;
                 case BOTTOM:
@@ -118,8 +146,8 @@ public class TLine extends TView {
                             width, height,
                             lineX,
                             lineArrowWidth, lineArrowHeight,
-                            lineArrowStrokeWidth,
-                            lineArrowStrokeColor,
+                            lineStrokeWidth,
+                            lineStrokeColor,
                             false);
                     break;
                 default:
@@ -128,16 +156,16 @@ public class TLine extends TView {
 
             //The filling part of the color triangle
             if (lineArrowColor != Color.TRANSPARENT) {
-                switch (lineTowardType) {
+                switch (lineArrowMode) {
                     case TOP:
-                        initPathMoveTo(lineX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, height);
-                        path.lineTo(lineX, height - lineArrowHeight - lineArrowStrokeWidth * 0.5f);
-                        path.lineTo(lineX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, height);
+                        initPathMoveTo(lineX - lineArrowWidth * 0.5f + lineStrokeWidth * 0.5f, height);
+                        path.lineTo(lineX, height - lineArrowHeight - lineStrokeWidth * 0.5f);
+                        path.lineTo(lineX + lineArrowWidth * 0.5f - lineStrokeWidth * 0.5f, height);
                         break;
                     case BOTTOM:
-                        initPathMoveTo(lineX - lineArrowWidth * 0.5f + lineArrowStrokeWidth * 0.5f, 0);
-                        path.lineTo(lineX, lineArrowHeight - lineArrowStrokeWidth * 0.5f);
-                        path.lineTo(lineX + lineArrowWidth * 0.5f - lineArrowStrokeWidth * 0.5f, 0);
+                        initPathMoveTo(lineX - lineArrowWidth * 0.5f + lineStrokeWidth * 0.5f, 0);
+                        path.lineTo(lineX, lineArrowHeight - lineStrokeWidth * 0.5f);
+                        path.lineTo(lineX + lineArrowWidth * 0.5f - lineStrokeWidth * 0.5f, 0);
                         break;
                     default:
                         break;

@@ -26,7 +26,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorGravityMode="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -46,7 +46,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorGravityMode="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -65,7 +65,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorGravityMode="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -84,7 +84,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravity="right|bottom"
+            app:srcAnchorGravityMode="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -119,11 +119,11 @@
         android:layout_marginRight="25dp"
         app:lineArrowColor="#ffffff"
         app:lineArrowHeight="16dp"
-        app:lineArrowStrokeColor="#b2b2b2"
-        app:lineArrowStrokeWidth="1dp"
+        app:lineStrokeColor="#b2b2b2"
+        app:lineStrokeWidth="1dp"
         app:lineArrowWidth="22dp"
         app:lineSurround="#f0eff5"
-        app:lineTowardType="bottom" />
+        app:lineArrowMode="bottom" />
 
     <com.tunasushi.tuna.TRepeat
         android:id="@+id/tRepeatStar"
@@ -132,8 +132,8 @@
         android:layout_below="@id/tLine"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        app:repeatSelectType="connect"
-        app:repeatShapeType="custom"
+        app:repeatSelectMode="connect"
+        app:repeatShapeMode="custom"
         app:repeatSrcNormal="@drawable/bitmap_trepeat_star_normal"
         app:repeatSrcSelect="@drawable/bitmap_trepeat_star_select"
         app:repeatTotal="5" />
@@ -152,8 +152,8 @@
         app:repeatItemTextFractionBottom="86%"
         app:repeatItemTextFractionTop="72%"
         app:repeatItemTextSize="14dp"
-        app:repeatSelectType="current"
-        app:repeatShapeType="custom"
+        app:repeatSelectMode="current"
+        app:repeatShapeMode="custom"
         app:repeatSrcNormal="@drawable/bitmap_trepeat_car_normal"
         app:repeatSrcSelect="@drawable/bitmap_trepeat_car_select" />
 
@@ -166,8 +166,8 @@
         android:layout_marginTop="25dp"
         app:repeatItemBackgroundNormal="#ffffff"
         app:repeatItemBackgroundSelect="#999999"
-        app:repeatSelectType="current"
-        app:repeatShapeType="circle"
+        app:repeatSelectMode="current"
+        app:repeatShapeMode="circle"
         app:repeatTotal="5" />
 
     <Spinner

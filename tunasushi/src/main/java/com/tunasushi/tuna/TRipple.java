@@ -12,7 +12,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Property;
-import android.util.TypedValue;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
@@ -24,6 +23,11 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.tuna.R;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
@@ -344,16 +348,24 @@ public class TRipple extends TView {
         this.rippleTimeInterpolator = rippleTimeInterpolator;
     }
 
-    public enum RippleTimeInterpolator {
-        ACCELERATEDECELERATEINTERPOLATOR(0), ACCELERATEINTERPOLATOR(1), ANTICIPATEINTERPOLATOR(2), ANTICIPATEOVERSHOOTINTERPOLATOR(3), BOUNCEINTERPOLATOR(4), CYCLEINTERPOLATOR(5), DECELERATEINTERPOLATOR(
-                6), LINEARINTERPOLATOR(7), OVERSHOOTINTERPOLATOR(8),
-        ;
-        final int nativeInt;
-
-        RippleTimeInterpolator(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({ACCELERATEDECELERATEINTERPOLATOR, ACCELERATEINTERPOLATOR, ANTICIPATEINTERPOLATOR,
+            ANTICIPATEOVERSHOOTINTERPOLATOR, BOUNCEINTERPOLATOR, CYCLEINTERPOLATOR,
+            DECELERATEINTERPOLATOR, LINEARINTERPOLATOR, OVERSHOOTINTERPOLATOR,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface rippleMode {
     }
+
+    public static final int ACCELERATEDECELERATEINTERPOLATOR = 0;
+    public static final int ACCELERATEINTERPOLATOR = 1;
+    public static final int ANTICIPATEINTERPOLATOR = 2;
+    public static final int ANTICIPATEOVERSHOOTINTERPOLATOR = 3;
+    public static final int BOUNCEINTERPOLATOR = 4;
+    public static final int CYCLEINTERPOLATOR = 5;
+    public static final int DECELERATEINTERPOLATOR = 6;
+    public static final int LINEARINTERPOLATOR = 7;
+    public static final int OVERSHOOTINTERPOLATOR = 8;
+    private @rippleMode
+    int rippleMode;
 
     //
     private static final TimeInterpolator[] rippleTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(), new AnticipateInterpolator(),
@@ -446,9 +458,9 @@ public class TRipple extends TView {
 
         rippleDuraction = typedArray.getInt(R.styleable.TRipple_rippleDuraction, 0);
 
-        int rippleTimeInterpolatorIndex = typedArray.getInt(R.styleable.TRipple_rippleTimeInterpolator, -1);
-        if (rippleTimeInterpolatorIndex > -1) {
-            rippleTimeInterpolator = rippleTimeInterpolatorArray[rippleTimeInterpolatorIndex];
+        int rippleModeIndex = typedArray.getInt(R.styleable.TRipple_rippleMode, -1);
+        if (rippleModeIndex > -1) {
+            rippleTimeInterpolator = rippleTimeInterpolatorArray[rippleModeIndex];
         }
         typedArray.recycle();
     }

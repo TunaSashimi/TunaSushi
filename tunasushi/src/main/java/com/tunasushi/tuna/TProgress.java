@@ -13,6 +13,11 @@ import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:56
@@ -24,43 +29,30 @@ public class TProgress extends TView {
     private int progressBoundBackground;
     private Bitmap progressSrcBack, progressSrcFront;
 
-    private ProgressShapeType progressShapeType;
 
-    public enum ProgressShapeType {
-        CUSTOM(0),
-        CIRCLE(1),
-        ;
-        final int nativeInt;
-
-        ProgressShapeType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({CUSTOM, CIRCLE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface progressShapeMode {
     }
 
-    private static final ProgressShapeType[] progressShapeTypeArray = {
-            ProgressShapeType.CUSTOM,
-            ProgressShapeType.CIRCLE,
-    };
+    public static final int CUSTOM = 0;
+    public static final int CIRCLE = 1;
+    private static final int[] progressShapeModeArray = {CUSTOM, CIRCLE,};
+    private @progressShapeMode
+    int progressShapeMode;
 
-    private ProgressPromoteType progressPromoteType;
 
-    public enum ProgressPromoteType {
-        CLOCKWISE(0),
-        UPWARD(1),
-        UPDOWN(2),
-        ;
-        final int nativeInt;
-
-        ProgressPromoteType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({CLOCKWISE, UPWARD, UPDOWN})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface progressEffectMode {
     }
 
-    private static final ProgressPromoteType[] progressPromoteTypeArray = {
-            ProgressPromoteType.CLOCKWISE,
-            ProgressPromoteType.UPWARD,
-            ProgressPromoteType.UPDOWN,
-    };
+    public static final int CLOCKWISE = 0;
+    public static final int UPWARD = 1;
+    public static final int UPDOWN = 2;
+    private static final int[] progressEffectModeArray = {CLOCKWISE, UPWARD, UPDOWN,};
+    private @progressEffectMode
+    int progressEffectMode;
 
     private static final float PROMOTE_CIRCLE_STARTANGLE = -90;
 
@@ -79,21 +71,21 @@ public class TProgress extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TProgress);
 
-        int progressShapeTypeIndex = typedArray.getInt(R.styleable.TProgress_progressShapeType, -1);
-        if (progressShapeTypeIndex >= 0) {
-            progressShapeType = progressShapeTypeArray[progressShapeTypeIndex];
+        int progressShapeModeIndex = typedArray.getInt(R.styleable.TProgress_progressShapeMode, -1);
+        if (progressShapeModeIndex >= 0) {
+            progressShapeMode = progressShapeModeArray[progressShapeModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named progressShapeType");
+            throw new IllegalArgumentException("The content attribute require a property named progressShapeMode");
         }
 
-        int progressPromoteTypeIndex = typedArray.getInt(R.styleable.TProgress_progressPromoteType, -1);
-        if (progressPromoteTypeIndex >= 0) {
-            progressPromoteType = progressPromoteTypeArray[progressPromoteTypeIndex];
+        int progressEffectModeIndex = typedArray.getInt(R.styleable.TProgress_progressEffectMode, -1);
+        if (progressEffectModeIndex >= 0) {
+            progressEffectMode = progressEffectModeArray[progressEffectModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named progressPromoteType");
+            throw new IllegalArgumentException("The content attribute require a property named progressEffectMode");
         }
 
-        if (progressShapeType == ProgressShapeType.CUSTOM) {
+        if (progressShapeMode == CUSTOM) {
 
             int progressSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressSrcBack, -1);
             if (progressSrcBackId != -1) {
@@ -122,7 +114,7 @@ public class TProgress extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        if (progressShapeType == ProgressShapeType.CUSTOM) {
+        if (progressShapeMode == CUSTOM) {
             int progressSrcFrontWidth = progressSrcFront.getWidth();
             int progressSrcFrontHeight = progressSrcFront.getHeight();
             int progressSrcBackWidth = progressSrcBack.getWidth();
@@ -131,7 +123,7 @@ public class TProgress extends TView {
                 throw new IndexOutOfBoundsException("Both the width and height of the attribute progressSrcFront and progressSrcBack needed equal");
             }
 
-            if (progressShapeType == ProgressShapeType.CUSTOM) {
+            if (progressShapeMode == CUSTOM) {
                 scale = width * 1f / progressSrcBackWidth;
             }
             matrix = initMatrix(matrix, scale, scale);
@@ -141,13 +133,13 @@ public class TProgress extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        switch (progressShapeType) {
+        switch (progressShapeMode) {
             case CUSTOM:
 
                 canvas.drawBitmap(progressSrcBack, matrix, null);
                 canvas.save();
 
-                switch (progressPromoteType) {
+                switch (progressEffectMode) {
                     case CLOCKWISE:
                         initPathMoveTo(width >> 1, height >> 1);
                         path.lineTo(width >> 1, 0);
@@ -175,7 +167,7 @@ public class TProgress extends TView {
 
                 canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.STROKE, progressBoundBackground));
 
-                switch (progressPromoteType) {
+                switch (progressEffectMode) {
                     case CLOCKWISE:
                         canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, initPaint(Paint.Style.FILL, progressArcBackground));
                         break;

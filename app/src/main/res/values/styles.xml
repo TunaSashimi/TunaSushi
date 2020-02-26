@@ -49,7 +49,7 @@
         <item name="textColorPress">#ffffff</item>
         <item name="textColorSelect">#ffffff</item>
         <item name="textSize">16dp</item>
-        <item name="selectType">always</item>
+        <item name="selectMode">always</item>
     </style>
 
     <style name="TViewGroupDrackBrownStart" parent="TViewGroupDrackBrown">
@@ -73,7 +73,7 @@
         <item name="textColorPress">#ffffff</item>
         <item name="textColorSelect">#ffffff</item>
         <item name="textSize">16dp</item>
-        <item name="selectType">always</item>
+        <item name="selectMode">always</item>
     </style>
 
     <style name="TViewGroupLightGraySrart" parent="TViewGroupLightGray">
@@ -102,7 +102,7 @@
         <item name="dialogTextSize">17dp</item>
         <item name="dialogTextColor">#333333</item>
         <item name="dialogTextDy">20dp</item>
-        <item name="dialogTextTypeFace">bold</item>
+        <item name="dialogTextMode">bold</item>
 
         <item name="dialogContentSize">14dp</item>
         <item name="dialogContentColor">#62636c</item>

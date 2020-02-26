@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
+import com.tunasushi.tuna.TButton;
 import com.tunasushi.tuna.TDialog;
 import com.tunasushi.tuna.TView;
 
@@ -15,7 +16,7 @@ import com.tunasushi.tuna.TView;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TDialogActivity extends Activity {
+public class TDialogActivity extends Activity implements TView.TouchUpListener {
     private TView tViewConfirm, tViewChoice, tViewSelect;
     private TDialog tDialogChoice, tDialogConfirm, tDialogSelect;
 
@@ -30,74 +31,48 @@ public class TDialogActivity extends Activity {
         tViewChoice = findViewById(R.id.tViewChoice);
         tViewSelect = findViewById(R.id.tViewSelect);
 
-        //
-        tViewConfirm.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tDialogConfirm.setVisibility(View.VISIBLE);
-            }
-        });
-        tViewChoice.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tDialogChoice.setVisibility(View.VISIBLE);
-            }
-        });
-        //
-        tViewSelect.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tDialogSelect.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //
         tDialogConfirm = findViewById(R.id.tDialogConfirm);
         tDialogChoice = findViewById(R.id.tDialogChoice);
         tDialogSelect = findViewById(R.id.tDialogSelect);
 
         //
-        tDialogConfirm.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                int choiceIndex = tDialogConfirm.getDialogChoiceIndex();
-                String valueArray[] = tDialogConfirm.getDialogChoiceTextValueArray();
+        tViewConfirm.setTouchUpListener(this);
+        tViewChoice.setTouchUpListener(this);
+        tViewSelect.setTouchUpListener(this);
+
+        tDialogConfirm.setTouchUpListener(this);
+        tDialogChoice.setTouchUpListener(this);
+        tDialogSelect.setTouchUpListener(this);
+    }
+
+    @Override
+    public void touchUp(TView t) {
+        switch (t.getId()) {
+            case R.id.tViewConfirm:
+                tDialogConfirm.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tViewChoice:
+                tDialogChoice.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tViewSelect:
+                tDialogSelect.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tDialogConfirm:
+            case R.id.tDialogChoice:
+            case R.id.tDialogSelect:
+                TDialog tDialog = (TDialog) t;
+                int choiceIndex = tDialog.getDialogChoiceIndex();
+                String valueArray[] = tDialog.getDialogChoiceTextValueArray();
                 if (-1 == choiceIndex) {
-                    Toast.makeText(TDialogActivity.this, "Nothing Choice", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nothing Choice", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TDialogActivity.this, valueArray[choiceIndex], Toast.LENGTH_SHORT).show();
-                    tDialogConfirm.setVisibility(View.INVISIBLE);
+                    Toast.makeText(this, valueArray[choiceIndex], Toast.LENGTH_SHORT).show();
+                    tDialog.setVisibility(View.INVISIBLE);
                 }
-                tDialogConfirm.setDialogChoiceIndex(-1);
-            }
-        });
-        tDialogChoice.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                int choiceIndex = tDialogChoice.getDialogChoiceIndex();
-                String valueArray[] = tDialogChoice.getDialogChoiceTextValueArray();
-                if (-1 == choiceIndex) {
-                    Toast.makeText(TDialogActivity.this, "Nothing Choice", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(TDialogActivity.this, valueArray[choiceIndex], Toast.LENGTH_SHORT).show();
-                    tDialogChoice.setVisibility(View.INVISIBLE);
-                }
-                tDialogChoice.setDialogChoiceIndex(-1);
-            }
-        });
-        tDialogSelect.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                int choiceIndex = tDialogSelect.getDialogChoiceIndex();
-                String valueArray[] = tDialogSelect.getDialogChoiceTextValueArray();
-                if (-1 == choiceIndex) {
-                    Toast.makeText(TDialogActivity.this, "Nothing Choice", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(TDialogActivity.this, valueArray[choiceIndex], Toast.LENGTH_SHORT).show();
-                    tDialogSelect.setVisibility(View.INVISIBLE);
-                }
-                tDialogSelect.setDialogChoiceIndex(-1);
-            }
-        });
+                tDialog.setDialogChoiceIndex(-1);
+                break;
+            default:
+                break;
+        }
     }
 }

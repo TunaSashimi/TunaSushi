@@ -13,6 +13,11 @@ import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
@@ -62,35 +67,23 @@ public class TDraw extends TView {
     }
 
 
-    private DrawType drawType;
-
-    public enum DrawType {
-        CIRCLE(0),
-        STAR(1),
-        HEART(2),
-        FLOWER(3),
-        PENTAGON(4),
-        SIXTEENEDGE(5),
-        FORTYEDGE(6),
-        SNAIL(7),
-        ;
-        final int nativeInt;
-
-        DrawType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface drawMode {
     }
 
-    private static final DrawType[] drawTypeArray = {
-            DrawType.CIRCLE,
-            DrawType.STAR,
-            DrawType.HEART,
-            DrawType.FLOWER,
-            DrawType.PENTAGON,
-            DrawType.SIXTEENEDGE,
-            DrawType.FORTYEDGE,
-            DrawType.SNAIL,
-    };
+    public static final int NORMAL = 0;
+    public static final int CIRCLE = 1;
+    public static final int STAR = 2;
+    public static final int HEART = 3;
+    public static final int FLOWER = 4;
+    public static final int PENTAGON = 5;
+    public static final int SIXTEENEDGE = 6;
+    public static final int FORTYEDGE = 7;
+    public static final int SNAIL = 8;
+    private static final int[] drawModeArray = {NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,};
+    private @drawMode
+    int drawMode;
 
     private Bitmap drawDstBitmap;
     protected Matrix drawDstMatrix;
@@ -147,9 +140,9 @@ public class TDraw extends TView {
         }
 
         //
-        int drawTypeIndex = typedArray.getInt(R.styleable.TDraw_drawType, -1);
-        if (drawTypeIndex >= 0) {
-            drawType = drawTypeArray[drawTypeIndex];
+        int drawModeIndex = typedArray.getInt(R.styleable.TDraw_drawMode, -1);
+        if (drawModeIndex >= 0) {
+            drawMode = drawModeArray[drawModeIndex];
         }
 
         typedArray.recycle();
@@ -200,11 +193,11 @@ public class TDraw extends TView {
         }
 
         //
-        if (drawType != null) {
+        if (drawMode != NORMAL) {
             int shortSide = width >= height ? height : width;
             initPaintingDstMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-            switch (drawType) {
+            switch (drawMode) {
                 case CIRCLE:
                     drawDstBitmap = getCircleBitmap(shortSide);
                     break;
@@ -235,7 +228,7 @@ public class TDraw extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (drawType == null) {
+        if (drawMode == NORMAL) {
             if (drawSrc != null) {
                 canvas.drawBitmap(drawSrc, matrix, null);
             }
@@ -244,12 +237,11 @@ public class TDraw extends TView {
                 canvas.drawPath(path, paint);
             }
         } else {
-
             //
             if (drawSrc != null) {
                 canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
                 canvas.drawBitmap(drawDstBitmap, drawDstMatrix, paint);
-                paint.setXfermode(TPorterDuffXfermode);
+                paint.setXfermode(porterDuffXferMode);
                 canvas.drawBitmap(drawSrc, matrix, paint);
                 paint.setXfermode(null);
                 canvas.restore();
@@ -258,7 +250,7 @@ public class TDraw extends TView {
             //
             canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
             canvas.drawBitmap(drawDstBitmap, drawDstMatrix, drawPaint);
-            drawPaint.setXfermode(TPorterDuffXfermode);
+            drawPaint.setXfermode(porterDuffXferMode);
             canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
             drawPaint.setXfermode(null);
             canvas.restore();

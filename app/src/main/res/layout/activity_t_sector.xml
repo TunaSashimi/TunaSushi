@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        app:sectorDragRadius="4dp"
         app:sectorArcWidthIn="12dp"
         app:sectorArcWidthOut="2dp"
+        app:sectorDragRadius="4dp"
         app:sectorSpaceWidth="12dp" />
 
     <com.tunasushi.tuna.TView
@@ -25,33 +25,29 @@
         app:textSize="40sp"
         app:textValue="0%" />
 
-    <View
-        android:id="@+id/viewAnchor"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true" />
-
-    <com.tunasushi.tuna.TView
-        android:id="@+id/tViewAdd"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/viewAnchor"
-        app:strokeColorNormal="#3597d0"
-        app:strokeWidthNormal="1dp"
-        app:textColorNormal="#3597d0"
-        app:textSize="16dp"
-        app:textValue="+" />
-
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewSubtract"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/viewAnchor"
+        android:layout_marginBottom="6dp"
+        app:radius="6dp"
         app:strokeColorNormal="#3597d0"
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#3597d0"
         app:textSize="16dp"
         app:textValue="-" />
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewAdd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/tViewSubtract"
+        android:layout_marginBottom="6dp"
+        app:radius="6dp"
+        app:strokeColorNormal="#3597d0"
+        app:strokeWidthNormal="1dp"
+        app:textColorNormal="#3597d0"
+        app:textSize="16dp"
+        app:textValue="+" />
 </RelativeLayout>

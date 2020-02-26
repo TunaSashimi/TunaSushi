@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="material设置启用MaterialDesign效果\nmaterialDuraction设置动画时长\nmaterialTimeInterpolator设置插补器\nmaterialSpread设置中心偏移"
+            android:text="materialTime设置动画时长\nmaterialSpread设置中心偏移"
             android:textColor="#434343" />
 
         <com.tunasushi.tuna.TView
@@ -26,11 +26,11 @@
             android:layout_marginRight="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#bc7955"
-            app:material="spread"
+            app:materialTime="1000"
             app:textColorNormal="#bc7955"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialDuraction=default" />
+            app:textValue="materialTime=1000" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewMaterial02"
@@ -40,12 +40,11 @@
             android:layout_margin="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#bc7955"
-            app:material="spread"
-            app:materialDuraction="2000"
+            app:materialTime="2000"
             app:textColorNormal="#bc7955"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialDuraction=2000" />
+            app:textValue="materialTime=2000" />
 
         <RelativeLayout
             android:id="@+id/relativeMaterial"
@@ -60,24 +59,24 @@
                 style="@style/ViewAnchor" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewGroupMaterial01"
+                android:id="@+id/tViewMaterial03"
                 style="@style/TViewGroupDrackBrownStart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/viewAnchor01"
-                app:material="spread"
+                app:materialTime="1000"
                 app:select="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="5dp"
                 app:textValue="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
-                android:id="@+id/tViewGroupMaterial02"
+                android:id="@+id/tViewMaterial04"
                 style="@style/TViewGroupDrackBrownEnd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/viewAnchor01"
-                app:material="spread"
+                app:materialTime="1000"
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="5dp"
@@ -91,13 +90,12 @@
             android:layout_margin="16dp"
             app:backgroundNormal="#ffffff"
             app:backgroundPress="#000000"
-            app:material="spread"
             app:materialMove="true"
-            app:materialTimeInterpolator="accelerateDecelerateInterpolator"
+            app:materialTime="1000"
             app:textColorNormal="#000000"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialSpread=true" />
+            app:textValue="materialMove=true" />
     </RelativeLayout>
 
 </ScrollView>

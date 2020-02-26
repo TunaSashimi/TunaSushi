@@ -10,6 +10,11 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:58
@@ -26,25 +31,19 @@ public class TScale extends TView {
 
     private boolean scaleCrop;
 
-    private ScaleType scaleType;
 
-    public enum ScaleType {
-        WIDTH_TOP(0),
-        WIDTH_CENTER(1),
-        WIDTH_BOTTOM(2),
-        ;
-        final int nativeInt;
-
-        ScaleType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface scaleMode {
     }
 
-    private static final ScaleType[] scaleTypeArray = {
-            ScaleType.WIDTH_TOP,
-            ScaleType.WIDTH_CENTER,
-            ScaleType.WIDTH_BOTTOM,
+    public static final int WIDTH_TOP = 0;
+    public static final int WIDTH_CENTER = 1;
+    public static final int WIDTH_BOTTOM = 2;
+    private static final int[] scaleModeArray = {WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM,
     };
+    private @scaleMode
+    int scaleMode;
 
     public TScale(Context context) {
         this(context, null);
@@ -67,11 +66,11 @@ public class TScale extends TView {
             srcBitmap = BitmapFactory.decodeResource(getResources(), scaleBitmapId);
         }
 
-        int scaleTypeIndex = typedArray.getInt(R.styleable.TScale_scaleType, -1);
-        if (scaleTypeIndex >= 0) {
-            scaleType = scaleTypeArray[scaleTypeIndex];
+        int scaleModeIndex = typedArray.getInt(R.styleable.TScale_scaleMode, -1);
+        if (scaleModeIndex >= 0) {
+            scaleMode = scaleModeArray[scaleModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named scaleType");
+            throw new IllegalArgumentException("The content attribute require a property named scaleMode");
         }
 
         scaleCrop = typedArray.getBoolean(R.styleable.TScale_scaleCrop, false);
@@ -103,10 +102,10 @@ public class TScale extends TView {
             dy = srcHeightScale - height;
 
             //
-            if (ScaleType.WIDTH_TOP == scaleType) {
-            } else if (ScaleType.WIDTH_CENTER == scaleType) {
+            if (WIDTH_TOP == scaleMode) {
+            } else if (WIDTH_CENTER == scaleMode) {
                 matrix.postTranslate(0, dy * -0.5f);
-            } else if (ScaleType.WIDTH_BOTTOM == scaleType) {
+            } else if (WIDTH_BOTTOM == scaleMode) {
                 matrix.postTranslate(0, -dy);
             }
         }
@@ -122,13 +121,13 @@ public class TScale extends TView {
     }
 
     private void generateCrop() {
-        if (ScaleType.WIDTH_TOP == scaleType) {
+        if (WIDTH_TOP == scaleMode) {
             initRect((int) (srcWidthScale * scaleCropFractionLeft), (int) (srcHeightScale * scaleCropFractionTop),
                     (int) (srcWidthScale * scaleCropFractionRight), (int) (srcHeightScale * scaleCropFractionBottom));
-        } else if (ScaleType.WIDTH_CENTER == scaleType) {
+        } else if (WIDTH_CENTER == scaleMode) {
             initRect((int) (srcWidthScale * scaleCropFractionLeft), (int) (srcHeightScale * scaleCropFractionTop - dy * 0.5f),
                     (int) (srcWidthScale * scaleCropFractionRight), (int) (srcHeightScale * scaleCropFractionBottom - dy * 0.5f));
-        } else if (ScaleType.WIDTH_BOTTOM == scaleType) {
+        } else if (WIDTH_BOTTOM == scaleMode) {
             initRect((int) (srcWidthScale * scaleCropFractionLeft), (int) (srcHeightScale * scaleCropFractionTop - dy),
                     (int) (srcWidthScale * scaleCropFractionRight), (int) (srcHeightScale * scaleCropFractionBottom - dy));
         }

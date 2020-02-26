@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.TypedArray;
@@ -30,24 +29,18 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.CycleInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.OvershootInterpolator;
 
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -378,23 +371,23 @@ public class TView extends View {
 
     // 6
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TView.TextGravity.CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TEXT_GRAVITY_CENTER, 1.0f, null);
     }
 
     // 8
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, 1.0f, null);
     }
 
     // 9
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
                                float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TView.TextGravity.CENTER, textRowSpaceRatio, valueMeasureList);
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, textRowSpaceRatio, valueMeasureList);
     }
 
     // 10
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               TView.TextGravity textGravity, float textRowSpaceRatio, List<Integer> valueMeasureList) {
+                               int textGravityMode, float textRowSpaceRatio, List<Integer> valueMeasureList) {
         if (valueMeasureList == null) {
             valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
         }
@@ -422,17 +415,17 @@ public class TView extends View {
             float measureLength = paint.measureText(drawString);
 
             if (i != valueMeasureListSize - 1) {
-                switch (textGravity) {
-                    case CENTER:
+                switch (textGravityMode) {
+                    case TEXT_GRAVITY_CENTER:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
                         break;
-                    case LEFT:
+                    case TEXT_GRAVITY_LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         break;
-                    case CENTER_LEFT:
+                    case TEXT_GRAVITY_CENTER_LEFT:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
                         break;
-                    case LEFT_CENTER:
+                    case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         break;
                     default:
@@ -440,17 +433,17 @@ public class TView extends View {
                 }
             } else {
                 float availableWidth = width - paddingLeft - paddingRight;
-                switch (textGravity) {
-                    case CENTER:
+                switch (textGravityMode) {
+                    case TEXT_GRAVITY_CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
                         return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case LEFT:
+                    case TEXT_GRAVITY_LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case CENTER_LEFT:
+                    case TEXT_GRAVITY_CENTER_LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case LEFT_CENTER:
+                    case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
                         return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
                     default:
@@ -759,27 +752,25 @@ public class TView extends View {
     }
 
     //
-    // default none
-    private SelectType selectType;
 
-    public enum SelectType {
-        REVERSE(0), ALWAYS(1),
-        ;
-        final int nativeInt;
-
-        SelectType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({REVERSE, ALWAYS})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface selectMode {
     }
 
-    private static final SelectType[] selectTypeArray = {SelectType.REVERSE, SelectType.ALWAYS,};
+    public static final int REVERSE = 0;
+    public static final int ALWAYS = 1;
+    private static final int[] selectModeArray = {REVERSE, ALWAYS,};
+    // default REVERSE
+    private int selectMode;
 
-    public SelectType getSelectType() {
-        return selectType;
+
+    public int getSelectType() {
+        return selectMode;
     }
 
-    public void setSelectType(SelectType selectType) {
-        this.selectType = selectType;
+    public void setSelectType(int selectMode) {
+        this.selectMode = selectMode;
     }
 
     // rotate default 0
@@ -1955,14 +1946,14 @@ public class TView extends View {
     public static final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
 
     //
-    private int srcAnchorGravity;
+    private int srcAnchorGravityMode;
 
     public int getDownloadMarkGravity() {
-        return srcAnchorGravity;
+        return srcAnchorGravityMode;
     }
 
-    public void setSrcAnchorGravity(int srcAnchorGravity) {
-        this.srcAnchorGravity = srcAnchorGravity;
+    public void setSrcAnchorGravity(int srcAnchorGravityMode) {
+        this.srcAnchorGravityMode = srcAnchorGravityMode;
     }
 
     // anchor Normal,Press,Select use one Matrix
@@ -2718,58 +2709,48 @@ public class TView extends View {
         this.textRowSpaceRatio = textRowSpaceRatio;
     }
 
+
+    @IntDef({TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface textGravityMode {
+    }
+
+    public static final int TEXT_GRAVITY_CENTER = 0;
+    public static final int TEXT_GRAVITY_LEFT = 1;
+    public static final int TEXT_GRAVITY_CENTER_LEFT = 2;
+    public static final int TEXT_GRAVITY_LEFT_CENTER = 3;
+    private static final int[] textGravityModeArray = {TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,};
+    private @textGravityMode
+    int textGravityMode;
+
+    public int getTextGravity() {
+        return textGravityMode;
+    }
+
+    public void setTextGravity(int textGravityMode) {
+        this.textGravityMode = textGravityMode;
+    }
+
     //
-    private TextGravity textGravity;
-
-    public enum TextGravity {
-        CENTER(0), LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
-        final int nativeInt;
-
-        TextGravity(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final TextGravity[] textGravityArray = {TextGravity.CENTER, TextGravity.LEFT, TextGravity.CENTER_LEFT, TextGravity.LEFT_CENTER,};
-
-    public TextGravity getTextGravity() {
-        return textGravity;
-    }
-
-    public void setTextGravity(TextGravity textGravity) {
-        this.textGravity = textGravity;
-    }
-
-    //
-    private Typeface textTypeFace;
-
-    public enum TextTypeFace {
-        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
-        final int nativeInt;
-
-        TextTypeFace(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final int[] textTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+    private Typeface textTypeFaceMode;
+    private static final int[] textTypeFaceModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
     public Typeface getTextTypeFace() {
-        return textTypeFace;
+        return textTypeFaceMode;
     }
 
-    public void setTextTypeFace(Typeface textTypeFace) {
-        this.textTypeFace = textTypeFace;
+    public void setTextTypeFace(Typeface textTypeFaceMode) {
+        this.textTypeFaceMode = textTypeFaceMode;
     }
 
-    private String textTypeFaceFromAsset;
+    private String textTypeFaceAsset;
 
     public String getTextTypeFaceFromAsset() {
-        return textTypeFaceFromAsset;
+        return textTypeFaceAsset;
     }
 
-    public void setTextTypeFaceFromAsset(String textTypeFaceFromAsset) {
-        this.textTypeFaceFromAsset = textTypeFaceFromAsset;
+    public void setTextTypeFaceFromAsset(String textTypeFaceAsset) {
+        this.textTypeFaceAsset = textTypeFaceAsset;
     }
 
     // attention that textDx is the width of the base , textDy is the
@@ -3131,48 +3112,33 @@ public class TView extends View {
         this.contentRowSpaceRatio = contentRowSpaceRatio;
     }
 
-    //
-    private ContentGravity contentGravity;
 
-    public enum ContentGravity {
-        CENTER(0), LEFT(1), CENTER_LEFT(2), LEFT_CENTER(3);
-        final int nativeInt;
+//
 
-        ContentGravity(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface contentGravityMode {
     }
 
-    private static final ContentGravity[] contentGravityArray = {ContentGravity.CENTER, ContentGravity.LEFT, ContentGravity.CENTER_LEFT, ContentGravity.LEFT_CENTER,};
+    public static final int CONTENT_GRAVITY_CENTER = 0;
+    public static final int CONTENT_GRAVITY_LEFT = 1;
+    public static final int CONTENT_GRAVITY_CENTER_LEFT = 2;
+    public static final int CONTENT_GRAVITY_LEFT_CENTER = 3;
+    private static final int[] contentGravityModeArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
+    private @contentGravityMode
+    int contentGravityMode;
 
-    public ContentGravity getContentGravity() {
-        return contentGravity;
-    }
-
-    public void setContentGravity(ContentGravity contentGravity) {
-        this.contentGravity = contentGravity;
-    }
 
     //
-    private Typeface contentTypeFace;
-
-    public enum ContentTypeFace {
-        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
-        final int nativeInt;
-
-        ContentTypeFace(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final int[] contentTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
+    private Typeface contentTypeFaceMode;
+    private static final int[] contentTypeFaceModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
 
     public Typeface getContentTypeFace() {
-        return contentTypeFace;
+        return contentTypeFaceMode;
     }
 
-    public void Typeface(Typeface contentTypeFace) {
-        this.contentTypeFace = contentTypeFace;
+    public void Typeface(Typeface contentTypeFaceMode) {
+        this.contentTypeFaceMode = contentTypeFaceMode;
     }
 
     private String contentTypeFaceAssets;
@@ -3722,51 +3688,9 @@ public class TView extends View {
         }
     }
 
-    // attention TPorterDuffXfermode default 0 instead of -1!
-    protected PorterDuffXfermode TPorterDuffXfermode;
-
-    public enum TPorterDuffXfermode {
-        SRC_IN(0), SRC_OUT(1),
-        ;
-        final int nativeInt;
-
-        TPorterDuffXfermode(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    protected final Mode[] porterDuffXfermodeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
-
-    public PorterDuffXfermode getTPorterDuffXfermode() {
-        return TPorterDuffXfermode;
-    }
-
-    public void setTPorterDuffXfermode(PorterDuffXfermode tPorterDuffXfermode) {
-        this.TPorterDuffXfermode = tPorterDuffXfermode;
-    }
-
-    //
-    private Material material;
-
-    public enum Material {
-        SPREAD(0), TRANS(1),
-        ;
-        final int nativeInt;
-
-        Material(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final Material[] materialArray = {Material.SPREAD, Material.TRANS,};
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
+    // attention porterDuffXferMode default 0 instead of -1!
+    protected PorterDuffXfermode porterDuffXferMode;
+    protected final Mode[] porterDuffXferModeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
 
     //
     private boolean materialMove;
@@ -3813,14 +3737,14 @@ public class TView extends View {
     }
 
     //
-    private int materialDuraction = 500;
+    private int materialTime;
 
     public int getMaterialDuraction() {
-        return materialDuraction;
+        return materialTime;
     }
 
-    public void setMaterialDuraction(int materialDuraction) {
-        this.materialDuraction = materialDuraction;
+    public void setMaterialDuraction(int materialTime) {
+        this.materialTime = materialTime;
     }
 
     //
@@ -3833,41 +3757,6 @@ public class TView extends View {
     public void setMaterialPlay(boolean materialPlay) {
         this.materialPlay = materialPlay;
     }
-
-    //
-    private TimeInterpolator materialTimeInterpolator;
-
-    public TimeInterpolator getMaterialTimeInterpolator() {
-        return materialTimeInterpolator;
-    }
-
-    public void setMaterialTimeInterpolator(TimeInterpolator materialTimeInterpolator) {
-        this.materialTimeInterpolator = materialTimeInterpolator;
-    }
-
-    //
-    public enum materialTimeInterpolator {
-        ACCELERATEDECELERATEINTERPOLATOR(0),
-        ACCELERATEINTERPOLATOR(1),
-        ANTICIPATEINTERPOLATOR(2),
-        ANTICIPATEOVERSHOOTINTERPOLATOR(3),
-        BOUNCEINTERPOLATOR(4),
-        CYCLEINTERPOLATOR(5),
-        DECELERATEINTERPOLATOR(6),
-        LINEARINTERPOLATOR(7),
-        OVERSHOOTINTERPOLATOR(8),
-        ;
-        final int nativeInt;
-
-        materialTimeInterpolator(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    //
-    private static final TimeInterpolator[] materialTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(),
-            new AnticipateInterpolator(), new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(),
-            new LinearInterpolator(), new OvershootInterpolator(),};
 
     //
     private AnimatorSet materialAnimatorSet;
@@ -3965,18 +3854,16 @@ public class TView extends View {
         press = typedArray.getBoolean(R.styleable.TView_press, false);
         select = typedArray.getBoolean(R.styleable.TView_select, false);
 
-        // selectType default reverse
-        int selectTypeIndex = typedArray.getInt(R.styleable.TView_selectType, 0);
-        selectType = selectTypeArray[selectTypeIndex];
+        // selectMode default reverse
+        int selectModeIndex = typedArray.getInt(R.styleable.TView_selectMode, 0);
+        selectMode = selectModeArray[selectModeIndex];
 
         animationable = typedArray.getBoolean(R.styleable.TView_animationable, false);
         rotate = typedArray.getInt(R.styleable.TView_rotate, 0);
 
-        // porterDuffXfermodeArrayIndex default PorterDuff.Mode.SRC_IN
-        int porterDuffXfermodeArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
-
-        //
-        TPorterDuffXfermode = new PorterDuffXfermode(porterDuffXfermodeArray[porterDuffXfermodeArrayIndex]);
+        // porterDuffXferModeArrayIndex default PorterDuff.Mode.SRC_IN
+        int porterDuffXferModeArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXferMode, 0);
+        porterDuffXferMode = new PorterDuffXfermode(porterDuffXferModeArray[porterDuffXferModeArrayIndex]);
 
         //
         radius = typedArray.getDimension(R.styleable.TView_radius, 0);
@@ -4012,16 +3899,16 @@ public class TView extends View {
                 backgroundGradientEndNormal = typedArray.getColor(R.styleable.TView_backgroundGradientEndNormal, backgroundNormal);
             }
 
-            backgroundAnglePress = typedArray.getInt(R.styleable.TView_backgroundAnglePress, Integer.MAX_VALUE);
+            backgroundAnglePress = typedArray.getInt(R.styleable.TView_backgroundAnglePress, backgroundAngleNormal);
             if (backgroundAnglePress != Integer.MAX_VALUE) {
-                backgroundGradientStartPress = typedArray.getColor(R.styleable.TView_backgroundGradientStartPress, backgroundPress);
-                backgroundGradientEndPress = typedArray.getColor(R.styleable.TView_backgroundGradientEndPress, backgroundPress);
+                backgroundGradientStartPress = typedArray.getColor(R.styleable.TView_backgroundGradientStartPress, backgroundGradientStartNormal);
+                backgroundGradientEndPress = typedArray.getColor(R.styleable.TView_backgroundGradientEndPress, backgroundGradientEndNormal);
             }
 
-            backgroundAngleSelect = typedArray.getInt(R.styleable.TView_backgroundAngleSelect, Integer.MAX_VALUE);
+            backgroundAngleSelect = typedArray.getInt(R.styleable.TView_backgroundAngleSelect, backgroundAngleNormal);
             if (backgroundAngleSelect != Integer.MAX_VALUE) {
-                backgroundGradientStartSelect = typedArray.getColor(R.styleable.TView_backgroundGradientStartSelect, backgroundSelect);
-                backgroundGradientEndSelect = typedArray.getColor(R.styleable.TView_backgroundGradientEndSelect, backgroundSelect);
+                backgroundGradientStartSelect = typedArray.getColor(R.styleable.TView_backgroundGradientStartSelect, backgroundGradientStartNormal);
+                backgroundGradientEndSelect = typedArray.getColor(R.styleable.TView_backgroundGradientEndSelect, backgroundGradientEndNormal);
             }
 
             //Note background Normal ShadowRadius and srcNormal ShadowRadius are two values!
@@ -4089,7 +3976,7 @@ public class TView extends View {
             }
 
             //
-            srcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
+            srcAnchorGravityMode = typedArray.getInt(R.styleable.TView_srcAnchorGravityMode, 0);
 
             //
             int srcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_srcAnchorNormal, -1);
@@ -4202,20 +4089,20 @@ public class TView extends View {
             textRowSpaceRatio = typedArray.getFraction(R.styleable.TView_textRowSpaceRatio, 1, 1, 1);
 
             //
-            int textGravityIndex = typedArray.getInt(R.styleable.TView_textGravity, 0);
-            if (textGravityIndex >= 0) {
-                textGravity = textGravityArray[textGravityIndex];
+            int textGravityModeIndex = typedArray.getInt(R.styleable.TView_textGravityMode, 0);
+            if (textGravityModeIndex >= 0) {
+                textGravityMode = textGravityModeArray[textGravityModeIndex];
             }
 
-            // If textTypeFaceFromAsset is set then textTypeFace will be replaced!
-            textTypeFaceFromAsset = typedArray.getString(R.styleable.TView_textTypeFaceFromAsset);
-            if (textTypeFaceFromAsset != null) {
-                textTypeFace = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceFromAsset);
+            // If textTypeFaceAsset is set then textTypeFaceMode will be replaced!
+            textTypeFaceAsset = typedArray.getString(R.styleable.TView_textTypeFaceAsset);
+            if (textTypeFaceAsset != null) {
+                textTypeFaceMode = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceAsset);
             } else {
                 //
-                int textTypeFaceIndex = typedArray.getInt(R.styleable.TView_textTypeFace, 0);
-                if (textTypeFaceIndex >= 0) {
-                    textTypeFace = Typeface.create(Typeface.DEFAULT, textTypeFaceArray[textTypeFaceIndex]);
+                int textTypeFaceModeIndex = typedArray.getInt(R.styleable.TView_textTypeFaceMode, 0);
+                if (textTypeFaceModeIndex >= 0) {
+                    textTypeFaceMode = Typeface.create(Typeface.DEFAULT, textTypeFaceModeArray[textTypeFaceModeIndex]);
                 }
             }
 
@@ -4245,20 +4132,19 @@ public class TView extends View {
             contentRowSpaceRatio = typedArray.getFraction(R.styleable.TView_contentRowSpaceRatio, 1, 1, 1);
 
             //
-            int contentGravityIndex = typedArray.getInt(R.styleable.TView_contentGravity, 0);
-            if (contentGravityIndex >= 0) {
-                contentGravity = contentGravityArray[contentGravityIndex];
+            int contentGravityModeIndex = typedArray.getInt(R.styleable.TView_contentGravityMode, 0);
+            if (contentGravityModeIndex >= 0) {
+                contentGravityMode = contentGravityModeArray[contentGravityModeIndex];
             }
 
-
-            // If contentTypeFaceAssets is set then contentTypeFace will be replaced!
+            // If contentTypeFaceAssets is set then contentTypeFaceMode will be replaced!
             contentTypeFaceAssets = typedArray.getString(R.styleable.TView_contentTypeFaceAssets);
             if (contentTypeFaceAssets != null) {
-                contentTypeFace = Typeface.createFromAsset(getContext().getAssets(), contentTypeFaceAssets);
+                contentTypeFaceMode = Typeface.createFromAsset(getContext().getAssets(), contentTypeFaceAssets);
             } else {
-                int contentTypeFaceIndex = typedArray.getInt(R.styleable.TView_contentTypeFace, 0);
-                if (contentTypeFaceIndex >= 0) {
-                    contentTypeFace = Typeface.create(Typeface.DEFAULT, contentTypeFaceArray[contentTypeFaceIndex]);
+                int contentTypeFaceModeIndex = typedArray.getInt(R.styleable.TView_contentTypeFaceMode, 0);
+                if (contentTypeFaceModeIndex >= 0) {
+                    contentTypeFaceMode = Typeface.create(Typeface.DEFAULT, contentTypeFaceModeArray[contentTypeFaceModeIndex]);
                 }
             }
 
@@ -4281,11 +4167,9 @@ public class TView extends View {
             textMarkFractionDx = typedArray.getFraction(R.styleable.TView_textMarkFractionDx, 1, 1, 0);
             textMarkFractionDy = typedArray.getFraction(R.styleable.TView_textMarkFractionDy, 1, 1, 0);
 
-            // materialIndex default -1
-            int materialIndex = typedArray.getInt(R.styleable.TView_material, -1);
-            if (materialIndex > -1) {
-                material = materialArray[materialIndex];
-            }
+            //
+            materialTime = typedArray.getInt(R.styleable.TView_materialTime, 0);
+            materialMove = typedArray.getBoolean(R.styleable.TView_materialMove, false);
 
             //
             final String handlerNameTouchUp = typedArray.getString(R.styleable.TView_touchUp);
@@ -4320,7 +4204,7 @@ public class TView extends View {
                 touchDownEventY = event.getY();
                 //
                 press = true;
-                if (selectType == SelectType.ALWAYS) {
+                if (selectMode == ALWAYS) {
                     select = false;
                 }
                 if (!textMarkTouchable) {
@@ -4336,56 +4220,46 @@ public class TView extends View {
                     associateListener.associate(this);
                 }
                 //
-                if (material != null) {
-                    switch (material) {
-                        case SPREAD:
-                            float startRadius, endRadius;
-                            if (width >= height) {
-                                startRadius = touchDownEventY >= height - touchDownEventY ? touchDownEventY : height - touchDownEventY;
-                                endRadius = width << 1;
-                            } else {
-                                startRadius = touchDownEventX >= width - touchDownEventX ? touchDownEventX : width - touchDownEventX;
-                                endRadius = height << 1;
-                            }
-                            materialAnimatorSet = new AnimatorSet();
-                            if (materialMove) {
-                                materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius),
-                                        ObjectAnimator.ofFloat(this, materialPaintXProperty, touchDownEventX, width >> 1),
-                                        ObjectAnimator.ofFloat(this, materialPaintYProperty, touchDownEventY, height >> 1));
-                            } else {
-                                materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius));
-                            }
-                            materialAnimatorSet.setDuration(materialDuraction);
-                            if (materialTimeInterpolator != null) {
-                                materialAnimatorSet.setInterpolator(materialTimeInterpolator);
-                            }
-                            materialAnimatorSet.addListener(new AnimatorListener() {
-                                @Override
-                                public void onAnimationStart(Animator animation) {
-                                    materialPlay = true;
-                                }
+                if (materialTime != 0) {
 
-                                @Override
-                                public void onAnimationRepeat(Animator animation) {
-                                }
-
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                    materialPlay = false;
-                                }
-
-                                @Override
-                                public void onAnimationCancel(Animator animation) {
-                                    materialPlay = false;
-                                }
-                            });
-                            materialAnimatorSet.start();
-                            break;
-                        case TRANS:
-                            break;
-                        default:
-                            break;
+                    float startRadius, endRadius;
+                    if (width >= height) {
+                        startRadius = touchDownEventY >= height - touchDownEventY ? touchDownEventY : height - touchDownEventY;
+                        endRadius = width << 1;
+                    } else {
+                        startRadius = touchDownEventX >= width - touchDownEventX ? touchDownEventX : width - touchDownEventX;
+                        endRadius = height << 1;
                     }
+                    materialAnimatorSet = new AnimatorSet();
+                    if (materialMove) {
+                        materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius),
+                                ObjectAnimator.ofFloat(this, materialPaintXProperty, touchDownEventX, width >> 1),
+                                ObjectAnimator.ofFloat(this, materialPaintYProperty, touchDownEventY, height >> 1));
+                    } else {
+                        materialAnimatorSet.playTogether(ObjectAnimator.ofFloat(this, materialRadiusProperty, startRadius, endRadius));
+                    }
+                    materialAnimatorSet.setDuration(materialTime);
+                    materialAnimatorSet.addListener(new AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            materialPlay = true;
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            materialPlay = false;
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            materialPlay = false;
+                        }
+                    });
+                    materialAnimatorSet.start();
                 }
                 //
                 if (adjust) {
@@ -4431,7 +4305,7 @@ public class TView extends View {
                 touchCancel = false;
                 //
                 press = false;
-                if (selectType == SelectType.ALWAYS) {
+                if (selectMode == ALWAYS) {
                     select = true;
                 } else {
                     select = !select;
@@ -4459,7 +4333,7 @@ public class TView extends View {
                 touchCancel = true;
                 //
                 press = false;
-                if (selectType == SelectType.ALWAYS) {
+                if (selectMode == ALWAYS) {
                     select = true;
                 } else {
                     select = !select;
@@ -4769,7 +4643,7 @@ public class TView extends View {
 
         // draw bitmap
         if (needSaveLayer) {
-            paint.setXfermode(TPorterDuffXfermode);
+            paint.setXfermode(porterDuffXferMode);
 
             // If they are offset backgroundShadow, mobile, is to draw on the background shadow,
             // without moving the bigger picture and the need to set the width and height
@@ -4796,11 +4670,11 @@ public class TView extends View {
 
         // draw anchor
         if (select && srcAnchorSelect != null) {
-            drawAnchor(canvas, paint, srcAnchorSelect, matrixSelect, width, height, srcAnchorGravity, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
+            drawAnchor(canvas, paint, srcAnchorSelect, matrixSelect, width, height, srcAnchorGravityMode, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
         } else if (press && srcAnchorPress != null) {
-            drawAnchor(canvas, paint, srcAnchorPress, matrixPress, width, height, srcAnchorGravity, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
+            drawAnchor(canvas, paint, srcAnchorPress, matrixPress, width, height, srcAnchorGravityMode, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
         } else if (srcAnchorNormal != null) {
-            drawAnchor(canvas, paint, srcAnchorNormal, matrixNormal, width, height, srcAnchorGravity, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
+            drawAnchor(canvas, paint, srcAnchorNormal, matrixNormal, width, height, srcAnchorGravityMode, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
         }
 
         // draw text
@@ -4815,8 +4689,8 @@ public class TView extends View {
                     textPaddingRight + srcRightWidth,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal, textSize,
-                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textTypeFace, Paint.Align.CENTER),
-                    textGravity,
+                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textTypeFaceMode, Paint.Align.CENTER),
+                    textGravityMode,
                     textRowSpaceRatio,
                     textValueMeasureList);
 
@@ -4827,8 +4701,8 @@ public class TView extends View {
 
         // draw content
         if (contentValue != null) {
-            //Conversion of style into textGravity to use drawText method!
-            TextGravity textGravityFromContent = textGravityArray[contentGravity.nativeInt];
+            //Conversion of style into textGravityMode to use drawText method!
+            int textGravityModeFromContent = contentGravityModeArray[contentGravityMode];
 
             float f[] = drawText(
                     canvas,
@@ -4840,8 +4714,8 @@ public class TView extends View {
                     contentPaddingRight + srcRightWidth,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? contentColorPress : select ? contentColorSelect : press ? contentColorPress : contentColorNormal, contentSize,
-                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentTypeFace, Paint.Align.CENTER),
-                    textGravityFromContent,
+                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentTypeFaceMode, Paint.Align.CENTER),
+                    textGravityModeFromContent,
                     contentRowSpaceRatio,
                     contentValueMeasureList);
 

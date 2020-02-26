@@ -17,7 +17,7 @@ import java.util.Arrays;
  * @Description
  */
 public class TMaterialActivity extends Activity {
-    private TView tViewMaterialRadio01, tViewMaterialRadio02;
+    private TView tViewMaterial03, tViewMaterial04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +26,9 @@ public class TMaterialActivity extends Activity {
         setContentView(R.layout.activity_t_materlai);
 
         //
-        tViewMaterialRadio01 = findViewById(R.id.tViewGroupMaterial01);
-        tViewMaterialRadio02 = findViewById(R.id.tViewGroupMaterial02);
+        tViewMaterial03 = findViewById(R.id.tViewMaterial03);
+        tViewMaterial04 = findViewById(R.id.tViewMaterial04);
 
-        TGroup.link(Arrays.asList(tViewMaterialRadio01, tViewMaterialRadio02));
+        TGroup.link(Arrays.asList(tViewMaterial03, tViewMaterial04));
     }
 }

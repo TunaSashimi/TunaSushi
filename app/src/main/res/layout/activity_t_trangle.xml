@@ -13,9 +13,9 @@
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#d9c700"
+        app:trangleMode="top"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="top" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:id="@+id/tTrangleRight"
@@ -26,9 +26,9 @@
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#d9c700"
+        app:trangleMode="right"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="right" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:id="@+id/tTrangleBottom"
@@ -40,9 +40,9 @@
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#bc7955"
         app:trangleBackgroundSelect="#592d2d"
+        app:trangleMode="bottom"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="bottom" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:layout_width="60dp"
@@ -54,12 +54,12 @@
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#bc7955"
         app:trangleBackgroundSelect="#592d2d"
+        app:trangleMode="left"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="left" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tViewBox"
+        android:id="@+id/tView02"
         android:layout_width="90dp"
         android:layout_height="65dp"
         android:layout_below="@id/tTrangleTop"
@@ -75,42 +75,42 @@
         android:id="@+id/tTrangleBox"
         android:layout_width="22dp"
         android:layout_height="16dp"
-        android:layout_below="@id/tViewBox"
+        android:layout_below="@id/tView02"
         android:layout_marginLeft="34dp"
         android:layout_marginTop="-4.5dp"
         app:trangleBackgroundNormal="#fae500"
         app:trangleHideEdge="true"
+        app:trangleMode="bottom"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="bottom" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:id="@+id/tTrangleTopHide"
         android:layout_width="22dp"
         android:layout_height="16dp"
-        android:layout_alignTop="@id/tViewBox"
+        android:layout_alignTop="@id/tView02"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/tViewBox"
+        android:layout_toRightOf="@id/tView02"
         app:trangleBackgroundNormal="#ffffff"
         app:trangleHideEdge="true"
+        app:trangleMode="top"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="top" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:id="@+id/tTrangleBottomHide"
         android:layout_width="22dp"
         android:layout_height="16dp"
-        android:layout_alignBottom="@id/tViewBox"
+        android:layout_alignBottom="@id/tView02"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/tViewBox"
+        android:layout_toRightOf="@id/tView02"
         app:trangleBackgroundNormal="#ffffff"
         app:trangleHideEdge="true"
+        app:trangleMode="bottom"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="bottom" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:layout_width="22dp"
@@ -120,9 +120,9 @@
         android:layout_toRightOf="@id/tTrangleTopHide"
         app:trangleBackgroundNormal="#ffffff"
         app:trangleHideEdge="true"
+        app:trangleMode="left"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="left" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TTrangle
         android:layout_width="22dp"
@@ -132,12 +132,12 @@
         android:layout_toRightOf="@id/tTrangleBottomHide"
         app:trangleBackgroundNormal="#ffffff"
         app:trangleHideEdge="true"
+        app:trangleMode="right"
         app:trangleStrokeColor="#592d2e"
-        app:trangleStrokeWidth="2dp"
-        app:trangleTowardType="right" />
+        app:trangleStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TView
-        android:id="@+id/tView"
+        android:id="@+id/tView01"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/tTrangleBox"

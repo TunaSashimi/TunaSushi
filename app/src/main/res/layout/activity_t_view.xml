@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundNormal设置常规背景\ntextTypeFace设置字体\ntextTypeFaceFromAsset设置自定义字体\nrotate设置旋转角度" />
+            android:text="backgroundNormal设置常规背景\ntextTypeFaceMode设置字体\ntextTypeFaceAsset设置自定义字体\nrotate设置旋转角度" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect01"
@@ -40,7 +40,7 @@
             app:rotate="15"
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
-            app:textTypeFace="bold_italic"
+            app:textTypeFaceMode="bold_italic"
             app:textValue="#444444" />
 
         <com.tunasushi.tuna.TView
@@ -52,11 +52,12 @@
             app:backgroundNormal="#666666"
             app:rotate="30"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceFromAsset="fonts/computer.ttf"
+            app:textTypeFaceAsset="fonts/computer.ttf"
             app:textValue="#666666"
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
+            android:id="@+id/tViewRect04"
             style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect03"
             android:layout_toRightOf="@id/tViewRect03"
@@ -65,7 +66,7 @@
             app:onClick="onClick"
             app:rotate="15"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceFromAsset="fonts/digital-7.ttf"
+            app:textTypeFaceAsset="fonts/digital-7.ttf"
             app:textValue="#cccccc" />
 
         <TextView
@@ -75,7 +76,7 @@
             android:layout_below="@id/tViewRect01"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔bottom|right)" />
+            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravityMode设置锚图片停靠(多属性用|分隔bottom|right)" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSelect01"
@@ -87,7 +88,7 @@
             app:backgroundPress="#cccccc"
             app:backgroundSelect="#000000"
             app:radius="5dp"
-            app:selectType="reverse"
+            app:selectMode="reverse"
             app:srcAnchorDxNormal="5dp"
             app:srcAnchorDyNormal="5dp"
             app:srcAnchorHeightNormal="7dp"
@@ -98,7 +99,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectType=reverse" />
+            app:textValue="selectMode=reverse" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="170dp"
@@ -110,8 +111,8 @@
             app:backgroundPress="#cccccc"
             app:backgroundSelect="#000000"
             app:radius="5dp"
-            app:selectType="always"
-            app:srcAnchorGravity="bottom|right"
+            app:selectMode="always"
+            app:srcAnchorGravityMode="bottom|right"
             app:srcAnchorHeightNormal="7dp"
             app:srcAnchorNormal="@drawable/bitmap_tview_anchor_normal"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select"
@@ -120,7 +121,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectType=always" />
+            app:textValue="selectMode=always" />
 
         <TextView
             android:id="@+id/textPrompt03"
@@ -194,7 +195,7 @@
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffff00"
-            app:textGravity="center_left"
+            app:textGravityMode="center_left"
             app:textMark="true"
             app:textMarkColor="#ff0000"
             app:textMarkRadius="10dp"
@@ -229,7 +230,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#592d2d"
             app:textColorPress="#592d2d"
-            app:textGravity="left_center"
+            app:textGravityMode="left_center"
             app:textPaddingLeft="4dp"
             app:textPaddingRight="4dp"
             app:textSize="14dp"
@@ -252,7 +253,7 @@
             app:textPaddingLeft="8dp"
             app:textPaddingRight="8dp"
             app:textSize="14dp"
-            app:textTypeFaceFromAsset="fonts/simsun.ttf"
+            app:textTypeFaceAsset="fonts/simsun.ttf"
             app:textValue="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
 
         <TextView
@@ -265,7 +266,7 @@
             android:text="backgroundGradientDirection设置渐变方向\nbackgroundGradientStart设置渐变开始\nbackgroundGradientEnd设置渐变结束" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tView01"
+            android:id="@+id/tViewGradient01"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/textPrompt05"
@@ -283,15 +284,15 @@
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
-            app:textGravity="left"
+            app:textGravityMode="left"
             app:textSize="14dp"
             app:textValue="backgroundNormalGradientDirection设置top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#592d2d" />
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tView02"
+            android:id="@+id/tViewGradient02"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_below="@id/tView01"
+            android:layout_below="@id/tViewGradient01"
             android:layout_margin="16dp"
             app:backgroundAngleNormal="315"
             app:backgroundAnglePress="270"
@@ -303,7 +304,7 @@
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
-            app:textGravity="left"
+            app:textGravityMode="left"
             app:textSize="14dp"
             app:textValue="backgroundNormalGradientDirection设置left_top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#ffca00" />
 
@@ -311,7 +312,7 @@
             android:id="@+id/textPrompt06"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tView02"
+            android:layout_below="@id/tViewGradient02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
@@ -379,8 +380,8 @@
             app:srcNormal="@drawable/bitmap_tview_srcnormal01"
             app:srcPress="@drawable/bitmap_tview_srcnormal02"
             app:textColorNormal="#ffffff"
-            app:textGravity="center"
-            app:textValue="mark=true&amp;textGravity=center" />
+            app:textGravityMode="center"
+            app:textValue="mark=true&amp;textGravityMode=center" />
 
         <com.tunasushi.tuna.TView
             style="@style/TViewTextMarkRedHorizontal"
@@ -393,9 +394,9 @@
             app:srcNormal="@drawable/bitmap_tview_srcnormal01"
             app:srcPress="@drawable/bitmap_tview_srcnormal02"
             app:textColorNormal="#ffffff"
-            app:textGravity="left"
+            app:textGravityMode="left"
             app:textRowSpaceRatio="200%"
-            app:textValue="mark=true&amp;textGravity=left" />
+            app:textValue="mark=true&amp;textGravityMode=left" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView05"
@@ -424,7 +425,7 @@
             android:layout_height="100dp"
             android:layout_alignTop="@id/tView06"
             android:layout_toRightOf="@id/tView06"
-            app:porterDuffXfermode="src_out"
+            app:porterDuffXferMode="src_out"
             app:radius="24dp"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
@@ -481,7 +482,7 @@
             app:backgroundNormal="#e1e1e1"
             app:contentColorNormal="#999999"
             app:contentDy="-28dp"
-            app:contentGravity="left"
+            app:contentGravityMode="left"
             app:contentPaddingLeft="8dp"
             app:contentSize="14dp"
             app:contentValue="1."
@@ -489,7 +490,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#999999"
             app:textDy="6dp"
-            app:textGravity="left"
+            app:textGravityMode="left"
             app:textMark="true"
             app:textMarkColor="#ff0000"
             app:textMarkRadius="10dp"

@@ -33,25 +33,15 @@ public class TDialog extends TView {
     private float dialogTextDy;
 
     //
-    private Typeface dialogTextTypeFace;
-
-    public enum DialogTextTypeFace {
-        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
-        final int nativeInt;
-
-        DialogTextTypeFace(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final int[] dialogTextTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+    private Typeface dialogTextMode;
+    private static final int[] dialogTextModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
     public Typeface getDialogTextTypeFace() {
-        return dialogTextTypeFace;
+        return dialogTextMode;
     }
 
-    public void setDialogTextTypeFace(Typeface dialogTextTypeFace) {
-        this.dialogTextTypeFace = dialogTextTypeFace;
+    public void setDialogTextTypeFace(Typeface dialogTextMode) {
+        this.dialogTextMode = dialogTextMode;
     }
 
     //
@@ -61,25 +51,15 @@ public class TDialog extends TView {
     private float dialogContentDy;
 
     //
-    private Typeface dialogContentTypeFace;
-
-    public enum DialogContentTypeFace {
-        NORMAL(0), BOLD(1), ITALIC(2), BOLD_ITALIC(3);
-        final int nativeInt;
-
-        DialogContentTypeFace(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final int[] dialogContentTypeFaceArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+    private Typeface dialogContentMode;
+    private static final int[] dialogContentModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
     public Typeface getDialogContentTypeFace() {
-        return dialogContentTypeFace;
+        return dialogContentMode;
     }
 
-    public void setDialogContentTypeFace(Typeface dialogContentTypeFace) {
-        this.dialogContentTypeFace = dialogContentTypeFace;
+    public void setDialogContentTypeFace(Typeface dialogContentMode) {
+        this.dialogContentMode = dialogContentMode;
     }
 
     private float dialogContentPaddingLeft;
@@ -168,9 +148,9 @@ public class TDialog extends TView {
         dialogTextColor = typedArray.getColor(R.styleable.TDialog_dialogTextColor, textColorDefault);
         dialogTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTextDy, 0);
 
-        int dialogTextTypeFaceIndex = typedArray.getInt(R.styleable.TDialog_dialogTextTypeFace, 0);
-        if (dialogTextTypeFaceIndex >= 0) {
-            dialogTextTypeFace = Typeface.create(Typeface.DEFAULT, dialogTextTypeFaceArray[dialogTextTypeFaceIndex]);
+        int dialogTextModeIndex = typedArray.getInt(R.styleable.TDialog_dialogTextMode, 0);
+        if (dialogTextModeIndex >= 0) {
+            dialogTextMode = Typeface.create(Typeface.DEFAULT, dialogTextModeArray[dialogTextModeIndex]);
         }
 
         dialogContentValue = typedArray.getString(R.styleable.TDialog_dialogContentValue);
@@ -178,9 +158,9 @@ public class TDialog extends TView {
         dialogContentColor = typedArray.getColor(R.styleable.TDialog_dialogContentColor, textColorDefault);
         dialogContentDy = typedArray.getDimension(R.styleable.TDialog_dialogContentDy, 0);
 
-        int dialogContentTypeFaceIndex = typedArray.getInt(R.styleable.TDialog_dialogContentTypeFace, 0);
-        if (dialogContentTypeFaceIndex >= 0) {
-            dialogContentTypeFace = Typeface.create(Typeface.DEFAULT, dialogContentTypeFaceArray[dialogContentTypeFaceIndex]);
+        int dialogContentModeIndex = typedArray.getInt(R.styleable.TDialog_dialogContentMode, 0);
+        if (dialogContentModeIndex >= 0) {
+            dialogContentMode = Typeface.create(Typeface.DEFAULT, dialogContentModeArray[dialogContentModeIndex]);
         }
 
         dialogContentPaddingLeft = typedArray.getDimension(R.styleable.TDialog_dialogContentPaddingLeft, 0);
@@ -267,7 +247,7 @@ public class TDialog extends TView {
                 dialogWidth / 2,
                 dialogTextSize * 0.5f + dialogTextDy,
                 0, 0,
-                initTextPaint(Paint.Style.FILL, dialogTextColor, dialogTextSize, dialogTextTypeFace, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, dialogTextColor, dialogTextSize, dialogTextMode, Paint.Align.CENTER));
 
         //drawDialogContent
         drawText(
@@ -277,7 +257,7 @@ public class TDialog extends TView {
                 dialogWidth / 2,
                 dialogHeight / 2 + dialogContentDy,
                 dialogContentPaddingLeft, dialogContentPaddingRight,
-                initTextPaint(Paint.Style.FILL, dialogContentColor, dialogContentSize, dialogContentTypeFace, Paint.Align.CENTER));
+                initTextPaint(Paint.Style.FILL, dialogContentColor, dialogContentSize, dialogContentMode, Paint.Align.CENTER));
 
         //draw Choice
         for (int i = 0; i < total; i++) {

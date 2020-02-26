@@ -9,6 +9,11 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:59
@@ -26,27 +31,19 @@ public class TTrangle extends TView {
     // trangleBackgroundNormal default Color.WHITE,trangleBackgroundPress default trangleBackgroundNormal,trangleBackgroundSelect default trangleBackgroundNormal
     private int trangleBackgroundNormal, trangleBackgroundPress, trangleBackgroundSelect;
 
-    private TrangleTowardType trangleTowardType;
-
-    public enum TrangleTowardType {
-        TOP(0),
-        BOTTOM(1),
-        LEFT(2),
-        RIGHT(3),
-        ;
-        final int nativeInt;
-
-        TrangleTowardType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({TOP, BOTTOM, LEFT, RIGHT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface trangleMode {
     }
 
-    private static final TrangleTowardType[] towardTypeArray = {
-            TrangleTowardType.TOP,
-            TrangleTowardType.BOTTOM,
-            TrangleTowardType.LEFT,
-            TrangleTowardType.RIGHT,
+    public static final int TOP = 0;
+    public static final int BOTTOM = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+    private static final int[] trangleModeArray = {TOP, BOTTOM, LEFT, RIGHT,
     };
+    private @trangleMode
+    int trangleMode;
 
     //when draw a triangle possible need hide Maximum border line default false
     private boolean trangleHideEdge;
@@ -72,11 +69,11 @@ public class TTrangle extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TTrangle);
 
-        int tunaTrangleTowardTypeIndex = typedArray.getInt(R.styleable.TTrangle_trangleTowardType, -1);
-        if (tunaTrangleTowardTypeIndex >= 0) {
-            trangleTowardType = towardTypeArray[tunaTrangleTowardTypeIndex];
+        int trangleModeIndex = typedArray.getInt(R.styleable.TTrangle_trangleMode, -1);
+        if (trangleModeIndex >= 0) {
+            trangleMode = trangleModeArray[trangleModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute trangleTowardType type must be given");
+            throw new IllegalArgumentException("The content attribute trangleMode type must be given");
         }
 
         trangleBackgroundNormal = typedArray.getColor(R.styleable.TTrangle_trangleBackgroundNormal, Color.TRANSPARENT);
@@ -94,7 +91,7 @@ public class TTrangle extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (trangleTowardType == TrangleTowardType.TOP || trangleTowardType == TrangleTowardType.BOTTOM) {
+        if (trangleMode == TOP || trangleMode == BOTTOM) {
             //tan(trangleHalfTopCornerDadian)=(1/2tunaWidth)/height
             trangleHalfTopCornerDadian = Math.atan((width * 0.5f) / height);
         } else {
@@ -114,7 +111,7 @@ public class TTrangle extends TView {
     protected void onDraw(Canvas canvas) {
         //start drawing from the outside triangle topCorner and draw clockwise
         //attention! direct coverage on some models will be the sideline, the way to avoid the use of painted area
-        switch (trangleTowardType) {
+        switch (trangleMode) {
             case TOP:
                 initPathMoveTo(width >> 1, 0);
                 //both requirements trangleStrokeWidth != 0 and tunaTrangleHideHypotenuse=true will cut edge
@@ -176,7 +173,7 @@ public class TTrangle extends TView {
                         trangleStrokeColor : select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal));
 
         //drawing  the inside triangle topCorner and draw clockwise
-        switch (trangleTowardType) {
+        switch (trangleMode) {
             case TOP:
                 if (trangleStrokeWidth != 0) {
                     paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);

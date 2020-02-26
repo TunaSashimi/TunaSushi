@@ -230,28 +230,9 @@ public class TLayout extends RelativeLayout {
         }
     }
 
-    // attention layoutPorterDuffXfermode default 0 instead of -1!
-    protected PorterDuffXfermode layoutPorterDuffXfermode;
-
-    public enum LayoutPorterDuffXfermode {
-        Layout_SRC_IN(0), Layout_SRC_OUT(1),
-        ;
-        final int nativeInt;
-
-        LayoutPorterDuffXfermode(int ni) {
-            nativeInt = ni;
-        }
-    }
-
-    private static final Mode[] layoutPorterDuffXfermodeArray = {Mode.SRC_IN, Mode.SRC_OUT,};
-
-    public PorterDuffXfermode getLayoutPorterDuffXfermode() {
-        return layoutPorterDuffXfermode;
-    }
-
-    public void setLayoutPorterDuffXfermode(LayoutPorterDuffXfermode layoutXfermode) {
-        this.layoutPorterDuffXfermode = new PorterDuffXfermode(layoutPorterDuffXfermodeArray[layoutXfermode.nativeInt]);
-    }
+    // attention layoutPorterDuffXferMode default 0 instead of -1!
+    protected PorterDuffXfermode layoutPorterDuffXferMode;
+    private static final Mode[] layoutPorterDuffXferModeArray = {Mode.SRC_IN, Mode.SRC_OUT,};
 
     // layoutStrokeWidth default 0
     private float layoutStrokeWidth;
@@ -441,8 +422,8 @@ public class TLayout extends RelativeLayout {
         if (layoutSrcId != -1) {
 
             // layoutXfermodeIndex default PorterDuff.Mode.SRC_IN
-            int layoutXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXfermode, 0);
-            layoutPorterDuffXfermode = new PorterDuffXfermode(layoutPorterDuffXfermodeArray[layoutXfermodeIndex]);
+            int layoutXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXferMode, 0);
+            layoutPorterDuffXferMode = new PorterDuffXfermode(layoutPorterDuffXferModeArray[layoutXfermodeIndex]);
 
             //
             layoutSrc = BitmapFactory.decodeResource(getResources(), layoutSrcId);
@@ -523,7 +504,7 @@ public class TLayout extends RelativeLayout {
 
         // draw layoutBitmap
         if (needSaveLayer) {
-            layoutPaint.setXfermode(layoutPorterDuffXfermode);
+            layoutPaint.setXfermode(layoutPorterDuffXferMode);
 
             canvas.translate(layoutBackgroundShadowDx * 2f + layoutSrcShadowRadius - layoutSrcShadowDx,
                     layoutBackgroundShadowDy * 2f + layoutSrcShadowRadius - layoutSrcShadowDy);

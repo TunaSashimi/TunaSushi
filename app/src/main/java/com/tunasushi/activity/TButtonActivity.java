@@ -1,7 +1,9 @@
 package com.tunasushi.activity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +17,7 @@ import com.tunasushi.tuna.TView;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TButtonActivity extends Activity {
+public class TButtonActivity extends Activity implements TView.TouchUpListener {
     private TButton tButton01, tButton02, tButton03;
 
     @Override
@@ -28,23 +30,22 @@ public class TButtonActivity extends Activity {
         tButton02 = findViewById(R.id.tButton02);
         tButton03 = findViewById(R.id.tButton03);
 
-        tButton01.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                Toast.makeText(TButtonActivity.this, tButton01.getButtonTextValue(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        tButton02.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                Toast.makeText(TButtonActivity.this, tButton02.getButtonTextValue(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        tButton03.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                Toast.makeText(TButtonActivity.this, tButton03.getButtonTextValue(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        tButton01.setTouchUpListener(this);
+        tButton02.setTouchUpListener(this);
+        tButton03.setTouchUpListener(this);
+    }
+
+    @Override
+    public void touchUp(TView t) {
+        switch (t.getId()) {
+            case R.id.tButton01:
+            case R.id.tButton02:
+            case R.id.tButton03:
+                TButton tButton = (TButton) t;
+                Toast.makeText(this, tButton.getButtonTextValue(), Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 }

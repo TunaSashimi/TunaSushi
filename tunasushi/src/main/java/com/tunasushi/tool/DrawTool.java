@@ -25,12 +25,12 @@ public class DrawTool {
                                   Bitmap srcAnchor,
                                   Matrix anchorMatrix,
                                   int width, int height,
-                                  int srcAnchorGravity,
+                                  int srcAnchorGravityMode,
                                   float srcAnchorWidth, float srcAnchorHeight,
                                   float srcAnchorDx, float srcAnchorDy) {
 
         float anchorDxNormal = 0, anchorDyNormal = 0;
-        switch (srcAnchorGravity & GRAVITY_MASK) {
+        switch (srcAnchorGravityMode & GRAVITY_MASK) {
             case LEFT:
                 break;
             case CENTER_HORIZONTAL:

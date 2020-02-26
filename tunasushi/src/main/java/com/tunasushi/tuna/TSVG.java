@@ -11,6 +11,11 @@ import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
 
@@ -53,36 +58,32 @@ public class TSVG extends TView {
         return SVGMatrix;
     }
 
-    private SVGType svgType;
 
-    public enum SVGType {
-        CIRCLE(0),
-        STAR(1),
-        HEART(2),
-        FLOWER(3),
-        PENTAGON(4),
-        SIXTEENEDGE(5),
-        FORTYEDGE(6),
-        SNAIL(7),
-        ;
-        final int nativeInt;
-
-        SVGType(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface SVGMode {
     }
 
-    private static final SVGType[] SVGTypeArray = {
-            SVGType.CIRCLE,
-            SVGType.STAR,
-            SVGType.HEART,
-            SVGType.FLOWER,
-            SVGType.PENTAGON,
-            SVGType.SIXTEENEDGE,
-            SVGType.FORTYEDGE,
-            SVGType.SNAIL,
+    public static final int CIRCLE = 0;
+    public static final int STAR = 1;
+    public static final int HEART = 2;
+    public static final int FLOWER = 3;
+    public static final int PENTAGON = 4;
+    public static final int SIXTEENEDGE = 5;
+    public static final int FORTYEDGE = 6;
+    public static final int SNAIL = 7;
+    private static final int[] SVGModeArray = {
+            CIRCLE,
+            STAR,
+            HEART,
+            FLOWER,
+            PENTAGON,
+            SIXTEENEDGE,
+            FORTYEDGE,
+            SNAIL,
     };
-
+    private @SVGMode
+    int svgMode;
 
     public TSVG(Context context) {
         this(context, null);
@@ -105,9 +106,9 @@ public class TSVG extends TView {
             srcBitmap = BitmapFactory.decodeResource(getResources(), SVGSrcId);
         }
 
-        int tunaSVGTypeIndex = typedArray.getInt(R.styleable.TSVG_SVGType, 0);
-        if (tunaSVGTypeIndex >= 0) {
-            svgType = SVGTypeArray[tunaSVGTypeIndex];
+        int SVGModeIndex = typedArray.getInt(R.styleable.TSVG_SVGMode, 0);
+        if (SVGModeIndex >= 0) {
+            svgMode = SVGModeArray[SVGModeIndex];
         }
 
         typedArray.recycle();
@@ -145,7 +146,7 @@ public class TSVG extends TView {
         int shortSide = width >= height ? height : width;
         initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-        switch (svgType) {
+        switch (svgMode) {
             case CIRCLE:
                 SVGSrc = getCircleBitmap(shortSide);
                 break;
@@ -179,7 +180,7 @@ public class TSVG extends TView {
         //
         canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
         //
-        paint.setXfermode(TPorterDuffXfermode);
+        paint.setXfermode(porterDuffXferMode);
         canvas.drawBitmap(srcBitmap, matrix, paint);
 
         paint.setXfermode(null);

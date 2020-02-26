@@ -13,7 +13,6 @@ import com.tunasushi.R;
 import com.tunasushi.tool.DeviceTool;
 import com.tunasushi.tuna.TGroup;
 import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TView.TouchUpListener;
 
 import java.util.Arrays;
 
@@ -25,8 +24,8 @@ import static com.tunasushi.tool.ConvertTool.dpToPx;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TViewActivity extends Activity {
-    private TView tViewRect01, tViewClassic02;
+public class TViewActivity extends Activity implements TView.TouchUpListener, TView.OnClickListener {
+    private TView tViewRect01, tView02;
     private TView tViewShadow01, tViewShadow02;
     private TView tViewGroupStart, tViewGroupEnd;
 
@@ -42,40 +41,17 @@ public class TViewActivity extends Activity {
 
         //
         tViewRect01 = findViewById(R.id.tViewRect01);
-        tViewRect01.setTouchUpListener(new TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
-            }
-        });
+        tViewRect01.setTouchUpListener(this);
 
         /**
          * 注意这里继承的是TView.OnClick事件
          */
-        tViewClassic02 = findViewById(R.id.tViewRect02);
-        tViewClassic02.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
-            }
-        });
+        tView02 = findViewById(R.id.tViewRect02);
+        tView02.setOnClickListener(this);
 
         //
         tViewShadow01 = findViewById(R.id.tViewShadow01);
-        tViewShadow01.setTouchUpListener(new TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tViewShadow01.setTextMark(
-                        4, TypedValue.COMPLEX_UNIT_DIP,
-                        Color.RED,
-                        null,
-                        0, TypedValue.COMPLEX_UNIT_DIP,
-                        0,
-                        0, TypedValue.COMPLEX_UNIT_DIP,
-                        0, TypedValue.COMPLEX_UNIT_DIP
-                );
-            }
-        });
+        tViewShadow01.setTouchUpListener(this);
 
         //
         tViewShadow02 = findViewById(R.id.tViewShadow02);
@@ -88,20 +64,7 @@ public class TViewActivity extends Activity {
                 0, TypedValue.COMPLEX_UNIT_DIP,
                 0, TypedValue.COMPLEX_UNIT_DIP
         );
-        tViewShadow02.setTouchUpListener(new TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tViewShadow02.setTextMark(
-                        4, TypedValue.COMPLEX_UNIT_DIP,
-                        Color.RED,
-                        null,
-                        0, TypedValue.COMPLEX_UNIT_DIP,
-                        0,
-                        0, TypedValue.COMPLEX_UNIT_DIP,
-                        0, TypedValue.COMPLEX_UNIT_DIP
-                );
-            }
-        });
+        tViewShadow02.setTouchUpListener(this);
 
         //
         tViewGroupStart = findViewById(R.id.tViewGroupStart);
@@ -115,20 +78,11 @@ public class TViewActivity extends Activity {
 
         //
         String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};
-
         LinearLayout linearGroup = findViewById(R.id.linearGroup);
-        TouchUpListener touchUpListener = new TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                Toast.makeText(TViewActivity.this, t.getTextValue(), Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        //String[] stringArray, int index(下标默认0), TouchUpListener touchUpListener, LinearLayout linearLayout, int widthUnit(默认dp), int width,
-        //int leftStyle,int rightStyle, int horizontalStyle, int wholeStyle
         TGroup.create(groupTitleArray,
                 "枪",
-                touchUpListener,
+                this,
+                null,
                 linearGroup,
                 dpToPx(60), LinearLayout.LayoutParams.MATCH_PARENT,
                 R.style.TViewGroupLightGraySrart,
@@ -137,14 +91,56 @@ public class TViewActivity extends Activity {
         );
     }
 
-    //Defined in xml
     //Difference between onClick interface and touchUp interface
     //onClick interface parameter is View, onTouch interface parameter is TView!
+    @Override
     public void touchUp(TView t) {
-        Toast.makeText(TViewActivity.this, "app:touchUp=\"touchUp\"", Toast.LENGTH_SHORT).show();
+        switch (t.getId()) {
+            case R.id.tViewRect01:
+                Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tViewRect03:
+                Toast.makeText(TViewActivity.this, "app:onClick=\"touchUp\"", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tViewShadow01:
+                tViewShadow01.setTextMark(
+                        4, TypedValue.COMPLEX_UNIT_DIP,
+                        Color.RED,
+                        null,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0, TypedValue.COMPLEX_UNIT_DIP
+                );
+                break;
+            case R.id.tViewShadow02:
+                tViewShadow02.setTextMark(
+                        4, TypedValue.COMPLEX_UNIT_DIP,
+                        Color.RED,
+                        null,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0,
+                        0, TypedValue.COMPLEX_UNIT_DIP,
+                        0, TypedValue.COMPLEX_UNIT_DIP
+                );
+                break;
+            default:
+                Toast.makeText(TViewActivity.this, t.getTextValue(), Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
+    @Override
     public void onClick(View v) {
-        Toast.makeText(TViewActivity.this, "app:onClick=\"onClick\"", Toast.LENGTH_SHORT).show();
+        switch (v.getId()) {
+            case R.id.tViewRect02:
+                Toast.makeText(TViewActivity.this, "TView.OnClick", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tViewRect04:
+                Toast.makeText(TViewActivity.this, "app:onClick=\"onClick\"", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 }

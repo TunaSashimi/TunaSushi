@@ -5,7 +5,7 @@
     <declare-styleable name="TView">
         <attr name="press" format="boolean" />
         <attr name="select" format="boolean" />
-        <attr name="selectType">
+        <attr name="selectMode">
             <enum name="reverse" value="0" />
             <enum name="always" value="1" />
         </attr>
@@ -55,7 +55,7 @@
         <attr name="srcShadowDxSelect" format="dimension" />
         <attr name="srcShadowDySelect" format="dimension" />
 
-        <attr name="srcAnchorGravity">
+        <attr name="srcAnchorGravityMode">
             <flag name="left" value="0x00" />
             <flag name="center_horizontal" value="0x01" />
             <flag name="right" value="0x02" />
@@ -106,19 +106,19 @@
         <attr name="textPaddingLeft" format="dimension" />
         <attr name="textPaddingRight" format="dimension" />
         <attr name="textRowSpaceRatio" format="fraction" />
-        <attr name="textGravity">
+        <attr name="textGravityMode">
             <enum name="center" value="0" />
             <enum name="left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>
-        <attr name="textTypeFace">
+        <attr name="textTypeFaceMode">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="textTypeFaceFromAsset" format="string" />
+        <attr name="textTypeFaceAsset" format="string" />
         <attr name="textDx" format="dimension" />
         <attr name="textDy" format="dimension" />
         <attr name="textFractionDx" format="fraction" />
@@ -149,13 +149,13 @@
         <attr name="contentPaddingLeft" format="dimension" />
         <attr name="contentPaddingRight" format="dimension" />
         <attr name="contentRowSpaceRatio" format="fraction" />
-        <attr name="contentGravity">
+        <attr name="contentGravityMode">
             <enum name="center" value="0" />
             <enum name="left" value="1" />
             <enum name="center_left" value="2" />
             <enum name="left_center" value="3" />
         </attr>
-        <attr name="contentTypeFace">
+        <attr name="contentTypeFaceMode">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
@@ -202,39 +202,13 @@
         <attr name="srcRightDx" format="dimension" />
         <attr name="srcRightDy" format="dimension" />
 
-        <attr name="porterDuffXfermode">
+        <attr name="porterDuffXferMode">
             <enum name="src_in" value="0" />
             <enum name="src_out" value="1" />
         </attr>
 
-        <attr name="material">
-            <enum name="spread" value="0" />
-            <enum name="trans" value="1" />
-        </attr>
         <attr name="materialMove" format="boolean" />
-        <attr name="materialDuraction" format="integer" />
-
-        <attr name="materialTimeInterpolator">
-            <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
-            <enum name="accelerateDecelerateInterpolator" value="0" />
-            <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
-            <enum name="accelerateInterpolator" value="1" />
-            <!-- Initially thrown forward and then backward -->
-            <enum name="anticipateInterpolator" value="2" />
-            <!-- At the beginning of the return value after a certain value thrown forward and then backward -->
-            <enum name="anticipateOvershootInterpolator" value="3" />
-            <!-- When the animation ends bounce -->
-            <enum name="bounceInterpolator" value="4" />
-            <!-- The number of times a particular animation loop, velocity change along a sine curve -->
-            <enum name="cycleInterpolator" value="5" />
-            <!-- Fast and slow at the beginning of the local animation -->
-            <enum name="decelerateInterpolator" value="6" />
-            <!-- In a constant rate of change -->
-            <enum name="linearInterpolator" value="7" />
-            <!-- Thrown forward certain value and then return to its original position -->
-            <enum name="overshootInterpolator" value="8" />
-        </attr>
-
+        <attr name="materialTime" format="integer" />
         <attr name="touchUp" format="string" />
         <attr name="onClick" format="string" />
 
@@ -250,13 +224,13 @@
         <attr name="bubbleTextColor" format="reference|color" />
         <attr name="bubbleTextPadding" format="dimension" />
 
-        <attr name="bubbleTowardType">
+        <attr name="bubbleTowardMode">
             <enum name="left" value="0" />
             <enum name="top" value="1" />
             <enum name="right" value="2" />
             <enum name="bottom" value="3" />
         </attr>
-        <attr name="bubbleLocationType">
+        <attr name="bubblePositionMode">
             <enum name="low" value="0" />
             <enum name="middle" value="1" />
             <enum name="high" value="2" />
@@ -296,7 +270,7 @@
         <attr name="dialogTextSize" format="dimension" />
         <attr name="dialogTextColor" format="reference|color" />
         <attr name="dialogTextDy" format="dimension" />
-        <attr name="dialogTextTypeFace">
+        <attr name="dialogTextMode">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
@@ -307,7 +281,7 @@
         <attr name="dialogContentSize" format="dimension" />
         <attr name="dialogContentColor" format="reference|color" />
         <attr name="dialogContentDy" format="dimension" />
-        <attr name="dialogContentTypeFace">
+        <attr name="dialogContentMode">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
@@ -332,15 +306,16 @@
         <attr name="drawColor" format="reference|color" />
         <attr name="drawWidth" format="dimension" />
         <attr name="drawSrc" format="reference" />
-        <attr name="drawType">
-            <enum name="circle" value="0" />
-            <enum name="star" value="1" />
-            <enum name="heart" value="2" />
-            <enum name="flower" value="3" />
-            <enum name="pentagon" value="4" />
-            <enum name="sixteenedge" value="5" />
-            <enum name="fortyedge" value="6" />
-            <enum name="snail" value="7" />
+        <attr name="drawMode">
+            <enum name="normal" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="star" value="2" />
+            <enum name="heart" value="3" />
+            <enum name="flower" value="4" />
+            <enum name="pentagon" value="5" />
+            <enum name="sixteenedge" value="6" />
+            <enum name="fortyedge" value="7" />
+            <enum name="snail" value="8" />
         </attr>
     </declare-styleable>
 
@@ -366,9 +341,10 @@
         <attr name="imageHue" format="dimension" />
         <attr name="imageSaturation" format="dimension" />
 
-        <attr name="imageReverse">
-            <enum name="horizontal" value="0" />
-            <enum name="vertical" value="1" />
+        <attr name="imageReverseMode">
+            <enum name="normal" value="0" />
+            <enum name="horizontal" value="1" />
+            <enum name="vertical" value="2" />
         </attr>
     </declare-styleable>
 
@@ -387,7 +363,7 @@
         <attr name="layoutSrcShadowDx" format="dimension" />
         <attr name="layoutSrcShadowDy" format="dimension" />
 
-        <attr name="layoutPorterDuffXfermode">
+        <attr name="layoutPorterDuffXferMode">
             <enum name="layout_src_in" value="0" />
             <enum name="layout_src_out" value="1" />
         </attr>
@@ -405,10 +381,17 @@
     <declare-styleable name="TLine">
         <attr name="lineArrowWidth" format="dimension" />
         <attr name="lineArrowHeight" format="dimension" />
-        <attr name="lineArrowStrokeColor" format="reference|color" />
-        <attr name="lineArrowStrokeWidth" format="dimension" />
+        <attr name="lineStrokeColor" format="reference|color" />
+        <attr name="lineStrokeWidth" format="dimension" />
         <attr name="lineArrowColor" format="reference|color" />
-        <attr name="lineTowardType">
+
+        <attr name="lineMode">
+            <enum name="horizontal" value="0" />
+            <enum name="slash" value="1" />
+            <enum name="slashBack" value="2" />
+        </attr>
+
+        <attr name="lineArrowMode">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
         </attr>
@@ -431,11 +414,11 @@
         <attr name="progressBoundBackground" format="reference|color" />
         <attr name="progressSrcBack" format="reference" />
         <attr name="progressSrcFront" format="reference" />
-        <attr name="progressShapeType">
+        <attr name="progressShapeMode">
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
         </attr>
-        <attr name="progressPromoteType">
+        <attr name="progressEffectMode">
             <enum name="clockWise" value="0" />
             <enum name="upWard" value="1" />
             <enum name="upDown" value="2" />
@@ -471,11 +454,11 @@
         <attr name="repeatItemStrokeColorNormal" format="reference|color" />
         <attr name="repeatItemStrokeColorSelect" format="reference|color" />
         <attr name="repeatItemStrokeWidth" format="dimension" />
-        <attr name="repeatSelectType">
+        <attr name="repeatSelectMode">
             <enum name="connect" value="0" />
             <enum name="current" value="1" />
         </attr>
-        <attr name="repeatShapeType">
+        <attr name="repeatShapeMode">
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
         </attr>
@@ -504,7 +487,7 @@
         <attr name="rippleCircleColorGradientEndInner" format="reference|color" />
         <attr name="rippleCircleColorGradientStartOuter" format="reference|color" />
         <attr name="rippleCircleColorGradientEndOuter" format="reference|color" />
-        <attr name="rippleTimeInterpolator">
+        <attr name="rippleMode">
             <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
             <enum name="accelerateDecelerateInterpolator" value="0" />
             <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
@@ -529,7 +512,7 @@
     <declare-styleable name="TRow">
         <attr name="rowBackground" format="reference|color" />
         <attr name="rowDuraction" format="integer" />
-        <attr name="rowDirection">
+        <attr name="rowMode">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
         </attr>
@@ -537,7 +520,7 @@
 
     <declare-styleable name="TScale">
         <attr name="scaleBitmap" format="reference" />
-        <attr name="scaleType">
+        <attr name="scaleMode">
             <enum name="width_top" value="0" />
             <enum name="width_center" value="1" />
             <enum name="width_bottom" value="2" />
@@ -602,7 +585,7 @@
         <attr name="signTextStrokeWidth" format="dimension" />
         <attr name="signTextValueBefore" format="string" />
         <attr name="signTextValueAfter" format="string" />
-        <attr name="signDirection">
+        <attr name="signMode">
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
         </attr>
@@ -610,7 +593,7 @@
 
     <declare-styleable name="TSVG">
         <attr name="SVGSrc" format="reference" />
-        <attr name="SVGType">
+        <attr name="SVGMode">
             <enum name="circle" value="0" />
             <enum name="star" value="1" />
             <enum name="heart" value="2" />
@@ -652,7 +635,7 @@
         <attr name="trangleStrokeColor" format="reference|color" />
         <attr name="trangleStrokeWidth" format="dimension" />
         <attr name="trangleHideEdge" format="boolean" />
-        <attr name="trangleTowardType">
+        <attr name="trangleMode">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="left" value="2" />

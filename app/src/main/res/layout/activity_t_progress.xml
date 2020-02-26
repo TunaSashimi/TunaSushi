@@ -21,8 +21,8 @@
         android:layout_margin="10dp"
         app:progressArcBackground="#ffcb17"
         app:progressBoundBackground="#ffcb17"
-        app:progressPromoteType="clockWise"
-        app:progressShapeType="circle" />
+        app:progressEffectMode="clockWise"
+        app:progressShapeMode="circle" />
 
     <com.tunasushi.tuna.TProgress
         android:id="@+id/tProgressCircleUpWard"
@@ -32,8 +32,8 @@
         android:layout_toRightOf="@id/tProgressCircleClockWise"
         app:progressArcBackground="#ffcb17"
         app:progressBoundBackground="#ffcb17"
-        app:progressPromoteType="upWard"
-        app:progressShapeType="circle" />
+        app:progressEffectMode="upWard"
+        app:progressShapeMode="circle" />
 
     <com.tunasushi.tuna.TProgress
         android:id="@+id/tProgressCircleUpDown"
@@ -44,8 +44,8 @@
         android:layout_toRightOf="@id/tProgressCircleUpWard"
         app:progressArcBackground="#ffcb17"
         app:progressBoundBackground="#ffcb17"
-        app:progressPromoteType="upDown"
-        app:progressShapeType="circle" />
+        app:progressEffectMode="upDown"
+        app:progressShapeMode="circle" />
 
     <com.tunasushi.tuna.TProgress
         android:id="@+id/tProgressCustomClockWise"
@@ -53,10 +53,10 @@
         android:layout_height="80dp"
         android:layout_below="@id/tProgressCircleUpDown"
         android:layout_margin="10dp"
+        app:progressEffectMode="clockWise"
+        app:progressShapeMode="custom"
         app:progressSrcBack="@drawable/bitmap_tprogress_back"
-        app:progressSrcFront="@drawable/bitmap_tprogress_front"
-        app:progressPromoteType="clockWise"
-        app:progressShapeType="custom" />
+        app:progressSrcFront="@drawable/bitmap_tprogress_front" />
 
     <com.tunasushi.tuna.TProgress
         android:id="@+id/tProgressCustomUpWard"
@@ -64,10 +64,10 @@
         android:layout_height="80dp"
         android:layout_alignTop="@id/tProgressCustomClockWise"
         android:layout_toRightOf="@id/tProgressCustomClockWise"
+        app:progressEffectMode="upWard"
+        app:progressShapeMode="custom"
         app:progressSrcBack="@drawable/bitmap_tprogress_back"
-        app:progressSrcFront="@drawable/bitmap_tprogress_front"
-        app:progressPromoteType="upWard"
-        app:progressShapeType="custom" />
+        app:progressSrcFront="@drawable/bitmap_tprogress_front" />
 
     <com.tunasushi.tuna.TProgress
         android:id="@+id/tProgressCustomUpDown"
@@ -76,10 +76,10 @@
         android:layout_alignTop="@id/tProgressCustomUpWard"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/tProgressCustomUpWard"
+        app:progressEffectMode="upDown"
+        app:progressShapeMode="custom"
         app:progressSrcBack="@drawable/bitmap_tprogress_back"
-        app:progressSrcFront="@drawable/bitmap_tprogress_front"
-        app:progressPromoteType="upDown"
-        app:progressShapeType="custom" />
+        app:progressSrcFront="@drawable/bitmap_tprogress_front" />
 
     <SeekBar
         android:id="@+id/seekbar"

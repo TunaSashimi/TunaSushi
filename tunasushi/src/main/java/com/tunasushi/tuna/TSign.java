@@ -10,6 +10,11 @@ import android.util.AttributeSet;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 
 /**
  * @author TunaSashimi
@@ -33,19 +38,17 @@ public class TSign extends TView {
     private float signTextStrokeWidth;
     private String signTextValueBefore, signTextValueAfter;
 
-    private SignDirection signDirection;
 
-    public enum SignDirection {
-        HORIZONTAL(0), VERTICAL(1),
-        ;
-        final int nativeInt;
-
-        SignDirection(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({HORIZONTAL, VERTICAL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface signMode {
     }
 
-    private static final SignDirection[] signDirectionArray = {SignDirection.HORIZONTAL, SignDirection.VERTICAL,};
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
+    private static final int[] signModeArray = {HORIZONTAL, VERTICAL,};
+    private @signMode
+    int signMode;
 
     public TSign(Context context) {
         this(context, null);
@@ -79,11 +82,11 @@ public class TSign extends TView {
         signTextValueBefore = typedArray.getString(R.styleable.TSign_signTextValueBefore);
         signTextValueAfter = typedArray.getString(R.styleable.TSign_signTextValueAfter);
 
-        int signDirectionIndex = typedArray.getInt(R.styleable.TSign_signDirection, -1);
-        if (signDirectionIndex >= 0) {
-            signDirection = signDirectionArray[signDirectionIndex];
+        int signModeIndex = typedArray.getInt(R.styleable.TSign_signMode, -1);
+        if (signModeIndex >= 0) {
+            signMode = signModeArray[signModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute signDirectionIndex type must be given");
+            throw new IllegalArgumentException("The content attribute signMode type must be given");
         }
 
         typedArray.recycle();
@@ -125,7 +128,7 @@ public class TSign extends TView {
         }
         paint.setColor(signRectColor);
 
-        if (signDirection == SignDirection.VERTICAL) {
+        if (signMode == VERTICAL) {
 
             float rectCenterX = width >> 1;
             float rectCenterY = signCircleMargin + signCircleRadius * 2 + signCircleStrokeWidth * 2 + signRectMargin + signRectHeight / 2

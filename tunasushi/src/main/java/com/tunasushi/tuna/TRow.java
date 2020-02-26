@@ -13,6 +13,11 @@ import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:57
@@ -41,23 +46,20 @@ public class TRow extends TView {
         this.rowDuraction = rowDuraction;
     }
 
-    private RowDirection rowDirection;
 
-    public enum RowDirection {
-        TOP(0),
-        BOTTOM(1),
-        ;
-        final int nativeInt;
-
-        RowDirection(int ni) {
-            nativeInt = ni;
-        }
+    @IntDef({TOP, BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface rowMode {
     }
 
-    private static final RowDirection[] rowDirectionArray = {
-            RowDirection.TOP,
-            RowDirection.BOTTOM,
+    public static final int TOP = 0;
+    public static final int BOTTOM = 1;
+    private static final int[] rowModeArray = {
+            TOP,
+            BOTTOM,
     };
+    private @rowMode
+    int rowMode;
 
     private int rowStopY;
     //
@@ -103,9 +105,9 @@ public class TRow extends TView {
         rowBackground = typedArray.getColor(R.styleable.TRow_rowBackground, Color.TRANSPARENT);
         rowDuraction = typedArray.getInt(R.styleable.TRow_rowDuraction, 1000);
 
-        int rowDirectionIndex = typedArray.getInt(R.styleable.TRow_rowDirection, 0);
-        if (rowDirectionIndex >= 0) {
-            rowDirection = rowDirectionArray[rowDirectionIndex];
+        int rowModeIndex = typedArray.getInt(R.styleable.TRow_rowMode, 0);
+        if (rowModeIndex >= 0) {
+            rowMode = rowModeArray[rowModeIndex];
         }
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -117,7 +119,7 @@ public class TRow extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        switch (rowDirection) {
+        switch (rowMode) {
             case TOP:
                 rowStopY = 0;
                 break;
@@ -132,7 +134,7 @@ public class TRow extends TView {
     @Override
     protected void onDraw(Canvas canvas) {
         //
-        switch (rowDirection) {
+        switch (rowMode) {
             case TOP:
                 canvas.drawLine(width >> 1, 0, width >> 1, rowStopY, paint);
                 break;
@@ -146,7 +148,7 @@ public class TRow extends TView {
         rowAnimatorSet = new AnimatorSet();
         ObjectAnimator rowStopYObjectAnimator = null;
         //
-        switch (rowDirection) {
+        switch (rowMode) {
             case TOP:
                 rowStopYObjectAnimator = ObjectAnimator.ofInt(this, rowStopYProperty, 0, height);
                 break;

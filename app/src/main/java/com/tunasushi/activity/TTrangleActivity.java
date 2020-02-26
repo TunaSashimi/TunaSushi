@@ -2,10 +2,10 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TView;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53
@@ -13,7 +13,7 @@ import com.tunasushi.tuna.TView;
  * @Description
  */
 public class TTrangleActivity extends Activity {
-    private TView tView, tViewBox;
+    private TView tView01, tView02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +21,16 @@ public class TTrangleActivity extends Activity {
 
         setContentView(R.layout.activity_t_trangle);
 
-        tView = findViewById(R.id.tView);
-        tViewBox = findViewById(R.id.tViewBox);
+        tView01 = findViewById(R.id.tView01);
+        tView02 = findViewById(R.id.tView02);
 
-        tView.setTouchUpListener(new TView.TouchUpListener() {
+        tView01.setTouchUpListener(new TView.TouchUpListener() {
             @Override
             public void touchUp(TView t) {
-                if ("TunaSashimi".equals(tViewBox.getTextValue())) {
-                    tViewBox.setTextValue("金枪鱼刺身");
+                if ("TunaSashimi".equals(tView02.getTextValue())) {
+                    tView02.setTextValue("金枪鱼刺身");
                 } else {
-                    tViewBox.setTextValue("TunaSashimi");
+                    tView02.setTextValue("TunaSashimi");
                 }
             }
         });

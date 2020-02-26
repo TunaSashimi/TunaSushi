@@ -30,7 +30,7 @@ public class TRangeActivity extends Activity {
 
         setContentView(R.layout.activity_t_range);
 
-        tView = findViewById(R.id.tView);
+        tView = findViewById(R.id.tView01);
         tRange = findViewById(R.id.tRange);
         tBubble = findViewById(R.id.tBubble);
 
@@ -41,7 +41,6 @@ public class TRangeActivity extends Activity {
                 if (dx == 0) {
                     dx = tBubble.getWidth() >> 1;
                 }
-
                 //
                 tBubble.setTBubbleTextValue(tRange.getRangeValue());
                 //
