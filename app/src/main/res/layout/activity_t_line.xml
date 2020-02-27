@@ -110,22 +110,22 @@
         app:lineStrokeWidth="1dp" />
 
     <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineSlash"
+        android:id="@+id/tLineSlashBack"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_below="@id/tLineMove"
         android:layout_margin="16dp"
-        app:lineMode="slash"
+        app:lineMode="slashBack"
         app:lineStrokeColor="#dedede"
         app:lineStrokeWidth="2dp" />
 
     <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineSlashBack"
+        android:id="@+id/tLineSlash"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_alignTop="@id/tLineSlash"
-        android:layout_toRightOf="@id/tLineSlash"
-        app:lineMode="slashBack"
+        android:layout_alignTop="@id/tLineSlashBack"
+        android:layout_toRightOf="@id/tLineSlashBack"
+        app:lineMode="slash"
         app:lineStrokeColor="#dedede"
         app:lineStrokeWidth="2dp" />
 </RelativeLayout>
