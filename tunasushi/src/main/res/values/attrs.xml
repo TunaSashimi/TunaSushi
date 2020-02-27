@@ -213,6 +213,7 @@
         <attr name="onClick" format="string" />
 
         <attr name="adjust" format="boolean" />
+        <attr name="dispatch" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TBubble">

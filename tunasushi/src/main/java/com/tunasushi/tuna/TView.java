@@ -722,6 +722,18 @@ public class TView extends View {
         this.adjust = adjust;
     }
 
+    // Whether to return a touch event
+    protected boolean dispatch;
+
+    public boolean isDispatch() {
+        return dispatch;
+    }
+
+    public void setDispatch(boolean dispatch) {
+        this.dispatch = dispatch;
+    }
+
+
     protected boolean touchDown;
     protected boolean touchMove;
     protected boolean touchUp;
@@ -3827,7 +3839,7 @@ public class TView extends View {
     private long touchDownTimeStart, touchDownTimeEnd;
     private static final int TOUCH_DOWN_TIMES = 3;
 
-    // in response to the dispathtouch event: need touch TOUCH_DOWN_TIMES
+    // in response to the dispatchTouchEvent event: need touch TOUCH_DOWN_TIMES
     // consecutive times within SHOW_PROPERTY_MAX_TIME_MILLIS ,
     // and the touch location can not exceed SHOW_PROPERTY_MAX_DISTANCE_DIP,
     // touchDownEventX and touchDownEventY position refresh when pressed
@@ -3877,6 +3889,7 @@ public class TView extends View {
 
         //
         adjust = typedArray.getBoolean(R.styleable.TView_adjust, false);
+        dispatch = typedArray.getBoolean(R.styleable.TView_dispatch, false);
 
         //
         origin = TView.class == this.getClass();
@@ -4357,14 +4370,18 @@ public class TView extends View {
         //
         setTouchXY(touchX, touchY);
 
+        //
         if (touchListener != null) {
             touchListener.touch(this);
         }
 
+        //
         if (isOrigin()) {
             invalidate();
         }
-        return true;
+
+        //
+        return dispatch ? false : true;
     }
 
     @Override
