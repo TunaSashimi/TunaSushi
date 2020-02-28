@@ -13,7 +13,7 @@
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#d9c700"
-        app:trangleMode="top"
+        app:trangleMode="left"
         app:trangleStrokeColor="#592d2e"
         app:trangleStrokeWidth="2dp" />
 
@@ -26,7 +26,7 @@
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#d9c700"
-        app:trangleMode="right"
+        app:trangleMode="top"
         app:trangleStrokeColor="#592d2e"
         app:trangleStrokeWidth="2dp" />
 
@@ -35,12 +35,13 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignTop="@id/tTrangleRight"
+        android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/tTrangleRight"
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#bc7955"
         app:trangleBackgroundSelect="#592d2d"
-        app:trangleMode="bottom"
+        app:trangleMode="right"
         app:trangleStrokeColor="#592d2e"
         app:trangleStrokeWidth="2dp" />
 
@@ -49,12 +50,11 @@
         android:layout_height="60dp"
         android:layout_alignTop="@id/tTrangleBottom"
         android:layout_toRightOf="@id/tTrangleBottom"
-        app:adjust="true"
         app:textColorNormal="#592d2e"
         app:trangleBackgroundNormal="#fae500"
         app:trangleBackgroundPress="#bc7955"
         app:trangleBackgroundSelect="#592d2d"
-        app:trangleMode="left"
+        app:trangleMode="bottom"
         app:trangleStrokeColor="#592d2e"
         app:trangleStrokeWidth="2dp" />
 

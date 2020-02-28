@@ -12,7 +12,7 @@
         android:layout_margin="16dp"
         android:layerType="software"
         app:scratchCoverColor="#000000"
-        app:scratchCoverStrokeWidth="20dp"
+        app:scratchCoverStrokeWidth="50dp"
         app:scratchRadius="10dp"
         app:scratchSrc="@drawable/bitmap_tprogress_front"
         app:scratchText="TunaSashimi"

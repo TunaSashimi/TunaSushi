@@ -40,8 +40,7 @@ public class TTrangle extends TView {
     public static final int BOTTOM = 1;
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
-    private static final int[] trangleModeArray = {TOP, BOTTOM, LEFT, RIGHT,
-    };
+    private static final int[] trangleModeArray = {TOP, BOTTOM, LEFT, RIGHT,};
     private @trangleMode
     int trangleMode;
 

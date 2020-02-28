@@ -510,15 +510,6 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="TRow">
-        <attr name="rowBackground" format="reference|color" />
-        <attr name="rowDuraction" format="integer" />
-        <attr name="rowMode">
-            <enum name="top" value="0" />
-            <enum name="bottom" value="1" />
-        </attr>
-    </declare-styleable>
-
     <declare-styleable name="TScale">
         <attr name="scaleBitmap" format="reference" />
         <attr name="scaleMode">

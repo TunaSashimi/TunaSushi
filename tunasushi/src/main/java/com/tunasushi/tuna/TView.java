@@ -4374,14 +4374,12 @@ public class TView extends View {
         if (touchListener != null) {
             touchListener.touch(this);
         }
-
         //
         if (isOrigin()) {
             invalidate();
         }
-
         //
-        return dispatch ? false : true;
+        return dispatch ? super.dispatchTouchEvent(event) : true;
     }
 
     @Override

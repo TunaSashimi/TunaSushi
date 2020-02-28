@@ -53,7 +53,6 @@ public class EntryActivity extends Activity {
             TRangeActivity.class,
             TRepeatActivity.class,
             TRippleActivity.class,
-            TRowActivity.class,
 
             TScaleActivity.class,
             TScratchActivity.class,

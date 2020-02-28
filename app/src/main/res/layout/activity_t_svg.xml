@@ -13,7 +13,8 @@
             android:id="@+id/tSVG01"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
@@ -21,30 +22,30 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignTop="@id/tSVG01"
+            android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG01"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG03"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignTop="@id/tSVG02"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG02"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="circle"
-            app:porterDuffXferMode="src_in" />
+            app:SVGMode="star"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG04"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignTop="@id/tSVG03"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG03"
+            app:SVGMode="star"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="circle"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -53,8 +54,9 @@
             android:layout_height="60dp"
             android:layout_below="@id/tSVG01"
             android:layout_alignLeft="@id/tSVG01"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="star" />
+            android:layout_marginTop="16dp"
+            app:SVGMode="heart"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG06"
@@ -63,8 +65,8 @@
             android:layout_alignTop="@id/tSVG05"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG05"
+            app:SVGMode="heart"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="star"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -74,8 +76,8 @@
             android:layout_alignTop="@id/tSVG06"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG06"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="heart" />
+            app:SVGMode="flower"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG08"
@@ -84,8 +86,8 @@
             android:layout_alignTop="@id/tSVG07"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG07"
+            app:SVGMode="flower"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="heart"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -95,8 +97,8 @@
             android:layout_below="@id/tSVG05"
             android:layout_alignLeft="@id/tSVG05"
             android:layout_marginTop="16dp"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="flower" />
+            app:SVGMode="pentagon"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG10"
@@ -105,8 +107,8 @@
             android:layout_alignTop="@id/tSVG09"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG09"
+            app:SVGMode="pentagon"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="flower"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -116,8 +118,8 @@
             android:layout_alignTop="@id/tSVG10"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG10"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="pentagon" />
+            app:SVGMode="sixteenedge"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG12"
@@ -126,8 +128,8 @@
             android:layout_alignTop="@id/tSVG11"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG11"
+            app:SVGMode="sixteenedge"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="pentagon"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -137,8 +139,8 @@
             android:layout_below="@id/tSVG09"
             android:layout_alignLeft="@id/tSVG09"
             android:layout_marginTop="16dp"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="sixteenedge" />
+            app:SVGMode="fortyedge"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG14"
@@ -147,8 +149,8 @@
             android:layout_alignTop="@id/tSVG13"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG13"
+            app:SVGMode="fortyedge"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="sixteenedge"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
@@ -158,8 +160,8 @@
             android:layout_alignTop="@id/tSVG14"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG14"
-            app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="fortyedge" />
+            app:SVGMode="snail"
+            app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG16"
@@ -168,30 +170,30 @@
             android:layout_alignTop="@id/tSVG15"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG15"
+            app:SVGMode="snail"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="fortyedge"
             app:porterDuffXferMode="src_out" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG17"
-            android:layout_width="60dp"
+            android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_below="@id/tSVG13"
             android:layout_alignLeft="@id/tSVG13"
             android:layout_marginTop="16dp"
+            app:SVGMode="circle"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="snail" />
+            app:porterDuffXferMode="src_in" />
 
         <com.tunasushi.tuna.TSVG
             android:id="@+id/tSVG18"
-            android:layout_width="60dp"
+            android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_alignTop="@id/tSVG17"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tSVG17"
+            app:SVGMode="circle"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
-            app:SVGMode="snail"
             app:porterDuffXferMode="src_out" />
-
     </RelativeLayout>
 </ScrollView>

@@ -48,7 +48,6 @@
         <activity android:name=".activity.TRangeActivity" />
         <activity android:name=".activity.TRepeatActivity" />
         <activity android:name=".activity.TRippleActivity" />
-        <activity android:name=".activity.TRowActivity" />
 
         <activity android:name=".activity.TScaleActivity" />
         <activity android:name=".activity.TScratchActivity" />

@@ -76,7 +76,7 @@
             android:layout_below="@id/tViewRect01"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorNormalHeight设置锚图片高度\nsrcAnchorGravityMode设置锚图片停靠(多属性用|分隔bottom|right)" />
+            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorHeightNormal设置锚图片高度\nsrcAnchorGravityMode设置锚图片停靠(多属性用|分隔比如 bottom|right)" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSelect01"
@@ -183,7 +183,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
-            android:text="textShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\nstrokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
+            android:text="strokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadow01"
@@ -310,13 +310,13 @@
 
         <TextView
             android:id="@+id/textPrompt06"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tViewGradient02"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
-            android:text="radiusTopLeft,radiusBottomLeft,radiusTopRight,radiusBottomRight设置矩形4个角弧度" />
+            android:text="radius设置统一弧度,或者使用radiusTopLeft,radiusTopRight,radiusBottomLeft,radiusBottomRight分别设置弧度" />
 
         <View
             android:id="@+id/tViewAnchorSecondaryButton01"
@@ -361,7 +361,7 @@
             android:layout_below="@id/tView03"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="srcNormal设置常规图片(根据形状进行截取)\nsrcPress设置按下图片\nbitmapSrcSelect设置选中图片(selectable设置true)" />
+            android:text="srcNormal设置常规图片(根据形状进行截取)\nsrcPress设置按下图片\nsrcSelect设置选中图片" />
 
         <View
             android:id="@+id/viewAnchorSecondaryButton02"
