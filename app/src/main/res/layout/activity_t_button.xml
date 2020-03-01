@@ -28,7 +28,7 @@
                 app:buttonTextFractionBottom="86%"
                 app:buttonTextFractionTop="72%"
                 app:buttonTextSize="14dp"
-                app:buttonTextValue="马上用车" />
+                app:buttonText="马上用车" />
 
             <View
                 android:layout_width="1dp"
@@ -49,7 +49,7 @@
                 app:buttonTextFractionBottom="86%"
                 app:buttonTextFractionTop="72%"
                 app:buttonTextSize="14dp"
-                app:buttonTextValue="预约用车" />
+                app:buttonText="预约用车" />
 
             <View
                 android:layout_width="1dp"
@@ -70,7 +70,7 @@
                 app:buttonTextFractionBottom="86%"
                 app:buttonTextFractionTop="72%"
                 app:buttonTextSize="14dp"
-                app:buttonTextValue="接机送机" />
+                app:buttonText="接机送机" />
         </LinearLayout>
     </LinearLayout>
 

@@ -30,7 +30,7 @@
             app:textColorNormal="#bc7955"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialTime=1000" />
+            app:text="materialTime=1000" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewMaterial02"
@@ -44,7 +44,7 @@
             app:textColorNormal="#bc7955"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialTime=2000" />
+            app:text="materialTime=2000" />
 
         <RelativeLayout
             android:id="@+id/relativeMaterial"
@@ -68,7 +68,7 @@
                 app:select="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="5dp"
-                app:textValue="金枪鱼刺身" />
+                app:text="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
                 android:id="@+id/tViewMaterial04"
@@ -80,7 +80,7 @@
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="5dp"
-                app:textValue="TunaSashimi" />
+                app:text="TunaSashimi" />
         </RelativeLayout>
 
         <com.tunasushi.tuna.TView
@@ -95,7 +95,7 @@
             app:textColorNormal="#000000"
             app:textColorPress="#ffffff"
             app:textSize="16dp"
-            app:textValue="materialMove=true" />
+            app:text="materialMove=true" />
     </RelativeLayout>
 
 </ScrollView>

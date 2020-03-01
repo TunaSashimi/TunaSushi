@@ -63,7 +63,7 @@
         app:signRectWidth="1.5dp"
         app:signTextSize="20dp"
         app:signTextStrokeWidth="0dp"
-        app:signTextValueAfter="终"
-        app:signTextValueBefore="起" />
+        app:signTextAfter="终"
+        app:signTextBefore="起" />
 
 </RelativeLayout>

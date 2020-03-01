@@ -21,6 +21,7 @@ import androidx.annotation.IntDef;
 import static com.tunasushi.tool.BitmapTool.decodeBitmapResource;
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
+import static com.tunasushi.tool.ConvertTool.dpToPx;
 
 /**
  * @author TunaSashimi
@@ -29,42 +30,12 @@ import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
  * @Description
  */
 public class TDraw extends TView {
-
     //
+    private float drawThick;
     private int drawColor;
-
-    public int getDrawColor() {
-        return drawColor;
-    }
-
-    public void setDrawColor(int drawColor) {
-        this.drawColor = drawColor;
-    }
-
-    private float drawWidth;
-
-    public float getDrawWidth() {
-        return drawWidth;
-    }
-
-    public void setDrawWidth(float drawWidth) {
-        this.drawWidth = drawWidth;
-    }
 
     //
     private Bitmap drawSrc;
-
-    public Bitmap getDrawSrc() {
-        return drawSrc;
-    }
-
-    public void setDrawSrc(int id) {
-        setDrawSrc(decodeBitmapResource(id));
-    }
-
-    public void setDrawSrc(Bitmap bitmap) {
-        this.drawSrc = bitmap;
-    }
 
 
     @IntDef({NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
@@ -130,9 +101,8 @@ public class TDraw extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TDraw);
 
+        drawThick = typedArray.getDimension(R.styleable.TDraw_drawThick, dpToPx(12));
         drawColor = typedArray.getColor(R.styleable.TDraw_drawColor, Color.RED);
-        drawWidth = typedArray.getDimension(R.styleable.TDraw_drawWidth, 12);
-
 
         int drawSrcId = typedArray.getResourceId(R.styleable.TDraw_drawSrc, -1);
         if (drawSrcId != -1) {
@@ -174,7 +144,7 @@ public class TDraw extends TView {
         super.onLayout(changed, left, top, right, bottom);
 
         //When the parent class in onMeasure initialized paint in TView
-        initPaint(Paint.Style.STROKE, drawColor, drawWidth);
+        initPaint(Paint.Style.STROKE, drawColor, drawThick);
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStrokeJoin(Paint.Join.ROUND);

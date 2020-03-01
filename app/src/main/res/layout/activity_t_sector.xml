@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         app:textColorNormal="#4acc75"
         app:textSize="40sp"
-        app:textValue="0%" />
+        app:text="0%" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewSubtract"
@@ -36,7 +36,7 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#3597d0"
         app:textSize="16dp"
-        app:textValue="-" />
+        app:text="-" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewAdd"
@@ -49,5 +49,5 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#3597d0"
         app:textSize="16dp"
-        app:textValue="+" />
+        app:text="+" />
 </RelativeLayout>

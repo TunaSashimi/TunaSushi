@@ -23,7 +23,6 @@ import androidx.annotation.IntDef;
  * @Description
  */
 public class TRepeat extends TView {
-
     private float repeatItemFractionTop, repeatItemFractionBottom;
     private float repeatItemTextFractionTop, repeatItemTextFractionBottom;
 
@@ -78,11 +77,11 @@ public class TRepeat extends TView {
 
         total = typedArray.getInt(R.styleable.TRepeat_repeatTotal, 0);
 
-        int repeatItemTextValueArrayId = typedArray.getResourceId(R.styleable.TRepeat_repeatItemTextValueArray, -1);
-        if (repeatItemTextValueArrayId != -1) {
-            stringArray = typedArray.getResources().getStringArray(repeatItemTextValueArrayId);
+        int repeatItemTextArrayId = typedArray.getResourceId(R.styleable.TRepeat_repeatItemTextArray, -1);
+        if (repeatItemTextArrayId != -1) {
+            stringArray = typedArray.getResources().getStringArray(repeatItemTextArrayId);
             if (total != stringArray.length) {
-                throw new IndexOutOfBoundsException("The content attribute repeatTotal and repeatItemTextValueArray must be the same length");
+                throw new IndexOutOfBoundsException("The content attribute repeatTotal and repeatItemTextArray must be the same length");
             }
         }
 
@@ -333,11 +332,11 @@ public class TRepeat extends TView {
         invalidate();
     }
 
-    public String[] getRepeatItemTextValueArray() {
+    public String[] getRepeatItemTextArray() {
         return stringArray;
     }
 
-    public void setRepeatItemTextValueArray(String[] repeatItemTextValueArray) {
-        this.stringArray = repeatItemTextValueArray;
+    public void setRepeatItemTextArray(String[] repeatItemTextArray) {
+        this.stringArray = repeatItemTextArray;
     }
 }

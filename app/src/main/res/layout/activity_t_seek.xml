@@ -27,7 +27,7 @@
         app:seekStrokeWidth="2px"
         app:seekTextColor="#cccccc"
         app:seekTextSize="17dp"
-        app:seekTextValueArray="@array/seek_text_value_array" />
+        app:seekTextArray="@array/seek_text_value_array" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewReset"
@@ -43,7 +43,7 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#ffffff"
         app:textSize="14dp"
-        app:textValue="下标重置" />
+        app:text="下标重置" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewIndex"
@@ -63,13 +63,13 @@
         app:textMarkColor="#ff0000"
         app:textMarkRadius="4dp"
         app:textSize="14dp"
-        app:textValue="获取下标" />
+        app:text="获取下标" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tViewReset"
         android:layout_margin="16dp"
-        android:text="seekAngle管道角度\nseekDragBackgroundNormal设置小球常规背景\nseekDragBackgroundPress设置小球按下背景\nseekDragRadiusNormal设置小球常规半径\nseekDragRadiusPress设置小球按下半径\nseekDragStrokeColorNormal设置小球边框线常规颜色\nseekDragStrokeColorPress设置小球边框线按下颜色\nseekDragTextColor设置小球上字体颜色\nseekIndex选中下标\nseekColorFill填充颜色\nseekStrokeColor设置边框线颜色\nseekStrokeWidth设置边框线宽度\nseekTextColor设置默认字体颜色\nseekTextSize设置字体大小\nseekTextValueArray选择项数组"
+        android:text="seekAngle管道角度\nseekDragBackgroundNormal设置小球常规背景\nseekDragBackgroundPress设置小球按下背景\nseekDragRadiusNormal设置小球常规半径\nseekDragRadiusPress设置小球按下半径\nseekDragStrokeColorNormal设置小球边框线常规颜色\nseekDragStrokeColorPress设置小球边框线按下颜色\nseekDragTextColor设置小球上字体颜色\nseekIndex选中下标\nseekColorFill填充颜色\nseekStrokeColor设置边框线颜色\nseekStrokeWidth设置边框线宽度\nseekTextColor设置默认字体颜色\nseekTextSize设置字体大小\nseekTextArray选择项数组"
         android:textColor="#434343" />
 </RelativeLayout>

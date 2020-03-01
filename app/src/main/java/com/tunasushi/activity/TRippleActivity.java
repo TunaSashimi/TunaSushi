@@ -74,11 +74,11 @@ public class TRippleActivity extends Activity {
         tViewChange.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ("^".equals(tRipple01.getRippleTextValue())) {
-                    tRipple01.setRippleTextValue("&");
-                    tRipple02.setRippleTextValue("&");
-                    tRipple03.setRippleTextValue("&");
-                    tRipple04.setRippleTextValue("&");
+                if ("^".equals(tRipple01.getRippleText())) {
+                    tRipple01.setRippleText("&");
+                    tRipple02.setRippleText("&");
+                    tRipple03.setRippleText("&");
+                    tRipple04.setRippleText("&");
 
                     tRipple01.setRippleCircleColorInner(0xffff9900);
                     tRipple02.setRippleCircleColorOuter(
@@ -91,10 +91,10 @@ public class TRippleActivity extends Activity {
                     tRipple04.setRippleCircleAngleOuter(90);
                 } else {
 
-                    tRipple01.setRippleTextValue("^");
-                    tRipple02.setRippleTextValue("^");
-                    tRipple03.setRippleTextValue("^");
-                    tRipple04.setRippleTextValue("^");
+                    tRipple01.setRippleText("^");
+                    tRipple02.setRippleText("^");
+                    tRipple03.setRippleText("^");
+                    tRipple04.setRippleText("^");
 
                     tRipple01.setRippleCircleColorInner(0xfffed136);
                     tRipple02.setRippleCircleColorOuter(0xffff9900);

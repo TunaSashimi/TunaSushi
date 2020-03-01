@@ -42,7 +42,7 @@ public class TRangeActivity extends Activity {
                     dx = tBubble.getWidth() >> 1;
                 }
                 //
-                tBubble.setTBubbleTextValue(tRange.getRangeValue());
+                tBubble.setTBubbleText(tRange.getRangeText());
                 //
                 if (t.isPress()) {
 
@@ -53,7 +53,7 @@ public class TRangeActivity extends Activity {
                     tBubble.setVisibility(View.INVISIBLE);
                 }
                 //
-                tView.setContentValue(tRange.getRangeValueLeft() + " - " + tRange.getRangeValueRight());
+                tView.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
             }
         });
     }

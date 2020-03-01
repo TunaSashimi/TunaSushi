@@ -18,16 +18,16 @@ import com.tuna.R;
  * @Description
  */
 public class TRange extends TView {
-    private String[] rangeValueArray;
+    private String[] rangeTextArray;
 
-    private float rangeThink;
+    private float rangeThick;
 
     private int rangeColorNormal;
     private int rangeColorSelect;
 
     private int rangeDragColor;
-    private int rangeDragStrokeColor;
     private float rangeDragStrokeWidth;
+    private int rangeDragStrokeColor;
 
     private int rangeDragIndexLeft;
 
@@ -62,28 +62,27 @@ public class TRange extends TView {
         this.rangeCircleCentreX = rangeCircleCentreX;
     }
 
-
     //
-    private String rangeValue;
+    private String rangeText;
 
-    public String getRangeValue() {
+    public String getRangeText() {
         if (dx > 0) {
-            return rangeValueArray[rangeDragIndexRight];
+            return rangeTextArray[rangeDragIndexRight];
         } else {
-            return rangeValueArray[rangeDragIndexLeft];
+            return rangeTextArray[rangeDragIndexLeft];
         }
     }
 
-    public void setRangeValue(String rangeValue) {
-        this.rangeValue = rangeValue;
+    public void setRangeText(String rangeText) {
+        this.rangeText = rangeText;
     }
 
-    public String getRangeValueLeft() {
-        return rangeValueArray[rangeDragIndexLeft];
+    public String getRangeTextLeft() {
+        return rangeTextArray[rangeDragIndexLeft];
     }
 
-    public String getRangeValueRight() {
-        return rangeValueArray[rangeDragIndexRight];
+    public String getRangeTextRight() {
+        return rangeTextArray[rangeDragIndexRight];
     }
 
     public TRange(Context context) {
@@ -103,39 +102,39 @@ public class TRange extends TView {
 
         int rangeValueArrayId = typedArray.getResourceId(R.styleable.TRange_rangeValueArray, -1);
         if (rangeValueArrayId != -1) {
-            rangeValueArray = typedArray.getResources().getStringArray(rangeValueArrayId);
-            total = rangeValueArray.length;
+            rangeTextArray = typedArray.getResources().getStringArray(rangeValueArrayId);
+            total = rangeTextArray.length;
             if (total < 2) {
-                throw new IndexOutOfBoundsException("The content attribute rangeValueArray length must be at least 2");
+                throw new IndexOutOfBoundsException("The content attribute rangeTextArray length must be at least 2");
             } else {
                 floatArray = new float[total];
             }
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named rangeValueArray");
+            throw new IllegalArgumentException("The content attribute require a property named rangeTextArray");
         }
 
-        rangeThink = typedArray.getDimension(R.styleable.TRange_rangeThink, 0);
-        if (rangeThink <= 0) {
-            throw new IllegalArgumentException("The content attribute rangeThink must be greater than 0 ");
+        rangeThick = typedArray.getDimension(R.styleable.TRange_rangeThick, 0);
+        if (rangeThick <= 0) {
+            throw new IllegalArgumentException("The content attribute rangeThick must be greater than 0 ");
         }
 
         rangeColorNormal = typedArray.getColor(R.styleable.TRange_rangeColorNormal, Color.TRANSPARENT);
         rangeColorSelect = typedArray.getColor(R.styleable.TRange_rangeColorSelect, rangeColorNormal);
 
         rangeDragColor = typedArray.getColor(R.styleable.TRange_rangeDragColor, Color.TRANSPARENT);
-        rangeDragStrokeColor = typedArray.getColor(R.styleable.TRange_rangeDragStrokeColor, Color.TRANSPARENT);
         rangeDragStrokeWidth = typedArray.getDimension(R.styleable.TRange_rangeDragStrokeWidth, 0);
+        rangeDragStrokeColor = typedArray.getColor(R.styleable.TRange_rangeDragStrokeColor, Color.TRANSPARENT);
 
         //0
         rangeDragIndexLeft = typedArray.getInt(R.styleable.TRange_rangeDragIndexLeft, 0);
         if (rangeDragIndexLeft < 0 || rangeDragIndexLeft > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexLeft must be no less than 0 and no greater than rangeValueArray length");
+            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexLeft must be no less than 0 and no greater than rangeTextArray length");
         }
 
-        //rangeValueArray.length - 1
+        //rangeTextArray.length - 1
         rangeDragIndexRight = typedArray.getInt(R.styleable.TRange_rangeDragIndexRight, total - 1);
         if (rangeDragIndexRight < 0 || rangeDragIndexRight > total - 1) {
-            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexRight must be no less than 0 and no greater than rangeValueArray length");
+            throw new IndexOutOfBoundsException("The content attribute rangeDragIndexRight must be no less than 0 and no greater than rangeTextArray length");
         }
 
         //
@@ -169,7 +168,7 @@ public class TRange extends TView {
     @Override
     protected void onDraw(Canvas canvas) {
         //draw rangeColorNormal
-        initPaint(Paint.Style.FILL, rangeColorNormal, rangeThink);
+        initPaint(Paint.Style.FILL, rangeColorNormal, rangeThick);
         canvas.drawLine(0, height >> 1, width, height >> 1, paint);
 
         // draw range dragLeft
@@ -194,7 +193,7 @@ public class TRange extends TView {
         }
 
         //draw rangeColorSelect
-        initPaint(Paint.Style.FILL, rangeColorSelect, rangeThink);
+        initPaint(Paint.Style.FILL, rangeColorSelect, rangeThick);
         canvas.drawLine(floatArray[rangeDragIndexLeft] + (height >> 1), height >> 1,
                 floatArray[rangeDragIndexRight] - (height >> 1), height >> 1, paint);
     }

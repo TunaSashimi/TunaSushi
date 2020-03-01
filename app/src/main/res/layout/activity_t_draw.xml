@@ -11,5 +11,5 @@
         app:drawColor="#ffff00"
         app:drawMode="flower"
         app:drawSrc="@drawable/bitmap_thollow_bg"
-        app:drawWidth="8dp" />
+        app:drawThick="8dp" />
 </RelativeLayout>

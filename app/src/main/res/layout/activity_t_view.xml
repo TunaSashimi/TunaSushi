@@ -27,7 +27,7 @@
             app:backgroundNormal="#444444"
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
-            app:textValue="#444444" />
+            app:text="#444444" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect02"
@@ -41,7 +41,7 @@
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
             app:textTypeFaceMode="bold_italic"
-            app:textValue="#444444" />
+            app:text="#444444" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect03"
@@ -53,7 +53,7 @@
             app:rotate="30"
             app:textColorNormal="#ffffff"
             app:textTypeFaceAsset="fonts/computer.ttf"
-            app:textValue="#666666"
+            app:text="#666666"
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
@@ -67,7 +67,7 @@
             app:rotate="15"
             app:textColorNormal="#ffffff"
             app:textTypeFaceAsset="fonts/digital-7.ttf"
-            app:textValue="#cccccc" />
+            app:text="#cccccc" />
 
         <TextView
             android:id="@+id/textPrompt02"
@@ -99,7 +99,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectMode=reverse" />
+            app:text="selectMode=reverse" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="170dp"
@@ -121,7 +121,7 @@
             app:strokeWidthSelect="1dp"
             app:textColorNormal="#dedede"
             app:textSize="16dp"
-            app:textValue="selectMode=always" />
+            app:text="selectMode=always" />
 
         <TextView
             android:id="@+id/textPrompt03"
@@ -153,7 +153,7 @@
                 app:select="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="4dp"
-                app:textValue="金枪鱼刺身" />
+                app:text="金枪鱼刺身" />
 
             <com.tunasushi.tuna.TView
                 android:id="@+id/tViewGroupEnd"
@@ -164,7 +164,7 @@
                 app:textMark="true"
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="4dp"
-                app:textValue="TunaSashimi" />
+                app:text="TunaSashimi" />
         </RelativeLayout>
 
         <LinearLayout
@@ -183,7 +183,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
-            android:text="strokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkTextValue设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
+            android:text="strokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkText设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadow01"
@@ -201,7 +201,7 @@
             app:textMarkRadius="10dp"
             app:textMarkTextColor="#ffffff"
             app:textMarkTextSize="10dp"
-            app:textMarkTextValue="1"
+            app:textMarkText="1"
             app:textPaddingLeft="4dp"
             app:textPaddingRight="4dp"
             app:textShadowColor="#998383"
@@ -209,7 +209,7 @@
             app:textShadowDy="2dp"
             app:textShadowRadius="3dp"
             app:textSize="14dp"
-            app:textValue="背景#e1e1e1描边#999999字体阴影#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
+            app:text="背景#e1e1e1描边#999999字体阴影#ff00ff字体阴影半径3dp字体阴影横向偏移2dp字体阴影纵向偏移2dp字体停靠center_left" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadow02"
@@ -220,7 +220,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:backgroundNormal="#fae500"
-            app:backgroundNormalShadowColor="#998383"
+            app:backgroundShadowColorNormal="#998383"
             app:backgroundPress="#d9c700"
             app:backgroundShadowDxNormal="1dp"
             app:backgroundShadowDyNormal="1dp"
@@ -234,7 +234,7 @@
             app:textPaddingLeft="4dp"
             app:textPaddingRight="4dp"
             app:textSize="14dp"
-            app:textValue="背景#fae500描边#ac9696背景阴影#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
+            app:text="背景#fae500描边#ac9696背景阴影#998383背景阴影半径2dp背景阴影横向偏移1dp背景阴影纵向偏移1dp字体停靠left_center" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewShadow03"
@@ -244,7 +244,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#0000ff"
-            app:backgroundNormalShadowColor="#800000ff"
+            app:backgroundShadowColorNormal="#800000ff"
             app:backgroundShadowDxNormal="0dp"
             app:backgroundShadowDyNormal="0dp"
             app:backgroundShadowRadiusNormal="8dp"
@@ -254,7 +254,7 @@
             app:textPaddingRight="8dp"
             app:textSize="14dp"
             app:textTypeFaceAsset="fonts/simsun.ttf"
-            app:textValue="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
+            app:text="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp" />
 
         <TextView
             android:id="@+id/textPrompt05"
@@ -286,7 +286,7 @@
             app:textColorNormal="#ffffff"
             app:textGravityMode="left"
             app:textSize="14dp"
-            app:textValue="backgroundNormalGradientDirection设置top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#592d2d" />
+            app:text="backgroundNormalGradientDirection设置top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#592d2d" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewGradient02"
@@ -306,7 +306,7 @@
             app:textColorNormal="#ffffff"
             app:textGravityMode="left"
             app:textSize="14dp"
-            app:textValue="backgroundNormalGradientDirection设置left_top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#ffca00" />
+            app:text="backgroundNormalGradientDirection设置left_top,backgroundGradientStartNormal设置#ffca00,backgroundGradientEndNormal设置#ffca00" />
 
         <TextView
             android:id="@+id/textPrompt06"
@@ -337,7 +337,7 @@
             app:strokeColorNormal="#592d2d"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
-            app:textValue="背景按下#d9c700" />
+            app:text="背景按下#d9c700" />
 
         <com.tunasushi.tuna.TView
             style="@style/TViewTextMarkRedTop"
@@ -352,7 +352,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
             app:textMarkTouchable="true"
-            app:textValue="前景按下#50444444" />
+            app:text="前景按下#50444444" />
 
         <TextView
             android:id="@+id/clipButton"
@@ -381,7 +381,7 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal02"
             app:textColorNormal="#ffffff"
             app:textGravityMode="center"
-            app:textValue="mark=true&amp;textGravityMode=center" />
+            app:text="mark=true&amp;textGravityMode=center" />
 
         <com.tunasushi.tuna.TView
             style="@style/TViewTextMarkRedHorizontal"
@@ -396,7 +396,7 @@
             app:textColorNormal="#ffffff"
             app:textGravityMode="left"
             app:textRowSpaceRatio="200%"
-            app:textValue="mark=true&amp;textGravityMode=left" />
+            app:text="mark=true&amp;textGravityMode=left" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView05"
@@ -456,7 +456,7 @@
             android:layout_height="100dp"
             android:layout_alignTop="@id/tView08"
             android:layout_toRightOf="@id/tView08"
-            app:backgroundNormalShadowColor="#998383"
+            app:backgroundShadowColorNormal="#998383"
             app:backgroundShadowDxNormal="2dp"
             app:backgroundShadowDyNormal="2dp"
             app:backgroundShadowRadiusNormal="2dp"
@@ -470,7 +470,7 @@
             android:layout_below="@id/tView08"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="contentValue和textValue用法相同" />
+            android:text="content和text用法相同" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewContent"
@@ -485,7 +485,7 @@
             app:contentGravityMode="left"
             app:contentPaddingLeft="8dp"
             app:contentSize="14dp"
-            app:contentValue="1."
+            app:content="1."
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#999999"
@@ -496,11 +496,11 @@
             app:textMarkRadius="10dp"
             app:textMarkTextColor="#ffffff"
             app:textMarkTextSize="10dp"
-            app:textMarkTextValue="1"
+            app:textMarkText="1"
             app:textPaddingLeft="18dp"
             app:textPaddingRight="18dp"
             app:textSize="14dp"
-            app:textValue="同时设置contentValue和textValue通过设置不同的contentPaddingLeft,textPaddingLeft,contentDy及textDy来实现标题缩进的效果" />
+            app:text="同时设置content和text通过设置不同的contentPaddingLeft,textPaddingLeft,contentDy及textDy来实现标题缩进的效果" />
 
         <TextView
             android:id="@+id/textPrompt09"
@@ -528,7 +528,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
             app:textSize="16dp"
-            app:textValue="100" />
+            app:text="100" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSrcLeftPadding"
@@ -547,7 +547,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
             app:textSize="16dp"
-            app:textValue="100" />
+            app:text="100" />
 
         <TextView
             android:layout_width="match_parent"
@@ -576,7 +576,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
             app:textSize="16dp"
-            app:textValue="100" />
+            app:text="100" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSrcRightPaddingDx"
@@ -596,7 +596,7 @@
             app:strokeWidthNormal="1dp"
             app:textColorNormal="#ffffff"
             app:textSize="16dp"
-            app:textValue="100" />
+            app:text="100" />
 
         <TextView
             android:layout_width="match_parent"

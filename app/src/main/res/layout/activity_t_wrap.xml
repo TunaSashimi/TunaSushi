@@ -34,6 +34,6 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#bc7955"
         app:textSize="16dp"
-        app:textValue="SHOW RESULT" />
+        app:text="SHOW RESULT" />
 
 </RelativeLayout>

@@ -326,7 +326,7 @@ public class TGroup {
             return;
         } else if (stringArray.length == 1) {
             TView t = new TView(context, null, styleOther);
-            t.setTextValue(stringArray[0]);
+            t.setText(stringArray[0]);
             if (touchUpListener != null) {
                 t.setTouchUpListener(touchUpListener);
             }
@@ -337,7 +337,7 @@ public class TGroup {
         } else {
             for (int i = 0; i < stringArray.length; i++) {
                 TView t = new TView(context, null, i == 0 ? styleStart : i == stringArray.length - 1 ? styleEnd : styleOther);
-                t.setTextValue(stringArray[i]);
+                t.setText(stringArray[i]);
                 if (i == index) {
                     t.setSelect(true);
                 }

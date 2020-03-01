@@ -25,7 +25,7 @@ import static java.lang.Math.sin;
  */
 public class TSeek extends TView {
 
-    private String[] seekTextValueArray;
+    private String[] seekTextArray;
     private int seekAngle;
     private int seekColorFill;
     private float seekStrokeWidth;
@@ -40,8 +40,8 @@ public class TSeek extends TView {
 
     private float seekDragRadiusNormal, seekDragRadiusPress;
 
-    private int seekDragTextColor;
     private float seekDragTextSize;
+    private int seekDragTextColor;
 
     private Bitmap seekDragSrcPress;
 
@@ -79,12 +79,12 @@ public class TSeek extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSeek);
 
-        int seekTextValueArrayId = typedArray.getResourceId(R.styleable.TSeek_seekTextValueArray, -1);
-        if (seekTextValueArrayId != -1) {
-            seekTextValueArray = typedArray.getResources().getStringArray(seekTextValueArrayId);
-            total = seekTextValueArray.length;
+        int seekTextArrayId = typedArray.getResourceId(R.styleable.TSeek_seekTextArray, -1);
+        if (seekTextArrayId != -1) {
+            seekTextArray = typedArray.getResources().getStringArray(seekTextArrayId);
+            total = seekTextArray.length;
             if (total < 2) {
-                throw new IndexOutOfBoundsException("The content attribute seekTextValueArray length must be at least 2");
+                throw new IndexOutOfBoundsException("The content attribute seekTextArray length must be at least 2");
             } else {
                 floatArray = new float[total];
                 seekCircleRectFArray = new RectF[total];
@@ -93,12 +93,12 @@ public class TSeek extends TView {
                 }
             }
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named seekTextValueArray");
+            throw new IllegalArgumentException("The content attribute require a property named seekTextArray");
         }
 
         seekIndex = typedArray.getInt(R.styleable.TSeek_seekIndex, -1);
         if (seekIndex >= total) {
-            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be smaller than the seekTextValueArray length");
+            throw new IndexOutOfBoundsException("The content attribute seekIndex length must be smaller than the seekTextArray length");
         }
 
         seekAngle = typedArray.getInt(R.styleable.TSeek_seekAngle, 30);
@@ -106,8 +106,8 @@ public class TSeek extends TView {
         seekStrokeWidth = typedArray.getDimension(R.styleable.TSeek_seekStrokeWidth, 0);
         seekStrokeColor = typedArray.getColor(R.styleable.TSeek_seekStrokeColor, Color.TRANSPARENT);
 
-        seekTextColor = typedArray.getColor(R.styleable.TSeek_seekTextColor,textColorDefault);
         seekTextSize = typedArray.getDimension(R.styleable.TSeek_seekTextSize, textSizeDefault);
+        seekTextColor = typedArray.getColor(R.styleable.TSeek_seekTextColor,textColorDefault);
 
         seekDragBackgroundNormal = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundNormal, Color.TRANSPARENT);
         seekDragBackgroundPress = typedArray.getColor(R.styleable.TSeek_seekDragBackgroundPress, seekDragBackgroundNormal);
@@ -218,7 +218,7 @@ public class TSeek extends TView {
         // draw bottom text
         initTextPaint(Paint.Style.FILL, seekTextColor, seekTextSize, Align.CENTER);
         for (int i = 0; i < total; i++) {
-            drawText(canvas, seekTextValueArray[i], width, floatArray[i], height >> 1, 0, 0, paint);
+            drawText(canvas, seekTextArray[i], width, floatArray[i], height >> 1, 0, 0, paint);
         }
 
         // draw drag
@@ -279,7 +279,7 @@ public class TSeek extends TView {
                 canvas.drawPath(path, paint);
             }
 
-            drawText(canvas, seekTextValueArray[seekIndex], width, x, height >> 1, 0, 0,
+            drawText(canvas, seekTextArray[seekIndex], width, x, height >> 1, 0, 0,
                     initTextPaint(Paint.Style.FILL, seekDragTextColor, seekDragTextSize, Align.CENTER));
 
         } else {
@@ -290,7 +290,7 @@ public class TSeek extends TView {
             canvas.drawCircle(adjuestX, height >> 1, seekDragRadiusNormal - seekDragStrokeWidth, initPaint(Paint.Style.FILL, seekDragBackgroundNormal));
 
             // draw response text
-            drawText(canvas, seekTextValueArray[seekIndex], width, adjuestX, height >> 1, 0, 0,
+            drawText(canvas, seekTextArray[seekIndex], width, adjuestX, height >> 1, 0, 0,
                     initTextPaint(Paint.Style.FILL, seekDragTextColor, seekDragTextSize, Align.CENTER));
         }
     }

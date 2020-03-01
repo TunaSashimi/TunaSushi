@@ -40,7 +40,6 @@ import static com.tunasushi.tool.ViewTool.getLinearGradient;
  * @Description
  */
 public class TRipple extends TView {
-
     private float rippleCircleRadiusInner;
 
     public float getRippleCircleRadiusInner() {
@@ -145,6 +144,16 @@ public class TRipple extends TView {
         rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorGradientStartOuter, rippleCircleColorGradientEndOuter);
     }
 
+    private String rippleText;
+
+    public String getRippleText() {
+        return rippleText;
+    }
+
+    public void setRippleText(String rippleText) {
+        this.rippleText = rippleText;
+    }
+
     private float rippleTextSize;
 
     public float getRippleTextSize() {
@@ -163,16 +172,6 @@ public class TRipple extends TView {
 
     public void setRippleTextColor(int rippleTextColor) {
         this.rippleTextColor = rippleTextColor;
-    }
-
-    private String rippleTextValue;
-
-    public String getRippleTextValue() {
-        return rippleTextValue;
-    }
-
-    public void setRippleTextValue(String rippleTextValue) {
-        this.rippleTextValue = rippleTextValue;
     }
 
     //
@@ -348,25 +347,6 @@ public class TRipple extends TView {
         this.rippleTimeInterpolator = rippleTimeInterpolator;
     }
 
-    @IntDef({ACCELERATEDECELERATEINTERPOLATOR, ACCELERATEINTERPOLATOR, ANTICIPATEINTERPOLATOR,
-            ANTICIPATEOVERSHOOTINTERPOLATOR, BOUNCEINTERPOLATOR, CYCLEINTERPOLATOR,
-            DECELERATEINTERPOLATOR, LINEARINTERPOLATOR, OVERSHOOTINTERPOLATOR,})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface rippleMode {
-    }
-
-    public static final int ACCELERATEDECELERATEINTERPOLATOR = 0;
-    public static final int ACCELERATEINTERPOLATOR = 1;
-    public static final int ANTICIPATEINTERPOLATOR = 2;
-    public static final int ANTICIPATEOVERSHOOTINTERPOLATOR = 3;
-    public static final int BOUNCEINTERPOLATOR = 4;
-    public static final int CYCLEINTERPOLATOR = 5;
-    public static final int DECELERATEINTERPOLATOR = 6;
-    public static final int LINEARINTERPOLATOR = 7;
-    public static final int OVERSHOOTINTERPOLATOR = 8;
-    private @rippleMode
-    int rippleMode;
-
     //
     private static final TimeInterpolator[] rippleTimeInterpolatorArray = {new AccelerateDecelerateInterpolator(), new AccelerateInterpolator(), new AnticipateInterpolator(),
             new AnticipateOvershootInterpolator(), new BounceInterpolator(), new CycleInterpolator(0), new DecelerateInterpolator(), new LinearInterpolator(),
@@ -432,10 +412,9 @@ public class TRipple extends TView {
 
         rippleCircleColorOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorOuter, rippleCircleColorInner);
 
+        rippleText = typedArray.getString(R.styleable.TRipple_rippleText);
         rippleTextSize = typedArray.getDimension(R.styleable.TRipple_rippleTextSize, textSizeDefault);
         rippleTextColor = typedArray.getColor(R.styleable.TRipple_rippleTextColor, textColorDefault);
-
-        rippleTextValue = typedArray.getString(R.styleable.TRipple_rippleTextValue);
 
         //
         rippleTextDx = typedArray.getDimension(R.styleable.TRipple_rippleTextDx, 0);
@@ -523,8 +502,8 @@ public class TRipple extends TView {
                             / rippleDeltaRadius * 255)));
         }
 
-        if (rippleTextValue != null) {
-            drawText(canvas, rippleTextValue, width, (width >> 1) + rippleTextDx, (height >> 1) + rippleTextDy, 0, 0,
+        if (rippleText != null) {
+            drawText(canvas, rippleText, width, (width >> 1) + rippleTextDx, (height >> 1) + rippleTextDy, 0, 0,
                     initTextPaint(Paint.Style.FILL, rippleTextColor, rippleTextSize, Align.CENTER));
         }
     }
@@ -543,5 +522,4 @@ public class TRipple extends TView {
         }
         rippleAnimatorSet.start();
     }
-
 }

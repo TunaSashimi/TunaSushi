@@ -27,7 +27,7 @@ public class TDialog extends TView {
     private float dialogStrokeWidth;
     private int dialogStrokeColor;
 
-    private String dialogTextValue;
+    private String dialogText;
     private float dialogTextSize;
     private int dialogTextColor;
     private float dialogTextDy;
@@ -45,7 +45,7 @@ public class TDialog extends TView {
     }
 
     //
-    private String dialogContentValue;
+    private String dialogContent;
     private float dialogContentSize;
     private int dialogContentColor;
     private float dialogContentDy;
@@ -69,14 +69,14 @@ public class TDialog extends TView {
     private int dialogChoiceBackgroundPress;
     private float dialogChoiceHeight;
 
-    private String[] dialogChoiceTextValueArray;
+    private String[] dialogChoiceTextArray;
 
-    public String[] getDialogChoiceTextValueArray() {
-        return dialogChoiceTextValueArray;
+    public String[] getDialogChoiceTextArray() {
+        return dialogChoiceTextArray;
     }
 
-    public void setDialogChoiceTextValueArray(String[] dialogChoiceTextValueArray) {
-        this.dialogChoiceTextValueArray = dialogChoiceTextValueArray;
+    public void setDialogChoiceTextArray(String[] dialogChoiceTextArray) {
+        this.dialogChoiceTextArray = dialogChoiceTextArray;
     }
 
     private float dialogChoiceSize;
@@ -143,7 +143,7 @@ public class TDialog extends TView {
         dialogStrokeWidth = typedArray.getDimension(R.styleable.TDialog_dialogStrokeWidth, 0);
         dialogStrokeColor = typedArray.getColor(R.styleable.TDialog_dialogStrokeColor, Color.TRANSPARENT);
 
-        dialogTextValue = typedArray.getString(R.styleable.TDialog_dialogTextValue);
+        dialogText = typedArray.getString(R.styleable.TDialog_dialogText);
         dialogTextSize = typedArray.getDimension(R.styleable.TDialog_dialogTextSize, textSizeDefault);
         dialogTextColor = typedArray.getColor(R.styleable.TDialog_dialogTextColor, textColorDefault);
         dialogTextDy = typedArray.getDimension(R.styleable.TDialog_dialogTextDy, 0);
@@ -153,7 +153,7 @@ public class TDialog extends TView {
             dialogTextMode = Typeface.create(Typeface.DEFAULT, dialogTextModeArray[dialogTextModeIndex]);
         }
 
-        dialogContentValue = typedArray.getString(R.styleable.TDialog_dialogContentValue);
+        dialogContent = typedArray.getString(R.styleable.TDialog_dialogContent);
         dialogContentSize = typedArray.getDimension(R.styleable.TDialog_dialogContentSize, textSizeDefault);
         dialogContentColor = typedArray.getColor(R.styleable.TDialog_dialogContentColor, textColorDefault);
         dialogContentDy = typedArray.getDimension(R.styleable.TDialog_dialogContentDy, 0);
@@ -169,13 +169,13 @@ public class TDialog extends TView {
         dialogChoiceBackgroundNormal = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundNormal, Color.TRANSPARENT);
         dialogChoiceBackgroundPress = typedArray.getColor(R.styleable.TDialog_dialogChoiceBackgroundPress, dialogChoiceBackgroundNormal);
 
-        int dialogChoiceTextValueArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceValueArray, -1);
-        if (dialogChoiceTextValueArrayId != -1) {
-            dialogChoiceTextValueArray = typedArray.getResources().getStringArray(dialogChoiceTextValueArrayId);
-            total = dialogChoiceTextValueArray.length;
+        int dialogChoiceTextArrayId = typedArray.getResourceId(R.styleable.TDialog_dialogChoiceValueArray, -1);
+        if (dialogChoiceTextArrayId != -1) {
+            dialogChoiceTextArray = typedArray.getResources().getStringArray(dialogChoiceTextArrayId);
+            total = dialogChoiceTextArray.length;
             floatArray = new float[total];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named dialogChoiceTextValueArray");
+            throw new IllegalArgumentException("The content attribute require a property named dialogChoiceTextArray");
         }
 
         dialogChoiceHeight = typedArray.getDimension(R.styleable.TDialog_dialogChoiceHeight, 0);
@@ -227,7 +227,9 @@ public class TDialog extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(dialogSurround);
+        if (dialogSurround != Color.TRANSPARENT) {
+            canvas.drawColor(dialogSurround);
+        }
         canvas.translate(dx, dy);
 
         //
@@ -242,7 +244,7 @@ public class TDialog extends TView {
         //drawDialogText
         drawText(
                 canvas,
-                dialogTextValue,
+                dialogText,
                 dialogWidth,
                 dialogWidth / 2,
                 dialogTextSize * 0.5f + dialogTextDy,
@@ -252,7 +254,7 @@ public class TDialog extends TView {
         //drawDialogContent
         drawText(
                 canvas,
-                dialogContentValue,
+                dialogContent,
                 dialogWidth,
                 dialogWidth / 2,
                 dialogHeight / 2 + dialogContentDy,
@@ -325,7 +327,7 @@ public class TDialog extends TView {
             //
             drawText(
                     canvas,
-                    dialogChoiceTextValueArray[i],
+                    dialogChoiceTextArray[i],
                     dialogWidth,
                     share * (i + 0.5f),
                     dialogHeight - dialogChoiceHeight * 0.5f,

@@ -10,10 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.tunasushi.R;
+import com.tunasushi.tuna.TTrangle;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TLine;
 import com.tunasushi.tuna.TRepeat;
 
+import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
 
 /**
@@ -22,11 +24,10 @@ import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TRepeatActivity extends Activity {
+public class TRepeatActivity extends Activity implements TView.TouchListener {
+    private int dx;
     private TLine tLine;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
-
-    private Spinner spinner;
     private String[] indexArray = {"-1", "0", "1", "2", "3"};
 
     @Override
@@ -35,6 +36,7 @@ public class TRepeatActivity extends Activity {
 
         setContentView(R.layout.activity_t_repeat);
 
+        //
         tLine = findViewById(R.id.tLine);
 
         tRepeatStar = findViewById(R.id.tRepeatStar);
@@ -42,45 +44,38 @@ public class TRepeatActivity extends Activity {
         tRepeatTips = findViewById(R.id.tRepeatTips);
 
         //
-        tRepeatCar.setRepeatTotal(indexArray.length);
-        tRepeatCar.setRepeatItemTextValueArray(indexArray);
+        tRepeatStar.setTouchListener(this);
 
         //
-        tRepeatStar.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                float touchEventX = t.getTouchX();
-                float touchEventY = t.getTouchY();
-                tRepeatCar.setTouchXYRaw(touchEventX, touchEventY);
-                tLine.setTouchXYRaw(touchEventX, touchEventY);
-            }
-        });
+        tRepeatCar.setRepeatTotal(indexArray.length);
+        tRepeatCar.setRepeatItemTextArray(indexArray);
+        tRepeatCar.setTouchListener(this);
 
-        tRepeatCar.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                float touchEventX = t.getTouchX();
-                float touchEventY = t.getTouchY();
-                tRepeatStar.setTouchXYRaw(touchEventX, touchEventY);
-                tLine.setTouchXYRaw(touchEventX, touchEventY);
-            }
-        });
 
         //
         setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);
+    }
 
-        spinner = findViewById(R.id.spinner);
-        spinner.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, indexArray));
-        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tRepeatStar.setRepeatIndex(position - 1);
-                tRepeatCar.setRepeatIndex(position - 1);
-            }
+    @Override
+    public void touch(TView t) {
+        float touchEventX = t.getTouchX();
+        float touchEventY = t.getTouchY();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        //
+        if (dx == 0) {
+            dx = tLine.getWidth() >> 1;
+        }
+        tLine.setX((int) touchEventX - dx + dpToPx(20));
+
+        switch (t.getId()) {
+            case R.id.tRepeatStar:
+                tRepeatCar.setTouchXYRaw(touchEventX, touchEventY);
+                break;
+            case R.id.tRepeatCar:
+                tRepeatStar.setTouchXYRaw(touchEventX, touchEventY);
+                break;
+            default:
+                break;
+        }
     }
 }

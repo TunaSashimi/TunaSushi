@@ -3,7 +3,6 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TSector;
@@ -35,7 +34,7 @@ public class TSectorActivity extends Activity implements TView.OnClickListener {
         tViewSubtract = findViewById(R.id.tViewSubtract);
 
         tSector.setProgress(progress);
-        tViewProgress.setTextValue(progress + "%");
+        tViewProgress.setText(progress + "%");
 
         //
         tViewAdd.setOnClickListener(this);
@@ -51,7 +50,7 @@ public class TSectorActivity extends Activity implements TView.OnClickListener {
                     progress = 100;
                 }
                 tSector.setProgress(progress);
-                tViewProgress.setTextValue(progress + "%");
+                tViewProgress.setText(progress + "%");
                 break;
             case R.id.tViewSubtract:
                 progress -= 1;
@@ -59,7 +58,7 @@ public class TSectorActivity extends Activity implements TView.OnClickListener {
                     progress = 0;
                 }
                 tSector.setProgress(progress);
-                tViewProgress.setTextValue(progress + "%");
+                tViewProgress.setText(progress + "%");
                 break;
             default:
                 break;

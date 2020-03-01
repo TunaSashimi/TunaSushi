@@ -111,13 +111,13 @@ public class TView extends View {
     }
 
     // 1
-    protected Paint initPaint(int colorValue) {
-        return initPaint(Paint.Style.FILL, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(int color) {
+        return initPaint(Paint.Style.FILL, 0, color, null, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 2
-    protected Paint initPaint(Paint.Style style, int colorValue) {
-        return initPaint(style, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Paint.Style style, int color) {
+        return initPaint(style, 0, color, null, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 2
@@ -126,13 +126,13 @@ public class TView extends View {
     }
 
     // 3
-    protected Paint initPaint(Paint.Style style, int colorValue, float strokeWidth) {
-        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Paint.Style style, int color, float strokeWidth) {
+        return initPaint(style, strokeWidth, color, null, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 3
-    protected Paint initPaint(Paint.Style style, int colorValue, Shader shader) {
-        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Paint.Style style, int color, Shader shader) {
+        return initPaint(style, 0, color, shader, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 3
@@ -141,13 +141,13 @@ public class TView extends View {
     }
 
     // 4
-    protected Paint initPaint(Paint.Style style, int colorValue, Shader shader, int alpha) {
-        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
+    protected Paint initPaint(Paint.Style style, int color, Shader shader, int alpha) {
+        return initPaint(style, 0, color, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
     }
 
     // 4
-    protected Paint initPaint(Paint.Style style, int colorValue, float strokeWidth, int alpha) {
-        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, alpha);
+    protected Paint initPaint(Paint.Style style, int color, float strokeWidth, int alpha) {
+        return initPaint(style, strokeWidth, color, null, 0, Color.TRANSPARENT, 0, 0, alpha);
     }
 
     // 4
@@ -165,12 +165,12 @@ public class TView extends View {
     }
 
     // 6
-    protected Paint initPaint(Paint.Style style, int colorValue, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
-        return initPaint(style, 0, colorValue, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
+    protected Paint initPaint(Paint.Style style, int color, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
+        return initPaint(style, 0, color, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
     }
 
     // 9
-    protected Paint initPaint(Paint.Style style, float strokeWidth, int colorValue, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
+    protected Paint initPaint(Paint.Style style, float strokeWidth, int color, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
         //
         initPaint();
         //
@@ -183,7 +183,7 @@ public class TView extends View {
 
         // When the shadow color can not be set to transparent, but can not set
         if (shader == null) {
-            paint.setColor(colorValue);
+            paint.setColor(color);
         } else {
             paint.setShader(shader);
         }
@@ -223,14 +223,14 @@ public class TView extends View {
     }
 
     // 8
-    protected Paint initTextPaint(Paint.Style style, int colorValue, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align) {
+    protected Paint initTextPaint(Paint.Style style, int color, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align) {
         //
         initPaint();
         //
         if (style != null) {
             paint.setStyle(style);
         }
-        paint.setColor(colorValue);
+        paint.setColor(color);
 
         if (textSize != 0) {
             paint.setTextSize(textSize);
@@ -381,18 +381,18 @@ public class TView extends View {
 
     // 9
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, textRowSpaceRatio, valueMeasureList);
+                               float textRowSpaceRatio, List<Integer> measureList) {
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, textRowSpaceRatio, measureList);
     }
 
     // 10
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               int textGravityMode, float textRowSpaceRatio, List<Integer> valueMeasureList) {
-        if (valueMeasureList == null) {
-            valueMeasureList = generateMeasureList(string, paint, width, paddingLeft, paddingRight);
+                               int textGravityMode, float textRowSpaceRatio, List<Integer> measureList) {
+        if (measureList == null) {
+            measureList = createMeasureList(string, paint, width, paddingLeft, paddingRight);
         }
 
-        float textMiddleRow = (valueMeasureList.size() + 1) * 0.5f;
+        float textMiddleRow = (measureList.size() + 1) * 0.5f;
 
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         // float baseline = (targetRectBottom + targetRectTop - fontMetrics.bottom - fontMetrics.top) * 0.5f;
@@ -403,18 +403,18 @@ public class TView extends View {
         String drawString;
         float drawLineY;
 
-        int valueMeasureListSize = valueMeasureList.size();
-        for (int i = 0; i < valueMeasureListSize; i++) {
+        int measureListSize = measureList.size();
+        for (int i = 0; i < measureListSize; i++) {
             drawLineY = baseline + (i + 1 - textMiddleRow) * paint.getTextSize() * textRowSpaceRatio;
             if (i == 0) {
-                drawString = string.substring(0, valueMeasureList.get(i));
+                drawString = string.substring(0, measureList.get(i));
             } else {
-                drawString = string.substring(valueMeasureList.get(i - 1), valueMeasureList.get(i));
+                drawString = string.substring(measureList.get(i - 1), measureList.get(i));
             }
 
             float measureLength = paint.measureText(drawString);
 
-            if (i != valueMeasureListSize - 1) {
+            if (i != measureListSize - 1) {
                 switch (textGravityMode) {
                     case TEXT_GRAVITY_CENTER:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
@@ -466,7 +466,7 @@ public class TView extends View {
             String markText,
             int markTextColor,
             float markTextSize,
-            List<Integer> valueMeasureList) {
+            List<Integer> measureList) {
 
         float cx = (width >> 1) + offsetX + markRadius + markDx;
         float cy = (height >> 1) + offsetY + markDy;
@@ -476,7 +476,7 @@ public class TView extends View {
             // Because, drawText use the same method to clear the cache measureRowList
             drawText(canvas, markText, width, cx, cy, 0, 0,
                     initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
-                    , 1, valueMeasureList);
+                    , 1, measureList);
         }
     }
 
@@ -485,23 +485,23 @@ public class TView extends View {
                              int width, int height,
                              float floatX,
                              float arrowWidth, float arrowHeight,
-                             float arrowStrokeWidth, int arrowStrokeColor,
+                             float lineThick, int lineColor,
                              boolean upward) {
         if (upward) {
-            initPathMoveTo(0, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX, height - arrowStrokeWidth * 0.5f - arrowHeight);
-            path.lineTo(floatX + arrowWidth * 0.5f, height - arrowStrokeWidth * 0.5f);
-            path.lineTo(width, height - arrowStrokeWidth * 0.5f);
+            initPathMoveTo(0, height - lineThick * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, height - lineThick * 0.5f);
+            path.lineTo(floatX, height - lineThick * 0.5f - arrowHeight);
+            path.lineTo(floatX + arrowWidth * 0.5f, height - lineThick * 0.5f);
+            path.lineTo(width, height - lineThick * 0.5f);
         } else {
-            initPathMoveTo(0, arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX, arrowHeight + arrowStrokeWidth * 0.5f);
-            path.lineTo(floatX + arrowWidth * 0.5f, arrowStrokeWidth * 0.5f);
-            path.lineTo(width, arrowStrokeWidth * 0.5f);
+            initPathMoveTo(0, lineThick * 0.5f);
+            path.lineTo(floatX - arrowWidth * 0.5f, lineThick * 0.5f);
+            path.lineTo(floatX, arrowHeight + lineThick * 0.5f);
+            path.lineTo(floatX + arrowWidth * 0.5f, lineThick * 0.5f);
+            path.lineTo(width, lineThick * 0.5f);
         }
 
-        canvas.drawPath(path, initPaint(Paint.Style.STROKE, arrowStrokeColor, arrowStrokeWidth));
+        canvas.drawPath(path, initPaint(Paint.Style.STROKE, lineColor, lineThick));
     }
 
     //
@@ -797,15 +797,15 @@ public class TView extends View {
     }
 
     // default false
-    protected boolean animationable;
+    protected boolean animation;
 
-    public boolean isAnimationable() {
-        return animationable;
+    public boolean isAnimation() {
+        return animation;
     }
 
-    public void setAnimationable(boolean animationable) {
-        this.animationable = animationable;
-        if (animationable) {
+    public void setAnimation(boolean animation) {
+        this.animation = animation;
+        if (animation) {
             invalidate();
         }
     }
@@ -1494,14 +1494,14 @@ public class TView extends View {
     }
 
     //
-    private int backgroundNormalShadowColor;
+    private int backgroundShadowColorNormal;
 
     public int getBackgroundNormalShadowColor() {
-        return backgroundNormalShadowColor;
+        return backgroundShadowColorNormal;
     }
 
-    public void setBackgroundNormalShadowColor(int backgroundNormalShadowColor) {
-        this.backgroundNormalShadowColor = backgroundNormalShadowColor;
+    public void setBackgroundNormalShadowColor(int backgroundShadowColorNormal) {
+        this.backgroundShadowColorNormal = backgroundShadowColorNormal;
     }
 
     //
@@ -1570,15 +1570,15 @@ public class TView extends View {
         }
     }
 
-    // default backgroundNormalShadowColor
-    private int backgroundPressShadowColor;
+    // default backgroundShadowColorNormal
+    private int backgroundShadowColorPress;
 
     public int getBackgroundPressShadowColor() {
-        return backgroundPressShadowColor;
+        return backgroundShadowColorPress;
     }
 
-    public void setBackgroundPressShadowColor(int backgroundPressShadowColor) {
-        this.backgroundPressShadowColor = backgroundPressShadowColor;
+    public void setBackgroundPressShadowColor(int backgroundShadowColorPress) {
+        this.backgroundShadowColorPress = backgroundShadowColorPress;
     }
 
     // default backgroundShadowDxNormal
@@ -1647,15 +1647,15 @@ public class TView extends View {
         }
     }
 
-    // default backgroundNormalShadowColor
-    private int backgroundSelectShadowColor;
+    // default backgroundShadowColorNormal
+    private int backgroundShadowColorSelect;
 
     public int getBackgroundSelectShadowColor() {
-        return backgroundSelectShadowColor;
+        return backgroundShadowColorSelect;
     }
 
-    public void setBackgroundSelectShadowColor(int backgroundSelectShadowColor) {
-        this.backgroundSelectShadowColor = backgroundSelectShadowColor;
+    public void setBackgroundSelectShadowColor(int backgroundShadowColorSelect) {
+        this.backgroundShadowColorSelect = backgroundShadowColorSelect;
     }
 
     // default backgroundShadowDxNormal
@@ -2381,38 +2381,38 @@ public class TView extends View {
         invalidate();
     }
 
-    public void setTextMark(String textMarkTextValue) {
-        this.textMarkTextValue = textMarkTextValue;
+    public void setTextMark(String textMarkText) {
+        this.textMarkText = textMarkText;
         requestLayout();
     }
 
-    public void setTextMark(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
+    public void setTextMark(float textMarkRadius, int textMarkColor, String textMarkText, float textMarkTextSize, int textMarkTextColor,
                             float textMarkDx, float textMarkDy) {
-        setTextMark(textMarkRadius, textMarkColor, textMarkTextValue, textMarkTextSize,
+        setTextMark(textMarkRadius, textMarkColor, textMarkText, textMarkTextSize,
                 textMarkTextColor, textMarkDx, textMarkDy);
     }
 
     public void setTextMark(float textMarkRadius, int textMarkRadiusUnit,
                             int textMarkColor,
-                            String textMarkTextValue,
+                            String textMarkText,
                             float textMarkTextSize, int textMarkTextSizeUnit,
                             int textMarkTextColor,
                             float textMarkDx, int textMarkDxUnit,
                             float textMarkDy, int textMarkDyUnit) {
 
-        setTextMarkRaw(convertToPX(textMarkRadius, textMarkRadiusUnit), textMarkColor, textMarkTextValue,
+        setTextMarkRaw(convertToPX(textMarkRadius, textMarkRadiusUnit), textMarkColor, textMarkText,
                 convertToPX(textMarkTextSize, textMarkTextSizeUnit), textMarkTextColor,
                 convertToPX(textMarkDx, textMarkDxUnit), convertToPX(textMarkDy, textMarkDyUnit));
     }
 
-    private void setTextMarkRaw(float textMarkRadius, int textMarkColor, String textMarkTextValue, float textMarkTextSize, int textMarkTextColor,
+    private void setTextMarkRaw(float textMarkRadius, int textMarkColor, String textMarkText, float textMarkTextSize, int textMarkTextColor,
                                 float textMarkDx, float textMarkDy) {
-        if (this.textMarkRadius != textMarkRadius || this.textMarkColor != textMarkColor || this.textMarkTextValue != textMarkTextValue
+        if (this.textMarkRadius != textMarkRadius || this.textMarkColor != textMarkColor || this.textMarkText != textMarkText
                 || this.textMarkTextSize != textMarkTextSize || this.textMarkTextColor != textMarkTextColor || this.textMarkDx != textMarkDx
                 || this.textMarkDy != textMarkDy) {
             this.textMarkRadius = textMarkRadius;
             this.textMarkColor = textMarkColor;
-            this.textMarkTextValue = textMarkTextValue;
+            this.textMarkText = textMarkText;
             this.textMarkTextSize = textMarkTextSize;
             this.textMarkTextColor = textMarkTextColor;
             this.textMarkDx = textMarkDx;
@@ -2467,25 +2467,25 @@ public class TView extends View {
     }
 
     //
-    private String textMarkTextValue;
+    private String textMarkText;
 
-    public String getTextMarkTextValue() {
-        return textMarkTextValue;
+    public String getTextMarkText() {
+        return textMarkText;
     }
 
-    public void setTextMarkTextValue(String textMarkTextValue) {
-        this.textMarkTextValue = textMarkTextValue;
+    public void setTextMarkText(String textMarkText) {
+        this.textMarkText = textMarkText;
         requestLayout();
     }
 
-    private List<Integer> textMarkTextValueMeasureList;
+    private List<Integer> textMarkTextMeasureList;
 
-    public List<Integer> getTextMarkTextValueMeasureList() {
-        return textMarkTextValueMeasureList;
+    public List<Integer> getTextMarkTextMeasureList() {
+        return textMarkTextMeasureList;
     }
 
-    public void setTextMarkTextValueMeasureList(List<Integer> textMarkTextValueMeasureList) {
-        this.textMarkTextValueMeasureList = textMarkTextValueMeasureList;
+    public void setTextMarkTextMeasureList(List<Integer> textMarkTextMeasureList) {
+        this.textMarkTextMeasureList = textMarkTextMeasureList;
     }
 
     //
@@ -2587,26 +2587,26 @@ public class TView extends View {
         this.textMarkFractionDy = textMarkFractionDy;
     }
 
-    // textValue default null
-    private String textValue;
+    // text default null
+    private String text;
 
-    public String getTextValue() {
-        return textValue;
+    public String getText() {
+        return text;
     }
 
-    public void setTextValue(String textValue) {
-        this.textValue = textValue;
+    public void setText(String text) {
+        this.text = text;
         requestLayout();
     }
 
-    private List<Integer> textValueMeasureList;
+    private List<Integer> textMeasureList;
 
-    public List<Integer> getTextValueMeasureList() {
-        return textValueMeasureList;
+    public List<Integer> getTextMeasureList() {
+        return textMeasureList;
     }
 
-    public void setTextValueMeasureList(List<Integer> textValueMeasureList) {
-        this.textValueMeasureList = textValueMeasureList;
+    public void setTextMeasureList(List<Integer> textMeasureList) {
+        this.textMeasureList = textMeasureList;
     }
 
     // textSize default 0
@@ -2833,7 +2833,7 @@ public class TView extends View {
     }
 
     //
-    private float textDrawWidth;
+    private float textDrawThick;
     private float textEndOffsetCenterX;
     private float textEndOffsetCenterY;
 
@@ -2914,26 +2914,26 @@ public class TView extends View {
         }
     }
 
-    // contentValue default null
-    private String contentValue;
+    // content default null
+    private String content;
 
-    public String getContentValue() {
-        return contentValue;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentValue(String contentValue) {
-        this.contentValue = contentValue;
+    public void setContent(String content) {
+        this.content = content;
         requestLayout();
     }
 
-    private List<Integer> contentValueMeasureList;
+    private List<Integer> contentMeasureList;
 
-    public List<Integer> getContentValueMeasureList() {
-        return contentValueMeasureList;
+    public List<Integer> getContentMeasureList() {
+        return contentMeasureList;
     }
 
-    public void setContentValueMeasureList(List<Integer> contentValueMeasureList) {
-        this.contentValueMeasureList = contentValueMeasureList;
+    public void setContentMeasureList(List<Integer> contentMeasureList) {
+        this.contentMeasureList = contentMeasureList;
     }
 
     // contentSize default 0
@@ -3241,38 +3241,38 @@ public class TView extends View {
         invalidate();
     }
 
-    public void setContentMark(String contentMarkTextValue) {
-        this.contentMarkTextValue = contentMarkTextValue;
+    public void setContentMark(String contentMarkText) {
+        this.contentMarkText = contentMarkText;
         invalidate();
     }
 
-    public void setContentMark(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
+    public void setContentMark(float contentMarkRadius, int contentMarkColor, String contentMarkText, float contentMarkTextSize,
                                int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
-        setContentMarkRaw(contentMarkRadius, contentMarkColor, contentMarkTextValue,
+        setContentMarkRaw(contentMarkRadius, contentMarkColor, contentMarkText,
                 contentMarkTextSize, contentMarkTextColor, contentMarkDx, contentMarkDy);
     }
 
     public void setContentMark(float contentMarkRadius, int contentMarkRadiusUnit,
                                int contentMarkColor,
-                               String contentMarkTextValue,
+                               String contentMarkText,
                                float contentMarkTextSize, int contentMarkTextSizeUnit,
                                int contentMarkTextColor,
                                float contentMarkDx, int contentMarkDxUnit,
                                float contentMarkDy, int contentMarkDyUnit) {
 
-        setContentMarkRaw(convertToPX(contentMarkRadius, contentMarkRadiusUnit), contentMarkColor, contentMarkTextValue,
+        setContentMarkRaw(convertToPX(contentMarkRadius, contentMarkRadiusUnit), contentMarkColor, contentMarkText,
                 convertToPX(contentMarkTextSize, contentMarkTextSizeUnit), contentMarkTextColor,
                 convertToPX(contentMarkDx, contentMarkDxUnit), convertToPX(contentMarkDy, contentMarkDyUnit));
     }
 
-    private void setContentMarkRaw(float contentMarkRadius, int contentMarkColor, String contentMarkTextValue, float contentMarkTextSize,
+    private void setContentMarkRaw(float contentMarkRadius, int contentMarkColor, String contentMarkText, float contentMarkTextSize,
                                    int contentMarkTextColor, float contentMarkDx, float contentMarkDy) {
-        if (this.contentMarkRadius != contentMarkRadius || this.contentMarkColor != contentMarkColor || this.contentMarkTextValue != contentMarkTextValue
+        if (this.contentMarkRadius != contentMarkRadius || this.contentMarkColor != contentMarkColor || this.contentMarkText != contentMarkText
                 || this.contentMarkTextSize != contentMarkTextSize || this.contentMarkTextColor != contentMarkTextColor
                 || this.contentMarkDx != contentMarkDx || this.contentMarkDy != contentMarkDy) {
             this.contentMarkRadius = contentMarkRadius;
             this.contentMarkColor = contentMarkColor;
-            this.contentMarkTextValue = contentMarkTextValue;
+            this.contentMarkText = contentMarkText;
             this.contentMarkTextSize = contentMarkTextSize;
             this.contentMarkTextColor = contentMarkTextColor;
             this.contentMarkDx = contentMarkDx;
@@ -3327,25 +3327,25 @@ public class TView extends View {
     }
 
     //
-    private String contentMarkTextValue;
+    private String contentMarkText;
 
-    public String getContentMarkTextValue() {
-        return contentMarkTextValue;
+    public String getContentMarkText() {
+        return contentMarkText;
     }
 
-    public void setContentMarkTextValue(String contentMarkTextValue) {
-        this.contentMarkTextValue = contentMarkTextValue;
+    public void setContentMarkText(String contentMarkText) {
+        this.contentMarkText = contentMarkText;
         requestLayout();
     }
 
-    private List<Integer> contentMarkTextValueMeasureList;
+    private List<Integer> contentMarkTextMeasureList;
 
-    public List<Integer> getContentMarkTextValueMeasureList() {
-        return contentMarkTextValueMeasureList;
+    public List<Integer> getContentMarkTextMeasureList() {
+        return contentMarkTextMeasureList;
     }
 
-    public void setContentMarkTextValueMeasureList(List<Integer> contentMarkTextValueMeasureList) {
-        this.contentMarkTextValueMeasureList = contentMarkTextValueMeasureList;
+    public void setContentMarkTextMeasureList(List<Integer> contentMarkTextMeasureList) {
+        this.contentMarkTextMeasureList = contentMarkTextMeasureList;
     }
 
     //
@@ -3448,7 +3448,7 @@ public class TView extends View {
     }
 
     //
-    private float contentDrawWidth;
+    private float contentDrawThick;
     private float contentEndOffsetCenterX;
     private float contentEndOffsetCenterY;
 
@@ -3870,7 +3870,7 @@ public class TView extends View {
         int selectModeIndex = typedArray.getInt(R.styleable.TView_selectMode, 0);
         selectMode = selectModeArray[selectModeIndex];
 
-        animationable = typedArray.getBoolean(R.styleable.TView_animationable, false);
+        animation = typedArray.getBoolean(R.styleable.TView_animation, false);
         rotate = typedArray.getInt(R.styleable.TView_rotate, 0);
 
         // porterDuffXferModeArrayIndex default PorterDuff.Mode.SRC_IN
@@ -3927,7 +3927,7 @@ public class TView extends View {
             //Note background Normal ShadowRadius and srcNormal ShadowRadius are two values!
             backgroundShadowRadiusNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusNormal, 0);
             if (backgroundShadowRadiusNormal > 0) {
-                backgroundNormalShadowColor = typedArray.getColor(R.styleable.TView_backgroundNormalShadowColor, Color.TRANSPARENT);
+                backgroundShadowColorNormal = typedArray.getColor(R.styleable.TView_backgroundShadowColorNormal, Color.TRANSPARENT);
                 backgroundShadowDxNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowDxNormal, 0);
                 backgroundShadowDyNormal = typedArray.getDimension(R.styleable.TView_backgroundShadowDyNormal, 0);
             }
@@ -3935,7 +3935,7 @@ public class TView extends View {
             //
             backgroundShadowRadiusPress = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusPress, backgroundShadowRadiusNormal);
             if (backgroundShadowRadiusPress > 0) {
-                backgroundPressShadowColor = typedArray.getColor(R.styleable.TView_backgroundPressShadowColor, backgroundNormalShadowColor);
+                backgroundShadowColorPress = typedArray.getColor(R.styleable.TView_backgroundShadowColorPress, backgroundShadowColorNormal);
                 backgroundShadowDxPress = typedArray.getDimension(R.styleable.TView_backgroundShadowDxPress, backgroundShadowDxNormal);
                 backgroundShadowDyPress = typedArray.getDimension(R.styleable.TView_backgroundShadowDyPress, backgroundShadowDyNormal);
             }
@@ -3943,7 +3943,7 @@ public class TView extends View {
             //
             backgroundShadowRadiusSelect = typedArray.getDimension(R.styleable.TView_backgroundShadowRadiusSelect, backgroundShadowRadiusNormal);
             if (backgroundShadowRadiusSelect > 0) {
-                backgroundSelectShadowColor = typedArray.getColor(R.styleable.TView_backgroundSelectShadowColor, backgroundNormalShadowColor);
+                backgroundShadowColorSelect = typedArray.getColor(R.styleable.TView_backgroundShadowColorSelect, backgroundShadowColorNormal);
                 backgroundShadowDxSelect = typedArray.getDimension(R.styleable.TView_backgroundShadowDxSelect, backgroundShadowDxNormal);
                 backgroundShadowDySelect = typedArray.getDimension(R.styleable.TView_backgroundShadowDySelect, backgroundShadowDyNormal);
             }
@@ -4068,7 +4068,7 @@ public class TView extends View {
             textMarkTouchable = typedArray.getBoolean(R.styleable.TView_textMarkTouchable, false);
             textMarkRadius = typedArray.getDimension(R.styleable.TView_textMarkRadius, 0);
             textMarkColor = typedArray.getColor(R.styleable.TView_textMarkColor, Color.TRANSPARENT);
-            textMarkTextValue = typedArray.getString(R.styleable.TView_textMarkTextValue);
+            textMarkText = typedArray.getString(R.styleable.TView_textMarkText);
             textMarkTextSize = typedArray.getDimension(R.styleable.TView_textMarkTextSize, textSizeDefault);
             textMarkTextColor = typedArray.getColor(R.styleable.TView_textMarkTextColor, textColorDefault);
 
@@ -4077,7 +4077,7 @@ public class TView extends View {
             contentMarkTouchable = typedArray.getBoolean(R.styleable.TView_contentMarkTouchable, false);
             contentMarkRadius = typedArray.getDimension(R.styleable.TView_contentMarkRadius, 0);
             contentMarkColor = typedArray.getColor(R.styleable.TView_contentMarkColor, Color.TRANSPARENT);
-            contentMarkTextValue = typedArray.getString(R.styleable.TView_contentMarkTextValue);
+            contentMarkText = typedArray.getString(R.styleable.TView_contentMarkText);
             contentMarkTextSize = typedArray.getDimension(R.styleable.TView_contentMarkTextSize, textSizeDefault);
             contentMarkTextColor = typedArray.getColor(R.styleable.TView_contentMarkTextColor, textColorDefault);
 
@@ -4090,7 +4090,7 @@ public class TView extends View {
             strokeColorSelect = typedArray.getColor(R.styleable.TView_strokeColorSelect, strokeColorNormal);
 
             //
-            textValue = typedArray.getString(R.styleable.TView_textValue);
+            text = typedArray.getString(R.styleable.TView_text);
             textSize = typedArray.getDimension(R.styleable.TView_textSize, textSizeDefault);
 
             textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, textColorDefault);
@@ -4133,7 +4133,7 @@ public class TView extends View {
             }
 
             //
-            contentValue = typedArray.getString(R.styleable.TView_contentValue);
+            content = typedArray.getString(R.styleable.TView_content);
             contentSize = typedArray.getDimension(R.styleable.TView_contentSize, textSizeDefault);
 
             contentColorNormal = typedArray.getColor(R.styleable.TView_contentColorNormal, textColorDefault);
@@ -4384,21 +4384,20 @@ public class TView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (textValue != null) {
-            textValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
-                    textValue, initTextPaint(textSize), textPaddingLeft, textPaddingRight,
+        if (text != null) {
+            textMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
+                    text, initTextPaint(textSize), textPaddingLeft, textPaddingRight,
                     textRowSpaceRatio);
         } else {
-            contentValueMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
-                    contentValue, initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
+            contentMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
+                    content, initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
                     contentRowSpaceRatio);
         }
     }
 
     protected List<Integer> measure(int widthMeasureSpec, int heightMeasureSpec,
-                                    String textValue, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
-        List<Integer> ValueMeasureList = null;
-
+                                    String text, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
+        List<Integer> measureList = null;
         //
         int specModeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int specSizeWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -4413,8 +4412,8 @@ public class TView extends View {
 
         //measureWidth
         //expressed hope that the size of the parent view subviews should be determined by the value of specSize
-        if (specModeWidth == MeasureSpec.AT_MOST && textValue != null) {//wrap_content
-            int requestWidth = (int) (paint.measureText(textValue) + paddingLeft + paddingRight);
+        if (specModeWidth == MeasureSpec.AT_MOST && text != null) {//wrap_content
+            int requestWidth = (int) (paint.measureText(text) + paddingLeft + paddingRight);
             measuredWidth = Math.min(specSizeWidth, requestWidth);
             //showing the child view can only be the size specified specSizer
         } else if (specModeWidth == MeasureSpec.EXACTLY) {// match_parent
@@ -4425,32 +4424,32 @@ public class TView extends View {
         }
 
         //measuredHeight
-        if (specModeHeight == MeasureSpec.AT_MOST && textValue != null) {// wrap_content
-            ValueMeasureList = generateMeasureList(textValue, paint, measuredWidth, paddingLeft, paddingRight);
+        if (specModeHeight == MeasureSpec.AT_MOST && text != null) {// wrap_content
+            measureList = createMeasureList(text, paint, measuredWidth, paddingLeft, paddingRight);
             FontMetricsInt fontMetrics = paint.getFontMetricsInt();
             int rowHeight = fontMetrics.descent - fontMetrics.ascent;
-            measuredHeight = (int) (rowHeight * rowSpaceRatio * ValueMeasureList.size());
+            measuredHeight = (int) (rowHeight * rowSpaceRatio * measureList.size());
         } else if (specModeHeight == MeasureSpec.EXACTLY) {// match_parent
             measuredHeight = specSizeHeight;
-        } else if (specModeHeight == MeasureSpec.UNSPECIFIED && textValue != null) {// unspecified
-            ValueMeasureList = generateMeasureList(textValue, paint, measuredWidth, paddingLeft, paddingRight);
+        } else if (specModeHeight == MeasureSpec.UNSPECIFIED && text != null) {// unspecified
+            measureList = createMeasureList(text, paint, measuredWidth, paddingLeft, paddingRight);
             FontMetricsInt fontMetrics = paint.getFontMetricsInt();
             int rowHeight = fontMetrics.descent - fontMetrics.ascent;
-            measuredHeight = (int) (rowHeight * rowSpaceRatio * ValueMeasureList.size());
+            measuredHeight = (int) (rowHeight * rowSpaceRatio * measureList.size());
         }
         setMeasuredDimension(measuredWidth, measuredHeight);
-        return ValueMeasureList;
+        return measureList;
     }
 
-    protected List<Integer> generateMeasureList(String textValue, Paint paint, float width, float paddingLeft, float paddingRight) {
+    protected List<Integer> createMeasureList(String text, Paint paint, float width, float paddingLeft, float paddingRight) {
         List<Integer> measureList = new ArrayList<Integer>();
-        int charatcerLength = textValue.length();
-        float characterWidth = paint.measureText(textValue);
+        int charatcerLength = text.length();
+        float characterWidth = paint.measureText(text);
         float availableWidth = width - paddingLeft - paddingRight;
         //
         if (characterWidth > availableWidth) {
             for (int measureStart = 0, measure = 1; measure <= charatcerLength; measure++) {
-                String measureString = textValue.substring(measureStart, measure);
+                String measureString = text.substring(measureStart, measure);
                 float measureLength = paint.measureText(measureString);
                 if (measureLength > availableWidth) {
                     measureStart = measure - 1;
@@ -4616,7 +4615,7 @@ public class TView extends View {
                 drawRectClassic(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
                         width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
                                 - backgroundShadowDyNormal, backgroundNormal, backgroundNormalShader, backgroundShadowRadiusNormal,
-                        backgroundNormalShadowColor, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal, radius);
+                        backgroundShadowColorNormal, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal, radius);
 
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
@@ -4625,7 +4624,7 @@ public class TView extends View {
                                 - backgroundShadowDyNormal, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
                         select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
                         select ? backgroundShadowRadiusSelect : press ? backgroundShadowRadiusPress : backgroundShadowRadiusNormal,
-                        select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
+                        select ? backgroundShadowColorSelect : press ? backgroundShadowColorPress : backgroundShadowColorNormal,
                         select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
                         select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal, select ? strokeWidthSelect
                                 : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
@@ -4638,7 +4637,7 @@ public class TView extends View {
                 drawRectCustom(canvas, backgroundShadowRadiusNormal + backgroundShadowDxNormal, backgroundShadowRadiusNormal + backgroundShadowDyNormal,
                         width - backgroundShadowRadiusNormal - backgroundShadowDxNormal, height - backgroundShadowRadiusNormal
                                 - backgroundShadowDyNormal, backgroundNormal, backgroundNormalShader, backgroundShadowRadiusNormal,
-                        backgroundNormalShadowColor, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal,
+                        backgroundShadowColorNormal, backgroundShadowDxNormal, backgroundShadowDyNormal, strokeWidthNormal, strokeColorNormal,
                         radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
 
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
@@ -4648,7 +4647,7 @@ public class TView extends View {
                                 - backgroundShadowDyNormal, select ? backgroundSelect : press ? backgroundPress : backgroundNormal,
                         select ? backgroundSelectShader : press ? backgroundPressShader : backgroundNormalShader,
                         select ? backgroundShadowRadiusSelect : press ? backgroundShadowRadiusPress : backgroundShadowRadiusNormal,
-                        select ? backgroundSelectShadowColor : press ? backgroundPressShadowColor : backgroundNormalShadowColor,
+                        select ? backgroundShadowColorSelect : press ? backgroundShadowColorPress : backgroundShadowColorNormal,
                         select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
                         select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal, select ? strokeWidthSelect
                                 : press ? strokeWidthPress : strokeWidthNormal, select ? strokeColorSelect : press ? strokeColorPress
@@ -4693,10 +4692,10 @@ public class TView extends View {
         }
 
         // draw text
-        if (textValue != null) {
+        if (text != null) {
             float f[] = drawText(
                     canvas,
-                    textValue,
+                    text,
                     width,
                     (width >> 1) + textDx + srcLeftWidth * 0.5f + srcLeftPadding * 0.5f - srcRightWidth * 0.5f - srcRightPadding * 0.5f,
                     (height >> 1) + textDy,
@@ -4707,21 +4706,21 @@ public class TView extends View {
                             textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textTypeFaceMode, Paint.Align.CENTER),
                     textGravityMode,
                     textRowSpaceRatio,
-                    textValueMeasureList);
+                    textMeasureList);
 
-            textDrawWidth = f[0];
+            textDrawThick = f[0];
             textEndOffsetCenterX = f[1];
             textEndOffsetCenterY = f[2];
         }
 
         // draw content
-        if (contentValue != null) {
+        if (content != null) {
             //Conversion of style into textGravityMode to use drawText method!
             int textGravityModeFromContent = contentGravityModeArray[contentGravityMode];
 
             float f[] = drawText(
                     canvas,
-                    contentValue,
+                    content,
                     width,
                     (width >> 1) + contentDx + srcLeftWidth * 0.5f + srcLeftPadding * 0.5f - srcRightWidth * 0.5f - srcRightPadding * 0.5f,
                     (height >> 1) + contentDy,
@@ -4732,17 +4731,17 @@ public class TView extends View {
                             contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentTypeFaceMode, Paint.Align.CENTER),
                     textGravityModeFromContent,
                     contentRowSpaceRatio,
-                    contentValueMeasureList);
+                    contentMeasureList);
 
-            contentDrawWidth = f[0];
+            contentDrawThick = f[0];
             contentEndOffsetCenterX = f[1];
             contentEndOffsetCenterY = f[2];
         }
 
         // draw bitmapLeft,the draw position is half of the width minus
-        // the srcLeftPadding and textActualDrawWidth*0.5f
+        // the srcLeftPadding and textActualDrawThick*0.5f
         if (srcLeft != null) {
-            float dx = (width >> 1) - srcLeftWidth * 0.5f - textDrawWidth * 0.5f - srcLeftPadding * 0.5f + srcLeftDx;
+            float dx = (width >> 1) - srcLeftWidth * 0.5f - textDrawThick * 0.5f - srcLeftPadding * 0.5f + srcLeftDx;
             float dy = (height >> 1) - srcLeftHeight * 0.5f + srcLeftDy;
 
             canvas.translate(dx, dy);
@@ -4752,7 +4751,7 @@ public class TView extends View {
 
         if (srcRight != null) {
 
-            float dx = (width >> 1) - srcRightWidth * 0.5f + textDrawWidth * 0.5f + srcRightPadding * 0.5f + srcRightDx;
+            float dx = (width >> 1) - srcRightWidth * 0.5f + textDrawThick * 0.5f + srcRightPadding * 0.5f + srcRightDx;
             float dy = (height >> 1) - srcRightHeight * 0.5f + srcRightDy;
 
             canvas.translate(dx, dy);
@@ -4769,10 +4768,10 @@ public class TView extends View {
                     textMarkDx, textMarkDy,
                     textDx + textEndOffsetCenterX + textMarkDx,
                     textDy + textEndOffsetCenterY + textMarkDy,
-                    textMarkTextValue,
+                    textMarkText,
                     textMarkTextColor,
                     textMarkTextSize,
-                    textMarkTextValueMeasureList);
+                    textMarkTextMeasureList);
         }
 
         // draw contentMark
@@ -4784,10 +4783,10 @@ public class TView extends View {
                     contentMarkDx, contentMarkDy,
                     contentDx + contentEndOffsetCenterX + contentMarkDx,
                     contentDy + contentEndOffsetCenterY + contentMarkDy,
-                    contentMarkTextValue,
+                    contentMarkText,
                     contentMarkTextColor,
                     contentMarkTextSize,
-                    contentMarkTextValueMeasureList);
+                    contentMarkTextMeasureList);
         }
 
         // draw foreground

@@ -39,12 +39,9 @@ public class TLayout extends RelativeLayout {
     protected int layoutLayer;
     protected Paint layoutPaint;
     //
-    //
     protected Path layoutPath;
 
-
     protected RectF layoutRectF;
-
     //
     protected Matrix layoutMatrix;
 
@@ -60,21 +57,16 @@ public class TLayout extends RelativeLayout {
     // layoutBackground in onLayout if background transparent and have drawn the case of default white shadow
     private int layoutBackground;
 
-
     private int layoutBackgroundAngle;
-
 
     // layoutBackgroundGradientStart default layoutBackground
     private int layoutBackgroundGradientStart;
 
-
     // layoutBackgroundGradientEnd default background
     private int layoutBackgroundGradientEnd;
 
-
     // layoutBackgroundShader default null
     private Shader layoutBackgroundShader;
-
 
     //
     private float layoutBackgroundShadowRadius;
@@ -609,24 +601,24 @@ public class TLayout extends RelativeLayout {
     }
 
     // 2
-    protected Paint initPaint(Style style, int colorValue) {
-        return initPaint(style, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Style style, int color) {
+        return initPaint(style, 0, color, null, 0, Color.TRANSPARENT, 0, 0, -1);
 
     }
 
     // 3
-    protected Paint initPaint(Style style, int colorValue, int alpha) {
-        return initPaint(style, 0, colorValue, null, 0, Color.TRANSPARENT, 0, 0, alpha);
+    protected Paint initPaint(Style style, int color, int alpha) {
+        return initPaint(style, 0, color, null, 0, Color.TRANSPARENT, 0, 0, alpha);
     }
 
     // 4
-    protected Paint initPaint(Style style, int colorValue, Shader shader, int alpha) {
-        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
+    protected Paint initPaint(Style style, int color, Shader shader, int alpha) {
+        return initPaint(style, 0, color, shader, 0, Color.TRANSPARENT, 0, 0, alpha);
     }
 
     // 3
-    protected Paint initPaint(Style style, int colorValue, Shader shader) {
-        return initPaint(style, 0, colorValue, shader, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Style style, int color, Shader shader) {
+        return initPaint(style, 0, color, shader, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 2
@@ -641,13 +633,13 @@ public class TLayout extends RelativeLayout {
 
 
     // 3
-    protected Paint initPaint(Style style, int colorValue, float strokeWidth) {
-        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, -1);
+    protected Paint initPaint(Style style, int color, float strokeWidth) {
+        return initPaint(style, strokeWidth, color, null, 0, Color.TRANSPARENT, 0, 0, -1);
     }
 
     // 4
-    protected Paint initPaint(Style style, int colorValue, float strokeWidth, int alpha) {
-        return initPaint(style, strokeWidth, colorValue, null, 0, Color.TRANSPARENT, 0, 0, alpha);
+    protected Paint initPaint(Style style, int color, float strokeWidth, int alpha) {
+        return initPaint(style, strokeWidth, color, null, 0, Color.TRANSPARENT, 0, 0, alpha);
     }
 
     // 6
@@ -656,12 +648,12 @@ public class TLayout extends RelativeLayout {
     }
 
     // 6
-    protected Paint initPaint(Style style, int colorValue, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
-        return initPaint(style, 0, colorValue, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
+    protected Paint initPaint(Style style, int color, float shadowRadius, int shadowColor, float shadowDx, float shadowDy) {
+        return initPaint(style, 0, color, null, shadowRadius, shadowColor, shadowDx, shadowDy, -1);
     }
 
     // 9
-    protected Paint initPaint(Style style, float strokeWidth, int colorValue, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
+    protected Paint initPaint(Style style, float strokeWidth, int color, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, int alpha) {
         //
         initPaint();
         //
@@ -674,7 +666,7 @@ public class TLayout extends RelativeLayout {
 
         // When the shadow color can not be set to transparent, but can not set
         if (shader == null) {
-            layoutPaint.setColor(colorValue);
+            layoutPaint.setColor(color);
         } else {
             layoutPaint.setShader(shader);
         }
@@ -694,12 +686,12 @@ public class TLayout extends RelativeLayout {
     }
 
     // 4
-    protected Paint initPaint(Style style, int colorValue, float textSize, Align align) {
-        return initPaint(style, colorValue, textSize, 0, Color.TRANSPARENT, 0, 0, align);
+    protected Paint initPaint(Style style, int color, float textSize, Align align) {
+        return initPaint(style, color, textSize, 0, Color.TRANSPARENT, 0, 0, align);
     }
 
     // 8
-    protected Paint initPaint(Style style, int colorValue, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Align align) {
+    protected Paint initPaint(Style style, int color, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Align align) {
         //
         initPaint();
         //
@@ -707,7 +699,7 @@ public class TLayout extends RelativeLayout {
             layoutPaint.setStyle(style);
         }
 
-        layoutPaint.setColor(colorValue);
+        layoutPaint.setColor(color);
 
         if (textSize != 0) {
             layoutPaint.setTextSize(textSize);

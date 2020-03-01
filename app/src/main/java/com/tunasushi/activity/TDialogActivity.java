@@ -62,7 +62,7 @@ public class TDialogActivity extends Activity implements TView.TouchUpListener {
             case R.id.tDialogSelect:
                 TDialog tDialog = (TDialog) t;
                 int choiceIndex = tDialog.getDialogChoiceIndex();
-                String valueArray[] = tDialog.getDialogChoiceTextValueArray();
+                String valueArray[] = tDialog.getDialogChoiceTextArray();
                 if (-1 == choiceIndex) {
                     Toast.makeText(this, "Nothing Choice", Toast.LENGTH_SHORT).show();
                 } else {

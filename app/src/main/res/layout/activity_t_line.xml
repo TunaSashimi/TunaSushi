@@ -2,130 +2,72 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="lineArrowWidth设置箭头宽度\nlineArrowHeight设置箭头高度\nlineStrokeWidth设置箭头粗细\nlineStrokeColor设置箭头颜色\nlineArrowMode设置箭头方向\nlineSurroundNormal设置填充背景\nlineX设置箭头位置"
-        android:textColor="#434343" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="16dp"
-        android:layout_height="120dp"
-        android:layout_below="@id/text"
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineTop"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="#f0eff5" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/view"
-        android:layout_toRightOf="@id/view"
-        android:text="xml中设置lineX=View宽度\n\n或者\n\nActivity中setLineX为View宽度"
-        android:textColor="#434343" />
+        android:layout_marginTop="16dp"
+        app:lineColor="#592d2e"
+        app:lineMode="top"
+        app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineAlign"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_below="@id/view"
-        android:layout_margin="16dp"
-        app:lineArrowHeight="12dp"
-        app:lineArrowMode="top"
-        app:lineArrowWidth="22dp"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="1dp"
-        app:lineX="120dp" />
-
-    <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineBG"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_below="@id/tLineAlign"
+        android:id="@+id/tLineBottom"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/tLineTop"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:lineArrowHeight="12dp"
-        app:lineArrowMode="top"
-        app:lineArrowWidth="22dp"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="1dp"
-        app:lineSurround="#f0eff5"
-        app:lineX="120dp" />
+        android:layout_toRightOf="@id/tLineTop"
+        app:lineBackground="#fae500"
+        app:lineColor="#592d2e"
+        app:lineMode="bottom"
+        app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineAC"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_below="@id/tLineBG"
-        android:layout_margin="16dp"
-        app:lineArrowColor="#f0eff5"
-        app:lineArrowHeight="12dp"
-        app:lineArrowMode="bottom"
-        app:lineArrowWidth="22dp"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="1dp" />
+        android:id="@+id/tLineLeft"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/tLineBottom"
+        android:layout_toRightOf="@id/tLineBottom"
+        app:lineColor="#592d2e"
+        app:lineMode="left"
+        app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TView
-        android:id="@+id/tViewCenter"
-        android:layout_width="120dp"
-        android:layout_height="48dp"
-        android:layout_below="@id/tLineAC"
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineRight"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/tLineLeft"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:strokeColorNormal="#dedede"
-        app:strokeWidthNormal="1dp"
-        app:textColorNormal="#dedede"
-        app:textSize="16dp"
-        app:textValue="居中" />
-
-    <com.tunasushi.tuna.TView
-        android:id="@+id/tViewHidden"
-        android:layout_width="120dp"
-        android:layout_height="48dp"
-        android:layout_alignTop="@id/tViewCenter"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@id/tViewCenter"
-        app:strokeColorNormal="#dedede"
-        app:strokeWidthNormal="1dp"
-        app:textColorNormal="#dedede"
-        app:textSize="16dp"
-        app:textValue="隐藏" />
-
-    <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineMove"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_below="@id/tViewCenter"
-        android:layout_margin="16dp"
-        app:lineArrowHeight="12dp"
-        app:lineArrowMode="bottom"
-        app:lineArrowWidth="22dp"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="1dp" />
-
-    <com.tunasushi.tuna.TLine
-        android:id="@+id/tLineSlashBack"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_below="@id/tLineMove"
-        android:layout_margin="16dp"
-        app:lineMode="slashBack"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="2dp" />
+        android:layout_toRightOf="@id/tLineLeft"
+        app:lineBackground="#fae500"
+        app:lineColor="#592d2e"
+        app:lineMode="right"
+        app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLineSlash"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignTop="@id/tLineSlashBack"
-        android:layout_toRightOf="@id/tLineSlashBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/tLineTop"
+        android:layout_alignLeft="@id/tLineTop"
+        android:layout_marginTop="16dp"
+        app:lineColor="#592d2e"
         app:lineMode="slash"
-        app:lineStrokeColor="#dedede"
-        app:lineStrokeWidth="2dp" />
+        app:lineThick="1dp" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineSlashBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/tLineSlash"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/tLineSlash"
+        app:lineBackground="#fae500"
+        app:lineColor="#592d2e"
+        app:lineMode="slashBack"
+        app:lineThick="1dp" />
 </RelativeLayout>

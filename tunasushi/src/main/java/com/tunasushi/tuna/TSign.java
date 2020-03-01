@@ -36,7 +36,7 @@ public class TSign extends TView {
 
     private float signTextSize;
     private float signTextStrokeWidth;
-    private String signTextValueBefore, signTextValueAfter;
+    private String signTextBefore, signTextAfter;
 
 
     @IntDef({HORIZONTAL, VERTICAL})
@@ -79,8 +79,8 @@ public class TSign extends TView {
 
         signTextSize = typedArray.getDimension(R.styleable.TSign_signTextSize, textSizeDefault);
         signTextStrokeWidth = typedArray.getDimension(R.styleable.TSign_signTextStrokeWidth, 2);
-        signTextValueBefore = typedArray.getString(R.styleable.TSign_signTextValueBefore);
-        signTextValueAfter = typedArray.getString(R.styleable.TSign_signTextValueAfter);
+        signTextBefore = typedArray.getString(R.styleable.TSign_signTextBefore);
+        signTextAfter = typedArray.getString(R.styleable.TSign_signTextAfter);
 
         int signModeIndex = typedArray.getInt(R.styleable.TSign_signMode, -1);
         if (signModeIndex >= 0) {
@@ -116,8 +116,8 @@ public class TSign extends TView {
         FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float baseline = (circleCenterYBefore * 2 - fontMetrics.bottom - fontMetrics.top) * 0.5f;
 
-        if (signTextValueBefore != null) {
-            canvas.drawText(signTextValueBefore, width >> 1, baseline, paint);
+        if (signTextBefore != null) {
+            canvas.drawText(signTextBefore, width >> 1, baseline, paint);
         }
 
         if (signRectStrokeWidth != 0) {
@@ -165,8 +165,8 @@ public class TSign extends TView {
             }
             baseline = (circleCenterAfter * 2 - fontMetrics.bottom - fontMetrics.top) * 0.5f;
 
-            if (signTextValueAfter != null) {
-                canvas.drawText(signTextValueAfter, width >> 1, baseline, paint);
+            if (signTextAfter != null) {
+                canvas.drawText(signTextAfter, width >> 1, baseline, paint);
             }
 
         } else {

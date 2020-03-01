@@ -14,7 +14,7 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#4a4a4a"
         app:textSize="16dp"
-        app:textValue="SHOW DIALOG CONFIRM" />
+        app:text="SHOW DIALOG CONFIRM" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewChoice"
@@ -28,7 +28,7 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#4a4a4a"
         app:textSize="16dp"
-        app:textValue="SHOW DIALOG CHOICE" />
+        app:text="SHOW DIALOG CHOICE" />
 
     <com.tunasushi.tuna.TView
         android:id="@+id/tViewSelect"
@@ -41,29 +41,29 @@
         app:strokeWidthNormal="1dp"
         app:textColorNormal="#4a4a4a"
         app:textSize="16dp"
-        app:textValue="SHOW DIALOG SELECT" />
+        app:text="SHOW DIALOG SELECT" />
 
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogConfirm"
         style="@style/TDialogChoice"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_confirm"
-        app:dialogContentValue="多数订单会在10分钟内确认，请耐心等待。"
-        app:dialogTextValue="温馨提示" />
+        app:dialogContent="多数订单会在10分钟内确认，请耐心等待。"
+        app:dialogText="温馨提示" />
 
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogChoice"
         style="@style/TDialogChoice"
         app:dialogChoiceColorArray="@array/dialog_text_color_array_choice"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_choice"
-        app:dialogContentValue="您正在取消订单，确认要取消吗？"
-        app:dialogTextValue="温馨提示" />
+        app:dialogContent="您正在取消订单，确认要取消吗？"
+        app:dialogText="温馨提示" />
 
     <com.tunasushi.tuna.TDialog
         android:id="@+id/tDialogSelect"
         style="@style/TDialogChoice"
         app:dialogChoiceColorArray="@array/dialog_text_color_array_select"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_select"
-        app:dialogContentValue="您正在取消订单，确认要取消吗？"
-        app:dialogTextValue="温馨提示" />
+        app:dialogContent="您正在取消订单，确认要取消吗？"
+        app:dialogText="温馨提示" />
 
 </RelativeLayout>

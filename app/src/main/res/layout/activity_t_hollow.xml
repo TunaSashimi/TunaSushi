@@ -11,5 +11,5 @@
         app:hollowBitmap="@drawable/bitmap_thollow_font"
         app:hollowTextFractionVertical="80%"
         app:hollowTextSize="64dp"
-        app:hollowTextValue="THollow" />
+        app:hollowText="THollow" />
 </RelativeLayout>

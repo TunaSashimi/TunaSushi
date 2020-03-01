@@ -125,7 +125,7 @@ public class TViewActivity extends Activity implements TView.TouchUpListener, TV
                 );
                 break;
             default:
-                Toast.makeText(TViewActivity.this, t.getTextValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TViewActivity.this, t.getText(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

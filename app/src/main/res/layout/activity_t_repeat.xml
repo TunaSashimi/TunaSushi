@@ -32,9 +32,9 @@
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
+            app:text="服务态度不好"
             app:textColorNormal="#666666"
-            app:textSize="14dp"
-            app:textValue="服务态度不好" />
+            app:textSize="14dp" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="118dp"
@@ -52,9 +52,9 @@
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
+            app:text="服务态度不好"
             app:textColorNormal="#666666"
-            app:textSize="14dp"
-            app:textValue="服务态度不好" />
+            app:textSize="14dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/checkReason03"
@@ -71,9 +71,9 @@
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
+            app:text="服务态度不好"
             app:textColorNormal="#666666"
-            app:textSize="14dp"
-            app:textValue="服务态度不好" />
+            app:textSize="14dp" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="118dp"
@@ -90,9 +90,9 @@
             app:srcAnchorWidthSelect="12dp"
             app:strokeColorSelect="#fed136"
             app:strokeWidthSelect="1dp"
+            app:text="服务态度不好"
             app:textColorNormal="#666666"
-            app:textSize="14dp"
-            app:textValue="服务态度不好" />
+            app:textSize="14dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -111,26 +111,23 @@
 
     <com.tunasushi.tuna.TLine
         android:id="@+id/tLine"
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:layout_below="@id/tLayout"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="-2dp"
-        android:layout_marginRight="25dp"
-        app:lineArrowColor="#ffffff"
-        app:lineArrowHeight="16dp"
-        app:lineStrokeColor="#b2b2b2"
-        app:lineStrokeWidth="1dp"
-        app:lineArrowWidth="22dp"
-        app:lineSurround="#f0eff5"
-        app:lineArrowMode="bottom" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="-1dp"
+        app:lineBackground="#ffffff"
+        app:lineColor="#b2b2b2"
+        app:lineMode="bottom"
+        app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TRepeat
         android:id="@+id/tRepeatStar"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_below="@id/tLine"
+        android:layout_below="@id/tLayout"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="25dp"
         app:repeatSelectMode="connect"
         app:repeatShapeMode="custom"
@@ -144,7 +141,7 @@
         android:layout_height="100dp"
         android:layout_below="@id/tRepeatStar"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="25dp"
         app:repeatItemFractionBottom="50%"
         app:repeatItemTextColorNormal="#b2b2b2"
@@ -169,22 +166,4 @@
         app:repeatSelectMode="current"
         app:repeatShapeMode="circle"
         app:repeatTotal="5" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tRepeatTips"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/spinner"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@id/spinner"
-        android:text="Choice"
-        android:textColor="#000000"
-        android:textSize="18dp" />
 </RelativeLayout>

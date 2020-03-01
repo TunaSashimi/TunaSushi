@@ -22,8 +22,8 @@ public class TToggle extends TView {
     private Bitmap toggleSrcNormal;
     private Bitmap toggleSrcToggle;
 
-    private String toggleTextValueLeft;
-    private String toggleTextValueRight;
+    private String toggleTextLeft;
+    private String toggleTextRight;
 
     private int toggleTextColorLeftNormal;
     private int toggleTextColorLeftToggle;
@@ -101,8 +101,8 @@ public class TToggle extends TView {
         }
 
         // 有空做成数组
-        toggleTextValueLeft = typedArray.getString(R.styleable.TToggle_toggleTextValueLeft);
-        toggleTextValueRight = typedArray.getString(R.styleable.TToggle_toggleTextValueRight);
+        toggleTextLeft = typedArray.getString(R.styleable.TToggle_toggleTextLeft);
+        toggleTextRight = typedArray.getString(R.styleable.TToggle_toggleTextRight);
 
         //
         toggleTextColorLeftNormal = typedArray.getColor(R.styleable.TToggle_toggleTextColorLeftNormal, textColorDefault);
@@ -150,9 +150,9 @@ public class TToggle extends TView {
         }
 
         //
-        if (toggleTextValueLeft != null) {
+        if (toggleTextLeft != null) {
             drawText(
-                    canvas, toggleTextValueLeft,
+                    canvas, toggleTextLeft,
                     width >> 1, (width >> 2) + toggleLeftDx, (height >> 1) + toggleLeftDy,
                     initTextPaint(Paint.Style.FILL,
                             toggle ? toggleTextColorLeftToggle : toggleTextColorLeftNormal,
@@ -161,9 +161,9 @@ public class TToggle extends TView {
         }
 
         //
-        if (toggleTextValueRight != null) {
+        if (toggleTextRight != null) {
             drawText(
-                    canvas, toggleTextValueRight,
+                    canvas, toggleTextRight,
                     width >> 1, (width >> 1) + (width >> 2) + toggleRightDx, (height >> 1) + toggleRightDy,
                     initTextPaint(Paint.Style.FILL,
                             toggle ? toggleTextColorRightToggle : toggleTextColorRightNormal,

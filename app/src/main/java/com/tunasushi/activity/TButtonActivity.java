@@ -42,7 +42,7 @@ public class TButtonActivity extends Activity implements TView.TouchUpListener {
             case R.id.tButton02:
             case R.id.tButton03:
                 TButton tButton = (TButton) t;
-                Toast.makeText(this, tButton.getButtonTextValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, tButton.getButtonText(), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

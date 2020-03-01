@@ -27,7 +27,7 @@
             app:textColorNormal="#62636c"
             app:textGravityMode="left"
             app:textSize="14dp"
-            app:textValue="价格" />
+            app:text="价格" />
 
         <TextView
             android:id="@+id/tv_price_start"
@@ -59,8 +59,8 @@
             android:layout_marginTop="14dp"
             android:visibility="invisible"
             app:bubbleBackground="#000000"
-            app:bubbleEdgeHeight="6dp"
-            app:bubbleEdgeWidth="6dp"
+            app:bubbleCornerHeight="6dp"
+            app:bubbleCornerWidth="6dp"
             app:bubblePositionMode="middle"
             app:bubbleTextColor="#ffffff"
             app:bubbleTextSize="12dp"
@@ -80,7 +80,7 @@
             app:rangeDragColor="#ffffff"
             app:rangeDragStrokeColor="#dde2e8"
             app:rangeDragStrokeWidth="2dp"
-            app:rangeThink="2dp"
+            app:rangeThick="2dp"
             app:rangeValueArray="@array/range_value_array" />
 
         <TextView
@@ -111,7 +111,7 @@
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
             app:textSize="13dp"
-            app:textValue="不限" />
+            app:text="不限" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarTwo"
@@ -130,7 +130,7 @@
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
             app:textSize="13dp"
-            app:textValue="二星连锁" />
+            app:text="二星连锁" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarThree"
@@ -149,7 +149,7 @@
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
             app:textSize="13dp"
-            app:textValue="三星舒适" />
+            app:text="三星舒适" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarFour"
@@ -168,7 +168,7 @@
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
             app:textSize="13dp"
-            app:textValue="四星高档" />
+            app:text="四星高档" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarFive"
@@ -187,7 +187,7 @@
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
             app:textSize="13dp"
-            app:textValue="五星豪华" />
+            app:text="五星豪华" />
 
     </com.tunasushi.tuna.TLayout>
 </RelativeLayout>

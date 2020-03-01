@@ -21,7 +21,6 @@ import androidx.annotation.IntDef;
  * @Description
  */
 public class TTrangle extends TView {
-
     //trangleStrokeWidth default 0
     private float trangleStrokeWidth;
 
@@ -44,11 +43,7 @@ public class TTrangle extends TView {
     private @trangleMode
     int trangleMode;
 
-    //when draw a triangle possible need hide Maximum border line default false
-    private boolean trangleHideEdge;
-
     //some draw variables
-    private double trangleHalfTopCornerDadian;
     private float trangleTopCornerDistance;
     private float trangleBottomCornerInternalDirectionDistance;
     private float trangleBoundaryLineInterceptionDistance;
@@ -82,28 +77,28 @@ public class TTrangle extends TView {
         trangleStrokeWidth = typedArray.getDimension(R.styleable.TTrangle_trangleStrokeWidth, 0);
         trangleStrokeColor = typedArray.getColor(R.styleable.TTrangle_trangleStrokeColor, Color.TRANSPARENT);
 
-        trangleHideEdge = typedArray.getBoolean(R.styleable.TTrangle_trangleHideEdge, false);
-
         typedArray.recycle();
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+
+        double trangleTopCornerHalf = 0;
         if (trangleMode == TOP || trangleMode == BOTTOM) {
-            //tan(trangleHalfTopCornerDadian)=(1/2tunaWidth)/height
-            trangleHalfTopCornerDadian = Math.atan((width * 0.5f) / height);
-        } else {
-            //tan(trangleHalfTopCornerDadian)=(1/2tunaHeight)/width
-            trangleHalfTopCornerDadian = Math.atan((height * 0.5f) / width);
+            //tan(trangleTopCornerHalf)=(1/2 width)/height
+            trangleTopCornerHalf = Math.atan((width * 0.5f) / height);
+        } else if (trangleMode == LEFT || trangleMode == RIGHT) {
+            //tan(trangleTopCornerHalf)=(1/2 height)/width
+            trangleTopCornerHalf = Math.atan((height * 0.5f) / width);
         }
 
-        //sin(trangleHalfTopCornerDadian)=trangleStrokeWidth/trangleTopCornerDistance
-        trangleTopCornerDistance = (float) (trangleStrokeWidth / Math.sin(trangleHalfTopCornerDadian));
-        //cos(trangleHalfTopCornerDadian)=trangleStrokeWidth/bottomCornerOneCalDirectionDistance
-        trangleBottomCornerInternalDirectionDistance = (float) (trangleStrokeWidth / Math.cos(trangleHalfTopCornerDadian));
-        //tan(trangleHalfTopCornerDadian)=trangleBoundaryLineInterceptionDistance/trangleStrokeWidth
-        trangleBoundaryLineInterceptionDistance = (float) (Math.tan(trangleHalfTopCornerDadian) * trangleStrokeWidth);
+        //sin(trangleTopCornerHalf)=trangleStrokeWidth/trangleTopCornerDistance
+        trangleTopCornerDistance = (float) (trangleStrokeWidth / Math.sin(trangleTopCornerHalf));
+        //cos(trangleTopCornerHalf)=trangleStrokeWidth/bottomCornerOneCalDirectionDistance
+        trangleBottomCornerInternalDirectionDistance = (float) (trangleStrokeWidth / Math.cos(trangleTopCornerHalf));
+        //tan(trangleTopCornerHalf)=trangleBoundaryLineInterceptionDistance/trangleStrokeWidth
+        trangleBoundaryLineInterceptionDistance = (float) (Math.tan(trangleTopCornerHalf) * trangleStrokeWidth);
     }
 
     @Override
@@ -113,56 +108,23 @@ public class TTrangle extends TView {
         switch (trangleMode) {
             case TOP:
                 initPathMoveTo(width >> 1, 0);
-                //both requirements trangleStrokeWidth != 0 and tunaTrangleHideHypotenuse=true will cut edge
-                if (trangleStrokeWidth != 0 && trangleHideEdge) {
-                    path.lineTo(width - trangleBoundaryLineInterceptionDistance, height - trangleStrokeWidth);
-                    path.lineTo(width - (trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance), height - trangleStrokeWidth);
-                    path.lineTo(width >> 1, trangleTopCornerDistance);
-                    path.lineTo(trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance, height - trangleStrokeWidth);
-                    path.lineTo(trangleBoundaryLineInterceptionDistance, height - trangleStrokeWidth);
-                } else {
-                    path.lineTo(width, height);
-                    path.lineTo(0, height);
-                }
+                path.lineTo(width, height);
+                path.lineTo(0, height);
                 break;
             case BOTTOM:
                 initPathMoveTo(width >> 1, height);
-                if (trangleStrokeWidth != 0 && trangleHideEdge) {
-                    path.lineTo(trangleBoundaryLineInterceptionDistance, trangleStrokeWidth);
-                    path.lineTo(trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance, trangleStrokeWidth);
-                    path.lineTo(width >> 1, height - trangleTopCornerDistance);
-                    path.lineTo(width - (trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance), trangleStrokeWidth);
-                    path.lineTo(width - trangleBoundaryLineInterceptionDistance, trangleStrokeWidth);
-                } else {
-                    path.lineTo(0, 0);
-                    path.lineTo(width, 0);
-                }
+                path.lineTo(0, 0);
+                path.lineTo(width, 0);
                 break;
             case LEFT:
                 initPathMoveTo(0, height >> 1);
-                if (trangleStrokeWidth != 0 && trangleHideEdge) {
-                    path.lineTo(width - trangleStrokeWidth, trangleBoundaryLineInterceptionDistance);
-                    path.lineTo(width - trangleStrokeWidth, trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance);
-                    path.lineTo(trangleTopCornerDistance, height >> 1);
-                    path.lineTo(width - trangleStrokeWidth, height - (trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance));
-                    path.lineTo(width - trangleStrokeWidth, height - trangleBoundaryLineInterceptionDistance);
-                } else {
-                    path.lineTo(width, 0);
-                    path.lineTo(width, height);
-                }
+                path.lineTo(width, 0);
+                path.lineTo(width, height);
                 break;
             case RIGHT:
                 initPathMoveTo(width, height >> 1);
-                if (trangleStrokeWidth != 0 && trangleHideEdge) {
-                    path.lineTo(trangleStrokeWidth, height - trangleBoundaryLineInterceptionDistance);
-                    path.lineTo(trangleStrokeWidth, height - (trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance));
-                    path.lineTo(width - trangleTopCornerDistance, height >> 1);
-                    path.lineTo(trangleStrokeWidth, trangleBoundaryLineInterceptionDistance + trangleBottomCornerInternalDirectionDistance);
-                    path.lineTo(trangleStrokeWidth, trangleBoundaryLineInterceptionDistance);
-                } else {
-                    path.lineTo(0, height);
-                    path.lineTo(0, 0);
-                }
+                path.lineTo(0, height);
+                path.lineTo(0, 0);
                 break;
         }
 
@@ -172,51 +134,36 @@ public class TTrangle extends TView {
                         trangleStrokeColor : select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal));
 
         //drawing  the inside triangle topCorner and draw clockwise
+        path.reset();
+        paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
         switch (trangleMode) {
             case TOP:
-                if (trangleStrokeWidth != 0) {
-                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
-                    path.reset();
-                    path.moveTo(width >> 1, trangleTopCornerDistance);
-                    path.lineTo(width - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance), height - trangleStrokeWidth);
-                    path.lineTo(trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance, height - trangleStrokeWidth);
-                    path.close();
-                    canvas.drawPath(path, paint);
-                }
+                path.moveTo(width >> 1, trangleTopCornerDistance);
+                path.lineTo(width - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance), height - trangleStrokeWidth);
+                path.lineTo(trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance, height - trangleStrokeWidth);
                 break;
             case BOTTOM:
-                if (trangleStrokeWidth != 0) {
-                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
-                    path.reset();
-                    path.moveTo(width >> 1, height - trangleTopCornerDistance);
-                    path.lineTo(trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance, trangleStrokeWidth);
-                    path.lineTo(width - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance), trangleStrokeWidth);
-                    path.close();
-                    canvas.drawPath(path, paint);
-                }
+                path.moveTo(width >> 1, height - trangleTopCornerDistance);
+                path.lineTo(trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance, trangleStrokeWidth);
+                path.lineTo(width - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance), trangleStrokeWidth);
                 break;
             case LEFT:
-                if (trangleStrokeWidth != 0) {
-                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
-                    path.reset();
-                    path.moveTo(trangleTopCornerDistance, height >> 1);
-                    path.lineTo(width - trangleStrokeWidth, trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance);
-                    path.lineTo(width - trangleStrokeWidth, height - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance));
-                    path.close();
-                    canvas.drawPath(path, paint);
-                }
+                path.moveTo(trangleTopCornerDistance, height >> 1);
+                path.lineTo(width - trangleStrokeWidth, trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance);
+                path.lineTo(width - trangleStrokeWidth, height - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance));
                 break;
             case RIGHT:
-                if (trangleStrokeWidth != 0) {
-                    paint.setColor(select ? trangleBackgroundSelect : press ? trangleBackgroundPress : trangleBackgroundNormal);
-                    path.reset();
-                    path.moveTo(width - trangleTopCornerDistance, height >> 1);
-                    path.lineTo(trangleStrokeWidth, height - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance));
-                    path.lineTo(trangleStrokeWidth, trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance);
-                    path.close();
-                    canvas.drawPath(path, paint);
-                }
+                path.moveTo(width - trangleTopCornerDistance, height >> 1);
+                path.lineTo(trangleStrokeWidth, height - (trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance));
+                path.lineTo(trangleStrokeWidth, trangleBottomCornerInternalDirectionDistance + trangleBoundaryLineInterceptionDistance);
                 break;
         }
+        path.close();
+        canvas.drawPath(path, paint);
+    }
+
+    @Override
+    public void setTouchXYRaw(float touchX, float touchY) {
+        invalidate();
     }
 }

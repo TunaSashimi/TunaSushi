@@ -33,34 +33,34 @@ public class TBubble extends TView {
         this.bubbleBackground = bubbleBackground;
     }
 
-    private float bubbleEdgeWidth;
+    private float bubbleCornerWidth;
 
-    public float getTBubbleEdgeWidth() {
-        return bubbleEdgeWidth;
+    public float getTBubbleCornerWidth() {
+        return bubbleCornerWidth;
     }
 
-    public void setTBubbleEdgeWidth(float bubbleEdgeWidth) {
-        this.bubbleEdgeWidth = bubbleEdgeWidth;
+    public void setTBubbleCornerWidth(float bubbleCornerWidth) {
+        this.bubbleCornerWidth = bubbleCornerWidth;
     }
 
-    private float bubbleEdgeHeight;
+    private float bubbleCornerHeight;
 
-    public float getTBubbleEdgeHeight() {
-        return bubbleEdgeHeight;
+    public float getTBubbleCornerHeight() {
+        return bubbleCornerHeight;
     }
 
-    public void setTBubbleEdgeHeight(float bubbleEdgeHeight) {
-        this.bubbleEdgeHeight = bubbleEdgeHeight;
+    public void setTBubbleCornerHeight(float bubbleCornerHeight) {
+        this.bubbleCornerHeight = bubbleCornerHeight;
     }
 
-    private String bubbleTextValue;
+    private String bubbleText;
 
-    public String getTBubbleTextValue() {
-        return bubbleTextValue;
+    public String getTBubbleText() {
+        return bubbleText;
     }
 
-    public void setTBubbleTextValue(String bubbleTextValue) {
-        this.bubbleTextValue = bubbleTextValue;
+    public void setTBubbleText(String bubbleText) {
+        this.bubbleText = bubbleText;
         requestLayout();
     }
 
@@ -86,16 +86,16 @@ public class TBubble extends TView {
         this.bubbleTextPadding = bubbleTextPadding;
     }
 
-    @IntDef({LEFT, TOP, RIGHT, BOTTOM})
+    @IntDef({TOP, BOTTOM, LEFT, RIGHT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface bubbleTowardMode {
     }
 
-    public static final int LEFT = 0;
-    public static final int TOP = 1;
-    public static final int RIGHT = 2;
-    public static final int BOTTOM = 3;
-    private static final int[] bubbleTowardModeArray = {LEFT, TOP, RIGHT, BOTTOM,};
+    public static final int TOP = 0;
+    public static final int BOTTOM = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+    private static final int[] bubbleTowardModeArray = {TOP, BOTTOM, LEFT, RIGHT,};
     private @bubbleTowardMode
     int bubbleTowardMode;
 
@@ -160,10 +160,10 @@ public class TBubble extends TView {
 
         bubbleBackground = typedArray.getColor(R.styleable.TBubble_bubbleBackground, Color.TRANSPARENT);
 
-        bubbleEdgeWidth = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeWidth, 0);
-        bubbleEdgeHeight = typedArray.getDimension(R.styleable.TBubble_bubbleEdgeHeight, 0);
+        bubbleCornerWidth = typedArray.getDimension(R.styleable.TBubble_bubbleCornerWidth, 0);
+        bubbleCornerHeight = typedArray.getDimension(R.styleable.TBubble_bubbleCornerHeight, 0);
 
-        bubbleTextValue = typedArray.getString(R.styleable.TBubble_bubbleTextValue);
+        bubbleText = typedArray.getString(R.styleable.TBubble_bubbleText);
         bubbleTextSize = typedArray.getDimension(R.styleable.TBubble_bubbleTextSize, textSizeDefault);
         bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, textColorDefault);
         bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
@@ -192,11 +192,11 @@ public class TBubble extends TView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (bubbleEdgeWidth <= 0 || bubbleEdgeWidth + bubbleStrokeWidth * 0.5f > width) {
-            throw new IndexOutOfBoundsException("The content attribute bubbleEdgeWidth it does not conform to the rules");
+        if (bubbleCornerWidth <= 0 || bubbleCornerWidth + bubbleStrokeWidth * 0.5f > width) {
+            throw new IndexOutOfBoundsException("The content attribute bubbleCornerWidth it does not conform to the rules");
         }
-        if (bubbleEdgeHeight <= 0 || bubbleEdgeHeight + bubbleStrokeWidth * 0.5f > height) {
-            throw new IndexOutOfBoundsException("The content attribute bubbleEdgeHeight it does not conform to the rules");
+        if (bubbleCornerHeight <= 0 || bubbleCornerHeight + bubbleStrokeWidth * 0.5f > height) {
+            throw new IndexOutOfBoundsException("The content attribute bubbleCornerHeight it does not conform to the rules");
         }
     }
 
@@ -245,213 +245,205 @@ public class TBubble extends TView {
         float textCenterY = height >> 1;
 
         switch (bubbleTowardMode) {
-            case LEFT:
-
-                switch (bubblePositionMode) {
-                    case LOW:
-                        offsetY = (height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
-                        offsetY += bubbleOffset;
-                        break;
-                    case MIDDLE:
-                        offsetY += bubbleOffset;
-                        break;
-                    case HIGH:
-                        offsetY = ((height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
-                        offsetY += bubbleOffset;
-                        break;
-                    default:
-                        break;
-                }
-                left = bubbleEdgeHeight;
-
-                rectTop = (height >> 1) - bubbleEdgeWidth * 0.5f + offsetY;
-                rectBottom = rectTop + bubbleEdgeWidth;
-                rectLeft = bubbleEdgeHeight + offsetX;
-                rectRight = rectLeft + bubbleStrokeWidth;
-
-                inPolygonVertexX0 = bubbleStrokeWidth + offsetX;
-                inPolygonVertexY0 = (height >> 1) + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 + bubbleEdgeHeight;
-                inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 + radius;
-                inPolygonVertexY2 = inPolygonVertexY1;
-                inPolygonVertexX3 = inPolygonVertexX2;
-                inPolygonVertexY3 = inPolygonVertexY2 - bubbleEdgeWidth;
-                inPolygonVertexX4 = inPolygonVertexX1;
-                inPolygonVertexY4 = inPolygonVertexY3;
-
-                outPolygonVertexX0 = offsetX;
-                outPolygonVertexY0 = (height >> 1) + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 + bubbleEdgeHeight;
-                outPolygonVertexY1 = outPolygonVertexY0 + bubbleEdgeWidth * 0.5f;
-                outPolygonVertexX2 = outPolygonVertexX1 + bubbleStrokeWidth;
-                outPolygonVertexY2 = outPolygonVertexY1;
-                outPolygonVertexX3 = inPolygonVertexX0;
-                outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2;
-                outPolygonVertexY4 = outPolygonVertexY1 - bubbleEdgeWidth;
-                outPolygonVertexX5 = outPolygonVertexX1;
-                outPolygonVertexY5 = outPolygonVertexY4;
-
-                //
-                textCenterX += bubbleEdgeHeight * 0.5f;
-
-                break;
-
             case TOP:
                 switch (bubblePositionMode) {
                     case LOW:
-                        offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetX = ((width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;
                         break;
                     case MIDDLE:
                         offsetX += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetX = (width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetX = (width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1;
                         offsetX += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                top = bubbleEdgeHeight;
+                top = bubbleCornerHeight;
 
-                rectTop = bubbleEdgeHeight + offsetY;
+                rectTop = bubbleCornerHeight + offsetY;
                 rectBottom = rectTop + bubbleStrokeWidth;
-                rectLeft = (width >> 1) - bubbleEdgeWidth * 0.5f + offsetX;
-                rectRight = rectLeft + bubbleEdgeWidth;
+                rectLeft = (width >> 1) - bubbleCornerWidth * 0.5f + offsetX;
+                rectRight = rectLeft + bubbleCornerWidth;
 
                 inPolygonVertexX0 = (width >> 1) + offsetX;
                 inPolygonVertexY0 = bubbleStrokeWidth + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                inPolygonVertexY1 = inPolygonVertexY0 + bubbleEdgeHeight;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleCornerWidth * 0.5f;
+                inPolygonVertexY1 = inPolygonVertexY0 + bubbleCornerHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
                 inPolygonVertexY2 = inPolygonVertexY1 + radius;
-                inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
+                inPolygonVertexX3 = inPolygonVertexX2 + bubbleCornerWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
                 inPolygonVertexY4 = inPolygonVertexY1;
 
                 outPolygonVertexX0 = (width >> 1) + offsetX;
                 outPolygonVertexY0 = offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                outPolygonVertexY1 = outPolygonVertexY0 + bubbleEdgeHeight;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleCornerWidth * 0.5f;
+                outPolygonVertexY1 = outPolygonVertexY0 + bubbleCornerHeight;
                 outPolygonVertexX2 = outPolygonVertexX1;
                 outPolygonVertexY2 = outPolygonVertexY1 + bubbleStrokeWidth;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2 + bubbleEdgeWidth;
+                outPolygonVertexX4 = outPolygonVertexX2 + bubbleCornerWidth;
                 outPolygonVertexY4 = outPolygonVertexY2;
                 outPolygonVertexX5 = outPolygonVertexX4;
                 outPolygonVertexY5 = outPolygonVertexY1;
 
                 //
-                textCenterY += bubbleEdgeHeight * 0.5f;
-
+                textCenterY += bubbleCornerHeight * 0.5f;
                 break;
-
-            case RIGHT:
-                switch (bubblePositionMode) {
-                    case LOW:
-                        offsetY = ((height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
-                        offsetY += bubbleOffset;
-                        break;
-                    case MIDDLE:
-                        offsetY += bubbleOffset;
-                        break;
-                    case HIGH:
-                        offsetY = (height >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
-                        offsetY += bubbleOffset;
-                        break;
-                    default:
-                        break;
-                }
-                right -= bubbleEdgeHeight;
-
-                rectTop = (height >> 1) - bubbleEdgeWidth * 0.5f + offsetY;
-                rectBottom = rectTop + bubbleEdgeWidth;
-                rectRight = width - bubbleStrokeWidth + offsetX;
-                rectLeft = rectRight - bubbleEdgeHeight;
-
-                inPolygonVertexX0 = width - bubbleStrokeWidth + offsetX;
-                inPolygonVertexY0 = (height >> 1) + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeHeight;
-                inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
-                inPolygonVertexX2 = inPolygonVertexX1 - radius;
-                inPolygonVertexY2 = inPolygonVertexY1;
-                inPolygonVertexX3 = inPolygonVertexX2;
-                inPolygonVertexY3 = inPolygonVertexY2 + bubbleEdgeWidth;
-                inPolygonVertexX4 = inPolygonVertexX1;
-                inPolygonVertexY4 = inPolygonVertexY3;
-
-                outPolygonVertexX0 = width + offsetX;
-                outPolygonVertexY0 = (height >> 1) + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeHeight;
-                outPolygonVertexY1 = outPolygonVertexY0 - bubbleEdgeWidth * 0.5f;
-                outPolygonVertexX2 = outPolygonVertexX1 - bubbleStrokeWidth;
-                outPolygonVertexY2 = outPolygonVertexY1;
-                outPolygonVertexX3 = inPolygonVertexX0;
-                outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2;
-                outPolygonVertexY4 = outPolygonVertexY1 + bubbleEdgeWidth;
-                outPolygonVertexX5 = outPolygonVertexX1;
-                outPolygonVertexY5 = outPolygonVertexY4;
-
-                //
-                textCenterX -= bubbleEdgeHeight * 0.5f;
-
-                break;
-
             case BOTTOM:
                 switch (bubblePositionMode) {
                     case LOW:
-                        offsetX = ((width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetX = ((width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;
                         break;
                     case MIDDLE:
                         offsetX += bubbleOffset;
                         break;
                     case HIGH:
-                        offsetX = (width >> 1) - bubbleEdgeWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetX = (width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1;
                         offsetX += bubbleOffset;
                         break;
                     default:
                         break;
                 }
-                bottom -= bubbleEdgeHeight;
+                bottom -= bubbleCornerHeight;
 
                 rectBottom = height - bubbleStrokeWidth + offsetY;
-                rectTop = rectBottom - bubbleEdgeHeight;
-                rectLeft = (width >> 1) - bubbleEdgeWidth * 0.5f + offsetX;
-                rectRight = rectLeft + bubbleEdgeWidth;
+                rectTop = rectBottom - bubbleCornerHeight;
+                rectLeft = (width >> 1) - bubbleCornerWidth * 0.5f + offsetX;
+                rectRight = rectLeft + bubbleCornerWidth;
 
                 inPolygonVertexX0 = (width >> 1) + offsetX;
                 inPolygonVertexY0 = height - bubbleStrokeWidth + offsetY;
-                inPolygonVertexX1 = inPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                inPolygonVertexY1 = inPolygonVertexY0 - bubbleEdgeHeight;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleCornerWidth * 0.5f;
+                inPolygonVertexY1 = inPolygonVertexY0 - bubbleCornerHeight;
                 inPolygonVertexX2 = inPolygonVertexX1;
                 inPolygonVertexY2 = inPolygonVertexY1 - radius;
-                inPolygonVertexX3 = inPolygonVertexX2 + bubbleEdgeWidth;
+                inPolygonVertexX3 = inPolygonVertexX2 + bubbleCornerWidth;
                 inPolygonVertexY3 = inPolygonVertexY2;
                 inPolygonVertexX4 = inPolygonVertexX3;
                 inPolygonVertexY4 = inPolygonVertexY1;
 
                 outPolygonVertexX0 = (width >> 1) + offsetX;
                 outPolygonVertexY0 = height + offsetY;
-                outPolygonVertexX1 = outPolygonVertexX0 - bubbleEdgeWidth * 0.5f;
-                outPolygonVertexY1 = outPolygonVertexY0 - bubbleEdgeHeight;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleCornerWidth * 0.5f;
+                outPolygonVertexY1 = outPolygonVertexY0 - bubbleCornerHeight;
                 outPolygonVertexX2 = outPolygonVertexX1;
                 outPolygonVertexY2 = outPolygonVertexY1 - bubbleStrokeWidth;
                 outPolygonVertexX3 = inPolygonVertexX0;
                 outPolygonVertexY3 = inPolygonVertexY0;
-                outPolygonVertexX4 = outPolygonVertexX2 + bubbleEdgeWidth;
+                outPolygonVertexX4 = outPolygonVertexX2 + bubbleCornerWidth;
                 outPolygonVertexY4 = outPolygonVertexY2;
                 outPolygonVertexX5 = outPolygonVertexX4;
                 outPolygonVertexY5 = outPolygonVertexY1;
 
                 //
-                textCenterY -= bubbleEdgeHeight * 0.5f;
+                textCenterY -= bubbleCornerHeight * 0.5f;
+                break;
+            case LEFT:
+                switch (bubblePositionMode) {
+                    case LOW:
+                        offsetY = (height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetY += bubbleOffset;
+                        break;
+                    case MIDDLE:
+                        offsetY += bubbleOffset;
+                        break;
+                    case HIGH:
+                        offsetY = ((height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetY += bubbleOffset;
+                        break;
+                    default:
+                        break;
+                }
+                left = bubbleCornerHeight;
 
+                rectTop = (height >> 1) - bubbleCornerWidth * 0.5f + offsetY;
+                rectBottom = rectTop + bubbleCornerWidth;
+                rectLeft = bubbleCornerHeight + offsetX;
+                rectRight = rectLeft + bubbleStrokeWidth;
+
+                inPolygonVertexX0 = bubbleStrokeWidth + offsetX;
+                inPolygonVertexY0 = (height >> 1) + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 + bubbleCornerHeight;
+                inPolygonVertexY1 = inPolygonVertexY0 + bubbleCornerWidth * 0.5f;
+                inPolygonVertexX2 = inPolygonVertexX1 + radius;
+                inPolygonVertexY2 = inPolygonVertexY1;
+                inPolygonVertexX3 = inPolygonVertexX2;
+                inPolygonVertexY3 = inPolygonVertexY2 - bubbleCornerWidth;
+                inPolygonVertexX4 = inPolygonVertexX1;
+                inPolygonVertexY4 = inPolygonVertexY3;
+
+                outPolygonVertexX0 = offsetX;
+                outPolygonVertexY0 = (height >> 1) + offsetY;
+                outPolygonVertexX1 = outPolygonVertexX0 + bubbleCornerHeight;
+                outPolygonVertexY1 = outPolygonVertexY0 + bubbleCornerWidth * 0.5f;
+                outPolygonVertexX2 = outPolygonVertexX1 + bubbleStrokeWidth;
+                outPolygonVertexY2 = outPolygonVertexY1;
+                outPolygonVertexX3 = inPolygonVertexX0;
+                outPolygonVertexY3 = inPolygonVertexY0;
+                outPolygonVertexX4 = outPolygonVertexX2;
+                outPolygonVertexY4 = outPolygonVertexY1 - bubbleCornerWidth;
+                outPolygonVertexX5 = outPolygonVertexX1;
+                outPolygonVertexY5 = outPolygonVertexY4;
+
+                //
+                textCenterX += bubbleCornerHeight * 0.5f;
+                break;
+            case RIGHT:
+                switch (bubblePositionMode) {
+                    case LOW:
+                        offsetY = ((height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
+                        offsetY += bubbleOffset;
+                        break;
+                    case MIDDLE:
+                        offsetY += bubbleOffset;
+                        break;
+                    case HIGH:
+                        offsetY = (height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1;
+                        offsetY += bubbleOffset;
+                        break;
+                    default:
+                        break;
+                }
+                right -= bubbleCornerHeight;
+
+                rectTop = (height >> 1) - bubbleCornerWidth * 0.5f + offsetY;
+                rectBottom = rectTop + bubbleCornerWidth;
+                rectRight = width - bubbleStrokeWidth + offsetX;
+                rectLeft = rectRight - bubbleCornerHeight;
+
+                inPolygonVertexX0 = width - bubbleStrokeWidth + offsetX;
+                inPolygonVertexY0 = (height >> 1) + offsetY;
+                inPolygonVertexX1 = inPolygonVertexX0 - bubbleCornerHeight;
+                inPolygonVertexY1 = inPolygonVertexY0 - bubbleCornerWidth * 0.5f;
+                inPolygonVertexX2 = inPolygonVertexX1 - radius;
+                inPolygonVertexY2 = inPolygonVertexY1;
+                inPolygonVertexX3 = inPolygonVertexX2;
+                inPolygonVertexY3 = inPolygonVertexY2 + bubbleCornerWidth;
+                inPolygonVertexX4 = inPolygonVertexX1;
+                inPolygonVertexY4 = inPolygonVertexY3;
+
+                outPolygonVertexX0 = width + offsetX;
+                outPolygonVertexY0 = (height >> 1) + offsetY;
+                outPolygonVertexX1 = outPolygonVertexX0 - bubbleCornerHeight;
+                outPolygonVertexY1 = outPolygonVertexY0 - bubbleCornerWidth * 0.5f;
+                outPolygonVertexX2 = outPolygonVertexX1 - bubbleStrokeWidth;
+                outPolygonVertexY2 = outPolygonVertexY1;
+                outPolygonVertexX3 = inPolygonVertexX0;
+                outPolygonVertexY3 = inPolygonVertexY0;
+                outPolygonVertexX4 = outPolygonVertexX2;
+                outPolygonVertexY4 = outPolygonVertexY1 + bubbleCornerWidth;
+                outPolygonVertexX5 = outPolygonVertexX1;
+                outPolygonVertexY5 = outPolygonVertexY4;
+
+                //
+                textCenterX -= bubbleCornerHeight * 0.5f;
                 break;
             default:
                 break;
@@ -483,8 +475,8 @@ public class TBubble extends TView {
         canvas.drawPath(path, initPaint(Paint.Style.FILL, bubbleStrokeColor));
 
         //
-        if (bubbleTextValue != null) {
-            drawText(canvas, bubbleTextValue, textWidth, textCenterX, textCenterY, 0, 0,
+        if (bubbleText != null) {
+            drawText(canvas, bubbleText, textWidth, textCenterX, textCenterY, 0, 0,
                     initTextPaint(Paint.Style.FILL, bubbleTextColor, bubbleTextSize, Paint.Align.CENTER));
         }
     }

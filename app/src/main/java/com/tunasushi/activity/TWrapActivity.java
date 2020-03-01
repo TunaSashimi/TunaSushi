@@ -28,7 +28,7 @@ public class TWrapActivity extends Activity {
         setContentView(R.layout.activity_t_wrap);
 
         tWrap = findViewById(R.id.tWrap);
-        tWrap.setWrapItemTextValueArray(
+        tWrap.setWrapItemTextArray(
                 new String[]{
                         " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
                 });

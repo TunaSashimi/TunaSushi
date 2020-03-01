@@ -12,8 +12,8 @@
         android:layout_height="100dp"
         android:layout_margin="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="low"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
@@ -21,7 +21,7 @@
         app:bubbleTextColor="#ffffff"
         app:bubbleTextPadding="20dp"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="left" />
 
     <com.tunasushi.tuna.TBubble
@@ -31,15 +31,15 @@
         android:layout_below="@id/bubbleLeftLow"
         android:layout_alignLeft="@id/bubbleLeftLow"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="low"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
     <com.tunasushi.tuna.TBubble
@@ -50,15 +50,15 @@
         android:layout_alignLeft="@id/bubbleTopLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="low"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="right" />
 
     <com.tunasushi.tuna.TBubble
@@ -69,15 +69,15 @@
         android:layout_alignLeft="@id/bubbleRightLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="low"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="1dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="bottom" />
 
     <com.tunasushi.tuna.TBubble
@@ -87,8 +87,8 @@
         android:layout_alignLeft="@id/bubbleBottomLow"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="low"
         app:bubbleOffset="20dp"
         app:radius="10dp"
@@ -96,7 +96,7 @@
         app:bubbleStrokeWidth="1dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
     <com.tunasushi.tuna.TBubble
@@ -106,15 +106,15 @@
         android:layout_alignTop="@id/bubbleLeftLow"
         android:layout_toRightOf="@id/bubbleLeftLow"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="middle"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="left" />
 
     <com.tunasushi.tuna.TBubble
@@ -125,15 +125,15 @@
         android:layout_alignLeft="@id/bubbleLeftMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="middle"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
     <com.tunasushi.tuna.TBubble
@@ -144,15 +144,15 @@
         android:layout_alignLeft="@id/bubbleTopMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="middle"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="right" />
 
     <com.tunasushi.tuna.TBubble
@@ -163,15 +163,15 @@
         android:layout_alignLeft="@id/bubbleRightMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="middle"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="5dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="bottom" />
 
     <com.tunasushi.tuna.TBubble
@@ -181,8 +181,8 @@
         android:layout_alignLeft="@id/bubbleBottomMiddle"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="middle"
         app:bubbleOffset="20dp"
         app:radius="10dp"
@@ -190,7 +190,7 @@
         app:bubbleStrokeWidth="5dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
     <com.tunasushi.tuna.TBubble
@@ -201,15 +201,15 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/bubbleLeftMiddle"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="high"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="left" />
 
     <com.tunasushi.tuna.TBubble
@@ -220,15 +220,15 @@
         android:layout_alignLeft="@id/bubbleLeftHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="high"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
     <com.tunasushi.tuna.TBubble
@@ -239,15 +239,15 @@
         android:layout_alignLeft="@id/bubbleTopHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="high"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="right" />
 
     <com.tunasushi.tuna.TBubble
@@ -258,15 +258,15 @@
         android:layout_alignLeft="@id/bubbleRightHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="high"
         app:radius="10dp"
         app:bubbleStrokeColor="#000000"
         app:bubbleStrokeWidth="10dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="bottom" />
 
     <com.tunasushi.tuna.TBubble
@@ -276,8 +276,8 @@
         android:layout_alignLeft="@id/bubbleBottomHigh"
         android:layout_marginTop="10dp"
         app:bubbleBackground="#ff6632"
-        app:bubbleEdgeHeight="20dp"
-        app:bubbleEdgeWidth="20dp"
+        app:bubbleCornerHeight="20dp"
+        app:bubbleCornerWidth="20dp"
         app:bubblePositionMode="high"
         app:bubbleOffset="-20dp"
         app:radius="10dp"
@@ -285,7 +285,7 @@
         app:bubbleStrokeWidth="10dp"
         app:bubbleTextColor="#ffffff"
         app:bubbleTextSize="12dp"
-        app:bubbleTextValue="TunaBubble"
+        app:bubbleText="TunaBubble"
         app:bubbleTowardMode="top" />
 
 </RelativeLayout>

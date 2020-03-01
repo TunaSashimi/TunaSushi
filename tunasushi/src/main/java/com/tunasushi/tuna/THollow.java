@@ -20,7 +20,7 @@ import com.tuna.R;
  * @Description
  */
 public class THollow extends TView {
-    private String hollowTextValue;
+    private String hollowText;
     private float hollowTextSize;
     private float hollowTextFractionVertical;
     private Bitmap hollowSrc;
@@ -45,7 +45,7 @@ public class THollow extends TView {
             srcBitmap = BitmapFactory.decodeResource(getResources(), hollowBitmapId);
         }
 
-        hollowTextValue = typedArray.getString(R.styleable.THollow_hollowTextValue);
+        hollowText = typedArray.getString(R.styleable.THollow_hollowText);
         hollowTextSize = typedArray.getDimension(R.styleable.THollow_hollowTextSize, textSizeDefault);
         hollowTextFractionVertical = typedArray.getFraction(R.styleable.THollow_hollowTextFractionVertical, 1, 1, 0.5f);
 
@@ -66,7 +66,7 @@ public class THollow extends TView {
         hollowSrc = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         canvas = new Canvas(hollowSrc);
-        drawText(canvas, hollowTextValue, width, width >> 1, dy, initTextPaint(Color.WHITE, hollowTextSize, Paint.Align.CENTER));
+        drawText(canvas, hollowText, width, width >> 1, dy, initTextPaint(Color.WHITE, hollowTextSize, Paint.Align.CENTER));
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
         canvas.drawBitmap(srcBitmap, 0, 0, paint);
