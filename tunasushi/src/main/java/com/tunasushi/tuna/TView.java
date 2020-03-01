@@ -417,37 +417,25 @@ public class TView extends View {
             if (i != measureListSize - 1) {
                 switch (textGravityMode) {
                     case TEXT_GRAVITY_CENTER:
-                        canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
-                        break;
-                    case TEXT_GRAVITY_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        break;
                     case TEXT_GRAVITY_CENTER_LEFT:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
                         break;
+                    case TEXT_GRAVITY_LEFT:
                     case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        break;
-                    default:
                         break;
                 }
             } else {
                 float availableWidth = width - paddingLeft - paddingRight;
                 switch (textGravityMode) {
                     case TEXT_GRAVITY_CENTER:
-                        canvas.drawText(drawString, centerX, drawLineY, paint);
-                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case TEXT_GRAVITY_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
-                    case TEXT_GRAVITY_CENTER_LEFT:
-                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
-                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
                     case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
                         return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
-                    default:
-                        break;
+                    case TEXT_GRAVITY_LEFT:
+                    case TEXT_GRAVITY_CENTER_LEFT:
+                        canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
                 }
             }
         }
@@ -478,30 +466,6 @@ public class TView extends View {
                     initTextPaint(Paint.Style.FILL, markTextColor, markTextSize, Paint.Align.CENTER)
                     , 1, measureList);
         }
-    }
-
-    //
-    protected void drawArrow(Canvas canvas,
-                             int width, int height,
-                             float floatX,
-                             float arrowWidth, float arrowHeight,
-                             float lineThick, int lineColor,
-                             boolean upward) {
-        if (upward) {
-            initPathMoveTo(0, height - lineThick * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, height - lineThick * 0.5f);
-            path.lineTo(floatX, height - lineThick * 0.5f - arrowHeight);
-            path.lineTo(floatX + arrowWidth * 0.5f, height - lineThick * 0.5f);
-            path.lineTo(width, height - lineThick * 0.5f);
-        } else {
-            initPathMoveTo(0, lineThick * 0.5f);
-            path.lineTo(floatX - arrowWidth * 0.5f, lineThick * 0.5f);
-            path.lineTo(floatX, arrowHeight + lineThick * 0.5f);
-            path.lineTo(floatX + arrowWidth * 0.5f, lineThick * 0.5f);
-            path.lineTo(width, lineThick * 0.5f);
-        }
-
-        canvas.drawPath(path, initPaint(Paint.Style.STROKE, lineColor, lineThick));
     }
 
     //
@@ -1948,10 +1912,10 @@ public class TView extends View {
         }
     }
 
-    public static final int LEFT = 0x00000000;
+    public static final int TOP = 0x00000000;
+    public static final int LEFT = TOP;
     public static final int CENTER_HORIZONTAL = 0x00000001;
     public static final int RIGHT = CENTER_HORIZONTAL << 1;
-    public static final int TOP = 0x00000000;
     public static final int CENTER_VERTICAL = RIGHT << 1;
     public static final int BOTTOM = CENTER_VERTICAL << 1;
     public static final int CENTER = CENTER_HORIZONTAL | CENTER_VERTICAL;
@@ -3124,9 +3088,7 @@ public class TView extends View {
         this.contentRowSpaceRatio = contentRowSpaceRatio;
     }
 
-
-//
-
+    //
     @IntDef({CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface contentGravityMode {
@@ -3139,7 +3101,6 @@ public class TView extends View {
     private static final int[] contentGravityModeArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
     private @contentGravityMode
     int contentGravityMode;
-
 
     //
     private Typeface contentTypeFaceMode;
