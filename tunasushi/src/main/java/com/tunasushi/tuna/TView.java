@@ -4445,24 +4445,12 @@ public class TView extends View {
                 || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0 || backgroundAngleNormal != Integer.MAX_VALUE
                 || backgroundAnglePress != Integer.MAX_VALUE || backgroundAngleSelect != Integer.MAX_VALUE || srcAnchorNormal != null || srcAnchorPress != null
                 || srcAnchorSelect != null
-
         ) {
+
             // setShadowLayer() is only supported on text when hardware acceleration is on.
             // Hardware acceleration is on by default when targetSdk=14 or higher.
             // An easy workaround is to put your View in a software layer: myView.setLayerType(View.LAYER_TYPE_SOFTWARE, null).
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
-
-        if (srcNormal != null || srcPress != null || srcSelect != null || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0) {
-            if (backgroundNormal == Color.TRANSPARENT) {
-                backgroundNormal = Color.WHITE;
-            }
-            if (backgroundPress == Color.TRANSPARENT) {
-                backgroundPress = backgroundNormal;
-            }
-            if (backgroundSelect == Color.TRANSPARENT) {
-                backgroundSelect = backgroundNormal;
-            }
         }
 
         // text
@@ -4569,6 +4557,16 @@ public class TView extends View {
         if (needSaveLayer) {
             // draw the src/dst example into our offscreen bitmap
             layer = canvas.saveLayer(0, 0, width, height, null);
+
+            if (backgroundNormal == Color.TRANSPARENT) {
+                backgroundNormal = Color.WHITE;
+            }
+            if (backgroundPress == Color.TRANSPARENT) {
+                backgroundPress = backgroundNormal;
+            }
+            if (backgroundSelect == Color.TRANSPARENT) {
+                backgroundSelect = backgroundNormal;
+            }
         }
 
         // dst, note that when srcShadowRadiusSelect > 0, the parent background color must take incoming as backgroundNormal!
@@ -4619,7 +4617,7 @@ public class TView extends View {
             }
         }
 
-        // draw bitmap
+        // draw Xfermode SRC
         if (needSaveLayer) {
             paint.setXfermode(porterDuffXferMode);
 
@@ -4648,11 +4646,11 @@ public class TView extends View {
 
         // draw anchor
         if (select && srcAnchorSelect != null) {
-            drawAnchor(canvas, paint, srcAnchorSelect, matrixSelect, width, height, srcAnchorGravityMode, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
+            drawAnchor(canvas, initPaint(), srcAnchorSelect, matrixSelect, width, height, srcAnchorGravityMode, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
         } else if (press && srcAnchorPress != null) {
-            drawAnchor(canvas, paint, srcAnchorPress, matrixPress, width, height, srcAnchorGravityMode, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
+            drawAnchor(canvas, initPaint(), srcAnchorPress, matrixPress, width, height, srcAnchorGravityMode, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
         } else if (srcAnchorNormal != null) {
-            drawAnchor(canvas, paint, srcAnchorNormal, matrixNormal, width, height, srcAnchorGravityMode, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
+            drawAnchor(canvas, initPaint(), srcAnchorNormal, matrixNormal, width, height, srcAnchorGravityMode, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
         }
 
         // draw text

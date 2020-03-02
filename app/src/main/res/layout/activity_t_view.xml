@@ -449,7 +449,7 @@
             app:backgroundNormal="#c1eaee"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04"
-            app:srcShadowRadiusNormal="4dp" />
+            app:srcShadowRadiusNormal="8dp" />
 
         <com.tunasushi.tuna.TView
             android:layout_width="100dp"
