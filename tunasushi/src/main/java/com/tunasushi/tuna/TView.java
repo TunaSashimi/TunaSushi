@@ -436,7 +436,6 @@ public class TView extends View {
                         return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
                     case TEXT_GRAVITY_RIGHT:
                         canvas.drawText(drawString, width - paddingRight - measureLength * 0.5f, drawLineY, paint);
-//                        return new float[]{availableWidth, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
                         return new float[]{availableWidth, width * 0.5f - paddingRight, drawLineY - centerY - halfWordHeight};
                 }
             }
@@ -4353,7 +4352,7 @@ public class TView extends View {
             textMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
                     text, initTextPaint(textSize), textPaddingLeft, textPaddingRight,
                     textRowSpaceRatio);
-        } else {
+        } else if (content != null) {
             contentMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
                     content, initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
                     contentRowSpaceRatio);
