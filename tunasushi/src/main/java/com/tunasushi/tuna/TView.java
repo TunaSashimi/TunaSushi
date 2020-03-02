@@ -4352,7 +4352,7 @@ public class TView extends View {
             textMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
                     text, initTextPaint(textSize), textPaddingLeft, textPaddingRight,
                     textRowSpaceRatio);
-        } else if (content != null) {
+        } else {
             contentMeasureList = measure(widthMeasureSpec, heightMeasureSpec,
                     content, initTextPaint(contentSize), textPaddingLeft, textPaddingRight,
                     contentRowSpaceRatio);
