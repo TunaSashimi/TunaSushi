@@ -64,5 +64,4 @@
         <activity android:name=".activity.TWrapActivity" />
 
     </application>
-
 </manifest>

@@ -115,8 +115,9 @@
         <attr name="textGravityMode">
             <enum name="center" value="0" />
             <enum name="left" value="1" />
-            <enum name="center_left" value="2" />
-            <enum name="left_center" value="3" />
+            <enum name="right" value="2" />
+            <enum name="center_left" value="3" />
+            <enum name="left_center" value="4" />
         </attr>
         <attr name="textTypeFaceMode">
             <enum name="normal" value="0" />
@@ -158,8 +159,9 @@
         <attr name="contentGravityMode">
             <enum name="center" value="0" />
             <enum name="left" value="1" />
-            <enum name="center_left" value="2" />
-            <enum name="left_center" value="3" />
+            <enum name="right" value="2" />
+            <enum name="center_left" value="3" />
+            <enum name="left_center" value="4" />
         </attr>
         <attr name="contentTypeFaceMode">
             <enum name="normal" value="0" />

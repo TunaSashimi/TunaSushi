@@ -188,7 +188,6 @@ public class TProgress extends TView {
                 }
                 break;
         }
-
     }
 
     public float getProgressPercent() {

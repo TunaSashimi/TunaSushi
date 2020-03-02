@@ -43,7 +43,6 @@ public class TMove extends TView {
         }
     };
 
-
     public TMove(Context context) {
         this(context, null);
     }

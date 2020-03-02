@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layerType="software"
+        app:radius="5dp"
         app:wrapBackgroundNormal="#ffffff"
         app:wrapBackgroundSelect="#ffffff"
         app:wrapSpaceLine="20dp"
-        app:radius="5dp"
         app:wrapSpaceRow="10dp"
         app:wrapStrokeColorNormal="#cccccc"
         app:wrapStrokeColorSelect="#ff9933"
@@ -32,8 +32,7 @@
         android:layout_marginRight="16dp"
         app:strokeColorNormal="#bc7955"
         app:strokeWidthNormal="1dp"
+        app:text="SHOW RESULT"
         app:textColorNormal="#bc7955"
-        app:textSize="16dp"
-        app:text="SHOW RESULT" />
-
+        app:textSize="16dp" />
 </RelativeLayout>

@@ -393,16 +393,13 @@ public class TView extends View {
         }
 
         float textMiddleRow = (measureList.size() + 1) * 0.5f;
-
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         // float baseline = (targetRectBottom + targetRectTop - fontMetrics.bottom - fontMetrics.top) * 0.5f;
         float baseline = centerY - fontMetrics.bottom * 0.5f - fontMetrics.top * 0.5f;
         int halfWordHeight = (fontMetrics.descent - fontMetrics.ascent) >> 1;
-
         //
         String drawString;
         float drawLineY;
-
         int measureListSize = measureList.size();
         for (int i = 0; i < measureListSize; i++) {
             drawLineY = baseline + (i + 1 - textMiddleRow) * paint.getTextSize() * textRowSpaceRatio;
@@ -411,9 +408,7 @@ public class TView extends View {
             } else {
                 drawString = string.substring(measureList.get(i - 1), measureList.get(i));
             }
-
             float measureLength = paint.measureText(drawString);
-
             if (i != measureListSize - 1) {
                 switch (textGravityMode) {
                     case TEXT_GRAVITY_CENTER:
@@ -423,6 +418,9 @@ public class TView extends View {
                     case TEXT_GRAVITY_LEFT:
                     case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
+                        break;
+                    case TEXT_GRAVITY_RIGHT:
+                        canvas.drawText(drawString, width - paddingRight - measureLength * 0.5f, drawLineY, paint);
                         break;
                 }
             } else {
@@ -436,6 +434,9 @@ public class TView extends View {
                     case TEXT_GRAVITY_CENTER_LEFT:
                         canvas.drawText(drawString, paddingLeft + measureLength * 0.5f, drawLineY, paint);
                         return new float[]{availableWidth, measureLength + paddingLeft - width * 0.5f, drawLineY - centerY - halfWordHeight};
+                    case TEXT_GRAVITY_RIGHT:
+                        canvas.drawText(drawString, width - paddingRight - measureLength * 0.5f, drawLineY, paint);
+                        return new float[]{measureLength, measureLength * 0.5f, drawLineY - centerY - halfWordHeight};
                 }
             }
         }
@@ -2686,16 +2687,17 @@ public class TView extends View {
     }
 
 
-    @IntDef({TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER})
+    @IntDef({TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface textGravityMode {
     }
 
     public static final int TEXT_GRAVITY_CENTER = 0;
     public static final int TEXT_GRAVITY_LEFT = 1;
-    public static final int TEXT_GRAVITY_CENTER_LEFT = 2;
-    public static final int TEXT_GRAVITY_LEFT_CENTER = 3;
-    private static final int[] textGravityModeArray = {TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,};
+    public static final int TEXT_GRAVITY_RIGHT = 2;
+    public static final int TEXT_GRAVITY_CENTER_LEFT = 3;
+    public static final int TEXT_GRAVITY_LEFT_CENTER = 4;
+    private static final int[] textGravityModeArray = {TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,};
     private @textGravityMode
     int textGravityMode;
 
@@ -3096,9 +3098,10 @@ public class TView extends View {
 
     public static final int CONTENT_GRAVITY_CENTER = 0;
     public static final int CONTENT_GRAVITY_LEFT = 1;
-    public static final int CONTENT_GRAVITY_CENTER_LEFT = 2;
-    public static final int CONTENT_GRAVITY_LEFT_CENTER = 3;
-    private static final int[] contentGravityModeArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
+    public static final int CONTENT_GRAVITY_RIGHT = 2;
+    public static final int CONTENT_GRAVITY_CENTER_LEFT = 3;
+    public static final int CONTENT_GRAVITY_LEFT_CENTER = 4;
+    private static final int[] contentGravityModeArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_RIGHT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
     private @contentGravityMode
     int contentGravityMode;
 
