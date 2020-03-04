@@ -24,7 +24,6 @@ public class EntryActivity extends Activity {
 
             TViewActivity.class,
 
-            //
             TAnalysisActivity.class,
             TArcActivity.class,
 
@@ -74,16 +73,16 @@ public class EntryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
 
-        ListView lv = findViewById(R.id.listview);
+        ListView listView = findViewById(R.id.listView);
         List<String> list = new ArrayList<String>();
 
         for (int i = 0; i < c.length; i++) {
             list.add(c[i].getSimpleName());
         }
 
-        lv.setAdapter(new ArrayAdapter(this, R.layout.activity_entryitem, list));
+        listView.setAdapter(new ArrayAdapter(this, R.layout.activity_entryitem, list));
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 startActivity(new Intent(EntryActivity.this, c[arg2]));
             }
