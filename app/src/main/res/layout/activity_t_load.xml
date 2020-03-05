@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tunasushi.tuna.TLoad
+        android:id="@+id/tLoad"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp" />
+
+    <com.tunasushi.tuna.TLoad
+        android:id="@+id/tLoadCustom"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/tLoad"
+        android:layout_alignLeft="@id/tLoad"
+        android:layout_marginTop="16dp"
+        app:loadColorIn="#0000ff"
+        app:loadColorOut="#ff0000"
+        app:loadThickIn="10dp"
+        app:loadThickOut="5dp" />
+
+    <Button
+        android:id="@+id/btnDecor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tLoadCustom"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Tolad" />
+
+    <Button
+        android:id="@+id/btnFloat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnDecor"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:text="TLoad Float" />
+
+</RelativeLayout>

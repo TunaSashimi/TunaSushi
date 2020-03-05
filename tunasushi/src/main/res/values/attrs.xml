@@ -401,6 +401,15 @@
         <attr name="lineBackground" format="reference|color" />
     </declare-styleable>
 
+    <declare-styleable name="TLoad">
+        <attr name="loadTime" format="integer" />
+        <attr name="loadColorOut" format="reference|color" />
+        <attr name="loadColorIn" format="reference|color" />
+        <attr name="loadThickOut" format="dimension" />
+        <attr name="loadThickIn" format="dimension" />
+        <attr name="loadAngleStart" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="TMove">
         <attr name="moveBitmap" format="reference" />
         <attr name="moveDistance" format="dimension" />

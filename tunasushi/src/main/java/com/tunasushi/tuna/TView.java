@@ -515,6 +515,16 @@ public class TView extends View {
         return path;
     }
 
+    protected Path initPathArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
+        if (path == null) {
+            path = new Path();
+        } else {
+            path.reset();
+        }
+        path.addArc(left, top, right, bottom, startAngle, sweepAngle);
+        return path;
+    }
+
     protected Path initPathRoundRect(RectF rect, float[] radii, Path.Direction dir) {
         if (path == null) {
             path = new Path();

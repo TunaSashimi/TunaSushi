@@ -40,6 +40,7 @@ public class EntryActivity extends Activity {
 
             TLayoutActivity.class,
             TLineActivity.class,
+            TLoadActivity.class,
 
             TMaterialActivity.class,
             TMoveActivity.class,

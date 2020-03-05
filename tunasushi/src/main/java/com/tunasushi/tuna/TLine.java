@@ -72,20 +72,6 @@ public class TLine extends TView {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        double trangleTopCornerHalf = 0;
-        if (lineMode == TOP || lineMode == BOTTOM) {
-            //tan(trangleTopCornerHalf)=(1/2 width)/height
-            trangleTopCornerHalf = Math.atan((width * 0.5f) / height);
-        } else if (lineMode == LEFT || lineMode == RIGHT) {
-            //tan(trangleTopCornerHalf)=(1/2 height)/width
-            trangleTopCornerHalf = Math.atan((height * 0.5f) / width);
-        }
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
         switch (lineMode) {
             case TOP:
