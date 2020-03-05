@@ -22,25 +22,4 @@
         app:loadColorOut="#ff0000"
         app:loadThickIn="10dp"
         app:loadThickOut="5dp" />
-
-    <Button
-        android:id="@+id/btnDecor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tLoadCustom"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Tolad" />
-
-    <Button
-        android:id="@+id/btnFloat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnDecor"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:text="TLoad Float" />
-
 </RelativeLayout>
