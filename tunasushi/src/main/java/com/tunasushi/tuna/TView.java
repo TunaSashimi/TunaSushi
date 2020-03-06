@@ -4307,9 +4307,6 @@ public class TView extends View {
                     touchUpListener.touchUp(this);
                 }
                 if (onClickListener != null) {
-
-                    System.out.println("TView==>onClick");
-
                     onClickListener.onClick(this);
                 }
                 if (associateListener != null) {
