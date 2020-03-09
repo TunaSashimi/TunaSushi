@@ -6,11 +6,14 @@ import android.view.View;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TBubble;
+import com.tunasushi.tuna.TGroup;
 import com.tunasushi.tuna.TRange;
 import com.tunasushi.tuna.TView;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.tunasushi.tool.ConvertTool.dpToPx;
-import static com.tunasushi.tool.ViewTool.setViewMargins;
 
 /**
  * @author TunaSashimi
@@ -19,10 +22,13 @@ import static com.tunasushi.tool.ViewTool.setViewMargins;
  * @Description
  */
 public class TRangeActivity extends Activity {
-    private TView tView;
+    private TView tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive;
+    private TView tViewPrice, tViewReset, tViewComplete;
     private TBubble tBubble;
     private TRange tRange;
     private int dx;
+
+    private List<TView> tViewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +36,38 @@ public class TRangeActivity extends Activity {
 
         setContentView(R.layout.activity_t_range);
 
-        tView = findViewById(R.id.tView01);
+        tViewNoLimit = findViewById(R.id.tViewNoLimit);
+        tViewStarTwo = findViewById(R.id.tViewStarTwo);
+        tViewStarThree = findViewById(R.id.tViewStarThree);
+        tViewStarFour = findViewById(R.id.tViewStarFour);
+        tViewStarFive = findViewById(R.id.tViewStarFive);
+
+        //
+        tViewList = Arrays.asList(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive);
+        TGroup.link(tViewList);
+
+        tViewPrice = findViewById(R.id.tViewPrice);
         tRange = findViewById(R.id.tRange);
         tBubble = findViewById(R.id.tBubble);
+
+
+        tViewReset = findViewById(R.id.tViewReset);
+        tViewComplete = findViewById(R.id.tViewComplete);
+
+
+        tViewReset.setTouchUpListener(new TView.TouchUpListener() {
+            @Override
+            public void touchUp(TView t) {
+                TGroup.reset(tViewList);
+            }
+        });
+
+        tViewComplete.setTouchUpListener(new TView.TouchUpListener() {
+            @Override
+            public void touchUp(TView t) {
+
+            }
+        });
 
         tRange.setTouchListener(new TView.TouchListener() {
             @Override
@@ -53,7 +88,7 @@ public class TRangeActivity extends Activity {
                     tBubble.setVisibility(View.INVISIBLE);
                 }
                 //
-                tView.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
+                tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
             }
         });
     }

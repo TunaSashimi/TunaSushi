@@ -8,14 +8,14 @@
     <com.tunasushi.tuna.TLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
         android:layout_alignParentBottom="true"
         app:layoutBackground="#ffffff"
         app:layoutRadiusTopLeft="10dp"
         app:layoutRadiusTopRight="10dp">
 
         <com.tunasushi.tuna.TView
-            android:id="@+id/tView01"
+            android:id="@+id/tViewPrice"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -24,16 +24,16 @@
             app:contentGravityMode="left"
             app:contentPaddingLeft="50dp"
             app:contentSize="13dp"
+            app:text="价格"
             app:textColorNormal="#62636c"
             app:textGravityMode="left"
-            app:textSize="14dp"
-            app:text="价格" />
+            app:textSize="14dp" />
 
         <TextView
             android:id="@+id/tv_price_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tView01"
+            android:layout_below="@id/tViewPrice"
             android:layout_marginLeft="29dp"
             android:layout_marginTop="16dp"
             android:text="¥0"
@@ -55,7 +55,7 @@
             android:id="@+id/tBubble"
             android:layout_width="36dp"
             android:layout_height="30dp"
-            android:layout_below="@id/tView01"
+            android:layout_below="@id/tViewPrice"
             android:layout_marginTop="14dp"
             android:visibility="invisible"
             app:bubbleBackground="#000000"
@@ -88,9 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tRange"
-            android:layout_alignLeft="@id/tView01"
+            android:layout_alignLeft="@id/tViewPrice"
             android:layout_marginTop="16dp"
-            android:text="星级(多选)"
+            android:text="星级(单选)"
             android:textColor="#62636c"
             android:textSize="14dp" />
 
@@ -108,10 +108,10 @@
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
             app:srcAnchorWidthSelect="15dp"
+            app:text="不限"
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
-            app:textSize="13dp"
-            app:text="不限" />
+            app:textSize="13dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarTwo"
@@ -127,10 +127,10 @@
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
             app:srcAnchorWidthSelect="15dp"
+            app:text="二星连锁"
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
-            app:textSize="13dp"
-            app:text="二星连锁" />
+            app:textSize="13dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarThree"
@@ -146,10 +146,10 @@
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
             app:srcAnchorWidthSelect="15dp"
+            app:text="三星舒适"
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
-            app:textSize="13dp"
-            app:text="三星舒适" />
+            app:textSize="13dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarFour"
@@ -165,10 +165,10 @@
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
             app:srcAnchorWidthSelect="15dp"
+            app:text="四星高档"
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
-            app:textSize="13dp"
-            app:text="四星高档" />
+            app:textSize="13dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewStarFive"
@@ -184,10 +184,36 @@
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
             app:srcAnchorWidthSelect="15dp"
+            app:text="五星豪华"
             app:textColorNormal="#444344"
             app:textColorSelect="#0e82f6"
-            app:textSize="13dp"
-            app:text="五星豪华" />
+            app:textSize="13dp" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewReset"
+            android:layout_width="140dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/tViewNoLimit"
+            android:layout_alignLeft="@id/tViewNoLimit"
+            android:layout_marginTop="20dp"
+            app:radius="20dp"
+            app:strokeColorNormal="#0e82f6"
+            app:strokeWidthNormal="1px"
+            app:text="重置"
+            app:textColorNormal="#0e82f6" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewComplete"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_alignTop="@id/tViewReset"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/tViewReset"
+            app:backgroundNormal="#0e82f6"
+            app:radius="20dp"
+            app:text="完成"
+            app:textColorNormal="#ffffff" />
 
     </com.tunasushi.tuna.TLayout>
 </RelativeLayout>

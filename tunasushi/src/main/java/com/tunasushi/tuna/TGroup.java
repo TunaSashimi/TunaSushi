@@ -25,20 +25,50 @@ public class TGroup {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
+    public static void reset(TView[] tViewArray) {
+        reset(tViewArray, 0);
+    }
+
+    public static void reset(TView[] tViewArray, int index) {
+        int arraySize = tViewArray.length;
+        for (int i = 0; i < arraySize; i++) {
+            if (i == index) {
+                tViewArray[i].setStatus(false, true);
+            } else {
+                tViewArray[i].setStatus(false, false);
+            }
+        }
+    }
+
+    public static void reset(List<TView> tViewList) {
+        reset(tViewList, 0);
+    }
+
+    public static void reset(List<TView> tViewList, int index) {
+        for (int i = 0; i < tViewList.size(); i++) {
+            TView tView = tViewList.get(i);
+            if (i == index) {
+                tView.setStatus(false, true);
+            } else {
+                tView.setStatus(false, false);
+            }
+        }
+    }
+
     //
-    public static void link(final TView[] TViewArray) {
-        if (TViewArray == null) {
+    public static void link(final TView[] tViewArray) {
+        if (tViewArray == null) {
             return;
         }
-        final int arraySize = TViewArray.length;
+        final int arraySize = tViewArray.length;
         for (int i = 0; i < arraySize; i++) {
             final int finalI = i;
-            TViewArray[i].setAssociateListener(new TView.associateListener() {
+            tViewArray[i].setAssociateListener(new TView.associateListener() {
                 @Override
                 public void associate(TView t) {
                     for (int j = 0; j < arraySize; j++) {
                         if (j != finalI) {
-                            TViewArray[j].setStatus(false, false);
+                            tViewArray[j].setStatus(false, false);
                         }
                     }
                 }
@@ -47,20 +77,20 @@ public class TGroup {
     }
 
     //
-    public static void link(final List<TView> TViewList) {
-        if (TViewList == null) {
+    public static void link(final List<TView> tViewList) {
+        if (tViewList == null) {
             return;
         }
-        final int listSize = TViewList.size();
+        final int listSize = tViewList.size();
         for (int i = 0; i < listSize; i++) {
             final int finalI = i;
-            TViewList.get(i).setAssociateListener(new TView.associateListener() {
+            tViewList.get(i).setAssociateListener(new TView.associateListener() {
                 @Override
                 public void associate(TView t) {
                     //The link method of any TView is to set the status of other TViews to false!
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
-                            TViewList.get(j).setStatus(false, false);
+                            tViewList.get(j).setStatus(false, false);
                         }
                     }
                 }
@@ -321,7 +351,7 @@ public class TGroup {
                                    @OrientationMode int mode) {
 
         Context context = linearLayout.getContext();
-        List<TView> TViewList = new ArrayList();
+        List<TView> tViewList = new ArrayList();
         if (stringArray.length <= 0) {
             return;
         } else if (stringArray.length == 1) {
@@ -347,7 +377,7 @@ public class TGroup {
                 if (onClickListener != null) {
                     t.setOnClickListener(onClickListener);
                 }
-                TViewList.add(t);
+                tViewList.add(t);
                 //
                 int margin = (int) t.getStrokeWidthNormal();
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
@@ -365,7 +395,7 @@ public class TGroup {
                 }
                 linearLayout.addView(t, layoutParams);
             }
-            link(TViewList);
+            link(tViewList);
         }
     }
 }
