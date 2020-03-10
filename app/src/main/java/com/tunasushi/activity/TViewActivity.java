@@ -25,7 +25,7 @@ import static com.tunasushi.tool.ConvertTool.dpToPx;
  * @Description
  */
 public class TViewActivity extends Activity implements TView.TouchUpListener, TView.OnClickListener {
-    private TView tViewRect01, tView02;
+    private TView tViewRect01, tViewRect02, tView02;
     private TView tViewShadow01, tViewShadow02;
     private TView tViewGroupStart, tViewGroupEnd;
 
@@ -42,6 +42,9 @@ public class TViewActivity extends Activity implements TView.TouchUpListener, TV
         //
         tViewRect01 = findViewById(R.id.tViewRect01);
         tViewRect01.setTouchUpListener(this);
+
+        tViewRect02 = findViewById(R.id.tViewRect02);
+        tViewRect02.setTouchUpListener(this);
 
         /**
          * 注意这里继承的是TView.OnClick事件
@@ -99,6 +102,10 @@ public class TViewActivity extends Activity implements TView.TouchUpListener, TV
             case R.id.tViewRect01:
                 Toast.makeText(TViewActivity.this, "TView.TouchUp", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.tViewRect02:
+                tViewRect02.setBackground(Color.RED);
+                break;
+
             case R.id.tViewRect03:
                 Toast.makeText(TViewActivity.this, "app:onClick=\"touchUp\"", Toast.LENGTH_SHORT).show();
                 break;
