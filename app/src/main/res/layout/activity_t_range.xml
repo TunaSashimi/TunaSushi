@@ -104,6 +104,7 @@
             app:backgroundNormal="#f5f6fb"
             app:backgroundSelect="#dcecfc"
             app:radius="4dp"
+            app:select="true"
             app:srcAnchorGravityMode="bottom|right"
             app:srcAnchorHeightSelect="15dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select03"
@@ -200,7 +201,8 @@
             app:strokeColorNormal="#0e82f6"
             app:strokeWidthNormal="1px"
             app:text="重置"
-            app:textColorNormal="#0e82f6" />
+            app:textColorNormal="#0e82f6"
+            app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewComplete"
@@ -213,7 +215,8 @@
             app:backgroundNormal="#0e82f6"
             app:radius="20dp"
             app:text="完成"
-            app:textColorNormal="#ffffff" />
+            app:textColorNormal="#ffffff"
+            app:touchUp="touchUp" />
 
     </com.tunasushi.tuna.TLayout>
 </RelativeLayout>

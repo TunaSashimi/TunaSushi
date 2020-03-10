@@ -25,36 +25,6 @@ public class TGroup {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
-    public static void reset(TView[] tViewArray) {
-        reset(tViewArray, 0);
-    }
-
-    public static void reset(TView[] tViewArray, int index) {
-        int arraySize = tViewArray.length;
-        for (int i = 0; i < arraySize; i++) {
-            if (i == index) {
-                tViewArray[i].setStatus(false, true);
-            } else {
-                tViewArray[i].setStatus(false, false);
-            }
-        }
-    }
-
-    public static void reset(List<TView> tViewList) {
-        reset(tViewList, 0);
-    }
-
-    public static void reset(List<TView> tViewList, int index) {
-        for (int i = 0; i < tViewList.size(); i++) {
-            TView tView = tViewList.get(i);
-            if (i == index) {
-                tView.setStatus(false, true);
-            } else {
-                tView.setStatus(false, false);
-            }
-        }
-    }
-
     //
     public static void link(final TView[] tViewArray) {
         if (tViewArray == null) {
@@ -113,7 +83,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -130,7 +100,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     public static void create(String[] stringArray,
@@ -147,7 +117,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
@@ -165,7 +135,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //10
@@ -184,7 +154,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -201,7 +171,7 @@ public class TGroup {
                 break;
             }
         }
-        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //9
@@ -212,7 +182,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //8
@@ -222,7 +192,7 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
@@ -234,7 +204,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -245,7 +215,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -256,7 +226,7 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //8
@@ -266,7 +236,7 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
@@ -278,7 +248,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -289,7 +259,7 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
@@ -301,7 +271,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //11
@@ -314,7 +284,7 @@ public class TGroup {
                               int styleStart, int styleEnd, int styleOther,
                               @OrientationMode int mode) {
 
-        dynamicRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
     }
 
     //9
@@ -325,7 +295,7 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //10
@@ -337,18 +307,18 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        dynamicRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
     }
 
     //11
-    private static void dynamicRaw(String[] stringArray,
-                                   int index,
-                                   TView.TouchUpListener touchUpListener,
-                                   TView.OnClickListener onClickListener,
-                                   LinearLayout linearLayout,
-                                   int width, int height,
-                                   int styleStart, int styleEnd, int styleOther,
-                                   @OrientationMode int mode) {
+    private static void createRaw(String[] stringArray,
+                                  int index,
+                                  TView.TouchUpListener touchUpListener,
+                                  TView.OnClickListener onClickListener,
+                                  LinearLayout linearLayout,
+                                  int width, int height,
+                                  int styleStart, int styleEnd, int styleOther,
+                                  @OrientationMode int mode) {
 
         Context context = linearLayout.getContext();
         List<TView> tViewList = new ArrayList();
@@ -398,4 +368,66 @@ public class TGroup {
             link(tViewList);
         }
     }
+
+    public static void reset(TView[] tViewArray) {
+        reset(tViewArray, 0);
+    }
+
+    public static void reset(TView[] tViewArray, int index) {
+        int arraySize = tViewArray.length;
+        for (int i = 0; i < arraySize; i++) {
+            if (i == index) {
+                tViewArray[i].setStatus(false, true);
+            } else {
+                tViewArray[i].setStatus(false, false);
+            }
+        }
+    }
+
+    public static void reset(List<TView> tViewList) {
+        reset(tViewList, 0);
+    }
+
+    public static void reset(List<TView> tViewList, int index) {
+        for (int i = 0; i < tViewList.size(); i++) {
+            TView tView = tViewList.get(i);
+            if (i == index) {
+                tView.setStatus(false, true);
+            } else {
+                tView.setStatus(false, false);
+            }
+        }
+    }
+
+    public static int getIndex(List<TView> tViewList) {
+        for (int i = 0; i < tViewList.size(); i++) {
+            TView tView = tViewList.get(i);
+            if (tView.isSelect()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static String getIndexText(List<TView> tViewList) {
+        for (int i = 0; i < tViewList.size(); i++) {
+            TView tView = tViewList.get(i);
+            if (tView.isSelect()) {
+                return tView.getText();
+            }
+        }
+        return null;
+    }
+
+    public static String getIndexContent(List<TView> tViewList) {
+        for (int i = 0; i < tViewList.size(); i++) {
+            TView tView = tViewList.get(i);
+            if (tView.isSelect()) {
+                return tView.getContent();
+            }
+        }
+        return null;
+    }
 }
+
+
