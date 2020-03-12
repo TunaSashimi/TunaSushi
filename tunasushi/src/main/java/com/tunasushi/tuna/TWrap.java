@@ -207,6 +207,15 @@ public class TWrap extends TView {
                 rowHeight,
                 wrap.wrapSelect ? wrapBackgroundSelect : wrapBackgroundNormal,
                 wrapStrokeWidth,
+                radius
+        );
+
+        //
+        drawRectClassicStroke(
+                canvas,
+                itemWidth,
+                rowHeight,
+                wrapStrokeWidth,
                 wrap.wrapSelect ? wrapStrokeColorSelect : wrapStrokeColorNormal,
                 radius
         );

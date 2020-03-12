@@ -452,7 +452,27 @@ public class TBubble extends TView {
         //
         canvas.save();
         canvas.clipRect(initRect((int) rectLeft, (int) rectTop, (int) rectRight, (int) rectBottom), Op.DIFFERENCE);
-        drawRectClassic(canvas, left, top, right, bottom, bubbleBackground, bubbleStrokeWidth, bubbleStrokeColor, radius);
+
+        //
+        drawRectClassic(
+                canvas,
+                left,
+                top,
+                right,
+                bottom,
+                bubbleBackground,
+                bubbleStrokeWidth,
+                radius);
+        //
+        drawRectClassicStroke(
+                canvas,
+                left,
+                top,
+                right,
+                bottom,
+                bubbleStrokeWidth,
+                bubbleStrokeColor,
+                radius);
         canvas.restore();
 
         //

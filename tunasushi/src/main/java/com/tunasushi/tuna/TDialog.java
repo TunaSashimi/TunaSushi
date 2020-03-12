@@ -233,10 +233,19 @@ public class TDialog extends TView {
         canvas.translate(dx, dy);
 
         //
-        drawRectClassic(canvas,
+        drawRectClassic(
+                canvas,
                 dialogWidth,
                 dialogHeight,
                 dialogBackground,
+                dialogStrokeWidth,
+                radius);
+
+        //
+        drawRectClassicStroke(
+                canvas,
+                dialogWidth,
+                dialogHeight,
                 dialogStrokeWidth,
                 dialogStrokeColor,
                 radius);

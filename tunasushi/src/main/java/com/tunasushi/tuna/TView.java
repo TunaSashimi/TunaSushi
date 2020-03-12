@@ -250,49 +250,42 @@ public class TView extends View {
 
     // 5
     protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float radius) {
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radius);
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, radius);
     }
 
     // 7
-    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, int strokeColor, float radius) {
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float strokeWidth, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radius);
     }
 
     // 7
-    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, int strokeColor, float radius) {
-        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float strokeWidth, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radius);
     }
 
     // 9
-    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, int strokeColor, float radius) {
-        drawRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, float strokeWidth, float radius) {
+        drawRectClassic(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radius);
     }
 
     // 9
-    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, int strokeColor, float radius) {
-        drawRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, Shader shader, float strokeWidth, float radius) {
+        drawRectClassic(canvas, left, top, right, bottom, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radius);
     }
 
     // 11
-    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
-        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float width, float height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, radius);
     }
 
     // 11
-    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                   int strokeColor, float radius) {
-        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radius);
+    protected void drawRectClassic(Canvas canvas, float width, float height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth, float radius) {
+        drawRectClassic(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, radius);
     }
 
     // 12
     protected void drawRectClassic(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                   float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radius) {
-//        if (strokeWidth > 0) {
-//            canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
-//                    initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
-//        }
-
+                                   float shadowDx, float shadowDy, float strokeWidth, float radius) {
         canvas.drawRoundRect(
                 initRectF(left + strokeWidth, top + strokeWidth, right - strokeWidth, bottom - strokeWidth),
                 radius,
@@ -303,66 +296,53 @@ public class TView extends View {
     }
 
     //
-    protected void drawRectClassicStroke(Canvas canvas, float left, float top, float right, float bottom,
-                                         float strokeWidth, int strokeColor, float radius) {
-        if (strokeWidth > 0) {
-            canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
-                    initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
-        }
+    protected void drawRectClassicStroke(Canvas canvas, float width, float height, float strokeWidth, int strokeColor, float radius) {
+        drawRectClassicStroke(canvas, 0, 0, width, height, strokeWidth, strokeColor, radius);
+    }
+
+    protected void drawRectClassicStroke(Canvas canvas, float left, float top, float right, float bottom, float strokeWidth, int strokeColor, float radius) {
+        canvas.drawRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radius, radius,
+                initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
     }
 
     // 8
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusTopLeft, float radiusBottomLeft,
-                                  float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight,
-                radiusBottomRight);
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int left, int top, int right, int bottom, int fillColor, float radiusTopLeft, float radiusBottomLeft,
-                                  float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight,
-                radiusBottomRight);
+    protected void drawRectCustom(Canvas canvas, int left, int top, int right, int bottom, int fillColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, left, top, right, bottom, fillColor, null, 0, Color.TRANSPARENT, 0, 0, 0, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
-                                  float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft, radiusTopRight,
-                radiusBottomRight);
+    protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float strokeWidth, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 10
-    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft,
-                                  float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
-                radiusTopRight, radiusBottomRight);
+    protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float strokeWidth, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, 0, Color.TRANSPARENT, 0, 0, strokeWidth, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, int fillColor, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft,
+                                  float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, fillColor, null, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, radiusTopLeft, radiusBottomLeft,
                 radiusTopRight, radiusBottomRight);
     }
 
     // 14
     protected void drawRectCustom(Canvas canvas, int width, int height, Shader shader, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, float strokeWidth,
-                                  int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
-        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, strokeColor, radiusTopLeft,
+                                  float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustom(canvas, 0, 0, width, height, Color.TRANSPARENT, shader, shadowRadius, shadowColor, shadowDx, shadowDy, strokeWidth, radiusTopLeft,
                 radiusBottomLeft, radiusTopRight, radiusBottomRight);
     }
 
     // 15
     protected void drawRectCustom(Canvas canvas, float left, float top, float right, float bottom, int fillColor, Shader shader, float shadowRadius, int shadowColor,
-                                  float shadowDx, float shadowDy, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+                                  float shadowDx, float shadowDy, float strokeWidth, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
         float[] radii = {radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft};
-//        if (strokeWidth > 0) {
-//            canvas.drawPath(
-//                    initPathRoundRect(initRectF(left + strokeWidth * 0.5f, top + strokeWidth * 0.5f, right - strokeWidth * 0.5f, bottom - strokeWidth * 0.5f), radii,
-//                            Path.Direction.CW), initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
-//        }
-
         int radiiLength = radii.length;
         for (int i = 0; i < radiiLength; i++) {
             radii[i] -= strokeWidth;
@@ -376,6 +356,10 @@ public class TView extends View {
                         shadowDy));
     }
 
+    protected void drawRectCustomStroke(Canvas canvas, float width, float height, float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
+        drawRectCustomStroke(canvas, 0, 0, width, height, strokeWidth, strokeColor, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
+    }
+
     protected void drawRectCustomStroke(Canvas canvas, float left, float top, float right, float bottom,
                                         float strokeWidth, int strokeColor, float radiusTopLeft, float radiusBottomLeft, float radiusTopRight, float radiusBottomRight) {
         float[] radii = {radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft};
@@ -385,7 +369,6 @@ public class TView extends View {
                             Path.Direction.CW), initPaint(Paint.Style.STROKE, strokeColor, strokeWidth));
         }
     }
-
 
     // 6
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
@@ -4618,7 +4601,6 @@ public class TView extends View {
                         backgroundShadowDxNormal,
                         backgroundShadowDyNormal,
                         strokeWidthNormal,
-                        strokeColorNormal,
                         radius);
                 canvas.drawCircle(touchDownEventX, touchDownEventY, materialRadius, initPaint(backgroundPress));
             } else {
@@ -4635,7 +4617,6 @@ public class TView extends View {
                         select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
                         select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal,
                         select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
-                        select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
                         radius);
             }
         } else {
@@ -4654,7 +4635,6 @@ public class TView extends View {
                         backgroundShadowDxNormal,
                         backgroundShadowDyNormal,
                         strokeWidthNormal,
-                        strokeColorNormal,
                         radiusTopLeft,
                         radiusBottomLeft,
                         radiusTopRight,
@@ -4674,7 +4654,6 @@ public class TView extends View {
                         select ? backgroundShadowDxSelect : press ? backgroundShadowDxPress : backgroundShadowDxNormal,
                         select ? backgroundShadowDySelect : press ? backgroundShadowDyPress : backgroundShadowDyNormal,
                         select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
-                        select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
                         radiusTopLeft,
                         radiusBottomLeft,
                         radiusTopRight,
@@ -4722,7 +4701,6 @@ public class TView extends View {
             paint.setXfermode(null);
             // Uncomment will cause a null pointer with paint in xml preview canvas.restoreToCount(layer);
         }
-
 
         if (classic) {
             drawRectClassicStroke(
