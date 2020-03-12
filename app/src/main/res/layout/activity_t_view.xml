@@ -409,8 +409,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
+            app:radius="100dp"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
-            app:srcPress="@drawable/bitmap_tview_srcnormal04" />
+            app:srcPress="@drawable/bitmap_tview_srcnormal04"
+            app:strokeColorNormal="#ff0000"
+            app:strokeWidthNormal="2dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView06"
@@ -419,7 +422,8 @@
             android:layout_alignTop="@id/tView05"
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tView05"
-            app:radius="24dp"
+            app:porterDuffXferMode="src_in"
+            app:radius="26dp"
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
