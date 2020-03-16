@@ -9,8 +9,8 @@ import androidx.databinding.BindingAdapter;
  * @Description
  */
 public class TBinding {
-    @BindingAdapter({"url"})
-    public static void content(TView t, String content) {
+    @BindingAdapter({"content"})
+    public static void setContent(TView t, String content) {
         t.setContent(content);
     }
 }
