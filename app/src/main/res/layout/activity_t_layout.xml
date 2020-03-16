@@ -52,7 +52,5 @@
         app:layoutBackgroundGradientEnd="#ffca00"
         app:layoutBackgroundGradientStart="#ffec95"
         app:layoutRadius="5dp">
-
     </com.tunasushi.tuna.TLayout>
-
 </RelativeLayout>
