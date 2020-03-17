@@ -9,13 +9,13 @@ import androidx.databinding.BindingAdapter;
  * @Description
  */
 public class TBinding {
-    @BindingAdapter({"content"})
-    public static void setContent(TView t, String content) {
-        t.setContent(content);
-    }
-
-    @BindingAdapter({"text"})
-    public static void setText(TView t, String text) {
-        t.setText(text);
-    }
+//    @BindingAdapter({"content"})
+//    public static void setContent(TView t, String content) {
+//        t.setContent(content);
+//    }
+//
+//    @BindingAdapter({"text"})
+//    public static void setText(TView t, String text) {
+//        t.setText(text);
+//    }
 }
