@@ -84,13 +84,13 @@ public class TViewActivity extends Activity implements TView.TouchUpListener, TV
         LinearLayout linearGroup = findViewById(R.id.linearGroup);
         TGroup.create(groupTitleArray,
                 "枪",
-                this,
-                null,
                 linearGroup,
                 dpToPx(60), LinearLayout.LayoutParams.MATCH_PARENT,
                 R.style.TViewGroupLightGraySrart,
                 R.style.TViewGroupLightGrayEnd,
-                R.style.TViewGroupLightGrayOther
+                R.style.TViewGroupLightGrayOther,
+                this,
+                null
         );
     }
 

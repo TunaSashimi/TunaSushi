@@ -71,11 +71,11 @@ public class TGroup {
     //10
     public static void create(String[] stringArray,
                               String string,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -83,16 +83,16 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, null);
     }
 
     //9
     public static void create(String[] stringArray,
                               String string,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -100,16 +100,16 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, null);
     }
 
     public static void create(String[] stringArray,
                               String string,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -117,17 +117,17 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, onClickListener);
     }
 
     //10
     public static void create(String[] stringArray,
                               String string,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.OnClickListener onClickListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -135,18 +135,18 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, null, onClickListener);
     }
 
     //10
     public static void create(String[] stringArray,
                               String string,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -154,16 +154,16 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, onClickListener);
     }
 
     //9
     public static void create(String[] stringArray,
                               String string,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.OnClickListener onClickListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals(string)) {
@@ -171,120 +171,120 @@ public class TGroup {
                 break;
             }
         }
-        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, null, onClickListener);
     }
 
     //9
     public static void create(String[] stringArray,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener) {
 
-        createRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, null);
     }
 
     //8
     public static void create(String[] stringArray,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener) {
 
-        createRaw(stringArray, 0, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, null);
     }
 
     //10
     public static void create(String[] stringArray,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, onClickListener);
     }
 
     //9
     public static void create(String[] stringArray,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, null, onClickListener);
     }
 
     //9
     public static void create(String[] stringArray,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, 0, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, onClickListener);
     }
 
     //8
     public static void create(String[] stringArray,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, 0, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, null, onClickListener);
     }
 
     //10
     public static void create(String[] stringArray,
                               int index,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener) {
 
-        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, null);
     }
 
     //9
     public static void create(String[] stringArray,
                               int index,
-                              TView.TouchUpListener touchUpListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener) {
 
-        createRaw(stringArray, index, touchUpListener, null, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, null);
     }
 
     //10
     public static void create(String[] stringArray,
                               int index,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, null, onClickListener);
     }
 
     //11
     public static void create(String[] stringArray,
                               int index,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode) {
+                              @OrientationMode int mode,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, mode);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, onClickListener);
     }
 
     //9
@@ -295,30 +295,30 @@ public class TGroup {
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther) {
 
-        createRaw(stringArray, index, null, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, null, onClickListener);
     }
 
     //10
     public static void create(String[] stringArray,
                               int index,
-                              TView.TouchUpListener touchUpListener,
-                              TView.OnClickListener onClickListener,
                               LinearLayout linearLayout,
                               int width, int height,
-                              int styleStart, int styleEnd, int styleOther) {
+                              int styleStart, int styleEnd, int styleOther,
+                              TView.TouchUpListener touchUpListener,
+                              TView.OnClickListener onClickListener) {
 
-        createRaw(stringArray, index, touchUpListener, onClickListener, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL);
+        createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, HORIZONTAL, touchUpListener, onClickListener);
     }
 
     //11
     private static void createRaw(String[] stringArray,
                                   int index,
-                                  TView.TouchUpListener touchUpListener,
-                                  TView.OnClickListener onClickListener,
                                   LinearLayout linearLayout,
                                   int width, int height,
                                   int styleStart, int styleEnd, int styleOther,
-                                  @OrientationMode int mode) {
+                                  @OrientationMode int mode,
+                                  TView.TouchUpListener touchUpListener,
+                                  TView.OnClickListener onClickListener) {
 
         Context context = linearLayout.getContext();
         List<TView> tViewList = new ArrayList();
