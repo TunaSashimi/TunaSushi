@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 
 import com.tuna.R;
@@ -14,7 +15,6 @@ import com.tuna.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import androidx.annotation.IntDef;
 
 /**
  * @author TunaSashimi

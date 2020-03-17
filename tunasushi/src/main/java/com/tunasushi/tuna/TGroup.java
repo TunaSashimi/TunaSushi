@@ -1,6 +1,7 @@
 package com.tunasushi.tuna;
 
 import android.content.Context;
+import android.support.annotation.IntDef;
 import android.widget.LinearLayout;
 
 import java.lang.annotation.Retention;
@@ -8,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.IntDef;
 
 /**
  * @author TunaSashimi

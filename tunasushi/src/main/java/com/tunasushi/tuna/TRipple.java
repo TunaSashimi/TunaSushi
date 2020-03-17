@@ -24,10 +24,6 @@ import android.view.animation.OvershootInterpolator;
 
 import com.tuna.R;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import androidx.annotation.IntDef;
 
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;

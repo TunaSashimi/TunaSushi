@@ -5,15 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
-
 import com.tuna.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import androidx.annotation.IntDef;
-
 import static com.tunasushi.tool.BitmapTool.getAlphaBitmap;
 import static com.tunasushi.tool.BitmapTool.getBacksheetBitmap;
 import static com.tunasushi.tool.BitmapTool.getClassicRoundBitmap;
