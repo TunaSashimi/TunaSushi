@@ -4,10 +4,8 @@ group = 'com.github.TunaSashimi'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "29.0.0"
-
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 28
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
