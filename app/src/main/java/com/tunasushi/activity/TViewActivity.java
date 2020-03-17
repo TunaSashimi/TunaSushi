@@ -77,7 +77,7 @@ public class TViewActivity extends Activity implements TView.TouchUpListener, TV
         //	TView.link(new TView[]{tViewGroupStart, tViewGroupEnd});
         //	or
         //	can be placed on a list of incoming link method
-        TGroup.link(Arrays.asList(tViewGroupStart, tViewGroupEnd));
+        TGroup.link(Arrays.asList(tViewGroupStart, tViewGroupEnd), this, null);
 
         //
         String groupTitleArray[] = {"金", "枪", "鱼", "刺", "身"};

@@ -26,35 +26,38 @@ public class TGroup {
     public static final int VERTICAL = 1;
 
     //
-    public static void link(final TView[] tViewArray) {
-        if (tViewArray == null) {
-            return;
-        }
-        final int arraySize = tViewArray.length;
-        for (int i = 0; i < arraySize; i++) {
-            final int finalI = i;
-            tViewArray[i].setAssociateListener(new TView.associateListener() {
-                @Override
-                public void associate(TView t) {
-                    for (int j = 0; j < arraySize; j++) {
-                        if (j != finalI) {
-                            tViewArray[j].setStatus(false, false);
-                        }
-                    }
-                }
-            });
-        }
+    public static void link(final List<TView> tViewList) {
+        linkRaw(tViewList, null, null);
     }
 
-    //
-    public static void link(final List<TView> tViewList) {
+    public static void link(final List<TView> tViewList, TView.TouchUpListener touchUpListener) {
+        linkRaw(tViewList, touchUpListener, null);
+    }
+
+    public static void link(final List<TView> tViewList, TView.OnClickListener onClickListener) {
+        linkRaw(tViewList, null, onClickListener);
+    }
+
+    public static void link(final List<TView> tViewList,TView.TouchUpListener touchUpListener, TView.OnClickListener onClickListener) {
+        linkRaw(tViewList, touchUpListener, onClickListener);
+    }
+
+    //3
+    public static void linkRaw(final List<TView> tViewList, final TView.TouchUpListener touchUpListener, final TView.OnClickListener onClickListener) {
         if (tViewList == null) {
             return;
         }
         final int listSize = tViewList.size();
         for (int i = 0; i < listSize; i++) {
             final int finalI = i;
-            tViewList.get(i).setAssociateListener(new TView.associateListener() {
+            TView t = tViewList.get(i);
+            if (touchUpListener != null) {
+                t.setTouchUpListener(touchUpListener);
+            }
+            if (onClickListener != null) {
+                t.setOnClickListener(onClickListener);
+            }
+            t.setAssociateListener(new TView.associateListener() {
                 @Override
                 public void associate(TView t) {
                     //The link method of any TView is to set the status of other TViews to false!
