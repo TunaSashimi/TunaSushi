@@ -13,4 +13,9 @@ public class TBinding {
     public static void setContent(TView t, String content) {
         t.setContent(content);
     }
+
+    @BindingAdapter({"text"})
+    public static void setText(TView t, String text) {
+        t.setText(text);
+    }
 }
