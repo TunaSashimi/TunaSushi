@@ -81,6 +81,7 @@ public class TRangeActivity extends Activity implements TView.TouchUpListener {
         switch (t.getId()) {
             case R.id.tViewReset:
                 TGroup.reset(tViewList);
+                tRange.reset();
                 break;
             case R.id.tViewComplete:
                 Toast.makeText(this, tViewPrice.getContent() + "，" + TGroup.getIndexText(tViewList), Toast.LENGTH_SHORT).show();

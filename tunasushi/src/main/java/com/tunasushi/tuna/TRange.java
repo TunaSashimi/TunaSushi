@@ -85,6 +85,12 @@ public class TRange extends TView {
         return rangeTextArray[rangeDragIndexRight];
     }
 
+    public void reset() {
+        rangeDragIndexLeft = 0;
+        rangeDragIndexRight = total - 1;
+        invalidate();
+    }
+
     public TRange(Context context) {
         this(context, null);
     }
