@@ -13,7 +13,7 @@ public class TBinding {
     @BindingAdapter({"text"})
     public static void setText(TView t, String text) {
         final String oldText = t.getText();
-        if ((text == null && oldText.length() == 0) || text == oldText || text.equals(oldText)) {
+        if (text == null || text == oldText || text.equals(oldText)) {
             return;
         }
         t.setText(text);
@@ -22,7 +22,7 @@ public class TBinding {
     @BindingAdapter({"content"})
     public static void setContent(TView t, String content) {
         final String oldContent = t.getContent();
-        if ((content == null && oldContent.length() == 0) || content == oldContent || content.equals(oldContent)) {
+        if (content == null || content == oldContent || content.equals(oldContent)) {
             return;
         }
         t.setContent(content);
