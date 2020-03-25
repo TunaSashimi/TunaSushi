@@ -516,7 +516,7 @@
             android:layout_below="@id/tViewContent"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="srcLeft设置文字左边图片\nsrcLeftWidth设置图片宽度\nsrcLeftHeight设置图片高度\nsrcLeftPadding设置图片与文字间距\nsrcLeftDx设置左右偏移\nsrcLeftDy设置上下偏移" />
+            android:text="srcLeftNormal设置文字左边图片\nsrcLeftWidthNormal设置图片宽度\nsrcLeftHeightNormal设置图片高度\nsrcLeftPaddingNormal设置图片与文字间距\nsrcLeftDxNormal设置左右偏移\nsrcLeftDyNormal设置上下偏移" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSrcLeft"
@@ -527,10 +527,10 @@
             android:layout_marginRight="16dp"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcLeft="@drawable/bitmap_tview_src_rmb"
-            app:srcLeftDy="1dp"
-            app:srcLeftHeight="10dp"
-            app:srcLeftWidth="9dp"
+            app:srcLeftDyNormal="1dp"
+            app:srcLeftHeightNormal="10dp"
+            app:srcLeftNormal="@drawable/bitmap_tview_src_rmb"
+            app:srcLeftWidthNormal="9dp"
             app:strokeColorNormal="#ffffff"
             app:strokeWidthNormal="1dp"
             app:text="100"
@@ -545,11 +545,11 @@
             android:layout_toRightOf="@id/tViewSrcLeft"
             app:backgroundNormal="#00000000"
             app:radius="5dp"
-            app:srcLeft="@drawable/bitmap_tview_src_rmb"
-            app:srcLeftDy="1dp"
-            app:srcLeftHeight="10dp"
-            app:srcLeftPadding="8dp"
-            app:srcLeftWidth="9dp"
+            app:srcLeftDyNormal="1dp"
+            app:srcLeftHeightNormal="10dp"
+            app:srcLeftNormal="@drawable/bitmap_tview_src_rmb"
+            app:srcLeftPaddingNormal="8dp"
+            app:srcLeftWidthNormal="9dp"
             app:strokeColorNormal="#ffffff"
             app:strokeWidthNormal="1dp"
             app:text="100"
@@ -564,7 +564,7 @@
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tViewSrcLeftPadding"
             android:color="#434343"
-            android:text="srcLeftItemPadding设置8dp(Padding为空余)" />
+            android:text="srcLeftPaddingNormal设置8dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSrcRight"
@@ -572,17 +572,14 @@
             android:layout_height="48dp"
             android:layout_below="@id/tViewSrcLeft"
             android:layout_margin="16dp"
-            app:backgroundNormal="#00000000"
-
-            app:radius="5dp"
-            app:srcRight="@drawable/bitmap_tview_src_rmb"
-            app:srcRightDy="1dp"
-            app:srcRightHeight="10dp"
-            app:srcRightWidth="9dp"
-            app:strokeColorNormal="#ffffff"
-            app:strokeWidthNormal="1dp"
-            app:text="100"
-            app:textColorNormal="#ffffff"
+            app:srcLeftHeightNormal="18dp"
+            app:srcLeftNormal="@drawable/bitmap_tview_fliter01"
+            app:srcLeftPaddingNormal="6dp"
+            app:srcLeftSelect="@drawable/bitmap_tview_fliter02"
+            app:srcLeftWidthNormal="17dp"
+            app:text="筛选"
+            app:textColorNormal="#62636c"
+            app:textColorSelect="#0b79e8"
             app:textSize="16dp" />
 
         <com.tunasushi.tuna.TView
@@ -591,18 +588,14 @@
             android:layout_height="48dp"
             android:layout_alignTop="@id/tViewSrcRight"
             android:layout_toRightOf="@id/tViewSrcRight"
-            app:backgroundNormal="#00000000"
-            app:radius="5dp"
-            app:srcRight="@drawable/bitmap_tview_src_rmb"
-            app:srcRightDx="8dp"
-            app:srcRightDy="1dp"
-            app:srcRightHeight="10dp"
-            app:srcRightPadding="8dp"
-            app:srcRightWidth="9dp"
-            app:strokeColorNormal="#ffffff"
-            app:strokeWidthNormal="1dp"
-            app:text="100"
-            app:textColorNormal="#ffffff"
+            app:srcLeftHeightNormal="19dp"
+            app:srcLeftNormal="@drawable/bitmap_tview_export01"
+            app:srcLeftPaddingNormal="6dp"
+            app:srcLeftSelect="@drawable/bitmap_tview_export02"
+            app:srcLeftWidthNormal="16dp"
+            app:text="导出"
+            app:textColorNormal="#62636c"
+            app:textColorSelect="#0b79e8"
             app:textSize="16dp" />
 
         <TextView
@@ -613,7 +606,7 @@
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tViewSrcRightPaddingDx"
             android:color="#434343"
-            android:text="srcRightPadding和Dx设置10dp(Dx为偏移)" />
+            android:text="srcLeftSelect设置选中" />
 
         <TextView
             android:id="@+id/textPrompt10"

@@ -192,23 +192,55 @@
         <attr name="contentMarkFractionDx" format="fraction" />
         <attr name="contentMarkFractionDy" format="fraction" />
 
-        <attr name="srcLeft" format="reference" />
-        <attr name="srcLeftWidth" format="dimension" />
-        <attr name="srcLeftHeight" format="dimension" />
+        <attr name="srcLeftNormal" format="reference" />
+        <attr name="srcLeftWidthNormal" format="dimension" />
+        <attr name="srcLeftHeightNormal" format="dimension" />
 
-        <!-- textPaddingLeft means distance between srcLeft and The leftmost,note about the srcLeftPadding -->
-        <attr name="srcLeftPadding" format="dimension" />
-        <attr name="srcLeftDx" format="dimension" />
-        <attr name="srcLeftDy" format="dimension" />
+        <attr name="srcLeftPress" format="reference" />
+        <attr name="srcLeftWidthPress" format="dimension" />
+        <attr name="srcLeftHeightPress" format="dimension" />
 
-        <attr name="srcRight" format="reference" />
-        <attr name="srcRightWidth" format="dimension" />
-        <attr name="srcRightHeight" format="dimension" />
+        <attr name="srcLeftSelect" format="reference" />
+        <attr name="srcLeftWidthSelect" format="dimension" />
+        <attr name="srcLeftHeightSelect" format="dimension" />
 
-        <!-- textPaddingRight means distance between srcRight and The leftmost,note about the srcRightPadding -->
-        <attr name="srcRightPadding" format="dimension" />
-        <attr name="srcRightDx" format="dimension" />
-        <attr name="srcRightDy" format="dimension" />
+        <!-- srcLeftPaddingNormal means distance between srcLeftNormal and The leftmost,note about the srcLeftPaddingNormal -->
+        <attr name="srcLeftPaddingNormal" format="dimension" />
+        <attr name="srcLeftDxNormal" format="dimension" />
+        <attr name="srcLeftDyNormal" format="dimension" />
+
+        <attr name="srcLeftPaddingPress" format="dimension" />
+        <attr name="srcLeftDxPress" format="dimension" />
+        <attr name="srcLeftDyPress" format="dimension" />
+
+        <attr name="srcLeftPaddingSelect" format="dimension" />
+        <attr name="srcLeftDxSelect" format="dimension" />
+        <attr name="srcLeftDySelect" format="dimension" />
+
+        <attr name="srcRightNormal" format="reference" />
+        <attr name="srcRightWidthNormal" format="dimension" />
+        <attr name="srcRightHeightNormal" format="dimension" />
+
+        <attr name="srcRightPress" format="reference" />
+        <attr name="srcRightWidthPress" format="dimension" />
+        <attr name="srcRightHeightPress" format="dimension" />
+
+        <attr name="srcRightSelect" format="reference" />
+        <attr name="srcRightWidthSelect" format="dimension" />
+        <attr name="srcRightHeightSelect" format="dimension" />
+
+        <!-- srcRightPaddingNormal means distance between srcRightNormal and The leftmost,note about the srcRightPaddingNormal -->
+        <attr name="srcRightPaddingNormal" format="dimension" />
+        <attr name="srcRightDxNormal" format="dimension" />
+        <attr name="srcRightDyNormal" format="dimension" />
+
+        <attr name="srcRightPaddingPress" format="dimension" />
+        <attr name="srcRightDxPress" format="dimension" />
+        <attr name="srcRightDyPress" format="dimension" />
+
+        <attr name="srcRightPaddingSelect" format="dimension" />
+        <attr name="srcRightDxSelect" format="dimension" />
+        <attr name="srcRightDySelect" format="dimension" />
 
         <attr name="porterDuffXferMode">
             <enum name="src_in" value="0" />
