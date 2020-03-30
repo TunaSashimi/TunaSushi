@@ -913,7 +913,7 @@ public class TView extends View {
     }
 
     /**
-     * An implementation of OnClickListener that attempts to lazily load a
+     * An implementation of TouchUpListener that attempts to lazily load a
      * named click handling method from a parent or ancestor context.
      */
     private static class DeclaredTouchUpListener implements TouchUpListener {
@@ -4548,7 +4548,7 @@ public class TView extends View {
                 srcRightDxPress = typedArray.getDimension(R.styleable.TView_srcRightDxPress, srcRightDxNormal);
                 srcRightDyPress = typedArray.getDimension(R.styleable.TView_srcRightDyPress, srcRightDyNormal);
 
-                if (srcRightWidthNormal == 0 || srcRightHeightNormal == 0) {
+                if (srcRightWidthPress == 0 || srcRightHeightPress == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthPress and srcRightHeightPress");
                 }
             }
@@ -4562,8 +4562,8 @@ public class TView extends View {
                 srcRightDxSelect = typedArray.getDimension(R.styleable.TView_srcRightDxSelect, srcRightDxNormal);
                 srcRightDySelect = typedArray.getDimension(R.styleable.TView_srcRightDySelect, srcRightDyNormal);
 
-                if (srcRightWidthNormal == 0 || srcRightHeightNormal == 0) {
-                    throw new IllegalArgumentException("The content attribute require property named srcRightWidthPress and srcRightHeightPress");
+                if (srcRightWidthSelect == 0 || srcRightHeightSelect == 0) {
+                    throw new IllegalArgumentException("The content attribute require property named srcRightWidthSelect and srcRightHeightSelect");
                 }
             }
 
@@ -5330,7 +5330,7 @@ public class TView extends View {
             contentEndOffsetCenterY = f[2];
         }
 
-        // draw bitmapLeft,the draw position is half of the width minus the srcLeftPaddingNormal and textActualDrawThick*0.5f
+        // draw srcLeft,the draw position is half of the width minus the srcLeftPaddingNormal and textActualDrawThick*0.5f
         if (isSelect() && srcLeftSelect != null) {
             float dx = (width >> 1) - srcLeftWidthSelect * 0.5f - textDrawThick * 0.5f - srcLeftPaddingSelect * 0.5f + srcLeftDxSelect;
             float dy = (height >> 1) - srcLeftHeightSelect * 0.5f + srcLeftDySelect;
@@ -5353,19 +5353,19 @@ public class TView extends View {
 
         //
         if (isSelect() && srcRightSelect != null) {
-            float dx = (width >> 1) - srcRightWidthSelect * 0.5f - textDrawThick * 0.5f - srcRightPaddingSelect * 0.5f + srcRightDxSelect;
+            float dx = (width >> 1) - srcRightWidthSelect * 0.5f + textDrawThick * 0.5f + srcRightPaddingSelect * 0.5f + srcRightDxSelect;
             float dy = (height >> 1) - srcRightHeightSelect * 0.5f + srcRightDySelect;
             canvas.translate(dx, dy);
             canvas.drawBitmap(srcRightSelect, matrixSrcRightSelect, paint);
             canvas.translate(-dx, -dy);
         } else if (isPress() && srcRightPress != null) {
-            float dx = (width >> 1) - srcRightWidthPress * 0.5f - textDrawThick * 0.5f - srcRightPaddingPress * 0.5f + srcRightDxPress;
+            float dx = (width >> 1) - srcRightWidthPress * 0.5f + textDrawThick * 0.5f + srcRightPaddingPress * 0.5f + srcRightDxPress;
             float dy = (height >> 1) - srcRightHeightPress * 0.5f + srcRightDyPress;
             canvas.translate(dx, dy);
             canvas.drawBitmap(srcRightNormal, matrixSrcRightPress, paint);
             canvas.translate(-dx, -dy);
         } else if (srcRightNormal != null) {
-            float dx = (width >> 1) - srcRightWidthNormal * 0.5f - textDrawThick * 0.5f - srcRightPaddingNormal * 0.5f + srcRightDxNormal;
+            float dx = (width >> 1) - srcRightWidthNormal * 0.5f + textDrawThick * 0.5f + srcRightPaddingNormal * 0.5f + srcRightDxNormal;
             float dy = (height >> 1) - srcRightHeightNormal * 0.5f + srcRightDyNormal;
             canvas.translate(dx, dy);
             canvas.drawBitmap(srcRightNormal, matrixSrcRightNormal, paint);
