@@ -2627,6 +2627,10 @@ public class TView extends View {
         this.textColorNormal = textColorNormal;
     }
 
+    public void setTextColorNormal(String textColorNormal) {
+        this.textColorNormal = Color.parseColor(textColorNormal);
+    }
+
     // textColorPress default textColorNormal
     private int textColorPress;
 
@@ -2638,6 +2642,10 @@ public class TView extends View {
         this.textColorPress = textColorPress;
     }
 
+    public void setTextColorPress(String textColorPress) {
+        this.textColorPress = Color.parseColor(textColorPress);
+    }
+
     // textColorSelect default textColorNormal
     private int textColorSelect;
 
@@ -2647,6 +2655,10 @@ public class TView extends View {
 
     public void setTextColorSelect(int textColorSelect) {
         this.textColorSelect = textColorSelect;
+    }
+
+    public void setTextColorSelect(String textColorSelect) {
+        this.textColorSelect = Color.parseColor(textColorSelect);
     }
 
     // textPaddingLeft means distance between srcLeftNormal and The
@@ -3032,6 +3044,10 @@ public class TView extends View {
         this.contentColorNormal = contentColorNormal;
     }
 
+    public void setContentColorNormal(String contentColorNormal) {
+        this.contentColorNormal = Color.parseColor(contentColorNormal);
+    }
+
     // contentColorPress default contentColorNormal
     private int contentColorPress;
 
@@ -3043,6 +3059,10 @@ public class TView extends View {
         this.contentColorPress = contentColorPress;
     }
 
+    public void setContentColorPress(String contentColorPress) {
+        this.contentColorPress = Color.parseColor(contentColorPress);
+    }
+
     // contentColorSelect default contentColorNormal
     private int contentColorSelect;
 
@@ -3052,6 +3072,10 @@ public class TView extends View {
 
     public void setContentColorSelect(int contentColorSelect) {
         this.contentColorSelect = contentColorSelect;
+    }
+
+    public void setContentColorSelect(String contentColorSelect) {
+        this.contentColorSelect = Color.parseColor(contentColorSelect);
     }
 
     // contentPaddingLeft means distance between srcLeftNormal and The
