@@ -87,4 +87,10 @@ public class TBinding {
     public static void setContentColorSelect(TView t, String contentColorSelect) {
         t.setTextColorSelect(contentColorSelect);
     }
+
+    //
+    @BindingAdapter({"lineMode"})
+    public static void setLineMode(TLine tLine, int lineMode) {
+        tLine.setLineMode(lineMode);
+    }
 }

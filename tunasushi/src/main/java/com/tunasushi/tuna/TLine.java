@@ -39,6 +39,14 @@ public class TLine extends TView {
     private static final int[] lineModeArray = {TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK,};
     private @lineMode
     int lineMode;
+    public int getLineMode() {
+        return lineMode;
+    }
+
+    public void setLineMode(int lineMode) {
+        this.lineMode = lineMode;
+        invalidate();
+    }
 
     private int lineBackground;
 
