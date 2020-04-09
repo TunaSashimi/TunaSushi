@@ -1357,70 +1357,70 @@ public class TView extends View {
         this.backgroundAngleSelect = backgroundAngleSelect;
     }
 
-    // backgroundGradientStartNormal default backgroundNormal
-    private int backgroundGradientStartNormal;
+    // backgroundStartNormal default backgroundNormal
+    private int backgroundStartNormal;
 
-    public int getBackgroundGradientStartNormal() {
-        return backgroundGradientStartNormal;
+    public int getBackgroundStartNormal() {
+        return backgroundStartNormal;
     }
 
-    public void setBackgroundGradientStartNormal(int backgroundGradientStartNormal) {
-        this.backgroundGradientStartNormal = backgroundGradientStartNormal;
+    public void setBackgroundStartNormal(int backgroundStartNormal) {
+        this.backgroundStartNormal = backgroundStartNormal;
     }
 
-    // backgroundGradientEndNormal default backgroundNormal
-    private int backgroundGradientEndNormal;
+    // backgroundEndNormal default backgroundNormal
+    private int backgroundEndNormal;
 
-    public int getBackgroundGradientEndNormal() {
-        return backgroundGradientEndNormal;
+    public int getBackgroundEndNormal() {
+        return backgroundEndNormal;
     }
 
-    public void setBackgroundGradientEndNormal(int backgroundGradientEndNormal) {
-        this.backgroundGradientEndNormal = backgroundGradientEndNormal;
+    public void setBackgroundEndNormal(int backgroundEndNormal) {
+        this.backgroundEndNormal = backgroundEndNormal;
     }
 
-    // backgroundGradientStartPress default backgroundPress
-    private int backgroundGradientStartPress;
+    // backgroundStartPress default backgroundPress
+    private int backgroundStartPress;
 
-    public int getBackgroundGradientStartPress() {
-        return backgroundGradientStartPress;
+    public int getBackgroundStartPress() {
+        return backgroundStartPress;
     }
 
-    public void setBackgroundGradientStartPress(int backgroundGradientStartPress) {
-        this.backgroundGradientStartPress = backgroundGradientStartPress;
+    public void setBackgroundStartPress(int backgroundStartPress) {
+        this.backgroundStartPress = backgroundStartPress;
     }
 
-    // backgroundGradientEndPress default backgroundPress
-    private int backgroundGradientEndPress;
+    // backgroundEndPress default backgroundPress
+    private int backgroundEndPress;
 
-    public int getBackgroundGradientEndPress() {
-        return backgroundGradientEndPress;
+    public int getBackgroundEndPress() {
+        return backgroundEndPress;
     }
 
-    public void setBackgroundGradientEndPress(int backgroundGradientEndPress) {
-        this.backgroundGradientEndPress = backgroundGradientEndPress;
+    public void setBackgroundEndPress(int backgroundEndPress) {
+        this.backgroundEndPress = backgroundEndPress;
     }
 
-    // backgroundGradientStartSelect default backgroundSelect
-    private int backgroundGradientStartSelect;
+    // backgroundStartSelect default backgroundSelect
+    private int backgroundStartSelect;
 
-    public int getBackgroundGradientStartSelect() {
-        return backgroundGradientStartSelect;
+    public int getBackgroundStartSelect() {
+        return backgroundStartSelect;
     }
 
-    public void setBackgroundGradientStartSelect(int backgroundGradientStartSelect) {
-        this.backgroundGradientStartSelect = backgroundGradientStartSelect;
+    public void setBackgroundStartSelect(int backgroundStartSelect) {
+        this.backgroundStartSelect = backgroundStartSelect;
     }
 
-    // backgroundGradientEndSelect default backgroundSelect
-    private int backgroundGradientEndSelect;
+    // backgroundEndSelect default backgroundSelect
+    private int backgroundEndSelect;
 
-    public int getBackgroundGradientEndSelect() {
-        return backgroundGradientEndSelect;
+    public int getBackgroundEndSelect() {
+        return backgroundEndSelect;
     }
 
-    public void setBackgroundGradientEndSelect(int backgroundGradientEndSelect) {
-        this.backgroundGradientEndSelect = backgroundGradientEndSelect;
+    public void setBackgroundEndSelect(int backgroundEndSelect) {
+        this.backgroundEndSelect = backgroundEndSelect;
     }
 
     // backgroundNormalShader default null
@@ -4379,20 +4379,20 @@ public class TView extends View {
             //
             backgroundAngleNormal = typedArray.getInt(R.styleable.TView_backgroundAngleNormal, Integer.MAX_VALUE);
             if (backgroundAngleNormal != Integer.MAX_VALUE) {
-                backgroundGradientStartNormal = typedArray.getColor(R.styleable.TView_backgroundGradientStartNormal, backgroundNormal);
-                backgroundGradientEndNormal = typedArray.getColor(R.styleable.TView_backgroundGradientEndNormal, backgroundNormal);
+                backgroundStartNormal = typedArray.getColor(R.styleable.TView_backgroundStartNormal, backgroundNormal);
+                backgroundEndNormal = typedArray.getColor(R.styleable.TView_backgroundEndNormal, backgroundNormal);
             }
 
             backgroundAnglePress = typedArray.getInt(R.styleable.TView_backgroundAnglePress, backgroundAngleNormal);
             if (backgroundAnglePress != Integer.MAX_VALUE) {
-                backgroundGradientStartPress = typedArray.getColor(R.styleable.TView_backgroundGradientStartPress, backgroundGradientStartNormal);
-                backgroundGradientEndPress = typedArray.getColor(R.styleable.TView_backgroundGradientEndPress, backgroundGradientEndNormal);
+                backgroundStartPress = typedArray.getColor(R.styleable.TView_backgroundStartPress, backgroundStartNormal);
+                backgroundEndPress = typedArray.getColor(R.styleable.TView_backgroundEndPress, backgroundEndNormal);
             }
 
             backgroundAngleSelect = typedArray.getInt(R.styleable.TView_backgroundAngleSelect, backgroundAngleNormal);
             if (backgroundAngleSelect != Integer.MAX_VALUE) {
-                backgroundGradientStartSelect = typedArray.getColor(R.styleable.TView_backgroundGradientStartSelect, backgroundGradientStartNormal);
-                backgroundGradientEndSelect = typedArray.getColor(R.styleable.TView_backgroundGradientEndSelect, backgroundGradientEndNormal);
+                backgroundStartSelect = typedArray.getColor(R.styleable.TView_backgroundStartSelect, backgroundStartNormal);
+                backgroundEndSelect = typedArray.getColor(R.styleable.TView_backgroundEndSelect, backgroundEndNormal);
             }
 
             //Note background Normal ShadowRadius and srcNormal ShadowRadius are two values!
@@ -5027,13 +5027,13 @@ public class TView extends View {
 
         //
         if (backgroundAngleNormal != Integer.MAX_VALUE) {
-            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundGradientStartNormal, backgroundGradientEndNormal);
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
         }
         if (backgroundAnglePress != Integer.MAX_VALUE) {
-            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundGradientStartPress, backgroundGradientEndPress);
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
         }
         if (backgroundAngleSelect != Integer.MAX_VALUE) {
-            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundGradientStartSelect, backgroundGradientEndSelect);
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
         }
 
         //

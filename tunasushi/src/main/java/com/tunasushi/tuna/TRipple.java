@@ -60,21 +60,21 @@ public class TRipple extends TView {
     }
 
     //
-    public void setRippleCircleColorInner(int rippleCircleColorGradientStartInner, int rippleCircleColorGradientEndInner) {
-        this.rippleCircleColorGradientStartInner = rippleCircleColorGradientStartInner;
-        this.rippleCircleColorGradientEndInner = rippleCircleColorGradientEndInner;
+    public void setRippleCircleColorInner(int rippleCircleColorStartInner, int rippleCircleColorEndInner) {
+        this.rippleCircleColorStartInner = rippleCircleColorStartInner;
+        this.rippleCircleColorEndInner = rippleCircleColorEndInner;
 
         setRippleCircleColorInner(
                 rippleCircleAngleInner == Integer.MAX_VALUE ? 0 : rippleCircleAngleInner,
-                rippleCircleColorGradientStartInner,
-                rippleCircleColorGradientEndInner);
+                rippleCircleColorStartInner,
+                rippleCircleColorEndInner);
     }
 
-    public void setRippleCircleColorInner(int rippleCircleAngleInner, int rippleCircleColorGradientStartInner, int rippleCircleColorGradientEndInner) {
-        this.rippleCircleColorGradientStartInner = rippleCircleColorGradientStartInner;
-        this.rippleCircleColorGradientEndInner = rippleCircleColorGradientEndInner;
+    public void setRippleCircleColorInner(int rippleCircleAngleInner, int rippleCircleColorStartInner, int rippleCircleColorEndInner) {
+        this.rippleCircleColorStartInner = rippleCircleColorStartInner;
+        this.rippleCircleColorEndInner = rippleCircleColorEndInner;
 
-        rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorGradientStartInner, rippleCircleColorGradientEndInner);
+        rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorStartInner, rippleCircleColorEndInner);
     }
 
     //
@@ -126,18 +126,18 @@ public class TRipple extends TView {
 
     }
 
-    public void setRippleCircleColorOuter(int rippleCircleColorGradientStartOuter, int rippleCircleColorGradientEndOuter) {
+    public void setRippleCircleColorOuter(int rippleCircleColorStartOuter, int rippleCircleColorEndOuter) {
         setRippleCircleColorOuter(
                 rippleCircleAngleOuter == Integer.MAX_VALUE ? 0 : rippleCircleAngleOuter,
-                rippleCircleColorGradientStartOuter,
-                rippleCircleColorGradientEndOuter);
+                rippleCircleColorStartOuter,
+                rippleCircleColorEndOuter);
     }
 
-    public void setRippleCircleColorOuter(int rippleCircleAngleOuter, int rippleCircleColorGradientStartOuter, int rippleCircleColorGradientEndOuter) {
-        this.rippleCircleColorGradientStartOuter = rippleCircleColorGradientStartOuter;
-        this.rippleCircleColorGradientEndOuter = rippleCircleColorGradientEndOuter;
+    public void setRippleCircleColorOuter(int rippleCircleAngleOuter, int rippleCircleColorStartOuter, int rippleCircleColorEndOuter) {
+        this.rippleCircleColorStartOuter = rippleCircleColorStartOuter;
+        this.rippleCircleColorEndOuter = rippleCircleColorEndOuter;
 
-        rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorGradientStartOuter, rippleCircleColorGradientEndOuter);
+        rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorStartOuter, rippleCircleColorEndOuter);
     }
 
     private String rippleText;
@@ -234,14 +234,14 @@ public class TRipple extends TView {
         this.rippleTextFractionDy = rippleTextFractionDy;
     }
 
-    private int rippleDuraction;
+    private int rippleAngle;
 
     public int getRippleDuraction() {
-        return rippleDuraction;
+        return rippleAngle;
     }
 
-    public void setRippleDuraction(int rippleDuraction) {
-        this.rippleDuraction = rippleDuraction;
+    public void setRippleDuraction(int rippleAngle) {
+        this.rippleAngle = rippleAngle;
     }
 
     private int rippleCircleAngleInner;
@@ -252,7 +252,7 @@ public class TRipple extends TView {
 
     public void setRippleCircleAngleInner(int rippleCircleAngleInner) {
         this.rippleCircleAngleInner = rippleCircleAngleInner;
-        rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorGradientStartInner, rippleCircleColorGradientEndInner);
+        rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorStartInner, rippleCircleColorEndInner);
     }
 
     private int rippleCircleAngleOuter;
@@ -263,51 +263,51 @@ public class TRipple extends TView {
 
     public void setRippleCircleAngleOuter(int rippleCircleAngleOuter) {
         this.rippleCircleAngleOuter = rippleCircleAngleOuter;
-        rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorGradientStartOuter, rippleCircleColorGradientEndOuter);
+        rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorStartOuter, rippleCircleColorEndOuter);
     }
 
-    // rippleCircleColorGradientStartInner default rippleCircleColorInner
-    private int rippleCircleColorGradientStartInner;
+    // rippleCircleColorStartInner default rippleCircleColorInner
+    private int rippleCircleColorStartInner;
 
-    public int getRippleCircleColorGradientStartInner() {
-        return rippleCircleColorGradientStartInner;
+    public int getRippleCircleColorStartInner() {
+        return rippleCircleColorStartInner;
     }
 
-    public void setRippleCircleColorGradientStartInner(int rippleCircleColorGradientStartInner) {
-        this.rippleCircleColorGradientStartInner = rippleCircleColorGradientStartInner;
+    public void setRippleCircleColorStartInner(int rippleCircleColorStartInner) {
+        this.rippleCircleColorStartInner = rippleCircleColorStartInner;
     }
 
-    // rippleCircleColorGradientEndInner default rippleCircleColorInner
-    private int rippleCircleColorGradientEndInner;
+    // rippleCircleColorEndInner default rippleCircleColorInner
+    private int rippleCircleColorEndInner;
 
-    public int getRippleCircleColorGradientEndInner() {
-        return rippleCircleColorGradientEndInner;
+    public int getRippleCircleColorEndInner() {
+        return rippleCircleColorEndInner;
     }
 
-    public void setRippleCircleColorGradientEndInner(int rippleCircleColorGradientEndInner) {
-        this.rippleCircleColorGradientEndInner = rippleCircleColorGradientEndInner;
+    public void setRippleCircleColorEndInner(int rippleCircleColorEndInner) {
+        this.rippleCircleColorEndInner = rippleCircleColorEndInner;
     }
 
-    // rippleCircleColorGradientStartOuter default rippleCircleColorOuter
-    private int rippleCircleColorGradientStartOuter;
+    // rippleCircleColorStartOuter default rippleCircleColorOuter
+    private int rippleCircleColorStartOuter;
 
-    public int getRippleCircleColorGradientStartOuter() {
-        return rippleCircleColorGradientStartOuter;
+    public int getRippleCircleColorStartOuter() {
+        return rippleCircleColorStartOuter;
     }
 
-    public void setRippleCircleColorGradientStartOuter(int rippleCircleColorGradientStartOuter) {
-        this.rippleCircleColorGradientStartOuter = rippleCircleColorGradientStartOuter;
+    public void setRippleCircleColorStartOuter(int rippleCircleColorStartOuter) {
+        this.rippleCircleColorStartOuter = rippleCircleColorStartOuter;
     }
 
-    // rippleCircleColorGradientEndOuter default rippleCircleColorOuter
-    private int rippleCircleColorGradientEndOuter;
+    // rippleCircleColorEndOuter default rippleCircleColorOuter
+    private int rippleCircleColorEndOuter;
 
-    public int getRippleCircleColorGradientEndOuter() {
-        return rippleCircleColorGradientEndOuter;
+    public int getRippleCircleColorEndOuter() {
+        return rippleCircleColorEndOuter;
     }
 
-    public void setRippleCircleColorGradientEndOuter(int rippleCircleColorGradientEndOuter) {
-        this.rippleCircleColorGradientEndOuter = rippleCircleColorGradientEndOuter;
+    public void setRippleCircleColorEndOuter(int rippleCircleColorEndOuter) {
+        this.rippleCircleColorEndOuter = rippleCircleColorEndOuter;
     }
 
     // rippleCircleColorInnerShader default null
@@ -421,17 +421,17 @@ public class TRipple extends TView {
         //
         rippleCircleAngleInner = typedArray.getInt(R.styleable.TRipple_rippleCircleAngleInner, Integer.MAX_VALUE);
         if (rippleCircleAngleInner != Integer.MAX_VALUE) {
-            rippleCircleColorGradientStartInner = typedArray.getColor(R.styleable.TRipple_rippleCircleColorGradientStartInner, rippleCircleColorInner);
-            rippleCircleColorGradientEndInner = typedArray.getColor(R.styleable.TRipple_rippleCircleColorGradientEndInner, rippleCircleColorInner);
+            rippleCircleColorStartInner = typedArray.getColor(R.styleable.TRipple_rippleCircleColorStartInner, rippleCircleColorInner);
+            rippleCircleColorEndInner = typedArray.getColor(R.styleable.TRipple_rippleCircleColorEndInner, rippleCircleColorInner);
         }
 
         rippleCircleAngleOuter = typedArray.getInt(R.styleable.TRipple_rippleCircleAngleOuter, rippleCircleAngleInner);
         if (rippleCircleAngleOuter != Integer.MAX_VALUE) {
-            rippleCircleColorGradientStartOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorGradientStartOuter, rippleCircleColorGradientStartInner);
-            rippleCircleColorGradientEndOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorGradientEndOuter, rippleCircleColorGradientEndInner);
+            rippleCircleColorStartOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorStartOuter, rippleCircleColorStartInner);
+            rippleCircleColorEndOuter = typedArray.getColor(R.styleable.TRipple_rippleCircleColorEndOuter, rippleCircleColorEndInner);
         }
 
-        rippleDuraction = typedArray.getInt(R.styleable.TRipple_rippleDuraction, 0);
+        rippleAngle = typedArray.getInt(R.styleable.TRipple_rippleAngle, 0);
 
         int rippleModeIndex = typedArray.getInt(R.styleable.TRipple_rippleMode, -1);
         if (rippleModeIndex > -1) {
@@ -455,11 +455,11 @@ public class TRipple extends TView {
         rippleTextDy += height * rippleTextFractionDy;
 
         if (rippleCircleAngleInner != Integer.MAX_VALUE) {
-            rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorGradientStartInner, rippleCircleColorGradientEndInner);
+            rippleCircleColorInnerShader = getLinearGradient(width, height, rippleCircleAngleInner, rippleCircleColorStartInner, rippleCircleColorEndInner);
         }
 
         if (rippleCircleAngleOuter != Integer.MAX_VALUE) {
-            rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorGradientStartOuter, rippleCircleColorGradientEndOuter);
+            rippleCircleColorOuterShader = getLinearGradient(width, height, rippleCircleAngleOuter, rippleCircleColorStartOuter, rippleCircleColorEndOuter);
         }
 
     }
@@ -510,7 +510,7 @@ public class TRipple extends TView {
         ObjectAnimator rippleOuterCircleObjectAnimator = ObjectAnimator.ofFloat(this, rippleAnimationCircleRadiusProperty, rippleCircleRadiusInner,
                 rippleCircleRadiusInner + rippleDeltaRadius * 3);
 
-        rippleOuterCircleObjectAnimator.setDuration(rippleDuraction);
+        rippleOuterCircleObjectAnimator.setDuration(rippleAngle);
         rippleAnimatorSet.playTogether(rippleOuterCircleObjectAnimator);
 
         if (rippleTimeInterpolator != null) {

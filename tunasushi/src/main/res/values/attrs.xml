@@ -14,19 +14,22 @@
         <attr name="backgroundNormal" format="reference|color" />
         <attr name="backgroundPress" format="reference|color" />
         <attr name="backgroundSelect" format="reference|color" />
+
         <attr name="foregroundNormal" format="reference|color" />
         <attr name="foregroundPress" format="reference|color" />
         <attr name="foregroundSelect" format="reference|color" />
+
+        <attr name="backgroundStartNormal" format="reference|color" />
+        <attr name="backgroundStartPress" format="reference|color" />
+        <attr name="backgroundStartSelect" format="reference|color" />
+
+        <attr name="backgroundEndNormal" format="reference|color" />
+        <attr name="backgroundEndPress" format="reference|color" />
+        <attr name="backgroundEndSelect" format="reference|color" />
+
         <attr name="backgroundAngleNormal" format="integer" />
         <attr name="backgroundAnglePress" format="integer" />
         <attr name="backgroundAngleSelect" format="integer" />
-
-        <attr name="backgroundGradientStartNormal" format="reference|color" />
-        <attr name="backgroundGradientStartPress" format="reference|color" />
-        <attr name="backgroundGradientStartSelect" format="reference|color" />
-        <attr name="backgroundGradientEndNormal" format="reference|color" />
-        <attr name="backgroundGradientEndPress" format="reference|color" />
-        <attr name="backgroundGradientEndSelect" format="reference|color" />
 
         <attr name="backgroundShadowRadiusNormal" format="dimension" />
         <attr name="backgroundShadowRadiusPress" format="dimension" />
@@ -392,8 +395,8 @@
     <declare-styleable name="TLayout">
         <attr name="layoutBackground" format="reference|color" />
         <attr name="layoutBackgroundAngle" format="integer" />
-        <attr name="layoutBackgroundGradientStart" format="reference|color" />
-        <attr name="layoutBackgroundGradientEnd" format="reference|color" />
+        <attr name="layoutBackgroundStart" format="reference|color" />
+        <attr name="layoutBackgroundEnd" format="reference|color" />
         <attr name="layoutBackgroundShadowRadius" format="dimension" />
         <attr name="layoutBackgroundShadowColor" format="reference|color" />
         <attr name="layoutBackgroundShadowDx" format="dimension" />
@@ -523,13 +526,13 @@
         <attr name="rippleTextDy" format="dimension" />
         <attr name="rippleTextFractionDx" format="fraction" />
         <attr name="rippleTextFractionDy" format="fraction" />
-        <attr name="rippleDuraction" format="integer" />
+        <attr name="rippleAngle" format="integer" />
         <attr name="rippleCircleAngleInner" format="integer" />
         <attr name="rippleCircleAngleOuter" format="integer" />
-        <attr name="rippleCircleColorGradientStartInner" format="reference|color" />
-        <attr name="rippleCircleColorGradientEndInner" format="reference|color" />
-        <attr name="rippleCircleColorGradientStartOuter" format="reference|color" />
-        <attr name="rippleCircleColorGradientEndOuter" format="reference|color" />
+        <attr name="rippleCircleColorStartInner" format="reference|color" />
+        <attr name="rippleCircleColorEndInner" format="reference|color" />
+        <attr name="rippleCircleColorStartOuter" format="reference|color" />
+        <attr name="rippleCircleColorEndOuter" format="reference|color" />
         <attr name="rippleMode">
             <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
             <enum name="accelerateDecelerateInterpolator" value="0" />

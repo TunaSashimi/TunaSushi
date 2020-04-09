@@ -15,9 +15,9 @@
             android:layout_margin="16dp"
             app:strokeColorNormal="#bc7955"
             app:strokeWidthNormal="1dp"
+            app:text="Play"
             app:textColorNormal="#bc7955"
-            app:textSize="16dp"
-            app:text="Play" />
+            app:textSize="16dp" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewChange"
@@ -28,22 +28,21 @@
             android:layout_marginRight="16dp"
             app:strokeColorNormal="#bc7955"
             app:strokeWidthNormal="1dp"
+            app:text="Change"
             app:textColorNormal="#bc7955"
-            app:textSize="16dp"
-            app:text="Change" />
-
+            app:textSize="16dp" />
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple01"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_below="@id/tViewChange"
+            app:rippleAngle="1800"
             app:rippleCircleColorInner="#fed136"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleDuraction="1800"
+            app:rippleText="^"
             app:rippleTextColor="#ffffff"
-            app:rippleTextSize="20dp"
-            app:rippleText="^" />
+            app:rippleTextSize="20dp" />
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple02"
@@ -51,14 +50,14 @@
             android:layout_height="80dp"
             android:layout_alignTop="@id/tRipple01"
             android:layout_toRightOf="@id/tRipple01"
+            app:rippleAngle="1800"
             app:rippleCircleColorInner="#fed136"
             app:rippleCircleColorOuter="#ff9900"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleDuraction="1800"
             app:rippleMode="accelerateDecelerateInterpolator"
+            app:rippleText="^"
             app:rippleTextColor="#ffffff"
-            app:rippleTextSize="20dp"
-            app:rippleText="^" />
+            app:rippleTextSize="20dp" />
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple03"
@@ -66,16 +65,16 @@
             android:layout_height="80dp"
             android:layout_alignTop="@id/tRipple02"
             android:layout_toRightOf="@id/tRipple02"
+            app:rippleAngle="1800"
             app:rippleCircleAngleInner="270"
-            app:rippleCircleColorGradientEndInner="#0000ff"
-            app:rippleCircleColorGradientStartInner="#ffffff"
+            app:rippleCircleColorEndInner="#0000ff"
+            app:rippleCircleColorStartInner="#ffffff"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleDuraction="1800"
             app:rippleMode="accelerateInterpolator"
+            app:rippleText="^"
             app:rippleTextColor="#ffffff"
             app:rippleTextFractionDx="5%"
-            app:rippleTextSize="20dp"
-            app:rippleText="^" />
+            app:rippleTextSize="20dp" />
 
         <com.tunasushi.tuna.TRipple
             android:id="@+id/tRipple04"
@@ -83,19 +82,19 @@
             android:layout_height="80dp"
             android:layout_alignTop="@id/tRipple03"
             android:layout_toRightOf="@id/tRipple03"
+            app:rippleAngle="1800"
             app:rippleCircleAngleInner="270"
-            app:rippleCircleColorGradientEndInner="#0000ff"
-            app:rippleCircleColorGradientEndOuter="#0000ff"
-            app:rippleCircleColorGradientStartInner="#ffffff"
-            app:rippleCircleColorGradientStartOuter="#ff0000"
+            app:rippleCircleColorEndInner="#0000ff"
+            app:rippleCircleColorEndOuter="#0000ff"
+            app:rippleCircleColorStartInner="#ffffff"
+            app:rippleCircleColorStartOuter="#ff0000"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleDuraction="1800"
             app:rippleMode="anticipateInterpolator"
+            app:rippleText="^"
             app:rippleTextColor="#ffffff"
             app:rippleTextDy="10dp"
             app:rippleTextFractionDx="5%"
-            app:rippleTextSize="20dp"
-            app:rippleText="^" />
+            app:rippleTextSize="20dp" />
 
         <TextView
             android:id="@+id/text"
@@ -103,8 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tRipple01"
             android:layout_margin="16dp"
-            android:text="rippleCircleRadiusInner设置内圆半径\nrippleCircleColorInner设置内圆颜色\nrippleCircleColorOuter设置外圆颜色\nrippleText设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleCircleColorInnerGradientDirection设置内圆渐变方向\nrippleCircleColorOuterGradientDirection设置外圆渐变方向\nrippleCircleColorGradientStartInner设置内圆渐变开始颜色\nrippleCircleColorGradientEndInner设置内圆渐变结束颜色\nrippleCircleColorGradientStartOuter设置外圆渐变开始颜色\nrippleCircleColorGradientEndOuter设置外圆渐变结束颜色\nrippleDuraction设置持续时间\nrippleMode设置插补器"
+            android:text="rippleCircleRadiusInner设置内圆半径\nrippleCircleColorInner设置内圆颜色\nrippleCircleColorOuter设置外圆颜色\nrippleText设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleCircleColorAngleInner设置内圆渐变方向\nrippleCircleColorAngleOuter设置外圆渐变方向\nrippleCircleColorStartInner设置内圆渐变开始颜色\nrippleCircleColorEndInner设置内圆渐变结束颜色\nrippleCircleColorStartOuter设置外圆渐变开始颜色\nrippleCircleColorEndOuter设置外圆渐变结束颜色\nrippleAngle设置持续时间\nrippleMode设置插补器"
             android:textColor="#434343" />
-
     </RelativeLayout>
 </ScrollView>

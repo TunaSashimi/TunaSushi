@@ -59,11 +59,11 @@ public class TLayout extends RelativeLayout {
 
     private int layoutBackgroundAngle;
 
-    // layoutBackgroundGradientStart default layoutBackground
-    private int layoutBackgroundGradientStart;
+    // layoutBackgroundStart default layoutBackground
+    private int layoutBackgroundStart;
 
-    // layoutBackgroundGradientEnd default background
-    private int layoutBackgroundGradientEnd;
+    // layoutBackgroundEnd default background
+    private int layoutBackgroundEnd;
 
     // layoutBackgroundShader default null
     private Shader layoutBackgroundShader;
@@ -396,8 +396,8 @@ public class TLayout extends RelativeLayout {
         //
         layoutBackgroundAngle = typedArray.getInt(R.styleable.TLayout_layoutBackgroundAngle, Integer.MAX_VALUE);
         if (layoutBackgroundAngle != Integer.MAX_VALUE) {
-            layoutBackgroundGradientStart = typedArray.getColor(R.styleable.TLayout_layoutBackgroundGradientStart, layoutBackground);
-            layoutBackgroundGradientEnd = typedArray.getColor(R.styleable.TLayout_layoutBackgroundGradientEnd, layoutBackground);
+            layoutBackgroundStart = typedArray.getColor(R.styleable.TLayout_layoutBackgroundStart, layoutBackground);
+            layoutBackgroundEnd = typedArray.getColor(R.styleable.TLayout_layoutBackgroundEnd, layoutBackground);
 
         }
 
@@ -460,7 +460,7 @@ public class TLayout extends RelativeLayout {
 
         //
         if (layoutBackgroundAngle != Integer.MAX_VALUE) {
-            layoutBackgroundShader = getLinearGradient(layoutWidth, layoutHeight, layoutBackgroundAngle, layoutBackgroundGradientStart, layoutBackgroundGradientEnd);
+            layoutBackgroundShader = getLinearGradient(layoutWidth, layoutHeight, layoutBackgroundAngle, layoutBackgroundStart, layoutBackgroundEnd);
         }
 
         //

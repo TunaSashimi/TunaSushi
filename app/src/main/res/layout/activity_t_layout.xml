@@ -49,8 +49,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutBackgroundAngle="270"
-        app:layoutBackgroundGradientEnd="#ffca00"
-        app:layoutBackgroundGradientStart="#ffec95"
+        app:layoutBackgroundEnd="#ffca00"
+        app:layoutBackgroundStart="#ffec95"
         app:layoutRadius="5dp">
     </com.tunasushi.tuna.TLayout>
 </RelativeLayout>
