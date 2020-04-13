@@ -126,7 +126,7 @@ public class TProgress extends TView {
             if (progressShapeMode == CUSTOM) {
                 scale = width * 1f / progressSrcBackWidth;
             }
-            matrix = initMatrix(matrix, scale, scale);
+            matrixNormal = initMatrix(matrixNormal, scale, scale);
         }
     }
 
@@ -136,7 +136,7 @@ public class TProgress extends TView {
         switch (progressShapeMode) {
             case CUSTOM:
 
-                canvas.drawBitmap(progressSrcBack, matrix, null);
+                canvas.drawBitmap(progressSrcBack, matrixNormal, null);
                 canvas.save();
 
                 switch (progressEffectMode) {
@@ -159,7 +159,7 @@ public class TProgress extends TView {
                         break;
                 }
 
-                canvas.drawBitmap(progressSrcFront, matrix, null);
+                canvas.drawBitmap(progressSrcFront, matrixNormal, null);
                 canvas.restore();
 
                 break;

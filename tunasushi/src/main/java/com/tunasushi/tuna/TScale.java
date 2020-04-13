@@ -93,7 +93,7 @@ public class TScale extends TView {
         } else {
             //
             scale = width * 1f / srcBitmap.getWidth();
-            matrix = initMatrix(matrix, scale, scale);
+            matrixNormal = initMatrix(matrixNormal, scale, scale);
 
             //
             srcWidthScale = srcBitmap.getWidth() * scale;
@@ -104,9 +104,9 @@ public class TScale extends TView {
             //
             if (WIDTH_TOP == scaleMode) {
             } else if (WIDTH_CENTER == scaleMode) {
-                matrix.postTranslate(0, dy * -0.5f);
+                matrixNormal.postTranslate(0, dy * -0.5f);
             } else if (WIDTH_BOTTOM == scaleMode) {
-                matrix.postTranslate(0, -dy);
+                matrixNormal.postTranslate(0, -dy);
             }
         }
     }
@@ -116,7 +116,7 @@ public class TScale extends TView {
         if (scaleCrop) {
             canvas.drawBitmap(srcBitmap, rect, new Rect(0, 0, width, height), null);
         } else {
-            canvas.drawBitmap(srcBitmap, matrix, null);
+            canvas.drawBitmap(srcBitmap, matrixNormal, null);
         }
     }
 

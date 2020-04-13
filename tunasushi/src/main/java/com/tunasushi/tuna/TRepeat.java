@@ -161,7 +161,7 @@ public class TRepeat extends TView {
             srcWidthScale = srcHeightScale * repeatCustomSrcNormalWidth / repeatCustomSrcNormalHeight;
             scale = srcHeightScale / repeatCustomSrcNormalWidth;
 
-            matrix = initMatrix(matrix, scale, scale);
+            matrixNormal = initMatrix(matrixNormal, scale, scale);
 
         } else if (repeatShapeMode == CIRCLE) {
             srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
@@ -193,7 +193,7 @@ public class TRepeat extends TView {
                     } else {
                         canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawBitmap(repeatSrcNormal, matrix, null);
+                    canvas.drawBitmap(repeatSrcNormal, matrixNormal, null);
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
 
@@ -213,7 +213,7 @@ public class TRepeat extends TView {
                         canvas.translate(share + srcWidthScale, 0);
                     }
                     canvas.drawBitmap(repeatSelectMode == CONNECT ? i <= repeatIndex ? repeatSrcSelect
-                            : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrix, null);
+                            : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrixNormal, null);
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
                 if (stringArray != null) {

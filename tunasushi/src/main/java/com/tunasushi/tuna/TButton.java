@@ -106,7 +106,7 @@ public class TButton extends TView {
         dy = height * buttonBitmapFractionTop;
         dx = (width - buttonSrcNormalWidth * scale) * 0.5f;
 
-        matrix = initMatrix(matrix, scale, scale);
+        matrixNormal = initMatrix(matrixNormal, scale, scale);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class TButton extends TView {
 
         canvas.save();
         canvas.translate(dx, dy);
-        canvas.drawBitmap(press ? buttonSrcPress : buttonSrcNormal, matrix, null);
+        canvas.drawBitmap(press ? buttonSrcPress : buttonSrcNormal, matrixNormal, null);
         canvas.translate(-dx, -dy);
 
         drawText(canvas, buttonText, width, width >> 1, (height * buttonTextFractionTop + height * buttonTextFractionBottom) * 0.5f, 0, 0,

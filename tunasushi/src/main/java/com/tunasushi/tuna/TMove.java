@@ -85,7 +85,7 @@ public class TMove extends TView {
         scale = width * 1f / srcBitmapWidth;
 
 
-        moveSrc = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), initMatrix(matrix, scale, scale), true);
+        moveSrc = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), initMatrix(matrixNormal, scale, scale), true);
         moveSrcHeight = moveSrc.getHeight();
 
         moveSrcStartY = moveSrcHeight - height;

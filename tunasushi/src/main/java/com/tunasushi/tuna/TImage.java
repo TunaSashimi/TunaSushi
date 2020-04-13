@@ -215,7 +215,7 @@ public class TImage extends TView {
         scaleSx = width * 1f / srcBitmap.getWidth();
         scaleSy = height * 1f / srcBitmap.getHeight();
 
-        matrix = initMatrix(matrix, scaleSx, scaleSy);
+        matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
     }
 
     @Override
@@ -297,6 +297,6 @@ public class TImage extends TView {
                 imageSrc = processBitmap(imageSrc, imageBright, imageHue, imageSaturation);
             }
         }
-        canvas.drawBitmap(imageSrc, matrix, null);
+        canvas.drawBitmap(imageSrc, matrixNormal, null);
     }
 }

@@ -141,7 +141,7 @@ public class TSVG extends TView {
 
         scaleSx = width * 1f / srcBitmap.getWidth();
         scaleSy = height * 1f / srcBitmap.getHeight();
-        matrix = initMatrix(matrix, scaleSx, scaleSy);
+        matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
 
         int shortSide = width >= height ? height : width;
         initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);
@@ -181,7 +181,7 @@ public class TSVG extends TView {
         canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
         //
         paint.setXfermode(porterDuffXferMode);
-        canvas.drawBitmap(srcBitmap, matrix, paint);
+        canvas.drawBitmap(srcBitmap, matrixNormal, paint);
 
         paint.setXfermode(null);
     }

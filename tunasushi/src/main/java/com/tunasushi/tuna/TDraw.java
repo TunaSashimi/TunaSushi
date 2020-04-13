@@ -157,7 +157,7 @@ public class TDraw extends TView {
         if (drawSrc != null) {
             scaleSx = width * 1f / drawSrc.getWidth();
             scaleSy = height * 1f / drawSrc.getHeight();
-            matrix = initMatrix(matrix, scaleSx, scaleSy);
+            matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
         }
 
         //
@@ -198,7 +198,7 @@ public class TDraw extends TView {
     protected void onDraw(Canvas canvas) {
         if (drawMode == NORMAL) {
             if (drawSrc != null) {
-                canvas.drawBitmap(drawSrc, matrix, null);
+                canvas.drawBitmap(drawSrc, matrixNormal, null);
             }
             canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
             if (path != null) {
@@ -210,7 +210,7 @@ public class TDraw extends TView {
                 canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
                 canvas.drawBitmap(drawDstBitmap, drawDstMatrix, paint);
                 paint.setXfermode(porterDuffXferMode);
-                canvas.drawBitmap(drawSrc, matrix, paint);
+                canvas.drawBitmap(drawSrc, matrixNormal, paint);
                 paint.setXfermode(null);
                 canvas.restore();
             }
