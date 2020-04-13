@@ -5262,6 +5262,16 @@ public class TView extends View {
                                     backgroundShadowDyPress * 2f + srcShadowRadiusPress - srcShadowDyPress + strokeWidthPress :
                                     backgroundShadowDyNormal * 2f + srcShadowRadiusNormal - srcShadowDyNormal + strokeWidthPress);
 
+
+            System.out.println("select==>" + select);
+            System.out.println("press==>" + press);
+
+            System.out.println("srcSelect==>" + srcSelect);
+            System.out.println("srcPress==>" + srcPress);
+            System.out.println("srcNormal==>" + srcNormal);
+
+            System.out.println("matrix==>" + matrix);
+
             canvas.drawBitmap(
                     select ? srcSelect : press ? srcPress : srcNormal,
                     matrix,
