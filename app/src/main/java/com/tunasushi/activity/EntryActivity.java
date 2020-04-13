@@ -68,7 +68,6 @@ public class EntryActivity extends Activity {
             TWaveActivity.class,
             TWrapActivity.class,
             ChoiceActivity.class,
-            TViewSrcActivity.class,
     };
 
     @Override
@@ -77,7 +76,7 @@ public class EntryActivity extends Activity {
         setContentView(R.layout.activity_entry);
 
         ListView listView = findViewById(R.id.listView);
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList();
 
         for (int i = 0; i < c.length; i++) {
             list.add(c[i].getSimpleName());

@@ -753,25 +753,6 @@ public class TView extends View {
         this.inverseBindingSelect = inverseBindingSelect;
     }
 
-//    @BindingAdapter(value = "select")
-//    public static void setSelect(TView t, boolean select) {
-//        if (isSelect(t) != select) {
-//            t.setSelect(select);
-//        }
-//    }
-
-    @InverseBindingAdapter(attribute = "select", event = "selectChange")
-    public static boolean isSelect(TView t) {
-        return t.isSelect();
-    }
-
-    @BindingAdapter(value = {"selectChange"})
-    public static void setSelectChange(TView t, InverseBindingListener inverseBindingListener) {
-        if (inverseBindingListener != null) {
-            t.setInverseBindingSelect(inverseBindingListener);
-        }
-    }
-
     //
     @IntDef({REVERSE, ALWAYS})
     @Retention(RetentionPolicy.SOURCE)
@@ -5280,9 +5261,6 @@ public class TView extends View {
                             press ?
                                     backgroundShadowDyPress * 2f + srcShadowRadiusPress - srcShadowDyPress + strokeWidthPress :
                                     backgroundShadowDyNormal * 2f + srcShadowRadiusNormal - srcShadowDyNormal + strokeWidthPress);
-
-            System.out.println("select==>" + select);
-            System.out.println("press==>" + press);
 
             canvas.drawBitmap(
                     select ? srcSelect : press ? srcPress : srcNormal,

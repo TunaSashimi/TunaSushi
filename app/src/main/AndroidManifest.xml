@@ -65,6 +65,5 @@
         <activity android:name=".activity.TWrapActivity" />
 
         <activity android:name=".activity.ChoiceActivity" />
-        <activity android:name=".activity.TViewSrcActivity" />
     </application>
 </manifest>

@@ -2,6 +2,8 @@ package com.tunasushi.tuna;
 
 
 import android.databinding.BindingAdapter;
+import android.databinding.InverseBindingAdapter;
+import android.databinding.InverseBindingListener;
 
 /**
  * @author TunaSashimi
@@ -10,6 +12,25 @@ import android.databinding.BindingAdapter;
  * @Description
  */
 public class TBinding {
+    @BindingAdapter(value = "select")
+    public static void setSelect(TView t, boolean select) {
+        if (isSelect(t) != select) {
+            t.setSelect(select);
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "select", event = "selectChange")
+    public static boolean isSelect(TView t) {
+        return t.isSelect();
+    }
+
+    @BindingAdapter(value = {"selectChange"})
+    public static void setSelectChange(TView t, InverseBindingListener inverseBindingListener) {
+        if (inverseBindingListener != null) {
+            t.setInverseBindingSelect(inverseBindingListener);
+        }
+    }
+
     @BindingAdapter({"text"})
     public static void setText(TView t, String text) {
         final String oldText = t.getText();
@@ -88,7 +109,6 @@ public class TBinding {
         t.setTextColorSelect(contentColorSelect);
     }
 
-    //
     @BindingAdapter({"lineMode"})
     public static void setLineMode(TLine tLine, int lineMode) {
         tLine.setLineMode(lineMode);
