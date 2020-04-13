@@ -7,6 +7,9 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.TypedArray;
+import android.databinding.BindingAdapter;
+import android.databinding.InverseBindingAdapter;
+import android.databinding.InverseBindingListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -653,9 +656,9 @@ public class TView extends View {
     //
     public void setStatus(boolean press, boolean select, boolean textMark, boolean material) {
         if (this.press != press || this.select != select || this.textMark != textMark) {
-            this.press = press;
-            this.select = select;
-            this.textMark = textMark;
+            setPress(press);
+            setSelect(select);
+            setTextMark(textMark);
             if (!material && materialAnimatorSet != null) {
                 this.materialAnimatorSet.cancel();
             }
@@ -708,7 +711,6 @@ public class TView extends View {
         this.dispatch = dispatch;
     }
 
-
     protected boolean touchDown;
     protected boolean touchMove;
     protected boolean touchUp;
@@ -735,11 +737,42 @@ public class TView extends View {
 
     public void setSelect(boolean select) {
         this.select = select;
+        if (inverseBindingSelect != null) {
+            inverseBindingSelect.onChange();
+        }
         invalidate();
     }
 
-    //
+    private InverseBindingListener inverseBindingSelect;
 
+    public InverseBindingListener getInverseBindingSelect() {
+        return inverseBindingSelect;
+    }
+
+    public void setInverseBindingSelect(InverseBindingListener inverseBindingSelect) {
+        this.inverseBindingSelect = inverseBindingSelect;
+    }
+
+    @BindingAdapter(value = "select")
+    public static void setSelect(TView t, boolean select) {
+        if (isSelect(t) != select) {
+            t.setSelect(select);
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "select", event = "selectChange")
+    public static boolean isSelect(TView t) {
+        return t.isSelect();
+    }
+
+    @BindingAdapter(value = {"selectChange"})
+    public static void setSelectChange(TView t, InverseBindingListener inverseBindingListener) {
+        if (inverseBindingListener != null) {
+            t.setInverseBindingSelect(inverseBindingListener);
+        }
+    }
+
+    //
     @IntDef({REVERSE, ALWAYS})
     @Retention(RetentionPolicy.SOURCE)
     public @interface selectMode {
@@ -4746,7 +4779,7 @@ public class TView extends View {
                 //
                 press = true;
                 if (selectMode == ALWAYS) {
-                    select = false;
+                    setSelect(false);
                 }
                 if (!textMarkTouchable) {
                     textMark = false;
@@ -4847,9 +4880,9 @@ public class TView extends View {
                 //
                 press = false;
                 if (selectMode == ALWAYS) {
-                    select = true;
+                    setSelect(true);
                 } else {
-                    select = !select;
+                    setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {
                     textMark = false;
@@ -4875,9 +4908,9 @@ public class TView extends View {
                 //
                 press = false;
                 if (selectMode == ALWAYS) {
-                    select = true;
+                    setSelect(true);
                 } else {
-                    select = !select;
+                    setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {
                     textMark = false;
