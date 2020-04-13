@@ -753,12 +753,12 @@ public class TView extends View {
         this.inverseBindingSelect = inverseBindingSelect;
     }
 
-    @BindingAdapter(value = "select")
-    public static void setSelect(TView t, boolean select) {
-        if (isSelect(t) != select) {
-            t.setSelect(select);
-        }
-    }
+//    @BindingAdapter(value = "select")
+//    public static void setSelect(TView t, boolean select) {
+//        if (isSelect(t) != select) {
+//            t.setSelect(select);
+//        }
+//    }
 
     @InverseBindingAdapter(attribute = "select", event = "selectChange")
     public static boolean isSelect(TView t) {

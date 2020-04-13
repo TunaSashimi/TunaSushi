@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="choice"
+            type="com.tunasushi.activity.Choice" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tView01"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:backgroundNormal="#ffff00"
+            app:backgroundSelect="#0000ff"
+            app:select="@{choice.choice}" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tView02"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/tView01"
+            android:layout_marginTop="16dp"
+            app:backgroundNormal="#ffff00"
+            app:backgroundSelect="#0000ff"
+            app:select="@={choice.choice}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tView02"
+            android:layout_marginTop="16dp"
+            android:text="@{String.valueOf(choice.choice)}"
+            android:textSize="50dp" />
+    </RelativeLayout>
+</layout>

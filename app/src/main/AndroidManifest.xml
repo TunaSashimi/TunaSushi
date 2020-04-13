@@ -64,5 +64,6 @@
         <activity android:name=".activity.TWaveActivity" />
         <activity android:name=".activity.TWrapActivity" />
 
+        <activity android:name=".activity.ChoiceActivity" />
     </application>
 </manifest>
