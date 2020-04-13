@@ -1702,6 +1702,9 @@ public class TView extends View {
     }
 
     //
+    int srcNormalWidthRaw = 0, srcNormalHeightRaw = 0, srcPressWidthRaw = 0, srcPressHeightRaw = 0, srcWidthRawSelect = 0, srcHeightRawSelect = 0;
+
+    //
     private Bitmap srcNormal;
 
     public Bitmap getSrcNormal() {
@@ -1714,6 +1717,12 @@ public class TView extends View {
 
     public void setSrcNormal(Bitmap srcNormal) {
         this.srcNormal = srcNormal;
+
+        matrix = initMatrix(matrix,
+                (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcNormalWidthRaw,
+                (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcNormalHeightRaw)
+        ;
+
         invalidate();
     }
 
@@ -1730,6 +1739,7 @@ public class TView extends View {
 
     public void setSrcPress(Bitmap srcPress) {
         this.srcPress = srcPress;
+
         invalidate();
     }
 
@@ -5050,8 +5060,6 @@ public class TView extends View {
             backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
         }
 
-        //
-        int srcNormalWidthRaw = 0, srcNormalHeightRaw = 0, srcPressWidthRaw = 0, srcPressHeightRaw = 0, srcWidthRawSelect = 0, srcHeightRawSelect = 0;
         if (srcNormal != null) {
             srcNormalWidthRaw = srcNormal.getWidth();
             srcNormalHeightRaw = srcNormal.getHeight();
