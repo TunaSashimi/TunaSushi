@@ -1718,11 +1718,12 @@ public class TView extends View {
     public void setSrcNormal(Bitmap srcNormal) {
         this.srcNormal = srcNormal;
 
+        srcNormalWidthRaw = srcNormal.getWidth();
+        srcNormalHeightRaw = srcNormal.getHeight();
         matrix = initMatrix(matrix,
                 (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcNormalWidthRaw,
                 (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcNormalHeightRaw)
         ;
-
         invalidate();
     }
 
