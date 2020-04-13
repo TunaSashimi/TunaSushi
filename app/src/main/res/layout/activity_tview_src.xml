@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        app:radius="100dp"
+        app:srcNormal="@drawable/bitmap_tview_srcnormal03"
+        app:strokeColorNormal="#ff0000"
+        app:strokeWidthNormal="2dp" />
+</RelativeLayout>

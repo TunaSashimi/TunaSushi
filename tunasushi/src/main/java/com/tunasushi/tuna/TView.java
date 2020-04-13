@@ -1728,7 +1728,7 @@ public class TView extends View {
     }
 
     public void setSrcNormal(int id) {
-        setSrcNormal(decodeBitmapResource(id));
+        setSrcNormal(decodeBitmapResource(getResources(), id));
     }
 
     public void setSrcNormal(Bitmap srcNormal) {
@@ -1744,7 +1744,7 @@ public class TView extends View {
     }
 
     public void setSrcPress(int id) {
-        setSrcPress(decodeBitmapResource(id));
+        setSrcPress(decodeBitmapResource(getResources(), id));
     }
 
     public void setSrcPress(Bitmap srcPress) {
@@ -1760,7 +1760,7 @@ public class TView extends View {
     }
 
     public void setSrcSelect(int id) {
-        setSrcSelect(decodeBitmapResource(id));
+        setSrcSelect(decodeBitmapResource(getResources(), id));
     }
 
     public void setSrcSelect(Bitmap srcSelect) {
@@ -5091,10 +5091,10 @@ public class TView extends View {
             srcHeightRawSelect = srcSelect.getHeight();
         }
 
-        if (srcNormalWidthRaw != srcPressWidthRaw || srcNormalHeightRaw != srcPressHeightRaw || srcPressWidthRaw != srcWidthRawSelect
-                || srcPressHeightRaw != srcHeightRawSelect) {
-            throw new IndexOutOfBoundsException("Both the width and height of the attribute srcNormal ,srcPress and srcSelect needed equal");
-        }
+//        if (srcNormalWidthRaw != srcPressWidthRaw || srcNormalHeightRaw != srcPressHeightRaw || srcPressWidthRaw != srcWidthRawSelect
+//                || srcPressHeightRaw != srcHeightRawSelect) {
+//            throw new IndexOutOfBoundsException("Both the width and height of the attribute srcNormal ,srcPress and srcSelect needed equal");
+//        }
 
         //
         int srcAnchorWidthRawNormal, srcAnchorHeightRawNormal, srcAnchorWidthRawPress, srcAnchorHeightRawPress, srcAnchorWidthRawSelect, srcAnchorHeightRawSelect;
@@ -5280,6 +5280,9 @@ public class TView extends View {
                             press ?
                                     backgroundShadowDyPress * 2f + srcShadowRadiusPress - srcShadowDyPress + strokeWidthPress :
                                     backgroundShadowDyNormal * 2f + srcShadowRadiusNormal - srcShadowDyNormal + strokeWidthPress);
+
+            System.out.println("select==>" + select);
+            System.out.println("press==>" + press);
 
             canvas.drawBitmap(
                     select ? srcSelect : press ? srcPress : srcNormal,

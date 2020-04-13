@@ -37,7 +37,12 @@ public class BitmapTool {
         return decodeBitmapResource(id, 1);
     }
 
-    //
+    //ExifInterface supports JPEG and some RAW image formats only
+    public static Bitmap decodeBitmapResource(Resources resources, int id) {
+        return decodeBitmapResource(resources, id, 1);
+    }
+
+    //PNG
     public static Bitmap decodeBitmapResource(int id, int inSampleSize) {
         String stringId = String.valueOf(id);
         if (graphicsMap.containsKey(stringId)) {
@@ -53,6 +58,26 @@ public class BitmapTool {
             bitmap = BitmapFactory.decodeResource(Resources.getSystem(), id, bitmapFactoryOptions);
         } else {
             bitmap = BitmapFactory.decodeResource(Resources.getSystem(), id);
+        }
+        graphicsMap.put(stringId, bitmap);
+        return bitmap;
+    }
+
+    public static Bitmap decodeBitmapResource(Resources resources, int id, int inSampleSize) {
+        String stringId = String.valueOf(id);
+        if (graphicsMap.containsKey(stringId)) {
+            Object object = graphicsMap.get(stringId);
+            if (object != null && object instanceof Bitmap) {
+                return (Bitmap) object;
+            }
+        }
+        Bitmap bitmap;
+        if (inSampleSize > 1) {
+            BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
+            bitmapFactoryOptions.inSampleSize = inSampleSize;
+            bitmap = BitmapFactory.decodeResource(Resources.getSystem(), id, bitmapFactoryOptions);
+        } else {
+            bitmap = BitmapFactory.decodeResource(resources, id);
         }
         graphicsMap.put(stringId, bitmap);
         return bitmap;

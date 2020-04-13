@@ -68,6 +68,7 @@ public class EntryActivity extends Activity {
             TWaveActivity.class,
             TWrapActivity.class,
             ChoiceActivity.class,
+            TViewSrcActivity.class,
     };
 
     @Override
