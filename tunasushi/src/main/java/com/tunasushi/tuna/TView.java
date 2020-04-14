@@ -2698,6 +2698,19 @@ public class TView extends View {
         this.textColorSelect = Color.parseColor(textColorSelect);
     }
 
+    public void setTextColor(int textColor) {
+        this.textColorNormal = textColor;
+        this.textColorPress = textColor;
+        this.textColorSelect = textColor;
+    }
+
+    public void setTextColor(String textColor) {
+        int colorInt = Color.parseColor(textColor);
+        this.textColorNormal = colorInt;
+        this.textColorPress = colorInt;
+        this.textColorSelect = colorInt;
+    }
+
     // textPaddingLeft means distance between srcLeftNormal and The
     // leftmost,note about the srcLeftPaddingNormal
     private float textPaddingLeft;
@@ -3113,6 +3126,19 @@ public class TView extends View {
 
     public void setContentColorSelect(String contentColorSelect) {
         this.contentColorSelect = Color.parseColor(contentColorSelect);
+    }
+
+    public void setContentColor(int contentColor) {
+        this.contentColorNormal = contentColor;
+        this.contentColorPress = contentColor;
+        this.contentColorSelect = contentColor;
+    }
+
+    public void setContentColor(String contentColor) {
+        int colorInt = Color.parseColor(contentColor);
+        this.contentColorNormal = colorInt;
+        this.contentColorPress = colorInt;
+        this.contentColorSelect = colorInt;
     }
 
     // contentPaddingLeft means distance between srcLeftNormal and The
