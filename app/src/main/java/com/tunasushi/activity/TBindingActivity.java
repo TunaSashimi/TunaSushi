@@ -3,10 +3,12 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.tunasushi.R;
-import com.tunasushi.bean.Choice;
+import com.tunasushi.bean.BindingBean;
 import com.tunasushi.databinding.ActivityTBindingBinding;
+import com.tunasushi.tuna.TView;
 
 /**
  * @author TunaSashimi
@@ -20,9 +22,24 @@ public class TBindingActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         ActivityTBindingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_t_binding);
-        Choice choice = new Choice();
 
-        binding.setChoice(choice);
-        choice.choice.set(true);
+        BindingBean bean = new BindingBean();
+        bean.select.set(true);
+
+        //
+        binding.setBean(bean);
+
+        final TView tView03 = findViewById(R.id.tView03);
+        tView03.setOnClickListener(new TView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String string = tView03.getText();
+                if ("hello".equals(string)) {
+                    tView03.setText("world");
+                } else {
+                    tView03.setText("hello");
+                }
+            }
+        });
     }
 }

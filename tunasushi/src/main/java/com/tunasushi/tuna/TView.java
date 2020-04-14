@@ -58,6 +58,16 @@ import static com.tunasushi.tool.ViewTool.getLinearGradient;
  * @Description
  */
 public class TView extends View {
+    private InverseBindingListener inverseBindingListener;
+
+    public InverseBindingListener getInverseBindingListener() {
+        return inverseBindingListener;
+    }
+
+    public void setInverseBindingListener(InverseBindingListener inverseBindingListener) {
+        this.inverseBindingListener = inverseBindingListener;
+    }
+
     /**
      * The following fields and methods of the parent class and subclass can always use!
      */
@@ -737,20 +747,10 @@ public class TView extends View {
 
     public void setSelect(boolean select) {
         this.select = select;
-        if (inverseBindingSelect != null) {
-            inverseBindingSelect.onChange();
+        if (inverseBindingListener != null) {
+            inverseBindingListener.onChange();
         }
         invalidate();
-    }
-
-    private InverseBindingListener inverseBindingSelect;
-
-    public InverseBindingListener getInverseBindingSelect() {
-        return inverseBindingSelect;
-    }
-
-    public void setInverseBindingSelect(InverseBindingListener inverseBindingSelect) {
-        this.inverseBindingSelect = inverseBindingSelect;
     }
 
     //
@@ -2618,6 +2618,9 @@ public class TView extends View {
 
     public void setText(String text) {
         this.text = text;
+        if (inverseBindingListener != null) {
+            inverseBindingListener.onChange();
+        }
         requestLayout();
     }
 
@@ -2971,6 +2974,9 @@ public class TView extends View {
 
     public void setContent(String content) {
         this.content = content;
+        if (inverseBindingListener != null) {
+            inverseBindingListener.onChange();
+        }
         requestLayout();
     }
 

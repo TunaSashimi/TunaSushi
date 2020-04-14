@@ -27,7 +27,7 @@ public class TBinding {
     @BindingAdapter(value = {"selectChange"})
     public static void setSelectChange(TView t, InverseBindingListener inverseBindingListener) {
         if (inverseBindingListener != null) {
-            t.setInverseBindingSelect(inverseBindingListener);
+            t.setInverseBindingListener(inverseBindingListener);
         }
     }
 
@@ -38,6 +38,18 @@ public class TBinding {
             return;
         }
         t.setText(text);
+    }
+
+    @InverseBindingAdapter(attribute = "text", event = "textChange")
+    public static String getText(TView t) {
+        return t.getText();
+    }
+
+    @BindingAdapter(value = {"textChange"})
+    public static void setTextChange(TView t, InverseBindingListener inverseBindingListener) {
+        if (inverseBindingListener != null) {
+            t.setInverseBindingListener(inverseBindingListener);
+        }
     }
 
     @BindingAdapter({"textColorNormal"})
@@ -77,6 +89,18 @@ public class TBinding {
             return;
         }
         t.setContent(content);
+    }
+
+    @InverseBindingAdapter(attribute = "content", event = "contentChange")
+    public static String getContent(TView t) {
+        return t.getContent();
+    }
+
+    @BindingAdapter(value = {"contentChange"})
+    public static void setContentChange(TView t, InverseBindingListener inverseBindingListener) {
+        if (inverseBindingListener != null) {
+            t.setInverseBindingListener(inverseBindingListener);
+        }
     }
 
     @BindingAdapter({"contentColorNormal"})

@@ -2,6 +2,7 @@ package com.tunasushi.bean;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
 
 /**
  * @author TunaSashimi
@@ -9,6 +10,7 @@ import android.databinding.ObservableBoolean;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class Choice extends BaseObservable {
-    public ObservableBoolean choice = new ObservableBoolean();
+public class BindingBean extends BaseObservable {
+    public ObservableField<String> name = new ObservableField("hello");
+    public ObservableBoolean select = new ObservableBoolean();
 }
