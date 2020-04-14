@@ -1,4 +1,4 @@
-package com.tunasushi.activity;
+package com.tunasushi.bean;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;

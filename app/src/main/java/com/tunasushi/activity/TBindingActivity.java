@@ -5,7 +5,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.tunasushi.R;
-import com.tunasushi.databinding.ActivityChoiceBinding;
+import com.tunasushi.bean.Choice;
+import com.tunasushi.databinding.ActivityTBindingBinding;
 
 /**
  * @author TunaSashimi
@@ -13,12 +14,12 @@ import com.tunasushi.databinding.ActivityChoiceBinding;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class ChoiceActivity extends Activity {
+public class TBindingActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityChoiceBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_choice);
+        ActivityTBindingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_t_binding);
         Choice choice = new Choice();
 
         binding.setChoice(choice);

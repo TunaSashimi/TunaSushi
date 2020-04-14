@@ -28,6 +28,7 @@ public class EntryActivity extends Activity {
             TArcActivity.class,
 
             TBezierActivity.class,
+            TBindingActivity.class,
             TBubbleActivity.class,
             TButtonActivity.class,
 
@@ -67,7 +68,6 @@ public class EntryActivity extends Activity {
 
             TWaveActivity.class,
             TWrapActivity.class,
-            ChoiceActivity.class,
     };
 
     @Override

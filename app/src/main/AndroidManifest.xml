@@ -24,6 +24,7 @@
         <activity android:name=".activity.TArcActivity" />
 
         <activity android:name=".activity.TBezierActivity" />
+        <activity android:name=".activity.TBindingActivity" />
         <activity android:name=".activity.TBubbleActivity" />
         <activity android:name=".activity.TButtonActivity" />
 
@@ -63,7 +64,5 @@
 
         <activity android:name=".activity.TWaveActivity" />
         <activity android:name=".activity.TWrapActivity" />
-
-        <activity android:name=".activity.ChoiceActivity" />
     </application>
 </manifest>
