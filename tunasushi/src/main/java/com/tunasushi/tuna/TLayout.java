@@ -59,11 +59,52 @@ public class TLayout extends RelativeLayout {
 
     private int layoutBackgroundAngle;
 
+    public int getLayoutBackgroundAngle() {
+        return layoutBackgroundAngle;
+    }
+
+    public void setLayoutBackgroundAngle(int layoutBackgroundAngle) {
+        if (this.layoutBackgroundAngle != layoutBackgroundAngle) {
+            this.layoutBackgroundAngle = layoutBackgroundAngle;
+            invalidate();
+        }
+    }
+
     // layoutBackgroundStart default layoutBackground
     private int layoutBackgroundStart;
 
+    public int getLayoutBackgroundStart() {
+        return layoutBackgroundStart;
+    }
+
+    public void setLayoutBackgroundStart(int layoutBackgroundStart) {
+        if (this.layoutBackgroundStart != layoutBackgroundStart) {
+            this.layoutBackgroundStart = layoutBackgroundStart;
+            invalidate();
+        }
+    }
+
+    public void setLayoutBackgroundStart(String layoutBackgroundStart) {
+        setLayoutBackgroundStart(Color.parseColor(layoutBackgroundStart));
+    }
+
     // layoutBackgroundEnd default background
     private int layoutBackgroundEnd;
+
+    public int getLayoutBackgroundEnd() {
+        return layoutBackgroundEnd;
+    }
+
+    public void setLayoutBackgroundEnd(int layoutBackgroundEnd) {
+        if (this.layoutBackgroundEnd != layoutBackgroundEnd) {
+            this.layoutBackgroundEnd = layoutBackgroundEnd;
+            invalidate();
+        }
+    }
+
+    public void setLayoutBackgroundEnd(String layoutBackgroundEnd) {
+        setLayoutBackgroundEnd(Color.parseColor(layoutBackgroundEnd));
+    }
 
     // layoutBackgroundShader default null
     private Shader layoutBackgroundShader;
@@ -398,7 +439,6 @@ public class TLayout extends RelativeLayout {
         if (layoutBackgroundAngle != Integer.MAX_VALUE) {
             layoutBackgroundStart = typedArray.getColor(R.styleable.TLayout_layoutBackgroundStart, layoutBackground);
             layoutBackgroundEnd = typedArray.getColor(R.styleable.TLayout_layoutBackgroundEnd, layoutBackground);
-
         }
 
         //
@@ -735,5 +775,4 @@ public class TLayout extends RelativeLayout {
         layoutPath.addRoundRect(rect, radii, dir);
         return layoutPath;
     }
-
 }

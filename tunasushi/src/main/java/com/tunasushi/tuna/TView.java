@@ -746,11 +746,13 @@ public class TView extends View {
     }
 
     public void setSelect(boolean select) {
-        this.select = select;
-        if (inverseBindingListener != null) {
-            inverseBindingListener.onChange();
+        if (this.select != select) {
+            this.select = select;
+            if (inverseBindingListener != null) {
+                inverseBindingListener.onChange();
+            }
+            invalidate();
         }
-        invalidate();
     }
 
     //
@@ -2676,11 +2678,14 @@ public class TView extends View {
     }
 
     public void setTextColorNormal(int textColorNormal) {
-        this.textColorNormal = textColorNormal;
+        if (this.textColorNormal != textColorNormal) {
+            this.textColorNormal = textColorNormal;
+            invalidate();
+        }
     }
 
     public void setTextColorNormal(String textColorNormal) {
-        this.textColorNormal = Color.parseColor(textColorNormal);
+        setTextColorNormal(Color.parseColor(textColorNormal));
     }
 
     // textColorPress default textColorNormal
@@ -2691,11 +2696,14 @@ public class TView extends View {
     }
 
     public void setTextColorPress(int textColorPress) {
-        this.textColorPress = textColorPress;
+        if (this.textColorPress != textColorPress) {
+            this.textColorPress = textColorPress;
+            invalidate();
+        }
     }
 
     public void setTextColorPress(String textColorPress) {
-        this.textColorPress = Color.parseColor(textColorPress);
+        setTextColorPress(Color.parseColor(textColorPress));
     }
 
     // textColorSelect default textColorNormal
@@ -2706,11 +2714,14 @@ public class TView extends View {
     }
 
     public void setTextColorSelect(int textColorSelect) {
-        this.textColorSelect = textColorSelect;
+        if (this.textColorSelect != textColorSelect) {
+            this.textColorSelect = textColorSelect;
+            invalidate();
+        }
     }
 
     public void setTextColorSelect(String textColorSelect) {
-        this.textColorSelect = Color.parseColor(textColorSelect);
+        setTextColorSelect(Color.parseColor(textColorSelect));
     }
 
     public void setTextColor(int textColor) {

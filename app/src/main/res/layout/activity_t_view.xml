@@ -610,11 +610,44 @@
             android:color="#434343"
             android:text="srcLeftSelect设置选中" />
 
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewRadius01"
+            android:layout_width="84dp"
+            android:layout_height="18dp"
+            android:layout_below="@id/tViewSrcRight"
+            android:layout_marginLeft="16dp"
+            app:backgroundNormal="#0e82f6"
+            app:radiusBottomLeft="0dp"
+            app:radiusBottomRight="87dp"
+            app:radiusTopLeft="30dp"
+            app:radiusTopRight="0dp"
+            app:text="即将过期"
+            app:textColorNormal="#ffffff"
+            app:textSize="12sp" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewRadius02"
+            android:layout_width="84dp"
+            android:layout_height="18dp"
+            android:layout_alignTop="@id/tViewRadius01"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/tViewRadius01"
+            app:backgroundAngleNormal="45"
+            app:backgroundEndNormal="#ffa506"
+            app:backgroundStartNormal="#ff663f"
+            app:radiusBottomLeft="0dp"
+            app:radiusBottomRight="87dp"
+            app:radiusTopLeft="30dp"
+            app:radiusTopRight="0dp"
+            app:text="即将过期"
+            app:textColorNormal="#ffffff"
+            app:textSize="12sp" />
+
         <TextView
             android:id="@+id/textPrompt10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewSrcRight"
+            android:layout_below="@id/tViewRadius01"
             android:layout_margin="16dp"
             android:color="#434343" />
 

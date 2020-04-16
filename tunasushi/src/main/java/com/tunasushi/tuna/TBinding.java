@@ -52,19 +52,14 @@ public class TBinding {
         }
     }
 
+    @BindingAdapter({"textSize"})
+    public static void setTextSize(TView t, float textSize) {
+        t.setTextSize(textSize);
+    }
+
     @BindingAdapter({"textColorNormal"})
     public static void setTextColorNormal(TView t, int textColorNormal) {
         t.setTextColorNormal(textColorNormal);
-    }
-
-    @BindingAdapter({"textColorPress"})
-    public static void setTextColorPress(TView t, int textColorPress) {
-        t.setTextColorPress(textColorPress);
-    }
-
-    @BindingAdapter({"textColorSelect"})
-    public static void setTextColorSelect(TView t, int textColorSelect) {
-        t.setTextColorSelect(textColorSelect);
     }
 
     @BindingAdapter({"textColorNormal"})
@@ -73,8 +68,18 @@ public class TBinding {
     }
 
     @BindingAdapter({"textColorPress"})
+    public static void setTextColorPress(TView t, int textColorPress) {
+        t.setTextColorPress(textColorPress);
+    }
+
+    @BindingAdapter({"textColorPress"})
     public static void setTextColorPress(TView t, String textColorPress) {
         t.setTextColorPress(textColorPress);
+    }
+
+    @BindingAdapter({"textColorSelect"})
+    public static void setTextColorSelect(TView t, int textColorSelect) {
+        t.setTextColorSelect(textColorSelect);
     }
 
     @BindingAdapter({"textColorSelect"})
@@ -103,19 +108,14 @@ public class TBinding {
         }
     }
 
+    @BindingAdapter({"contentSize"})
+    public static void setContentSize(TView t, float contentSize) {
+        t.setContentSize(contentSize);
+    }
+
     @BindingAdapter({"contentColorNormal"})
     public static void setContentColorNormal(TView t, int contentColorNormal) {
         t.setTextColorSelect(contentColorNormal);
-    }
-
-    @BindingAdapter({"contentColorPress"})
-    public static void setContentColorPress(TView t, int contentColorPress) {
-        t.setTextColorSelect(contentColorPress);
-    }
-
-    @BindingAdapter({"contentColorSelect"})
-    public static void setContentColorSelect(TView t, int contentColorSelect) {
-        t.setTextColorSelect(contentColorSelect);
     }
 
     @BindingAdapter({"contentColorNormal"})
@@ -124,8 +124,18 @@ public class TBinding {
     }
 
     @BindingAdapter({"contentColorPress"})
+    public static void setContentColorPress(TView t, int contentColorPress) {
+        t.setTextColorSelect(contentColorPress);
+    }
+
+    @BindingAdapter({"contentColorPress"})
     public static void setContentColorPress(TView t, String contentColorPress) {
         t.setTextColorSelect(contentColorPress);
+    }
+
+    @BindingAdapter({"contentColorSelect"})
+    public static void setContentColorSelect(TView t, int contentColorSelect) {
+        t.setTextColorSelect(contentColorSelect);
     }
 
     @BindingAdapter({"contentColorSelect"})
@@ -138,24 +148,24 @@ public class TBinding {
         t.setStrokeColorNormal(strokeColorNormal);
     }
 
-    @BindingAdapter({"strokeColorPress"})
-    public static void setStrokeColorPress(TView t, int strokeColorPress) {
-        t.setStrokeColorPress(strokeColorPress);
-    }
-
-    @BindingAdapter({"strokeColorSelect"})
-    public static void setStrokeColorSelect(TView t, int strokeColorSelect) {
-        t.setStrokeColorSelect(strokeColorSelect);
-    }
-
     @BindingAdapter({"strokeColorNormal"})
     public static void setStrokeColorNormal(TView t, String strokeColorNormal) {
         t.setStrokeColorNormal(strokeColorNormal);
     }
 
     @BindingAdapter({"strokeColorPress"})
+    public static void setStrokeColorPress(TView t, int strokeColorPress) {
+        t.setStrokeColorPress(strokeColorPress);
+    }
+
+    @BindingAdapter({"strokeColorPress"})
     public static void setStrokeColorPress(TView t, String strokeColorPress) {
         t.setStrokeColorPress(strokeColorPress);
+    }
+
+    @BindingAdapter({"strokeColorSelect"})
+    public static void setStrokeColorSelect(TView t, int strokeColorSelect) {
+        t.setStrokeColorSelect(strokeColorSelect);
     }
 
     @BindingAdapter({"strokeColorSelect"})
@@ -166,5 +176,30 @@ public class TBinding {
     @BindingAdapter({"lineMode"})
     public static void setLineMode(TLine tLine, int lineMode) {
         tLine.setLineMode(lineMode);
+    }
+
+    @BindingAdapter({"layoutBackgroundAngle"})
+    public static void setLayoutBackgroundAngle(TLayout tLayout, int layoutBackgroundAngle) {
+        tLayout.setLayoutBackgroundAngle(layoutBackgroundAngle);
+    }
+
+    @BindingAdapter({"layoutBackgroundStart"})
+    public static void setLayoutBackgroundStart(TLayout tLayout, int layoutBackgroundStart) {
+        tLayout.setLayoutBackgroundStart(layoutBackgroundStart);
+    }
+
+    @BindingAdapter({"layoutBackgroundStart"})
+    public static void setLayoutBackgroundStart(TLayout tLayout, String layoutBackgroundStart) {
+        tLayout.setLayoutBackgroundStart(layoutBackgroundStart);
+    }
+
+    @BindingAdapter({"layoutBackgroundEnd"})
+    public static void setLayoutBackgroundEnd(TLayout tLayout, int layoutBackgroundEnd) {
+        tLayout.setLayoutBackgroundEnd(layoutBackgroundEnd);
+    }
+
+    @BindingAdapter({"layoutBackgroundEnd"})
+    public static void setLayoutBackgroundEnd(TLayout tLayout, String layoutBackgroundEnd) {
+        tLayout.setLayoutBackgroundEnd(layoutBackgroundEnd);
     }
 }

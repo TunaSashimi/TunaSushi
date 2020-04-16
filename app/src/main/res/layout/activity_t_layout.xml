@@ -51,6 +51,5 @@
         app:layoutBackgroundAngle="270"
         app:layoutBackgroundEnd="#ffca00"
         app:layoutBackgroundStart="#ffec95"
-        app:layoutRadius="5dp">
-    </com.tunasushi.tuna.TLayout>
+        app:layoutRadius="5dp"></com.tunasushi.tuna.TLayout>
 </RelativeLayout>
