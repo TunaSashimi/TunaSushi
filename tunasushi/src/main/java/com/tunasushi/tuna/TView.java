@@ -2325,6 +2325,10 @@ public class TView extends View {
         this.strokeColorNormal = strokeColorNormal;
     }
 
+    public void setStrokeColorNormal(String strokeColorNormal) {
+        this.strokeColorNormal = Color.parseColor(strokeColorNormal);
+    }
+
     // strokeWidthPress default strokeWidthNormal
     private float strokeWidthPress;
 
@@ -2358,6 +2362,10 @@ public class TView extends View {
         this.strokeColorPress = strokeColorPress;
     }
 
+    public void setStrokeColorPress(String strokeColorPress) {
+        this.strokeColorPress = Color.parseColor(strokeColorPress);
+    }
+
     // strokeWidthSelect default strokeWidthNormal
     private float strokeWidthSelect;
 
@@ -2389,6 +2397,10 @@ public class TView extends View {
 
     public void setStrokeColorSelect(int strokeColorSelect) {
         this.strokeColorSelect = strokeColorSelect;
+    }
+
+    public void setStrokeColorSelect(String strokeColorSelect) {
+        this.strokeColorSelect = Color.parseColor(strokeColorSelect);
     }
 
     // textMark default false

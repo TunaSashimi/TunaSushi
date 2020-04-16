@@ -133,6 +133,36 @@ public class TBinding {
         t.setTextColorSelect(contentColorSelect);
     }
 
+    @BindingAdapter({"strokeColorNormal"})
+    public static void setStrokeColorNormal(TView t, int strokeColorNormal) {
+        t.setStrokeColorNormal(strokeColorNormal);
+    }
+
+    @BindingAdapter({"strokeColorPress"})
+    public static void setStrokeColorPress(TView t, int strokeColorPress) {
+        t.setStrokeColorPress(strokeColorPress);
+    }
+
+    @BindingAdapter({"strokeColorSelect"})
+    public static void setStrokeColorSelect(TView t, int strokeColorSelect) {
+        t.setStrokeColorSelect(strokeColorSelect);
+    }
+
+    @BindingAdapter({"strokeColorNormal"})
+    public static void setStrokeColorNormal(TView t, String strokeColorNormal) {
+        t.setStrokeColorNormal(strokeColorNormal);
+    }
+
+    @BindingAdapter({"strokeColorPress"})
+    public static void setStrokeColorPress(TView t, String strokeColorPress) {
+        t.setStrokeColorPress(strokeColorPress);
+    }
+
+    @BindingAdapter({"strokeColorSelect"})
+    public static void setStrokeColorSelect(TView t, String strokeColorSelect) {
+        t.setStrokeColorSelect(strokeColorSelect);
+    }
+
     @BindingAdapter({"lineMode"})
     public static void setLineMode(TLine tLine, int lineMode) {
         tLine.setLineMode(lineMode);
