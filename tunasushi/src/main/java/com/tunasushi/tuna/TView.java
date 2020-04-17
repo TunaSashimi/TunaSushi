@@ -1381,18 +1381,14 @@ public class TView extends View {
     }
 
     public void setBackgroundStartNormal(int backgroundStartNormal) {
-        this.backgroundStartNormal = backgroundStartNormal;
+        if (this.backgroundStartNormal != backgroundStartNormal) {
+            this.backgroundStartNormal = backgroundStartNormal;
+            invalidate();
+        }
     }
 
-    // backgroundEndNormal default backgroundNormal
-    private int backgroundEndNormal;
-
-    public int getBackgroundEndNormal() {
-        return backgroundEndNormal;
-    }
-
-    public void setBackgroundEndNormal(int backgroundEndNormal) {
-        this.backgroundEndNormal = backgroundEndNormal;
+    public void setBackgroundStartNormal(String backgroundStartNormal) {
+        setBackgroundStartNormal(Color.parseColor(backgroundStartNormal));
     }
 
     // backgroundStartPress default backgroundPress
@@ -1403,18 +1399,14 @@ public class TView extends View {
     }
 
     public void setBackgroundStartPress(int backgroundStartPress) {
-        this.backgroundStartPress = backgroundStartPress;
+        if (this.backgroundStartPress != backgroundStartPress) {
+            this.backgroundStartPress = backgroundStartPress;
+            invalidate();
+        }
     }
 
-    // backgroundEndPress default backgroundPress
-    private int backgroundEndPress;
-
-    public int getBackgroundEndPress() {
-        return backgroundEndPress;
-    }
-
-    public void setBackgroundEndPress(int backgroundEndPress) {
-        this.backgroundEndPress = backgroundEndPress;
+    public void setBackgroundStartPress(String backgroundStartPress) {
+        setBackgroundStartPress(Color.parseColor(backgroundStartPress));
     }
 
     // backgroundStartSelect default backgroundSelect
@@ -1425,7 +1417,61 @@ public class TView extends View {
     }
 
     public void setBackgroundStartSelect(int backgroundStartSelect) {
-        this.backgroundStartSelect = backgroundStartSelect;
+        if (this.backgroundStartSelect != backgroundStartSelect) {
+            this.backgroundStartSelect = backgroundStartSelect;
+            invalidate();
+        }
+    }
+
+    public void setBackgroundStart(int backgroundStart) {
+        this.backgroundStartNormal = backgroundStart;
+        this.backgroundStartPress = backgroundStart;
+        this.backgroundStartSelect = backgroundStart;
+        invalidate();
+    }
+
+    public void setBackgroundStart(String backgroundStart) {
+        setBackgroundStart(Color.parseColor(backgroundStart));
+    }
+
+    public void setBackgroundStartSelect(String backgroundStartSelect) {
+        setBackgroundStartSelect(Color.parseColor(backgroundStartSelect));
+    }
+
+    // backgroundEndNormal default backgroundNormal
+    private int backgroundEndNormal;
+
+    public int getBackgroundEndNormal() {
+        return backgroundEndNormal;
+    }
+
+    public void setBackgroundEndNormal(int backgroundEndNormal) {
+        if (this.backgroundEndNormal != backgroundEndNormal) {
+            this.backgroundEndNormal = backgroundEndNormal;
+            invalidate();
+        }
+    }
+
+    public void setBackgroundEndNormal(String backgroundEndNormal) {
+        setBackgroundEndNormal(Color.parseColor(backgroundEndNormal));
+    }
+
+    // backgroundEndPress default backgroundPress
+    private int backgroundEndPress;
+
+    public int getBackgroundEndPress() {
+        return backgroundEndPress;
+    }
+
+    public void setBackgroundEndPress(int backgroundEndPress) {
+        if (this.backgroundEndPress != backgroundEndPress) {
+            this.backgroundEndPress = backgroundEndPress;
+            invalidate();
+        }
+    }
+
+    public void setBackgroundEndPress(String backgroundEndPress) {
+        setBackgroundEndPress(Color.parseColor(backgroundEndPress));
     }
 
     // backgroundEndSelect default backgroundSelect
@@ -1436,7 +1482,25 @@ public class TView extends View {
     }
 
     public void setBackgroundEndSelect(int backgroundEndSelect) {
-        this.backgroundEndSelect = backgroundEndSelect;
+        if (this.backgroundEndSelect != backgroundEndSelect) {
+            this.backgroundEndSelect = backgroundEndSelect;
+            invalidate();
+        }
+    }
+
+    public void setBackgroundEndSelect(String backgroundEndSelect) {
+        setBackgroundEndSelect(Color.parseColor(backgroundEndSelect));
+    }
+
+    public void setBackgroundEnd(int backgroundEnd) {
+        this.backgroundEndNormal = backgroundEnd;
+        this.backgroundEndPress = backgroundEnd;
+        this.backgroundEndSelect = backgroundEnd;
+        invalidate();
+    }
+
+    public void setBackgroundEnd(String backgroundEnd) {
+        setBackgroundEnd(Color.parseColor(backgroundEnd));
     }
 
     // backgroundNormalShader default null
@@ -2361,11 +2425,14 @@ public class TView extends View {
     }
 
     public void setStrokeColorPress(int strokeColorPress) {
-        this.strokeColorPress = strokeColorPress;
+        if (this.strokeColorPress != strokeColorPress) {
+            this.strokeColorPress = strokeColorPress;
+            invalidate();
+        }
     }
 
     public void setStrokeColorPress(String strokeColorPress) {
-        this.strokeColorPress = Color.parseColor(strokeColorPress);
+        setStrokeColorPress(Color.parseColor(strokeColorPress));
     }
 
     // strokeWidthSelect default strokeWidthNormal
@@ -2398,11 +2465,25 @@ public class TView extends View {
     }
 
     public void setStrokeColorSelect(int strokeColorSelect) {
-        this.strokeColorSelect = strokeColorSelect;
+        if (this.strokeColorSelect != strokeColorSelect) {
+            this.strokeColorSelect = strokeColorSelect;
+            invalidate();
+        }
     }
 
     public void setStrokeColorSelect(String strokeColorSelect) {
-        this.strokeColorSelect = Color.parseColor(strokeColorSelect);
+        setStrokeColorSelect(Color.parseColor(strokeColorSelect));
+    }
+
+    public void setStrokeColor(int strokeColor) {
+        this.strokeColorNormal = strokeColor;
+        this.strokeColorPress = strokeColor;
+        this.strokeColorSelect = strokeColor;
+        invalidate();
+    }
+
+    public void setStrokeColor(String strokeColor) {
+        setStrokeColor(Color.parseColor(strokeColor));
     }
 
     // textMark default false
@@ -2678,9 +2759,6 @@ public class TView extends View {
     }
 
     public void setTextColorNormal(int textColorNormal) {
-
-        System.out.println("textColorNormal==>");
-
         if (this.textColorNormal != textColorNormal) {
             this.textColorNormal = textColorNormal;
             invalidate();
@@ -2735,9 +2813,7 @@ public class TView extends View {
     }
 
     public void setTextColor(String textColor) {
-        int colorInt = Color.parseColor(textColor);
-        this.textColorNormal = colorInt;
-        setTextColor(colorInt);
+        setTextColor(Color.parseColor(textColor));
     }
 
     // textPaddingLeft means distance between srcLeftNormal and The
@@ -3138,11 +3214,14 @@ public class TView extends View {
     }
 
     public void setContentColorPress(int contentColorPress) {
-        this.contentColorPress = contentColorPress;
+        if (this.contentColorPress != contentColorPress) {
+            this.contentColorPress = contentColorPress;
+            invalidate();
+        }
     }
 
     public void setContentColorPress(String contentColorPress) {
-        this.contentColorPress = Color.parseColor(contentColorPress);
+        setContentColorPress(Color.parseColor(contentColorPress));
     }
 
     // contentColorSelect default contentColorNormal
@@ -3153,24 +3232,25 @@ public class TView extends View {
     }
 
     public void setContentColorSelect(int contentColorSelect) {
-        this.contentColorSelect = contentColorSelect;
+        if (this.contentColorSelect != contentColorSelect) {
+            this.contentColorSelect = contentColorSelect;
+            invalidate();
+        }
     }
 
     public void setContentColorSelect(String contentColorSelect) {
-        this.contentColorSelect = Color.parseColor(contentColorSelect);
+        setContentColorSelect(Color.parseColor(contentColorSelect));
     }
 
     public void setContentColor(int contentColor) {
         this.contentColorNormal = contentColor;
         this.contentColorPress = contentColor;
         this.contentColorSelect = contentColor;
+        invalidate();
     }
 
     public void setContentColor(String contentColor) {
-        int colorInt = Color.parseColor(contentColor);
-        this.contentColorNormal = colorInt;
-        this.contentColorPress = colorInt;
-        this.contentColorSelect = colorInt;
+        setContentColor(Color.parseColor(contentColor));
     }
 
     // contentPaddingLeft means distance between srcLeftNormal and The
@@ -4715,8 +4795,6 @@ public class TView extends View {
             //
             text = typedArray.getString(R.styleable.TView_text);
             textSize = typedArray.getDimension(R.styleable.TView_textSize, textSizeDefault);
-
-            System.out.println("textColorNormal==>");
 
             textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, textColorDefault);
             textColorPress = typedArray.getColor(R.styleable.TView_textColorPress, textColorNormal);
