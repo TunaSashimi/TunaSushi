@@ -60,11 +60,15 @@ public class TBinding {
     @BindingAdapter({"textColorNormal"})
     public static void setTextColorNormal(TView t, int textColorNormal) {
         t.setTextColorNormal(textColorNormal);
+        t.setTextColorPress(textColorNormal);
+        t.setTextColorSelect(textColorNormal);
     }
 
     @BindingAdapter({"textColorNormal"})
     public static void setTextColorNormal(TView t, String textColorNormal) {
         t.setTextColorNormal(textColorNormal);
+        t.setTextColorPress(textColorNormal);
+        t.setTextColorSelect(textColorNormal);
     }
 
     @BindingAdapter({"textColorPress"})

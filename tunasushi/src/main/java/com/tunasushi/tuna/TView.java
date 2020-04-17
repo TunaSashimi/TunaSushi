@@ -2678,6 +2678,9 @@ public class TView extends View {
     }
 
     public void setTextColorNormal(int textColorNormal) {
+
+        System.out.println("textColorNormal==>");
+
         if (this.textColorNormal != textColorNormal) {
             this.textColorNormal = textColorNormal;
             invalidate();
@@ -4712,6 +4715,8 @@ public class TView extends View {
             //
             text = typedArray.getString(R.styleable.TView_text);
             textSize = typedArray.getDimension(R.styleable.TView_textSize, textSizeDefault);
+
+            System.out.println("textColorNormal==>");
 
             textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, textColorDefault);
             textColorPress = typedArray.getColor(R.styleable.TView_textColorPress, textColorNormal);
