@@ -2728,13 +2728,13 @@ public class TView extends View {
         this.textColorNormal = textColor;
         this.textColorPress = textColor;
         this.textColorSelect = textColor;
+        invalidate();
     }
 
     public void setTextColor(String textColor) {
         int colorInt = Color.parseColor(textColor);
         this.textColorNormal = colorInt;
-        this.textColorPress = colorInt;
-        this.textColorSelect = colorInt;
+        setTextColor(colorInt);
     }
 
     // textPaddingLeft means distance between srcLeftNormal and The
