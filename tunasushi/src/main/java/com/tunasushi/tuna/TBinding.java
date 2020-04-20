@@ -87,6 +87,16 @@ public class TBinding {
         t.setTextColorSelect(textColorSelect);
     }
 
+    @BindingAdapter({"textPaddingLeft"})
+    public static void setTextPaddingLeft(TView t, float textPaddingLeft) {
+        t.setTextPaddingLeft(textPaddingLeft);
+    }
+
+    @BindingAdapter({"textPaddingRight"})
+    public static void setTextPaddingRight(TView t, float textPaddingRight) {
+        t.setTextPaddingRight(textPaddingRight);
+    }
+
     @BindingAdapter({"content"})
     public static void setContent(TView t, String content) {
         final String oldContent = t.getContent();
@@ -141,6 +151,16 @@ public class TBinding {
     @BindingAdapter({"contentColorSelect"})
     public static void setContentColorSelect(TView t, String contentColorSelect) {
         t.setContentColorSelect(contentColorSelect);
+    }
+
+    @BindingAdapter({"contentPaddingLeft"})
+    public static void setContentPaddingLeft(TView t, float contentPaddingLeft) {
+        t.setContentPaddingLeft(contentPaddingLeft);
+    }
+
+    @BindingAdapter({"contentPaddingRight"})
+    public static void setContentPaddingRight(TView t, float contentPaddingRight) {
+        t.setContentPaddingRight(contentPaddingRight);
     }
 
     @BindingAdapter({"strokeColorNormal"})
