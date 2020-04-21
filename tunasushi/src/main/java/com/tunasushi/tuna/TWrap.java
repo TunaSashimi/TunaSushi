@@ -92,6 +92,7 @@ public class TWrap extends TView {
         wrapStrokeColorSelect = typedArray.getColor(R.styleable.TWrap_wrapStrokeColorSelect, wrapStrokeColorNormal);
 
         wrapTextSize = typedArray.getDimension(R.styleable.TWrap_wrapTextSize, textSizeDefault);
+
         wrapTextPadding = typedArray.getDimension(R.styleable.TWrap_wrapTextPadding, 0);
 
         wrapTextColorNormal = typedArray.getColor(R.styleable.TWrap_wrapTextColorNormal, textColorDefault);
@@ -131,6 +132,7 @@ public class TWrap extends TView {
         int specModeHeight = MeasureSpec.getMode(heightMeasureSpec);
         int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
+        //
         initTextPaint(wrapTextColorNormal, wrapTextSize);
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
 
@@ -139,8 +141,6 @@ public class TWrap extends TView {
 
         //
         int measuredWidth = specSizeWidth;
-
-        //
         int measuredHeight = (int) rowHeight;//At least one line
 
         //
@@ -149,10 +149,10 @@ public class TWrap extends TView {
         //measuredHeight
         if (specModeHeight == MeasureSpec.AT_MOST) {// wrap_content
             for (int i = 0; i <= total - 1; i++) {
-                //
+                //Start from the second
                 if (i != 0) {
-                    float itemWidth = paint.measureText(wrapItemTextArray[i]);
-                    characterWidth += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
+                    float itemWidth = paint.measureText(wrapItemTextArray[i]) + wrapTextPadding * 2;
+                    characterWidth += itemWidth + wrapSpaceLine;
                 }
                 if (characterWidth > specSizeWidth) {
                     characterWidth = 0;
@@ -169,36 +169,30 @@ public class TWrap extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        canvas.drawColor(0xffffff00);
-
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
         float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
-
         dx = 0;
         dy = 0;
-
         for (int i = 0; i <= total - 1; i++) {
-            float itemWidth = paint.measureText(wrapItemTextArray[i]);
+            float itemWidth = paint.measureText(wrapItemTextArray[i]) + wrapTextPadding * 2;
             if (i != 0) {
-                characterWidth += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
+                characterWidth += itemWidth + wrapSpaceLine;
             }
             if (characterWidth > width) {
                 //
                 dx = 0;
-                dy += rowHeight + wrapTextPadding * 2 + wrapSpaceRow;
-
+                dy += rowHeight + wrapSpaceRow;
                 //
                 drawDetail(canvas, dx, dy, itemWidth, rowHeight, wrapTextPadding, i);
                 //
-                dx += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
+                dx += itemWidth + wrapSpaceLine;
                 characterWidth = itemWidth;
             } else {
                 //
                 drawDetail(canvas, dx, dy, itemWidth, rowHeight, wrapTextPadding, i);
                 //
-                dx += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
+                dx += itemWidth + wrapSpaceLine;
             }
         }
     }
@@ -238,7 +232,7 @@ public class TWrap extends TView {
                 canvas,
                 wrap.wrapString,
                 itemWidth,
-                0,
+                wrapTextPadding,
                 rowHeight * 0.5f,
                 initTextPaint(wrap.wrapSelect ? wrapTextColorSelect : wrapTextColorNormal, wrapTextSize)
         );

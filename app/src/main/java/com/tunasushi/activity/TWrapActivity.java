@@ -19,7 +19,7 @@ import java.util.Arrays;
  */
 
 public class TWrapActivity extends Activity {
-    private TWrap tWrap01, tWrap02;
+    private TWrap tWrap01, tWrap02, tWrap03;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,23 +30,29 @@ public class TWrapActivity extends Activity {
         tWrap01 = findViewById(R.id.tWrap01);
         tWrap01.setWrapItemTextArray(
                 new String[]{
-                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
-                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
+                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
+                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                 });
 
         tWrap02 = findViewById(R.id.tWrap02);
         tWrap02.setWrapItemTextArray(
                 new String[]{
-                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
-                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
-                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
+                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
+                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏",
+                });
+
+        tWrap03 = findViewById(R.id.tWrap03);
+        tWrap03.setWrapItemTextArray(
+                new String[]{
+                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
+                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                 });
 
         TView tView = findViewById(R.id.tView);
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), Arrays.toString(tWrap02.getWrapSelect()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), Arrays.toString(tWrap03.getWrapSelect()), Toast.LENGTH_LONG).show();
             }
         });
     }
