@@ -688,6 +688,7 @@
         <attr name="wrapStrokeColorNormal" format="reference|color" />
         <attr name="wrapStrokeColorSelect" format="reference|color" />
         <attr name="wrapTextSize" format="dimension" />
+        <attr name="wrapTextPadding" format="dimension" />
         <attr name="wrapTextColorNormal" format="reference|color" />
         <attr name="wrapTextColorSelect" format="reference|color" />
         <attr name="wrapItemTextArray" format="reference" />

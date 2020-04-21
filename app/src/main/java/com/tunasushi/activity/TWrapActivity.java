@@ -19,7 +19,7 @@ import java.util.Arrays;
  */
 
 public class TWrapActivity extends Activity {
-    private TWrap tWrap;
+    private TWrap tWrap01, tWrap02;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,18 @@ public class TWrapActivity extends Activity {
 
         setContentView(R.layout.activity_t_wrap);
 
-        tWrap = findViewById(R.id.tWrap);
-        tWrap.setWrapItemTextArray(
+        tWrap01 = findViewById(R.id.tWrap01);
+        tWrap01.setWrapItemTextArray(
                 new String[]{
+                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
+                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
+                });
+
+        tWrap02 = findViewById(R.id.tWrap02);
+        tWrap02.setWrapItemTextArray(
+                new String[]{
+                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
+                        " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 ",
                         " 用户要求换车 ", "车辆不整洁", "车辆设施不完备 ", "车辆损坏 "
                 });
 
@@ -37,7 +46,7 @@ public class TWrapActivity extends Activity {
         tView.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), Arrays.toString(tWrap.getWrapSelect()), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), Arrays.toString(tWrap02.getWrapSelect()), Toast.LENGTH_LONG).show();
             }
         });
     }

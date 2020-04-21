@@ -32,6 +32,8 @@ public class TWrap extends TView {
 
     //
     private float wrapTextSize;
+    private float wrapTextPadding;
+
     private int wrapTextColorNormal, wrapTextColorSelect;
 
     public String[] getWrapItemTextArray() {
@@ -90,6 +92,8 @@ public class TWrap extends TView {
         wrapStrokeColorSelect = typedArray.getColor(R.styleable.TWrap_wrapStrokeColorSelect, wrapStrokeColorNormal);
 
         wrapTextSize = typedArray.getDimension(R.styleable.TWrap_wrapTextSize, textSizeDefault);
+        wrapTextPadding = typedArray.getDimension(R.styleable.TWrap_wrapTextPadding, 0);
+
         wrapTextColorNormal = typedArray.getColor(R.styleable.TWrap_wrapTextColorNormal, textColorDefault);
         wrapTextColorSelect = typedArray.getColor(R.styleable.TWrap_wrapTextColorSelect, wrapTextColorNormal);
 
@@ -129,13 +133,18 @@ public class TWrap extends TView {
 
         initTextPaint(wrapTextColorNormal, wrapTextSize);
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-        int rowHeight = fontMetrics.descent - fontMetrics.ascent;
+
+        //Need to add padding
+        float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
 
         //
         int measuredWidth = specSizeWidth;
-        int measuredHeight = rowHeight;//At least one line
 
-        float characterWidth = paint.measureText(wrapItemTextArray[0]);//At least one field
+        //
+        int measuredHeight = (int) rowHeight;//At least one line
+
+        //
+        float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
 
         //measuredHeight
         if (specModeHeight == MeasureSpec.AT_MOST) {// wrap_content
@@ -143,11 +152,11 @@ public class TWrap extends TView {
                 //
                 if (i != 0) {
                     float itemWidth = paint.measureText(wrapItemTextArray[i]);
-                    characterWidth += wrapSpaceLine + itemWidth;
+                    characterWidth += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
                 }
                 if (characterWidth > specSizeWidth) {
                     characterWidth = 0;
-                    measuredHeight += wrapSpaceRow + rowHeight;
+                    measuredHeight += rowHeight + wrapSpaceRow;
                 }
             }
         } else if (specModeHeight == MeasureSpec.EXACTLY) {// match_parent
@@ -160,9 +169,12 @@ public class TWrap extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        canvas.drawColor(0xffffff00);
+
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-        float rowHeight = fontMetrics.descent - fontMetrics.ascent;
-        float characterWidth = paint.measureText(wrapItemTextArray[0]);//At least one field
+        float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
+        float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
 
         dx = 0;
         dy = 0;
@@ -170,28 +182,29 @@ public class TWrap extends TView {
         for (int i = 0; i <= total - 1; i++) {
             float itemWidth = paint.measureText(wrapItemTextArray[i]);
             if (i != 0) {
-                characterWidth += wrapSpaceLine + itemWidth;
+                characterWidth += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
             }
             if (characterWidth > width) {
                 //
                 dx = 0;
-                dy += wrapSpaceRow + rowHeight;
+                dy += rowHeight + wrapTextPadding * 2 + wrapSpaceRow;
+
                 //
-                drawDetail(canvas, dx, dy, itemWidth, rowHeight, i);
+                drawDetail(canvas, dx, dy, itemWidth, rowHeight, wrapTextPadding, i);
                 //
-                dx += wrapSpaceLine + itemWidth;
+                dx += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
                 characterWidth = itemWidth;
             } else {
                 //
-                drawDetail(canvas, dx, dy, itemWidth, rowHeight, i);
+                drawDetail(canvas, dx, dy, itemWidth, rowHeight, wrapTextPadding, i);
                 //
-                dx += wrapSpaceLine + itemWidth;
+                dx += itemWidth + wrapTextPadding * 2 + wrapSpaceLine;
             }
         }
     }
 
 
-    private void drawDetail(Canvas canvas, float dx, float dy, float itemWidth, float rowHeight, int i) {
+    private void drawDetail(Canvas canvas, float dx, float dy, float itemWidth, float rowHeight, float wrapTextPadding, int i) {
         //
         if (wrapList.size() <= i) {
             wrapList.add(new Wrap(new RectF(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapItemTextArray[i]));
