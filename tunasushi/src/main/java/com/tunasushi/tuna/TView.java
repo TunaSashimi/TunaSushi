@@ -4786,7 +4786,7 @@ public class TView extends View {
 
             //
             strokeWidthNormal = typedArray.getDimension(R.styleable.TView_strokeWidthNormal, 0);
-            strokeColorNormal = typedArray.getColor(R.styleable.TView_strokeColorNormal, Color.TRANSPARENT);
+            strokeColorNormal = typedArray.getColor(R.styleable.TView_strokeColorNormal, textColorDefault);
             strokeWidthPress = typedArray.getDimension(R.styleable.TView_strokeWidthPress, strokeWidthNormal);
             strokeColorPress = typedArray.getColor(R.styleable.TView_strokeColorPress, strokeColorNormal);
             strokeWidthSelect = typedArray.getDimension(R.styleable.TView_strokeWidthSelect, strokeWidthNormal);
