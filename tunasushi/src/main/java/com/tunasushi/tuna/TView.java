@@ -5447,29 +5447,31 @@ public class TView extends View {
             // Uncomment will cause a null pointer with paint in xml preview canvas.restoreToCount(layer);
         }
 
-        if (classic) {
-            drawRectClassicStroke(
-                    canvas,
-                    backgroundShadowRadiusNormal + backgroundShadowDxNormal,
-                    backgroundShadowRadiusNormal + backgroundShadowDyNormal,
-                    width - backgroundShadowRadiusNormal - backgroundShadowDxNormal,
-                    height - backgroundShadowRadiusNormal - backgroundShadowDyNormal,
-                    select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
-                    select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
-                    radius);
-        } else {
-            drawRectCustomStroke(
-                    canvas,
-                    backgroundShadowRadiusNormal + backgroundShadowDxNormal,
-                    backgroundShadowRadiusNormal + backgroundShadowDyNormal,
-                    width - backgroundShadowRadiusNormal - backgroundShadowDxNormal,
-                    height - backgroundShadowRadiusNormal - backgroundShadowDyNormal,
-                    select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
-                    select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
-                    radiusTopLeft,
-                    radiusBottomLeft,
-                    radiusTopRight,
-                    radiusBottomRight);
+        if (strokeWidthNormal > 0) {
+            if (classic) {
+                drawRectClassicStroke(
+                        canvas,
+                        backgroundShadowRadiusNormal + backgroundShadowDxNormal,
+                        backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal,
+                        height - backgroundShadowRadiusNormal - backgroundShadowDyNormal,
+                        select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
+                        select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
+                        radius);
+            } else {
+                drawRectCustomStroke(
+                        canvas,
+                        backgroundShadowRadiusNormal + backgroundShadowDxNormal,
+                        backgroundShadowRadiusNormal + backgroundShadowDyNormal,
+                        width - backgroundShadowRadiusNormal - backgroundShadowDxNormal,
+                        height - backgroundShadowRadiusNormal - backgroundShadowDyNormal,
+                        select ? strokeWidthSelect : press ? strokeWidthPress : strokeWidthNormal,
+                        select ? strokeColorSelect : press ? strokeColorPress : strokeColorNormal,
+                        radiusTopLeft,
+                        radiusBottomLeft,
+                        radiusTopRight,
+                        radiusBottomRight);
+            }
         }
 
         // draw anchor

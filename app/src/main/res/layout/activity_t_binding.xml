@@ -28,7 +28,7 @@
             android:id="@+id/tView01"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/textSelect"
             app:backgroundNormal="#ffff00"
             app:backgroundSelect="#0000ff"
@@ -54,16 +54,17 @@
             android:layout_marginTop="16dp"
             android:text="@{bean.name}"
             android:textSize="42dp"
-            tools:text="name" />
+            tools:text="hello" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tView03"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_below="@id/tView01"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/textName"
+            app:strokeWidthNormal="1dp"
             app:text="@={bean.name}"
             app:textSize="42dp"
             tools:text="hello" />

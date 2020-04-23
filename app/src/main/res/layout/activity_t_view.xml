@@ -616,6 +616,7 @@
             android:layout_height="18dp"
             android:layout_below="@id/tViewSrcRight"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             app:backgroundNormal="#0e82f6"
             app:radiusBottomLeft="0dp"
             app:radiusBottomRight="87dp"
