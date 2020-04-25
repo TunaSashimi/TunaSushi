@@ -36,6 +36,8 @@ public class TWrap extends TView {
 
     private int wrapTextColorNormal, wrapTextColorSelect;
 
+    private int index;
+
     public String[] getWrapItemTextArray() {
         return wrapItemTextArray;
     }
@@ -55,13 +57,7 @@ public class TWrap extends TView {
     }
 
     public String getWrapSelectString() {
-//        return wrapSelect;
-        for (int i = 0; i < wrapItemTextArray.length; i++) {
-            if (wrapSelect[i]) {
-                return wrapItemTextArray[i];
-            }
-        }
-        return "";
+        return wrapItemTextArray[index];
     }
 
     public class Wrap {
@@ -256,14 +252,18 @@ public class TWrap extends TView {
         //MotionEvent.ACTION_MOVE press = true;
         //MotionEvent.ACTION_UP press = false;
         //MotionEvent.ACTION_CANCEL press = false;
-        if (!press) {
-            for (int i = 0; i <= total - 1; i++) {
-                Wrap wrap = wrapList.get(i);
-                if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
+//        if (!press) {
+        for (int i = 0; i <= total - 1; i++) {
+            Wrap wrap = wrapList.get(i);
+            if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
+                index = i;
+                if (!press) {
                     wrap.wrapSelect = !wrap.wrapSelect;
                     wrapSelect[i] = wrap.wrapSelect;
                 }
             }
+        }
+        if (!press) {
             invalidate();
         }
     }

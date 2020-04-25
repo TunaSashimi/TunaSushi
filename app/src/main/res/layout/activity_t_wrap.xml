@@ -58,17 +58,4 @@
         app:wrapTextColorSelect="#ff9933"
         app:wrapTextPadding="10dp"
         app:wrapTextSize="20dp" />
-
-    <com.tunasushi.tuna.TView
-        android:id="@+id/tView"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_below="@id/tWrap03"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:strokeColorNormal="#bc7955"
-        app:strokeWidthNormal="1dp"
-        app:text="SHOW RESULT"
-        app:textColorNormal="#bc7955"
-        app:textSize="16dp" />
 </RelativeLayout>

@@ -33,6 +33,14 @@ public class TWrapActivity extends Activity {
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                 });
+        tWrap01.setOnClickListener(new TView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TWrap tWrap = (TWrap) v;
+                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         tWrap02 = findViewById(R.id.tWrap02);
         tWrap02.setWrapItemTextArray(
@@ -40,6 +48,13 @@ public class TWrapActivity extends Activity {
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏",
                 });
+        tWrap02.setOnClickListener(new TView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TWrap tWrap = (TWrap) v;
+                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         tWrap03 = findViewById(R.id.tWrap03);
         tWrap03.setWrapItemTextArray(
@@ -47,13 +62,11 @@ public class TWrapActivity extends Activity {
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                 });
-
-        TView tView = findViewById(R.id.tView);
-        tView.setOnClickListener(new TView.OnClickListener() {
+        tWrap03.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), Arrays.toString(tWrap03.getWrapSelect()), Toast.LENGTH_LONG).show();
-//                Toast.makeText(getApplication(), tWrap03.getWrapSelectString(), Toast.LENGTH_LONG).show();
+                TWrap tWrap = (TWrap) v;
+                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
