@@ -54,6 +54,16 @@ public class TWrap extends TView {
         return wrapSelect;
     }
 
+    public String getWrapSelectString() {
+//        return wrapSelect;
+        for (int i = 0; i < wrapItemTextArray.length; i++) {
+            if (wrapSelect[i]) {
+                return wrapItemTextArray[i];
+            }
+        }
+        return "";
+    }
+
     public class Wrap {
         public RectF wrapRect;
         public boolean wrapSelect;

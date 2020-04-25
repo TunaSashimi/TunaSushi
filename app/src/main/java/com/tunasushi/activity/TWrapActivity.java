@@ -53,6 +53,7 @@ public class TWrapActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplication(), Arrays.toString(tWrap03.getWrapSelect()), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplication(), tWrap03.getWrapSelectString(), Toast.LENGTH_LONG).show();
             }
         });
     }
