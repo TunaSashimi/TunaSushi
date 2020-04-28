@@ -80,7 +80,7 @@
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSelect01"
-            android:layout_width="170dp"
+            android:layout_width="100dp"
             android:layout_height="48dp"
             android:layout_below="@id/textPrompt02"
             android:layout_marginLeft="16dp"
@@ -102,7 +102,8 @@
             app:textSize="16dp" />
 
         <com.tunasushi.tuna.TView
-            android:layout_width="170dp"
+            android:id="@+id/tViewSelect02"
+            android:layout_width="100dp"
             android:layout_height="48dp"
             android:layout_alignTop="@id/tViewSelect01"
             android:layout_marginLeft="16dp"
@@ -120,6 +121,29 @@
             app:strokeColorSelect="#dedede"
             app:strokeWidthSelect="1dp"
             app:text="selectMode=always"
+            app:textColorNormal="#dedede"
+            app:textSize="16dp" />
+
+        <com.tunasushi.tuna.TView
+            android:id="@+id/tViewSelect03"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_alignTop="@id/tViewSelect02"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/tViewSelect02"
+            app:backgroundNormal="#ffffff"
+            app:backgroundPress="#cccccc"
+            app:backgroundSelect="#000000"
+            app:radius="5dp"
+            app:selectMode="never"
+            app:srcAnchorGravityMode="bottom|right"
+            app:srcAnchorHeightNormal="7dp"
+            app:srcAnchorNormal="@drawable/bitmap_tview_anchor_normal"
+            app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select"
+            app:srcAnchorWidthNormal="10dp"
+            app:strokeColorSelect="#dedede"
+            app:strokeWidthSelect="1dp"
+            app:text="selectMode=never"
             app:textColorNormal="#dedede"
             app:textSize="16dp" />
 

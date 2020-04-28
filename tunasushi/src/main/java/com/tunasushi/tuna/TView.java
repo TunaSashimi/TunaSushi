@@ -763,10 +763,10 @@ public class TView extends View {
 
     public static final int REVERSE = 0;
     public static final int ALWAYS = 1;
-    private static final int[] selectModeArray = {REVERSE, ALWAYS,};
+    public static final int NEVER = 2;
+    private static final int[] selectModeArray = {REVERSE, ALWAYS, NEVER};
     // default REVERSE
     private int selectMode;
-
 
     public int getSelectType() {
         return selectMode;
@@ -5023,7 +5023,7 @@ public class TView extends View {
                 press = false;
                 if (selectMode == ALWAYS) {
                     setSelect(true);
-                } else {
+                } else if (selectMode == REVERSE) {
                     setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {
@@ -5051,7 +5051,7 @@ public class TView extends View {
                 press = false;
                 if (selectMode == ALWAYS) {
                     setSelect(true);
-                } else {
+                } else if (selectMode == REVERSE) {
                     setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {

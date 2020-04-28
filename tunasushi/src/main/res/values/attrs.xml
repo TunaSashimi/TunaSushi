@@ -8,6 +8,7 @@
         <attr name="selectMode">
             <enum name="reverse" value="0" />
             <enum name="always" value="1" />
+            <enum name="never" value="2" />
         </attr>
         <attr name="rotate" format="integer" />
         <attr name="animation" format="boolean" />
