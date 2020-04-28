@@ -433,6 +433,7 @@
             <enum name="right" value="3" />
             <enum name="slash" value="4" />
             <enum name="slashBack" value="5" />
+            <enum name="cross" value="6" />
         </attr>
         <attr name="lineBackground" format="reference|color" />
     </declare-styleable>

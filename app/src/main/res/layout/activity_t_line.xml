@@ -70,4 +70,15 @@
         app:lineColor="#592d2e"
         app:lineMode="slashBack"
         app:lineThick="1dp" />
+
+    <com.tunasushi.tuna.TLine
+        android:id="@+id/tLineCross"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/tLineSlashBack"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/tLineSlashBack"
+        app:lineColor="#592d2e"
+        app:lineMode="cross"
+        app:lineThick="1dp" />
 </RelativeLayout>

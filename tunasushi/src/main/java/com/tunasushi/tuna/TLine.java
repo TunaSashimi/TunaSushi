@@ -36,9 +36,11 @@ public class TLine extends TView {
     public static final int RIGHT = 3;
     public static final int SLASH = 4;
     public static final int SLASHBACK = 5;
-    private static final int[] lineModeArray = {TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK,};
+    public static final int CROSS = 6;
+    private static final int[] lineModeArray = {TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK, CROSS,};
     private @lineMode
     int lineMode;
+
     public int getLineMode() {
         return lineMode;
     }
@@ -136,6 +138,13 @@ public class TLine extends TView {
                 if (lineBackground != Color.TRANSPARENT) {
                     canvas.drawColor(lineBackground);
                 }
+                canvas.drawLine(width, 0, 0, height, initPaint(Paint.Style.FILL, lineColor, lineThick));
+                break;
+            case CROSS:
+                if (lineBackground != Color.TRANSPARENT) {
+                    canvas.drawColor(lineBackground);
+                }
+                canvas.drawLine(0, 0, width, height, initPaint(Paint.Style.FILL, lineColor, lineThick));
                 canvas.drawLine(width, 0, 0, height, initPaint(Paint.Style.FILL, lineColor, lineThick));
                 break;
             default:
