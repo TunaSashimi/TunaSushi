@@ -1798,6 +1798,8 @@ public class TView extends View {
 
     public void setSrcNormal(Drawable srcNormal) {
         setSrcNormal(BitmapTool.drawableToBitmap(srcNormal));
+        setSrcPress(srcNormal);
+        setSrcSelect(srcNormal);
     }
 
     //
