@@ -24,6 +24,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import com.tunasushi.tool.BitmapTool;
 import com.tunasushi.tool.DeviceTool;
 import com.tuna.R;
 
@@ -1794,6 +1796,10 @@ public class TView extends View {
         invalidate();
     }
 
+    public void setSrcNormal(Drawable srcNormal) {
+        setSrcNormal(BitmapTool.drawableToBitmap(srcNormal));
+    }
+
     //
     private Bitmap srcPress;
 
@@ -1816,6 +1822,10 @@ public class TView extends View {
         invalidate();
     }
 
+    public void setSrcPress(Drawable srcPress) {
+        setSrcPress(BitmapTool.drawableToBitmap(srcPress));
+    }
+
     //
     private Bitmap srcSelect;
 
@@ -1836,6 +1846,10 @@ public class TView extends View {
                 (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect)
         ;
         invalidate();
+    }
+
+    public void setSrcSelect(Drawable srcSelect) {
+        setSrcSelect(BitmapTool.drawableToBitmap(srcSelect));
     }
 
     //

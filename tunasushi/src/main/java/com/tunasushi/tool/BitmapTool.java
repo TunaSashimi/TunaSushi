@@ -12,10 +12,12 @@ import android.graphics.Matrix;
 import android.graphics.Movie;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 
 import java.util.HashMap;
 
@@ -31,6 +33,18 @@ public class BitmapTool {
 
     public static int bitmapMaxSize = 1536;
     public static HashMap<String, Object> graphicsMap = new HashMap<String, Object>();
+
+    public static final Bitmap drawableToBitmap(Drawable drawable) {
+        int bitmapWidth = drawable.getIntrinsicWidth();
+        int bitmapHeight = drawable.getIntrinsicHeight();
+        Bitmap.Config bitmapConfig = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+        //
+        Bitmap bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, bitmapConfig);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, bitmapWidth, bitmapHeight);
+        drawable.draw(canvas);
+        return bitmap;
+    }
 
     //
     public static Bitmap decodeBitmapResource(int id) {
