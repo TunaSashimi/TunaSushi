@@ -1783,6 +1783,8 @@ public class TView extends View {
 
     public void setSrcNormal(int id) {
         setSrcNormal(decodeBitmapResource(getResources(), id));
+        setSrcPress(decodeBitmapResource(getResources(), id));
+        setSrcSelect(decodeBitmapResource(getResources(), id));
     }
 
     public void setSrcNormal(Bitmap srcNormal) {
@@ -1793,13 +1795,16 @@ public class TView extends View {
                 (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
                 (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal)
         ;
+        //
+        setSrcPress(srcNormal);
+        setSrcSelect(srcNormal);
+        //
         invalidate();
     }
 
     public void setSrcNormal(Drawable srcNormal) {
+        //It contains synchronous setting of press and select status
         setSrcNormal(BitmapTool.drawableToBitmap(srcNormal));
-        setSrcPress(srcNormal);
-        setSrcSelect(srcNormal);
     }
 
     //
