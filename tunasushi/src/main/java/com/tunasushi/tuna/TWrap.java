@@ -121,7 +121,7 @@ public class TWrap extends TView {
         if (total <= 0) {
             throw new IllegalArgumentException("The content attribute tunaWrapItemTextArray length must be greater than 0 ");
         } else if (wrapList == null && wrapList == null) {
-            wrapList = new ArrayList(total);//这里有问题只是初始化
+            wrapList = new ArrayList(total);//The actual length here is 0
             wrapSelect = new boolean[total];
         }
         //
