@@ -5,10 +5,17 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#ffff00" />
+
     <com.tunasushi.tuna.TWrap
         android:id="@+id/tWrap01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editText"
         android:layout_margin="16dp"
         android:layerType="software"
         app:radius="5dp"
@@ -21,41 +28,41 @@
         app:wrapTextColorSelect="#ff9933"
         app:wrapTextSize="20dp" />
 
-    <com.tunasushi.tuna.TWrap
-        android:id="@+id/tWrap02"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tWrap01"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layerType="software"
-        app:radius="5dp"
-        app:wrapBackgroundNormal="#ffffff"
-        app:wrapBackgroundSelect="#ffffff"
-        app:wrapSpaceLine="20dp"
-        app:wrapSpaceRow="10dp"
-        app:wrapStrokeColorNormal="#cccccc"
-        app:wrapStrokeColorSelect="#ff9933"
-        app:wrapStrokeWidth="1dp"
-        app:wrapTextColorNormal="#6e7080"
-        app:wrapTextColorSelect="#ff9933"
-        app:wrapTextSize="20dp" />
+    <!--    <com.tunasushi.tuna.TWrap-->
+    <!--        android:id="@+id/tWrap02"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tWrap01"-->
+    <!--        android:layout_marginLeft="16dp"-->
+    <!--        android:layout_marginRight="16dp"-->
+    <!--        android:layerType="software"-->
+    <!--        app:radius="5dp"-->
+    <!--        app:wrapBackgroundNormal="#ffffff"-->
+    <!--        app:wrapBackgroundSelect="#ffffff"-->
+    <!--        app:wrapSpaceLine="20dp"-->
+    <!--        app:wrapSpaceRow="10dp"-->
+    <!--        app:wrapStrokeColorNormal="#cccccc"-->
+    <!--        app:wrapStrokeColorSelect="#ff9933"-->
+    <!--        app:wrapStrokeWidth="1dp"-->
+    <!--        app:wrapTextColorNormal="#6e7080"-->
+    <!--        app:wrapTextColorSelect="#ff9933"-->
+    <!--        app:wrapTextSize="20dp" />-->
 
-    <com.tunasushi.tuna.TWrap
-        android:id="@+id/tWrap03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tWrap02"
-        android:layout_margin="16dp"
-        android:layerType="software"
-        app:radius="5dp"
-        app:wrapBackgroundNormal="#ffffff"
-        app:wrapBackgroundSelect="#ffffff"
-        app:wrapStrokeColorNormal="#cccccc"
-        app:wrapStrokeColorSelect="#ff9933"
-        app:wrapStrokeWidth="1dp"
-        app:wrapTextColorNormal="#6e7080"
-        app:wrapTextColorSelect="#ff9933"
-        app:wrapTextPadding="10dp"
-        app:wrapTextSize="20dp" />
+    <!--    <com.tunasushi.tuna.TWrap-->
+    <!--        android:id="@+id/tWrap03"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tWrap02"-->
+    <!--        android:layout_margin="16dp"-->
+    <!--        android:layerType="software"-->
+    <!--        app:radius="5dp"-->
+    <!--        app:wrapBackgroundNormal="#ffffff"-->
+    <!--        app:wrapBackgroundSelect="#ffffff"-->
+    <!--        app:wrapStrokeColorNormal="#cccccc"-->
+    <!--        app:wrapStrokeColorSelect="#ff9933"-->
+    <!--        app:wrapStrokeWidth="1dp"-->
+    <!--        app:wrapTextColorNormal="#6e7080"-->
+    <!--        app:wrapTextColorSelect="#ff9933"-->
+    <!--        app:wrapTextPadding="10dp"-->
+    <!--        app:wrapTextSize="20dp" />-->
 </RelativeLayout>
