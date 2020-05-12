@@ -115,6 +115,9 @@ public class TWrap extends TView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        System.out.println("onMeasure==>");
+
         //Not only the onMeasure method of the parent class will affect the alignment!
         //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
         total = wrapItemTextArray.length;
@@ -175,6 +178,9 @@ public class TWrap extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        System.out.println("onDraw==>");
+
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
         float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
@@ -248,6 +254,9 @@ public class TWrap extends TView {
 
     @Override
     public void setTouchXY(float touchX, float touchY) {
+
+        System.out.println("wrapListSize==>" + wrapList.size());
+
         //MotionEvent.ACTION_DOWN press = true;
         //MotionEvent.ACTION_MOVE press = true;
         //MotionEvent.ACTION_UP press = false;
