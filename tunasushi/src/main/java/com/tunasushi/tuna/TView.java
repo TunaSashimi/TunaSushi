@@ -1264,6 +1264,10 @@ public class TView extends View {
         invalidate();
     }
 
+    public void setBackgroundNormal(String backgroundNormal) {
+        setBackgroundNormal(Color.parseColor(backgroundNormal));
+    }
+
     // backgroundPress default backgroundNormal
     private int backgroundPress;
 
@@ -1274,6 +1278,10 @@ public class TView extends View {
     public void setBackgroundPress(int backgroundPress) {
         this.backgroundPress = backgroundPress;
         invalidate();
+    }
+
+    public void setBackgroundPress(String backgroundPress) {
+        setBackgroundPress(Color.parseColor(backgroundPress));
     }
 
     // backgroundSelect default backgroundNormal
@@ -1288,11 +1296,19 @@ public class TView extends View {
         invalidate();
     }
 
+    public void setBackgroundSelect(String backgroundSelect) {
+        setBackgroundSelect(Color.parseColor(backgroundSelect));
+    }
+
     public void setBackground(int background) {
         this.backgroundNormal = background;
         this.backgroundPress = background;
         this.backgroundSelect = background;
         invalidate();
+    }
+
+    public void setBackground(String background) {
+        setBackground(Color.parseColor(background));
     }
 
     // foregroundNormal default transparent

@@ -163,6 +163,38 @@ public class TBinding {
         t.setContentPaddingRight(contentPaddingRight);
     }
 
+    //
+    @BindingAdapter({"backgroundNormal"})
+    public static void setBackgroundNormal(TView t, int backgroundNormal) {
+        t.setBackground(backgroundNormal);
+    }
+
+    @BindingAdapter({"backgroundPress"})
+    public static void setBackgroundPress(TView t, int backgroundPress) {
+        t.setBackgroundPress(backgroundPress);
+    }
+
+    @BindingAdapter({"backgroundSelect"})
+    public static void setBackgroundSelect(TView t, int backgroundSelect) {
+        t.setBackgroundSelect(backgroundSelect);
+    }
+
+    @BindingAdapter({"backgroundNormal"})
+    public static void setBackgroundNormal(TView t, String backgroundNormal) {
+        t.setBackground(backgroundNormal);
+    }
+
+    @BindingAdapter({"backgroundPress"})
+    public static void setBackgroundPress(TView t, String backgroundPress) {
+        t.setBackgroundPress(backgroundPress);
+    }
+
+    @BindingAdapter({"backgroundSelect"})
+    public static void setBackgroundSelect(TView t, String backgroundSelect) {
+        t.setBackgroundSelect(backgroundSelect);
+    }
+
+    //
     @BindingAdapter({"strokeColorNormal"})
     public static void setStrokeColorNormal(TView t, int strokeColorNormal) {
         t.setStrokeColor(strokeColorNormal);
