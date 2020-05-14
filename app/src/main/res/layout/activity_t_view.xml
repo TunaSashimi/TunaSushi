@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundNormal设置常规背景\ntextTypeFaceMode设置字体\ntextTypeFaceAsset设置自定义字体\nrotate设置旋转角度" />
+            android:text="backgroundNormal设置常规背景\ntextTypeFaceMode设置字体\ntextTypeFaceAsset设置自定义字体" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect01"
@@ -35,9 +35,9 @@
             android:layout_height="40dp"
             android:layout_alignTop="@id/tViewRect01"
             android:layout_toRightOf="@id/tViewRect01"
+            android:rotation="15"
             app:adjust="true"
             app:backgroundNormal="#cccccc"
-            app:rotate="15"
             app:text="#444444"
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
@@ -48,9 +48,9 @@
             style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect02"
             android:layout_toRightOf="@id/tViewRect02"
+            android:rotation="30"
             app:adjust="true"
             app:backgroundNormal="#666666"
-            app:rotate="30"
             app:text="#666666"
             app:textColorNormal="#ffffff"
             app:textTypeFaceAsset="fonts/computer.ttf"
@@ -61,10 +61,10 @@
             style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect03"
             android:layout_toRightOf="@id/tViewRect03"
+            android:rotation="45"
             app:adjust="true"
             app:backgroundNormal="#cccccc"
             app:onClick="onClick"
-            app:rotate="15"
             app:text="#cccccc"
             app:textColorNormal="#ffffff"
             app:textTypeFaceAsset="fonts/digital-7.ttf" />
@@ -682,12 +682,38 @@
             app:textPaddingLeft="10dp"
             app:textPaddingRight="10dp" />
 
+        <com.tunasushi.tuna.TLayout
+            android:id="@+id/tLayout01"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/tViewPadding"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:layoutRadius="4dp"
+            app:layoutStrokeColor="#e21e1a"
+            app:layoutStrokeWidth="1dp"
+            app:strokeWidthNormal="1dp">
+
+            <com.tunasushi.tuna.TView
+                android:id="@+id/tv"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="-45dp"
+                android:rotation="315"
+                app:backgroundNormal="#e21e1a"
+                app:text="10"
+                app:textColorNormal="#ffffff"
+                app:textDx="-6dp"
+                app:textSize="11sp" />
+        </com.tunasushi.tuna.TLayout>
+
         <TextView
             android:id="@+id/textPrompt10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewPadding"
-            android:layout_margin="16dp"
+            android:layout_below="@id/tLayout01"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:color="#434343" />
 
         <View

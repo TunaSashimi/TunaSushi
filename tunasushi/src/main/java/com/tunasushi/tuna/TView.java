@@ -778,17 +778,6 @@ public class TView extends View {
         this.selectMode = selectMode;
     }
 
-    // rotate default 0
-    private int rotate;
-
-    public int getRotate() {
-        return rotate;
-    }
-
-    public void setRotate(int rotate) {
-        this.rotate = rotate;
-    }
-
     // default false
     protected boolean animation;
 
@@ -4541,7 +4530,6 @@ public class TView extends View {
         selectMode = selectModeArray[selectModeIndex];
 
         animation = typedArray.getBoolean(R.styleable.TView_animation, false);
-        rotate = typedArray.getInt(R.styleable.TView_rotate, 0);
 
         // porterDuffXferModeArrayIndex default PorterDuff.Mode.SRC_IN
         int porterDuffXferModeArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXferMode, 0);
@@ -5328,10 +5316,6 @@ public class TView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         initCanvas(canvas);
-        //Set rotation
-        if (rotate != 0) {
-            canvas.rotate(rotate, width >> 1, height >> 1);
-        }
         if (!origin) {
             return;
         }
@@ -5642,9 +5626,6 @@ public class TView extends View {
             } else {
                 drawRectCustom(canvas, width, height, foregroundNormal, 0, Color.TRANSPARENT, radiusTopLeft, radiusBottomLeft, radiusTopRight, radiusBottomRight);
             }
-        }
-        if (rotate != 0) {
-            canvas.rotate(-rotate, width >> 1, height >> 1);
         }
         if (drawListener != null) {
             drawListener.draw(this);
