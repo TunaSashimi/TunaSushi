@@ -3756,6 +3756,27 @@ public class TView extends View {
         }
     }
 
+    public void setSrcLeftWidth(float srcLeftWidth) {
+        setSrcLeftWidthRaw(srcLeftWidth);
+    }
+
+    public void setSrcLeftWidth(float srcLeftWidth, int unit) {
+        setSrcLeftWidthRaw(convertToPX(srcLeftWidth, unit));
+    }
+
+    public void setSrcLeftWidthRaw(float srcLeftWidth) {
+        if (this.srcLeftWidthNormal != srcLeftWidth) {
+            this.srcLeftWidthNormal = srcLeftWidth;
+        }
+        if (this.srcLeftWidthPress != srcLeftWidth) {
+            this.srcLeftWidthPress = srcLeftWidth;
+        }
+        if (this.srcLeftWidthSelect != srcLeftWidth) {
+            this.srcLeftWidthSelect = srcLeftWidth;
+        }
+        invalidate();
+    }
+
     //
     private float srcLeftHeightNormal;
 
@@ -3820,6 +3841,27 @@ public class TView extends View {
             this.srcLeftHeightSelect = srcLeftHeightSelect;
             invalidate();
         }
+    }
+
+    public void setSrcLeftHeight(float srcLeftHeight) {
+        setSrcLeftHeightRaw(srcLeftHeight);
+    }
+
+    public void setSrcLeftHeight(float srcLeftHeight, int unit) {
+        setSrcLeftHeightRaw(convertToPX(srcLeftHeight, unit));
+    }
+
+    public void setSrcLeftHeightRaw(float srcLeftHeight) {
+        if (this.srcLeftHeightNormal != srcLeftHeight) {
+            this.srcLeftHeightNormal = srcLeftHeight;
+        }
+        if (this.srcLeftHeightPress != srcLeftHeight) {
+            this.srcLeftHeightPress = srcLeftHeight;
+        }
+        if (this.srcLeftHeightSelect != srcLeftHeight) {
+            this.srcLeftHeightSelect = srcLeftHeight;
+        }
+        invalidate();
     }
 
     //
@@ -3955,6 +3997,27 @@ public class TView extends View {
         }
     }
 
+    public void setSrcLeftDx(float srcLeftDx) {
+        setSrcLeftDxRaw(srcLeftDx);
+    }
+
+    public void setSrcLeftDx(float srcLeftDx, int unit) {
+        setSrcLeftDxRaw(convertToPX(srcLeftDx, unit));
+    }
+
+    public void setSrcLeftDxRaw(float srcLeftDx) {
+        if (this.srcLeftDxNormal != srcLeftDx) {
+            this.srcLeftDxNormal = srcLeftDx;
+        }
+        if (this.srcLeftDxPress != srcLeftDx) {
+            this.srcLeftDxPress = srcLeftDx;
+        }
+        if (this.srcLeftDxSelect != srcLeftDx) {
+            this.srcLeftDxSelect = srcLeftDx;
+        }
+        invalidate();
+    }
+
     //
     private float srcLeftDyNormal;
 
@@ -4017,6 +4080,27 @@ public class TView extends View {
             this.srcLeftDySelect = srcLeftDySelect;
             invalidate();
         }
+    }
+
+    public void setSrcLeftDy(float srcLeftDy) {
+        setSrcLeftDyRaw(srcLeftDy);
+    }
+
+    public void setSrcLeftDy(float srcLeftDy, int unit) {
+        setSrcLeftDyRaw(convertToPX(srcLeftDy, unit));
+    }
+
+    public void setSrcLeftDyRaw(float srcLeftDy) {
+        if (this.srcLeftDyNormal != srcLeftDy) {
+            this.srcLeftDyNormal = srcLeftDy;
+        }
+        if (this.srcLeftDyPress != srcLeftDy) {
+            this.srcLeftDyPress = srcLeftDy;
+        }
+        if (this.srcLeftDySelect != srcLeftDy) {
+            this.srcLeftDySelect = srcLeftDy;
+        }
+        invalidate();
     }
 
     //
@@ -4114,6 +4198,27 @@ public class TView extends View {
         }
     }
 
+    public void setSrcRightWidth(float srcRightWidth) {
+        setSrcRightWidthRaw(srcRightWidth);
+    }
+
+    public void setSrcRightWidth(float srcRightWidth, int unit) {
+        setSrcRightWidthRaw(convertToPX(srcRightWidth, unit));
+    }
+
+    public void setSrcRightWidthRaw(float srcRightWidth) {
+        if (this.srcRightWidthNormal != srcRightWidth) {
+            this.srcRightWidthNormal = srcRightWidth;
+        }
+        if (this.srcRightWidthPress != srcRightWidth) {
+            this.srcRightWidthPress = srcRightWidth;
+        }
+        if (this.srcRightWidthSelect != srcRightWidth) {
+            this.srcRightWidthSelect = srcRightWidth;
+        }
+        invalidate();
+    }
+
     //
     private float srcRightHeightNormal;
 
@@ -4176,6 +4281,27 @@ public class TView extends View {
             this.srcRightHeightSelect = srcRightHeightSelect;
             invalidate();
         }
+    }
+
+    public void setSrcRightHeight(float srcRightHeight) {
+        setSrcRightHeightRaw(srcRightHeight);
+    }
+
+    public void setSrcRightHeight(float srcRightHeight, int unit) {
+        setSrcRightHeightRaw(convertToPX(srcRightHeight, unit));
+    }
+
+    public void setSrcRightHeightRaw(float srcRightHeight) {
+        if (this.srcRightHeightNormal != srcRightHeight) {
+            this.srcRightHeightNormal = srcRightHeight;
+        }
+        if (this.srcRightHeightPress != srcRightHeight) {
+            this.srcRightHeightPress = srcRightHeight;
+        }
+        if (this.srcRightHeightSelect != srcRightHeight) {
+            this.srcRightHeightSelect = srcRightHeight;
+        }
+        invalidate();
     }
 
     //
@@ -4311,6 +4437,27 @@ public class TView extends View {
         }
     }
 
+    public void setSrcRightDx(float srcRightDx) {
+        setSrcRightDxRaw(srcRightDx);
+    }
+
+    public void setSrcRightDx(float srcRightDx, int unit) {
+        setSrcRightDxRaw(convertToPX(srcRightDx, unit));
+    }
+
+    public void setSrcRightDxRaw(float srcRightDx) {
+        if (this.srcRightDxNormal != srcRightDx) {
+            this.srcRightDxNormal = srcRightDx;
+        }
+        if (this.srcRightDxPress != srcRightDx) {
+            this.srcRightDxPress = srcRightDx;
+        }
+        if (this.srcRightDxSelect != srcRightDx) {
+            this.srcRightDxSelect = srcRightDx;
+        }
+        invalidate();
+    }
+
     //
     private float srcRightDyNormal;
 
@@ -4373,6 +4520,27 @@ public class TView extends View {
             this.srcRightDySelect = srcRightDySelect;
             invalidate();
         }
+    }
+
+    public void setSrcRightDy(float srcRightDy) {
+        setSrcRightDyRaw(srcRightDy);
+    }
+
+    public void setSrcRightDy(float srcRightDy, int unit) {
+        setSrcRightDyRaw(convertToPX(srcRightDy, unit));
+    }
+
+    public void setSrcRightDyRaw(float srcRightDy) {
+        if (this.srcRightDyNormal != srcRightDy) {
+            this.srcRightDyNormal = srcRightDy;
+        }
+        if (this.srcRightDyPress != srcRightDy) {
+            this.srcRightDyPress = srcRightDy;
+        }
+        if (this.srcRightDySelect != srcRightDy) {
+            this.srcRightDySelect = srcRightDy;
+        }
+        invalidate();
     }
 
     // attention porterDuffXferMode default 0 instead of -1!

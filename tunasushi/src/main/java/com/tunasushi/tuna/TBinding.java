@@ -1,6 +1,5 @@
 package com.tunasushi.tuna;
 
-
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
@@ -235,6 +234,127 @@ public class TBinding {
         t.setBackgroundEnd(backgroundEnd);
     }
 
+    @BindingAdapter({"srcLeftDxNormal"})
+    public static void setSrcLeftDxNormal(TView t, float srcLeftDxNormal) {
+        t.setSrcLeftDx(srcLeftDxNormal);
+    }
+
+    @BindingAdapter({"srcLeftDxPress"})
+    public static void setSrcLeftDxPress(TView t, float srcLeftDxPress) {
+        t.setSrcLeftDxPress(srcLeftDxPress);
+    }
+
+    @BindingAdapter({"srcLeftDxSelect"})
+    public static void setSrcLeftDxSelect(TView t, float srcLeftDxSelect) {
+        t.setSrcLeftDxSelect(srcLeftDxSelect);
+    }
+
+    @BindingAdapter({"srcLeftDyNormal"})
+    public static void setSrcLeftDyNormal(TView t, float srcLeftDyNormal) {
+        t.setSrcLeftDy(srcLeftDyNormal);
+    }
+
+    @BindingAdapter({"srcLeftDyPress"})
+    public static void setSrcLeftDyPress(TView t, float srcLeftDyPress) {
+        t.setSrcLeftDyPress(srcLeftDyPress);
+    }
+
+    @BindingAdapter({"srcLeftDySelect"})
+    public static void setSrcLeftDySelect(TView t, float srcLeftDySelect) {
+        t.setSrcLeftDySelect(srcLeftDySelect);
+    }
+
+    @BindingAdapter({"srcRightDxNormal"})
+    public static void setSrcRightDxNormal(TView t, float srcRightDxNormal) {
+        t.setSrcRightDx(srcRightDxNormal);
+    }
+
+    @BindingAdapter({"srcRightDxPress"})
+    public static void setSrcRightDxPress(TView t, float srcRightDxPress) {
+        t.setSrcRightDxPress(srcRightDxPress);
+    }
+
+    @BindingAdapter({"srcRightDxSelect"})
+    public static void setSrcRightDxSelect(TView t, float srcRightDxSelect) {
+        t.setSrcRightDxSelect(srcRightDxSelect);
+    }
+
+    @BindingAdapter({"srcRightDyNormal"})
+    public static void setSrcRightDyNormal(TView t, float srcRightDyNormal) {
+        t.setSrcRightDy(srcRightDyNormal);
+    }
+
+    @BindingAdapter({"srcRightDyPress"})
+    public static void setSrcRightDyPress(TView t, float srcRightDyPress) {
+        t.setSrcRightDyPress(srcRightDyPress);
+    }
+
+    @BindingAdapter({"srcRightDySelect"})
+    public static void setSrcRightDySelect(TView t, float srcRightDySelect) {
+        t.setSrcRightDySelect(srcRightDySelect);
+    }
+
+    @BindingAdapter({"srcLeftWidthNormal"})
+    public static void setSrcLeftWidthNormal(TView t, float srcLeftWidthNormal) {
+        t.setSrcLeftWidth(srcLeftWidthNormal);
+    }
+
+    @BindingAdapter({"srcLeftWidthPress"})
+    public static void setSrcLeftWidthPress(TView t, float srcLeftWidthPress) {
+        t.setSrcLeftWidthPress(srcLeftWidthPress);
+    }
+
+    @BindingAdapter({"srcLeftWidthSelect"})
+    public static void setSrcLeftWidthSelect(TView t, float srcLeftWidthSelect) {
+        t.setSrcLeftWidthSelect(srcLeftWidthSelect);
+    }
+
+    @BindingAdapter({"srcLeftHeightNormal"})
+    public static void setSrcLeftHeightNormal(TView t, float srcLeftHeightNormal) {
+        t.setSrcLeftHeight(srcLeftHeightNormal);
+    }
+
+    @BindingAdapter({"srcLeftHeightPress"})
+    public static void setSrcLeftHeightPress(TView t, float srcLeftHeightPress) {
+        t.setSrcLeftHeightPress(srcLeftHeightPress);
+    }
+
+    @BindingAdapter({"srcLeftHeightSelect"})
+    public static void setSrcLeftHeightSelect(TView t, float srcLeftHeightSelect) {
+        t.setSrcLeftHeightSelect(srcLeftHeightSelect);
+    }
+
+    @BindingAdapter({"srcRightWidthNormal"})
+    public static void setSrcRightWidthNormal(TView t, float srcRightWidthNormal) {
+        t.setSrcRightWidth(srcRightWidthNormal);
+    }
+
+    @BindingAdapter({"srcRightWidthPress"})
+    public static void setSrcRightWidthPress(TView t, float srcRightWidthPress) {
+        t.setSrcRightWidthPress(srcRightWidthPress);
+    }
+
+    @BindingAdapter({"srcRightWidthSelect"})
+    public static void setSrcRightWidthSelect(TView t, float srcRightWidthSelect) {
+        t.setSrcRightWidthSelect(srcRightWidthSelect);
+    }
+
+    @BindingAdapter({"srcRightHeightNormal"})
+    public static void setSrcRightHeightNormal(TView t, float srcRightHeightNormal) {
+        t.setSrcRightHeight(srcRightHeightNormal);
+    }
+
+    @BindingAdapter({"srcRightHeightPress"})
+    public static void setSrcRightHeightPress(TView t, float srcRightHeightPress) {
+        t.setSrcRightHeightPress(srcRightHeightPress);
+    }
+
+    @BindingAdapter({"srcRightHeightSelect"})
+    public static void setSrcRightHeightSelect(TView t, float srcRightHeightSelect) {
+        t.setSrcRightHeightSelect(srcRightHeightSelect);
+    }
+
+    //
     @BindingAdapter({"lineMode"})
     public static void setLineMode(TLine tLine, int lineMode) {
         tLine.setLineMode(lineMode);
