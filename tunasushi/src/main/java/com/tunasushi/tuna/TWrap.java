@@ -6,11 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.tuna.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,17 @@ import java.util.List;
  * @Description
  */
 public class TWrap extends TView {
+
+    @IntDef({MULTIPLE, SINGLE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface wrapMode {
+    }
+
+    public static final int MULTIPLE = 0;
+    public static final int SINGLE = 1;
+    private static final int[] wrapModeArray = {MULTIPLE, SINGLE,};
+    private @TWrap.wrapMode
+    int wrapMode;
 
     private float wrapSpaceLine;
     private float wrapSpaceRow;
@@ -86,6 +100,13 @@ public class TWrap extends TView {
         tag = TWrap.class.getSimpleName();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TWrap);
+
+        int wrapModeIndex = typedArray.getInt(R.styleable.TWrap_wrapMode, 0);
+        if (wrapModeIndex >= 0) {
+            wrapMode = wrapModeArray[wrapModeIndex];
+        } else {
+            throw new IllegalArgumentException("The content attribute wrapMode type must be given");
+        }
 
         wrapSpaceLine = typedArray.getDimension(R.styleable.TWrap_wrapSpaceLine, 0);
         wrapSpaceRow = typedArray.getDimension(R.styleable.TWrap_wrapSpaceRow, 0);
@@ -250,17 +271,24 @@ public class TWrap extends TView {
         //MotionEvent.ACTION_MOVE press = true;
         //MotionEvent.ACTION_UP press = false;
         //MotionEvent.ACTION_CANCEL press = false;
-        for (int i = 0; i <= total - 1; i++) {
-            Wrap wrap = wrapList.get(i);
-            if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
-                index = i;
-                if (!press) {
-                    wrap.wrapSelect = !wrap.wrapSelect;
+
+        if (!press) {
+            for (int i = 0; i <= total - 1; i++) {
+                Wrap wrap = wrapList.get(i);
+
+
+                if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
+                    index = i;
+                    if (wrapMode == MULTIPLE) {
+                        wrap.wrapSelect = !wrap.wrapSelect;
+                    } else {
+                        wrap.wrapSelect = true;
+                    }
                     wrapSelect[i] = wrap.wrapSelect;
+                } else if (wrapMode == SINGLE) {
+                    wrap.wrapSelect = false;
                 }
             }
-        }
-        if (!press) {
             invalidate();
         }
     }

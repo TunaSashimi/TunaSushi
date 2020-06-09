@@ -681,6 +681,10 @@
     </declare-styleable>
 
     <declare-styleable name="TWrap">
+        <attr name="wrapMode">
+            <enum name="multiple" value="0" />
+            <enum name="single" value="1" />
+        </attr>
         <attr name="wrapSpaceLine" format="dimension" />
         <attr name="wrapSpaceRow" format="dimension" />
         <attr name="wrapBackgroundNormal" format="reference|color" />
