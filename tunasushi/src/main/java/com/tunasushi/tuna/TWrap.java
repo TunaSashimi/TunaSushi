@@ -70,6 +70,10 @@ public class TWrap extends TView {
         return wrapSelect;
     }
 
+    public int getWrapSelectIndex() {
+        return index;
+    }
+
     public String getWrapSelectString() {
         return wrapItemTextArray[index];
     }
@@ -262,7 +266,6 @@ public class TWrap extends TView {
                 initTextPaint(wrap.wrapSelect ? wrapTextColorSelect : wrapTextColorNormal, wrapTextSize)
         );
         canvas.translate(-dx, -dy);
-
     }
 
     @Override
@@ -275,10 +278,9 @@ public class TWrap extends TView {
         if (!press) {
             for (int i = 0; i <= total - 1; i++) {
                 Wrap wrap = wrapList.get(i);
-
-
                 if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
                     index = i;
+                    System.out.println("index==>" + index);
                     if (wrapMode == MULTIPLE) {
                         wrap.wrapSelect = !wrap.wrapSelect;
                     } else {

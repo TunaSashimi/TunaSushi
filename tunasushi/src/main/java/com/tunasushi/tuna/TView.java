@@ -5103,6 +5103,9 @@ public class TView extends View {
         touchX = event.getX();
         touchY = event.getY();
 
+        //
+        setTouchXY(touchX, touchY);
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touchDown = true;
@@ -5263,9 +5266,6 @@ public class TView extends View {
             default:
                 break;
         }
-        //
-        setTouchXY(touchX, touchY);
-
         //
         if (touchListener != null) {
             touchListener.touch(this);
