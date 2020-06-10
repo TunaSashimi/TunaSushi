@@ -280,7 +280,6 @@ public class TWrap extends TView {
                 Wrap wrap = wrapList.get(i);
                 if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
                     index = i;
-                    System.out.println("index==>" + index);
                     if (wrapMode == MULTIPLE) {
                         wrap.wrapSelect = !wrap.wrapSelect;
                     } else {

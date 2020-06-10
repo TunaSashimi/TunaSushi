@@ -5091,9 +5091,7 @@ public class TView extends View {
                 setOnClickListener(new DeclaredOnClickListener(this, handlerNameOnClick));
             }
         }
-
         typedArray.recycle();
-
         //
         DeviceTool.initDisplayMetrics();
     }
