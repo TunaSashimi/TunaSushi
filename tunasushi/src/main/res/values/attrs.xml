@@ -122,13 +122,13 @@
             <enum name="center_left" value="3" />
             <enum name="left_center" value="4" />
         </attr>
-        <attr name="textTypeFaceMode">
+        <attr name="textStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="textTypeFaceAsset" format="string" />
+        <attr name="textAssets" format="string" />
         <attr name="textDx" format="dimension" />
         <attr name="textDy" format="dimension" />
         <attr name="textFractionDx" format="fraction" />
@@ -166,13 +166,13 @@
             <enum name="center_left" value="3" />
             <enum name="left_center" value="4" />
         </attr>
-        <attr name="contentTypeFaceMode">
+        <attr name="contentStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
         </attr>
-        <attr name="contentTypeFaceAssets" format="string" />
+        <attr name="contentAssets" format="string" />
         <attr name="contentDx" format="dimension" />
         <attr name="contentDy" format="dimension" />
         <attr name="contentFractionDx" format="fraction" />

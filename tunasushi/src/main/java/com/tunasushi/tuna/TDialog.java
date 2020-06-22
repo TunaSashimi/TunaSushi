@@ -36,11 +36,11 @@ public class TDialog extends TView {
     private Typeface dialogTextMode;
     private static final int[] dialogTextModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
-    public Typeface getDialogTextTypeFace() {
+    public Typeface getDialogTextStyle() {
         return dialogTextMode;
     }
 
-    public void setDialogTextTypeFace(Typeface dialogTextMode) {
+    public void setDialogTextStyle(Typeface dialogTextMode) {
         this.dialogTextMode = dialogTextMode;
     }
 
@@ -54,11 +54,11 @@ public class TDialog extends TView {
     private Typeface dialogContentMode;
     private static final int[] dialogContentModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
-    public Typeface getDialogContentTypeFace() {
+    public Typeface getDialogContentStyle() {
         return dialogContentMode;
     }
 
-    public void setDialogContentTypeFace(Typeface dialogContentMode) {
+    public void setDialogContentStyle(Typeface dialogContentMode) {
         this.dialogContentMode = dialogContentMode;
     }
 

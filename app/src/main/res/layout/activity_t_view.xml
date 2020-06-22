@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundNormal设置常规背景\ntextTypeFaceMode设置字体\ntextTypeFaceAsset设置自定义字体" />
+            android:text="backgroundNormal设置常规背景\ntextStyle设置字体\ntextAssets设置自定义字体" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect01"
@@ -41,7 +41,7 @@
             app:text="#444444"
             app:textColorNormal="#ffffff"
             app:textSize="12dp"
-            app:textTypeFaceMode="bold_italic" />
+            app:textStyle="bold_italic" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewRect03"
@@ -53,7 +53,7 @@
             app:backgroundNormal="#666666"
             app:text="#666666"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceAsset="fonts/computer.ttf"
+            app:textAssets="fonts/computer.ttf"
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
@@ -67,7 +67,7 @@
             app:onClick="onClick"
             app:text="#cccccc"
             app:textColorNormal="#ffffff"
-            app:textTypeFaceAsset="fonts/digital-7.ttf" />
+            app:textAssets="fonts/digital-7.ttf" />
 
         <TextView
             android:id="@+id/textPrompt02"
@@ -278,7 +278,7 @@
             app:textPaddingLeft="8dp"
             app:textPaddingRight="8dp"
             app:textSize="14dp"
-            app:textTypeFaceAsset="fonts/simsun.ttf" />
+            app:textAssets="fonts/simsun.ttf" />
 
         <TextView
             android:id="@+id/textPrompt05"

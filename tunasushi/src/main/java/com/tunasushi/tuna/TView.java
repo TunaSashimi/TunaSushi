@@ -2923,25 +2923,25 @@ public class TView extends View {
     }
 
     //
-    private Typeface textTypeFaceMode;
-    private static final int[] textTypeFaceModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
+    private Typeface textStyle;
+    private static final int[] textStyleArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
 
-    public Typeface getTextTypeFace() {
-        return textTypeFaceMode;
+    public Typeface getTextStyle() {
+        return textStyle;
     }
 
-    public void setTextTypeFace(Typeface textTypeFaceMode) {
-        this.textTypeFaceMode = textTypeFaceMode;
+    public void setTextStyle(Typeface textStyle) {
+        this.textStyle = textStyle;
     }
 
-    private String textTypeFaceAsset;
+    private String textAssets;
 
-    public String getTextTypeFaceFromAsset() {
-        return textTypeFaceAsset;
+    public String getTextAssets() {
+        return textAssets;
     }
 
-    public void setTextTypeFaceFromAsset(String textTypeFaceAsset) {
-        this.textTypeFaceAsset = textTypeFaceAsset;
+    public void setTextAssets(String textAssets) {
+        this.textAssets = textAssets;
     }
 
     // attention that textDx is the width of the base , textDy is the
@@ -3351,25 +3351,25 @@ public class TView extends View {
     int contentGravityMode;
 
     //
-    private Typeface contentTypeFaceMode;
-    private static final int[] contentTypeFaceModeArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
+    private Typeface contentStyle;
+    private static final int[] contentStyleArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
 
-    public Typeface getContentTypeFace() {
-        return contentTypeFaceMode;
+    public Typeface getContentStyle() {
+        return contentStyle;
     }
 
-    public void Typeface(Typeface contentTypeFaceMode) {
-        this.contentTypeFaceMode = contentTypeFaceMode;
+    public void setContentStyle(Typeface contentStyle) {
+        this.contentStyle = contentStyle;
     }
 
-    private String contentTypeFaceAssets;
+    private String contentAssets;
 
-    public String getContentTypeFaceAssets() {
-        return contentTypeFaceAssets;
+    public String getContentAssets() {
+        return contentAssets;
     }
 
-    public void setContentTypeFaceAssets(String contentTypeFaceAssets) {
-        this.contentTypeFaceAssets = contentTypeFaceAssets;
+    public void setContentAssets(String contentAssets) {
+        this.contentAssets = contentAssets;
     }
 
     // attention that contentDx is the width of the base , contentDy is the height of the base
@@ -5003,15 +5003,15 @@ public class TView extends View {
                 textGravityMode = textGravityModeArray[textGravityModeIndex];
             }
 
-            // If textTypeFaceAsset is set then textTypeFaceMode will be replaced!
-            textTypeFaceAsset = typedArray.getString(R.styleable.TView_textTypeFaceAsset);
-            if (textTypeFaceAsset != null) {
-                textTypeFaceMode = Typeface.createFromAsset(getContext().getAssets(), textTypeFaceAsset);
+            // If textAssets is set then textStyle will be replaced!
+            textAssets = typedArray.getString(R.styleable.TView_textAssets);
+            if (textAssets != null) {
+                textStyle = Typeface.createFromAsset(getContext().getAssets(), textAssets);
             } else {
                 //
-                int textTypeFaceModeIndex = typedArray.getInt(R.styleable.TView_textTypeFaceMode, 0);
-                if (textTypeFaceModeIndex >= 0) {
-                    textTypeFaceMode = Typeface.create(Typeface.DEFAULT, textTypeFaceModeArray[textTypeFaceModeIndex]);
+                int textStyleIndex = typedArray.getInt(R.styleable.TView_textStyle, 0);
+                if (textStyleIndex >= 0) {
+                    textStyle = Typeface.create(Typeface.DEFAULT, textStyleArray[textStyleIndex]);
                 }
             }
 
@@ -5046,14 +5046,14 @@ public class TView extends View {
                 contentGravityMode = contentGravityModeArray[contentGravityModeIndex];
             }
 
-            // If contentTypeFaceAssets is set then contentTypeFaceMode will be replaced!
-            contentTypeFaceAssets = typedArray.getString(R.styleable.TView_contentTypeFaceAssets);
-            if (contentTypeFaceAssets != null) {
-                contentTypeFaceMode = Typeface.createFromAsset(getContext().getAssets(), contentTypeFaceAssets);
+            // If contentAssets is set then contentStyle will be replaced!
+            contentAssets = typedArray.getString(R.styleable.TView_contentAssets);
+            if (contentAssets != null) {
+                contentStyle = Typeface.createFromAsset(getContext().getAssets(), contentAssets);
             } else {
-                int contentTypeFaceModeIndex = typedArray.getInt(R.styleable.TView_contentTypeFaceMode, 0);
-                if (contentTypeFaceModeIndex >= 0) {
-                    contentTypeFaceMode = Typeface.create(Typeface.DEFAULT, contentTypeFaceModeArray[contentTypeFaceModeIndex]);
+                int contentStyleIndex = typedArray.getInt(R.styleable.TView_contentStyle, 0);
+                if (contentStyleIndex >= 0) {
+                    contentStyle = Typeface.create(Typeface.DEFAULT, contentStyleArray[contentStyleIndex]);
                 }
             }
 
@@ -5100,7 +5100,6 @@ public class TView extends View {
     public boolean dispatchTouchEvent(MotionEvent event) {
         touchX = event.getX();
         touchY = event.getY();
-
         //
         setTouchXY(touchX, touchY);
 
@@ -5682,7 +5681,7 @@ public class TView extends View {
                     textPaddingRight + srcRightWidthNormal,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal, textSize,
-                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textTypeFaceMode, Paint.Align.CENTER),
+                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textStyle, Paint.Align.CENTER),
                     textGravityMode,
                     textRowSpaceRatio,
                     textMeasureList);
@@ -5707,7 +5706,7 @@ public class TView extends View {
                     contentPaddingRight + srcRightWidthNormal,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? contentColorPress : select ? contentColorSelect : press ? contentColorPress : contentColorNormal, contentSize,
-                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentTypeFaceMode, Paint.Align.CENTER),
+                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentStyle, Paint.Align.CENTER),
                     textGravityModeFromContent,
                     contentRowSpaceRatio,
                     contentMeasureList);
