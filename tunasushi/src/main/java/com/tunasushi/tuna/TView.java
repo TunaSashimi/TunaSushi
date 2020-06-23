@@ -1864,6 +1864,24 @@ public class TView extends View {
         setSrcSelect(BitmapTool.drawableToBitmap(srcSelect));
     }
 
+    public void setSrc(int id) {
+        setSrcNormal(id);
+        setSrcPress(id);
+        setSrcSelect(id);
+    }
+
+    public void setSrc(Bitmap src) {
+        setSrcNormal(src);
+        setSrcPress(src);
+        setSrcSelect(src);
+    }
+
+    public void setSrc(Drawable src) {
+        setSrcNormal(src);
+        setSrcPress(src);
+        setSrcSelect(src);
+    }
+
     //
     private float srcShadowRadiusNormal;
 
