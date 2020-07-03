@@ -1,8 +1,9 @@
 package com.tunasushi.bean;
 
-import android.databinding.BaseObservable;
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 
 /**
  * @author TunaSashimi

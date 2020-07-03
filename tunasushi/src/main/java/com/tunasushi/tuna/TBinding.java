@@ -1,8 +1,8 @@
 package com.tunasushi.tuna;
 
-import android.databinding.BindingAdapter;
-import android.databinding.InverseBindingAdapter;
-import android.databinding.InverseBindingListener;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 /**
  * @author TunaSashimi
@@ -11,11 +11,6 @@ import android.databinding.InverseBindingListener;
  * @Description
  */
 public class TBinding {
-    @BindingAdapter(value = "visibility")
-    public static void setVisibility(TView t, int visibility) {
-        t.setVisibility(visibility);
-    }
-
     @BindingAdapter(value = "select")
     public static void setSelect(TView t, boolean select) {
         if (isSelect(t) != select) {

@@ -1,7 +1,6 @@
 package com.tunasushi.activity;
 
 import android.app.Activity;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,6 +8,8 @@ import com.tunasushi.R;
 import com.tunasushi.bean.BindingBean;
 import com.tunasushi.databinding.ActivityTBindingBinding;
 import com.tunasushi.tuna.TView;
+
+import androidx.databinding.DataBindingUtil;
 
 /**
  * @author TunaSashimi

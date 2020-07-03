@@ -270,7 +270,7 @@
             app:backgroundNormal="#0000ff"
             app:backgroundShadowColorNormal="#800000ff"
             app:backgroundShadowDxNormal="0dp"
-            app:backgroundShadowDyNormal="0dp"
+            app:backgroundShadowDyNormal="8dp"
             app:backgroundShadowRadiusNormal="8dp"
             app:radius="5dp"
             app:text="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp"

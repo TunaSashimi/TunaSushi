@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Region.Op;
-import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,6 +15,8 @@ import com.tuna.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 
 /**
