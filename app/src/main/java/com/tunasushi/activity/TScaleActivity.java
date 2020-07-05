@@ -22,6 +22,6 @@ public class TScaleActivity extends Activity {
         setContentView(R.layout.activity_t_scale);
 
         tScale = findViewById(R.id.tScale);
-        tScale.setScaleSrc(R.drawable.bitmap_tscale_scalebitmap03);
+        tScale.setScaleSrc(R.drawable.bitmap_tscale_scalebitmap);
     }
 }
