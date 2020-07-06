@@ -68,6 +68,8 @@ public class EntryActivity extends Activity {
 
             TWaveActivity.class,
             TWrapActivity.class,
+
+            TestActivity.class,
     };
 
     @Override

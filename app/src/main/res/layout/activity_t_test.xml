@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewGetCode"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="16dp"
+        app:backgroundAngleNormal="180"
+        app:backgroundEndNormal="#636ebfff"
+        app:backgroundStartNormal="#630059ff"
+        app:radius="25dp"
+        app:text="获取验证码"
+        app:textColorNormal="#ffffff"
+        app:textSize="18dp" />
+</RelativeLayout>

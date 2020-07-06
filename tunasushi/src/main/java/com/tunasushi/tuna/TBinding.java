@@ -226,13 +226,11 @@ public class TBinding {
 
     @BindingAdapter({"backgroundStartNormal"})
     public static void setBackgroundStartNormal(TView t, int backgroundStart) {
-        System.out.println("backgroundStartNormal==>" + backgroundStart);
         t.setBackgroundStart(backgroundStart);
     }
 
     @BindingAdapter({"backgroundStartNormal"})
     public static void setBackgroundStartNormal(TView t, String backgroundStart) {
-        System.out.println("backgroundStartNormal==>" + backgroundStart);
         t.setBackgroundStart(backgroundStart);
     }
 

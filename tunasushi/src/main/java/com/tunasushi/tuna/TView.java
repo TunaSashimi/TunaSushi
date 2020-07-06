@@ -5409,17 +5409,6 @@ public class TView extends View {
         textMarkDx += width * textMarkFractionDx;
         textMarkDy += height * textMarkFractionDy;
 
-        //
-        if (backgroundAngleNormal != Integer.MAX_VALUE) {
-            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
-        }
-        if (backgroundAnglePress != Integer.MAX_VALUE) {
-            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
-        }
-        if (backgroundAngleSelect != Integer.MAX_VALUE) {
-            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
-        }
-
         if (srcNormal != null) {
             srcWidthRawNormal = srcNormal.getWidth();
             srcHeightRawNormal = srcNormal.getHeight();
@@ -5519,6 +5508,18 @@ public class TView extends View {
         if (!origin) {
             return;
         }
+
+        //
+        if (backgroundAngleNormal != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
+        }
+        if (backgroundAnglePress != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+        }
+        if (backgroundAngleSelect != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+
         //
         boolean needSaveLayer = (srcNormal != null || srcPress != null || srcSelect != null);
         if (needSaveLayer) {
