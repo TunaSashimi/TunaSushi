@@ -5499,24 +5499,6 @@ public class TView extends View {
             matrixSrcLeftSelect = initMatrix(matrixSrcLeftSelect, srcLeftWidthSelect / srcLeftWidthRawSelect, srcLeftHeightSelect / srcLeftHeightRawSelect);
         }
 
-        if (srcRightNormal != null) {
-            int srcRightWidthRawNormal = srcRightNormal.getWidth();
-            int srcRightHeightRawNormal = srcRightNormal.getHeight();
-            matrixSrcRightNormal = initMatrix(matrixSrcRightNormal, srcRightWidthNormal / srcRightWidthRawNormal, srcRightHeightNormal / srcRightHeightRawNormal);
-        }
-
-        if (srcRightPress != null) {
-            int srcRightWidthRawPress = srcRightPress.getWidth();
-            int srcRightHeightRawPress = srcRightPress.getHeight();
-            matrixSrcRightPress = initMatrix(matrixSrcRightPress, srcRightWidthPress / srcRightWidthRawPress, srcRightHeightNormal / srcRightHeightRawPress);
-        }
-
-        if (srcRightSelect != null) {
-            int srcRightWidthRawSelect = srcRightSelect.getWidth();
-            int srcRightHeighRawSelect = srcRightSelect.getHeight();
-            matrixSrcRightSelect = initMatrix(matrixSrcRightSelect, srcRightWidthSelect / srcRightWidthRawSelect, srcRightHeightSelect / srcRightHeighRawSelect);
-        }
-
         if (layoutListener != null) {
             layoutListener.layout(this);
         }
@@ -5538,6 +5520,25 @@ public class TView extends View {
         }
         if (backgroundAngleSelect != Integer.MAX_VALUE) {
             backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+
+        //
+        if (srcRightNormal != null) {
+            int srcRightWidthRawNormal = srcRightNormal.getWidth();
+            int srcRightHeightRawNormal = srcRightNormal.getHeight();
+            matrixSrcRightNormal = initMatrix(matrixSrcRightNormal, srcRightWidthNormal / srcRightWidthRawNormal, srcRightHeightNormal / srcRightHeightRawNormal);
+        }
+
+        if (srcRightPress != null) {
+            int srcRightWidthRawPress = srcRightPress.getWidth();
+            int srcRightHeightRawPress = srcRightPress.getHeight();
+            matrixSrcRightPress = initMatrix(matrixSrcRightPress, srcRightWidthPress / srcRightWidthRawPress, srcRightHeightNormal / srcRightHeightRawPress);
+        }
+
+        if (srcRightSelect != null) {
+            int srcRightWidthRawSelect = srcRightSelect.getWidth();
+            int srcRightHeighRawSelect = srcRightSelect.getHeight();
+            matrixSrcRightSelect = initMatrix(matrixSrcRightSelect, srcRightWidthSelect / srcRightWidthRawSelect, srcRightHeightSelect / srcRightHeighRawSelect);
         }
 
         //
