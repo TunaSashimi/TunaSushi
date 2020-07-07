@@ -4912,14 +4912,15 @@ public class TView extends View {
             }
 
             //
+            srcLeftWidthNormal = typedArray.getDimension(R.styleable.TView_srcLeftWidthNormal, 0);
+            srcLeftHeightNormal = typedArray.getDimension(R.styleable.TView_srcLeftHeightNormal, 0);
+            srcLeftPaddingNormal = typedArray.getDimension(R.styleable.TView_srcLeftPaddingNormal, 0);
+            srcLeftDxNormal = typedArray.getDimension(R.styleable.TView_srcLeftDxNormal, 0);
+            srcLeftDyNormal = typedArray.getDimension(R.styleable.TView_srcLeftDyNormal, 0);
+
             int srcLeftNormalId = typedArray.getResourceId(R.styleable.TView_srcLeftNormal, -1);
             if (srcLeftNormalId != -1) {
                 srcLeftNormal = BitmapFactory.decodeResource(getResources(), srcLeftNormalId);
-                srcLeftWidthNormal = typedArray.getDimension(R.styleable.TView_srcLeftWidthNormal, 0);
-                srcLeftHeightNormal = typedArray.getDimension(R.styleable.TView_srcLeftHeightNormal, 0);
-                srcLeftPaddingNormal = typedArray.getDimension(R.styleable.TView_srcLeftPaddingNormal, 0);
-                srcLeftDxNormal = typedArray.getDimension(R.styleable.TView_srcLeftDxNormal, 0);
-                srcLeftDyNormal = typedArray.getDimension(R.styleable.TView_srcLeftDyNormal, 0);
 
                 if (srcLeftWidthNormal == 0 || srcLeftHeightNormal == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcLeftWidthNormal and srcLeftHeightNormal");
@@ -4927,28 +4928,30 @@ public class TView extends View {
             }
 
             //
+            srcLeftWidthPress = typedArray.getDimension(R.styleable.TView_srcLeftWidthPress, srcLeftWidthNormal);
+            srcLeftHeightPress = typedArray.getDimension(R.styleable.TView_srcLeftHeightPress, srcLeftHeightNormal);
+            srcLeftPaddingPress = typedArray.getDimension(R.styleable.TView_srcLeftPaddingPress, srcLeftPaddingNormal);
+            srcLeftDxPress = typedArray.getDimension(R.styleable.TView_srcLeftDxPress, srcLeftDxNormal);
+            srcLeftDyPress = typedArray.getDimension(R.styleable.TView_srcLeftDyPress, srcLeftDyNormal);
+
             int srcLeftPressId = typedArray.getResourceId(R.styleable.TView_srcLeftPress, srcLeftNormalId);
             if (srcLeftPressId != -1) {
                 srcLeftPress = BitmapFactory.decodeResource(getResources(), srcLeftPressId);
-                srcLeftWidthPress = typedArray.getDimension(R.styleable.TView_srcLeftWidthPress, srcLeftWidthNormal);
-                srcLeftHeightPress = typedArray.getDimension(R.styleable.TView_srcLeftHeightPress, srcLeftHeightNormal);
-                srcLeftPaddingPress = typedArray.getDimension(R.styleable.TView_srcLeftPaddingPress, srcLeftPaddingNormal);
-                srcLeftDxPress = typedArray.getDimension(R.styleable.TView_srcLeftDxPress, srcLeftDxNormal);
-                srcLeftDyPress = typedArray.getDimension(R.styleable.TView_srcLeftDyPress, srcLeftDyNormal);
 
                 if (srcLeftWidthPress == 0 || srcLeftHeightPress == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcLeftWidthPress and srcLeftHeightPress");
                 }
             }
 
+            srcLeftWidthSelect = typedArray.getDimension(R.styleable.TView_srcLeftWidthSelect, srcLeftWidthNormal);
+            srcLeftHeightSelect = typedArray.getDimension(R.styleable.TView_srcLeftHeightSelect, srcLeftHeightNormal);
+            srcLeftPaddingSelect = typedArray.getDimension(R.styleable.TView_srcLeftPaddingSelect, srcLeftPaddingNormal);
+            srcLeftDxSelect = typedArray.getDimension(R.styleable.TView_srcLeftDxSelect, srcLeftDxNormal);
+            srcLeftDySelect = typedArray.getDimension(R.styleable.TView_srcLeftDySelect, srcLeftDyNormal);
+
             int srcLeftSelectId = typedArray.getResourceId(R.styleable.TView_srcLeftSelect, srcLeftNormalId);
             if (srcLeftSelectId != -1) {
                 srcLeftSelect = BitmapFactory.decodeResource(getResources(), srcLeftSelectId);
-                srcLeftWidthSelect = typedArray.getDimension(R.styleable.TView_srcLeftWidthSelect, srcLeftWidthNormal);
-                srcLeftHeightSelect = typedArray.getDimension(R.styleable.TView_srcLeftHeightSelect, srcLeftHeightNormal);
-                srcLeftPaddingSelect = typedArray.getDimension(R.styleable.TView_srcLeftPaddingSelect, srcLeftPaddingNormal);
-                srcLeftDxSelect = typedArray.getDimension(R.styleable.TView_srcLeftDxSelect, srcLeftDxNormal);
-                srcLeftDySelect = typedArray.getDimension(R.styleable.TView_srcLeftDySelect, srcLeftDyNormal);
 
                 if (srcLeftWidthSelect == 0 || srcLeftHeightSelect == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcLeftWidthSelect and srcLeftHeightSelect");
@@ -4956,42 +4959,46 @@ public class TView extends View {
             }
 
             //
+            srcRightWidthNormal = typedArray.getDimension(R.styleable.TView_srcRightWidthNormal, 0);
+            srcRightHeightNormal = typedArray.getDimension(R.styleable.TView_srcRightHeightNormal, 0);
+            srcRightPaddingNormal = typedArray.getDimension(R.styleable.TView_srcRightPaddingNormal, 0);
+            srcRightDxNormal = typedArray.getDimension(R.styleable.TView_srcRightDxNormal, 0);
+            srcRightDyNormal = typedArray.getDimension(R.styleable.TView_srcRightDyNormal, 0);
+
             int srcRightNormalId = typedArray.getResourceId(R.styleable.TView_srcRightNormal, -1);
             if (srcRightNormalId != -1) {
                 srcRightNormal = BitmapFactory.decodeResource(getResources(), srcRightNormalId);
-                srcRightWidthNormal = typedArray.getDimension(R.styleable.TView_srcRightWidthNormal, 0);
-                srcRightHeightNormal = typedArray.getDimension(R.styleable.TView_srcRightHeightNormal, 0);
-                srcRightPaddingNormal = typedArray.getDimension(R.styleable.TView_srcRightPaddingNormal, 0);
-                srcRightDxNormal = typedArray.getDimension(R.styleable.TView_srcRightDxNormal, 0);
-                srcRightDyNormal = typedArray.getDimension(R.styleable.TView_srcRightDyNormal, 0);
-
                 if (srcRightWidthNormal == 0 || srcRightHeightNormal == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthNormal and srcRightHeightNormal");
                 }
             }
 
+            srcRightWidthPress = typedArray.getDimension(R.styleable.TView_srcRightWidthPress, srcRightWidthNormal);
+            srcRightHeightPress = typedArray.getDimension(R.styleable.TView_srcRightHeightPress, srcRightHeightNormal);
+            srcRightPaddingPress = typedArray.getDimension(R.styleable.TView_srcRightPaddingPress, srcRightPaddingNormal);
+            srcRightDxPress = typedArray.getDimension(R.styleable.TView_srcRightDxPress, srcRightDxNormal);
+            srcRightDyPress = typedArray.getDimension(R.styleable.TView_srcRightDyPress, srcRightDyNormal);
+
             int srcRightPressId = typedArray.getResourceId(R.styleable.TView_srcRightPress, srcRightNormalId);
             if (srcRightPressId != -1) {
                 srcRightPress = BitmapFactory.decodeResource(getResources(), srcRightNormalId);
-                srcRightWidthPress = typedArray.getDimension(R.styleable.TView_srcRightWidthPress, srcRightWidthNormal);
-                srcRightHeightPress = typedArray.getDimension(R.styleable.TView_srcRightHeightPress, srcRightHeightNormal);
-                srcRightPaddingPress = typedArray.getDimension(R.styleable.TView_srcRightPaddingPress, srcRightPaddingNormal);
-                srcRightDxPress = typedArray.getDimension(R.styleable.TView_srcRightDxPress, srcRightDxNormal);
-                srcRightDyPress = typedArray.getDimension(R.styleable.TView_srcRightDyPress, srcRightDyNormal);
+
 
                 if (srcRightWidthPress == 0 || srcRightHeightPress == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthPress and srcRightHeightPress");
                 }
             }
 
+            srcRightWidthSelect = typedArray.getDimension(R.styleable.TView_srcRightWidthSelect, srcRightWidthNormal);
+            srcRightHeightSelect = typedArray.getDimension(R.styleable.TView_srcRightHeightSelect, srcRightHeightNormal);
+            srcRightPaddingSelect = typedArray.getDimension(R.styleable.TView_srcRightPaddingSelect, srcRightPaddingNormal);
+            srcRightDxSelect = typedArray.getDimension(R.styleable.TView_srcRightDxSelect, srcRightDxNormal);
+            srcRightDySelect = typedArray.getDimension(R.styleable.TView_srcRightDySelect, srcRightDyNormal);
+
             int srcRightSelectId = typedArray.getResourceId(R.styleable.TView_srcRightSelect, srcRightNormalId);
             if (srcRightSelectId != -1) {
                 srcRightSelect = BitmapFactory.decodeResource(getResources(), srcRightSelectId);
-                srcRightWidthSelect = typedArray.getDimension(R.styleable.TView_srcRightWidthSelect, srcRightWidthNormal);
-                srcRightHeightSelect = typedArray.getDimension(R.styleable.TView_srcRightHeightSelect, srcRightHeightNormal);
-                srcRightPaddingSelect = typedArray.getDimension(R.styleable.TView_srcRightPaddingSelect, srcRightPaddingNormal);
-                srcRightDxSelect = typedArray.getDimension(R.styleable.TView_srcRightDxSelect, srcRightDxNormal);
-                srcRightDySelect = typedArray.getDimension(R.styleable.TView_srcRightDySelect, srcRightDyNormal);
+
 
                 if (srcRightWidthSelect == 0 || srcRightHeightSelect == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthSelect and srcRightHeightSelect");
@@ -5480,25 +5487,6 @@ public class TView extends View {
             matrixAnchorSelect = initMatrix(matrixAnchorSelect, srcAnchorWidthSelect / srcAnchorWidthRawSelect, srcAnchorHeightSelect / srcAnchorHeightRawSelect);
         }
 
-        //
-        if (srcLeftNormal != null) {
-            int srcLeftWidthRawNormal = srcLeftNormal.getWidth();
-            int srcLeftHeightRawNormal = srcLeftNormal.getHeight();
-            matrixSrcLeftNormal = initMatrix(matrixSrcLeftNormal, srcLeftWidthNormal / srcLeftWidthRawNormal, srcLeftHeightNormal / srcLeftHeightRawNormal);
-        }
-
-        if (srcLeftPress != null) {
-            int srcLeftWidthRawPress = srcLeftPress.getWidth();
-            int srcLeftHeightRawPress = srcLeftPress.getHeight();
-            matrixSrcLeftPress = initMatrix(matrixSrcLeftPress, srcLeftWidthPress / srcLeftWidthRawPress, srcLeftHeightPress / srcLeftHeightRawPress);
-        }
-
-        if (srcLeftSelect != null) {
-            int srcLeftWidthRawSelect = srcLeftSelect.getWidth();
-            int srcLeftHeightRawSelect = srcLeftSelect.getHeight();
-            matrixSrcLeftSelect = initMatrix(matrixSrcLeftSelect, srcLeftWidthSelect / srcLeftWidthRawSelect, srcLeftHeightSelect / srcLeftHeightRawSelect);
-        }
-
         if (layoutListener != null) {
             layoutListener.layout(this);
         }
@@ -5520,6 +5508,25 @@ public class TView extends View {
         }
         if (backgroundAngleSelect != Integer.MAX_VALUE) {
             backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+
+        //
+        if (srcLeftNormal != null) {
+            int srcLeftWidthRawNormal = srcLeftNormal.getWidth();
+            int srcLeftHeightRawNormal = srcLeftNormal.getHeight();
+            matrixSrcLeftNormal = initMatrix(matrixSrcLeftNormal, srcLeftWidthNormal / srcLeftWidthRawNormal, srcLeftHeightNormal / srcLeftHeightRawNormal);
+        }
+
+        if (srcLeftPress != null) {
+            int srcLeftWidthRawPress = srcLeftPress.getWidth();
+            int srcLeftHeightRawPress = srcLeftPress.getHeight();
+            matrixSrcLeftPress = initMatrix(matrixSrcLeftPress, srcLeftWidthPress / srcLeftWidthRawPress, srcLeftHeightPress / srcLeftHeightRawPress);
+        }
+
+        if (srcLeftSelect != null) {
+            int srcLeftWidthRawSelect = srcLeftSelect.getWidth();
+            int srcLeftHeightRawSelect = srcLeftSelect.getHeight();
+            matrixSrcLeftSelect = initMatrix(matrixSrcLeftSelect, srcLeftWidthSelect / srcLeftWidthRawSelect, srcLeftHeightSelect / srcLeftHeightRawSelect);
         }
 
         //
