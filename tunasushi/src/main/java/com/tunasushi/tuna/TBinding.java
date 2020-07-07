@@ -1,5 +1,7 @@
 package com.tunasushi.tuna;
 
+import android.graphics.Bitmap;
+
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
@@ -362,6 +364,36 @@ public class TBinding {
     @BindingAdapter({"srcRightHeightSelect"})
     public static void setSrcRightHeightSelect(TView t, float srcRightHeightSelect) {
         t.setSrcRightHeightSelect(srcRightHeightSelect);
+    }
+
+    @BindingAdapter({"srcLeftNormal"})
+    public static void setSrcLeftNormal(TView t, Bitmap srcLeftNormal) {
+        t.setSrcLeft(srcLeftNormal);
+    }
+
+    @BindingAdapter({"srcLeftPress"})
+    public static void setSrcLeftPress(TView t, Bitmap srcLeftPress) {
+        t.setSrcLeftPress(srcLeftPress);
+    }
+
+    @BindingAdapter({"srcLeftSelect"})
+    public static void setSrcLeftSelect(TView t, Bitmap srcLeftSelect) {
+        t.setSrcLeftSelect(srcLeftSelect);
+    }
+
+    @BindingAdapter({"srcRightNormal"})
+    public static void setSrcRightNormal(TView t, Bitmap srcRightNormal) {
+        t.setSrcRight(srcRightNormal);
+    }
+
+    @BindingAdapter({"srcRightPress"})
+    public static void setSrcRightPress(TView t, Bitmap srcRightPress) {
+        t.setSrcRightPress(srcRightPress);
+    }
+
+    @BindingAdapter({"srcRightSelect"})
+    public static void setSrcRightSelect(TView t, Bitmap srcRightSelect) {
+        t.setSrcRightSelect(srcRightSelect);
     }
 
     //

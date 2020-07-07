@@ -3689,6 +3689,7 @@ public class TView extends View {
 
     public void setSrcLeftNormal(Bitmap srcLeftNormal) {
         this.srcLeftNormal = srcLeftNormal;
+        invalidate();
     }
 
     private Bitmap srcLeftPress;
@@ -3699,6 +3700,7 @@ public class TView extends View {
 
     public void setSrcLeftPress(Bitmap srcLeftPress) {
         this.srcLeftPress = srcLeftPress;
+        invalidate();
     }
 
     private Bitmap srcLeftSelect;
@@ -3709,6 +3711,14 @@ public class TView extends View {
 
     public void setSrcLeftSelect(Bitmap srcLeftSelect) {
         this.srcLeftSelect = srcLeftSelect;
+        invalidate();
+    }
+
+    public void setSrcLeft(Bitmap srcLeft) {
+        this.srcLeftNormal = srcLeft;
+        this.srcLeftPress = srcLeft;
+        this.srcLeftSelect = srcLeft;
+        invalidate();
     }
 
     //
@@ -4131,6 +4141,7 @@ public class TView extends View {
 
     public void setSrcRightNormal(Bitmap srcRightNormal) {
         this.srcRightNormal = srcRightNormal;
+        invalidate();
     }
 
     private Bitmap srcRightPress;
@@ -4141,6 +4152,7 @@ public class TView extends View {
 
     public void setSrcRightPress(Bitmap srcRightPress) {
         this.srcRightPress = srcRightPress;
+        invalidate();
     }
 
     private Bitmap srcRightSelect;
@@ -4151,6 +4163,14 @@ public class TView extends View {
 
     public void setSrcRightSelect(Bitmap srcRightSelect) {
         this.srcRightSelect = srcRightSelect;
+        invalidate();
+    }
+
+    public void setSrcRight(Bitmap srcRight) {
+        this.srcRightNormal = srcRight;
+        this.srcRightPress = srcRight;
+        this.srcRightSelect = srcRight;
+        invalidate();
     }
 
     //
