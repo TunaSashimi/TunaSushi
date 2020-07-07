@@ -1,6 +1,9 @@
 package com.tunasushi.tuna;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
+import com.tunasushi.tool.BitmapTool;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
@@ -381,6 +384,21 @@ public class TBinding {
         t.setSrcLeftSelect(srcLeftSelect);
     }
 
+    @BindingAdapter({"srcLeftNormal"})
+    public static void setSrcLeftNormal(TView t, Drawable srcLeftNormal) {
+        t.setSrcLeft(BitmapTool.drawableToBitmap(srcLeftNormal));
+    }
+
+    @BindingAdapter({"srcLeftPress"})
+    public static void setSrcLeftPress(TView t, Drawable srcLeftPress) {
+        t.setSrcLeftPress(BitmapTool.drawableToBitmap(srcLeftPress));
+    }
+
+    @BindingAdapter({"srcLeftSelect"})
+    public static void setSrcLeftSelect(TView t, Drawable srcLeftSelect) {
+        t.setSrcLeftSelect(BitmapTool.drawableToBitmap(srcLeftSelect));
+    }
+
     @BindingAdapter({"srcRightNormal"})
     public static void setSrcRightNormal(TView t, Bitmap srcRightNormal) {
         t.setSrcRight(srcRightNormal);
@@ -394,6 +412,21 @@ public class TBinding {
     @BindingAdapter({"srcRightSelect"})
     public static void setSrcRightSelect(TView t, Bitmap srcRightSelect) {
         t.setSrcRightSelect(srcRightSelect);
+    }
+
+    @BindingAdapter({"srcRightNormal"})
+    public static void setSrcRightNormal(TView t, Drawable srcRightNormal) {
+        t.setSrcRight(BitmapTool.drawableToBitmap(srcRightNormal));
+    }
+
+    @BindingAdapter({"srcRightPress"})
+    public static void setSrcRightPress(TView t, Drawable srcRightPress) {
+        t.setSrcRightPress(BitmapTool.drawableToBitmap(srcRightPress));
+    }
+
+    @BindingAdapter({"srcRightSelect"})
+    public static void setSrcRightSelect(TView t, Drawable srcRightSelect) {
+        t.setSrcRightSelect(BitmapTool.drawableToBitmap(srcRightSelect));
     }
 
     //
