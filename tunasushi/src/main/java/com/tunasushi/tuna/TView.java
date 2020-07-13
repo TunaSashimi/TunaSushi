@@ -1789,22 +1789,20 @@ public class TView extends View {
 
     public void setSrcNormal(int id) {
         setSrcNormal(decodeBitmapResource(getResources(), id));
-        setSrcPress(decodeBitmapResource(getResources(), id));
-        setSrcSelect(decodeBitmapResource(getResources(), id));
     }
 
     public void setSrcNormal(Bitmap srcNormal) {
         this.srcNormal = srcNormal;
-        srcWidthRawNormal = srcNormal.getWidth();
-        srcHeightRawNormal = srcNormal.getHeight();
-        matrixNormal = initMatrix(matrixNormal,
-                (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
-                (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal)
-        ;
-        //
-        setSrcPress(srcNormal);
-        setSrcSelect(srcNormal);
-        //
+//        srcWidthRawNormal = srcNormal.getWidth();
+//        srcHeightRawNormal = srcNormal.getHeight();
+//        matrixNormal = initMatrix(matrixNormal,
+//                (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
+//                (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal)
+//        ;
+//        //
+//        setSrcPress(srcNormal);
+//        setSrcSelect(srcNormal);
+//        //
         invalidate();
     }
 
@@ -1826,12 +1824,12 @@ public class TView extends View {
 
     public void setSrcPress(Bitmap srcPress) {
         this.srcPress = srcPress;
-        srcWidthRawPress = srcPress.getWidth();
-        srcHeightRawPress = srcPress.getHeight();
-        matrixPress = initMatrix(matrixPress,
-                (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
-                (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress)
-        ;
+//        srcWidthRawPress = srcPress.getWidth();
+//        srcHeightRawPress = srcPress.getHeight();
+//        matrixPress = initMatrix(matrixPress,
+//                (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
+//                (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress)
+//        ;
         invalidate();
     }
 
@@ -1852,12 +1850,12 @@ public class TView extends View {
 
     public void setSrcSelect(Bitmap srcSelect) {
         this.srcSelect = srcSelect;
-        srcWidthRawSelect = srcSelect.getWidth();
-        srcHeightRawSelect = srcSelect.getHeight();
-        matrixSelect = initMatrix(matrixSelect,
-                (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
-                (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect)
-        ;
+//        srcWidthRawSelect = srcSelect.getWidth();
+//        srcHeightRawSelect = srcSelect.getHeight();
+//        matrixSelect = initMatrix(matrixSelect,
+//                (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
+//                (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect)
+//        ;
         invalidate();
     }
 
@@ -1882,6 +1880,20 @@ public class TView extends View {
         setSrcPress(src);
         setSrcSelect(src);
     }
+
+    @IntDef({WIDTH_HEIGHT, WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface srcMode {
+    }
+
+    public static final int WIDTH_HEIGHT = 0;
+    public static final int WIDTH_TOP = 1;
+    public static final int WIDTH_CENTER = 2;
+    public static final int WIDTH_BOTTOM = 3;
+    private static final int[] srcModeArray = {WIDTH_HEIGHT, WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM,
+    };
+    private @srcMode
+    int srcMode;
 
     //
     private float srcShadowRadiusNormal;
@@ -4827,6 +4839,13 @@ public class TView extends View {
             }
 
             //
+
+            int srcModeIndex = typedArray.getInt(R.styleable.TView_srcMode, 0);
+            if (srcModeIndex >= 0) {
+                srcMode = srcModeArray[srcModeIndex];
+            }
+
+            //
             int srcNormalId = typedArray.getResourceId(R.styleable.TView_srcNormal, -1);
             if (srcNormalId != -1) {
 
@@ -5436,33 +5455,6 @@ public class TView extends View {
         textMarkDx += width * textMarkFractionDx;
         textMarkDy += height * textMarkFractionDy;
 
-        if (srcNormal != null) {
-            srcWidthRawNormal = srcNormal.getWidth();
-            srcHeightRawNormal = srcNormal.getHeight();
-            matrixNormal = initMatrix(matrixNormal,
-                    (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
-                    (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal)
-            ;
-        }
-
-        if (srcPress != null) {
-            srcWidthRawPress = srcPress.getWidth();
-            srcHeightRawPress = srcPress.getHeight();
-            matrixPress = initMatrix(matrixPress,
-                    (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
-                    (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress)
-            ;
-        }
-
-        if (srcSelect != null) {
-            srcWidthRawSelect = srcSelect.getWidth();
-            srcHeightRawSelect = srcSelect.getHeight();
-            matrixSelect = initMatrix(matrixSelect,
-                    (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
-                    (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect)
-            ;
-        }
-
         //
         int srcAnchorWidthRawNormal, srcAnchorHeightRawNormal, srcAnchorWidthRawPress, srcAnchorHeightRawPress, srcAnchorWidthRawSelect, srcAnchorHeightRawSelect;
 
@@ -5508,6 +5500,90 @@ public class TView extends View {
         }
         if (backgroundAngleSelect != Integer.MAX_VALUE) {
             backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+
+        //
+        if (srcNormal != null) {
+            srcWidthRawNormal = srcNormal.getWidth();
+            srcHeightRawNormal = srcNormal.getHeight();
+            scale = width * 1f / srcWidthRawNormal;
+            srcWidthScale = srcWidthRawNormal * scale;
+            srcHeightScale = srcHeightRawNormal * scale;
+            dy = srcHeightScale - height;
+            switch (srcMode) {
+                case WIDTH_HEIGHT:
+                    matrixNormal = initMatrix(matrixNormal,
+                            (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
+                            (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal);
+                    break;
+                case WIDTH_TOP:
+                    matrixNormal = initMatrix(matrixNormal, scale, scale);
+                    break;
+                case WIDTH_CENTER:
+                    matrixNormal = initMatrix(matrixNormal, scale, scale);
+                    matrixNormal.postTranslate(0, dy * -0.5f);
+                    break;
+                case WIDTH_BOTTOM:
+                    matrixNormal = initMatrix(matrixNormal, scale, scale);
+                    matrixNormal.postTranslate(0, -dy);
+                    break;
+            }
+        }
+
+        //
+        if (srcPress != null) {
+            srcWidthRawPress = srcPress.getWidth();
+            srcHeightRawPress = srcPress.getHeight();
+            scale = width * 1f / srcWidthRawPress;
+            srcWidthScale = srcWidthRawPress * scale;
+            srcHeightScale = srcHeightRawPress * scale;
+            dy = srcHeightScale - height;
+            switch (srcMode) {
+                case WIDTH_HEIGHT:
+                    matrixPress = initMatrix(matrixPress,
+                            (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
+                            (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress);
+                    break;
+                case WIDTH_TOP:
+                    matrixPress = initMatrix(matrixPress, scale, scale);
+                    break;
+                case WIDTH_CENTER:
+                    matrixPress = initMatrix(matrixPress, scale, scale);
+                    matrixPress.postTranslate(0, dy * -0.5f);
+                    break;
+                case WIDTH_BOTTOM:
+                    matrixPress = initMatrix(matrixPress, scale, scale);
+                    matrixPress.postTranslate(0, -dy);
+                    break;
+            }
+        }
+
+        //
+        if (srcSelect != null) {
+            srcWidthRawSelect = srcSelect.getWidth();
+            srcHeightRawSelect = srcSelect.getHeight();
+            scale = width * 1f / srcWidthRawSelect;
+            srcWidthScale = srcWidthRawSelect * scale;
+            srcHeightScale = srcHeightRawSelect * scale;
+            dy = srcHeightScale - height;
+            switch (srcMode) {
+                case WIDTH_HEIGHT:
+                    matrixSelect = initMatrix(matrixSelect,
+                            (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
+                            (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect);
+                    break;
+                case WIDTH_TOP:
+                    matrixSelect = initMatrix(matrixSelect, scale, scale);
+                    break;
+                case WIDTH_CENTER:
+                    matrixSelect = initMatrix(matrixSelect, scale, scale);
+                    matrixSelect.postTranslate(0, dy * -0.5f);
+                    break;
+                case WIDTH_BOTTOM:
+                    matrixSelect = initMatrix(matrixSelect, scale, scale);
+                    matrixSelect.postTranslate(0, -dy);
+                    break;
+            }
         }
 
         //

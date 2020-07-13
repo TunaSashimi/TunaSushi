@@ -32,7 +32,6 @@ public class TScale extends TView {
 
     private boolean scaleCrop;
 
-
     @IntDef({WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM})
     @Retention(RetentionPolicy.SOURCE)
     public @interface scaleMode {

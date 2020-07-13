@@ -51,6 +51,13 @@
         <attr name="srcPress" format="reference" />
         <attr name="srcSelect" format="reference" />
 
+        <attr name="srcMode">
+            <enum name="width_height" value="0" />
+            <enum name="width_top" value="1" />
+            <enum name="width_center" value="2" />
+            <enum name="width_bottom" value="3" />
+        </attr>
+
         <attr name="srcShadowRadiusNormal" format="dimension" />
         <attr name="srcShadowRadiusPress" format="dimension" />
         <attr name="srcShadowRadiusSelect" format="dimension" />

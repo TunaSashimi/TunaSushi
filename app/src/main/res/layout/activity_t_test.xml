@@ -38,4 +38,24 @@
         app:text="100"
         app:textColorNormal="#ffffff"
         app:textSize="16dp" />
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_below="@id/tViewSrcLeftPadding"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:srcNormal="@drawable/bitmap_tscale_scalebitmap" />
+
+    <com.tunasushi.tuna.TView
+        android:id="@+id/tViewCenter"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_below="@id/tView"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:srcMode="width_center"
+        app:srcNormal="@drawable/bitmap_tscale_scalebitmap" />
+
 </RelativeLayout>
