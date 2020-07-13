@@ -52,10 +52,10 @@
         <attr name="srcSelect" format="reference" />
 
         <attr name="srcMode">
-            <enum name="width_height" value="0" />
-            <enum name="width_top" value="1" />
-            <enum name="width_center" value="2" />
-            <enum name="width_bottom" value="3" />
+            <enum name="fit_xy" value="0" />
+            <enum name="fit_width" value="1" />
+            <enum name="fit_height" value="2" />
+            <enum name="fit_center" value="3" />
         </attr>
 
         <attr name="srcShadowRadiusNormal" format="dimension" />

@@ -1881,16 +1881,16 @@ public class TView extends View {
         setSrcSelect(src);
     }
 
-    @IntDef({WIDTH_HEIGHT, WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM})
+    @IntDef({FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface srcMode {
     }
 
-    public static final int WIDTH_HEIGHT = 0;
-    public static final int WIDTH_TOP = 1;
-    public static final int WIDTH_CENTER = 2;
-    public static final int WIDTH_BOTTOM = 3;
-    private static final int[] srcModeArray = {WIDTH_HEIGHT, WIDTH_TOP, WIDTH_CENTER, WIDTH_BOTTOM,
+    public static final int FIT_XY = 0;
+    public static final int FIT_WIDTH = 1;
+    public static final int FIT_HEIGHT = 2;
+    public static final int FIT_CENTER = 3;
+    private static final int[] srcModeArray = {FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER,
     };
     private @srcMode
     int srcMode;
@@ -5506,83 +5506,144 @@ public class TView extends View {
         if (srcNormal != null) {
             srcWidthRawNormal = srcNormal.getWidth();
             srcHeightRawNormal = srcNormal.getHeight();
-            scale = width * 1f / srcWidthRawNormal;
-            srcWidthScale = srcWidthRawNormal * scale;
-            srcHeightScale = srcHeightRawNormal * scale;
-            dy = srcHeightScale - height;
             switch (srcMode) {
-                case WIDTH_HEIGHT:
+                case FIT_XY:
                     matrixNormal = initMatrix(matrixNormal,
                             (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
                             (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal);
                     break;
-                case WIDTH_TOP:
-                    matrixNormal = initMatrix(matrixNormal, scale, scale);
-                    break;
-                case WIDTH_CENTER:
+                case FIT_WIDTH:
+                    scale = width * 1f / srcWidthRawNormal;
+                    srcWidthScale = srcWidthRawNormal * scale;
+                    srcHeightScale = srcHeightRawNormal * scale;
+                    dy = srcHeightScale - height;
                     matrixNormal = initMatrix(matrixNormal, scale, scale);
                     matrixNormal.postTranslate(0, dy * -0.5f);
                     break;
-                case WIDTH_BOTTOM:
+                case FIT_HEIGHT:
+                    scale = height * 1f / srcHeightRawNormal;
+                    srcWidthScale = srcWidthRawNormal * scale;
+                    srcHeightScale = srcHeightRawNormal * scale;
+                    dx = srcWidthScale - width;
                     matrixNormal = initMatrix(matrixNormal, scale, scale);
-                    matrixNormal.postTranslate(0, -dy);
+                    matrixNormal.postTranslate(dx * -0.5f, 0);
                     break;
+                case FIT_CENTER:
+                    float AspectRatio = width * 1f / height;
+                    float AspectRatioRae = srcWidthRawNormal * 1f / srcHeightRawNormal;
+                    boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
+                    //
+                    if (useFitWidthMode) {
+                        scale = width * 1f / srcWidthRawNormal;
+                        srcWidthScale = srcWidthRawNormal * scale;
+                        srcHeightScale = srcHeightRawNormal * scale;
+                        dy = srcHeightScale - height;
+                        matrixNormal = initMatrix(matrixNormal, scale, scale);
+                        matrixNormal.postTranslate(0, dy * -0.5f);
+                    } else {
+                        scale = height * 1f / srcHeightRawNormal;
+                        srcWidthScale = srcWidthRawNormal * scale;
+                        srcHeightScale = srcHeightRawNormal * scale;
+                        dx = srcWidthScale - width;
+                        matrixNormal = initMatrix(matrixNormal, scale, scale);
+                        matrixNormal.postTranslate(dx * -0.5f, 0);
+                    }
             }
         }
 
-        //
         if (srcPress != null) {
             srcWidthRawPress = srcPress.getWidth();
             srcHeightRawPress = srcPress.getHeight();
-            scale = width * 1f / srcWidthRawPress;
-            srcWidthScale = srcWidthRawPress * scale;
-            srcHeightScale = srcHeightRawPress * scale;
-            dy = srcHeightScale - height;
             switch (srcMode) {
-                case WIDTH_HEIGHT:
+                case FIT_XY:
                     matrixPress = initMatrix(matrixPress,
                             (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
                             (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress);
                     break;
-                case WIDTH_TOP:
-                    matrixPress = initMatrix(matrixPress, scale, scale);
-                    break;
-                case WIDTH_CENTER:
+                case FIT_WIDTH:
+                    scale = width * 1f / srcWidthRawPress;
+                    srcWidthScale = srcWidthRawPress * scale;
+                    srcHeightScale = srcHeightRawPress * scale;
+                    dy = srcHeightScale - height;
                     matrixPress = initMatrix(matrixPress, scale, scale);
                     matrixPress.postTranslate(0, dy * -0.5f);
                     break;
-                case WIDTH_BOTTOM:
+                case FIT_HEIGHT:
+                    scale = height * 1f / srcHeightRawPress;
+                    srcWidthScale = srcWidthRawPress * scale;
+                    srcHeightScale = srcHeightRawPress * scale;
+                    dx = srcWidthScale - width;
                     matrixPress = initMatrix(matrixPress, scale, scale);
-                    matrixPress.postTranslate(0, -dy);
+                    matrixPress.postTranslate(dx * -0.5f, 0);
                     break;
+                case FIT_CENTER:
+                    float AspectRatio = width * 1f / height;
+                    float AspectRatioRae = srcWidthRawPress * 1f / srcHeightRawPress;
+                    boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
+                    //
+                    if (useFitWidthMode) {
+                        scale = width * 1f / srcWidthRawPress;
+                        srcWidthScale = srcWidthRawPress * scale;
+                        srcHeightScale = srcHeightRawPress * scale;
+                        dy = srcHeightScale - height;
+                        matrixPress = initMatrix(matrixPress, scale, scale);
+                        matrixPress.postTranslate(0, dy * -0.5f);
+                    } else {
+                        scale = height * 1f / srcHeightRawPress;
+                        srcWidthScale = srcWidthRawPress * scale;
+                        srcHeightScale = srcHeightRawPress * scale;
+                        dx = srcWidthScale - width;
+                        matrixPress = initMatrix(matrixPress, scale, scale);
+                        matrixPress.postTranslate(dx * -0.5f, 0);
+                    }
             }
         }
 
-        //
         if (srcSelect != null) {
             srcWidthRawSelect = srcSelect.getWidth();
             srcHeightRawSelect = srcSelect.getHeight();
-            scale = width * 1f / srcWidthRawSelect;
-            srcWidthScale = srcWidthRawSelect * scale;
-            srcHeightScale = srcHeightRawSelect * scale;
-            dy = srcHeightScale - height;
             switch (srcMode) {
-                case WIDTH_HEIGHT:
+                case FIT_XY:
                     matrixSelect = initMatrix(matrixSelect,
                             (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
                             (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect);
                     break;
-                case WIDTH_TOP:
+                case FIT_WIDTH:
+                    scale = width * 1f / srcWidthRawSelect;
+                    srcWidthScale = srcWidthRawSelect * scale;
+                    srcHeightScale = srcHeightRawSelect * scale;
+                    dy = srcHeightScale - height;
                     matrixSelect = initMatrix(matrixSelect, scale, scale);
+                    matrixPress.postTranslate(0, dy * -0.5f);
                     break;
-                case WIDTH_CENTER:
+                case FIT_HEIGHT:
+                    scale = height * 1f / srcHeightRawSelect;
+                    srcWidthScale = srcWidthRawSelect * scale;
+                    srcHeightScale = srcHeightRawSelect * scale;
+                    dx = srcWidthScale - width;
                     matrixSelect = initMatrix(matrixSelect, scale, scale);
-                    matrixSelect.postTranslate(0, dy * -0.5f);
+                    matrixSelect.postTranslate(dx * -0.5f, 0);
                     break;
-                case WIDTH_BOTTOM:
-                    matrixSelect = initMatrix(matrixSelect, scale, scale);
-                    matrixSelect.postTranslate(0, -dy);
-                    break;
+                case FIT_CENTER:
+                    float AspectRatio = width * 1f / height;
+                    float AspectRatioRae = srcWidthRawSelect * 1f / srcHeightRawSelect;
+                    boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
+                    //
+                    if (useFitWidthMode) {
+                        scale = width * 1f / srcWidthRawSelect;
+                        srcWidthScale = srcWidthRawSelect * scale;
+                        srcHeightScale = srcHeightRawSelect * scale;
+                        dy = srcHeightScale - height;
+                        matrixSelect = initMatrix(matrixSelect, scale, scale);
+                        matrixPress.postTranslate(0, dy * -0.5f);
+                    } else {
+                        scale = height * 1f / srcHeightRawSelect;
+                        srcWidthScale = srcWidthRawSelect * scale;
+                        srcHeightScale = srcHeightRawSelect * scale;
+                        dx = srcWidthScale - width;
+                        matrixSelect = initMatrix(matrixSelect, scale, scale);
+                        matrixSelect.postTranslate(dx * -0.5f, 0);
+                    }
             }
         }
 
