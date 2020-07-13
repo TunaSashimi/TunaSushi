@@ -2,6 +2,7 @@ package com.tunasushi.tuna;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.widget.RelativeLayout;
 
 import com.tunasushi.tool.BitmapTool;
 
@@ -16,6 +17,30 @@ import androidx.databinding.InverseBindingListener;
  * @Description
  */
 public class TBinding {
+    @BindingAdapter({"layout_above"})
+    public static void setLayoutAbove(TView t, int itemId) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) t.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.ABOVE, itemId);
+    }
+
+    @BindingAdapter({"layout_below"})
+    public static void setlayoutBelow(TView t, int itemId) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) t.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.BELOW, itemId);
+    }
+
+    @BindingAdapter({"layout_toLeftOf"})
+    public static void setLayoutToLeftOf(TView t, int itemId) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) t.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.LEFT_OF, itemId);
+    }
+
+    @BindingAdapter({"layout_toRightOf"})
+    public static void setLayoutToRightOf(TView t, int itemId) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) t.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.RIGHT_OF, itemId);
+    }
+
     @BindingAdapter(value = "select")
     public static void setSelect(TView t, boolean select) {
         if (isSelect(t) != select) {
