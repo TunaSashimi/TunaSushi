@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
         <attr name="press" format="boolean" />
@@ -158,7 +157,7 @@
         <attr name="textMarkFractionDx" format="fraction" />
         <attr name="textMarkFractionDy" format="fraction" />
 
-        <attr name="content" format="string" />
+        <attr name="content" format="string|reference" />
         <attr name="contentSize" format="dimension" />
         <attr name="contentColorNormal" format="reference|color" />
         <attr name="contentColorPress" format="reference|color" />
