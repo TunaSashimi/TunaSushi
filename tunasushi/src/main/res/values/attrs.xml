@@ -157,7 +157,7 @@
         <attr name="textMarkFractionDx" format="fraction" />
         <attr name="textMarkFractionDy" format="fraction" />
 
-        <attr name="content" format="string|reference" />
+        <attr name="content" format="string" />
         <attr name="contentSize" format="dimension" />
         <attr name="contentColorNormal" format="reference|color" />
         <attr name="contentColorPress" format="reference|color" />
