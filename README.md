@@ -12,12 +12,14 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
   
-  Step 2. Add the dependency
+Step 2. Add the dependency
   
   	dependencies {
 	        implementation 'com.github.TunaSashimi:TunaSushi:1.0.93'
 	}
 	
+Attention
+
 If the attributes defined in the TunaSushi library and the attributes defined in other libraries have the same name and different types, compilation errors will occur.The solution is to define an attribute with the same name in the attr of the main project, but the type contains both.
 
 For example, The content attribute in TView in the TunaSushi library is string, and the content attribute in the constraintlayout library is reference.
