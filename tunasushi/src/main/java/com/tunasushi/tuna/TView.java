@@ -1138,12 +1138,6 @@ public class TView extends View {
         this.subAnimateEndListener = subAnimateEndListener;
     }
 
-    //
-    public interface ColorSelectListener {
-        void colorSelect(int color);
-    }
-
-
     // radius default 0
     protected float radius;
 

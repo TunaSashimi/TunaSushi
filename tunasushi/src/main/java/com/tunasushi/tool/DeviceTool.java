@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.tuna.R;
+import com.tunasushi.tuna.TPicker;
 import com.tunasushi.tuna.TPickerDialog;
 import com.tunasushi.tuna.TView;
 
@@ -640,45 +641,45 @@ public class DeviceTool {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundNormal(), new TView.ColorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundNormal(), new TPicker.PickerSelectListener() {
                         @Override
-                        public void colorSelect(int color) {
+                        public void pickerSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
                             edit_backgroundNormal.setTextColor(color);
                             edit_backgroundNormal.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundPress(), new TView.ColorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundPress(), new TPicker.PickerSelectListener() {
                         @Override
-                        public void colorSelect(int color) {
+                        public void pickerSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
                             edit_backgroundPress.setTextColor(color);
                             edit_backgroundPress.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundSelect(), new TView.ColorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundSelect(), new TPicker.PickerSelectListener() {
                         @Override
-                        public void colorSelect(int color) {
+                        public void pickerSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
                             edit_backgroundSelect.setTextColor(color);
                             edit_backgroundSelect.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new TPickerDialog(t.getContext(), t.getTextColorNormal(), new TView.ColorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getTextColorNormal(), new TPicker.PickerSelectListener() {
                         @Override
-                        public void colorSelect(int color) {
+                        public void pickerSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
                             edit_textColorNormal.setTextColor(color);
                             edit_textColorNormal.setText(Integer.toHexString(color));
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new TPickerDialog(t.getContext(), t.getStrokeColorNormal(), new TView.ColorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getStrokeColorNormal(), new TPicker.PickerSelectListener() {
                         @Override
-                        public void colorSelect(int color) {
+                        public void pickerSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);
                             edit_strokeColor.setTextColor(color);
                             edit_strokeColor.setText(Integer.toHexString(color));

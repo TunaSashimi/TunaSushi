@@ -45,11 +45,11 @@ public class TToggle extends TView {
     private float toggleLeftDx, toggleLeftDy;
     private float toggleRightDx, toggleRightDy;
 
-    protected ToggleListener toggleListener;
-
     public interface ToggleListener {
         void onToggle(boolean b);
     }
+
+    protected ToggleListener toggleListener;
 
     public ToggleListener getToggleListener() {
         return toggleListener;

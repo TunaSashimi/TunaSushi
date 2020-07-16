@@ -13,9 +13,9 @@ import android.os.Bundle;
 
 public class TPickerDialog extends Dialog {
     public int initialColor;
-    public TView.ColorSelectListener colorSelectListener;
+    public TPicker.PickerSelectListener colorSelectListener;
 
-    public TPickerDialog(Context context, int initialColor, TView.ColorSelectListener colorSelectListener) {
+    public TPickerDialog(Context context, int initialColor, TPicker.PickerSelectListener colorSelectListener) {
         super(context);
 
         this.initialColor = initialColor;
@@ -26,15 +26,17 @@ public class TPickerDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Add a layer inside the listener and Add to contentview
-        TView.ColorSelectListener colorSelectListener = new TView.ColorSelectListener() {
-            public void colorSelect(int color) {
-                TPickerDialog.this.colorSelectListener.colorSelect(color);
+        //
+        TPicker tPicker = new TPicker(getContext(), initialColor);
+        tPicker.setPickerSelectListener(new TPicker.PickerSelectListener() {
+            @Override
+            public void pickerSelect(int color) {
+                TPickerDialog.this.colorSelectListener.pickerSelect(color);
                 dismiss();
             }
-        };
+        });
 
-        setContentView(new TPicker(getContext(), initialColor, colorSelectListener));
+        setContentView(tPicker);
         setTitle("Select Color");
     }
 }

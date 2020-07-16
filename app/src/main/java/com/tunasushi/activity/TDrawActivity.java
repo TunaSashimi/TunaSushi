@@ -10,9 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tunasushi.R;
+import com.tunasushi.tuna.TPicker;
 import com.tunasushi.tuna.TPickerDialog;
 import com.tunasushi.tuna.TDraw;
-import com.tunasushi.tuna.TView;
 
 /**
  * @author TunaSashimi
@@ -63,13 +63,13 @@ public class TDrawActivity extends Activity {
         switch (item.getItemId()) {
             case COLOR_MENU_ID:
                 TPickerDialog colorPicker = new TPickerDialog(this,
-                    tDraw.getPaintingPaint().getColor(),
-                    new TView.ColorSelectListener() {
-                        @Override
-                        public void colorSelect(int color) {
-                            tDraw.getPaintingPaint().setColor(color);
-                        }
-                    });
+                        tDraw.getPaintingPaint().getColor(),
+                        new TPicker.PickerSelectListener() {
+                            @Override
+                            public void pickerSelect(int color) {
+                                tDraw.getPaintingPaint().setColor(color);
+                            }
+                        });
                 colorPicker.show();
                 return true;
             case EMBOSS_MENU_ID:

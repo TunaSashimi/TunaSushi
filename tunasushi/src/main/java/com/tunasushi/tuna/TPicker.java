@@ -18,7 +18,21 @@ public class TPicker extends TView {
     private Paint mPaint;
     private Paint mCenterPaint;
     private final int[] mColors;
-    public TView.ColorSelectListener mColorSelectListener;
+
+    //
+    public interface PickerSelectListener {
+        void pickerSelect(int color);
+    }
+
+    private PickerSelectListener pickerSelectListener;
+
+    public PickerSelectListener getPickerSelectListener() {
+        return pickerSelectListener;
+    }
+
+    public void setPickerSelectListener(PickerSelectListener pickerSelectListener) {
+        this.pickerSelectListener = pickerSelectListener;
+    }
 
     private boolean mTrackingCenter;
 
@@ -32,10 +46,11 @@ public class TPicker extends TView {
 
     float displayDensity;
 
-    TPicker(Context c, int color, TView.ColorSelectListener l) {
+    TPicker(Context c, int color) {
         super(c);
 
-        mColorSelectListener = l;
+        tag = TPicker.class.getSimpleName();
+
         mColors = new int[]{0xffff0000, 0xffff00ff, 0xff0000ff, 0xff00ffff, 0xff00ff00, 0xffffff00, 0xffff0000};
 
         displayDensity = getResources().getDisplayMetrics().density;
@@ -103,7 +118,7 @@ public class TPicker extends TView {
             }
         } else if (touchUp) {
             if (mTrackingCenter) {
-                mColorSelectListener.colorSelect(mCenterPaint.getColor());
+                pickerSelectListener.pickerSelect(mCenterPaint.getColor());
                 invalidate();
             }
         }
