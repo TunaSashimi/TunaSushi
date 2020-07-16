@@ -10,8 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.ColorPickerDialog;
+import com.tunasushi.tuna.TPickerDialog;
 import com.tunasushi.tuna.TDraw;
+import com.tunasushi.tuna.TView;
+
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53
@@ -60,9 +62,9 @@ public class TDrawActivity extends Activity {
 
         switch (item.getItemId()) {
             case COLOR_MENU_ID:
-                ColorPickerDialog colorPicker = new ColorPickerDialog(this,
+                TPickerDialog colorPicker = new TPickerDialog(this,
                     tDraw.getPaintingPaint().getColor(),
-                    new ColorPickerDialog.colorSelectListener() {
+                    new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             tDraw.getPaintingPaint().setColor(color);

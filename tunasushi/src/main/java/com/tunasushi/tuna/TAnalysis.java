@@ -45,7 +45,6 @@ public class TAnalysis extends TView {
         tag = TAnalysis.class.getSimpleName();
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         initPaint(Paint.Style.FILL, Color.RED);

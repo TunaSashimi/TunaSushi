@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.tuna.R;
-import com.tunasushi.tuna.ColorPickerDialog;
+import com.tunasushi.tuna.TPickerDialog;
 import com.tunasushi.tuna.TView;
 
 import java.io.BufferedReader;
@@ -640,7 +640,7 @@ public class DeviceTool {
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
                     edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new ColorPickerDialog(t.getContext(), t.getBackgroundNormal(), new ColorPickerDialog.colorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundNormal(), new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             btn_backgroundNormal.setBackgroundColor(color);
@@ -649,7 +649,7 @@ public class DeviceTool {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new ColorPickerDialog(t.getContext(), t.getBackgroundPress(), new ColorPickerDialog.colorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundPress(), new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             btn_backgroundPress.setBackgroundColor(color);
@@ -658,7 +658,7 @@ public class DeviceTool {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new ColorPickerDialog(t.getContext(), t.getBackgroundSelect(), new ColorPickerDialog.colorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getBackgroundSelect(), new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             btn_backgroundSelect.setBackgroundColor(color);
@@ -667,7 +667,7 @@ public class DeviceTool {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new ColorPickerDialog(t.getContext(), t.getTextColorNormal(), new ColorPickerDialog.colorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getTextColorNormal(), new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             btn_textColorNormal.setBackgroundColor(color);
@@ -676,7 +676,7 @@ public class DeviceTool {
                         }
                     }).show();
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new ColorPickerDialog(t.getContext(), t.getStrokeColorNormal(), new ColorPickerDialog.colorSelectListener() {
+                    new TPickerDialog(t.getContext(), t.getStrokeColorNormal(), new TView.ColorSelectListener() {
                         @Override
                         public void colorSelect(int color) {
                             btn_strokeColor.setBackgroundColor(color);

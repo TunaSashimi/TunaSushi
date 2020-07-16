@@ -28,7 +28,6 @@ import com.tuna.R;
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
-
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:57

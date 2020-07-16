@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
 
-
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:58

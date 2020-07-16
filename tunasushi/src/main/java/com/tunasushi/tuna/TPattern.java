@@ -9,10 +9,8 @@ import android.graphics.Color;
 import android.graphics.DrawFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
 /**
  * @author TunaSashimi
@@ -25,8 +23,8 @@ public class TPattern extends TView {
     private final Shader mShader2;
     private final Paint mPaint;
 
-    private float mTouchCurrX;
-    private float mTouchCurrY;
+    private float mTouchCurrentX;
+    private float mTouchCurrentY;
     private DrawFilter mDF;
 
     public TPattern(Context context) {
@@ -62,7 +60,7 @@ public class TPattern extends TView {
         mPaint.setShader(mShader1);
         canvas.drawPaint(mPaint);
 
-        canvas.translate(mTouchCurrX, mTouchCurrY);
+        canvas.translate(mTouchCurrentX, mTouchCurrentY);
 
         mPaint.setShader(mShader2);
         canvas.drawPaint(mPaint);
@@ -91,8 +89,8 @@ public class TPattern extends TView {
     @Override
     public void setTouchXY(float touchX, float touchY) {
         if (press) {
-            mTouchCurrX = touchX;
-            mTouchCurrY = touchY;
+            mTouchCurrentX = touchX;
+            mTouchCurrentY = touchY;
         } else if (touchUp) {
             mDF = null;
         }

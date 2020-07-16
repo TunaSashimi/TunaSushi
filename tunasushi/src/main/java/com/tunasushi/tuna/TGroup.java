@@ -10,7 +10,6 @@ import java.util.List;
 
 import androidx.annotation.IntDef;
 
-
 /**
  * @author TunaSashimi
  * @date 2020-02-03 01:18

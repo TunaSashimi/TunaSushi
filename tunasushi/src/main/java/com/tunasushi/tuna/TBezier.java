@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
@@ -244,7 +243,6 @@ public class TBezier extends TView {
         Circle circle = circlePaths.get(0);
         circle.center[0] = touchX;
         circle.center[1] = touchY;
-        invalidate();
         invalidate();
     }
 }
