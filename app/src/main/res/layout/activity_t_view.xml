@@ -52,8 +52,8 @@
             app:adjust="true"
             app:backgroundNormal="#666666"
             app:text="#666666"
-            app:textColorNormal="#ffffff"
             app:textAssets="fonts/computer.ttf"
+            app:textColorNormal="#ffffff"
             app:touchUp="touchUp" />
 
         <com.tunasushi.tuna.TView
@@ -66,8 +66,8 @@
             app:backgroundNormal="#cccccc"
             app:onClick="onClick"
             app:text="#cccccc"
-            app:textColorNormal="#ffffff"
-            app:textAssets="fonts/digital-7.ttf" />
+            app:textAssets="fonts/digital-7.ttf"
+            app:textColorNormal="#ffffff" />
 
         <TextView
             android:id="@+id/textPrompt02"
@@ -274,11 +274,11 @@
             app:backgroundShadowRadiusNormal="8dp"
             app:radius="5dp"
             app:text="字体fonts/simsun.ttf背景#0000ff背景阴影#800000ff背景阴影半径8dp背景阴影横向偏移0dp背景阴影纵向偏移0dp"
+            app:textAssets="fonts/simsun.ttf"
             app:textColorNormal="#ffffff"
             app:textPaddingLeft="8dp"
             app:textPaddingRight="8dp"
-            app:textSize="14dp"
-            app:textAssets="fonts/simsun.ttf" />
+            app:textSize="14dp" />
 
         <TextView
             android:id="@+id/textPrompt05"

@@ -3,6 +3,10 @@
     <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
         <attr name="press" format="boolean" />
+        <attr name="pressMode">
+            <enum name="normal" value="0" />
+            <enum name="never" value="1" />
+        </attr>
         <attr name="select" format="boolean" />
         <attr name="selectMode">
             <enum name="reverse" value="0" />

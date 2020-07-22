@@ -741,6 +741,27 @@ public class TView extends View {
         invalidate();
     }
 
+    //
+    @IntDef({NEED, WITHOUT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface pressMode {
+    }
+
+    public static final int NEED = 0;
+    public static final int WITHOUT = 1;
+    private static final int[] pressModeArray = {NEED, WITHOUT};
+    // default REVERSE
+    private int pressMode;
+
+    public int getPressType() {
+        return pressMode;
+    }
+
+    public void setPressType(int pressMode) {
+        this.pressMode = pressMode;
+    }
+
+
     // select default false
     protected boolean select;
 
@@ -759,7 +780,7 @@ public class TView extends View {
     }
 
     //
-    @IntDef({REVERSE, ALWAYS})
+    @IntDef({REVERSE, ALWAYS, NEVER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface selectMode {
     }
@@ -4756,10 +4777,13 @@ public class TView extends View {
         //
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
-        //
         press = typedArray.getBoolean(R.styleable.TView_press, false);
-        select = typedArray.getBoolean(R.styleable.TView_select, false);
+        // selectMode default need
+        int pressModeIndex = typedArray.getInt(R.styleable.TView_pressMode, 0);
+        pressMode = pressModeArray[pressModeIndex];
 
+        //
+        select = typedArray.getBoolean(R.styleable.TView_select, false);
         // selectMode default reverse
         int selectModeIndex = typedArray.getInt(R.styleable.TView_selectMode, 0);
         selectMode = selectModeArray[selectModeIndex];
@@ -4839,7 +4863,6 @@ public class TView extends View {
             }
 
             //
-
             int srcModeIndex = typedArray.getInt(R.styleable.TView_srcMode, 0);
             if (srcModeIndex >= 0) {
                 srcMode = srcModeArray[srcModeIndex];
@@ -5176,11 +5199,18 @@ public class TView extends View {
                 touchCancel = false;
                 touchDownEventX = event.getX();
                 touchDownEventY = event.getY();
+
                 //
-                press = true;
-                if (selectMode == ALWAYS) {
-                    setSelect(false);
+                if (pressMode == NEED) {
+                    press = true;
+                    if (selectMode == ALWAYS) {
+                        setSelect(false);
+                    }
+                } else if (pressMode == WITHOUT) {
+                    press = false;
+                    setSelect(true);
                 }
+
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
@@ -5195,7 +5225,6 @@ public class TView extends View {
                 }
                 //
                 if (materialTime != 0) {
-
                     float startRadius, endRadius;
                     if (width >= height) {
                         startRadius = touchDownEventY >= height - touchDownEventY ? touchDownEventY : height - touchDownEventY;
@@ -5257,8 +5286,14 @@ public class TView extends View {
                 touchMove = true;
                 touchUp = false;
                 touchCancel = false;
+
                 //
-                press = true;
+                if (pressMode == NEED) {
+                    press = true;
+                } else if (pressMode == WITHOUT) {
+                    press = false;
+                }
+
                 if (!textMarkTouchable) {
                     textMark = false;
                 }
@@ -5400,7 +5435,7 @@ public class TView extends View {
     }
 
     protected List<Integer> createMeasureList(String text, Paint paint, float width, float paddingLeft, float paddingRight) {
-        List<Integer> measureList = new ArrayList<Integer>();
+        List<Integer> measureList = new ArrayList();
         int charatcerLength = text.length();
         float characterWidth = paint.measureText(text);
         float availableWidth = width - paddingLeft - paddingRight;
