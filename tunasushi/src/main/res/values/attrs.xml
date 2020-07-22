@@ -4,8 +4,8 @@
     <declare-styleable name="TView">
         <attr name="press" format="boolean" />
         <attr name="pressMode">
-            <enum name="normal" value="0" />
-            <enum name="never" value="1" />
+            <enum name="need" value="0" />
+            <enum name="without" value="1" />
         </attr>
         <attr name="select" format="boolean" />
         <attr name="selectMode">
