@@ -29,6 +29,6 @@ public class TMaterialActivity extends Activity {
         tViewMaterial03 = findViewById(R.id.tViewMaterial03);
         tViewMaterial04 = findViewById(R.id.tViewMaterial04);
 
-        TGroup.link(Arrays.asList(tViewMaterial03, tViewMaterial04));
+        TGroup.link(tViewMaterial03, tViewMaterial04);
     }
 }

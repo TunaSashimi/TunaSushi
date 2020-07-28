@@ -5,8 +5,6 @@ import android.widget.LinearLayout;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.IntDef;
 
@@ -26,31 +24,31 @@ public class TGroup {
     public static final int VERTICAL = 1;
 
     //
-    public static void link(final List<TView> tViewList) {
-        linkRaw(tViewList, null, null);
+    public static void link(TView... tViews) {
+        linkRaw(null, null, tViews);
     }
 
-    public static void link(final List<TView> tViewList, TView.TouchUpListener touchUpListener) {
-        linkRaw(tViewList, touchUpListener, null);
+    public static void link(TView.TouchUpListener touchUpListener, TView... tViews) {
+        linkRaw(touchUpListener, null, tViews);
     }
 
-    public static void link(final List<TView> tViewList, TView.OnClickListener onClickListener) {
-        linkRaw(tViewList, null, onClickListener);
+    public static void link(TView.OnClickListener onClickListener, TView... tViews) {
+        linkRaw(null, onClickListener, tViews);
     }
 
-    public static void link(final List<TView> tViewList,TView.TouchUpListener touchUpListener, TView.OnClickListener onClickListener) {
-        linkRaw(tViewList, touchUpListener, onClickListener);
+    public static void link(TView.TouchUpListener touchUpListener, TView.OnClickListener onClickListener, TView... tViews) {
+        linkRaw(touchUpListener, onClickListener, tViews);
     }
 
     //3
-    public static void linkRaw(final List<TView> tViewList, final TView.TouchUpListener touchUpListener, final TView.OnClickListener onClickListener) {
-        if (tViewList == null) {
+    public static void linkRaw(TView.TouchUpListener touchUpListener, TView.OnClickListener onClickListener, final TView... tViews) {
+        if (tViews == null) {
             return;
         }
-        final int listSize = tViewList.size();
+        final int listSize = tViews.length;
         for (int i = 0; i < listSize; i++) {
             final int finalI = i;
-            TView t = tViewList.get(i);
+            TView t = tViews[i];
             if (touchUpListener != null) {
                 t.setTouchUpListener(touchUpListener);
             }
@@ -63,7 +61,7 @@ public class TGroup {
                     //The link method of any TView is to set the status of other TViews to false!
                     for (int j = 0; j < listSize; j++) {
                         if (j != finalI) {
-                            tViewList.get(j).setStatus(false, false);
+                            tViews[j].setStatus(false, false);
                         }
                     }
                 }
@@ -324,7 +322,7 @@ public class TGroup {
                                   TView.OnClickListener onClickListener) {
 
         Context context = linearLayout.getContext();
-        List<TView> tViewList = new ArrayList();
+        TView[] tViews;
         if (stringArray.length <= 0) {
             return;
         } else if (stringArray.length == 1) {
@@ -338,6 +336,8 @@ public class TGroup {
             }
             linearLayout.addView(t, width, LinearLayout.LayoutParams.MATCH_PARENT);
         } else {
+            //
+            tViews = new TView[stringArray.length];
             for (int i = 0; i < stringArray.length; i++) {
                 TView t = new TView(context, null, i == 0 ? styleStart : i == stringArray.length - 1 ? styleEnd : styleOther);
                 t.setText(stringArray[i]);
@@ -350,7 +350,7 @@ public class TGroup {
                 if (onClickListener != null) {
                     t.setOnClickListener(onClickListener);
                 }
-                tViewList.add(t);
+                tViews[i] = t;
                 //
                 int margin = (int) t.getStrokeWidthNormal();
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
@@ -368,32 +368,17 @@ public class TGroup {
                 }
                 linearLayout.addView(t, layoutParams);
             }
-            link(tViewList);
+            link(tViews);
         }
     }
 
-    public static void reset(TView[] tViewArray) {
-        reset(tViewArray, 0);
+    public static void reset(TView... tViews) {
+        reset(0, tViews);
     }
 
-    public static void reset(TView[] tViewArray, int index) {
-        int arraySize = tViewArray.length;
-        for (int i = 0; i < arraySize; i++) {
-            if (i == index) {
-                tViewArray[i].setStatus(false, true);
-            } else {
-                tViewArray[i].setStatus(false, false);
-            }
-        }
-    }
-
-    public static void reset(List<TView> tViewList) {
-        reset(tViewList, 0);
-    }
-
-    public static void reset(List<TView> tViewList, int index) {
-        for (int i = 0; i < tViewList.size(); i++) {
-            TView tView = tViewList.get(i);
+    public static void reset(int index, TView... tViews) {
+        for (int i = 0; i < tViews.length; i++) {
+            TView tView = tViews[i];
             if (i == index) {
                 tView.setStatus(false, true);
             } else {
@@ -402,9 +387,9 @@ public class TGroup {
         }
     }
 
-    public static int getIndex(List<TView> tViewList) {
-        for (int i = 0; i < tViewList.size(); i++) {
-            TView tView = tViewList.get(i);
+    public static int getIndex(TView... tViews) {
+        for (int i = 0; i < tViews.length; i++) {
+            TView tView = tViews[i];
             if (tView.isSelect()) {
                 return i;
             }
@@ -412,9 +397,9 @@ public class TGroup {
         return -1;
     }
 
-    public static String getIndexText(List<TView> tViewList) {
-        for (int i = 0; i < tViewList.size(); i++) {
-            TView tView = tViewList.get(i);
+    public static String getIndexText(TView... tViews) {
+        for (int i = 0; i < tViews.length; i++) {
+            TView tView = tViews[i];
             if (tView.isSelect()) {
                 return tView.getText();
             }
@@ -422,9 +407,9 @@ public class TGroup {
         return null;
     }
 
-    public static String getIndexContent(List<TView> tViewList) {
-        for (int i = 0; i < tViewList.size(); i++) {
-            TView tView = tViewList.get(i);
+    public static String getIndexContent(TView... tViews) {
+        for (int i = 0; i < tViews.length; i++) {
+            TView tView = tViews[i];
             if (tView.isSelect()) {
                 return tView.getContent();
             }

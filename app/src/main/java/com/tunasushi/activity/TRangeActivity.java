@@ -3,16 +3,12 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tuna.TBubble;
 import com.tunasushi.tuna.TGroup;
 import com.tunasushi.tuna.TRange;
 import com.tunasushi.tuna.TView;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
 
@@ -28,8 +24,6 @@ public class TRangeActivity extends Activity implements TView.TouchUpListener {
     private TBubble tBubble;
     private TRange tRange;
     private int dx;
-
-    private List<TView> tViewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +42,7 @@ public class TRangeActivity extends Activity implements TView.TouchUpListener {
         tBubble = findViewById(R.id.tBubble);
 
         //
-        tViewList = Arrays.asList(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive);
-        TGroup.link(tViewList);
+        TGroup.link(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive);
 
         //
         tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
@@ -80,11 +73,10 @@ public class TRangeActivity extends Activity implements TView.TouchUpListener {
     public void touchUp(TView t) {
         switch (t.getId()) {
             case R.id.tViewReset:
-                TGroup.reset(tViewList);
                 tRange.reset();
                 break;
             case R.id.tViewComplete:
-                Toast.makeText(this, tViewPrice.getContent() + "，" + TGroup.getIndexText(tViewList), Toast.LENGTH_SHORT).show();
+                finish();
                 break;
             default:
                 break;
