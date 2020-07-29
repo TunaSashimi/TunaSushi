@@ -147,7 +147,7 @@ public class TWrap extends TView {
         //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
 
         if (wrapTextArray == null) {
-            return;
+            wrapTextArray = new String[]{""};
         }
 
         total = wrapTextArray.length;
