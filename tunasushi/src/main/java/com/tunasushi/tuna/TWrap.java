@@ -146,6 +146,9 @@ public class TWrap extends TView {
         //Not only the onMeasure method of the parent class will affect the alignment!
         //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
 
+        System.out.println("onMeasure==>");
+        System.out.println("wrapTextArray==>" + wrapTextArray);
+
         if (wrapTextArray == null) {
             wrapTextArray = new String[]{""};
         }
