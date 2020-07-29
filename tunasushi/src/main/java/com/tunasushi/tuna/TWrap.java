@@ -111,7 +111,8 @@ public class TWrap extends TView {
         if (wrapModeIndex >= 0) {
             wrapMode = wrapModeArray[wrapModeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute wrapMode type must be given");
+//            throw new IllegalArgumentException("The content attribute wrapMode type must be given");
+            return;
         }
 
         wrapSpaceLine = typedArray.getDimension(R.styleable.TWrap_wrapSpaceLine, 0);

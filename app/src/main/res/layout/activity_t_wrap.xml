@@ -12,12 +12,9 @@
         android:layout_margin="16dp"
         android:layerType="software"
         app:radius="5dp"
-        app:wrapBackgroundNormal="#ffffff"
-        app:wrapStrokeColorNormal="#cccccc"
-        app:wrapStrokeColorSelect="#ff9933"
+        app:wrapStrokeColorNormal="#ff9933"
         app:wrapStrokeWidth="1dp"
-        app:wrapTextColorNormal="#6e7080"
-        app:wrapTextColorSelect="#ff9933"
+        app:wrapTextColorNormal="#ff9933"
         app:wrapTextSize="20dp" />
 
     <com.tunasushi.tuna.TWrap
@@ -29,7 +26,6 @@
         android:layout_marginRight="16dp"
         android:layerType="software"
         app:radius="5dp"
-        app:wrapBackgroundNormal="#ffffff"
         app:wrapMode="multiple"
         app:wrapSpaceLine="20dp"
         app:wrapSpaceRow="10dp"
@@ -48,7 +44,6 @@
         android:layout_margin="16dp"
         android:layerType="software"
         app:radius="5dp"
-        app:wrapBackgroundNormal="#ffffff"
         app:wrapMode="single"
         app:wrapStrokeColorNormal="#cccccc"
         app:wrapStrokeColorSelect="#ff9933"
