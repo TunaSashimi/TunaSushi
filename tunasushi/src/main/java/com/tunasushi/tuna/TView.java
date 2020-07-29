@@ -402,6 +402,10 @@ public class TView extends View {
     // 10
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
                                int textGravityMode, float textRowSpaceRatio, List<Integer> measureList) {
+
+        //
+//        paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG );
+
         if (measureList == null) {
             measureList = createMeasureList(string, paint, width, paddingLeft, paddingRight);
         }

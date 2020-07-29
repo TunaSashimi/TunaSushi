@@ -706,6 +706,6 @@
         <attr name="wrapTextPadding" format="dimension" />
         <attr name="wrapTextColorNormal" format="reference|color" />
         <attr name="wrapTextColorSelect" format="reference|color" />
-        <attr name="wrapItemTextArray" format="reference" />
+        <attr name="wrapTextArray" format="reference" />
     </declare-styleable>
 </resources>

@@ -484,4 +484,9 @@ public class TBinding {
     public static void setLayoutBackgroundEnd(TLayout tLayout, String layoutBackgroundEnd) {
         tLayout.setLayoutBackgroundEnd(layoutBackgroundEnd);
     }
+
+    @BindingAdapter({"wrapTextArray"})
+    public static void setWrapTextArray(TWrap tWrap, String[] wrapTextArray) {
+        tWrap.setWrapTextArray(wrapTextArray);
+    }
 }

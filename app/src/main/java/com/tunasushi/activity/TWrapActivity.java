@@ -26,7 +26,7 @@ public class TWrapActivity extends Activity {
         setContentView(R.layout.activity_t_wrap);
 
         tWrap01 = findViewById(R.id.tWrap01);
-        tWrap01.setWrapItemTextArray(
+        tWrap01.setWrapTextArray(
                 new String[]{
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
@@ -41,7 +41,7 @@ public class TWrapActivity extends Activity {
 
         //
         tWrap02 = findViewById(R.id.tWrap02);
-        tWrap02.setWrapItemTextArray(
+        tWrap02.setWrapTextArray(
                 new String[]{
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏",
@@ -56,7 +56,7 @@ public class TWrapActivity extends Activity {
 
         //
         tWrap03 = findViewById(R.id.tWrap03);
-        tWrap03.setWrapItemTextArray(
+        tWrap03.setWrapTextArray(
                 new String[]{
                         "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
                         , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"

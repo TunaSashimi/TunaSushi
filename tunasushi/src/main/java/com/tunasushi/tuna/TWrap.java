@@ -53,14 +53,15 @@ public class TWrap extends TView {
 
     private int index;
 
-    public String[] getWrapItemTextArray() {
-        return wrapItemTextArray;
+    public String[] getWrapTextArray() {
+        return wrapTextArray;
     }
 
-    private String[] wrapItemTextArray;
+    private String[] wrapTextArray;
 
-    public void setWrapItemTextArray(String[] wrapItemTextArray) {
-        this.wrapItemTextArray = wrapItemTextArray;
+    public void setWrapTextArray(String[] wrapTextArray) {
+        this.wrapTextArray = wrapTextArray;
+        requestLayout();
     }
 
     //
@@ -76,7 +77,7 @@ public class TWrap extends TView {
     }
 
     public String getWrapSelectString() {
-        return wrapItemTextArray[index];
+        return wrapTextArray[index];
     }
 
     public class Wrap {
@@ -130,9 +131,9 @@ public class TWrap extends TView {
         wrapTextColorNormal = typedArray.getColor(R.styleable.TWrap_wrapTextColorNormal, textColorDefault);
         wrapTextColorSelect = typedArray.getColor(R.styleable.TWrap_wrapTextColorSelect, wrapTextColorNormal);
 
-        int wrapItemTextArrayId = typedArray.getResourceId(R.styleable.TWrap_wrapItemTextArray, -1);
-        if (wrapItemTextArrayId != -1) {
-            wrapItemTextArray = typedArray.getResources().getStringArray(wrapItemTextArrayId);
+        int wrapTextArrayId = typedArray.getResourceId(R.styleable.TWrap_wrapTextArray, -1);
+        if (wrapTextArrayId != -1) {
+            wrapTextArray = typedArray.getResources().getStringArray(wrapTextArrayId);
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
@@ -143,7 +144,7 @@ public class TWrap extends TView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //Not only the onMeasure method of the parent class will affect the alignment!
         //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
-        total = wrapItemTextArray.length;
+        total = wrapTextArray.length;
         if (total <= 0) {
             throw new IllegalArgumentException("The content attribute tunaWrapItemTextArray length must be greater than 0 ");
         } else if (wrapList == null && wrapList == null) {
@@ -174,14 +175,14 @@ public class TWrap extends TView {
         int measuredHeight = (int) rowHeight;//At least one line
 
         //
-        float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
+        float characterWidth = paint.measureText(wrapTextArray[0]) + wrapTextPadding * 2;//At least one field
 
         //measuredHeight
         if (specModeHeight == MeasureSpec.AT_MOST) {// wrap_content
             for (int i = 0; i <= total - 1; i++) {
                 //Start from the second
                 if (i != 0) {
-                    float itemWidth = paint.measureText(wrapItemTextArray[i]) + wrapTextPadding * 2;
+                    float itemWidth = paint.measureText(wrapTextArray[i]) + wrapTextPadding * 2;
                     characterWidth += itemWidth + wrapSpaceLine;
                 }
                 if (characterWidth > specSizeWidth) {
@@ -201,11 +202,11 @@ public class TWrap extends TView {
     protected void onDraw(Canvas canvas) {
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
-        float characterWidth = paint.measureText(wrapItemTextArray[0]) + wrapTextPadding * 2;//At least one field
+        float characterWidth = paint.measureText(wrapTextArray[0]) + wrapTextPadding * 2;//At least one field
         dx = 0;
         dy = 0;
         for (int i = 0; i <= total - 1; i++) {
-            float itemWidth = paint.measureText(wrapItemTextArray[i]) + wrapTextPadding * 2;
+            float itemWidth = paint.measureText(wrapTextArray[i]) + wrapTextPadding * 2;
             if (i != 0) {
                 characterWidth += itemWidth + wrapSpaceLine;
             }
@@ -231,7 +232,7 @@ public class TWrap extends TView {
     private void drawDetail(Canvas canvas, float dx, float dy, float itemWidth, float rowHeight, float wrapTextPadding, int i) {
         //
         if (wrapList.size() <= i) {
-            wrapList.add(new Wrap(new RectF(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapItemTextArray[i]));
+            wrapList.add(new Wrap(new RectF(dx, dy, dx + (int) itemWidth, dy + (int) rowHeight), false, wrapTextArray[i]));
         }
 
         Wrap wrap = wrapList.get(i);
