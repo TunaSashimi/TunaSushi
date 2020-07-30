@@ -26,9 +26,9 @@ public class TLine extends TView {
     private float lineThick;
     private int lineColor;
 
-    @IntDef({TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK})
+    @IntDef({TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface lineMode {
+    public @interface lineStyle {
     }
 
     public static final int TOP = 0;
@@ -38,16 +38,16 @@ public class TLine extends TView {
     public static final int SLASH = 4;
     public static final int SLASHBACK = 5;
     public static final int CROSS = 6;
-    private static final int[] lineModeArray = {TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK, CROSS,};
-    private @lineMode
-    int lineMode;
+    private static final int[] lineStyleArray = {TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK, CROSS,};
+    private @lineStyle
+    int lineStyle;
 
-    public int getLineMode() {
-        return lineMode;
+    public int getLineStyle() {
+        return lineStyle;
     }
 
-    public void setLineMode(int lineMode) {
-        this.lineMode = lineMode;
+    public void setLineStyle(int lineStyle) {
+        this.lineStyle = lineStyle;
         invalidate();
     }
 
@@ -71,9 +71,9 @@ public class TLine extends TView {
         lineThick = typedArray.getDimension(R.styleable.TLine_lineThick, 0);
         lineColor = typedArray.getColor(R.styleable.TLine_lineColor, Color.TRANSPARENT);
 
-        int lineModeIndex = typedArray.getInt(R.styleable.TLine_lineMode, 0);
-        if (lineModeIndex >= 0) {
-            lineMode = lineModeArray[lineModeIndex];
+        int lineStyleIndex = typedArray.getInt(R.styleable.TLine_lineStyle, 0);
+        if (lineStyleIndex >= 0) {
+            lineStyle = lineStyleArray[lineStyleIndex];
         }
 
         lineBackground = typedArray.getColor(R.styleable.TLine_lineBackground, Color.TRANSPARENT);
@@ -84,7 +84,7 @@ public class TLine extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        switch (lineMode) {
+        switch (lineStyle) {
             case TOP:
                 if (lineBackground != Color.TRANSPARENT) {
                     initPathMoveTo(0, height);

@@ -455,9 +455,9 @@ public class TBinding {
     }
 
     //
-    @BindingAdapter({"lineMode"})
-    public static void setLineMode(TLine tLine, int lineMode) {
-        tLine.setLineMode(lineMode);
+    @BindingAdapter({"lineStyle"})
+    public static void setLineStyle(TLine tLine, int lineStyle) {
+        tLine.setLineStyle(lineStyle);
     }
 
     @BindingAdapter({"layoutBackgroundAngle"})

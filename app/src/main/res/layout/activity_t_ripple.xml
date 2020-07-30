@@ -54,7 +54,7 @@
             app:rippleCircleColorInner="#fed136"
             app:rippleCircleColorOuter="#ff9900"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleMode="accelerateDecelerateInterpolator"
+            app:rippleStyle="accelerateDecelerateInterpolator"
             app:rippleText="^"
             app:rippleTextColor="#ffffff"
             app:rippleTextSize="20dp" />
@@ -70,7 +70,7 @@
             app:rippleCircleColorEndInner="#0000ff"
             app:rippleCircleColorStartInner="#ffffff"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleMode="accelerateInterpolator"
+            app:rippleStyle="accelerateInterpolator"
             app:rippleText="^"
             app:rippleTextColor="#ffffff"
             app:rippleTextFractionDx="5%"
@@ -89,7 +89,7 @@
             app:rippleCircleColorStartInner="#ffffff"
             app:rippleCircleColorStartOuter="#ff0000"
             app:rippleCircleRadiusInner="24dp"
-            app:rippleMode="anticipateInterpolator"
+            app:rippleStyle="anticipateInterpolator"
             app:rippleText="^"
             app:rippleTextColor="#ffffff"
             app:rippleTextDy="10dp"
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tRipple01"
             android:layout_margin="16dp"
-            android:text="rippleCircleRadiusInner设置内圆半径\nrippleCircleColorInner设置内圆颜色\nrippleCircleColorOuter设置外圆颜色\nrippleText设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleCircleColorAngleInner设置内圆渐变方向\nrippleCircleColorAngleOuter设置外圆渐变方向\nrippleCircleColorStartInner设置内圆渐变开始颜色\nrippleCircleColorEndInner设置内圆渐变结束颜色\nrippleCircleColorStartOuter设置外圆渐变开始颜色\nrippleCircleColorEndOuter设置外圆渐变结束颜色\nrippleAngle设置持续时间\nrippleMode设置插补器"
+            android:text="rippleCircleRadiusInner设置内圆半径\nrippleCircleColorInner设置内圆颜色\nrippleCircleColorOuter设置外圆颜色\nrippleText设置文字内容\nrippleTextSize设置字体大小\nrippleTextColor设置字体颜色\nrippleTextDx设置文字横向偏移\nrippleTextDy设置文字纵向偏移\nrippleTextFractionDx设置文字横向偏移百分比\nrippleTextFractionDy设置文字纵向偏移百分比\nrippleCircleColorAngleInner设置内圆渐变方向\nrippleCircleColorAngleOuter设置外圆渐变方向\nrippleCircleColorStartInner设置内圆渐变开始颜色\nrippleCircleColorEndInner设置内圆渐变结束颜色\nrippleCircleColorStartOuter设置外圆渐变开始颜色\nrippleCircleColorEndOuter设置外圆渐变结束颜色\nrippleAngle设置持续时间\nrippleStyle设置插补器"
             android:textColor="#434343" />
     </RelativeLayout>
 </ScrollView>

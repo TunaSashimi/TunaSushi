@@ -97,6 +97,10 @@ public class TView extends View {
     protected String[] stringArray;
 
     //
+    protected int widthDefault = dpToPx(96);
+    protected int heightDefault = dpToPx(48);
+
+    //
     protected float textSizeDefault = dpToPx(16);
     protected int textColorDefault = 0xff999999;
 
@@ -204,6 +208,7 @@ public class TView extends View {
         if (shadowRadius != 0) {
             paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
         }
+
         if (alpha != -1) {
             paint.setAlpha(alpha);
         }
@@ -212,38 +217,43 @@ public class TView extends View {
 
     // 1
     protected Paint initTextPaint(float textSize) {
-        return initTextPaint(null, Color.WHITE, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
+        return initTextPaint(null, Color.WHITE, textSize, 0, Color.TRANSPARENT, 0, 0, null, null, TEXT_FLAG_NORMAL);
     }
 
     // 2
     protected Paint initTextPaint(int textColor, float textSize) {
-        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, null);
+        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, null, TEXT_FLAG_NORMAL);
     }
 
     // 3
     protected Paint initTextPaint(int textColor, float textSize, Paint.Align align) {
-        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
+        return initTextPaint(null, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align, TEXT_FLAG_NORMAL);
     }
 
     // 4
     protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, Paint.Align align) {
-        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align);
+        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, null, align, TEXT_FLAG_NORMAL);
     }
 
     // 5
     protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, Typeface typeFace, Paint.Align align) {
-        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, typeFace, align);
+        return initTextPaint(style, textColor, textSize, 0, Color.TRANSPARENT, 0, 0, typeFace, align, TEXT_FLAG_NORMAL);
     }
 
     // 8
-    protected Paint initTextPaint(Paint.Style style, int color, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align) {
+    protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align) {
+        return initTextPaint(style, textColor, textSize, shadowRadius, shadowColor, shadowDx, shadowDy, typeFace, align, TEXT_FLAG_NORMAL);
+    }
+
+    // 9
+    protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align, int textFlag) {
         //
         initPaint();
         //
         if (style != null) {
             paint.setStyle(style);
         }
-        paint.setColor(color);
+        paint.setColor(textColor);
 
         if (textSize != 0) {
             paint.setTextSize(textSize);
@@ -251,12 +261,20 @@ public class TView extends View {
         if (shadowRadius != 0) {
             paint.setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
         }
+
+        if (typeFace != null) {
+            paint.setTypeface(typeFace);
+        }
+
         if (align != null) {
             paint.setTextAlign(align);
         }
 
-        if (typeFace != null) {
-            paint.setTypeface(typeFace);
+        //
+        if (textFlag == TEXT_FLAG_STRIKE_THROUGH) {
+            paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        } else if (textFlag == TEXT_FLAG_UNDER_LINE) {
+            paint.setFlags(Paint.UNDERLINE_TEXT_FLAG);
         }
         return paint;
     }
@@ -401,7 +419,7 @@ public class TView extends View {
 
     // 10
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
-                               int textGravityMode, float textRowSpaceRatio, List<Integer> measureList) {
+                               int textGravity, float textRowSpaceRatio, List<Integer> measureList) {
 
         //
 //        paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG );
@@ -428,7 +446,7 @@ public class TView extends View {
             }
             float measureLength = paint.measureText(drawString);
             if (i != measureListSize - 1) {
-                switch (textGravityMode) {
+                switch (textGravity) {
                     case TEXT_GRAVITY_CENTER:
                     case TEXT_GRAVITY_CENTER_LEFT:
                         canvas.drawText(drawString, centerX + (paddingLeft - paddingRight) * 0.5f, drawLineY, paint);
@@ -443,7 +461,7 @@ public class TView extends View {
                 }
             } else {
                 float availableWidth = width - paddingLeft - paddingRight;
-                switch (textGravityMode) {
+                switch (textGravity) {
                     case TEXT_GRAVITY_CENTER:
                     case TEXT_GRAVITY_LEFT_CENTER:
                         canvas.drawText(drawString, centerX, drawLineY, paint);
@@ -746,23 +764,23 @@ public class TView extends View {
     }
 
     //
-    @IntDef({NEED, WITHOUT})
+    @IntDef({NEED, WITHOUT,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface pressMode {
+    public @interface pressStyle {
     }
 
     public static final int NEED = 0;
     public static final int WITHOUT = 1;
-    private static final int[] pressModeArray = {NEED, WITHOUT};
+    private static final int[] pressStyleArray = {NEED, WITHOUT,};
     // default REVERSE
-    private int pressMode;
+    private int pressStyle;
 
     public int getPressType() {
-        return pressMode;
+        return pressStyle;
     }
 
-    public void setPressType(int pressMode) {
-        this.pressMode = pressMode;
+    public void setPressType(int pressStyle) {
+        this.pressStyle = pressStyle;
     }
 
 
@@ -784,24 +802,24 @@ public class TView extends View {
     }
 
     //
-    @IntDef({REVERSE, ALWAYS, NEVER})
+    @IntDef({REVERSE, ALWAYS, NEVER,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface selectMode {
+    public @interface selectStyle {
     }
 
     public static final int REVERSE = 0;
     public static final int ALWAYS = 1;
     public static final int NEVER = 2;
-    private static final int[] selectModeArray = {REVERSE, ALWAYS, NEVER};
+    private static final int[] selectStyleArray = {REVERSE, ALWAYS, NEVER,};
     // default REVERSE
-    private int selectMode;
+    private int selectStyle;
 
     public int getSelectType() {
-        return selectMode;
+        return selectStyle;
     }
 
-    public void setSelectType(int selectMode) {
-        this.selectMode = selectMode;
+    public void setSelectType(int selectStyle) {
+        this.selectStyle = selectStyle;
     }
 
     // default false
@@ -1906,19 +1924,19 @@ public class TView extends View {
         setSrcSelect(src);
     }
 
-    @IntDef({FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER})
+    @IntDef({FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface srcMode {
+    public @interface srcStyle {
     }
 
     public static final int FIT_XY = 0;
     public static final int FIT_WIDTH = 1;
     public static final int FIT_HEIGHT = 2;
     public static final int FIT_CENTER = 3;
-    private static final int[] srcModeArray = {FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER,
+    private static final int[] srcStyleArray = {FIT_XY, FIT_WIDTH, FIT_HEIGHT, FIT_CENTER,
     };
-    private @srcMode
-    int srcMode;
+    private @srcStyle
+    int srcStyle;
 
     //
     private float srcShadowRadiusNormal;
@@ -2128,14 +2146,14 @@ public class TView extends View {
     public static final int GRAVITY_MASK = CENTER_HORIZONTAL | RIGHT | CENTER_VERTICAL | BOTTOM;
 
     //
-    private int srcAnchorGravityMode;
+    private int srcAnchorGravity;
 
     public int getDownloadMarkGravity() {
-        return srcAnchorGravityMode;
+        return srcAnchorGravity;
     }
 
-    public void setSrcAnchorGravity(int srcAnchorGravityMode) {
-        this.srcAnchorGravityMode = srcAnchorGravityMode;
+    public void setSrcAnchorGravity(int srcAnchorGravity) {
+        this.srcAnchorGravity = srcAnchorGravity;
     }
 
     // anchor Normal,Press,Select use one Matrix
@@ -2956,28 +2974,6 @@ public class TView extends View {
     }
 
 
-    @IntDef({TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface textGravityMode {
-    }
-
-    public static final int TEXT_GRAVITY_CENTER = 0;
-    public static final int TEXT_GRAVITY_LEFT = 1;
-    public static final int TEXT_GRAVITY_RIGHT = 2;
-    public static final int TEXT_GRAVITY_CENTER_LEFT = 3;
-    public static final int TEXT_GRAVITY_LEFT_CENTER = 4;
-    private static final int[] textGravityModeArray = {TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,};
-    private @textGravityMode
-    int textGravityMode;
-
-    public int getTextGravity() {
-        return textGravityMode;
-    }
-
-    public void setTextGravity(int textGravityMode) {
-        this.textGravityMode = textGravityMode;
-    }
-
     //
     private Typeface textStyle;
     private static final int[] textStyleArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC};
@@ -2988,6 +2984,50 @@ public class TView extends View {
 
     public void setTextStyle(Typeface textStyle) {
         this.textStyle = textStyle;
+    }
+
+    //
+    @IntDef({TEXT_FLAG_NORMAL, TEXT_FLAG_STRIKE_THROUGH, TEXT_FLAG_UNDER_LINE,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface textFlag {
+    }
+
+    public static final int TEXT_FLAG_NORMAL = 0;
+    public static final int TEXT_FLAG_STRIKE_THROUGH = 1;
+    public static final int TEXT_FLAG_UNDER_LINE = 2;
+    private static final int[] textFlagArray = {TEXT_FLAG_NORMAL, TEXT_FLAG_STRIKE_THROUGH, TEXT_FLAG_UNDER_LINE,};
+    private @textFlag
+    int textFlag;
+
+    public int getTextFlag() {
+        return textGravity;
+    }
+
+    public void setTextFlag(int textFlag) {
+        this.textFlag = textFlag;
+    }
+
+    //
+    @IntDef({TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface textGravity {
+    }
+
+    public static final int TEXT_GRAVITY_CENTER = 0;
+    public static final int TEXT_GRAVITY_LEFT = 1;
+    public static final int TEXT_GRAVITY_RIGHT = 2;
+    public static final int TEXT_GRAVITY_CENTER_LEFT = 3;
+    public static final int TEXT_GRAVITY_LEFT_CENTER = 4;
+    private static final int[] textGravityArray = {TEXT_GRAVITY_CENTER, TEXT_GRAVITY_LEFT, TEXT_GRAVITY_RIGHT, TEXT_GRAVITY_CENTER_LEFT, TEXT_GRAVITY_LEFT_CENTER,};
+    private @textGravity
+    int textGravity;
+
+    public int getTextGravity() {
+        return textGravity;
+    }
+
+    public void setTextGravity(int textGravity) {
+        this.textGravity = textGravity;
     }
 
     private String textAssets;
@@ -3392,21 +3432,6 @@ public class TView extends View {
     }
 
     //
-    @IntDef({CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface contentGravityMode {
-    }
-
-    public static final int CONTENT_GRAVITY_CENTER = 0;
-    public static final int CONTENT_GRAVITY_LEFT = 1;
-    public static final int CONTENT_GRAVITY_RIGHT = 2;
-    public static final int CONTENT_GRAVITY_CENTER_LEFT = 3;
-    public static final int CONTENT_GRAVITY_LEFT_CENTER = 4;
-    private static final int[] contentGravityModeArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_RIGHT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
-    private @contentGravityMode
-    int contentGravityMode;
-
-    //
     private Typeface contentStyle;
     private static final int[] contentStyleArray = {Typeface.NORMAL, Typeface.BOLD, Typeface.ITALIC, Typeface.BOLD_ITALIC,};
 
@@ -3416,6 +3441,49 @@ public class TView extends View {
 
     public void setContentStyle(Typeface contentStyle) {
         this.contentStyle = contentStyle;
+    }
+
+    @IntDef({CONTENT_FLAG_NORMAL, CONTENT_FLAG_STRIKE_THROUGH, CONTENT_FLAG_UNDER_LINE,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface contentFlag {
+    }
+
+    public static final int CONTENT_FLAG_NORMAL = 0;
+    public static final int CONTENT_FLAG_STRIKE_THROUGH = 1;
+    public static final int CONTENT_FLAG_UNDER_LINE = 2;
+    private static final int[] contentFlagArray = {CONTENT_FLAG_NORMAL, CONTENT_FLAG_STRIKE_THROUGH, CONTENT_FLAG_UNDER_LINE,};
+    private @contentFlag
+    int contentFlag;
+
+    public int getContentFlag() {
+        return contentFlag;
+    }
+
+    public void setContentFlag(int contentFlag) {
+        this.contentFlag = contentFlag;
+    }
+
+    //
+    @IntDef({CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface contentGravity {
+    }
+
+    public static final int CONTENT_GRAVITY_CENTER = 0;
+    public static final int CONTENT_GRAVITY_LEFT = 1;
+    public static final int CONTENT_GRAVITY_RIGHT = 2;
+    public static final int CONTENT_GRAVITY_CENTER_LEFT = 3;
+    public static final int CONTENT_GRAVITY_LEFT_CENTER = 4;
+    private static final int[] contentGravityArray = {CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_LEFT, CONTENT_GRAVITY_RIGHT, CONTENT_GRAVITY_CENTER_LEFT, CONTENT_GRAVITY_LEFT_CENTER,};
+    private @contentGravity
+    int contentGravity;
+
+    public int getContentGravity() {
+        return contentGravity;
+    }
+
+    public void setContentGravity(int contentGravity) {
+        this.contentGravity = contentGravity;
     }
 
     private String contentAssets;
@@ -4619,9 +4687,9 @@ public class TView extends View {
         invalidate();
     }
 
-    // attention porterDuffXferMode default 0 instead of -1!
-    protected PorterDuffXfermode porterDuffXferMode;
-    protected final Mode[] porterDuffXferModeArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
+    // attention porterDuffXferStyle default 0 instead of -1!
+    protected PorterDuffXfermode porterDuffXferStyle;
+    protected final Mode[] porterDuffXferStyleArray = {PorterDuff.Mode.SRC_IN, PorterDuff.Mode.SRC_OUT,};
 
     //
     private boolean materialMove;
@@ -4782,21 +4850,21 @@ public class TView extends View {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TView, 0, defStyle);
 
         press = typedArray.getBoolean(R.styleable.TView_press, false);
-        // selectMode default need
-        int pressModeIndex = typedArray.getInt(R.styleable.TView_pressMode, 0);
-        pressMode = pressModeArray[pressModeIndex];
+        // selectStyle default need
+        int pressStyleIndex = typedArray.getInt(R.styleable.TView_pressStyle, 0);
+        pressStyle = pressStyleArray[pressStyleIndex];
 
         //
         select = typedArray.getBoolean(R.styleable.TView_select, false);
-        // selectMode default reverse
-        int selectModeIndex = typedArray.getInt(R.styleable.TView_selectMode, 0);
-        selectMode = selectModeArray[selectModeIndex];
+        // selectStyle default reverse
+        int selectStyleIndex = typedArray.getInt(R.styleable.TView_selectStyle, 0);
+        selectStyle = selectStyleArray[selectStyleIndex];
 
         animation = typedArray.getBoolean(R.styleable.TView_animation, false);
 
-        // porterDuffXferModeArrayIndex default PorterDuff.Mode.SRC_IN
-        int porterDuffXferModeArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXferMode, 0);
-        porterDuffXferMode = new PorterDuffXfermode(porterDuffXferModeArray[porterDuffXferModeArrayIndex]);
+        // porterDuffXferStyleArrayIndex default PorterDuff.Mode.SRC_IN
+        int porterDuffXferStyleArrayIndex = typedArray.getInt(R.styleable.TView_porterDuffXferStyle, 0);
+        porterDuffXferStyle = new PorterDuffXfermode(porterDuffXferStyleArray[porterDuffXferStyleArrayIndex]);
 
         //
         radius = typedArray.getDimension(R.styleable.TView_radius, 0);
@@ -4867,9 +4935,9 @@ public class TView extends View {
             }
 
             //
-            int srcModeIndex = typedArray.getInt(R.styleable.TView_srcMode, 0);
-            if (srcModeIndex >= 0) {
-                srcMode = srcModeArray[srcModeIndex];
+            int srcStyleIndex = typedArray.getInt(R.styleable.TView_srcStyle, 0);
+            if (srcStyleIndex >= 0) {
+                srcStyle = srcStyleArray[srcStyleIndex];
             }
 
             //
@@ -4913,7 +4981,7 @@ public class TView extends View {
             }
 
             //
-            srcAnchorGravityMode = typedArray.getInt(R.styleable.TView_srcAnchorGravityMode, 0);
+            srcAnchorGravity = typedArray.getInt(R.styleable.TView_srcAnchorGravity, 0);
 
             //
             int srcAnchorNormalId = typedArray.getResourceId(R.styleable.TView_srcAnchorNormal, -1);
@@ -5089,12 +5157,6 @@ public class TView extends View {
             textPaddingRight = typedArray.getDimension(R.styleable.TView_textPaddingRight, 0);
             textRowSpaceRatio = typedArray.getFraction(R.styleable.TView_textRowSpaceRatio, 1, 1, 1);
 
-            //
-            int textGravityModeIndex = typedArray.getInt(R.styleable.TView_textGravityMode, 0);
-            if (textGravityModeIndex >= 0) {
-                textGravityMode = textGravityModeArray[textGravityModeIndex];
-            }
-
             // If textAssets is set then textStyle will be replaced!
             textAssets = typedArray.getString(R.styleable.TView_textAssets);
             if (textAssets != null) {
@@ -5105,6 +5167,18 @@ public class TView extends View {
                 if (textStyleIndex >= 0) {
                     textStyle = Typeface.create(Typeface.DEFAULT, textStyleArray[textStyleIndex]);
                 }
+            }
+
+            //
+            int textFlagIndex = typedArray.getInt(R.styleable.TView_textFlag, 0);
+            if (textFlagIndex >= 0) {
+                textFlag = textFlagArray[textFlagIndex];
+            }
+
+            //
+            int textGravityIndex = typedArray.getInt(R.styleable.TView_textGravity, 0);
+            if (textGravityIndex >= 0) {
+                textGravity = textGravityArray[textGravityIndex];
             }
 
             textDx = typedArray.getDimension(R.styleable.TView_textDx, 0);
@@ -5132,12 +5206,6 @@ public class TView extends View {
             contentPaddingRight = typedArray.getDimension(R.styleable.TView_contentPaddingRight, 0);
             contentRowSpaceRatio = typedArray.getFraction(R.styleable.TView_contentRowSpaceRatio, 1, 1, 1);
 
-            //
-            int contentGravityModeIndex = typedArray.getInt(R.styleable.TView_contentGravityMode, 0);
-            if (contentGravityModeIndex >= 0) {
-                contentGravityMode = contentGravityModeArray[contentGravityModeIndex];
-            }
-
             // If contentAssets is set then contentStyle will be replaced!
             contentAssets = typedArray.getString(R.styleable.TView_contentAssets);
             if (contentAssets != null) {
@@ -5147,6 +5215,18 @@ public class TView extends View {
                 if (contentStyleIndex >= 0) {
                     contentStyle = Typeface.create(Typeface.DEFAULT, contentStyleArray[contentStyleIndex]);
                 }
+            }
+
+            //
+            int contentFlagIndex = typedArray.getInt(R.styleable.TView_contentFlag, 0);
+            if (contentFlagIndex >= 0) {
+                contentFlag = contentFlagArray[contentFlagIndex];
+            }
+
+            //
+            int contentGravityIndex = typedArray.getInt(R.styleable.TView_contentGravity, 0);
+            if (contentGravityIndex >= 0) {
+                contentGravity = contentGravityArray[contentGravityIndex];
             }
 
             contentDx = typedArray.getDimension(R.styleable.TView_contentDx, 0);
@@ -5205,12 +5285,12 @@ public class TView extends View {
                 touchDownEventY = event.getY();
 
                 //
-                if (pressMode == NEED) {
+                if (pressStyle == NEED) {
                     press = true;
-                    if (selectMode == ALWAYS) {
+                    if (selectStyle == ALWAYS) {
                         setSelect(false);
                     }
-                } else if (pressMode == WITHOUT) {
+                } else if (pressStyle == WITHOUT) {
                     press = false;
                     setSelect(true);
                 }
@@ -5292,9 +5372,9 @@ public class TView extends View {
                 touchCancel = false;
 
                 //
-                if (pressMode == NEED) {
+                if (pressStyle == NEED) {
                     press = true;
-                } else if (pressMode == WITHOUT) {
+                } else if (pressStyle == WITHOUT) {
                     press = false;
                 }
 
@@ -5318,9 +5398,9 @@ public class TView extends View {
                 touchCancel = false;
                 //
                 press = false;
-                if (selectMode == ALWAYS) {
+                if (selectStyle == ALWAYS) {
                     setSelect(true);
-                } else if (selectMode == REVERSE) {
+                } else if (selectStyle == REVERSE) {
                     setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {
@@ -5346,9 +5426,9 @@ public class TView extends View {
                 touchCancel = true;
                 //
                 press = false;
-                if (selectMode == ALWAYS) {
+                if (selectStyle == ALWAYS) {
                     setSelect(true);
-                } else if (selectMode == REVERSE) {
+                } else if (selectStyle == REVERSE) {
                     setSelect(!isSelect());
                 }
                 if (!textMarkTouchable) {
@@ -5404,8 +5484,8 @@ public class TView extends View {
         int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
         //
-        int measuredWidth = (int) convertToPX(96, TypedValue.COMPLEX_UNIT_DIP);
-        int measuredHeight = (int) convertToPX(48, TypedValue.COMPLEX_UNIT_DIP);
+        int measuredWidth = widthDefault;
+        int measuredHeight = heightDefault;
 
         //measureWidth
         //expressed hope that the size of the parent view subviews should be determined by the value of specSize
@@ -5545,7 +5625,7 @@ public class TView extends View {
         if (srcNormal != null) {
             srcWidthRawNormal = srcNormal.getWidth();
             srcHeightRawNormal = srcNormal.getHeight();
-            switch (srcMode) {
+            switch (srcStyle) {
                 case FIT_XY:
                     matrixNormal = initMatrix(matrixNormal,
                             (width - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDxNormal * 2f - strokeWidthNormal * 2f) / srcWidthRawNormal,
@@ -5593,7 +5673,7 @@ public class TView extends View {
         if (srcPress != null) {
             srcWidthRawPress = srcPress.getWidth();
             srcHeightRawPress = srcPress.getHeight();
-            switch (srcMode) {
+            switch (srcStyle) {
                 case FIT_XY:
                     matrixPress = initMatrix(matrixPress,
                             (width - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDxPress * 2f - strokeWidthPress * 2f) / srcWidthRawPress,
@@ -5641,7 +5721,7 @@ public class TView extends View {
         if (srcSelect != null) {
             srcWidthRawSelect = srcSelect.getWidth();
             srcHeightRawSelect = srcSelect.getHeight();
-            switch (srcMode) {
+            switch (srcStyle) {
                 case FIT_XY:
                     matrixSelect = initMatrix(matrixSelect,
                             (width - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDxSelect * 2f - strokeWidthSelect * 2f) / srcWidthRawSelect,
@@ -5818,7 +5898,7 @@ public class TView extends View {
 
         // draw Xfermode SRC
         if (needSaveLayer) {
-            paint.setXfermode(porterDuffXferMode);
+            paint.setXfermode(porterDuffXferStyle);
             // If they are offset backgroundShadow, mobile, is to draw on the background shadow,
             // without moving the bigger picture and the need to set the width and height
             canvas.translate(
@@ -5886,11 +5966,11 @@ public class TView extends View {
 
         // draw anchor
         if (select && srcAnchorSelect != null) {
-            drawAnchor(canvas, initPaint(), srcAnchorSelect, matrixAnchorSelect, width, height, srcAnchorGravityMode, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
+            drawAnchor(canvas, initPaint(), srcAnchorSelect, matrixAnchorSelect, width, height, srcAnchorGravity, srcAnchorWidthSelect, srcAnchorHeightSelect, srcAnchorDxSelect, srcAnchorDySelect);
         } else if (press && srcAnchorPress != null) {
-            drawAnchor(canvas, initPaint(), srcAnchorPress, matrixAnchorPress, width, height, srcAnchorGravityMode, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
+            drawAnchor(canvas, initPaint(), srcAnchorPress, matrixAnchorPress, width, height, srcAnchorGravity, srcAnchorWidthPress, srcAnchorHeightPress, srcAnchorDxPress, srcAnchorDyPress);
         } else if (srcAnchorNormal != null) {
-            drawAnchor(canvas, initPaint(), srcAnchorNormal, matrixAnchorNormal, width, height, srcAnchorGravityMode, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
+            drawAnchor(canvas, initPaint(), srcAnchorNormal, matrixAnchorNormal, width, height, srcAnchorGravity, srcAnchorWidthNormal, srcAnchorHeightNormal, srcAnchorDxNormal, srcAnchorDyNormal);
         }
 
         // draw text
@@ -5905,8 +5985,8 @@ public class TView extends View {
                     textPaddingRight + srcRightWidthNormal,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal, textSize,
-                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textStyle, Paint.Align.CENTER),
-                    textGravityMode,
+                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textStyle, Paint.Align.CENTER, textFlag),
+                    textGravity,
                     textRowSpaceRatio,
                     textMeasureList);
 
@@ -5917,8 +5997,8 @@ public class TView extends View {
 
         // draw content
         if (content != null) {
-            //Conversion of style into textGravityMode to use drawText method!
-            int textGravityModeFromContent = contentGravityModeArray[contentGravityMode];
+            //Conversion of style into textGravity to use drawText method!
+            int textGravityFromContent = contentGravityArray[contentGravity];
 
             float f[] = drawText(
                     canvas,
@@ -5930,8 +6010,8 @@ public class TView extends View {
                     contentPaddingRight + srcRightWidthNormal,
                     initTextPaint(Paint.Style.FILL,
                             materialPlay ? contentColorPress : select ? contentColorSelect : press ? contentColorPress : contentColorNormal, contentSize,
-                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentStyle, Paint.Align.CENTER),
-                    textGravityModeFromContent,
+                            contentShadowRadius, contentShadowColor, contentShadowDx, contentShadowDy, contentStyle, Paint.Align.CENTER, contentFlag),
+                    textGravityFromContent,
                     contentRowSpaceRatio,
                     contentMeasureList);
 

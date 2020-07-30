@@ -11,7 +11,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         app:lineColor="#592d2e"
-        app:lineMode="top"
+        app:lineStyle="top"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -23,7 +23,7 @@
         android:layout_toRightOf="@id/tLineTop"
         app:lineBackground="#fae500"
         app:lineColor="#592d2e"
-        app:lineMode="bottom"
+        app:lineStyle="bottom"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -33,7 +33,7 @@
         android:layout_alignTop="@id/tLineBottom"
         android:layout_toRightOf="@id/tLineBottom"
         app:lineColor="#592d2e"
-        app:lineMode="left"
+        app:lineStyle="left"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -45,7 +45,7 @@
         android:layout_toRightOf="@id/tLineLeft"
         app:lineBackground="#fae500"
         app:lineColor="#592d2e"
-        app:lineMode="right"
+        app:lineStyle="right"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -56,7 +56,7 @@
         android:layout_alignLeft="@id/tLineTop"
         android:layout_marginTop="16dp"
         app:lineColor="#592d2e"
-        app:lineMode="slash"
+        app:lineStyle="slash"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -68,7 +68,7 @@
         android:layout_toRightOf="@id/tLineSlash"
         app:lineBackground="#fae500"
         app:lineColor="#592d2e"
-        app:lineMode="slashBack"
+        app:lineStyle="slashBack"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TLine
@@ -79,6 +79,6 @@
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/tLineSlashBack"
         app:lineColor="#592d2e"
-        app:lineMode="cross"
+        app:lineStyle="cross"
         app:lineThick="1dp" />
 </RelativeLayout>

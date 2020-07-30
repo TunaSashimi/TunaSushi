@@ -32,7 +32,7 @@
             android:layout_alignTop="@id/tImage01"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tImage01"
-            app:imageReverseMode="horizontal"
+            app:imageReverse="horizontal"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03"
             app:imageSunshineFractionX="50%"
             app:imageSunshineFractionY="50%" />

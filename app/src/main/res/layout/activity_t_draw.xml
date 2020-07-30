@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:drawColor="#ffff00"
-        app:drawMode="flower"
+        app:drawStyle="flower"
         app:drawSrc="@drawable/bitmap_thollow_bg"
         app:drawThick="8dp" />
 </RelativeLayout>

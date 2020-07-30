@@ -263,9 +263,9 @@ public class TLayout extends RelativeLayout {
         }
     }
 
-    // attention layoutPorterDuffXferMode default 0 instead of -1!
-    protected PorterDuffXfermode layoutPorterDuffXferMode;
-    private static final Mode[] layoutPorterDuffXferModeArray = {Mode.SRC_IN, Mode.SRC_OUT,};
+    // attention layoutPorterDuffXferStyle default 0 instead of -1!
+    protected PorterDuffXfermode layoutPorterDuffXferStyle;
+    private static final Mode[] layoutPorterDuffXferStyleArray = {Mode.SRC_IN, Mode.SRC_OUT,};
 
     // layoutStrokeWidth default 0
     private float layoutStrokeWidth;
@@ -454,8 +454,8 @@ public class TLayout extends RelativeLayout {
         if (layoutSrcId != -1) {
 
             // layoutXfermodeIndex default PorterDuff.Mode.SRC_IN
-            int layoutXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXferMode, 0);
-            layoutPorterDuffXferMode = new PorterDuffXfermode(layoutPorterDuffXferModeArray[layoutXfermodeIndex]);
+            int layoutXfermodeIndex = typedArray.getInt(R.styleable.TView_porterDuffXferStyle, 0);
+            layoutPorterDuffXferStyle = new PorterDuffXfermode(layoutPorterDuffXferStyleArray[layoutXfermodeIndex]);
 
             //
             layoutSrc = BitmapFactory.decodeResource(getResources(), layoutSrcId);
@@ -536,7 +536,7 @@ public class TLayout extends RelativeLayout {
 
         // draw layoutBitmap
         if (needSaveLayer) {
-            layoutPaint.setXfermode(layoutPorterDuffXferMode);
+            layoutPaint.setXfermode(layoutPorterDuffXferStyle);
 
             canvas.translate(layoutBackgroundShadowDx * 2f + layoutSrcShadowRadius - layoutSrcShadowDx,
                     layoutBackgroundShadowDy * 2f + layoutSrcShadowRadius - layoutSrcShadowDy);

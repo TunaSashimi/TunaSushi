@@ -36,29 +36,29 @@ public class TRepeat extends TView {
     private int repeatItemBackgroundNormal, repeatItemBackgroundSelect;
 
 
-    @IntDef({CONNECT, CURRENT})
+    @IntDef({CONNECT, CURRENT,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface repeatSelectMode {
+    public @interface repeatSelect {
     }
 
     public static final int CONNECT = 0;
     public static final int CURRENT = 1;
-    private static final int[] repeatSelectModeArray = {CONNECT, CURRENT,};
-    private @repeatSelectMode
-    int repeatSelectMode;
+    private static final int[] repeatSelectArray = {CONNECT, CURRENT,};
+    private @repeatSelect
+    int repeatSelect;
 
 
     @IntDef({CUSTOM, CIRCLE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface repeatShapeMode {
+    public @interface repeatShape {
     }
 
     public static final int CUSTOM = 0;
     public static final int CIRCLE = 1;
 
-    private static final int[] repeatShapeModeArray = {CUSTOM, CIRCLE,};
-    private @repeatShapeMode
-    int repeatShapeMode;
+    private static final int[] repeatShapeArray = {CUSTOM, CIRCLE,};
+    private @repeatShape
+    int repeatShape;
 
     public TRepeat(Context context) {
         this(context, null);
@@ -103,14 +103,14 @@ public class TRepeat extends TView {
             throw new IndexOutOfBoundsException("The content attribute repeatItemFractionBottom must be greater than repeatItemFractionTop");
         }
 
-        int repeatShapeModeIndex = typedArray.getInt(R.styleable.TRepeat_repeatShapeMode, -1);
-        if (repeatShapeModeIndex >= 0) {
-            repeatShapeMode = repeatShapeModeArray[repeatShapeModeIndex];
+        int repeatShapeIndex = typedArray.getInt(R.styleable.TRepeat_repeatShape, -1);
+        if (repeatShapeIndex >= 0) {
+            repeatShape = repeatShapeArray[repeatShapeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named repeatShapeMode");
+            throw new IllegalArgumentException("The content attribute require a property named repeatShape");
         }
 
-        if (repeatShapeMode == CUSTOM) {
+        if (repeatShape == CUSTOM) {
             int repeatSrcNormalId = typedArray.getResourceId(R.styleable.TRepeat_repeatSrcNormal, -1);
             if (repeatSrcNormalId != -1) {
                 repeatSrcNormal = BitmapFactory.decodeResource(getResources(), repeatSrcNormalId);
@@ -119,16 +119,16 @@ public class TRepeat extends TView {
             if (repeatSrcSelectId != -1) {
                 repeatSrcSelect = BitmapFactory.decodeResource(getResources(), repeatSrcSelectId);
             }
-        } else if (repeatShapeMode == CIRCLE) {
+        } else if (repeatShape == CIRCLE) {
             repeatItemBackgroundNormal = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundNormal, Color.TRANSPARENT);
             repeatItemBackgroundSelect = typedArray.getColor(R.styleable.TRepeat_repeatItemBackgroundSelect, repeatItemBackgroundNormal);
         }
 
-        int repeatSelectModeIndex = typedArray.getInt(R.styleable.TRepeat_repeatSelectMode, -1);
-        if (repeatSelectModeIndex >= 0) {
-            repeatSelectMode = repeatSelectModeArray[repeatSelectModeIndex];
+        int repeatSelectIndex = typedArray.getInt(R.styleable.TRepeat_repeatSelect, -1);
+        if (repeatSelectIndex >= 0) {
+            repeatSelect = repeatSelectArray[repeatSelectIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named repeatSelectMode");
+            throw new IllegalArgumentException("The content attribute require a property named repeatSelect");
         }
 
         repeatIndex = typedArray.getInt(R.styleable.TRepeat_repeatIndex, -1);
@@ -148,7 +148,7 @@ public class TRepeat extends TView {
             throw new IndexOutOfBoundsException("The content attribute repeatIndex length must be no less than -1 and smaller than the total length minus 1");
         }
 
-        if (repeatShapeMode == CUSTOM) {
+        if (repeatShape == CUSTOM) {
             int repeatCustomSrcNormalWidth = repeatSrcNormal.getWidth();
             int repeatCustomSrcNormalHeight = repeatSrcNormal.getHeight();
             int repeatCustomSrcWidthSelect = repeatSrcSelect.getWidth();
@@ -163,7 +163,7 @@ public class TRepeat extends TView {
 
             matrixNormal = initMatrix(matrixNormal, scale, scale);
 
-        } else if (repeatShapeMode == CIRCLE) {
+        } else if (repeatShape == CIRCLE) {
             srcHeightScale = height * (repeatItemFractionBottom - repeatItemFractionTop);
             srcWidthScale = srcHeightScale;
         }
@@ -183,7 +183,7 @@ public class TRepeat extends TView {
     @Override
     protected void onDraw(Canvas canvas) {
         //
-        switch (repeatShapeMode) {
+        switch (repeatShape) {
             case CUSTOM:
 
                 // in order to draw a map of the effect of the half, the first painting baseBitmap
@@ -212,7 +212,7 @@ public class TRepeat extends TView {
                     } else {
                         canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawBitmap(repeatSelectMode == CONNECT ? i <= repeatIndex ? repeatSrcSelect
+                    canvas.drawBitmap(repeatSelect == CONNECT ? i <= repeatIndex ? repeatSrcSelect
                             : repeatSrcNormal : i == repeatIndex ? repeatSrcSelect : repeatSrcNormal, matrixNormal, null);
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
@@ -227,7 +227,7 @@ public class TRepeat extends TView {
                                 0,
                                 0,
                                 initTextPaint(Paint.Style.FILL,
-                                        repeatSelectMode == CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                        repeatSelect == CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
                                                 : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                         repeatItemTextSize, Paint.Align.CENTER));
                     }
@@ -261,7 +261,7 @@ public class TRepeat extends TView {
                     } else {
                         canvas.translate(share + srcWidthScale, 0);
                     }
-                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelectMode == CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
+                    canvas.drawCircle(srcWidthScale / 2, srcWidthScale / 2, srcWidthScale / 2, initPaint(repeatSelect == CONNECT ? i <= repeatIndex ? repeatItemBackgroundSelect
                             : repeatItemBackgroundNormal : i == repeatIndex ? repeatItemBackgroundSelect : repeatItemBackgroundNormal));
                 }
                 canvas.translate((share + srcWidthScale) * (1 - total) - share, -dy);
@@ -276,7 +276,7 @@ public class TRepeat extends TView {
                                 0,
                                 0,
                                 initTextPaint(Paint.Style.FILL,
-                                        repeatSelectMode == CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
+                                        repeatSelect == CONNECT ? i <= repeatIndex ? repeatItemTextColorSelect
                                                 : repeatItemTextColorNormal : i == repeatIndex ? repeatItemTextColorSelect : repeatItemTextColorNormal,
                                         repeatItemTextSize, Paint.Align.CENTER));
                     }

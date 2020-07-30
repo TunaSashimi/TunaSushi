@@ -15,9 +15,9 @@ import androidx.annotation.IntDef;
  * @Description
  */
 public class TGroup {
-    @IntDef({HORIZONTAL, VERTICAL})
+    @IntDef({HORIZONTAL, VERTICAL,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OrientationMode {
+    public @interface OrientationStyle {
     }
 
     public static final int HORIZONTAL = 0;
@@ -75,7 +75,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
@@ -127,7 +127,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.OnClickListener onClickListener) {
         int index = 0;
         for (int i = 0; i < stringArray.length; i++) {
@@ -145,7 +145,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener,
                               TView.OnClickListener onClickListener) {
         int index = 0;
@@ -180,7 +180,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener) {
 
         createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, null);
@@ -201,7 +201,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener,
                               TView.OnClickListener onClickListener) {
 
@@ -213,7 +213,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.OnClickListener onClickListener) {
 
         createRaw(stringArray, 0, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, null, onClickListener);
@@ -246,7 +246,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener) {
 
         createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, touchUpListener, null);
@@ -269,7 +269,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.OnClickListener onClickListener) {
 
         createRaw(stringArray, index, linearLayout, width, height, styleStart, styleEnd, styleOther, mode, null, onClickListener);
@@ -281,7 +281,7 @@ public class TGroup {
                               LinearLayout linearLayout,
                               int width, int height,
                               int styleStart, int styleEnd, int styleOther,
-                              @OrientationMode int mode,
+                              @OrientationStyle int mode,
                               TView.TouchUpListener touchUpListener,
                               TView.OnClickListener onClickListener) {
 
@@ -317,7 +317,7 @@ public class TGroup {
                                   LinearLayout linearLayout,
                                   int width, int height,
                                   int styleStart, int styleEnd, int styleOther,
-                                  @OrientationMode int mode,
+                                  @OrientationStyle int mode,
                                   TView.TouchUpListener touchUpListener,
                                   TView.OnClickListener onClickListener) {
 

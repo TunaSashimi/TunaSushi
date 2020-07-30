@@ -763,8 +763,8 @@ public class SVGTool {
 
         boolean pushed = false;
 
-        HashMap<String, Shader> gradientMap = new HashMap<String, Shader>();
-        HashMap<String, Gradient> gradientRefMap = new HashMap<String, Gradient>();
+        HashMap<String, Shader> gradientMap = new HashMap();
+        HashMap<String, Gradient> gradientRefMap = new HashMap();
         Gradient gradient = null;
 
         private SVGHandler(Picture picture) {

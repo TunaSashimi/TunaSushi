@@ -46,7 +46,7 @@
         android:layout_below="@id/tViewSrcLeftPadding"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        app:srcMode="fit_height"
+        app:srcStyle="fit_height"
         app:srcNormal="@drawable/bitmap_tscale_scalebitmap" />
 
     <com.tunasushi.tuna.TView
@@ -56,6 +56,6 @@
         android:layout_below="@id/tView"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        app:srcMode="fit_center"
+        app:srcStyle="fit_center"
         app:srcNormal="@drawable/bitmap_tscale_scalebitmap" />
 </RelativeLayout>

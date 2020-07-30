@@ -30,29 +30,29 @@ public class TProgress extends TView {
     private Bitmap progressSrcBack, progressSrcFront;
 
 
-    @IntDef({CUSTOM, CIRCLE})
+    @IntDef({CUSTOM, CIRCLE,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface progressShapeMode {
+    public @interface progressShape {
     }
 
     public static final int CUSTOM = 0;
     public static final int CIRCLE = 1;
-    private static final int[] progressShapeModeArray = {CUSTOM, CIRCLE,};
-    private @progressShapeMode
-    int progressShapeMode;
+    private static final int[] progressShapeArray = {CUSTOM, CIRCLE,};
+    private @progressShape
+    int progressShape;
 
 
-    @IntDef({CLOCKWISE, UPWARD, UPDOWN})
+    @IntDef({CLOCKWISE, UPWARD, UPDOWN,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface progressEffectMode {
+    public @interface progressEffect {
     }
 
     public static final int CLOCKWISE = 0;
     public static final int UPWARD = 1;
     public static final int UPDOWN = 2;
-    private static final int[] progressEffectModeArray = {CLOCKWISE, UPWARD, UPDOWN,};
-    private @progressEffectMode
-    int progressEffectMode;
+    private static final int[] progressEffectArray = {CLOCKWISE, UPWARD, UPDOWN,};
+    private @progressEffect
+    int progressEffect;
 
     private static final float PROMOTE_CIRCLE_STARTANGLE = -90;
 
@@ -71,21 +71,21 @@ public class TProgress extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TProgress);
 
-        int progressShapeModeIndex = typedArray.getInt(R.styleable.TProgress_progressShapeMode, -1);
-        if (progressShapeModeIndex >= 0) {
-            progressShapeMode = progressShapeModeArray[progressShapeModeIndex];
+        int progressShapeIndex = typedArray.getInt(R.styleable.TProgress_progressShape, -1);
+        if (progressShapeIndex >= 0) {
+            progressShape = progressShapeArray[progressShapeIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named progressShapeMode");
+            throw new IllegalArgumentException("The content attribute require a property named progressShape");
         }
 
-        int progressEffectModeIndex = typedArray.getInt(R.styleable.TProgress_progressEffectMode, -1);
-        if (progressEffectModeIndex >= 0) {
-            progressEffectMode = progressEffectModeArray[progressEffectModeIndex];
+        int progressEffectIndex = typedArray.getInt(R.styleable.TProgress_progressEffect, -1);
+        if (progressEffectIndex >= 0) {
+            progressEffect = progressEffectArray[progressEffectIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute require a property named progressEffectMode");
+            throw new IllegalArgumentException("The content attribute require a property named progressEffect");
         }
 
-        if (progressShapeMode == CUSTOM) {
+        if (progressShape == CUSTOM) {
 
             int progressSrcBackId = typedArray.getResourceId(R.styleable.TProgress_progressSrcBack, -1);
             if (progressSrcBackId != -1) {
@@ -114,7 +114,7 @@ public class TProgress extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        if (progressShapeMode == CUSTOM) {
+        if (progressShape == CUSTOM) {
             int progressSrcFrontWidth = progressSrcFront.getWidth();
             int progressSrcFrontHeight = progressSrcFront.getHeight();
             int progressSrcBackWidth = progressSrcBack.getWidth();
@@ -123,7 +123,7 @@ public class TProgress extends TView {
                 throw new IndexOutOfBoundsException("Both the width and height of the attribute progressSrcFront and progressSrcBack needed equal");
             }
 
-            if (progressShapeMode == CUSTOM) {
+            if (progressShape == CUSTOM) {
                 scale = width * 1f / progressSrcBackWidth;
             }
             matrixNormal = initMatrix(matrixNormal, scale, scale);
@@ -133,13 +133,13 @@ public class TProgress extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        switch (progressShapeMode) {
+        switch (progressShape) {
             case CUSTOM:
 
                 canvas.drawBitmap(progressSrcBack, matrixNormal, null);
                 canvas.save();
 
-                switch (progressEffectMode) {
+                switch (progressEffect) {
                     case CLOCKWISE:
                         initPathMoveTo(width >> 1, height >> 1);
                         path.lineTo(width >> 1, 0);
@@ -167,7 +167,7 @@ public class TProgress extends TView {
 
                 canvas.drawCircle(width >> 1, height >> 1, width >> 1, initPaint(Paint.Style.STROKE, progressBoundBackground));
 
-                switch (progressEffectMode) {
+                switch (progressEffect) {
                     case CLOCKWISE:
                         canvas.drawArc(initRectF(0, 0, width, height), PROMOTE_CIRCLE_STARTANGLE, 360 * percent, true, initPaint(Paint.Style.FILL, progressArcBackground));
                         break;

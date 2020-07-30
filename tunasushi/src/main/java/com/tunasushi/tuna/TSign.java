@@ -38,16 +38,16 @@ public class TSign extends TView {
     private String signTextBefore, signTextAfter;
 
 
-    @IntDef({HORIZONTAL, VERTICAL})
+    @IntDef({HORIZONTAL, VERTICAL,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface signMode {
+    public @interface signStyle {
     }
 
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
-    private static final int[] signModeArray = {HORIZONTAL, VERTICAL,};
-    private @signMode
-    int signMode;
+    private static final int[] signStyleArray = {HORIZONTAL, VERTICAL,};
+    private @signStyle
+    int signStyle;
 
     public TSign(Context context) {
         this(context, null);
@@ -81,11 +81,11 @@ public class TSign extends TView {
         signTextBefore = typedArray.getString(R.styleable.TSign_signTextBefore);
         signTextAfter = typedArray.getString(R.styleable.TSign_signTextAfter);
 
-        int signModeIndex = typedArray.getInt(R.styleable.TSign_signMode, -1);
-        if (signModeIndex >= 0) {
-            signMode = signModeArray[signModeIndex];
+        int signStyleIndex = typedArray.getInt(R.styleable.TSign_signStyle, -1);
+        if (signStyleIndex >= 0) {
+            signStyle = signStyleArray[signStyleIndex];
         } else {
-            throw new IllegalArgumentException("The content attribute signMode type must be given");
+            throw new IllegalArgumentException("The content attribute signStyle type must be given");
         }
 
         typedArray.recycle();
@@ -127,7 +127,7 @@ public class TSign extends TView {
         }
         paint.setColor(signRectColor);
 
-        if (signMode == VERTICAL) {
+        if (signStyle == VERTICAL) {
 
             float rectCenterX = width >> 1;
             float rectCenterY = signCircleMargin + signCircleRadius * 2 + signCircleStrokeWidth * 2 + signRectMargin + signRectHeight / 2

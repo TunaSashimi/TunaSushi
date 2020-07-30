@@ -432,9 +432,9 @@ public class TRipple extends TView {
 
         rippleAngle = typedArray.getInt(R.styleable.TRipple_rippleAngle, 0);
 
-        int rippleModeIndex = typedArray.getInt(R.styleable.TRipple_rippleMode, -1);
-        if (rippleModeIndex > -1) {
-            rippleTimeInterpolator = rippleTimeInterpolatorArray[rippleModeIndex];
+        int rippleStyleIndex = typedArray.getInt(R.styleable.TRipple_rippleStyle, -1);
+        if (rippleStyleIndex > -1) {
+            rippleTimeInterpolator = rippleTimeInterpolatorArray[rippleStyleIndex];
         }
         typedArray.recycle();
     }

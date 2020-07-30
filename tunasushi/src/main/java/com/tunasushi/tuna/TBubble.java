@@ -86,31 +86,31 @@ public class TBubble extends TView {
         this.bubbleTextPadding = bubbleTextPadding;
     }
 
-    @IntDef({TOP, BOTTOM, LEFT, RIGHT})
+    @IntDef({TOP, BOTTOM, LEFT, RIGHT,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface bubbleTowardMode {
+    public @interface bubbleToward {
     }
 
     public static final int TOP = 0;
     public static final int BOTTOM = 1;
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
-    private static final int[] bubbleTowardModeArray = {TOP, BOTTOM, LEFT, RIGHT,};
-    private @bubbleTowardMode
-    int bubbleTowardMode;
+    private static final int[] bubbleTowardArray = {TOP, BOTTOM, LEFT, RIGHT,};
+    private @bubbleToward
+    int bubbleToward;
 
 
-    @IntDef({LOW, MIDDLE, HIGH})
+    @IntDef({LOW, MIDDLE, HIGH,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface bubblePositionMode {
+    public @interface bubblePosition {
     }
 
     public static final int LOW = 0;
     public static final int MIDDLE = 1;
     public static final int HIGH = 2;
-    private static final int[] bubblePositionModeArray = {LOW, MIDDLE, HIGH,};
-    private @bubblePositionMode
-    int bubblePositionMode;
+    private static final int[] bubblePositionArray = {LOW, MIDDLE, HIGH,};
+    private @bubblePosition
+    int bubblePosition;
 
 
     private float bubbleOffset;
@@ -168,18 +168,18 @@ public class TBubble extends TView {
         bubbleTextColor = typedArray.getColor(R.styleable.TBubble_bubbleTextColor, textColorDefault);
         bubbleTextPadding = typedArray.getDimension(R.styleable.TBubble_bubbleTextPadding, 0);
 
-        int bubbleTowardModeIndex = typedArray.getInt(R.styleable.TBubble_bubbleTowardMode, 0);
-        if (bubbleTowardModeIndex >= 0) {
-            bubbleTowardMode = bubbleTowardModeArray[bubbleTowardModeIndex];
+        int bubbleTowardIndex = typedArray.getInt(R.styleable.TBubble_bubbleToward, 0);
+        if (bubbleTowardIndex >= 0) {
+            bubbleToward = bubbleTowardArray[bubbleTowardIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute bubbleTowardMode type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubbleToward type it does not conform to the rules");
         }
 
-        int bubblePositionModeIndex = typedArray.getInt(R.styleable.TBubble_bubblePositionMode, 0);
-        if (bubblePositionModeIndex >= 0) {
-            bubblePositionMode = bubblePositionModeArray[bubblePositionModeIndex];
+        int bubblePositionIndex = typedArray.getInt(R.styleable.TBubble_bubblePosition, 0);
+        if (bubblePositionIndex >= 0) {
+            bubblePosition = bubblePositionArray[bubblePositionIndex];
         } else {
-            throw new IndexOutOfBoundsException("The content attribute bubblePositionMode type it does not conform to the rules");
+            throw new IndexOutOfBoundsException("The content attribute bubblePosition type it does not conform to the rules");
         }
 
         bubbleOffset = typedArray.getDimension(R.styleable.TBubble_bubbleOffset, 0);
@@ -244,9 +244,9 @@ public class TBubble extends TView {
         float textCenterX = width >> 1;
         float textCenterY = height >> 1;
 
-        switch (bubbleTowardMode) {
+        switch (bubbleToward) {
             case TOP:
-                switch (bubblePositionMode) {
+                switch (bubblePosition) {
                     case LOW:
                         offsetX = ((width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;
@@ -296,7 +296,7 @@ public class TBubble extends TView {
                 textCenterY += bubbleCornerHeight * 0.5f;
                 break;
             case BOTTOM:
-                switch (bubblePositionMode) {
+                switch (bubblePosition) {
                     case LOW:
                         offsetX = ((width >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetX += bubbleOffset;
@@ -346,7 +346,7 @@ public class TBubble extends TView {
                 textCenterY -= bubbleCornerHeight * 0.5f;
                 break;
             case LEFT:
-                switch (bubblePositionMode) {
+                switch (bubblePosition) {
                     case LOW:
                         offsetY = (height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1;
                         offsetY += bubbleOffset;
@@ -396,7 +396,7 @@ public class TBubble extends TView {
                 textCenterX += bubbleCornerHeight * 0.5f;
                 break;
             case RIGHT:
-                switch (bubblePositionMode) {
+                switch (bubblePosition) {
                     case LOW:
                         offsetY = ((height >> 1) - bubbleCornerWidth * 0.5f - bubbleStrokeWidth * 1) * -1;
                         offsetY += bubbleOffset;

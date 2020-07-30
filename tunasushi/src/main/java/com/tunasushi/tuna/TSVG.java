@@ -62,7 +62,7 @@ public class TSVG extends TView {
 
     @IntDef({CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SVGMode {
+    public @interface SVGStyle {
     }
 
     public static final int CIRCLE = 0;
@@ -73,7 +73,7 @@ public class TSVG extends TView {
     public static final int SIXTEENEDGE = 5;
     public static final int FORTYEDGE = 6;
     public static final int SNAIL = 7;
-    private static final int[] SVGModeArray = {
+    private static final int[] SVGStyleArray = {
             CIRCLE,
             STAR,
             HEART,
@@ -83,8 +83,8 @@ public class TSVG extends TView {
             FORTYEDGE,
             SNAIL,
     };
-    private @SVGMode
-    int svgMode;
+    private @SVGStyle
+    int svgStyle;
 
     public TSVG(Context context) {
         this(context, null);
@@ -107,9 +107,9 @@ public class TSVG extends TView {
             srcBitmap = BitmapFactory.decodeResource(getResources(), SVGSrcId);
         }
 
-        int SVGModeIndex = typedArray.getInt(R.styleable.TSVG_SVGMode, 0);
-        if (SVGModeIndex >= 0) {
-            svgMode = SVGModeArray[SVGModeIndex];
+        int SVGStyleIndex = typedArray.getInt(R.styleable.TSVG_SVGStyle, 0);
+        if (SVGStyleIndex >= 0) {
+            svgStyle = SVGStyleArray[SVGStyleIndex];
         }
 
         typedArray.recycle();
@@ -147,7 +147,7 @@ public class TSVG extends TView {
         int shortSide = width >= height ? height : width;
         initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-        switch (svgMode) {
+        switch (svgStyle) {
             case CIRCLE:
                 SVGSrc = getCircleBitmap(shortSide);
                 break;
@@ -181,7 +181,7 @@ public class TSVG extends TView {
         //
         canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
         //
-        paint.setXfermode(porterDuffXferMode);
+        paint.setXfermode(porterDuffXferStyle);
         canvas.drawBitmap(srcBitmap, matrixNormal, paint);
 
         paint.setXfermode(null);

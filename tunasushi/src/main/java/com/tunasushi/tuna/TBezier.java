@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * @Description
  */
 public class TBezier extends TView {
-
     private Paint paint = new Paint();
 
     private float handleLenRate = 2f;
@@ -76,8 +75,8 @@ public class TBezier extends TView {
         float radius;
     }
 
-    public void setPaintMode(int mode) {
-        paint.setStyle(mode == 0 ? Paint.Style.STROKE : Paint.Style.FILL);
+    public void setPaintStyle(int style) {
+        paint.setStyle(style == 0 ? Paint.Style.STROKE : Paint.Style.FILL);
         invalidate();
     }
 
@@ -101,10 +100,10 @@ public class TBezier extends TView {
     }
 
     /**
-     * @param canvas 画布
+     * @param canvas          画布
      * @param j
      * @param i
-     * @param v 控制两个圆连接时候长度，间接控制连接线的粗细，该值为1的时候连接线为直线
+     * @param v               控制两个圆连接时候长度，间接控制连接线的粗细，该值为1的时候连接线为直线
      * @param handle_len_rate
      * @param maxDistance
      */

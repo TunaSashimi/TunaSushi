@@ -39,7 +39,7 @@ public class TDraw extends TView {
 
     @IntDef({NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface drawMode {
+    public @interface drawStyle {
     }
 
     public static final int NORMAL = 0;
@@ -51,9 +51,9 @@ public class TDraw extends TView {
     public static final int SIXTEENEDGE = 6;
     public static final int FORTYEDGE = 7;
     public static final int SNAIL = 8;
-    private static final int[] drawModeArray = {NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,};
-    private @drawMode
-    int drawMode;
+    private static final int[] drawStyleArray = {NORMAL, CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,};
+    private @drawStyle
+    int drawStyle;
 
     private Bitmap drawDstBitmap;
     protected Matrix drawDstMatrix;
@@ -109,9 +109,9 @@ public class TDraw extends TView {
         }
 
         //
-        int drawModeIndex = typedArray.getInt(R.styleable.TDraw_drawMode, -1);
-        if (drawModeIndex >= 0) {
-            drawMode = drawModeArray[drawModeIndex];
+        int drawStyleIndex = typedArray.getInt(R.styleable.TDraw_drawStyle, -1);
+        if (drawStyleIndex >= 0) {
+            drawStyle = drawStyleArray[drawStyleIndex];
         }
 
         typedArray.recycle();
@@ -162,11 +162,11 @@ public class TDraw extends TView {
         }
 
         //
-        if (drawMode != NORMAL) {
+        if (drawStyle != NORMAL) {
             int shortSide = width >= height ? height : width;
             initPaintingDstMatrix(width * 1f / shortSide, height * 1f / shortSide);
 
-            switch (drawMode) {
+            switch (drawStyle) {
                 case CIRCLE:
                     drawDstBitmap = getCircleBitmap(shortSide);
                     break;
@@ -197,7 +197,7 @@ public class TDraw extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (drawMode == NORMAL) {
+        if (drawStyle == NORMAL) {
             if (drawSrc != null) {
                 canvas.drawBitmap(drawSrc, matrixNormal, null);
             }
@@ -210,7 +210,7 @@ public class TDraw extends TView {
             if (drawSrc != null) {
                 canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
                 canvas.drawBitmap(drawDstBitmap, drawDstMatrix, paint);
-                paint.setXfermode(porterDuffXferMode);
+                paint.setXfermode(porterDuffXferStyle);
                 canvas.drawBitmap(drawSrc, matrixNormal, paint);
                 paint.setXfermode(null);
                 canvas.restore();
@@ -219,7 +219,7 @@ public class TDraw extends TView {
             //
             canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
             canvas.drawBitmap(drawDstBitmap, drawDstMatrix, drawPaint);
-            drawPaint.setXfermode(porterDuffXferMode);
+            drawPaint.setXfermode(porterDuffXferStyle);
             canvas.drawBitmap(srcBitmap, 0, 0, drawPaint);
             drawPaint.setXfermode(null);
             canvas.restore();

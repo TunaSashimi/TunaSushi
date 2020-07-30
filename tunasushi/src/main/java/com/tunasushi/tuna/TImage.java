@@ -143,17 +143,17 @@ public class TImage extends TView {
         invalidate();
     }
 
-    @IntDef({NORMAL, HORIZONTAL, VERTICAL})
+    @IntDef({NORMAL, HORIZONTAL, VERTICAL,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface imageReverseMode {
+    public @interface imageReverse {
     }
 
     public static final int NORMAL = 0;
     public static final int HORIZONTAL = 1;
     public static final int VERTICAL = 2;
-    private static final int[] imageReverseModeArray = {NORMAL, HORIZONTAL, VERTICAL,};
-    private @imageReverseMode
-    int imageReverseMode;
+    private static final int[] imageReverseArray = {NORMAL, HORIZONTAL, VERTICAL,};
+    private @imageReverse
+    int imageReverse;
 
     private Bitmap imageSrc;
 
@@ -202,9 +202,9 @@ public class TImage extends TView {
         imageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0f);
         imageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1f);
 
-        int imageReverseModeIndex = typedArray.getInt(R.styleable.TImage_imageReverseMode, -1);
-        if (imageReverseModeIndex >= 0) {
-            imageReverseMode = imageReverseModeArray[imageReverseModeIndex];
+        int imageReverseIndex = typedArray.getInt(R.styleable.TImage_imageReverse, -1);
+        if (imageReverseIndex >= 0) {
+            imageReverse = imageReverseArray[imageReverseIndex];
         }
 
         typedArray.recycle();
@@ -284,11 +284,11 @@ public class TImage extends TView {
             }
         }
 
-        if (imageReverseMode != NORMAL) {
+        if (imageReverse != NORMAL) {
             if (imageSrc == null) {
-                imageSrc = getReverseBitmap(srcBitmap, imageReverseMode == HORIZONTAL ? 0 : 1);
+                imageSrc = getReverseBitmap(srcBitmap, imageReverse == HORIZONTAL ? 0 : 1);
             } else {
-                imageSrc = getReverseBitmap(imageSrc, imageReverseMode == HORIZONTAL ? 0 : 1);
+                imageSrc = getReverseBitmap(imageSrc, imageReverse == HORIZONTAL ? 0 : 1);
             }
         }
 

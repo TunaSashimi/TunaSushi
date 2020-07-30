@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="signMode设置矩形方向\nsignRectColor设置矩形颜色\nsignRectWidth设置矩形宽度\nsignRectHeight设置矩形高度\nsignRectColor设置矩形颜色\nsignRectMargin设置矩形间距"
+        android:text="signStyle设置矩形方向\nsignRectColor设置矩形颜色\nsignRectWidth设置矩形宽度\nsignRectHeight设置矩形高度\nsignRectColor设置矩形颜色\nsignRectMargin设置矩形间距"
         android:textColor="#434343" />
 
     <com.tunasushi.tuna.TSign
@@ -20,7 +20,7 @@
         android:layout_below="@id/text"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        app:signMode="vertical"
+        app:signStyle="vertical"
         app:signRectColor="#cccccc"
         app:signRectHeight="4dp"
         app:signRectMargin="1dp"
@@ -39,7 +39,7 @@
         app:signCircleMargin="0dp"
         app:signCircleRadius="0dp"
         app:signCircleStrokeWidth="0dp"
-        app:signMode="horizontal"
+        app:signStyle="horizontal"
         app:signRectColor="#c8c8c8"
         app:signRectHeight="1dp"
         app:signRectMargin="1dp"
@@ -58,7 +58,7 @@
         app:signCircleMargin="1dp"
         app:signCircleRadius="12dp"
         app:signCircleStrokeWidth="1dp"
-        app:signMode="vertical"
+        app:signStyle="vertical"
         app:signRectColor="#cccccc"
         app:signRectHeight="4dp"
         app:signRectMargin="1dp"

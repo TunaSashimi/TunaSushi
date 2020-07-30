@@ -26,7 +26,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravityMode="right|bottom"
+            app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -46,7 +46,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravityMode="right|bottom"
+            app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -65,7 +65,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravityMode="right|bottom"
+            app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -84,7 +84,7 @@
             app:backgroundNormal="#f0eff5"
             app:backgroundSelect="#ffffff"
             app:radius="5dp"
-            app:srcAnchorGravityMode="right|bottom"
+            app:srcAnchorGravity="right|bottom"
             app:srcAnchorHeightSelect="11dp"
             app:srcAnchorSelect="@drawable/bitmap_tview_anchor_select02"
             app:srcAnchorWidthSelect="12dp"
@@ -118,7 +118,7 @@
         android:layout_marginTop="-1dp"
         app:lineBackground="#ffffff"
         app:lineColor="#b2b2b2"
-        app:lineMode="bottom"
+        app:lineStyle="bottom"
         app:lineThick="1dp" />
 
     <com.tunasushi.tuna.TRepeat
@@ -129,8 +129,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="25dp"
-        app:repeatSelectMode="connect"
-        app:repeatShapeMode="custom"
+        app:repeatSelect="connect"
+        app:repeatShape="custom"
         app:repeatSrcNormal="@drawable/bitmap_trepeat_star_normal"
         app:repeatSrcSelect="@drawable/bitmap_trepeat_star_select"
         app:repeatTotal="5" />
@@ -149,8 +149,8 @@
         app:repeatItemTextFractionBottom="86%"
         app:repeatItemTextFractionTop="72%"
         app:repeatItemTextSize="14dp"
-        app:repeatSelectMode="current"
-        app:repeatShapeMode="custom"
+        app:repeatSelect="current"
+        app:repeatShape="custom"
         app:repeatSrcNormal="@drawable/bitmap_trepeat_car_normal"
         app:repeatSrcSelect="@drawable/bitmap_trepeat_car_select" />
 
@@ -163,7 +163,7 @@
         android:layout_marginTop="25dp"
         app:repeatItemBackgroundNormal="#ffffff"
         app:repeatItemBackgroundSelect="#999999"
-        app:repeatSelectMode="current"
-        app:repeatShapeMode="circle"
+        app:repeatSelect="current"
+        app:repeatShape="circle"
         app:repeatTotal="5" />
 </RelativeLayout>

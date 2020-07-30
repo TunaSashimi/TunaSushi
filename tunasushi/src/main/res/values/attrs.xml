@@ -3,12 +3,12 @@
     <!-- Attributes that can be used with {@link com.tunasushi.tuna.TView} or any of its subclasses. -->
     <declare-styleable name="TView">
         <attr name="press" format="boolean" />
-        <attr name="pressMode">
+        <attr name="pressStyle">
             <enum name="need" value="0" />
             <enum name="without" value="1" />
         </attr>
         <attr name="select" format="boolean" />
-        <attr name="selectMode">
+        <attr name="selectStyle">
             <enum name="reverse" value="0" />
             <enum name="always" value="1" />
             <enum name="never" value="2" />
@@ -54,7 +54,7 @@
         <attr name="srcPress" format="reference" />
         <attr name="srcSelect" format="reference" />
 
-        <attr name="srcMode">
+        <attr name="srcStyle">
             <enum name="fit_xy" value="0" />
             <enum name="fit_width" value="1" />
             <enum name="fit_height" value="2" />
@@ -73,7 +73,7 @@
         <attr name="srcShadowDyPress" format="dimension" />
         <attr name="srcShadowDySelect" format="dimension" />
 
-        <attr name="srcAnchorGravityMode">
+        <attr name="srcAnchorGravity">
             <flag name="left" value="0x00" />
             <flag name="center_horizontal" value="0x01" />
             <flag name="right" value="0x02" />
@@ -125,18 +125,23 @@
         <attr name="textPaddingLeft" format="dimension" />
         <attr name="textPaddingRight" format="dimension" />
         <attr name="textRowSpaceRatio" format="fraction" />
-        <attr name="textGravityMode">
-            <enum name="center" value="0" />
-            <enum name="left" value="1" />
-            <enum name="right" value="2" />
-            <enum name="center_left" value="3" />
-            <enum name="left_center" value="4" />
-        </attr>
         <attr name="textStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
+        </attr>
+        <attr name="textFlag">
+            <enum name="normal" value="0" />
+            <enum name="strike_through" value="1" />
+            <enum name="under_line" value="2" />
+        </attr>
+        <attr name="textGravity">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="center_left" value="3" />
+            <enum name="left_center" value="4" />
         </attr>
         <attr name="textAssets" format="string" />
         <attr name="textDx" format="dimension" />
@@ -169,18 +174,23 @@
         <attr name="contentPaddingLeft" format="dimension" />
         <attr name="contentPaddingRight" format="dimension" />
         <attr name="contentRowSpaceRatio" format="fraction" />
-        <attr name="contentGravityMode">
-            <enum name="center" value="0" />
-            <enum name="left" value="1" />
-            <enum name="right" value="2" />
-            <enum name="center_left" value="3" />
-            <enum name="left_center" value="4" />
-        </attr>
         <attr name="contentStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
             <enum name="bold_italic" value="3" />
+        </attr>
+        <attr name="contentFlag">
+            <enum name="normal" value="0" />
+            <enum name="strike_through" value="1" />
+            <enum name="under_line" value="2" />
+        </attr>
+        <attr name="contentGravity">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="center_left" value="3" />
+            <enum name="left_center" value="4" />
         </attr>
         <attr name="contentAssets" format="string" />
         <attr name="contentDx" format="dimension" />
@@ -255,7 +265,7 @@
         <attr name="srcRightDxSelect" format="dimension" />
         <attr name="srcRightDySelect" format="dimension" />
 
-        <attr name="porterDuffXferMode">
+        <attr name="porterDuffXferStyle">
             <enum name="src_in" value="0" />
             <enum name="src_out" value="1" />
         </attr>
@@ -278,13 +288,13 @@
         <attr name="bubbleTextColor" format="reference|color" />
         <attr name="bubbleTextPadding" format="dimension" />
 
-        <attr name="bubbleTowardMode">
+        <attr name="bubbleToward">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="left" value="2" />
             <enum name="right" value="3" />
         </attr>
-        <attr name="bubblePositionMode">
+        <attr name="bubblePosition">
             <enum name="low" value="0" />
             <enum name="middle" value="1" />
             <enum name="high" value="2" />
@@ -324,7 +334,7 @@
         <attr name="dialogTextSize" format="dimension" />
         <attr name="dialogTextColor" format="reference|color" />
         <attr name="dialogTextDy" format="dimension" />
-        <attr name="dialogTextMode">
+        <attr name="dialogTextStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
@@ -335,7 +345,7 @@
         <attr name="dialogContentSize" format="dimension" />
         <attr name="dialogContentColor" format="reference|color" />
         <attr name="dialogContentDy" format="dimension" />
-        <attr name="dialogContentMode">
+        <attr name="dialogContentStyle">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
@@ -360,7 +370,7 @@
         <attr name="drawThick" format="dimension" />
         <attr name="drawColor" format="reference|color" />
         <attr name="drawSrc" format="reference" />
-        <attr name="drawMode">
+        <attr name="drawStyle">
             <enum name="normal" value="0" />
             <enum name="circle" value="1" />
             <enum name="star" value="2" />
@@ -395,7 +405,7 @@
         <attr name="imageHue" format="dimension" />
         <attr name="imageSaturation" format="dimension" />
 
-        <attr name="imageReverseMode">
+        <attr name="imageReverse">
             <enum name="normal" value="0" />
             <enum name="horizontal" value="1" />
             <enum name="vertical" value="2" />
@@ -417,7 +427,7 @@
         <attr name="layoutSrcShadowDx" format="dimension" />
         <attr name="layoutSrcShadowDy" format="dimension" />
 
-        <attr name="layoutPorterDuffXferMode">
+        <attr name="layoutPorterDuffXferStyle">
             <enum name="layout_src_in" value="0" />
             <enum name="layout_src_out" value="1" />
         </attr>
@@ -435,7 +445,7 @@
     <declare-styleable name="TLine">
         <attr name="lineThick" format="dimension" />
         <attr name="lineColor" format="reference|color" />
-        <attr name="lineMode">
+        <attr name="lineStyle">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="left" value="2" />
@@ -471,11 +481,11 @@
         <attr name="progressBoundBackground" format="reference|color" />
         <attr name="progressSrcBack" format="reference" />
         <attr name="progressSrcFront" format="reference" />
-        <attr name="progressShapeMode">
+        <attr name="progressShape">
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
         </attr>
-        <attr name="progressEffectMode">
+        <attr name="progressEffect">
             <enum name="clockWise" value="0" />
             <enum name="upWard" value="1" />
             <enum name="upDown" value="2" />
@@ -511,11 +521,11 @@
         <attr name="repeatItemStrokeWidth" format="dimension" />
         <attr name="repeatItemStrokeColorNormal" format="reference|color" />
         <attr name="repeatItemStrokeColorSelect" format="reference|color" />
-        <attr name="repeatSelectMode">
+        <attr name="repeatSelect">
             <enum name="connect" value="0" />
             <enum name="current" value="1" />
         </attr>
-        <attr name="repeatShapeMode">
+        <attr name="repeatShape">
             <enum name="custom" value="0" />
             <enum name="circle" value="1" />
         </attr>
@@ -544,7 +554,7 @@
         <attr name="rippleCircleColorEndInner" format="reference|color" />
         <attr name="rippleCircleColorStartOuter" format="reference|color" />
         <attr name="rippleCircleColorEndOuter" format="reference|color" />
-        <attr name="rippleMode">
+        <attr name="rippleStyle">
             <!-- In the animation begins and ends where the rate of change is relatively slow, accelerate the time in the middle -->
             <enum name="accelerateDecelerateInterpolator" value="0" />
             <!-- Animation begins at the local rate of change is relatively slow, and then began to accelerate -->
@@ -568,7 +578,7 @@
 
     <declare-styleable name="TScale">
         <attr name="scaleBitmap" format="reference" />
-        <attr name="scaleMode">
+        <attr name="scaleStyle">
             <enum name="width_top" value="0" />
             <enum name="width_center" value="1" />
             <enum name="width_bottom" value="2" />
@@ -633,7 +643,7 @@
         <attr name="signTextStrokeWidth" format="dimension" />
         <attr name="signTextBefore" format="string" />
         <attr name="signTextAfter" format="string" />
-        <attr name="signMode">
+        <attr name="signStyle">
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
         </attr>
@@ -641,7 +651,7 @@
 
     <declare-styleable name="TSVG">
         <attr name="SVGSrc" format="reference" />
-        <attr name="SVGMode">
+        <attr name="SVGStyle">
             <enum name="circle" value="0" />
             <enum name="star" value="1" />
             <enum name="heart" value="2" />
@@ -682,7 +692,7 @@
         <attr name="trangleBackgroundSelect" format="reference|color" />
         <attr name="trangleStrokeWidth" format="dimension" />
         <attr name="trangleStrokeColor" format="reference|color" />
-        <attr name="trangleMode">
+        <attr name="trangleStyle">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="left" value="2" />
@@ -691,7 +701,7 @@
     </declare-styleable>
 
     <declare-styleable name="TWrap">
-        <attr name="wrapMode">
+        <attr name="wrapStyle">
             <enum name="multiple" value="0" />
             <enum name="single" value="1" />
         </attr>

@@ -26,16 +26,16 @@ import androidx.annotation.IntDef;
  */
 public class TWrap extends TView {
 
-    @IntDef({MULTIPLE, SINGLE})
+    @IntDef({MULTIPLE, SINGLE,})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface wrapMode {
+    public @interface wrapStyle {
     }
 
     public static final int MULTIPLE = 0;
     public static final int SINGLE = 1;
-    private static final int[] wrapModeArray = {MULTIPLE, SINGLE,};
-    private @TWrap.wrapMode
-    int wrapMode;
+    private static final int[] wrapStyleArray = {MULTIPLE, SINGLE,};
+    private @TWrap.wrapStyle
+    int wrapStyle;
 
     private float wrapSpaceLine;
     private float wrapSpaceRow;
@@ -107,11 +107,11 @@ public class TWrap extends TView {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TWrap);
 
-        int wrapModeIndex = typedArray.getInt(R.styleable.TWrap_wrapMode, 0);
-        if (wrapModeIndex >= 0) {
-            wrapMode = wrapModeArray[wrapModeIndex];
+        int wrapStyleIndex = typedArray.getInt(R.styleable.TWrap_wrapStyle, 0);
+        if (wrapStyleIndex >= 0) {
+            wrapStyle = wrapStyleArray[wrapStyleIndex];
         } else {
-//            throw new IllegalArgumentException("The content attribute wrapMode type must be given");
+//            throw new IllegalArgumentException("The content attribute wrapStyle type must be given");
             return;
         }
 
@@ -291,13 +291,13 @@ public class TWrap extends TView {
                 Wrap wrap = wrapList.get(i);
                 if (wrap.wrapRect.contains((int) touchX, (int) touchY)) {
                     index = i;
-                    if (wrapMode == MULTIPLE) {
+                    if (wrapStyle == MULTIPLE) {
                         wrap.wrapSelect = !wrap.wrapSelect;
                     } else {
                         wrap.wrapSelect = true;
                     }
                     wrapSelect[i] = wrap.wrapSelect;
-                } else if (wrapMode == SINGLE) {
+                } else if (wrapStyle == SINGLE) {
                     wrap.wrapSelect = false;
                 }
             }
