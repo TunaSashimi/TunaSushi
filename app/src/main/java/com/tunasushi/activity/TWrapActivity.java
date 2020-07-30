@@ -25,12 +25,8 @@ public class TWrapActivity extends Activity {
 
         setContentView(R.layout.activity_t_wrap);
 
+        //
         tWrap01 = findViewById(R.id.tWrap01);
-        tWrap01.setWrapTextArray(
-                new String[]{
-                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
-                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
-                });
         tWrap01.setOnClickListener(new TView.OnClickListener() {
             @Override
             public void onClick(View v) {

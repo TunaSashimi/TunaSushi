@@ -58,4 +58,15 @@
         <item>¥1000</item>
         <item>不限</item>
     </string-array>
+
+    <string-array name="wrap_text_array">
+        <item>用户要求换车</item>
+        <item>车辆不整洁</item>
+        <item>车辆设施不完备</item>
+        <item>车辆损坏</item>
+        <item>用户要求换车</item>
+        <item>车辆不整洁</item>
+        <item>车辆设施不完备</item>
+        <item>车辆损坏</item>
+    </string-array>
 </resources>

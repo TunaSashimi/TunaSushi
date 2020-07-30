@@ -53,11 +53,11 @@ public class TWrap extends TView {
 
     private int index;
 
+    private String[] wrapTextArray;
+
     public String[] getWrapTextArray() {
         return wrapTextArray;
     }
-
-    private String[] wrapTextArray;
 
     public void setWrapTextArray(String[] wrapTextArray) {
         this.wrapTextArray = wrapTextArray;
@@ -111,8 +111,7 @@ public class TWrap extends TView {
         if (wrapStyleIndex >= 0) {
             wrapStyle = wrapStyleArray[wrapStyleIndex];
         } else {
-//            throw new IllegalArgumentException("The content attribute wrapStyle type must be given");
-            return;
+            throw new IllegalArgumentException("The content attribute wrapStyle type must be given");
         }
 
         wrapSpaceLine = typedArray.getDimension(R.styleable.TWrap_wrapSpaceLine, 0);
@@ -145,13 +144,13 @@ public class TWrap extends TView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //Not only the onMeasure method of the parent class will affect the alignment!
         //Because the paint that measures the length is static, it will be affected by other classes and must be independent!
-
-        System.out.println("onMeasure==>");
-        System.out.println("wrapTextArray==>" + wrapTextArray);
-
         if (wrapTextArray == null) {
             wrapTextArray = new String[]{""};
         }
+
+        System.out.println("onMeasure==>");
+        System.out.println("wrapTextArray==>" + wrapTextArray.length);
+
 
         total = wrapTextArray.length;
         if (total <= 0) {
@@ -209,6 +208,9 @@ public class TWrap extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        System.out.println("onDraw==>");
+
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
         float characterWidth = paint.measureText(wrapTextArray[0]) + wrapTextPadding * 2;//At least one field

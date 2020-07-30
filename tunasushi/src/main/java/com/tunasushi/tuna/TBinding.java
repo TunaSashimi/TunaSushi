@@ -2,6 +2,7 @@ package com.tunasushi.tuna;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.tunasushi.tool.BitmapTool;
@@ -487,6 +488,7 @@ public class TBinding {
 
     @BindingAdapter({"wrapTextArray"})
     public static void setWrapTextArray(TWrap tWrap, String[] wrapTextArray) {
+        tWrap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         tWrap.setWrapTextArray(wrapTextArray);
     }
 }

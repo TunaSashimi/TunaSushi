@@ -10,7 +10,6 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_margin="16dp"
-        android:layerType="software"
         app:scratchCoverColor="#000000"
         app:scratchCoverStrokeWidth="50dp"
         app:scratchRadius="10dp"
