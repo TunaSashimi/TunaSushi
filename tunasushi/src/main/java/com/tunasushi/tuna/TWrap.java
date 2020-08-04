@@ -148,8 +148,8 @@ public class TWrap extends TView {
             wrapTextArray = new String[]{""};
         }
 
-        System.out.println("onMeasure==>");
-        System.out.println("wrapTextArray==>" + wrapTextArray.length);
+//        System.out.println("onMeasure==>");
+//        System.out.println("wrapTextArrayLength==>" + wrapTextArray.length);
 
 
         total = wrapTextArray.length;
