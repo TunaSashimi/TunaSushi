@@ -488,6 +488,10 @@ public class TBinding {
 
     @BindingAdapter({"wrapTextArray"})
     public static void setWrapTextArray(TWrap tWrap, String[] wrapTextArray) {
+        System.out.println("setWrapTextArray==>");
+        if (wrapTextArray != null) {
+            System.out.println("length==>" + wrapTextArray.length);
+        }
         tWrap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         tWrap.setWrapTextArray(wrapTextArray);
     }
