@@ -499,7 +499,7 @@ public class TBinding {
     }
 
     @BindingAdapter({"wrapTextArray"})
-    public static void setWrapTextArray(TWrap tWrap, List wrapTextArray) {
+    public static void setWrapTextArray(TWrap tWrap, List<String> wrapTextArray) {
         System.out.println("setWrapTextArray==>List==>");
         if (wrapTextArray != null) {
             System.out.println("size==>" + wrapTextArray.size());
