@@ -151,7 +151,6 @@ public class TWrap extends TView {
 //        System.out.println("onMeasure==>");
 //        System.out.println("wrapTextArrayLength==>" + wrapTextArray.length);
 
-
         total = wrapTextArray.length;
         if (total <= 0) {
             throw new IllegalArgumentException("The content attribute tunaWrapItemTextArray length must be greater than 0 ");
@@ -209,7 +208,7 @@ public class TWrap extends TView {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        System.out.println("onDraw==>");
+//        System.out.println("onDraw==>");
 
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;

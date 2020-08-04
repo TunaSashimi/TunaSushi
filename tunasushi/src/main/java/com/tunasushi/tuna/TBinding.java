@@ -7,6 +7,8 @@ import android.widget.RelativeLayout;
 
 import com.tunasushi.tool.BitmapTool;
 
+import java.util.List;
+
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
@@ -488,11 +490,21 @@ public class TBinding {
 
     @BindingAdapter({"wrapTextArray"})
     public static void setWrapTextArray(TWrap tWrap, String[] wrapTextArray) {
-        System.out.println("setWrapTextArray==>");
+        System.out.println("setWrapTextArray==>String[]==>");
         if (wrapTextArray != null) {
             System.out.println("length==>" + wrapTextArray.length);
         }
         tWrap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         tWrap.setWrapTextArray(wrapTextArray);
+    }
+
+    @BindingAdapter({"wrapTextArray"})
+    public static void setWrapTextArray(TWrap tWrap, List wrapTextArray) {
+        System.out.println("setWrapTextArray==>List==>");
+        if (wrapTextArray != null) {
+            System.out.println("size==>" + wrapTextArray.size());
+        }
+//        tWrap.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+//        tWrap.setWrapTextArray(wrapTextArray);
     }
 }
