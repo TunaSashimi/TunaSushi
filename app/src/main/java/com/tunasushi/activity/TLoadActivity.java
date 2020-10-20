@@ -11,7 +11,6 @@ import com.tunasushi.R;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-
 public class TLoadActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

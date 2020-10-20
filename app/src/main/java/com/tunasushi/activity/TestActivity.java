@@ -18,13 +18,5 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_t_test);
-
-        final TView tViewGetCode = findViewById(R.id.tViewGetCode);
-        tViewGetCode.setTouchUpListener(new TView.TouchUpListener() {
-            @Override
-            public void touchUp(TView t) {
-                tViewGetCode.setBackgroundStart("#ff0000");
-            }
-        });
     }
 }

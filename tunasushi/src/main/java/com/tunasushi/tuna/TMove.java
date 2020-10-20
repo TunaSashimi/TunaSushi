@@ -15,7 +15,6 @@ import com.tuna.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 /**
  * @author TunaSashimi
  * @date 2015-11-05 15:49

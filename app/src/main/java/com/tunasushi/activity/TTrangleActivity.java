@@ -12,6 +12,7 @@ import com.tunasushi.R;
  * @Description
  */
 public class TTrangleActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

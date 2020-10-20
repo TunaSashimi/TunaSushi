@@ -20,7 +20,7 @@ import java.util.List;
  * @Description
  */
 public class EntryActivity extends Activity {
-    private Class<?>[] c = {
+    private Class<?>[] cla = {
 
             TViewActivity.class,
 
@@ -78,17 +78,17 @@ public class EntryActivity extends Activity {
         setContentView(R.layout.activity_entry);
 
         ListView listView = findViewById(R.id.listView);
-        List<String> list = new ArrayList();
+        List<String> stringList = new ArrayList();
 
-        for (int i = 0; i < c.length; i++) {
-            list.add(c[i].getSimpleName());
+        for (int i = 0; i < cla.length; i++) {
+            stringList.add(cla[i].getSimpleName());
         }
 
-        listView.setAdapter(new ArrayAdapter(this, R.layout.activity_entryitem, list));
+        listView.setAdapter(new ArrayAdapter(this, R.layout.activity_entry_item, stringList));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                startActivity(new Intent(EntryActivity.this, c[arg2]));
+                startActivity(new Intent(EntryActivity.this, cla[arg2]));
             }
         });
     }

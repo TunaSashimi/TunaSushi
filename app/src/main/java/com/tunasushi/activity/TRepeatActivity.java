@@ -3,14 +3,8 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TTrangle;
 import com.tunasushi.tuna.TView;
 import com.tunasushi.tuna.TLine;
 import com.tunasushi.tuna.TRepeat;
@@ -25,10 +19,10 @@ import static com.tunasushi.tool.ViewTool.setLayoutByWidth;
  * @Description
  */
 public class TRepeatActivity extends Activity implements TView.TouchListener {
-    private int dx;
     private TLine tLine;
     private TRepeat tRepeatStar, tRepeatCar, tRepeatTips;
     private String[] indexArray = {"-1", "0", "1", "2", "3"};
+    private int dx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +44,6 @@ public class TRepeatActivity extends Activity implements TView.TouchListener {
         tRepeatCar.setRepeatTotal(indexArray.length);
         tRepeatCar.setRepeatItemTextArray(indexArray);
         tRepeatCar.setTouchListener(this);
-
 
         //
         setLayoutByWidth(tRepeatTips, 5 * 40, TypedValue.COMPLEX_UNIT_DIP);

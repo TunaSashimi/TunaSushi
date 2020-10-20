@@ -78,7 +78,7 @@
             android:layout_below="@id/tViewRect01"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景(设置selectable非none)\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorHeightNormal设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔比如 bottom|right)" />
+            android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorHeightNormal设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔比如 bottom|right)" />
 
         <com.tunasushi.tuna.TView
             android:id="@+id/tViewSelect01"
