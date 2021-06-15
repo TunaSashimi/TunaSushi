@@ -8,7 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
-import com.tuna.R;
+import com.tunasushi.R;
+
 
 /**
  * @author TunaSashimi

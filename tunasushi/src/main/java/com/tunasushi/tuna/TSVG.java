@@ -9,7 +9,8 @@ import android.graphics.Matrix;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.tuna.R;
+
+import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

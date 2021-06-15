@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.tuna.R;
+import com.tunasushi.R;
 import com.tunasushi.tuna.TPicker;
 import com.tunasushi.tuna.TPickerDialog;
 import com.tunasushi.tuna.TView;

@@ -31,9 +31,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import com.tunasushi.R;
 import com.tunasushi.tool.BitmapTool;
 import com.tunasushi.tool.DeviceTool;
-import com.tuna.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

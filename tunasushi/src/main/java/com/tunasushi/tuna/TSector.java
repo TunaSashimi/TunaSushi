@@ -17,7 +17,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 
-import com.tuna.R;
+import com.tunasushi.R;
+
 
 /**
  * @author TunaSashimi

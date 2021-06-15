@@ -17,7 +17,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 
-import com.tuna.R;
+
+import com.tunasushi.R;
 
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 

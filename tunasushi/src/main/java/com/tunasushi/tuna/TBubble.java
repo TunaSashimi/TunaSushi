@@ -8,7 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Region.Op;
 import android.util.AttributeSet;
 
-import com.tuna.R;
+
+import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

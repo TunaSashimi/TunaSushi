@@ -10,7 +10,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 
 
-import com.tuna.R;
+import com.tunasushi.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

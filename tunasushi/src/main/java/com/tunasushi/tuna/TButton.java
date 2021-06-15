@@ -9,7 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
-import com.tuna.R;
+import com.tunasushi.R;
+
 
 /**
  * @author TunaSashimi

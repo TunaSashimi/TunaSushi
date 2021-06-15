@@ -12,7 +12,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.tuna.R;
+
+import com.tunasushi.R;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
