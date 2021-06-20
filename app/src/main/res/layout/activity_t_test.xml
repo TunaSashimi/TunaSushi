@@ -5,10 +5,11 @@
     android:layout_height="match_parent">
 
     <com.tunasushi.tuna.TView
-        android:layout_width="60dp"
+        android:layout_width="120dp"
         android:layout_height="60dp"
         app:backgroundNormal="#ff0000"
-        app:backgroundPress="#ffff00"
-        app:backgroundSelect="#0000ff" />
+        app:backgroundPress="#00ff00"
+        app:radiusBottomLeft="20dp"
+        app:radiusTopLeft="20dp" />
 
 </RelativeLayout>

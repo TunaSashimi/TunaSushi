@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TView;
 
 /**
  * @author TunaSashimi
@@ -13,10 +12,12 @@ import com.tunasushi.tuna.TView;
  * @Description
  */
 public class TestActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_t_test);
+
     }
 }
