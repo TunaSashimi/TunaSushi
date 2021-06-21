@@ -1,5 +1,7 @@
 # TunaSushi
 
+TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
+
 Step 1. Add the JitPack repository to your build file
 
 To get a Git project into your build:
