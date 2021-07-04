@@ -14,7 +14,7 @@
             android:layout_height="108dp"
             android:orientation="horizontal">
 
-            <com.tunasushi.tuna.TButton
+            <com.tunasushi.view.TButton
                 android:id="@+id/tButton01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 
-            <com.tunasushi.tuna.TButton
+            <com.tunasushi.view.TButton
                 android:id="@+id/tButton02"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:background="#dedede" />
 
-            <com.tunasushi.tuna.TButton
+            <com.tunasushi.view.TButton
                 android:id="@+id/tButton03"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

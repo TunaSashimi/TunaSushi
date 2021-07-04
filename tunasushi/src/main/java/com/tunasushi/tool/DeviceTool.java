@@ -25,9 +25,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TPicker;
-import com.tunasushi.tuna.TPickerDialog;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TPicker;
+import com.tunasushi.view.TPickerDialog;
+import com.tunasushi.view.TView;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TScratch;
+import com.tunasushi.view.TScratch;
 
 /**
  * @author TunaSashimi

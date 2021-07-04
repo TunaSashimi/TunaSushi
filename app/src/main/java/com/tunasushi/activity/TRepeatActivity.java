@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.util.TypedValue;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TLine;
-import com.tunasushi.tuna.TRepeat;
+import com.tunasushi.view.TView;
+import com.tunasushi.view.TLine;
+import com.tunasushi.view.TRepeat;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
 import static com.tunasushi.tool.ViewTool.setLayoutByWidth;

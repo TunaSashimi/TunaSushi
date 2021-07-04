@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineTop"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -14,7 +14,7 @@
         app:lineStyle="top"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineBottom"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -26,7 +26,7 @@
         app:lineStyle="bottom"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineLeft"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -36,7 +36,7 @@
         app:lineStyle="left"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineRight"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -48,7 +48,7 @@
         app:lineStyle="right"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineSlash"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -59,7 +59,7 @@
         app:lineStyle="slash"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineSlashBack"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -71,7 +71,7 @@
         app:lineStyle="slashBack"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLineCross"
         android:layout_width="60dp"
         android:layout_height="60dp"

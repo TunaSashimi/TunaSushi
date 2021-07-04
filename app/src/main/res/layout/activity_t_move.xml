@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bitmap_tscale_scalebitmap">
 
-    <com.tunasushi.tuna.TMove
+    <com.tunasushi.view.TMove
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:moveBitmap="@drawable/bitmap_tmove_movebitmap"

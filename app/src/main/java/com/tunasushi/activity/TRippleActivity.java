@@ -8,8 +8,8 @@ import android.os.Message;
 import android.view.View;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TRipple;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TRipple;
+import com.tunasushi.view.TView;
 
 import java.util.Timer;
 import java.util.TimerTask;

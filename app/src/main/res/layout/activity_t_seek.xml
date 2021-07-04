@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.tunasushi.tuna.TSeek
+    <com.tunasushi.view.TSeek
         android:id="@+id/tSeek"
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -29,7 +29,7 @@
         app:seekTextSize="17dp"
         app:seekTextArray="@array/seek_text_value_array" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewReset"
         android:layout_width="80dp"
         android:layout_height="40dp"
@@ -45,7 +45,7 @@
         app:textSize="14dp"
         app:text="下标重置" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewIndex"
         android:layout_width="80dp"
         android:layout_height="40dp"

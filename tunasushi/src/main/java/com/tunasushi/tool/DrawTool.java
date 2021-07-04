@@ -6,13 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
-import static com.tunasushi.tuna.TView.BOTTOM;
-import static com.tunasushi.tuna.TView.CENTER;
-import static com.tunasushi.tuna.TView.CENTER_HORIZONTAL;
-import static com.tunasushi.tuna.TView.CENTER_VERTICAL;
-import static com.tunasushi.tuna.TView.GRAVITY_MASK;
-import static com.tunasushi.tuna.TView.LEFT;
-import static com.tunasushi.tuna.TView.RIGHT;
+import static com.tunasushi.view.TView.BOTTOM;
+import static com.tunasushi.view.TView.CENTER;
+import static com.tunasushi.view.TView.CENTER_HORIZONTAL;
+import static com.tunasushi.view.TView.CENTER_VERTICAL;
+import static com.tunasushi.view.TView.GRAVITY_MASK;
+import static com.tunasushi.view.TView.LEFT;
+import static com.tunasushi.view.TView.RIGHT;
 
 /**
  * @author TunaSashimi

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG01"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -17,7 +17,7 @@
             android:layout_marginTop="16dp"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG02"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -27,7 +27,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG03"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -37,7 +37,7 @@
             app:SVGStyle="star"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG04"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -48,7 +48,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG05"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -58,7 +58,7 @@
             app:SVGStyle="heart"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG06"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -69,7 +69,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG07"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -79,7 +79,7 @@
             app:SVGStyle="flower"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG08"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -90,7 +90,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG09"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -100,7 +100,7 @@
             app:SVGStyle="pentagon"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG10"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -111,7 +111,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG11"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -121,7 +121,7 @@
             app:SVGStyle="sixteenedge"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG12"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -132,7 +132,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG13"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -142,7 +142,7 @@
             app:SVGStyle="fortyedge"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG14"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -153,7 +153,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG15"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -163,7 +163,7 @@
             app:SVGStyle="snail"
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG16"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -174,7 +174,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_out" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG17"
             android:layout_width="100dp"
             android:layout_height="60dp"
@@ -185,7 +185,7 @@
             app:SVGSrc="@drawable/bitmap_icon_tunasashimi"
             app:porterDuffXferStyle="src_in" />
 
-        <com.tunasushi.tuna.TSVG
+        <com.tunasushi.view.TSVG
             android:id="@+id/tSVG18"
             android:layout_width="100dp"
             android:layout_height="60dp"

@@ -1,15 +1,12 @@
 package com.tunasushi.activity;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TButton;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TButton;
+import com.tunasushi.view.TView;
 
 /**
  * @author TunaSashimi

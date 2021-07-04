@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tunasushi.tuna.TLoad
+    <com.tunasushi.view.TLoad
         android:id="@+id/tLoad"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp" />
 
-    <com.tunasushi.tuna.TLoad
+    <com.tunasushi.view.TLoad
         android:id="@+id/tLoadCustom"
         android:layout_width="120dp"
         android:layout_height="120dp"

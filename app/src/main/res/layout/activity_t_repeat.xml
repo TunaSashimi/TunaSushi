@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#f0eff5">
 
-    <com.tunasushi.tuna.TLayout
+    <com.tunasushi.view.TLayout
         android:id="@+id/tLayout"
         android:layout_width="match_parent"
         android:layout_height="260dp"
@@ -17,7 +17,7 @@
         app:layoutStrokeColor="#b2b2b2"
         app:layoutStrokeWidth="1dp">
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/checkReason01"
             android:layout_width="118dp"
             android:layout_height="36dp"
@@ -36,7 +36,7 @@
             app:textColorNormal="#666666"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason01"
@@ -56,7 +56,7 @@
             app:textColorNormal="#666666"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/checkReason03"
             android:layout_width="118dp"
             android:layout_height="36dp"
@@ -75,7 +75,7 @@
             app:textColorNormal="#666666"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:layout_width="118dp"
             android:layout_height="36dp"
             android:layout_alignTop="@id/checkReason03"
@@ -107,9 +107,9 @@
             android:padding="20dp"
             android:textColor="#666666"
             android:textSize="14dp" />
-    </com.tunasushi.tuna.TLayout>
+    </com.tunasushi.view.TLayout>
 
-    <com.tunasushi.tuna.TLine
+    <com.tunasushi.view.TLine
         android:id="@+id/tLine"
         android:layout_width="16dp"
         android:layout_height="16dp"
@@ -121,7 +121,7 @@
         app:lineStyle="bottom"
         app:lineThick="1dp" />
 
-    <com.tunasushi.tuna.TRepeat
+    <com.tunasushi.view.TRepeat
         android:id="@+id/tRepeatStar"
         android:layout_width="match_parent"
         android:layout_height="32dp"
@@ -135,7 +135,7 @@
         app:repeatSrcSelect="@drawable/bitmap_trepeat_star_select"
         app:repeatTotal="5" />
 
-    <com.tunasushi.tuna.TRepeat
+    <com.tunasushi.view.TRepeat
         android:id="@+id/tRepeatCar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -154,7 +154,7 @@
         app:repeatSrcNormal="@drawable/bitmap_trepeat_car_normal"
         app:repeatSrcSelect="@drawable/bitmap_trepeat_car_select" />
 
-    <com.tunasushi.tuna.TRepeat
+    <com.tunasushi.view.TRepeat
         android:id="@+id/tRepeatTips"
         android:layout_width="match_parent"
         android:layout_height="16dp"

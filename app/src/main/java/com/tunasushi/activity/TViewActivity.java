@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.tunasushi.R;
 import com.tunasushi.tool.DeviceTool;
-import com.tunasushi.tuna.TGroup;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TGroup;
+import com.tunasushi.view.TView;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
 

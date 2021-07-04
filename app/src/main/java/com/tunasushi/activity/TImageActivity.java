@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.SeekBar;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TImage;
+import com.tunasushi.view.TImage;
 
 /**
  * @author TunaSashimi

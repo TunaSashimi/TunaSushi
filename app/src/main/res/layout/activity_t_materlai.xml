@@ -17,7 +17,7 @@
             android:text="materialTime设置动画时长\nmaterialSpread设置中心偏移"
             android:textColor="#434343" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewMaterial01"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -32,7 +32,7 @@
             app:textSize="16dp"
             app:text="materialTime=1000" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewMaterial02"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -58,7 +58,7 @@
                 android:id="@+id/viewAnchor01"
                 style="@style/ViewAnchor" />
 
-            <com.tunasushi.tuna.TView
+            <com.tunasushi.view.TView
                 android:id="@+id/tViewMaterial03"
                 style="@style/TViewGroupDrackBrownStart"
                 android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 app:textMarkRadius="5dp"
                 app:text="金枪鱼刺身" />
 
-            <com.tunasushi.tuna.TView
+            <com.tunasushi.view.TView
                 android:id="@+id/tViewMaterial04"
                 style="@style/TViewGroupDrackBrownEnd"
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 app:text="TunaSashimi" />
         </RelativeLayout>
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:layout_width="288dp"
             android:layout_height="288dp"
             android:layout_below="@id/relativeMaterial"

@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TSector;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TSector;
+import com.tunasushi.view.TView;
 
 /**
  * @author TunaSashimi

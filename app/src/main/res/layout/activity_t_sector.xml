@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <com.tunasushi.tuna.TSector
+    <com.tunasushi.view.TSector
         android:id="@+id/tSector"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -15,7 +15,7 @@
         app:sectorDragRadius="4dp"
         app:sectorSpaceWidth="12dp" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         app:textSize="40sp"
         app:text="0%" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewSubtract"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -38,7 +38,7 @@
         app:textSize="16dp"
         app:text="-" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewAdd"
         android:layout_width="match_parent"
         android:layout_height="50dp"

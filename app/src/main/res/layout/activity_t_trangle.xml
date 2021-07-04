@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.tunasushi.tuna.TTrangle
+    <com.tunasushi.view.TTrangle
         android:id="@+id/tTrangleTop"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -15,7 +15,7 @@
         app:trangleBackgroundPress="#d9c700"
         app:trangleStyle="top" />
 
-    <com.tunasushi.tuna.TTrangle
+    <com.tunasushi.view.TTrangle
         android:id="@+id/tTrangleBottom"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -27,7 +27,7 @@
         app:trangleStrokeColor="#592d2e"
         app:trangleStrokeWidth="2dp" />
 
-    <com.tunasushi.tuna.TTrangle
+    <com.tunasushi.view.TTrangle
         android:id="@+id/tTrangleLeft"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -38,7 +38,7 @@
         app:trangleBackgroundSelect="#592d2d"
         app:trangleStyle="left" />
 
-    <com.tunasushi.tuna.TTrangle
+    <com.tunasushi.view.TTrangle
         android:id="@+id/tTrangleRight"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -60,42 +60,42 @@
         android:layout_marginRight="16dp"
         android:orientation="horizontal">
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:trangleBackgroundNormal="#fae500"
             app:trangleStyle="bottom" />
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:trangleBackgroundNormal="#fae500"
             app:trangleStyle="bottom" />
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:trangleBackgroundNormal="#fae500"
             app:trangleStyle="bottom" />
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:trangleBackgroundNormal="#fae500"
             app:trangleStyle="bottom" />
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:trangleBackgroundNormal="#fae500"
             app:trangleStyle="bottom" />
 
-        <com.tunasushi.tuna.TTrangle
+        <com.tunasushi.view.TTrangle
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -7,7 +7,7 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp">
 
-    <com.tunasushi.tuna.TPentagram
+    <com.tunasushi.view.TPentagram
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:pentagramColor="#ff0000"

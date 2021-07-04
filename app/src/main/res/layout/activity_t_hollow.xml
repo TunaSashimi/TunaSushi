@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bitmap_thollow_bg">
 
-    <com.tunasushi.tuna.THollow
+    <com.tunasushi.view.THollow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:hollowBitmap="@drawable/bitmap_thollow_font"

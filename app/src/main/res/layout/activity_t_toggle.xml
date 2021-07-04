@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <com.tunasushi.tuna.TToggle
+    <com.tunasushi.view.TToggle
         android:id="@+id/tToggle01"
         android:layout_width="224dp"
         android:layout_height="32dp"
@@ -25,7 +25,7 @@
         app:toggleTextLeft="按关键字查询"
         app:toggleTextRight="按日期查询" />
 
-    <com.tunasushi.tuna.TToggle
+    <com.tunasushi.view.TToggle
         android:id="@+id/tToggle02"
         android:layout_width="355dp"
         android:layout_height="43dp"

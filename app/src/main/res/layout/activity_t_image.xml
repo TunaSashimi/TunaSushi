@@ -17,7 +17,7 @@
             android:text="imageSrc设置图片源\nimageRadius设置圆角\nimageAlpha设置透明度\nimageSepia设置怀旧\nimageBacksheet设置底片\nimageSketch设置素描\nimageEmboss设置浮雕\nimageSunshineFractionX,Y设置光照坐标\nimageBright设置亮度0~2\nimageHue设置色相-180~180\nimageSaturation设置饱和度0~2"
             android:textColor="#434343" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:id="@+id/tImage01"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -25,7 +25,7 @@
             android:layout_marginLeft="16dp"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:id="@+id/tImage02"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -37,7 +37,7 @@
             app:imageSunshineFractionX="50%"
             app:imageSunshineFractionY="50%" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignTop="@id/tImage02"
@@ -47,7 +47,7 @@
             app:imageRadius="10dp"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:id="@+id/tImage04"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -57,7 +57,7 @@
             app:imageSepia="true"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignTop="@id/tImage04"
@@ -66,7 +66,7 @@
             app:imageBacksheet="true"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:id="@+id/tImage06"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -76,7 +76,7 @@
             app:imageSketch="true"
             app:imageSrc="@drawable/bitmap_tview_srcnormal03" />
 
-        <com.tunasushi.tuna.TImage
+        <com.tunasushi.view.TImage
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignTop="@id/tImage06"

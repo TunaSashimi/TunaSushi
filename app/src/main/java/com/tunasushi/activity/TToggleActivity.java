@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TToggle;
+import com.tunasushi.view.TToggle;
 
 /**
  * @author TunaSashimi

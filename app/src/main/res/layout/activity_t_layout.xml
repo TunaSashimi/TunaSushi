@@ -13,7 +13,7 @@
         android:text="TLayout用法参考TView"
         android:textColor="#434343" />
 
-    <com.tunasushi.tuna.TLayout
+    <com.tunasushi.view.TLayout
         android:id="@+id/tLayout01"
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -25,9 +25,9 @@
         app:layoutStrokeColor="#ac9696"
         app:layoutStrokeWidth="1dp">
 
-    </com.tunasushi.tuna.TLayout>
+    </com.tunasushi.view.TLayout>
 
-    <com.tunasushi.tuna.TLayout
+    <com.tunasushi.view.TLayout
         android:id="@+id/tLayout02"
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -40,9 +40,9 @@
         app:layoutBackgroundShadowRadius="2dp"
         app:layoutRadius="5dp">
 
-    </com.tunasushi.tuna.TLayout>
+    </com.tunasushi.view.TLayout>
 
-    <com.tunasushi.tuna.TLayout
+    <com.tunasushi.view.TLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_below="@id/tLayout02"
@@ -51,5 +51,5 @@
         app:layoutBackgroundAngle="270"
         app:layoutBackgroundEnd="#ffca00"
         app:layoutBackgroundStart="#ffec95"
-        app:layoutRadius="5dp"></com.tunasushi.tuna.TLayout>
+        app:layoutRadius="5dp"></com.tunasushi.view.TLayout>
 </RelativeLayout>

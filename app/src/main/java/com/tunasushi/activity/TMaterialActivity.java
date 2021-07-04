@@ -5,10 +5,8 @@ import android.os.Bundle;
 
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TGroup;
-import com.tunasushi.tuna.TView;
-
-import java.util.Arrays;
+import com.tunasushi.view.TGroup;
+import com.tunasushi.view.TView;
 
 /**
  * @author TunaSashimi

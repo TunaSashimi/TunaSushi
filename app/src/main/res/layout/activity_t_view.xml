@@ -17,7 +17,7 @@
             android:color="#434343"
             android:text="backgroundNormal设置常规背景\ntextStyle设置字体\ntextAssets设置自定义字体\ntextFlag设置删除线下划线" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRect01"
             android:layout_width="84dp"
             android:layout_height="40dp"
@@ -30,7 +30,7 @@
             app:textFlag="strike_through"
             app:textSize="12dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRect02"
             android:layout_width="84dp"
             android:layout_height="40dp"
@@ -45,7 +45,7 @@
             app:textSize="12dp"
             app:textStyle="bold_italic" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRect03"
             style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect02"
@@ -58,7 +58,7 @@
             app:textColorNormal="#ffffff"
             app:touchUp="touchUp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRect04"
             style="@style/TViewRect"
             android:layout_alignTop="@id/tViewRect03"
@@ -80,7 +80,7 @@
             android:color="#434343"
             android:text="backgroundPress设置按下背景\nbackgroundSelect设置选中背景\nsrcAnchorNormal设置锚图片\nsrcAnchorWidthNormal设置锚图片宽度\nsrcAnchorHeightNormal设置锚图片高度\nsrcAnchorGravity设置锚图片停靠(多属性用|分隔比如 bottom|right)" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSelect01"
             android:layout_width="100dp"
             android:layout_height="48dp"
@@ -103,7 +103,7 @@
             app:textColorNormal="#dedede"
             app:textSize="16dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSelect02"
             android:layout_width="100dp"
             android:layout_height="48dp"
@@ -126,7 +126,7 @@
             app:textColorNormal="#dedede"
             app:textSize="16dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSelect03"
             android:layout_width="100dp"
             android:layout_height="48dp"
@@ -170,7 +170,7 @@
                 android:id="@+id/viewAnchor01"
                 style="@style/ViewAnchor" />
 
-            <com.tunasushi.tuna.TView
+            <com.tunasushi.view.TView
                 android:id="@+id/tViewGroupStart"
                 style="@style/TViewGroupDrackBrownStart"
                 android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                 app:textMarkColor="#ff0000"
                 app:textMarkRadius="4dp" />
 
-            <com.tunasushi.tuna.TView
+            <com.tunasushi.view.TView
                 android:id="@+id/tViewGroupEnd"
                 style="@style/TViewGroupDrackBrownEnd"
                 android:layout_width="match_parent"
@@ -211,7 +211,7 @@
             android:color="#434343"
             android:text="strokeWidth设置描边宽度\nstrokeColorNormal设置描边\ntextShadowColor设置文字阴影\ntextShadowRadius设置文字阴影半径\ntextShadowDx设置文字阴影横向偏移\ntextShadowDy设置文字阴影纵向偏移\ntextMarkRadius设置标识半径\ntextMarkColor设置标识\ntextMarkDx设置标识横向偏移\ntextMarkDx设置标识纵向偏移\ntextMarkText设置标识文本\ntextMarkTextSize设置标识字号\ntextMarkTextColor设置标识\ntextMarkTouchable禁止标识隐藏" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewShadow01"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -237,7 +237,7 @@
             app:textShadowRadius="3dp"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewShadow02"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -262,7 +262,7 @@
             app:textPaddingRight="4dp"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewShadow03"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -291,7 +291,7 @@
             android:color="#434343"
             android:text="backgroundAngle设置渐变方向\nbackgroundStart设置渐变开始\nbackgroundEnd设置渐变结束" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewGradient01"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -314,7 +314,7 @@
             app:textGravity="left"
             app:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewGradient02"
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -352,7 +352,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tView03"
             style="@style/TViewTextMarkRedHorizontal"
             android:layout_alignTop="@id/tViewAnchorSecondaryButton01"
@@ -365,7 +365,7 @@
             app:text="背景按下#d9c700"
             app:textColorNormal="#ffffff" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             style="@style/TViewTextMarkRedTop"
             android:layout_alignTop="@id/tViewAnchorSecondaryButton01"
             android:layout_marginRight="16dp"
@@ -394,7 +394,7 @@
             style="@style/ViewAnchor"
             android:layout_below="@id/clipButton" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tView04"
             style="@style/TViewTextMarkRedHorizontal"
             android:layout_height="60dp"
@@ -411,7 +411,7 @@
             app:textGravity="right"
             app:textPaddingRight="40dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             style="@style/TViewTextMarkRedHorizontal"
             android:layout_height="60dp"
             android:layout_alignTop="@id/viewAnchorSecondaryButton02"
@@ -427,7 +427,7 @@
             app:textPaddingLeft="42dp"
             app:textRowSpaceRatio="150%" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tView05"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -441,7 +441,7 @@
             app:strokeColorNormal="#ff0000"
             app:strokeWidthNormal="2dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tView06"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -453,7 +453,7 @@
             app:srcNormal="@drawable/bitmap_tview_srcnormal03"
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignTop="@id/tView06"
@@ -472,7 +472,7 @@
             android:color="#434343"
             android:text="srcShadowRadiusNormal设置背景图阴影半径,注意设置的时候一定要把父控件的背景作为backgroundNormal传入\nsrcShadowDxNormal设置背景图阴影横向偏移\nsrcShadowDxNormal设置背景图阴影纵向偏移\n针对backgroundShadow偏移,移动的是背景图上阴影的绘制" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tView08"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -484,7 +484,7 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal04"
             app:srcShadowRadiusNormal="8dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignTop="@id/tView08"
@@ -505,7 +505,7 @@
             android:color="#434343"
             android:text="content和text用法相同" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewContent"
             android:layout_width="match_parent"
             android:layout_height="96dp"
@@ -544,7 +544,7 @@
             android:color="#434343"
             android:text="srcLeftNormal设置文字左边图片\nsrcLeftWidthNormal设置图片宽度\nsrcLeftHeightNormal设置图片高度\nsrcLeftPaddingNormal设置图片与文字间距\nsrcLeftDxNormal设置左右偏移\nsrcLeftDyNormal设置上下偏移" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSrcLeft"
             android:layout_width="80dp"
             android:layout_height="48dp"
@@ -563,7 +563,7 @@
             app:textColorNormal="#ffffff"
             app:textSize="16dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSrcLeftPadding"
             android:layout_width="80dp"
             android:layout_height="48dp"
@@ -592,7 +592,7 @@
             android:color="#434343"
             android:text="srcLeftPaddingNormal设置8dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSrcRight"
             android:layout_width="80dp"
             android:layout_height="48dp"
@@ -609,7 +609,7 @@
             app:textColorSelect="#0b79e8"
             app:textSize="16dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewSrcRightPaddingDx"
             android:layout_width="80dp"
             android:layout_height="48dp"
@@ -636,7 +636,7 @@
             android:color="#434343"
             android:text="srcLeftSelect设置选中" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRadius01"
             android:layout_width="84dp"
             android:layout_height="18dp"
@@ -652,7 +652,7 @@
             app:textColorNormal="#ffffff"
             app:textSize="12sp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewRadius02"
             android:layout_width="84dp"
             android:layout_height="18dp"
@@ -670,7 +670,7 @@
             app:textColorNormal="#ffffff"
             app:textSize="12sp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewPadding"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -684,7 +684,7 @@
             app:textPaddingLeft="10dp"
             app:textPaddingRight="10dp" />
 
-        <com.tunasushi.tuna.TLayout
+        <com.tunasushi.view.TLayout
             android:id="@+id/tLayout01"
             android:layout_width="120dp"
             android:layout_height="60dp"
@@ -696,7 +696,7 @@
             app:layoutStrokeWidth="1dp"
             app:strokeWidthNormal="1dp">
 
-            <com.tunasushi.tuna.TView
+            <com.tunasushi.view.TView
                 android:id="@+id/tv"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
@@ -707,7 +707,7 @@
                 app:textColorNormal="#ffffff"
                 app:textDx="-6dp"
                 app:textSize="11sp" />
-        </com.tunasushi.tuna.TLayout>
+        </com.tunasushi.view.TLayout>
 
         <TextView
             android:id="@+id/textPrompt10"

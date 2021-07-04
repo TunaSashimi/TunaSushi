@@ -8,13 +8,13 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp">
 
-    <com.tunasushi.tuna.TBezier
+    <com.tunasushi.view.TBezier
         android:id="@+id/tBezier01"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true" />
 
-    <com.tunasushi.tuna.TBezier
+    <com.tunasushi.view.TBezier
         android:id="@+id/tBezier02"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

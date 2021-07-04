@@ -7,7 +7,7 @@ import android.view.View;
 import com.tunasushi.R;
 import com.tunasushi.bean.BindingBean;
 import com.tunasushi.databinding.ActivityTBindingBinding;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TView;
 
 import androidx.databinding.DataBindingUtil;
 

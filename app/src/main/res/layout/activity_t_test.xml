@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:layout_width="120dp"
         android:layout_height="60dp"
         app:backgroundNormal="#ff0000"

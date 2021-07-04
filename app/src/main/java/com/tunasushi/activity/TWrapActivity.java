@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TWrap;
+import com.tunasushi.view.TView;
+import com.tunasushi.view.TWrap;
 
 /**
  * @author TunaSashimi

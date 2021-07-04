@@ -10,9 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TPicker;
-import com.tunasushi.tuna.TPickerDialog;
-import com.tunasushi.tuna.TDraw;
+import com.tunasushi.view.TPicker;
+import com.tunasushi.view.TPickerDialog;
+import com.tunasushi.view.TDraw;
 
 /**
  * @author TunaSashimi

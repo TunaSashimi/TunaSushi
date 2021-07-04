@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TBubble;
-import com.tunasushi.tuna.TGroup;
-import com.tunasushi.tuna.TRange;
-import com.tunasushi.tuna.TView;
+import com.tunasushi.view.TBubble;
+import com.tunasushi.view.TGroup;
+import com.tunasushi.view.TRange;
+import com.tunasushi.view.TView;
 
 import static com.tunasushi.tool.ConvertTool.dpToPx;
 

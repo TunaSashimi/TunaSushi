@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TView;
-import com.tunasushi.tuna.TSeek;
+import com.tunasushi.view.TView;
+import com.tunasushi.view.TSeek;
 
 /**
  * @author TunaSashimi

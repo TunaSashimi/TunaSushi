@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.tunasushi.tuna.TAnalysis
+    <com.tunasushi.view.TAnalysis
         android:id="@+id/tAnalysis"
         android:layout_width="300dp"
         android:layout_height="300dp"

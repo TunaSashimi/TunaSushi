@@ -6,7 +6,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TProgress;
+import com.tunasushi.view.TProgress;
 
 /**
  * @author TunaSashimi

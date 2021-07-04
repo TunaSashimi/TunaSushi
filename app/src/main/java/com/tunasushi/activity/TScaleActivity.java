@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.tunasushi.R;
-import com.tunasushi.tuna.TScale;
+import com.tunasushi.view.TScale;
 
 /**
  * @author TunaSashimi

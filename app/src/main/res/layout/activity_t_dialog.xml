@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewConfirm"
         android:layout_width="match_parent"
         android:layout_height="36dp"
@@ -16,7 +16,7 @@
         app:textSize="16dp"
         app:text="SHOW DIALOG CONFIRM" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewChoice"
         android:layout_width="match_parent"
         android:layout_height="36dp"
@@ -30,7 +30,7 @@
         app:textSize="16dp"
         app:text="SHOW DIALOG CHOICE" />
 
-    <com.tunasushi.tuna.TView
+    <com.tunasushi.view.TView
         android:id="@+id/tViewSelect"
         android:layout_width="match_parent"
         android:layout_height="36dp"
@@ -43,14 +43,14 @@
         app:textSize="16dp"
         app:text="SHOW DIALOG SELECT" />
 
-    <com.tunasushi.tuna.TDialog
+    <com.tunasushi.view.TDialog
         android:id="@+id/tDialogConfirm"
         style="@style/TDialogChoice"
         app:dialogChoiceValueArray="@array/dialog_text_value_array_confirm"
         app:dialogContent="多数订单会在10分钟内确认，请耐心等待。"
         app:dialogText="温馨提示" />
 
-    <com.tunasushi.tuna.TDialog
+    <com.tunasushi.view.TDialog
         android:id="@+id/tDialogChoice"
         style="@style/TDialogChoice"
         app:dialogChoiceColorArray="@array/dialog_text_color_array_choice"
@@ -58,7 +58,7 @@
         app:dialogContent="您正在取消订单，确认要取消吗？"
         app:dialogText="温馨提示" />
 
-    <com.tunasushi.tuna.TDialog
+    <com.tunasushi.view.TDialog
         android:id="@+id/tDialogSelect"
         style="@style/TDialogChoice"
         app:dialogChoiceColorArray="@array/dialog_text_color_array_select"

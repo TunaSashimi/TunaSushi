@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.tunasushi.tuna.TScale
+        <com.tunasushi.view.TScale
             android:id="@+id/tScaleTop"
             android:layout_width="320dp"
             android:layout_height="320dp"
@@ -17,7 +17,7 @@
             app:scaleBitmap="@drawable/bitmap_tscale_scalebitmap"
             app:scaleStyle="width_top" />
 
-        <com.tunasushi.tuna.TScale
+        <com.tunasushi.view.TScale
             android:id="@+id/tScaleCenter"
             android:layout_width="320dp"
             android:layout_height="320dp"
@@ -26,7 +26,7 @@
             app:scaleBitmap="@drawable/bitmap_tscale_scalebitmap"
             app:scaleStyle="width_center" />
 
-        <com.tunasushi.tuna.TScale
+        <com.tunasushi.view.TScale
             android:id="@+id/tScaleBottom"
             android:layout_width="320dp"
             android:layout_height="320dp"
@@ -35,7 +35,7 @@
             app:scaleBitmap="@drawable/bitmap_tscale_scalebitmap"
             app:scaleStyle="width_bottom" />
 
-        <com.tunasushi.tuna.TScale
+        <com.tunasushi.view.TScale
             android:id="@+id/tScale"
             android:layout_width="320dp"
             android:layout_height="320dp"

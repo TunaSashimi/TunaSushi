@@ -3,7 +3,7 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.tunasushi.tuna.TPattern;
+import com.tunasushi.view.TPattern;
 
 /**
  * @author TunaSashimi

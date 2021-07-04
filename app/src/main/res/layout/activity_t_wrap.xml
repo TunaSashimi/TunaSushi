@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.tunasushi.tuna.TWrap
+    <com.tunasushi.view.TWrap
         android:id="@+id/tWrap01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:wrapTextColorNormal="#ff9933"
         app:wrapTextSize="20dp" />
 
-    <com.tunasushi.tuna.TWrap
+    <com.tunasushi.view.TWrap
         android:id="@+id/tWrap02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:wrapTextPadding="10dp"
         app:wrapTextSize="20dp" />
 
-    <com.tunasushi.tuna.TWrap
+    <com.tunasushi.view.TWrap
         android:id="@+id/tWrap03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

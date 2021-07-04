@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#80000000">
 
-    <com.tunasushi.tuna.TLayout
+    <com.tunasushi.view.TLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
         android:layout_height="280dp"
@@ -14,7 +14,7 @@
         app:layoutRadiusTopLeft="10dp"
         app:layoutRadiusTopRight="10dp">
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewPrice"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:textColor="#62636c"
             android:textSize="14dp" />
 
-        <com.tunasushi.tuna.TBubble
+        <com.tunasushi.view.TBubble
             android:id="@+id/tBubble"
             android:layout_width="36dp"
             android:layout_height="30dp"
@@ -67,7 +67,7 @@
             app:bubbleToward="bottom"
             app:radius="4dp" />
 
-        <com.tunasushi.tuna.TRange
+        <com.tunasushi.view.TRange
             android:id="@+id/tRange"
             android:layout_width="match_parent"
             android:layout_height="36dp"
@@ -94,7 +94,7 @@
             android:textColor="#62636c"
             android:textSize="14dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewNoLimit"
             android:layout_width="66dp"
             android:layout_height="40dp"
@@ -114,7 +114,7 @@
             app:textColorSelect="#0e82f6"
             app:textSize="13dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewStarTwo"
             android:layout_width="66dp"
             android:layout_height="40dp"
@@ -133,7 +133,7 @@
             app:textColorSelect="#0e82f6"
             app:textSize="13dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewStarThree"
             android:layout_width="66dp"
             android:layout_height="40dp"
@@ -152,7 +152,7 @@
             app:textColorSelect="#0e82f6"
             app:textSize="13dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewStarFour"
             android:layout_width="66dp"
             android:layout_height="40dp"
@@ -171,7 +171,7 @@
             app:textColorSelect="#0e82f6"
             app:textSize="13dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewStarFive"
             android:layout_width="66dp"
             android:layout_height="40dp"
@@ -190,7 +190,7 @@
             app:textColorSelect="#0e82f6"
             app:textSize="13dp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewReset"
             android:layout_width="140dp"
             android:layout_height="38dp"
@@ -204,7 +204,7 @@
             app:textColorNormal="#0e82f6"
             app:touchUp="touchUp" />
 
-        <com.tunasushi.tuna.TView
+        <com.tunasushi.view.TView
             android:id="@+id/tViewComplete"
             android:layout_width="match_parent"
             android:layout_height="38dp"
@@ -218,5 +218,5 @@
             app:textColorNormal="#ffffff"
             app:touchUp="touchUp" />
 
-    </com.tunasushi.tuna.TLayout>
+    </com.tunasushi.view.TLayout>
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleLeftLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -23,7 +23,7 @@
         app:bubbleToward="left"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleTopLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -41,7 +41,7 @@
         app:bubbleToward="top"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleRightLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -60,7 +60,7 @@
         app:bubbleToward="right"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleBottomLow"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -79,7 +79,7 @@
         app:bubbleToward="bottom"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleBottomLow"
@@ -98,7 +98,7 @@
         app:bubbleToward="top"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleLeftMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -116,7 +116,7 @@
         app:bubbleToward="left"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleTopMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -135,7 +135,7 @@
         app:bubbleToward="top"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleRightMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -154,7 +154,7 @@
         app:bubbleToward="right"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleBottomMiddle"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -173,7 +173,7 @@
         app:bubbleToward="bottom"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleBottomMiddle"
@@ -192,7 +192,7 @@
         app:bubbleToward="top"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleLeftHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -211,7 +211,7 @@
         app:bubbleToward="left"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleTopHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -230,7 +230,7 @@
         app:bubbleToward="top"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleRightHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -249,7 +249,7 @@
         app:bubbleToward="right"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:id="@+id/bubbleBottomHigh"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -268,7 +268,7 @@
         app:bubbleToward="bottom"
         app:radius="10dp" />
 
-    <com.tunasushi.tuna.TBubble
+    <com.tunasushi.view.TBubble
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/bubbleBottomHigh"

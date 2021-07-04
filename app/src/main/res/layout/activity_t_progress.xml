@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:text="设置android:layerType=software(开启硬件加速影响)" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCircleClockWise"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -24,7 +24,7 @@
         app:progressEffect="clockWise"
         app:progressShape="circle" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCircleUpWard"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -35,7 +35,7 @@
         app:progressEffect="upWard"
         app:progressShape="circle" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCircleUpDown"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -47,7 +47,7 @@
         app:progressEffect="upDown"
         app:progressShape="circle" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCustomClockWise"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -58,7 +58,7 @@
         app:progressSrcBack="@drawable/bitmap_tprogress_back"
         app:progressSrcFront="@drawable/bitmap_tprogress_front" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCustomUpWard"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -69,7 +69,7 @@
         app:progressSrcBack="@drawable/bitmap_tprogress_back"
         app:progressSrcFront="@drawable/bitmap_tprogress_front" />
 
-    <com.tunasushi.tuna.TProgress
+    <com.tunasushi.view.TProgress
         android:id="@+id/tProgressCustomUpDown"
         android:layout_width="80dp"
         android:layout_height="80dp"
