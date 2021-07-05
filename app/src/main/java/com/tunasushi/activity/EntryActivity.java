@@ -7,9 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.tunasushi.R;
-
+import com.tunasushi.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +83,6 @@ public class EntryActivity extends Activity {
         }
 
         listView.setAdapter(new ArrayAdapter(this, R.layout.activity_entry_item, stringList));
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 startActivity(new Intent(EntryActivity.this, cla[arg2]));

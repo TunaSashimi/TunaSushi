@@ -2,7 +2,7 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 
 /**
  * @author TunaSashimi

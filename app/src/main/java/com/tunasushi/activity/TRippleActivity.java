@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 import com.tunasushi.view.TRipple;
 import com.tunasushi.view.TView;
-
 import java.util.Timer;
 import java.util.TimerTask;
 

@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 import com.tunasushi.tool.DeviceTool;
 import com.tunasushi.view.TGroup;
 import com.tunasushi.view.TView;

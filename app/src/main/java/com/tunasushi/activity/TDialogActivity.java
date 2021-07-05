@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 import com.tunasushi.view.TDialog;
 import com.tunasushi.view.TView;
 

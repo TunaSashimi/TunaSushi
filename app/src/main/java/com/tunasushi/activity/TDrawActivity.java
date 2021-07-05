@@ -8,8 +8,7 @@ import android.graphics.PorterDuffXfermode;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 import com.tunasushi.view.TPicker;
 import com.tunasushi.view.TPickerDialog;
 import com.tunasushi.view.TDraw;

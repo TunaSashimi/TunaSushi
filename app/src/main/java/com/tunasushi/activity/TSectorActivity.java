@@ -3,8 +3,7 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-
-import com.tunasushi.R;
+import com.tunasushi.demo.R;
 import com.tunasushi.view.TSector;
 import com.tunasushi.view.TView;
 

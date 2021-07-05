@@ -2,8 +2,8 @@ package com.tunasushi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.tunasushi.demo.R;
 
-import com.tunasushi.R;
 /**
  * @author TunaSashimi
  * @date 2015-10-30 16:53

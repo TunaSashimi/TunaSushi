@@ -3,10 +3,9 @@ package com.tunasushi.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-
-import com.tunasushi.R;
 import com.tunasushi.bean.BindingBean;
-import com.tunasushi.databinding.ActivityTBindingBinding;
+import com.tunasushi.demo.R;
+import com.tunasushi.demo.databinding.ActivityTBindingBinding;
 import com.tunasushi.view.TView;
 
 import androidx.databinding.DataBindingUtil;

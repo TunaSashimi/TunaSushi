@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tunasushi">
+    package="com.tunasushi.demo">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.EntryActivity"
+            android:name="com.tunasushi.activity.EntryActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,53 +18,53 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.TViewActivity" />
+        <activity android:name="com.tunasushi.activity.TViewActivity" />
 
-        <activity android:name=".activity.TAnalysisActivity" />
-        <activity android:name=".activity.TArcActivity" />
+        <activity android:name="com.tunasushi.activity.TAnalysisActivity" />
+        <activity android:name="com.tunasushi.activity.TArcActivity" />
 
-        <activity android:name=".activity.TBezierActivity" />
-        <activity android:name=".activity.TBindingActivity" />
-        <activity android:name=".activity.TBubbleActivity" />
-        <activity android:name=".activity.TButtonActivity" />
+        <activity android:name="com.tunasushi.activity.TBezierActivity" />
+        <activity android:name="com.tunasushi.activity.TBindingActivity" />
+        <activity android:name="com.tunasushi.activity.TBubbleActivity" />
+        <activity android:name="com.tunasushi.activity.TButtonActivity" />
 
-        <activity android:name=".activity.TDialogActivity" />
-        <activity android:name=".activity.TDrawActivity" />
+        <activity android:name="com.tunasushi.activity.TDialogActivity" />
+        <activity android:name="com.tunasushi.activity.TDrawActivity" />
 
-        <activity android:name=".activity.THollowActivity" />
+        <activity android:name="com.tunasushi.activity.THollowActivity" />
 
-        <activity android:name=".activity.TImageActivity" />
+        <activity android:name="com.tunasushi.activity.TImageActivity" />
 
-        <activity android:name=".activity.TLayoutActivity" />
-        <activity android:name=".activity.TLineActivity" />
-        <activity android:name=".activity.TLoadActivity" />
+        <activity android:name="com.tunasushi.activity.TLayoutActivity" />
+        <activity android:name="com.tunasushi.activity.TLineActivity" />
+        <activity android:name="com.tunasushi.activity.TLoadActivity" />
 
-        <activity android:name=".activity.TMaterialActivity" />
-        <activity android:name=".activity.TMoveActivity" />
+        <activity android:name="com.tunasushi.activity.TMaterialActivity" />
+        <activity android:name="com.tunasushi.activity.TMoveActivity" />
 
-        <activity android:name=".activity.TPathActivity" />
-        <activity android:name=".activity.TPatternActivity" />
-        <activity android:name=".activity.TPentagramActivity" />
-        <activity android:name=".activity.TProgressActivity" />
+        <activity android:name="com.tunasushi.activity.TPathActivity" />
+        <activity android:name="com.tunasushi.activity.TPatternActivity" />
+        <activity android:name="com.tunasushi.activity.TPentagramActivity" />
+        <activity android:name="com.tunasushi.activity.TProgressActivity" />
 
-        <activity android:name=".activity.TRangeActivity" />
-        <activity android:name=".activity.TRepeatActivity" />
-        <activity android:name=".activity.TRippleActivity" />
+        <activity android:name="com.tunasushi.activity.TRangeActivity" />
+        <activity android:name="com.tunasushi.activity.TRepeatActivity" />
+        <activity android:name="com.tunasushi.activity.TRippleActivity" />
 
-        <activity android:name=".activity.TScaleActivity" />
-        <activity android:name=".activity.TScratchActivity" />
-        <activity android:name=".activity.TSectorActivity" />
-        <activity android:name=".activity.TSeekActivity" />
-        <activity android:name=".activity.TSignActivity" />
-        <activity android:name=".activity.TSVGActivity" />
+        <activity android:name="com.tunasushi.activity.TScaleActivity" />
+        <activity android:name="com.tunasushi.activity.TScratchActivity" />
+        <activity android:name="com.tunasushi.activity.TSectorActivity" />
+        <activity android:name="com.tunasushi.activity.TSeekActivity" />
+        <activity android:name="com.tunasushi.activity.TSignActivity" />
+        <activity android:name="com.tunasushi.activity.TSVGActivity" />
 
-        <activity android:name=".activity.TToggleActivity" />
-        <activity android:name=".activity.TTrackActivity" />
-        <activity android:name=".activity.TTrangleActivity" />
+        <activity android:name="com.tunasushi.activity.TToggleActivity" />
+        <activity android:name="com.tunasushi.activity.TTrackActivity" />
+        <activity android:name="com.tunasushi.activity.TTrangleActivity" />
 
-        <activity android:name=".activity.TWaveActivity" />
-        <activity android:name=".activity.TWrapActivity" />
+        <activity android:name="com.tunasushi.activity.TWaveActivity" />
+        <activity android:name="com.tunasushi.activity.TWrapActivity" />
 
-        <activity android:name=".activity.TestActivity" />
+        <activity android:name="com.tunasushi.activity.TestActivity" />
     </application>
 </manifest>
