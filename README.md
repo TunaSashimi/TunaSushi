@@ -1,10 +1,9 @@
-https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg
-
-# Introduction
+## TunaSushi
+![image text](https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg)
 
 TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
 
-# How To Use
+## Getting started
 
 Step 1. Add the JitPack repository to your build file
 
@@ -24,7 +23,7 @@ Step 2. Add the dependency
 	        implementation 'com.github.TunaSashimi:TunaSushi:1.0.02'
 	}
 	
-# Extra Attention
+## Known Issues
 
 If the attributes defined in the TunaSushi library and the attributes defined in other libraries have the same name and different types, compilation errors will occur.The solution is to define an attribute with the same name in the attr of the main project, but the type contains both.
 
@@ -34,7 +33,7 @@ When the types of attributes with the same name are inconsistent, you can config
 
 	<attr name="content" format="reference|string" />
 	
-# Demo Example
+## Demo Example
 
 ![WechatIMG1330](https://user-images.githubusercontent.com/8152969/123502113-4bbe8d00-d67c-11eb-9404-3fa25136ef2a.jpeg)
 ![WechatIMG1331](https://user-images.githubusercontent.com/8152969/123502117-51b46e00-d67c-11eb-8f76-1f7e19a164d1.jpeg)
