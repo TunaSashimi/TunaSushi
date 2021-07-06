@@ -1,5 +1,9 @@
 ## TunaSushi
 ![image text](https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg)
+[![license](http://img.shields.io/badge/license-BSD3-brightgreen.svg?style=flat)](https://github.com/Tencent/tinker/blob/master/LICENSE)
+[![Release Version](https://img.shields.io/badge/release-1.9.14.17-red.svg)](https://github.com/Tencent/tinker/releases)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/tinker/pulls)
+[![WeChat Approved](https://img.shields.io/badge/Wechat_Approved-1.9.14.17-red.svg)](https://github.com/Tencent/tinker/wiki)
 
 TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
 
