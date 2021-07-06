@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 
-
 import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
@@ -87,7 +86,6 @@ public class TScale extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        //
         if (scaleCrop) {
             generateCrop();
         } else {

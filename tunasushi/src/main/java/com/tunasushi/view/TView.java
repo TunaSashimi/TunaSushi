@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
@@ -246,13 +247,23 @@ public class TView extends View {
 
     // 9
     protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align, int textFlag) {
+        return initTextPaint(style, textColor, textSize, shadowRadius, shadowColor, shadowDx, shadowDy, typeFace, align, textFlag, null);
+    }
+
+    // 10
+    protected Paint initTextPaint(Paint.Style style, int textColor, float textSize, float shadowRadius, int shadowColor, float shadowDx, float shadowDy, Typeface typeFace, Paint.Align align, int textFlag, Shader shader) {
         //
         initPaint();
         //
         if (style != null) {
             paint.setStyle(style);
         }
-        paint.setColor(textColor);
+        //
+        if (shader != null) {
+            paint.setShader(shader);
+        } else {
+            paint.setColor(textColor);
+        }
 
         if (textSize != 0) {
             paint.setTextSize(textSize);
@@ -419,9 +430,6 @@ public class TView extends View {
     // 10
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint,
                                int textGravity, float textRowSpaceRatio, List<Integer> measureList) {
-
-        //
-//        paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG );
 
         if (measureList == null) {
             measureList = createMeasureList(string, paint, width, paddingLeft, paddingRight);
@@ -1103,7 +1111,6 @@ public class TView extends View {
                     + "attribute defined on view " + mHostView.getClass() + idText);
         }
     }
-
 
     //
     protected TouchCancelListener touchCancelListener;
@@ -2915,6 +2922,199 @@ public class TView extends View {
         setTextColor(Color.parseColor(textColor));
     }
 
+    private int textColorAngleNormal;
+
+    public int getTextColorAngleNormal() {
+        return textColorAngleNormal;
+    }
+
+    public void setTextColorAngleNormal(int textColorAngleNormal) {
+        this.textColorAngleNormal = textColorAngleNormal;
+    }
+
+    private int textColorAnglePress;
+
+    public int getTextColorAnglePress() {
+        return textColorAnglePress;
+    }
+
+    public void setTextColorAnglePress(int textColorAnglePress) {
+        this.textColorAnglePress = textColorAnglePress;
+    }
+
+    private int textColorAngleSelect;
+
+    public int getTextColorAngleSelect() {
+        return textColorAngleSelect;
+    }
+
+    public void setTextColorAngleSelect(int textColorAngleSelect) {
+        this.textColorAngleSelect = textColorAngleSelect;
+    }
+
+    // textColorStartNormal default textColorNormal
+    private int textColorStartNormal;
+
+    public int getTextColorStartNormal() {
+        return textColorStartNormal;
+    }
+
+    public void setTextColorStartNormal(int textColorStartNormal) {
+        if (this.textColorStartNormal != textColorStartNormal) {
+            this.textColorStartNormal = textColorStartNormal;
+            invalidate();
+        }
+    }
+
+    public void setTextColorStartNormal(String textColorStartNormal) {
+        setTextColorStartNormal(Color.parseColor(textColorStartNormal));
+    }
+
+    // textColorStartPress default textColorPress
+    private int textColorStartPress;
+
+    public int getTextColorStartPress() {
+        return textColorStartPress;
+    }
+
+    public void setTextColorStartPress(int textColorStartPress) {
+        if (this.textColorStartPress != textColorStartPress) {
+            this.textColorStartPress = textColorStartPress;
+            invalidate();
+        }
+    }
+
+    public void setTextColorStartPress(String textColorStartPress) {
+        setTextColorStartPress(Color.parseColor(textColorStartPress));
+    }
+
+    // textColorStartSelect default textColorSelect
+    private int textColorStartSelect;
+
+    public int getTextColorStartSelect() {
+        return textColorStartSelect;
+    }
+
+    public void setTextColorStartSelect(int textColorStartSelect) {
+        if (this.textColorStartSelect != textColorStartSelect) {
+            this.textColorStartSelect = textColorStartSelect;
+            invalidate();
+        }
+    }
+
+    public void setTextColorStart(int textColorStart) {
+        this.textColorStartNormal = textColorStart;
+        this.textColorStartPress = textColorStart;
+        this.textColorStartSelect = textColorStart;
+        invalidate();
+    }
+
+    public void setTextColorStart(String textColorStart) {
+        setTextColorStart(Color.parseColor(textColorStart));
+    }
+
+    public void setTextColorStartSelect(String textColorStartSelect) {
+        setTextColorStartSelect(Color.parseColor(textColorStartSelect));
+    }
+
+    // textColorEndNormal default textColorNormal
+    private int textColorEndNormal;
+
+    public int getTextColorEndNormal() {
+        return textColorEndNormal;
+    }
+
+    public void setTextColorEndNormal(int textColorEndNormal) {
+        if (this.textColorEndNormal != textColorEndNormal) {
+            this.textColorEndNormal = textColorEndNormal;
+            invalidate();
+        }
+    }
+
+    public void setTextColorEndNormal(String textColorEndNormal) {
+        setTextColorEndNormal(Color.parseColor(textColorEndNormal));
+    }
+
+    // textColorEndPress default textColorPress
+    private int textColorEndPress;
+
+    public int getTextColorEndPress() {
+        return textColorEndPress;
+    }
+
+    public void setTextColorEndPress(int textColorEndPress) {
+        if (this.textColorEndPress != textColorEndPress) {
+            this.textColorEndPress = textColorEndPress;
+            invalidate();
+        }
+    }
+
+    public void setTextColorEndPress(String textColorEndPress) {
+        setTextColorEndPress(Color.parseColor(textColorEndPress));
+    }
+
+    // textColorEndSelect default textColorSelect
+    private int textColorEndSelect;
+
+    public int getTextColorEndSelect() {
+        return textColorEndSelect;
+    }
+
+    public void setTextColorEndSelect(int textColorEndSelect) {
+        if (this.textColorEndSelect != textColorEndSelect) {
+            this.textColorEndSelect = textColorEndSelect;
+            invalidate();
+        }
+    }
+
+    public void setTextColorEndSelect(String textColorEndSelect) {
+        setTextColorEndSelect(Color.parseColor(textColorEndSelect));
+    }
+
+    public void setTextColorEnd(int textColorEnd) {
+        this.textColorEndNormal = textColorEnd;
+        this.textColorEndPress = textColorEnd;
+        this.textColorEndSelect = textColorEnd;
+        invalidate();
+    }
+
+    public void setTextColorEnd(String textColorEnd) {
+        setTextColorEnd(Color.parseColor(textColorEnd));
+    }
+
+    // textColorNormalShader default null
+    private Shader textColorNormalShader;
+
+    public Shader getTextColorNormalShader() {
+        return textColorNormalShader;
+    }
+
+    public void setTextColorNormalShader(Shader textColorNormalShader) {
+        this.textColorNormalShader = textColorNormalShader;
+    }
+
+    // textColorPressShader default null
+    private Shader textColorPressShader;
+
+    public Shader getTextColorPressShader() {
+        return textColorPressShader;
+    }
+
+    public void setTextColorPressShader(Shader textColorPressShader) {
+        this.textColorPressShader = textColorPressShader;
+    }
+
+    // textColorSelectShader default null
+    private Shader textColorSelectShader;
+
+    public Shader getTextColorSelectShader() {
+        return textColorSelectShader;
+    }
+
+    public void setTextColorSelectShader(Shader textColorSelectShader) {
+        this.textColorSelectShader = textColorSelectShader;
+    }
+
     // textPaddingLeft means distance between srcLeftNormal and The
     // leftmost,note about the srcLeftPaddingNormal
     private float textPaddingLeft;
@@ -2971,7 +3171,6 @@ public class TView extends View {
     public void setTextRowSpaceRatio(float textRowSpaceRatio) {
         this.textRowSpaceRatio = textRowSpaceRatio;
     }
-
 
     //
     private Typeface textStyle;
@@ -5111,8 +5310,6 @@ public class TView extends View {
             int srcRightSelectId = typedArray.getResourceId(R.styleable.TView_srcRightSelect, srcRightNormalId);
             if (srcRightSelectId != -1) {
                 srcRightSelect = BitmapFactory.decodeResource(getResources(), srcRightSelectId);
-
-
                 if (srcRightWidthSelect == 0 || srcRightHeightSelect == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthSelect and srcRightHeightSelect");
                 }
@@ -5151,6 +5348,25 @@ public class TView extends View {
             textColorNormal = typedArray.getColor(R.styleable.TView_textColorNormal, textColorDefault);
             textColorPress = typedArray.getColor(R.styleable.TView_textColorPress, textColorNormal);
             textColorSelect = typedArray.getColor(R.styleable.TView_textColorSelect, textColorNormal);
+
+            //
+            textColorAngleNormal = typedArray.getInt(R.styleable.TView_textColorAngleNormal, Integer.MAX_VALUE);
+            if (textColorAngleNormal != Integer.MAX_VALUE) {
+                textColorStartNormal = typedArray.getColor(R.styleable.TView_textColorStartNormal, textColorNormal);
+                textColorEndNormal = typedArray.getColor(R.styleable.TView_textColorEndNormal, textColorNormal);
+            }
+
+            textColorAnglePress = typedArray.getInt(R.styleable.TView_textColorAnglePress, textColorAngleNormal);
+            if (textColorAnglePress != Integer.MAX_VALUE) {
+                textColorStartPress = typedArray.getColor(R.styleable.TView_textColorStartPress, textColorStartNormal);
+                textColorEndPress = typedArray.getColor(R.styleable.TView_textColorEndPress, textColorEndNormal);
+            }
+
+            textColorAngleSelect = typedArray.getInt(R.styleable.TView_textColorAngleSelect, textColorAngleNormal);
+            if (textColorAngleSelect != Integer.MAX_VALUE) {
+                textColorStartSelect = typedArray.getColor(R.styleable.TView_textColorStartSelect, textColorStartNormal);
+                textColorEndSelect = typedArray.getColor(R.styleable.TView_textColorEndSelect, textColorEndNormal);
+            }
 
             textPaddingLeft = typedArray.getDimension(R.styleable.TView_textPaddingLeft, 0);
             textPaddingRight = typedArray.getDimension(R.styleable.TView_textPaddingRight, 0);
@@ -5552,11 +5768,13 @@ public class TView extends View {
             return;
         }
 
-        if (foregroundNormal != Color.TRANSPARENT || foregroundPress != Color.TRANSPARENT || foregroundSelect != Color.TRANSPARENT || srcNormal != null
-                || srcPress != null || srcSelect != null || srcShadowRadiusNormal > 0 || srcShadowRadiusPress > 0 || srcShadowRadiusSelect > 0
-                || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0 || backgroundAngleNormal != Integer.MAX_VALUE
-                || backgroundAnglePress != Integer.MAX_VALUE || backgroundAngleSelect != Integer.MAX_VALUE || srcAnchorNormal != null || srcAnchorPress != null
-                || srcAnchorSelect != null
+        if (foregroundNormal != Color.TRANSPARENT || foregroundPress != Color.TRANSPARENT || foregroundSelect != Color.TRANSPARENT
+                || srcNormal != null || srcPress != null || srcSelect != null
+                || srcShadowRadiusNormal > 0 || srcShadowRadiusPress > 0 || srcShadowRadiusSelect > 0
+                || backgroundShadowRadiusNormal > 0 || backgroundShadowRadiusPress > 0 || backgroundShadowRadiusSelect > 0
+                || backgroundAngleNormal != Integer.MAX_VALUE || backgroundAnglePress != Integer.MAX_VALUE || backgroundAngleSelect != Integer.MAX_VALUE
+                || textColorAngleNormal != Integer.MAX_VALUE || textColorAngleNormal != Integer.MAX_VALUE || textColorAngleNormal != Integer.MAX_VALUE
+                || srcAnchorNormal != null || srcAnchorPress != null || srcAnchorSelect != null
         ) {
 
             // setShadowLayer() is only supported on text when hardware acceleration is on.
@@ -5974,6 +6192,16 @@ public class TView extends View {
 
         // draw text
         if (text != null) {
+            if (textColorAngleNormal != Integer.MAX_VALUE) {
+                textColorNormalShader = getLinearGradient(width, height, textColorAngleNormal, textColorStartNormal, textColorEndNormal);
+            }
+            if (textColorAnglePress != Integer.MAX_VALUE) {
+                textColorPressShader = getLinearGradient(width, height, textColorAnglePress, textColorStartPress, textColorEndPress);
+            }
+            if (textColorAngleSelect != Integer.MAX_VALUE) {
+                textColorSelectShader = getLinearGradient(width, height, textColorAngleSelect, textColorStartSelect, textColorEndSelect);
+            }
+
             float f[] = drawText(
                     canvas,
                     text,
@@ -5983,8 +6211,10 @@ public class TView extends View {
                     textPaddingLeft + srcLeftWidthNormal,
                     textPaddingRight + srcRightWidthNormal,
                     initTextPaint(Paint.Style.FILL,
-                            materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal, textSize,
-                            textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textStyle, Paint.Align.CENTER, textFlag),
+                            materialPlay ? textColorPress : select ? textColorSelect : press ? textColorPress : textColorNormal
+                            , textSize, textShadowRadius, textShadowColor, textShadowDx, textShadowDy, textStyle, Paint.Align.CENTER, textFlag,
+                            select ? textColorSelectShader : press ? textColorPressShader : textColorNormalShader
+                    ),
                     textGravity,
                     textRowSpaceRatio,
                     textMeasureList);

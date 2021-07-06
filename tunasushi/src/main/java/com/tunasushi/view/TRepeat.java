@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
-
 import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
@@ -36,7 +35,6 @@ public class TRepeat extends TView {
 
     private int repeatItemBackgroundNormal, repeatItemBackgroundSelect;
 
-
     @IntDef({CONNECT, CURRENT,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface repeatSelect {
@@ -47,7 +45,6 @@ public class TRepeat extends TView {
     private static final int[] repeatSelectArray = {CONNECT, CURRENT,};
     private @repeatSelect
     int repeatSelect;
-
 
     @IntDef({CUSTOM, CIRCLE})
     @Retention(RetentionPolicy.SOURCE)

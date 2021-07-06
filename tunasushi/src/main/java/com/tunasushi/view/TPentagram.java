@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 
 import com.tunasushi.R;
 
-
 /**
  * @author TunaSashimi
  * @date 2020-02-12 20:15
@@ -18,7 +17,8 @@ import com.tunasushi.R;
  * @Description
  */
 public class TPentagram extends TView {
-    private final static float DEGREE = 36; //Pentagram angle
+    //Pentagram angle
+    private final static float DEGREE = 36;
     private float pentagramThick;
     private int pentagramColor;
 

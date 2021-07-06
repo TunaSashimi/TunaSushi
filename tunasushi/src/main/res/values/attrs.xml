@@ -122,6 +122,19 @@
         <attr name="textColorNormal" format="reference|color" />
         <attr name="textColorPress" format="reference|color" />
         <attr name="textColorSelect" format="reference|color" />
+
+        <attr name="textColorStartNormal" format="reference|color" />
+        <attr name="textColorStartPress" format="reference|color" />
+        <attr name="textColorStartSelect" format="reference|color" />
+
+        <attr name="textColorEndNormal" format="reference|color" />
+        <attr name="textColorEndPress" format="reference|color" />
+        <attr name="textColorEndSelect" format="reference|color" />
+
+        <attr name="textColorAngleNormal" format="integer" />
+        <attr name="textColorAnglePress" format="integer" />
+        <attr name="textColorAngleSelect" format="integer" />
+
         <attr name="textPaddingLeft" format="dimension" />
         <attr name="textPaddingRight" format="dimension" />
         <attr name="textRowSpaceRatio" format="fraction" />

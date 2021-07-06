@@ -15,9 +15,7 @@ import android.graphics.SweepGradient;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-
 import com.tunasushi.R;
-
 
 /**
  * @author TunaSashimi

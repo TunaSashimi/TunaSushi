@@ -8,14 +8,12 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-
 import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
-
 
 /**
  * @author TunaSashimi
@@ -27,7 +25,7 @@ public class TLine extends TView {
     private float lineThick;
     private int lineColor;
 
-    @IntDef({TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK,})
+    @IntDef({TOP, BOTTOM, LEFT, RIGHT, SLASH, SLASHBACK, CROSS,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface lineStyle {
     }

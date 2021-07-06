@@ -7,9 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
-
 import com.tunasushi.R;
-
 
 /**
  * @author TunaSashimi

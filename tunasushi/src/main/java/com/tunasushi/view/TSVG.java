@@ -8,16 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
 import android.view.View;
-
-
 import com.tunasushi.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-
 import androidx.annotation.IntDef;
-
 import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
 import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
 

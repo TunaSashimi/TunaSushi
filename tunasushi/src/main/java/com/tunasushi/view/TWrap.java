@@ -8,15 +8,11 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-
-
 import com.tunasushi.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.IntDef;
 
 /**
@@ -148,10 +144,6 @@ public class TWrap extends TView {
         if (wrapTextArray == null) {
             wrapTextArray = new String[]{""};
         }
-
-//        System.out.println("onMeasure==>");
-//        System.out.println("wrapTextArrayLength==>" + wrapTextArray.length);
-
         total = wrapTextArray.length;
         if (total <= 0) {
             throw new IllegalArgumentException("The content attribute tunaWrapItemTextArray length must be greater than 0 ");
@@ -208,9 +200,6 @@ public class TWrap extends TView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-//        System.out.println("onDraw==>");
-
         Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
         float rowHeight = fontMetrics.descent - fontMetrics.ascent + wrapTextPadding * 2;
         float characterWidth = paint.measureText(wrapTextArray[0]) + wrapTextPadding * 2;//At least one field

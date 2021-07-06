@@ -484,5 +484,4 @@
             android:text="false"
             android:textColor="#ffffff" />
     </RelativeLayout>
-
 </ScrollView>

@@ -20,7 +20,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-
 import com.tunasushi.R;
 
 import static com.tunasushi.tool.ConvertTool.convertToPX;
@@ -33,7 +32,6 @@ import static com.tunasushi.tool.ViewTool.getLinearGradient;
  * @Description
  */
 public class TLayout extends RelativeLayout {
-
     protected String tag;
 
     protected int layoutWidth, layoutHeight;

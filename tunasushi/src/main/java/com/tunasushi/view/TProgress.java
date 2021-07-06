@@ -11,7 +11,6 @@ import android.graphics.Region.Op;
 import android.util.AttributeSet;
 import android.view.View;
 
-
 import com.tunasushi.R;
 
 import java.lang.annotation.Retention;
@@ -29,7 +28,6 @@ public class TProgress extends TView {
     private int progressArcBackground;
     private int progressBoundBackground;
     private Bitmap progressSrcBack, progressSrcFront;
-
 
     @IntDef({CUSTOM, CIRCLE,})
     @Retention(RetentionPolicy.SOURCE)

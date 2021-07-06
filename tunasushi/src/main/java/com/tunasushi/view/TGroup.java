@@ -2,10 +2,8 @@ package com.tunasushi.view;
 
 import android.content.Context;
 import android.widget.LinearLayout;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
 import androidx.annotation.IntDef;
 
 /**

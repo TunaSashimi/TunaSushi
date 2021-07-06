@@ -282,17 +282,41 @@
             app:textPaddingRight="8dp"
             app:textSize="14dp" />
 
+        <com.tunasushi.view.TView
+            android:id="@+id/tViewGradient01"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/tViewShadow03"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            app:backgroundNormal="#ffffff"
+            app:radiusBottomLeft="5dp"
+            app:radiusTopLeft="5dp"
+            app:radiusTopRight="5dp"
+            app:strokeColorNormal="#999999"
+            app:strokeWidthNormal="1dp"
+            app:text="textColorAngleNormal设置315,textColorStartNormal设置#ffca00,textColorEndNormal设置#592d2d"
+            app:textColorAngleNormal="315"
+            app:textColorAnglePress="135"
+            app:textColorEndNormal="#ff0000"
+            app:textColorEndPress="#ff0000"
+            app:textColorStartNormal="#0000ff"
+            app:textColorStartPress="#0000ff"
+            app:textGravity="left"
+            app:textSize="14dp" />
+
         <TextView
             android:id="@+id/textPrompt05"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewShadow03"
+            android:layout_below="@id/tViewGradient01"
             android:layout_margin="16dp"
             android:color="#434343"
-            android:text="backgroundAngle设置渐变方向\nbackgroundStart设置渐变开始\nbackgroundEnd设置渐变结束" />
+            android:text="textColorAngle设置文字渐变方向\ntextColorStart设置文字渐变开始\ntextColorEnd设置文字渐变结束" />
 
         <com.tunasushi.view.TView
-            android:id="@+id/tViewGradient01"
+            android:id="@+id/tViewGradient02"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/textPrompt05"
@@ -314,14 +338,23 @@
             app:textGravity="left"
             app:textSize="14dp" />
 
+        <TextView
+            android:id="@+id/textPrompt06"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tViewGradient02"
+            android:layout_margin="16dp"
+            android:color="#434343"
+            android:text="backgroundAngle背景变方向\nbackgroundStart设置背景渐变开始\nbackgroundEnd设置背景渐变结束" />
+
         <com.tunasushi.view.TView
-            android:id="@+id/tViewGradient02"
+            android:id="@+id/tViewGradient03"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_below="@id/tViewGradient01"
+            android:layout_below="@id/textPrompt06"
             android:layout_margin="16dp"
             app:backgroundAngleNormal="315"
-            app:backgroundAnglePress="270"
+            app:backgroundAnglePress="135"
             app:backgroundEndNormal="#0000ff"
             app:backgroundEndPress="#0000ff"
             app:backgroundStartNormal="#ff0000"
@@ -329,16 +362,16 @@
             app:radius="5dp"
             app:strokeColorNormal="#999999"
             app:strokeWidthNormal="1dp"
-            app:text="backgroundAngleNormal设置315,backgroundStartNormal设置#ffca00,backgroundEndNormal设置#ffca00"
+            app:text="backgroundAngleNormal设置315,backgroundStartNormal设置#ff0000,backgroundEndNormal设置#0000ff"
             app:textColorNormal="#ffffff"
             app:textGravity="left"
             app:textSize="14dp" />
 
         <TextView
-            android:id="@+id/textPrompt06"
+            android:id="@+id/textPrompt07"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tViewGradient02"
+            android:layout_below="@id/tViewGradient03"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:color="#434343"
@@ -347,7 +380,7 @@
         <View
             android:id="@+id/tViewAnchorSecondaryButton01"
             style="@style/ViewAnchor"
-            android:layout_below="@id/textPrompt06"
+            android:layout_below="@id/textPrompt07"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp" />
@@ -464,7 +497,7 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
-            android:id="@+id/textPrompt07"
+            android:id="@+id/textPrompt08"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tView05"
@@ -476,7 +509,7 @@
             android:id="@+id/tView08"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_below="@id/textPrompt07"
+            android:layout_below="@id/textPrompt08"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#c1eaee"
@@ -497,7 +530,7 @@
             app:srcPress="@drawable/bitmap_tview_srcnormal04" />
 
         <TextView
-            android:id="@+id/textPrompt08"
+            android:id="@+id/textPrompt09"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tView08"
@@ -509,7 +542,7 @@
             android:id="@+id/tViewContent"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:layout_below="@id/textPrompt08"
+            android:layout_below="@id/textPrompt09"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#e1e1e1"
@@ -536,7 +569,7 @@
             app:textSize="14dp" />
 
         <TextView
-            android:id="@+id/textPrompt09"
+            android:id="@+id/textPrompt10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tViewContent"
@@ -548,7 +581,7 @@
             android:id="@+id/tViewSrcLeft"
             android:layout_width="80dp"
             android:layout_height="48dp"
-            android:layout_below="@id/textPrompt09"
+            android:layout_below="@id/textPrompt10"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:backgroundNormal="#00000000"
@@ -710,7 +743,7 @@
         </com.tunasushi.view.TLayout>
 
         <TextView
-            android:id="@+id/textPrompt10"
+            android:id="@+id/textPrompt11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tLayout01"
@@ -721,7 +754,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_below="@id/textPrompt10"
+            android:layout_below="@id/textPrompt11"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
     </RelativeLayout>

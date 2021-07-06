@@ -21,10 +21,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
-
-
 import com.tunasushi.R;
-
 import static com.tunasushi.tool.ConvertTool.convertToPX;
 import static com.tunasushi.tool.ViewTool.getLinearGradient;
 
