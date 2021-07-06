@@ -1,3 +1,5 @@
+https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg
+
 # Introduction
 
 TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
