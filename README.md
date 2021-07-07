@@ -1,6 +1,7 @@
 ## TunaSushi
 [![license](https://img.shields.io/github/license/TunaSashimi/TunaSushi)](https://github.com/TunaSashimi/TunaSushi/blob/master/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/TunaSashimi/TunaSushi)](https://github.com/TunaSashimi/TunaSushi/commits)
+[![Code Size](https://img.shields.io/github/languages/code-size/TunaSashimi/TunaSushi)](https://github.com/TunaSashimi/TunaSushi)
 [![Release Version](https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg)](https://github.com/TunaSashimi/TunaSushi/releases)
 
 TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
@@ -12,18 +13,21 @@ Step 1. Add the JitPack repository to your build file
 To get a Git project into your build:
 Add it in your root build.gradle at the end of repositories:
 
+```gradle
 	allprojects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
 		}
 	}
-  
+```  
 Step 2. Add the dependency
   
+```gradle
   	dependencies {
 	        implementation 'com.github.TunaSashimi:TunaSushi:1.0.02'
 	}
+```
 	
 ## Known Issues
 
@@ -33,7 +37,9 @@ For example, The content attribute in TView in the TunaSushi library is string, 
 
 When the types of attributes with the same name are inconsistent, you can configure a single content in the project, and the attribute is the union of the two.such as below.
 
+```java
 	<attr name="content" format="reference|string" />
+```
 	
 ## Demo Example
 
