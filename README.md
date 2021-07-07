@@ -1,6 +1,7 @@
 ## TunaSushi
 [![license](https://img.shields.io/github/license/TunaSashimi/TunaSushi)](https://github.com/TunaSashimi/TunaSushi/blob/master/LICENSE)
 [![Release Version](https://img.shields.io/github/v/release/TunaSashimi/TunaSushi.svg)](https://github.com/TunaSashimi/TunaSushi/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/TunaSashimi/TunaSushi)](https://github.com/TunaSashimi/TunaSushi/commits)
 
 TunaSushi is a set of view libraries that help developers follow best practices, reduce boilerplate code, and write code that works consistently on Android versions and devices.
 
