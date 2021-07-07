@@ -40,6 +40,9 @@ When the types of attributes with the same name are inconsistent, you can config
 ```java
 	<attr name="content" format="reference|string" />
 ```
+
+## License
+TunaSushi is under the MIT license. See the [LICENSE](https://github.com/TunaSashimi/TunaSushi/blob/master/LICENSE) file for details.
 	
 ## Demo Example
 
