@@ -5,11 +5,26 @@
     android:layout_height="match_parent">
 
     <com.tunasushi.view.TView
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:id="@+id/tView01"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
         app:backgroundNormal="#ff0000"
-        app:backgroundPress="#00ff00"
-        app:radiusBottomLeft="20dp"
-        app:radiusTopLeft="20dp" />
+        app:backgroundSelect="#ffff00"
+        app:radius="60dp"
+        app:selectStyle="always"
+
+        />
+
+    <com.tunasushi.view.TView
+        android:id="@+id/tView02"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/tView01"
+        app:backgroundNormal="#ff0000"
+        app:backgroundSelect="#ffff00"
+        app:radius="60dp"
+        app:selectStyle="always"
+
+        />
 
 </RelativeLayout>
