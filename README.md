@@ -26,7 +26,7 @@ Step 2. Add the dependency
   
 ```gradle
   	dependencies {
-	        implementation 'com.github.TunaSashimi:TunaSushi:1.0.02'
+	        implementation 'com.github.TunaSashimi:TunaSushi:1.0.04'
 	}
 ```
 	
