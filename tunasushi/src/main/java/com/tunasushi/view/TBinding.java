@@ -4,8 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import com.tunasushi.tool.BitmapTool;
-import java.util.List;
+
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
@@ -254,24 +255,82 @@ public class TBinding {
         t.setStrokeColorSelect(strokeColorSelect);
     }
 
-    @BindingAdapter({"backgroundStartNormal"})
-    public static void setBackgroundStartNormal(TView t, int backgroundStart) {
-        t.setBackgroundStart(backgroundStart);
+    //
+    @BindingAdapter({"backgroundAngleNormal"})
+    public static void setBackgroundAngleNormal(TView t, int backgroundAngleNormal) {
+        t.setBackgroundAngle(backgroundAngleNormal);
     }
 
     @BindingAdapter({"backgroundStartNormal"})
-    public static void setBackgroundStartNormal(TView t, String backgroundStart) {
-        t.setBackgroundStart(backgroundStart);
+    public static void setBackgroundStartNormal(TView t, int backgroundStartNormal) {
+        t.setBackgroundStart(backgroundStartNormal);
+    }
+
+    @BindingAdapter({"backgroundStartNormal"})
+    public static void setBackgroundStartNormal(TView t, String backgroundStartNormal) {
+        t.setBackgroundStart(backgroundStartNormal);
     }
 
     @BindingAdapter({"backgroundEndNormal"})
-    public static void setBackgroundEndNormal(TView t, int backgroundEnd) {
-        t.setBackgroundEnd(backgroundEnd);
+    public static void setBackgroundEndNormal(TView t, int backgroundEndNormal) {
+        t.setBackgroundEnd(backgroundEndNormal);
     }
 
     @BindingAdapter({"backgroundEndNormal"})
-    public static void setBackgroundEndNormal(TView t, String backgroundEnd) {
-        t.setBackgroundEnd(backgroundEnd);
+    public static void setBackgroundEndNormal(TView t, String backgroundEndNormal) {
+        t.setBackgroundEnd(backgroundEndNormal);
+    }
+
+    //
+    @BindingAdapter({"backgroundAnglePress"})
+    public static void setBackgroundAnglePress(TView t, int backgroundAnglePress) {
+        t.setBackgroundAnglePress(backgroundAnglePress);
+    }
+
+    @BindingAdapter({"backgroundStartPress"})
+    public static void setBackgroundStartPress(TView t, int backgroundPress) {
+        t.setBackgroundStartPress(backgroundPress);
+    }
+
+    @BindingAdapter({"backgroundStartPress"})
+    public static void setBackgroundStartPress(TView t, String backgroundPress) {
+        t.setBackgroundStartPress(backgroundPress);
+    }
+
+    @BindingAdapter({"backgroundEndPress"})
+    public static void setBackgroundEndPress(TView t, int backgroundEndPress) {
+        t.setBackgroundEndPress(backgroundEndPress);
+    }
+
+    @BindingAdapter({"backgroundEndPress"})
+    public static void setBackgroundEndPress(TView t, String backgroundEndPress) {
+        t.setBackgroundEndPress(backgroundEndPress);
+    }
+
+    //
+    @BindingAdapter({"backgroundAngleSelect"})
+    public static void setBackgroundAngleSelect(TView t, int backgroundAngleSelect) {
+        t.setBackgroundAngleSelect(backgroundAngleSelect);
+    }
+
+    @BindingAdapter({"backgroundStartSelect"})
+    public static void setBackgroundStartSelect(TView t, int backgroundSelect) {
+        t.setBackgroundStartSelect(backgroundSelect);
+    }
+
+    @BindingAdapter({"backgroundStartSelect"})
+    public static void setBackgroundStartSelect(TView t, String backgroundSelect) {
+        t.setBackgroundStartSelect(backgroundSelect);
+    }
+
+    @BindingAdapter({"backgroundEndSelect"})
+    public static void setBackgroundEndSelect(TView t, int backgroundEndSelect) {
+        t.setBackgroundEndSelect(backgroundEndSelect);
+    }
+
+    @BindingAdapter({"backgroundEndSelect"})
+    public static void setBackgroundEndSelect(TView t, String backgroundEndSelect) {
+        t.setBackgroundEndSelect(backgroundEndSelect);
     }
 
     @BindingAdapter({"srcLeftDxNormal"})

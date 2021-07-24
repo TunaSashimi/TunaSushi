@@ -1417,7 +1417,13 @@ public class TView extends View {
     }
 
     public void setBackgroundAnglePress(int backgroundAnglePress) {
-        this.backgroundAnglePress = backgroundAnglePress;
+        if(this.backgroundAnglePress!=backgroundAnglePress){
+            this.backgroundAnglePress = backgroundAnglePress;
+            if (backgroundAnglePress != Integer.MAX_VALUE) {
+                backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+            }
+            invalidate();
+        }
     }
 
     private int backgroundAngleSelect;
@@ -1427,7 +1433,29 @@ public class TView extends View {
     }
 
     public void setBackgroundAngleSelect(int backgroundAngleSelect) {
-        this.backgroundAngleSelect = backgroundAngleSelect;
+        if (this.backgroundAngleSelect != backgroundAngleSelect) {
+            this.backgroundAngleSelect = backgroundAngleSelect;
+            if (backgroundAngleSelect != Integer.MAX_VALUE) {
+                backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+            }
+            invalidate();
+        }
+    }
+
+    public void setBackgroundAngle(int backgroundAngle) {
+        this.backgroundAngleNormal = backgroundAngle;
+        this.backgroundAnglePress = backgroundAngle;
+        this.backgroundAngleSelect = backgroundAngle;
+        if (backgroundAngleNormal != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
+        }
+        if (backgroundAnglePress != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+        }
+        if (backgroundAngleSelect != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+        invalidate();
     }
 
     // backgroundStartNormal default backgroundNormal
@@ -1458,6 +1486,9 @@ public class TView extends View {
     public void setBackgroundStartPress(int backgroundStartPress) {
         if (this.backgroundStartPress != backgroundStartPress) {
             this.backgroundStartPress = backgroundStartPress;
+            if (backgroundAnglePress != Integer.MAX_VALUE) {
+                backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+            }
             invalidate();
         }
     }
@@ -1476,6 +1507,9 @@ public class TView extends View {
     public void setBackgroundStartSelect(int backgroundStartSelect) {
         if (this.backgroundStartSelect != backgroundStartSelect) {
             this.backgroundStartSelect = backgroundStartSelect;
+            if (backgroundAngleSelect != Integer.MAX_VALUE) {
+                backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+            }
             invalidate();
         }
     }
@@ -1484,6 +1518,15 @@ public class TView extends View {
         this.backgroundStartNormal = backgroundStart;
         this.backgroundStartPress = backgroundStart;
         this.backgroundStartSelect = backgroundStart;
+        if (backgroundAngleNormal != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
+        }
+        if (backgroundAnglePress != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+        }
+        if (backgroundAngleSelect != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
         invalidate();
     }
 
@@ -1523,6 +1566,9 @@ public class TView extends View {
     public void setBackgroundEndPress(int backgroundEndPress) {
         if (this.backgroundEndPress != backgroundEndPress) {
             this.backgroundEndPress = backgroundEndPress;
+            if (backgroundAnglePress != Integer.MAX_VALUE) {
+                backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+            }
             invalidate();
         }
     }
@@ -1541,6 +1587,9 @@ public class TView extends View {
     public void setBackgroundEndSelect(int backgroundEndSelect) {
         if (this.backgroundEndSelect != backgroundEndSelect) {
             this.backgroundEndSelect = backgroundEndSelect;
+            if (backgroundAngleSelect != Integer.MAX_VALUE) {
+                backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+            }
             invalidate();
         }
     }
@@ -1553,6 +1602,15 @@ public class TView extends View {
         this.backgroundEndNormal = backgroundEnd;
         this.backgroundEndPress = backgroundEnd;
         this.backgroundEndSelect = backgroundEnd;
+        if (backgroundAngleNormal != Integer.MAX_VALUE) {
+            backgroundNormalShader = getLinearGradient(width, height, backgroundAngleNormal, backgroundStartNormal, backgroundEndNormal);
+        }
+        if (backgroundAnglePress != Integer.MAX_VALUE) {
+            backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);
+        }
+        if (backgroundAngleSelect != Integer.MAX_VALUE) {
+            backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
         invalidate();
     }
 
@@ -5294,8 +5352,6 @@ public class TView extends View {
             int srcRightPressId = typedArray.getResourceId(R.styleable.TView_srcRightPress, srcRightNormalId);
             if (srcRightPressId != -1) {
                 srcRightPress = BitmapFactory.decodeResource(getResources(), srcRightNormalId);
-
-
                 if (srcRightWidthPress == 0 || srcRightHeightPress == 0) {
                     throw new IllegalArgumentException("The content attribute require property named srcRightWidthPress and srcRightHeightPress");
                 }
@@ -5479,6 +5535,7 @@ public class TView extends View {
             }
         }
         typedArray.recycle();
+
         //
         DeviceTool.initDisplayMetrics();
     }
@@ -5688,7 +5745,9 @@ public class TView extends View {
     }
 
     protected List<Integer> measure(int widthMeasureSpec, int heightMeasureSpec,
-                                    String text, Paint paint, float paddingLeft, float paddingRight, float rowSpaceRatio) {
+                                    String text, Paint paint,
+                                    float paddingLeft, float paddingRight,
+                                    float rowSpaceRatio) {
         List<Integer> measureList = null;
         //
         int specModeWidth = MeasureSpec.getMode(widthMeasureSpec);
@@ -5818,14 +5877,6 @@ public class TView extends View {
         if (layoutListener != null) {
             layoutListener.layout(this);
         }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        initCanvas(canvas);
-        if (!origin) {
-            return;
-        }
 
         //
         if (backgroundAngleNormal != Integer.MAX_VALUE) {
@@ -5836,6 +5887,14 @@ public class TView extends View {
         }
         if (backgroundAngleSelect != Integer.MAX_VALUE) {
             backgroundSelectShader = getLinearGradient(width, height, backgroundAngleSelect, backgroundStartSelect, backgroundEndSelect);
+        }
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        initCanvas(canvas);
+        if (!origin) {
+            return;
         }
 
         //
