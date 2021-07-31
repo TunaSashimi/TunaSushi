@@ -1,6 +1,5 @@
 package com.tunasushi.tool;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;

@@ -1,4 +1,4 @@
-package com.tunasushi.tool;
+package com.tunasushi.tool
 
 /**
  * @author TunaSashimi
@@ -6,6 +6,4 @@ package com.tunasushi.tool;
  * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
-public class StringTool {
-
-}
+class StringTool 

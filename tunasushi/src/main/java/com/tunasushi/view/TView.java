@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
@@ -1417,7 +1416,7 @@ public class TView extends View {
     }
 
     public void setBackgroundAnglePress(int backgroundAnglePress) {
-        if(this.backgroundAnglePress!=backgroundAnglePress){
+        if (this.backgroundAnglePress != backgroundAnglePress) {
             this.backgroundAnglePress = backgroundAnglePress;
             if (backgroundAnglePress != Integer.MAX_VALUE) {
                 backgroundPressShader = getLinearGradient(width, height, backgroundAnglePress, backgroundStartPress, backgroundEndPress);

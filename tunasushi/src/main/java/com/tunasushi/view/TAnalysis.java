@@ -16,6 +16,9 @@ public class TAnalysis extends TView {
     private int analysisControlX, analysisControlY;
 
     public int getAnalysisControlX() {
+
+        System.out.println("1.0.04");
+
         return analysisControlX;
     }
 
