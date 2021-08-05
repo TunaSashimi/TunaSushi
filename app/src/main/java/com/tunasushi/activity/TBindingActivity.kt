@@ -1,14 +1,12 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import com.tunasushi.bean.BindingBean;
-import com.tunasushi.demo.R;
-import com.tunasushi.demo.databinding.ActivityTBindingBinding;
-import com.tunasushi.view.TView;
-
-import androidx.databinding.DataBindingUtil;
+import android.app.Activity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import com.tunasushi.demo.R
+import com.tunasushi.bean.BindingBean
+import com.tunasushi.view.TView
+import com.tunasushi.demo.databinding.ActivityTBindingBinding
 
 /**
  * @author TunaSashimi
@@ -16,30 +14,24 @@ import androidx.databinding.DataBindingUtil;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TBindingActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ActivityTBindingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_t_binding);
-
-        BindingBean bean = new BindingBean();
-        bean.select.set(true);
+class TBindingActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityTBindingBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_t_binding)
+        val bean = BindingBean()
+        bean.select.set(true)
 
         //
-        binding.setBean(bean);
-
-        final TView tView03 = findViewById(R.id.tView03);
-        tView03.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String string = tView03.getText();
-                if ("hello".equals(string)) {
-                    tView03.setText("world");
-                } else {
-                    tView03.setText("hello");
-                }
+        binding.bean = bean
+        val tView03: TView = findViewById(R.id.tView03)
+        tView03.onClickListener = TView.OnClickListener {
+            val string = tView03.text
+            if ("hello" == string) {
+                tView03.text = "world"
+            } else {
+                tView03.text = "hello"
             }
-        });
+        }
     }
 }

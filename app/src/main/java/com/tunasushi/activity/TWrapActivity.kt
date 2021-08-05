@@ -1,12 +1,11 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TView;
-import com.tunasushi.view.TWrap;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import android.widget.Toast
+import com.tunasushi.view.TWrap
 
 /**
  * @author TunaSashimi
@@ -14,54 +13,43 @@ import com.tunasushi.view.TWrap;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-
-public class TWrapActivity extends Activity {
-    private TWrap tWrap01, tWrap02, tWrap03;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_wrap);
+class TWrapActivity : Activity() {
+    private lateinit var tWrap01: TWrap
+    private lateinit var tWrap02: TWrap
+    private lateinit var tWrap03: TWrap
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_wrap)
 
         //
-        tWrap01 = findViewById(R.id.tWrap01);
-        tWrap01.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TWrap tWrap = (TWrap) v;
-                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        tWrap01 = findViewById(R.id.tWrap01)
+        tWrap01.setOnClickListener(TView.OnClickListener { v ->
+            val tWrap = v as TWrap
+            Toast.makeText(application, tWrap.wrapSelectString, Toast.LENGTH_SHORT).show()
+        })
 
         //
-        tWrap02 = findViewById(R.id.tWrap02);
+        tWrap02 = findViewById(R.id.tWrap02)
         tWrap02.setWrapTextArray(
-                new String[]{
-                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
-                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏",
-                });
-        tWrap02.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TWrap tWrap = (TWrap) v;
-                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            arrayOf(
+                "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏", "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
+            )
+        )
+        tWrap02.setOnClickListener(TView.OnClickListener { v ->
+            val tWrap = v as TWrap
+            Toast.makeText(application, tWrap.wrapSelectString, Toast.LENGTH_SHORT).show()
+        })
 
         //
-        tWrap03 = findViewById(R.id.tWrap03);
+        tWrap03 = findViewById(R.id.tWrap03)
         tWrap03.setWrapTextArray(
-                new String[]{
-                        "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
-                        , "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
-                });
-        tWrap03.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TWrap tWrap = (TWrap) v;
-                Toast.makeText(getApplication(), tWrap.getWrapSelectString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            arrayOf(
+                "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏", "用户要求换车", "车辆不整洁", "车辆设施不完备", "车辆损坏"
+            )
+        )
+        tWrap03.setOnClickListener(TView.OnClickListener { v ->
+            val tWrap = v as TWrap
+            Toast.makeText(application, tWrap.wrapSelectString, Toast.LENGTH_SHORT).show()
+        })
     }
 }

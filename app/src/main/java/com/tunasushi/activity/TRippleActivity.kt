@@ -1,16 +1,14 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TRipple;
-import com.tunasushi.view.TView;
-import java.util.Timer;
-import java.util.TimerTask;
+import android.app.Activity
+import android.graphics.Color
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import android.os.Handler
+import android.os.Message
+import com.tunasushi.view.TRipple
+import java.util.*
 
 /**
  * @author TunaSashimi
@@ -18,98 +16,87 @@ import java.util.TimerTask;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TRippleActivity extends Activity {
-    private static final int PLAY_TUNARIPPLE_ANIMATION = 0;
-
-    private TView tViewPlay, tViewChange;
-    private TRipple tRipple01, tRipple02, tRipple03, tRipple04;
-
-    private Timer timer;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case PLAY_TUNARIPPLE_ANIMATION:
-                    tRipple01.play();
-                    tRipple02.play();
-                    tRipple03.play();
-                    tRipple04.play();
-                    break;
-                default:
-                    break;
+class TRippleActivity : Activity() {
+    private lateinit var tViewPlay: TView
+    private lateinit var tViewChange: TView
+    private lateinit var tRipple01: TRipple
+    private lateinit var tRipple02: TRipple
+    private lateinit var tRipple03: TRipple
+    private lateinit var tRipple04: TRipple
+    private var timer: Timer? = null
+    private val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+                PLAY_TUNARIPPLE_ANIMATION -> {
+                    tRipple01!!.play()
+                    tRipple02!!.play()
+                    tRipple03!!.play()
+                    tRipple04!!.play()
+                }
+                else -> {
+                }
             }
         }
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_ripple);
-
-        tRipple01 = findViewById(R.id.tRipple01);
-        tRipple02 = findViewById(R.id.tRipple02);
-        tRipple03 = findViewById(R.id.tRipple03);
-        tRipple04 = findViewById(R.id.tRipple04);
-
-        tViewPlay = findViewById(R.id.tViewPlay);
-        tViewPlay.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (timer == null) {
-                    timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            handler.sendEmptyMessage(PLAY_TUNARIPPLE_ANIMATION);
-                        }
-                    }, 0, 2000);
-                }
-            }
-        });
-
-        tViewChange = findViewById(R.id.tViewChange);
-        tViewChange.setOnClickListener(new TView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ("^".equals(tRipple01.getRippleText())) {
-                    tRipple01.setRippleText("&");
-                    tRipple02.setRippleText("&");
-                    tRipple03.setRippleText("&");
-                    tRipple04.setRippleText("&");
-
-                    tRipple01.setRippleCircleColorInner(0xffff9900);
-                    tRipple02.setRippleCircleColorOuter(
-                            270,
-                            0xfffed136,
-                            0xffff9900);
-                    tRipple03.setRippleCircleColorInner(0xfffed136);
-                    tRipple03.setRippleCircleColorOuter(0xfffed136);
-                    tRipple04.setRippleCircleAngleInner(90);
-                    tRipple04.setRippleCircleAngleOuter(90);
-                } else {
-
-                    tRipple01.setRippleText("^");
-                    tRipple02.setRippleText("^");
-                    tRipple03.setRippleText("^");
-                    tRipple04.setRippleText("^");
-
-                    tRipple01.setRippleCircleColorInner(0xfffed136);
-                    tRipple02.setRippleCircleColorOuter(0xffff9900);
-                    tRipple03.setRippleCircleColorInner(Color.WHITE, Color.BLUE);
-                    tRipple03.setRippleCircleColorOuter(Color.WHITE, Color.BLUE);
-                    tRipple04.setRippleCircleColorInner(270, Color.WHITE, Color.BLUE);
-                    tRipple04.setRippleCircleColorOuter(270, Color.RED, Color.BLUE);
-                }
-            }
-        });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_ripple)
+        tRipple01 = findViewById(R.id.tRipple01)
+        tRipple02 = findViewById(R.id.tRipple02)
+        tRipple03 = findViewById(R.id.tRipple03)
+        tRipple04 = findViewById(R.id.tRipple04)
+        tViewPlay = findViewById(R.id.tViewPlay)
+        tViewPlay.setOnClickListener(TView.OnClickListener {
+            if (timer == null) {
+                timer = Timer()
+                timer!!.schedule(object : TimerTask() {
+                    override fun run() {
+                        handler.sendEmptyMessage(PLAY_TUNARIPPLE_ANIMATION)
+                    }
+                }, 0, 2000)
+            }
+        })
+        tViewChange = findViewById(R.id.tViewChange)
+        tViewChange.setOnClickListener(TView.OnClickListener {
+            if ("^" == tRipple01.getRippleText()) {
+                tRipple01.setRippleText("&")
+                tRipple02.setRippleText("&")
+                tRipple03.setRippleText("&")
+                tRipple04.setRippleText("&")
+                tRipple01.setRippleCircleColorInner(-0x6700)
+                tRipple02.setRippleCircleColorOuter(
+                    270,
+                    -0x12eca,
+                    -0x6700
+                )
+                tRipple03.setRippleCircleColorInner(-0x12eca)
+                tRipple03.setRippleCircleColorOuter(-0x12eca)
+                tRipple04.setRippleCircleAngleInner(90)
+                tRipple04.setRippleCircleAngleOuter(90)
+            } else {
+                tRipple01.setRippleText("^")
+                tRipple02.setRippleText("^")
+                tRipple03.setRippleText("^")
+                tRipple04.setRippleText("^")
+                tRipple01.setRippleCircleColorInner(-0x12eca)
+                tRipple02.setRippleCircleColorOuter(-0x6700)
+                tRipple03.setRippleCircleColorInner(Color.WHITE, Color.BLUE)
+                tRipple03.setRippleCircleColorOuter(Color.WHITE, Color.BLUE)
+                tRipple04.setRippleCircleColorInner(270, Color.WHITE, Color.BLUE)
+                tRipple04.setRippleCircleColorOuter(270, Color.RED, Color.BLUE)
+            }
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         if (timer != null) {
-            timer.cancel();
+            timer!!.cancel()
         }
+    }
+
+    companion object {
+        private const val PLAY_TUNARIPPLE_ANIMATION = 0
     }
 }

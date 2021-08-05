@@ -1,14 +1,16 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TBubble;
-import com.tunasushi.view.TGroup;
-import com.tunasushi.view.TRange;
-import com.tunasushi.view.TView;
-import static com.tunasushi.tool.ConvertTool.dpToPx;
+import com.tunasushi.tool.ConvertTool.dpToPx
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import com.tunasushi.view.TView.TouchUpListener
+import com.tunasushi.view.TGroup
+import com.tunasushi.view.TBubble
+import com.tunasushi.view.TRange
+import com.tunasushi.view.TView.TouchListener
+import android.view.View
 
 /**
  * @author TunaSashimi
@@ -16,68 +18,58 @@ import static com.tunasushi.tool.ConvertTool.dpToPx;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TRangeActivity extends Activity implements TView.TouchUpListener {
-    private TView tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive;
-    private TView tViewPrice;
-    private TBubble tBubble;
-    private TRange tRange;
-    private int dx;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_range);
-
-        tViewNoLimit = findViewById(R.id.tViewNoLimit);
-        tViewStarTwo = findViewById(R.id.tViewStarTwo);
-        tViewStarThree = findViewById(R.id.tViewStarThree);
-        tViewStarFour = findViewById(R.id.tViewStarFour);
-        tViewStarFive = findViewById(R.id.tViewStarFive);
-
-        tViewPrice = findViewById(R.id.tViewPrice);
-        tRange = findViewById(R.id.tRange);
-        tBubble = findViewById(R.id.tBubble);
-
-        //
-        TGroup.link(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive);
+class TRangeActivity : Activity(), TouchUpListener {
+    private lateinit var tViewNoLimit: TView
+    private lateinit var tViewStarTwo: TView
+    private lateinit var tViewStarThree: TView
+    private lateinit var tViewStarFour: TView
+    private lateinit var tViewStarFive: TView
+    private lateinit var tViewPrice: TView
+    private lateinit var tBubble: TBubble
+    private lateinit var tRange: TRange
+    private var dx = 0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_range)
+        tViewNoLimit = findViewById(R.id.tViewNoLimit)
+        tViewStarTwo = findViewById(R.id.tViewStarTwo)
+        tViewStarThree = findViewById(R.id.tViewStarThree)
+        tViewStarFour = findViewById(R.id.tViewStarFour)
+        tViewStarFive = findViewById(R.id.tViewStarFive)
+        tViewPrice = findViewById(R.id.tViewPrice)
+        tRange = findViewById(R.id.tRange)
+        tBubble = findViewById(R.id.tBubble)
 
         //
-        tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
+        TGroup.link(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive)
 
         //
-        tRange.setTouchListener(new TView.TouchListener() {
-            @Override
-            public void touch(TView t) {
-                //
-                if (dx == 0) {
-                    dx = tBubble.getWidth() >> 1;
-                }
-                tBubble.setTBubbleText(tRange.getRangeText());
-                if (t.isPress()) {
-                    tBubble.setVisibility(View.VISIBLE);
-                    //Need to add marginLift of tRange!
-                    tBubble.setX((int) tRange.getRangeCircleCentreX() - dx + dpToPx(20));
-                } else {
-                    tBubble.setVisibility(View.INVISIBLE);
-                }
-                //
-                tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight());
+        tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight())
+
+        //
+        tRange.setTouchListener(TouchListener { t -> //
+            if (dx == 0) {
+                dx = tBubble.getWidth() shr 1
             }
-        });
+            tBubble.setTBubbleText(tRange.getRangeText())
+            if (t.isPress) {
+                tBubble.setVisibility(View.VISIBLE)
+                //Need to add marginLift of tRange!
+                tBubble.setX((tRange.getRangeCircleCentreX().toInt() - dx + dpToPx(20f)).toFloat())
+            } else {
+                tBubble.setVisibility(View.INVISIBLE)
+            }
+            //
+            tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight())
+        })
     }
 
-    @Override
-    public void touchUp(TView t) {
-        switch (t.getId()) {
-            case R.id.tViewReset:
-                tRange.reset();
-                break;
-            case R.id.tViewComplete:
-                finish();
-                break;
-            default:
-                break;
+    override fun touchUp(t: TView) {
+        when (t.id) {
+            R.id.tViewReset -> tRange!!.reset()
+            R.id.tViewComplete -> finish()
+            else -> {
+            }
         }
     }
 }

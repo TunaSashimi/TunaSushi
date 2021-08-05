@@ -1,11 +1,12 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.Toast;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TView;
-import com.tunasushi.view.TSeek;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import com.tunasushi.view.TView.TouchUpListener
+import android.widget.Toast
+import com.tunasushi.view.TSeek
 
 /**
  * @author TunaSashimi
@@ -13,36 +14,31 @@ import com.tunasushi.view.TSeek;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TSeekActivity extends Activity implements TView.TouchUpListener {
-    private TSeek tSeek;
-    private TView tViewReset, tViewIndex;
+class TSeekActivity : Activity(), TouchUpListener {
+    private lateinit var tSeek: TSeek
+    private lateinit var tViewReset: TView
+    private lateinit var tViewIndex: TView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_seek)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_seek);
-
-        tSeek = findViewById(R.id.tSeek);
-
-        tViewReset = findViewById(R.id.tViewReset);
-        tViewIndex = findViewById(R.id.tViewIndex);
-
-        tViewReset.setTouchUpListener(this);
-        tViewIndex.setTouchUpListener(this);
+        tSeek = findViewById(R.id.tSeek)
+        tViewReset = findViewById(R.id.tViewReset)
+        tViewIndex = findViewById(R.id.tViewIndex)
+        tViewReset.setTouchUpListener(this)
+        tViewIndex.setTouchUpListener(this)
     }
 
-    @Override
-    public void touchUp(TView t) {
-        switch (t.getId()) {
-            case R.id.tViewReset:
-                tSeek.setSeekIndex(0);
-                break;
-            case R.id.tViewIndex:
-                Toast.makeText(TSeekActivity.this, "TSeek下标==>" + tSeek.getSeekIndex(), Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
+    override fun touchUp(t: TView) {
+        when (t.id) {
+            R.id.tViewReset -> tSeek!!.seekIndex = 0
+            R.id.tViewIndex -> Toast.makeText(
+                this@TSeekActivity,
+                "TSeek下标==>" + tSeek!!.seekIndex,
+                Toast.LENGTH_SHORT
+            ).show()
+            else -> {
+            }
         }
     }
 }

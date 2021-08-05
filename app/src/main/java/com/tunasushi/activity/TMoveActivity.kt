@@ -1,8 +1,8 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import com.tunasushi.demo.R;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
 
 /**
  * @author TunaSashimi
@@ -10,11 +10,9 @@ import com.tunasushi.demo.R;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TMoveActivity extends Activity {
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_t_move);
-	}
+class TMoveActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_move)
+    }
 }

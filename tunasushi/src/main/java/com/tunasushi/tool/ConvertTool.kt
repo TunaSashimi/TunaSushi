@@ -1,12 +1,9 @@
-package com.tunasushi.tool;
+package com.tunasushi.tool
 
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-
-import static com.tunasushi.tool.DeviceTool.displayDensity;
-import static com.tunasushi.tool.DeviceTool.displayScaledDensity;
-import static com.tunasushi.tool.DeviceTool.initDisplayMetrics;
+import android.content.res.Resources
+import com.tunasushi.tool.DeviceTool
+import android.util.DisplayMetrics
+import android.util.TypedValue
 
 /**
  * @author TunaSashimi
@@ -14,55 +11,52 @@ import static com.tunasushi.tool.DeviceTool.initDisplayMetrics;
  * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
-public class ConvertTool {
+object ConvertTool {
     // Parameter need to float for example tunaStroke is float convert the value to dip or dp px values​​, to ensure constant size
-    public static float pxToDp(float pxValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics();
+    @JvmStatic
+    fun pxToDp(pxValue: Float): Float {
+        if (DeviceTool.displayDensity == 0f) {
+            DeviceTool.initDisplayMetrics()
         }
-        return pxValue / displayDensity;
+        return pxValue / DeviceTool.displayDensity
     }
 
     // Parameter need to float for example tunaStroke is float convert the value to dip or dp px values​​, to ensure constant size
-    public static float pxToSp(float pxValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics();
+    fun pxToSp(pxValue: Float): Float {
+        if (DeviceTool.displayDensity == 0f) {
+            DeviceTool.initDisplayMetrics()
         }
-        return pxValue / displayScaledDensity;
+        return pxValue / DeviceTool.displayScaledDensity
     }
 
     // convert the value px sp values​​, to ensure constant size
-    public static int spToPx(float spValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics();
+    fun spToPx(spValue: Float): Int {
+        if (DeviceTool.displayDensity == 0f) {
+            DeviceTool.initDisplayMetrics()
         }
-        return (int) (spValue * displayScaledDensity + 0.5f);
+        return (spValue * DeviceTool.displayScaledDensity + 0.5f).toInt()
     }
 
     // convert the value to px dp values​​, to ensure constant size
-    public static int dpToPx(float dpValue) {
-        if (displayDensity == 0f) {
-            initDisplayMetrics();
+    @JvmStatic
+    fun dpToPx(dpValue: Float): Int {
+        if (DeviceTool.displayDensity == 0f) {
+            DeviceTool.initDisplayMetrics()
         }
-        return (int) (dpValue * displayDensity + 0.5f);
+        return (dpValue * DeviceTool.displayDensity + 0.5f).toInt()
     }
 
-    public static float convertToPX(float value, int unit) {
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        switch (unit) {
-            case TypedValue.COMPLEX_UNIT_PX:
-                return value;
-            case TypedValue.COMPLEX_UNIT_DIP:
-                return value * metrics.density;
-            case TypedValue.COMPLEX_UNIT_SP:
-                return value * metrics.scaledDensity;
-            case TypedValue.COMPLEX_UNIT_PT:
-                return value * metrics.xdpi * (1.0f / 72);
-            case TypedValue.COMPLEX_UNIT_IN:
-                return value * metrics.xdpi;
-            case TypedValue.COMPLEX_UNIT_MM:
-                return value * metrics.xdpi * (1.0f / 25.4f);
+    @JvmStatic
+    fun convertToPX(value: Float, unit: Int): Float {
+        val metrics = Resources.getSystem().displayMetrics
+        when (unit) {
+            TypedValue.COMPLEX_UNIT_PX -> return value
+            TypedValue.COMPLEX_UNIT_DIP -> return value * metrics.density
+            TypedValue.COMPLEX_UNIT_SP -> return value * metrics.scaledDensity
+            TypedValue.COMPLEX_UNIT_PT -> return value * metrics.xdpi * (1.0f / 72)
+            TypedValue.COMPLEX_UNIT_IN -> return value * metrics.xdpi
+            TypedValue.COMPLEX_UNIT_MM -> return value * metrics.xdpi * (1.0f / 25.4f)
         }
-        return 0;
+        return 0F
     }
 }

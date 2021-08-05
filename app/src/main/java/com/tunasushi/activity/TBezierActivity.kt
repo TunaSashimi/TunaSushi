@@ -1,10 +1,11 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.SeekBar;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TBezier;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import com.tunasushi.view.TBezier
 
 /**
  * @author TunaSashimi
@@ -12,48 +13,31 @@ import com.tunasushi.view.TBezier;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TBezierActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
-    private TBezier tBezier;
-    private SeekBar seekBar01, seekBar02, seekBar03;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_bezier);
-
-        tBezier = findViewById(R.id.tBezier02);
-
-        seekBar01 = findViewById(R.id.seekBar01);
-        seekBar02 = findViewById(R.id.seekBar02);
-        seekBar03 = findViewById(R.id.seekBar03);
-        seekBar01.setOnSeekBarChangeListener(this);
-        seekBar02.setOnSeekBarChangeListener(this);
-        seekBar03.setOnSeekBarChangeListener(this);
+class TBezierActivity : Activity(), OnSeekBarChangeListener {
+    private lateinit var tBezier: TBezier
+    private lateinit var seekBar01: SeekBar
+    private lateinit var seekBar02: SeekBar
+    private lateinit var seekBar03: SeekBar
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_bezier)
+        tBezier = findViewById(R.id.tBezier02)
+        seekBar01 = findViewById(R.id.seekBar01)
+        seekBar02 = findViewById(R.id.seekBar02)
+        seekBar03 = findViewById(R.id.seekBar03)
+        seekBar01.setOnSeekBarChangeListener(this)
+        seekBar02.setOnSeekBarChangeListener(this)
+        seekBar03.setOnSeekBarChangeListener(this)
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        switch (seekBar.getId()) {
-            case R.id.seekBar01:
-                tBezier.setMaxDistance(progress);
-                break;
-            case R.id.seekBar02:
-                tBezier.setMv(progress / 100f);
-                break;
-            case R.id.seekBar03:
-                tBezier.setHandleLenRate(progress / 100f);
-                break;
+    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        when (seekBar.id) {
+            R.id.seekBar01 -> tBezier.maxDistance = progress.toFloat()
+            R.id.seekBar02 -> tBezier.mv = progress / 100f
+            R.id.seekBar03 -> tBezier.handleLenRate = progress / 100f
         }
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
+    override fun onStartTrackingTouch(seekBar: SeekBar) {}
+    override fun onStopTrackingTouch(seekBar: SeekBar) {}
 }

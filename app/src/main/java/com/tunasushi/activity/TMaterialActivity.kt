@@ -1,10 +1,10 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TGroup;
-import com.tunasushi.view.TView;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TGroup
+import com.tunasushi.view.TView
 
 /**
  * @author TunaSashimi
@@ -12,19 +12,16 @@ import com.tunasushi.view.TView;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TMaterialActivity extends Activity {
-    private TView tViewMaterial03, tViewMaterial04;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_materlai);
+class TMaterialActivity : Activity() {
+    private lateinit var tViewMaterial03: TView
+    private lateinit var tViewMaterial04: TView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_materlai)
 
         //
-        tViewMaterial03 = findViewById(R.id.tViewMaterial03);
-        tViewMaterial04 = findViewById(R.id.tViewMaterial04);
-
-        TGroup.link(tViewMaterial03, tViewMaterial04);
+        tViewMaterial03 = findViewById(R.id.tViewMaterial03)
+        tViewMaterial04 = findViewById(R.id.tViewMaterial04)
+        TGroup.link(tViewMaterial03, tViewMaterial04)
     }
 }

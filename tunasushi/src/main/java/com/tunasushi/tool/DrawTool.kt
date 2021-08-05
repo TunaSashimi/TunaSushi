@@ -1,17 +1,10 @@
-package com.tunasushi.tool;
+package com.tunasushi.tool
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-
-import static com.tunasushi.view.TView.BOTTOM;
-import static com.tunasushi.view.TView.CENTER;
-import static com.tunasushi.view.TView.CENTER_HORIZONTAL;
-import static com.tunasushi.view.TView.CENTER_VERTICAL;
-import static com.tunasushi.view.TView.GRAVITY_MASK;
-import static com.tunasushi.view.TView.LEFT;
-import static com.tunasushi.view.TView.RIGHT;
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Matrix
+import android.graphics.Paint
+import com.tunasushi.view.TView
 
 /**
  * @author TunaSashimi
@@ -19,52 +12,47 @@ import static com.tunasushi.view.TView.RIGHT;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Descriptiona
  */
-public class DrawTool {
-    public static void drawAnchor(Canvas canvas, Paint paint,
-                                  Bitmap srcAnchor,
-                                  Matrix anchorMatrix,
-                                  int width, int height,
-                                  int srcAnchorGravity,
-                                  float srcAnchorWidth, float srcAnchorHeight,
-                                  float srcAnchorDx, float srcAnchorDy) {
-
-        float anchorDxNormal = 0, anchorDyNormal = 0;
-        switch (srcAnchorGravity & GRAVITY_MASK) {
-            case LEFT:
-                break;
-            case CENTER_HORIZONTAL:
-                anchorDxNormal = (width >> 1) - srcAnchorWidth * 0.5f;
-                break;
-            case RIGHT:
-                anchorDxNormal = width - srcAnchorWidth;
-                break;
-            case CENTER_VERTICAL:
-                anchorDyNormal = (height >> 1) - srcAnchorHeight * 0.5f;
-                break;
-            case CENTER:
-                anchorDxNormal = (width >> 1) - srcAnchorWidth * 0.5f;
-                anchorDyNormal = (height >> 1) - srcAnchorHeight * 0.5f;
-                break;
-            case RIGHT | CENTER_VERTICAL:
-                anchorDxNormal = width - srcAnchorWidth;
-                anchorDyNormal = (height >> 1) - srcAnchorHeight * 0.5f;
-                break;
-            case BOTTOM:
-                anchorDyNormal = height - srcAnchorHeight;
-                break;
-            case BOTTOM | CENTER_HORIZONTAL:
-                anchorDxNormal = (width >> 1) - srcAnchorWidth * 0.5f;
-                anchorDyNormal = height - srcAnchorHeight;
-                break;
-            case BOTTOM | RIGHT:
-                anchorDxNormal = width - srcAnchorWidth;
-                anchorDyNormal = height - srcAnchorHeight;
-                break;
-            default:
-                break;
+object DrawTool {
+    @JvmStatic
+    fun drawAnchor(
+        canvas: Canvas, paint: Paint?,
+        srcAnchor: Bitmap?,
+        anchorMatrix: Matrix?,
+        width: Int, height: Int,
+        srcAnchorGravity: Int,
+        srcAnchorWidth: Float, srcAnchorHeight: Float,
+        srcAnchorDx: Float, srcAnchorDy: Float
+    ) {
+        var anchorDxNormal = 0f
+        var anchorDyNormal = 0f
+        when (srcAnchorGravity and TView.GRAVITY_MASK) {
+            TView.LEFT -> {
+            }
+            TView.CENTER_HORIZONTAL -> anchorDxNormal = (width shr 1) - srcAnchorWidth * 0.5f
+            TView.RIGHT -> anchorDxNormal = width - srcAnchorWidth
+            TView.CENTER_VERTICAL -> anchorDyNormal = (height shr 1) - srcAnchorHeight * 0.5f
+            TView.CENTER -> {
+                anchorDxNormal = (width shr 1) - srcAnchorWidth * 0.5f
+                anchorDyNormal = (height shr 1) - srcAnchorHeight * 0.5f
+            }
+            TView.RIGHT or TView.CENTER_VERTICAL -> {
+                anchorDxNormal = width - srcAnchorWidth
+                anchorDyNormal = (height shr 1) - srcAnchorHeight * 0.5f
+            }
+            TView.BOTTOM -> anchorDyNormal = height - srcAnchorHeight
+            TView.BOTTOM or TView.CENTER_HORIZONTAL -> {
+                anchorDxNormal = (width shr 1) - srcAnchorWidth * 0.5f
+                anchorDyNormal = height - srcAnchorHeight
+            }
+            TView.BOTTOM or TView.RIGHT -> {
+                anchorDxNormal = width - srcAnchorWidth
+                anchorDyNormal = height - srcAnchorHeight
+            }
+            else -> {
+            }
         }
-        canvas.translate(anchorDxNormal + srcAnchorDx, anchorDyNormal + srcAnchorDy);
-        canvas.drawBitmap(srcAnchor, anchorMatrix, paint);
-        canvas.translate(-anchorDxNormal + -srcAnchorDx, -anchorDyNormal - srcAnchorDy);
+        canvas.translate(anchorDxNormal + srcAnchorDx, anchorDyNormal + srcAnchorDy)
+        canvas.drawBitmap(srcAnchor!!, anchorMatrix!!, paint)
+        canvas.translate(-anchorDxNormal + -srcAnchorDx, -anchorDyNormal - srcAnchorDy)
     }
 }

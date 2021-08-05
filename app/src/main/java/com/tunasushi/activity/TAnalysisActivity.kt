@@ -1,11 +1,11 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TAnalysis;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TAnalysis
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 
 /**
  * @author TunaSashimi
@@ -13,32 +13,21 @@ import com.tunasushi.view.TAnalysis;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TAnalysisActivity extends Activity {
-    private TAnalysis tAnalysis;
-    private SeekBar seekbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_analysis);
-
-        tAnalysis = findViewById(R.id.tAnalysis);
-        seekbar = findViewById(R.id.seekbar);
-
-        seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tAnalysis.setAnalyaiaControlXY(progress, progress);
+class TAnalysisActivity : Activity() {
+    private lateinit var tAnalysis: TAnalysis
+    private lateinit var seekbar: SeekBar
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_analysis)
+        tAnalysis = findViewById(R.id.tAnalysis)
+        seekbar = findViewById(R.id.seekbar)
+        seekbar?.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                tAnalysis?.setAnalyaiaControlXY(progress, progress)
             }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
     }
 }

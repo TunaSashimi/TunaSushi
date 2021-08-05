@@ -1,12 +1,10 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TGroup;
-import com.tunasushi.view.TView;
-
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import com.tunasushi.view.TGroup
 
 /**
  * @author TunaSashimi
@@ -14,17 +12,12 @@ import com.tunasushi.view.TView;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TestActivity extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_test);
-
-        TView tView01 = findViewById(R.id.tView01);
-        TView tView02 = findViewById(R.id.tView02);
-
-        TGroup.link(tView01, tView02);
+class TestActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_test)
+        val tView01: TView = findViewById(R.id.tView01)
+        val tView02: TView = findViewById(R.id.tView02)
+        TGroup.link(tView01, tView02)
     }
 }

@@ -1,11 +1,12 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.Toast;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TButton;
-import com.tunasushi.view.TView;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TView
+import com.tunasushi.view.TView.TouchUpListener
+import com.tunasushi.view.TButton
+import android.widget.Toast
 
 /**
  * @author TunaSashimi
@@ -13,35 +14,29 @@ import com.tunasushi.view.TView;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TButtonActivity extends Activity implements TView.TouchUpListener {
-    private TButton tButton01, tButton02, tButton03;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_button);
-
-        tButton01 = findViewById(R.id.tButton01);
-        tButton02 = findViewById(R.id.tButton02);
-        tButton03 = findViewById(R.id.tButton03);
-
-        tButton01.setTouchUpListener(this);
-        tButton02.setTouchUpListener(this);
-        tButton03.setTouchUpListener(this);
+class TButtonActivity : Activity(), TouchUpListener {
+    private lateinit var tButton01: TButton
+    private lateinit var tButton02: TButton
+    private lateinit var tButton03: TButton
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_button)
+        tButton01 = findViewById(R.id.tButton01)
+        tButton02 = findViewById(R.id.tButton02)
+        tButton03 = findViewById(R.id.tButton03)
+        tButton01.setTouchUpListener(this)
+        tButton02.setTouchUpListener(this)
+        tButton03.setTouchUpListener(this)
     }
 
-    @Override
-    public void touchUp(TView t) {
-        switch (t.getId()) {
-            case R.id.tButton01:
-            case R.id.tButton02:
-            case R.id.tButton03:
-                TButton tButton = (TButton) t;
-                Toast.makeText(this, tButton.getButtonText(), Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
+    override fun touchUp(t: TView) {
+        when (t.id) {
+            R.id.tButton01, R.id.tButton02, R.id.tButton03 -> {
+                val tButton = t as TButton
+                Toast.makeText(this, tButton.buttonText, Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+            }
         }
     }
 }

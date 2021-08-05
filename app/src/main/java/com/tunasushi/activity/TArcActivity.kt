@@ -1,9 +1,8 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-
-import com.tunasushi.view.TArc;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.view.TArc
 
 /**
  * @author TunaSashimi
@@ -11,12 +10,9 @@ import com.tunasushi.view.TArc;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TArcActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(new TArc(this));
+class TArcActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(TArc(this))
     }
 }
-

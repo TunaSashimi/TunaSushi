@@ -1,9 +1,9 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TScale;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import com.tunasushi.view.TScale
 
 /**
  * @author TunaSashimi
@@ -11,16 +11,12 @@ import com.tunasushi.view.TScale;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TScaleActivity extends Activity {
-    private TScale tScale;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_scale);
-
-        tScale = findViewById(R.id.tScale);
-        tScale.setScaleSrc(R.drawable.bitmap_tscale_scalebitmap);
+class TScaleActivity : Activity() {
+    private lateinit var tScale: TScale
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_scale)
+        tScale = findViewById(R.id.tScale)
+        tScale.setScaleSrc(R.drawable.bitmap_tscale_scalebitmap)
     }
 }

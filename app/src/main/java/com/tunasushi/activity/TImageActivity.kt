@@ -1,10 +1,11 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.SeekBar;
-import com.tunasushi.demo.R;
-import com.tunasushi.view.TImage;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.demo.R
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import com.tunasushi.view.TImage
 
 /**
  * @author TunaSashimi
@@ -12,64 +13,38 @@ import com.tunasushi.view.TImage;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TImageActivity extends Activity {
-    private TImage tImage;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_t_image);
-
-        tImage = findViewById(R.id.tImage01);
-
-        SeekBar seekBar01 = findViewById(R.id.seekBar01);
-        SeekBar seekBar02 = findViewById(R.id.seekBar02);
-        SeekBar seekBar03 = findViewById(R.id.seekBar03);
-
-        seekBar01.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tImage.setImageBright(progress / 50f);//0-2
+class TImageActivity : Activity() {
+    private lateinit var tImage: TImage
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_t_image)
+        tImage = findViewById(R.id.tImage01)
+        val seekBar01 = findViewById<SeekBar>(R.id.seekBar01)
+        val seekBar02 = findViewById<SeekBar>(R.id.seekBar02)
+        val seekBar03 = findViewById<SeekBar>(R.id.seekBar03)
+        seekBar01.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                tImage.setImageBright(progress / 50f) //0-2
             }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
+        seekBar02.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                tImage.setImageHue((progress - 50) / 50f * 180) //-180-180
             }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        seekBar02.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tImage.setImageHue((progress - 50) / 50f * 180);//-180-180
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
+        seekBar03.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                tImage.setImageSaturation(progress / 50f) //0-2
             }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        seekBar03.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tImage.setImageSaturation(progress / 50f);//0-2
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
     }
 }

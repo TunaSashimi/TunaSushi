@@ -1,8 +1,8 @@
-package com.tunasushi.activity;
+package com.tunasushi.activity
 
-import android.app.Activity;
-import android.os.Bundle;
-import com.tunasushi.view.TPattern;
+import android.app.Activity
+import android.os.Bundle
+import com.tunasushi.view.TPattern
 
 /**
  * @author TunaSashimi
@@ -10,12 +10,9 @@ import com.tunasushi.view.TPattern;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TPatternActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(new TPattern(this));
+class TPatternActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(TPattern(this))
     }
 }
-
