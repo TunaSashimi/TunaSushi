@@ -1,9 +1,8 @@
-package com.tunasushi.bean;
+package com.tunasushi.bean
 
-
-import androidx.databinding.BaseObservable;
-import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ObservableField;
+import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
 
 /**
  * @author TunaSashimi
@@ -11,7 +10,9 @@ import androidx.databinding.ObservableField;
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
-public class BindingBean extends BaseObservable {
-    public ObservableField<String> name = new ObservableField("hello");
-    public ObservableBoolean select = new ObservableBoolean();
+class BindingBean : BaseObservable() {
+    @JvmField
+    var name: ObservableField<String?> = ObservableField("hello")
+    @JvmField
+    var select = ObservableBoolean()
 }
