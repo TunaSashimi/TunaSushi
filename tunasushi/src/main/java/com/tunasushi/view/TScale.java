@@ -90,7 +90,7 @@ public class TScale extends TView {
             generateCrop();
         } else {
             //
-            scale = width * 1f / srcBitmap.getWidth();
+            scale = width * 1F / srcBitmap.getWidth();
             matrixNormal = initMatrix(matrixNormal, scale, scale);
 
             //

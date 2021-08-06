@@ -23,8 +23,8 @@ object DrawTool {
         srcAnchorWidth: Float, srcAnchorHeight: Float,
         srcAnchorDx: Float, srcAnchorDy: Float
     ) {
-        var anchorDxNormal = 0f
-        var anchorDyNormal = 0f
+        var anchorDxNormal = 0F
+        var anchorDyNormal = 0F
         when (srcAnchorGravity and TView.GRAVITY_MASK) {
             TView.LEFT -> {
             }

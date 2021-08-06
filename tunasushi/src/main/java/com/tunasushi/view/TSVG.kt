@@ -4,13 +4,8 @@ import android.content.Context
 import com.tunasushi.tool.BitmapTool.Companion.getCircleBitmap
 import com.tunasushi.tool.BitmapTool.Companion.getSVGBitmap
 import kotlin.jvm.JvmOverloads
-import com.tunasushi.view.TView
 import android.graphics.Bitmap
-import com.tunasushi.view.TSVG
-import com.tunasushi.view.TSVG.SVGStyle
-import com.tunasushi.tool.BitmapTool
 import com.tunasushi.R
-import android.content.res.TypedArray
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Matrix
@@ -71,11 +66,11 @@ class TSVG @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        scaleSx = width * 1f / srcBitmap.width
-        scaleSy = height * 1f / srcBitmap.height
+        scaleSx = width * 1F / srcBitmap.width
+        scaleSy = height * 1F / srcBitmap.height
         matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy)
         val shortSide = if (width >= height) height else width
-        initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide)
+        initSVGMatrix(width * 1F / shortSide, height * 1F / shortSide)
         when (svgStyle) {
             CIRCLE -> sVGSrc = getCircleBitmap(shortSide)
             STAR -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_star)

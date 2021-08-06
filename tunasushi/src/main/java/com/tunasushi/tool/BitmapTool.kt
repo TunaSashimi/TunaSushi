@@ -331,7 +331,7 @@ class BitmapTool {
                 )
                 canvas.drawPicture(svg.picture)
             } else {
-                canvas.drawRect(RectF(0.0f, 0.0f, width.toFloat(), height.toFloat()), paint)
+                canvas.drawRect(RectF(0F, 0F, width.toFloat(), height.toFloat()), paint)
             }
             return bitmap
         }
@@ -410,8 +410,8 @@ class BitmapTool {
         fun getReverseBitmap(sourceBitmap: Bitmap, flag: Int): Bitmap {
             var floats: FloatArray? = null
             when (flag) {
-                0 -> floats = floatArrayOf(-1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
-                1 -> floats = floatArrayOf(1f, 0f, 0f, 0f, -1f, 0f, 0f, 0f, 1f)
+                0 -> floats = floatArrayOf(-1F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 1F)
+                1 -> floats = floatArrayOf(1F, 0F, 0F, 0F, -1F, 0F, 0F, 0F, 1F)
             }
             if (floats != null) {
                 val matrix = Matrix()
@@ -567,7 +567,7 @@ class BitmapTool {
             var newG = 0
             var newB = 0
             val radius = Math.min(centerX, centerY)
-            val strength = 150f // 光照强度 100~150
+            val strength = 150F // 光照强度 100~150
             val pixels = IntArray(width * height)
             sourceBitmap.getPixels(pixels, 0, width, 0, 0, width, height)
             var pos = 0
@@ -956,7 +956,7 @@ class BitmapTool {
             colorMatrixBright.setRotate(2, hueValue) // 控制蓝色区在色轮上旋转的角度
 
             // hueColor就是色轮旋转的角度,正值表示顺时针旋转,负值表示逆时针旋转,红、绿、蓝三分量按相同的比例,最后一个参数1表示透明度不做变化
-            colorMatrixHue.setScale(brightValue, brightValue, brightValue, 1f)
+            colorMatrixHue.setScale(brightValue, brightValue, brightValue, 1F)
 
             // saturation 饱和度值，最小可设为0，此时对应的是灰度图(也就是俗话的“黑白图”),为1表示饱和度不变，设置大于1，就显示过饱和
             colorMatrixSaturation.setSaturation(saturationValue)
@@ -966,7 +966,7 @@ class BitmapTool {
             val paint = Paint()
             paint.isAntiAlias = true
             paint.colorFilter = ColorMatrixColorFilter(colorMatrixAll) // 设置颜色变换效果
-            canvas.drawBitmap(sourceBitmap, 0f, 0f, paint) // 将颜色变化后的图片输出到新创建的位图区
+            canvas.drawBitmap(sourceBitmap, 0F, 0F, paint) // 将颜色变化后的图片输出到新创建的位图区
             // 返回新的位图，也即调色处理后的图片
             return createBitmap
         }

@@ -24,7 +24,7 @@ class TImageActivity : Activity() {
         val seekBar03 = findViewById<SeekBar>(R.id.seekBar03)
         seekBar01.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                tImage.setImageBright(progress / 50f) //0-2
+                tImage.setImageBright(progress / 50F) //0-2
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -32,7 +32,7 @@ class TImageActivity : Activity() {
         })
         seekBar02.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                tImage.setImageHue((progress - 50) / 50f * 180) //-180-180
+                tImage.setImageHue((progress - 50) / 50F * 180) //-180-180
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -40,7 +40,7 @@ class TImageActivity : Activity() {
         })
         seekBar03.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                tImage.setImageSaturation(progress / 50f) //0-2
+                tImage.setImageSaturation(progress / 50F) //0-2
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}

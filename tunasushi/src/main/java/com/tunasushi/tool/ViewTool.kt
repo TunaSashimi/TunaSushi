@@ -225,7 +225,7 @@ object ViewTool {
 
     fun adaptViewAutomatic(view: View, screenWidth: Int, screenHeight: Int, ratio: Float) {
         val params = view.layoutParams
-        if (screenWidth * 1f / screenHeight >= ratio) {
+        if (screenWidth * 1F / screenHeight >= ratio) {
             params.height = screenHeight
             params.width = (screenHeight * ratio).toInt()
         } else {
@@ -237,7 +237,7 @@ object ViewTool {
 
     fun fillViewAutomatic(view: View, screenWidth: Int, screenHeight: Int, ratio: Float) {
         val params = view.layoutParams
-        if (screenWidth * 1f / screenHeight >= ratio) {
+        if (screenWidth * 1F / screenHeight >= ratio) {
             params.width = screenWidth
             params.height = (screenWidth / ratio).toInt()
         } else {

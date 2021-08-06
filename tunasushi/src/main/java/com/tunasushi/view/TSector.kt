@@ -2,13 +2,10 @@ package com.tunasushi.view
 
 import android.animation.Animator
 import kotlin.jvm.JvmOverloads
-import com.tunasushi.view.TView
 import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
 import android.content.Context
-import com.tunasushi.view.TSector
-import android.content.res.TypedArray
 import android.graphics.*
 import android.os.Handler
 import android.os.Message
@@ -123,12 +120,12 @@ class TSector @JvmOverloads constructor(
         } else if (aimPercent > 20 && aimPercent <= 60) {
             val colorSweep = intArrayOf(yellowColor, pinkRedColor)
             val position = floatArrayOf(0.5f, 0.7f)
-            val sweepGradient = SweepGradient(width / 2*1f, radius, colorSweep, position)
+            val sweepGradient = SweepGradient(width / 2F, radius, colorSweep, position)
             sectorPaintShader.shader = sweepGradient
         } else if (aimPercent > 60 && aimPercent <= 90) {
             val colorSweep = intArrayOf(redColor, yellowColor, yellowColor, pinkRedColor, redColor)
-            val position = floatArrayOf(0.25f, 0.35f, 0.5f, 0.7f, 0.8f)
-            val sweepGradient = SweepGradient(width / 2*1f, radius, colorSweep, position)
+            val position = floatArrayOf(0.25F, 0.35F, 0.5F, 0.7F, 0.8f)
+            val sweepGradient = SweepGradient(width / 2F, radius, colorSweep, position)
             sectorPaintShader.shader = sweepGradient
         } else if (aimPercent > 90) {
             val colorSweep = intArrayOf(
@@ -140,7 +137,7 @@ class TSector @JvmOverloads constructor(
                 deepRedColor
             )
             val position = floatArrayOf(0.2f, 0.4f, 0.5f, 0.7f, 0.9f, 1.0f)
-            val sweepGradient = SweepGradient(width / 2*1f, radius, colorSweep, position)
+            val sweepGradient = SweepGradient(width / 2 * 1F, radius, colorSweep, position)
             sectorPaintShader.shader = sweepGradient
         }
         if (aimPercent <= 10) { //目的是为了
@@ -264,7 +261,7 @@ class TSector @JvmOverloads constructor(
         }
 
         //
-        mValueAnimator = ValueAnimator.ofFloat(0f, 1f)
+        mValueAnimator = ValueAnimator.ofFloat(0F, 1F)
             .setDuration(defaultDuration.toLong()) //设置动画时间，这里设置为0，则看不出动画执行的过程
         mValueAnimator!!.addUpdateListener(mUpdateListener)
         mValueAnimator!!.addListener(mAnimatorListener)

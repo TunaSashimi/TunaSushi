@@ -6,9 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import kotlin.jvm.JvmOverloads
-import com.tunasushi.view.TView
 import android.view.MotionEvent
-import com.tunasushi.view.TTrack
 
 /**
  * @author TunaSashimi

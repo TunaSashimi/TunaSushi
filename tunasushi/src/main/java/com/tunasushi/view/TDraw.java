@@ -152,15 +152,15 @@ public class TDraw extends TView {
         drawPaint = new Paint(Paint.DITHER_FLAG);
         //
         if (drawSrc != null) {
-            scaleSx = width * 1f / drawSrc.getWidth();
-            scaleSy = height * 1f / drawSrc.getHeight();
+            scaleSx = width * 1F / drawSrc.getWidth();
+            scaleSy = height * 1F / drawSrc.getHeight();
             matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
         }
 
         //
         if (drawStyle != NORMAL) {
             int shortSide = width >= height ? height : width;
-            initPaintingDstMatrix(width * 1f / shortSide, height * 1f / shortSide);
+            initPaintingDstMatrix(width * 1F / shortSide, height * 1F / shortSide);
 
             switch (drawStyle) {
                 case CIRCLE:

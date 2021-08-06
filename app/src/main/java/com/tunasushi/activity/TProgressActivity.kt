@@ -33,12 +33,12 @@ class TProgressActivity : Activity() {
         seekbar = findViewById(R.id.seekbar)
         seekbar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                tProgressCircleClockWise.setProgressPercent(progress * 0.01f)
-                tProgressCircleUpWard.setProgressPercent(progress * 0.01f)
-                tProgressCircleUpDown.setProgressPercent(progress * 0.01f)
-                tProgressCustomClockWise.setProgressPercent(progress * 0.01f)
-                tProgressCustomUpWard.setProgressPercent(progress * 0.01f)
-                tProgressCustomUpDown.setProgressPercent(progress * 0.01f)
+                tProgressCircleClockWise.setProgressPercent(progress * 0.01F)
+                tProgressCircleUpWard.setProgressPercent(progress * 0.01F)
+                tProgressCircleUpDown.setProgressPercent(progress * 0.01F)
+                tProgressCustomClockWise.setProgressPercent(progress * 0.01F)
+                tProgressCustomUpWard.setProgressPercent(progress * 0.01F)
+                tProgressCustomUpDown.setProgressPercent(progress * 0.01F)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}

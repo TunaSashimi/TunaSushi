@@ -412,12 +412,12 @@ public class TView extends View {
 
     // 6
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TEXT_GRAVITY_CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, 0, 0, paint, TEXT_GRAVITY_CENTER, 1F, null);
     }
 
     // 8
     protected float[] drawText(Canvas canvas, String string, float width, float centerX, float centerY, float paddingLeft, float paddingRight, Paint paint) {
-        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, 1.0f, null);
+        return drawText(canvas, string, width, centerX, centerY, paddingLeft, paddingRight, paint, TEXT_GRAVITY_CENTER, 1F, null);
     }
 
     // 9
@@ -3219,7 +3219,7 @@ public class TView extends View {
     }
 
     //
-    private float textRowSpaceRatio = 1.0f;
+    private float textRowSpaceRatio = 1F;
 
     public float getTextRowSpaceRatio() {
         return textRowSpaceRatio;
@@ -3676,7 +3676,7 @@ public class TView extends View {
         }
     }
 
-    private float contentRowSpaceRatio = 1.0f;
+    private float contentRowSpaceRatio = 1F;
 
     public float getContentRowSpaceRatio() {
         return contentRowSpaceRatio;
@@ -5907,7 +5907,7 @@ public class TView extends View {
                             (height - srcShadowRadiusNormal * 2f - backgroundShadowRadiusNormal * 2f - backgroundShadowDyNormal * 2f - strokeWidthNormal * 2f) / srcHeightRawNormal);
                     break;
                 case FIT_WIDTH:
-                    scale = width * 1f / srcWidthRawNormal;
+                    scale = width * 1F / srcWidthRawNormal;
                     srcWidthScale = srcWidthRawNormal * scale;
                     srcHeightScale = srcHeightRawNormal * scale;
                     dy = srcHeightScale - height;
@@ -5915,7 +5915,7 @@ public class TView extends View {
                     matrixNormal.postTranslate(0, dy * -0.5f);
                     break;
                 case FIT_HEIGHT:
-                    scale = height * 1f / srcHeightRawNormal;
+                    scale = height * 1F / srcHeightRawNormal;
                     srcWidthScale = srcWidthRawNormal * scale;
                     srcHeightScale = srcHeightRawNormal * scale;
                     dx = srcWidthScale - width;
@@ -5923,19 +5923,19 @@ public class TView extends View {
                     matrixNormal.postTranslate(dx * -0.5f, 0);
                     break;
                 case FIT_CENTER:
-                    float AspectRatio = width * 1f / height;
-                    float AspectRatioRae = srcWidthRawNormal * 1f / srcHeightRawNormal;
+                    float AspectRatio = width * 1F / height;
+                    float AspectRatioRae = srcWidthRawNormal * 1F / srcHeightRawNormal;
                     boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
                     //
                     if (useFitWidthMode) {
-                        scale = width * 1f / srcWidthRawNormal;
+                        scale = width * 1F / srcWidthRawNormal;
                         srcWidthScale = srcWidthRawNormal * scale;
                         srcHeightScale = srcHeightRawNormal * scale;
                         dy = srcHeightScale - height;
                         matrixNormal = initMatrix(matrixNormal, scale, scale);
                         matrixNormal.postTranslate(0, dy * -0.5f);
                     } else {
-                        scale = height * 1f / srcHeightRawNormal;
+                        scale = height * 1F / srcHeightRawNormal;
                         srcWidthScale = srcWidthRawNormal * scale;
                         srcHeightScale = srcHeightRawNormal * scale;
                         dx = srcWidthScale - width;
@@ -5955,7 +5955,7 @@ public class TView extends View {
                             (height - srcShadowRadiusPress * 2f - backgroundShadowRadiusPress * 2f - backgroundShadowDyPress * 2f - strokeWidthPress * 2f) / srcHeightRawPress);
                     break;
                 case FIT_WIDTH:
-                    scale = width * 1f / srcWidthRawPress;
+                    scale = width * 1F / srcWidthRawPress;
                     srcWidthScale = srcWidthRawPress * scale;
                     srcHeightScale = srcHeightRawPress * scale;
                     dy = srcHeightScale - height;
@@ -5963,7 +5963,7 @@ public class TView extends View {
                     matrixPress.postTranslate(0, dy * -0.5f);
                     break;
                 case FIT_HEIGHT:
-                    scale = height * 1f / srcHeightRawPress;
+                    scale = height * 1F / srcHeightRawPress;
                     srcWidthScale = srcWidthRawPress * scale;
                     srcHeightScale = srcHeightRawPress * scale;
                     dx = srcWidthScale - width;
@@ -5971,19 +5971,19 @@ public class TView extends View {
                     matrixPress.postTranslate(dx * -0.5f, 0);
                     break;
                 case FIT_CENTER:
-                    float AspectRatio = width * 1f / height;
-                    float AspectRatioRae = srcWidthRawPress * 1f / srcHeightRawPress;
+                    float AspectRatio = width * 1F / height;
+                    float AspectRatioRae = srcWidthRawPress * 1F / srcHeightRawPress;
                     boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
                     //
                     if (useFitWidthMode) {
-                        scale = width * 1f / srcWidthRawPress;
+                        scale = width * 1F / srcWidthRawPress;
                         srcWidthScale = srcWidthRawPress * scale;
                         srcHeightScale = srcHeightRawPress * scale;
                         dy = srcHeightScale - height;
                         matrixPress = initMatrix(matrixPress, scale, scale);
                         matrixPress.postTranslate(0, dy * -0.5f);
                     } else {
-                        scale = height * 1f / srcHeightRawPress;
+                        scale = height * 1F / srcHeightRawPress;
                         srcWidthScale = srcWidthRawPress * scale;
                         srcHeightScale = srcHeightRawPress * scale;
                         dx = srcWidthScale - width;
@@ -6003,7 +6003,7 @@ public class TView extends View {
                             (height - srcShadowRadiusSelect * 2f - backgroundShadowRadiusSelect * 2f - backgroundShadowDySelect * 2f - strokeWidthSelect * 2f) / srcHeightRawSelect);
                     break;
                 case FIT_WIDTH:
-                    scale = width * 1f / srcWidthRawSelect;
+                    scale = width * 1F / srcWidthRawSelect;
                     srcWidthScale = srcWidthRawSelect * scale;
                     srcHeightScale = srcHeightRawSelect * scale;
                     dy = srcHeightScale - height;
@@ -6011,7 +6011,7 @@ public class TView extends View {
                     matrixPress.postTranslate(0, dy * -0.5f);
                     break;
                 case FIT_HEIGHT:
-                    scale = height * 1f / srcHeightRawSelect;
+                    scale = height * 1F / srcHeightRawSelect;
                     srcWidthScale = srcWidthRawSelect * scale;
                     srcHeightScale = srcHeightRawSelect * scale;
                     dx = srcWidthScale - width;
@@ -6019,19 +6019,19 @@ public class TView extends View {
                     matrixSelect.postTranslate(dx * -0.5f, 0);
                     break;
                 case FIT_CENTER:
-                    float AspectRatio = width * 1f / height;
-                    float AspectRatioRae = srcWidthRawSelect * 1f / srcHeightRawSelect;
+                    float AspectRatio = width * 1F / height;
+                    float AspectRatioRae = srcWidthRawSelect * 1F / srcHeightRawSelect;
                     boolean useFitWidthMode = (AspectRatio >= AspectRatioRae);
                     //
                     if (useFitWidthMode) {
-                        scale = width * 1f / srcWidthRawSelect;
+                        scale = width * 1F / srcWidthRawSelect;
                         srcWidthScale = srcWidthRawSelect * scale;
                         srcHeightScale = srcHeightRawSelect * scale;
                         dy = srcHeightScale - height;
                         matrixSelect = initMatrix(matrixSelect, scale, scale);
                         matrixPress.postTranslate(0, dy * -0.5f);
                     } else {
-                        scale = height * 1f / srcHeightRawSelect;
+                        scale = height * 1F / srcHeightRawSelect;
                         srcWidthScale = srcWidthRawSelect * scale;
                         srcHeightScale = srcHeightRawSelect * scale;
                         dx = srcWidthScale - width;

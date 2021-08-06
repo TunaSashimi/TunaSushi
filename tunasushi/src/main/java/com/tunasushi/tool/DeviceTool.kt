@@ -4,20 +4,16 @@ import com.tunasushi.tool.ConvertTool.pxToDp
 import com.tunasushi.tool.ConvertTool.dpToPx
 import android.util.DisplayMetrics
 import android.telephony.TelephonyManager
-import com.tunasushi.tool.DeviceTool
 import android.os.Build
-import com.tunasushi.tool.DeviceTool.DeviceInfo
 import android.text.TextUtils
 import android.net.wifi.WifiManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.app.ActivityManager
 import android.os.Environment
 import android.os.StatFs
 import com.tunasushi.view.TView
 import android.view.LayoutInflater
 import com.tunasushi.R
-import com.tunasushi.view.TPickerDialog
 import com.tunasushi.view.TPicker.PickerSelectListener
 import android.app.AlertDialog
 import android.content.Context
@@ -27,6 +23,7 @@ import android.graphics.Color
 import android.provider.Settings
 import android.view.View
 import android.widget.*
+import com.tunasushi.view.TPickerDialog
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -46,10 +43,10 @@ object DeviceTool {
     //
     var displayWidth = 0
     var displayHeight = 0
-    var displayDensity = 0f
-    var displayScaledDensity = 0f
-    var displayXdpi = 0f
-    var displayYdpi = 0f
+    var displayDensity = 0F
+    var displayScaledDensity = 0F
+    var displayXdpi = 0F
+    var displayYdpi = 0F
 
     //
     var stringBuffer: StringBuffer? = null
@@ -661,13 +658,13 @@ object DeviceTool {
         var deviceHeight //1280
                 = 0
         var deviceDensity //2.0
-                = 0f
+                = 0F
         var deviceScaledDensity //2.0
-                = 0f
+                = 0F
         var deviceXdpi //345.0566
-                = 0f
+                = 0F
         var deviceYdpi //342.23157
-                = 0f
+                = 0F
         var IMSI //460010783794229
                 : String? = null
         var operators //中国联通

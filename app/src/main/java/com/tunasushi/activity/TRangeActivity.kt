@@ -44,23 +44,23 @@ class TRangeActivity : Activity(), TouchUpListener {
         TGroup.link(tViewNoLimit, tViewStarTwo, tViewStarThree, tViewStarFour, tViewStarFive)
 
         //
-        tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight())
+        tViewPrice.setContent(tRange.rangeTextLeft + " - " + tRange.rangeTextRight)
 
         //
         tRange.setTouchListener(TouchListener { t -> //
             if (dx == 0) {
                 dx = tBubble.getWidth() shr 1
             }
-            tBubble.setTBubbleText(tRange.getRangeText())
+            tBubble.setTBubbleText(tRange.rangeText)
             if (t.isPress) {
                 tBubble.setVisibility(View.VISIBLE)
                 //Need to add marginLift of tRange!
-                tBubble.setX((tRange.getRangeCircleCentreX().toInt() - dx + dpToPx(20f)).toFloat())
+                tBubble.setX((tRange.rangeCircleCentreX.toInt() - dx + dpToPx(20F)).toFloat())
             } else {
                 tBubble.setVisibility(View.INVISIBLE)
             }
             //
-            tViewPrice.setContent(tRange.getRangeTextLeft() + " - " + tRange.getRangeTextRight())
+            tViewPrice.setContent(tRange.rangeTextLeft + " - " + tRange.rangeTextRight)
         })
     }
 

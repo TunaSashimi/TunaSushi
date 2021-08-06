@@ -33,8 +33,8 @@ class TBezierActivity : Activity(), OnSeekBarChangeListener {
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         when (seekBar.id) {
             R.id.seekBar01 -> tBezier.maxDistance = progress.toFloat()
-            R.id.seekBar02 -> tBezier.mv = progress / 100f
-            R.id.seekBar03 -> tBezier.handleLenRate = progress / 100f
+            R.id.seekBar02 -> tBezier.mv = progress / 100F
+            R.id.seekBar03 -> tBezier.handleLenRate = progress / 100F
         }
     }
 

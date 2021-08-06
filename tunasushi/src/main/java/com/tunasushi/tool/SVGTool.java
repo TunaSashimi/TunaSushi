@@ -883,14 +883,14 @@ public class SVGTool {
             gradient.id = getStringAttr("id", atts);
             gradient.isLinear = isLinear;
             if (isLinear) {
-                gradient.x1 = getFloatAttr("x1", atts, 0f);
-                gradient.x2 = getFloatAttr("x2", atts, 0f);
-                gradient.y1 = getFloatAttr("y1", atts, 0f);
-                gradient.y2 = getFloatAttr("y2", atts, 0f);
+                gradient.x1 = getFloatAttr("x1", atts, 0F);
+                gradient.x2 = getFloatAttr("x2", atts, 0F);
+                gradient.y1 = getFloatAttr("y1", atts, 0F);
+                gradient.y2 = getFloatAttr("y2", atts, 0F);
             } else {
-                gradient.x = getFloatAttr("cx", atts, 0f);
-                gradient.y = getFloatAttr("cy", atts, 0f);
-                gradient.radius = getFloatAttr("r", atts, 0f);
+                gradient.x = getFloatAttr("cx", atts, 0F);
+                gradient.y = getFloatAttr("cy", atts, 0F);
+                gradient.radius = getFloatAttr("r", atts, 0F);
             }
             String transform = getStringAttr("gradientTransform", atts);
             if (transform != null) {
@@ -1014,11 +1014,11 @@ public class SVGTool {
                 if (localName.equals("rect")) {
                     Float x = getFloatAttr("x", atts);
                     if (x == null) {
-                        x = 0f;
+                        x = 0F;
                     }
                     Float y = getFloatAttr("y", atts);
                     if (y == null) {
-                        y = 0f;
+                        y = 0F;
                     }
                     Float width = getFloatAttr("width", atts);
                     Float height = getFloatAttr("height", atts);
@@ -1081,11 +1081,11 @@ public class SVGTool {
             } else if (!hidden && localName.equals("rect")) {
                 Float x = getFloatAttr("x", atts);
                 if (x == null) {
-                    x = 0f;
+                    x = 0F;
                 }
                 Float y = getFloatAttr("y", atts);
                 if (y == null) {
-                    y = 0f;
+                    y = 0F;
                 }
                 Float width = getFloatAttr("width", atts);
                 Float height = getFloatAttr("height", atts);
@@ -1456,7 +1456,7 @@ public class SVGTool {
                     case '.': case 'e': case 'E':
                         break m1;
                     default:
-                        return 0.0f;
+                        return 0F;
                     case '0':
                     }
                 }
@@ -1488,7 +1488,7 @@ public class SVGTool {
                 case 'e': case 'E':
                     if (!mantRead) {
                         reportUnexpectedCharacterError( current );
-                        return 0.0f;
+                        return 0F;
                     }
                     break;
 
@@ -1503,7 +1503,7 @@ public class SVGTool {
                                 break l;
                             default:
                                 if (!mantRead) {
-                                    return 0.0f;
+                                    return 0F;
                                 }
                                 break m2;
                             case '0':
@@ -1535,7 +1535,7 @@ public class SVGTool {
                 switch (current) {
                 default:
                     reportUnexpectedCharacterError( current );
-                    return 0f;
+                    return 0F;
                 case '-':
                     expPos = false;
                 case '+':
@@ -1543,7 +1543,7 @@ public class SVGTool {
                     switch (current) {
                     default:
                         reportUnexpectedCharacterError( current );
-                        return 0f;
+                        return 0F;
                     case '0': case '1': case '2': case '3': case '4':
                     case '5': case '6': case '7': case '8': case '9':
                     }
@@ -1604,7 +1604,7 @@ public class SVGTool {
          */
         public static float buildFloat(int mant, int exp) {
             if (exp < -125 || mant == 0) {
-                return 0.0f;
+                return 0F;
             }
 
             if (exp >=  128) {

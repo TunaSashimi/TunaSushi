@@ -26,8 +26,8 @@ class TArc @JvmOverloads constructor(
     private val mUseCenters: BooleanArray
     private val mOvals: Array<RectF?>
     private val mBigOval: RectF
-    private var mStart = 0f
-    private var mSweep = 0f
+    private var mStart = 0F
+    private var mSweep = 0F
     private var mBigIndex = 0
     private fun drawArcs(canvas: Canvas, oval: RectF?, useCenter: Boolean, paint: Paint?) {
         canvas.drawRect(oval!!, mFramePaint)
@@ -42,10 +42,10 @@ class TArc @JvmOverloads constructor(
         }
         mSweep += SWEEP_INC
         if (mSweep > 360) {
-            mSweep -= 360f
+            mSweep -= 360F
             mStart += START_INC
             if (mStart >= 360) {
-                mStart -= 360f
+                mStart -= 360F
             }
             mBigIndex = (mBigIndex + 1) % mOvals.size
         }
@@ -78,14 +78,14 @@ class TArc @JvmOverloads constructor(
         mPaints[3] = Paint(mPaints[2])
         mPaints[3]!!.color = -0x77777778
         mUseCenters[3] = true
-        mBigOval = RectF(40f, 10f, 280f, 250f)
-        mOvals[0] = RectF(10f, 270f, 70f, 330f)
-        mOvals[1] = RectF(90f, 270f, 150f, 330f)
-        mOvals[2] = RectF(170f, 270f, 230f, 330f)
-        mOvals[3] = RectF(250f, 270f, 310f, 330f)
+        mBigOval = RectF(40F, 10F, 280F, 250F)
+        mOvals[0] = RectF(10F, 270F, 70F, 330F)
+        mOvals[1] = RectF(90F, 270F, 150F, 330F)
+        mOvals[2] = RectF(170F, 270F, 230F, 330F)
+        mOvals[3] = RectF(250F, 270F, 310F, 330F)
         mFramePaint = Paint()
         mFramePaint.isAntiAlias = true
         mFramePaint.style = Paint.Style.STROKE
-        mFramePaint.strokeWidth = 0f
+        mFramePaint.strokeWidth = 0F
     }
 }

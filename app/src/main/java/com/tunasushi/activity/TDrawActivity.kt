@@ -6,11 +6,11 @@ import com.tunasushi.demo.R
 import android.graphics.EmbossMaskFilter
 import android.graphics.BlurMaskFilter
 import com.tunasushi.view.TDraw
-import com.tunasushi.view.TPickerDialog
 import android.graphics.PorterDuffXfermode
 import android.graphics.PorterDuff
 import android.view.Menu
 import android.view.MenuItem
+import com.tunasushi.view.TPickerDialog
 
 /**
  * @author TunaSashimi
@@ -25,7 +25,7 @@ class TDrawActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_t_draw)
-        embossMaskFilter = EmbossMaskFilter(floatArrayOf(1f, 1f, 1f), 0.4f, 6F, 3.5f)
+        embossMaskFilter = EmbossMaskFilter(floatArrayOf(1F, 1F, 1F), 0.4f, 6F, 3.5f)
         blurMaskFilter = BlurMaskFilter(8F, BlurMaskFilter.Blur.NORMAL)
         tDraw = findViewById(R.id.tDraw)
         tDraw?.setPaintingListener()

@@ -123,7 +123,7 @@ public class TProgress extends TView {
             }
 
             if (progressShape == CUSTOM) {
-                scale = width * 1f / progressSrcBackWidth;
+                scale = width * 1F / progressSrcBackWidth;
             }
             matrixNormal = initMatrix(matrixNormal, scale, scale);
         }

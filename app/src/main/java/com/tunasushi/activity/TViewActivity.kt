@@ -55,10 +55,10 @@ class TViewActivity : Activity(), TouchUpListener, TView.OnClickListener {
         //
         tViewShadow02 = findViewById(R.id.tViewShadow02)
         tViewShadow02.setTextMark(
-            10f, TypedValue.COMPLEX_UNIT_DIP,
+            10F, TypedValue.COMPLEX_UNIT_DIP,
             Color.RED,
-            "10", 10f, TypedValue.COMPLEX_UNIT_DIP,
-            Color.WHITE, 0f, TypedValue.COMPLEX_UNIT_DIP, 0f, TypedValue.COMPLEX_UNIT_DIP
+            "10", 10F, TypedValue.COMPLEX_UNIT_DIP,
+            Color.WHITE, 0F, TypedValue.COMPLEX_UNIT_DIP, 0f, TypedValue.COMPLEX_UNIT_DIP
         )
         tViewShadow02.setTouchUpListener(this)
 
@@ -79,7 +79,7 @@ class TViewActivity : Activity(), TouchUpListener, TView.OnClickListener {
             groupTitleArray,
             "枪",
             linearGroup,
-            dpToPx(60f), LinearLayout.LayoutParams.MATCH_PARENT,
+            dpToPx(60F), LinearLayout.LayoutParams.MATCH_PARENT,
             R.style.TViewGroupLightGraySrart,
             R.style.TViewGroupLightGrayEnd,
             R.style.TViewGroupLightGrayOther,
@@ -106,14 +106,14 @@ class TViewActivity : Activity(), TouchUpListener, TView.OnClickListener {
             R.id.tViewShadow01 -> tViewShadow01!!.setTextMark(
                 4f, TypedValue.COMPLEX_UNIT_DIP,
                 Color.RED,
-                null, 0f, TypedValue.COMPLEX_UNIT_DIP,
-                0, 0f, TypedValue.COMPLEX_UNIT_DIP, 0f, TypedValue.COMPLEX_UNIT_DIP
+                null, 0F, TypedValue.COMPLEX_UNIT_DIP,
+                0, 0F, TypedValue.COMPLEX_UNIT_DIP, 0F, TypedValue.COMPLEX_UNIT_DIP
             )
             R.id.tViewShadow02 -> tViewShadow02!!.setTextMark(
-                4f, TypedValue.COMPLEX_UNIT_DIP,
+                4F, TypedValue.COMPLEX_UNIT_DIP,
                 Color.RED,
-                null, 0f, TypedValue.COMPLEX_UNIT_DIP,
-                0, 0f, TypedValue.COMPLEX_UNIT_DIP, 0f, TypedValue.COMPLEX_UNIT_DIP
+                null, 0F, TypedValue.COMPLEX_UNIT_DIP,
+                0, 0f, TypedValue.COMPLEX_UNIT_DIP, 0F, TypedValue.COMPLEX_UNIT_DIP
             )
             else -> Toast.makeText(this@TViewActivity, t.text, Toast.LENGTH_SHORT).show()
         }

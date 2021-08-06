@@ -521,7 +521,7 @@ public class TLayout extends RelativeLayout {
             // draw the src/dst example into our offscreen bitmap
             layoutLayer = canvas.saveLayer(0, 0, layoutWidth, layoutHeight, null);
         }
-//		
+//
         drawRectCustom(canvas, layoutBackgroundShadowRadius + layoutBackgroundShadowDx, layoutBackgroundShadowRadius + layoutBackgroundShadowDy,
                 layoutWidth - layoutBackgroundShadowRadius - layoutBackgroundShadowDx, layoutHeight - layoutBackgroundShadowRadius
                         - layoutBackgroundShadowDy, layoutBackground,

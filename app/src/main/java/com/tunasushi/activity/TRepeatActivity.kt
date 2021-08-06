@@ -54,7 +54,7 @@ class TRepeatActivity : Activity(), TouchListener {
         if (dx == 0) {
             dx = tLine.getWidth() shr 1
         }
-        tLine.setX((touchEventX.toInt() - dx + dpToPx(20f)).toFloat())
+        tLine.setX((touchEventX.toInt() - dx + dpToPx(20F)).toFloat())
         when (t.id) {
             R.id.tRepeatStar -> tRepeatCar.setTouchXYRaw(touchEventX, touchEventY)
             R.id.tRepeatCar -> tRepeatStar.setTouchXYRaw(touchEventX, touchEventY)

@@ -130,8 +130,8 @@ public class TToggle extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        matrixAnchorNormal = initMatrix(matrixAnchorNormal, width * 1f / toggleSrcNormal.getWidth(), height * 1f / toggleSrcNormal.getHeight());
-        matrixAnchorSelect = initMatrix(matrixAnchorSelect, width * 1f / toggleSrcNormal.getWidth(), height * 1f / toggleSrcNormal.getHeight());
+        matrixAnchorNormal = initMatrix(matrixAnchorNormal, width * 1F / toggleSrcNormal.getWidth(), height * 1f / toggleSrcNormal.getHeight());
+        matrixAnchorSelect = initMatrix(matrixAnchorSelect, width * 1F / toggleSrcNormal.getWidth(), height * 1f / toggleSrcNormal.getHeight());
 
         //
         toggleLeftDx = width * toggleTextFractionLeftDx;

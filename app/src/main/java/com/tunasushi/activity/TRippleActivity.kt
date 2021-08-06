@@ -59,11 +59,11 @@ class TRippleActivity : Activity() {
         })
         tViewChange = findViewById(R.id.tViewChange)
         tViewChange.setOnClickListener(TView.OnClickListener {
-            if ("^" == tRipple01.getRippleText()) {
-                tRipple01.setRippleText("&")
-                tRipple02.setRippleText("&")
-                tRipple03.setRippleText("&")
-                tRipple04.setRippleText("&")
+            if ("^" == tRipple01.rippleText) {
+                tRipple01.rippleText = "&"
+                tRipple02.rippleText = "&"
+                tRipple03.rippleText = "&"
+                tRipple04.rippleText = "&"
                 tRipple01.setRippleCircleColorInner(-0x6700)
                 tRipple02.setRippleCircleColorOuter(
                     270,
@@ -75,10 +75,10 @@ class TRippleActivity : Activity() {
                 tRipple04.setRippleCircleAngleInner(90)
                 tRipple04.setRippleCircleAngleOuter(90)
             } else {
-                tRipple01.setRippleText("^")
-                tRipple02.setRippleText("^")
-                tRipple03.setRippleText("^")
-                tRipple04.setRippleText("^")
+                tRipple01.rippleText = "^"
+                tRipple02.rippleText = "^"
+                tRipple03.rippleText = "^"
+                tRipple04.rippleText = "^"
                 tRipple01.setRippleCircleColorInner(-0x12eca)
                 tRipple02.setRippleCircleColorOuter(-0x6700)
                 tRipple03.setRippleCircleColorInner(Color.WHITE, Color.BLUE)

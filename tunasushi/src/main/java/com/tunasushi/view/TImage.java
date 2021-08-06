@@ -196,9 +196,9 @@ public class TImage extends TView {
         imageSunshineFractionX = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionX, 1, 1, 0);
         imageSunshineFractionY = typedArray.getFraction(R.styleable.TImage_imageSunshineFractionY, 1, 1, 0);
 
-        imageBright = typedArray.getDimension(R.styleable.TImage_imageBright, 1f);
-        imageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0f);
-        imageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1f);
+        imageBright = typedArray.getDimension(R.styleable.TImage_imageBright, 1F);
+        imageHue = typedArray.getDimension(R.styleable.TImage_imageHue, 0F);
+        imageSaturation = typedArray.getDimension(R.styleable.TImage_imageSaturation, 1F);
 
         int imageReverseIndex = typedArray.getInt(R.styleable.TImage_imageReverse, -1);
         if (imageReverseIndex >= 0) {
@@ -212,8 +212,8 @@ public class TImage extends TView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        scaleSx = width * 1f / srcBitmap.getWidth();
-        scaleSy = height * 1f / srcBitmap.getHeight();
+        scaleSx = width * 1F / srcBitmap.getWidth();
+        scaleSy = height * 1F / srcBitmap.getHeight();
 
         matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
     }
@@ -226,7 +226,7 @@ public class TImage extends TView {
             imageSrc = getClassicRoundBitmap(srcBitmap, width);
         }
 
-        if (imageAlpha != 1f) {
+        if (imageAlpha != 1F) {
             if (imageSrc == null) {
                 imageSrc = getAlphaBitmap(srcBitmap, imageAlpha);
             } else {
@@ -290,7 +290,7 @@ public class TImage extends TView {
             }
         }
 
-        if (imageBright != 1f || imageHue != 0f || imageSaturation != 1f) {
+        if (imageBright != 1F || imageHue != 0F || imageSaturation != 1) {
             if (imageSrc == null) {
                 imageSrc = processBitmap(srcBitmap, imageBright, imageHue, imageSaturation);
             } else {
