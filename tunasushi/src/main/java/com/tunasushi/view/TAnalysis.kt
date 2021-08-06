@@ -1,10 +1,13 @@
-package com.tunasushi.view;
+package com.tunasushi.view
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.util.AttributeSet;
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.util.AttributeSet
+import kotlin.jvm.JvmOverloads
+import com.tunasushi.view.TView
+import com.tunasushi.view.TAnalysis
 
 /**
  * @author TunaSashimi
@@ -12,65 +15,56 @@ import android.util.AttributeSet;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TAnalysis extends TView {
-    private int analysisControlX, analysisControlY;
-
-    public int getAnalysisControlX() {
-        return analysisControlX;
+class TAnalysis @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : TView(context, attrs, defStyleAttr) {
+    var analysisControlX = 0
+    var analysisControlY = 0
+    override fun onDraw(canvas: Canvas) {
+        initPaint(Paint.Style.FILL, Color.RED)
+        val bezierCircleX = 150
+        val bezierCircley = 150
+        val deviationX = 80
+        val deviationtY = 80
+        initPathMoveTo((bezierCircleX - deviationX).toFloat(), bezierCircley.toFloat())
+        path.quadTo(
+            ((bezierCircleX - deviationX + bezierCircleX) / 2 - analysisControlX).toFloat(),
+            ((bezierCircley + bezierCircley + deviationtY) / 2 + analysisControlY).toFloat(),
+            bezierCircleX.toFloat(),
+            (bezierCircley
+                    + deviationtY).toFloat()
+        )
+        path.quadTo(
+            ((bezierCircleX + bezierCircleX + deviationX) / 2 + analysisControlX).toFloat(),
+            ((bezierCircley + deviationtY + bezierCircley) / 2 + analysisControlY).toFloat(),
+            (bezierCircleX + deviationX).toFloat(),
+            bezierCircley.toFloat()
+        )
+        path.quadTo(
+            ((bezierCircleX + deviationX + bezierCircleX) / 2 + analysisControlX).toFloat(),
+            ((bezierCircley + bezierCircley - deviationtY) / 2 - analysisControlY).toFloat(),
+            bezierCircleX.toFloat(),
+            (bezierCircley
+                    - deviationtY).toFloat()
+        )
+        path.quadTo(
+            ((bezierCircleX + bezierCircleX - deviationX) / 2 - analysisControlX).toFloat(),
+            ((bezierCircley - deviationtY + bezierCircley) / 2 - analysisControlY).toFloat(),
+            (bezierCircleX - deviationX).toFloat(),
+            bezierCircley.toFloat()
+        )
+        canvas.drawPath(path, paint)
     }
 
-    public void setAnalysisControlX(int analysisControlX) {
-        this.analysisControlX = analysisControlX;
+    fun setAnalyaiaControlXY(analysisControlX: Int, abalysisControlY: Int) {
+        this.analysisControlX = analysisControlX
+        analysisControlY = abalysisControlY
+        invalidate()
     }
 
-    public int getAnalysisControlY() {
-        return analysisControlY;
-    }
-
-    public void setAnalysisControlY(int analysisControlY) {
-        this.analysisControlY = analysisControlY;
-    }
-
-    public TAnalysis(Context context) {
-        this(context, null);
-    }
-
-    public TAnalysis(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public TAnalysis(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-
-        tag = TAnalysis.class.getSimpleName();
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        initPaint(Paint.Style.FILL, Color.RED);
-
-        int bezierCircleX = 150;
-        int bezierCircley = 150;
-
-        int deviationX = 80;
-        int deviationtY = 80;
-
-        initPathMoveTo(bezierCircleX - deviationX, bezierCircley);
-        path.quadTo((bezierCircleX - deviationX + bezierCircleX) / 2 - analysisControlX, (bezierCircley + bezierCircley + deviationtY) / 2 + analysisControlY, bezierCircleX, bezierCircley
-                + deviationtY);
-        path.quadTo((bezierCircleX + bezierCircleX + deviationX) / 2 + analysisControlX, (bezierCircley + deviationtY + bezierCircley) / 2 + analysisControlY, bezierCircleX + deviationX,
-                bezierCircley);
-        path.quadTo((bezierCircleX + deviationX + bezierCircleX) / 2 + analysisControlX, (bezierCircley + bezierCircley - deviationtY) / 2 - analysisControlY, bezierCircleX, bezierCircley
-                - deviationtY);
-        path.quadTo((bezierCircleX + bezierCircleX - deviationX) / 2 - analysisControlX, (bezierCircley - deviationtY + bezierCircley) / 2 - analysisControlY, bezierCircleX - deviationX,
-                bezierCircley);
-
-        canvas.drawPath(path, paint);
-    }
-
-    public void setAnalyaiaControlXY(int analysisControlX, int abalysisControlY) {
-        this.analysisControlX = analysisControlX;
-        this.analysisControlY = abalysisControlY;
-        invalidate();
+    init {
+        tag = TAnalysis::class.java.simpleName
     }
 }

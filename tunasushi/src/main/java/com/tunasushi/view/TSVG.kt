@@ -1,19 +1,23 @@
-package com.tunasushi.view;
+package com.tunasushi.view
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.util.AttributeSet;
-import android.view.View;
-import com.tunasushi.R;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import androidx.annotation.IntDef;
-import static com.tunasushi.tool.BitmapTool.getCircleBitmap;
-import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
+import android.content.Context
+import com.tunasushi.tool.BitmapTool.Companion.getCircleBitmap
+import com.tunasushi.tool.BitmapTool.Companion.getSVGBitmap
+import kotlin.jvm.JvmOverloads
+import com.tunasushi.view.TView
+import android.graphics.Bitmap
+import com.tunasushi.view.TSVG
+import com.tunasushi.view.TSVG.SVGStyle
+import com.tunasushi.tool.BitmapTool
+import com.tunasushi.R
+import android.content.res.TypedArray
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Matrix
+import android.util.AttributeSet
+import androidx.annotation.IntDef
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 
 /**
  * @author TunaSashimi
@@ -21,54 +25,90 @@ import static com.tunasushi.tool.BitmapTool.getSVGBitmap;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TSVG extends TView {
+class TSVG @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : TView(context, attrs, defStyle) {
+    //
+    var sVGSrc: Bitmap? = null
 
     //
-    private Bitmap SVGSrc;
-
-    public Bitmap getSVGSrc() {
-        return SVGSrc;
-    }
-
-    public void setSVGSrc(Bitmap SVGSrc) {
-        this.SVGSrc = SVGSrc;
-    }
-
-    //
-    protected Matrix SVGMatrix;
-
-    public Matrix getSVGMatrix() {
-        return SVGMatrix;
-    }
-
-    public void setSVGMatrix(Matrix SVGMatrix) {
-        this.SVGMatrix = SVGMatrix;
-    }
-
-    protected Matrix initSVGMatrix(float sx, float sy) {
-        if (SVGMatrix == null) {
-            SVGMatrix = new Matrix();
+    var sVGMatrix: Matrix? = null
+    protected fun initSVGMatrix(sx: Float, sy: Float): Matrix {
+        if (sVGMatrix == null) {
+            sVGMatrix = Matrix()
         }
-        SVGMatrix.reset();
-        SVGMatrix.setScale(sx, sy);
-        return SVGMatrix;
+        sVGMatrix!!.reset()
+        sVGMatrix!!.setScale(sx, sy)
+        return sVGMatrix!!
     }
 
+    @IntDef(CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL)
+    @Retention(
+        RetentionPolicy.SOURCE
+    )
+    annotation class SVGStyle
 
-    @IntDef({CIRCLE, STAR, HEART, FLOWER, PENTAGON, SIXTEENEDGE, FORTYEDGE, SNAIL,})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SVGStyle {
+    @SVGStyle
+    private var svgStyle = 0
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+
+        //
+        val specSizeWidth = MeasureSpec.getSize(widthMeasureSpec)
+        val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
+        val specSizeHeight = MeasureSpec.getSize(heightMeasureSpec)
+        var measuredHeight = specSizeWidth
+        if (specModeHeight == MeasureSpec.AT_MOST) { //wrap_content
+            measuredHeight = specSizeWidth
+        } else if (specModeHeight == MeasureSpec.EXACTLY) { // match_parent
+            measuredHeight = specSizeHeight
+        } else if (specModeHeight == MeasureSpec.UNSPECIFIED) { // unspecified
+            measuredHeight = specSizeWidth
+        }
+        setMeasuredDimension(specSizeWidth, measuredHeight)
     }
 
-    public static final int CIRCLE = 0;
-    public static final int STAR = 1;
-    public static final int HEART = 2;
-    public static final int FLOWER = 3;
-    public static final int PENTAGON = 4;
-    public static final int SIXTEENEDGE = 5;
-    public static final int FORTYEDGE = 6;
-    public static final int SNAIL = 7;
-    private static final int[] SVGStyleArray = {
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        scaleSx = width * 1f / srcBitmap.width
+        scaleSy = height * 1f / srcBitmap.height
+        matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy)
+        val shortSide = if (width >= height) height else width
+        initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide)
+        when (svgStyle) {
+            CIRCLE -> sVGSrc = getCircleBitmap(shortSide)
+            STAR -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_star)
+            HEART -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_heart)
+            FLOWER -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_flower)
+            PENTAGON -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_pentagon)
+            SIXTEENEDGE -> sVGSrc =
+                getSVGBitmap(context, shortSide, shortSide, R.raw.svg_sixteenedge)
+            FORTYEDGE -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_fortyedge)
+            SNAIL -> sVGSrc = getSVGBitmap(context, shortSide, shortSide, R.raw.svg_snail)
+        }
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), null, Canvas.ALL_SAVE_FLAG)
+        //
+        canvas.drawBitmap(sVGSrc!!, sVGMatrix!!, initPaint())
+        //
+        paint.xfermode = porterDuffXferStyle
+        canvas.drawBitmap(srcBitmap, matrixNormal, paint)
+        paint.xfermode = null
+    }
+
+    companion object {
+        const val CIRCLE = 0
+        const val STAR = 1
+        const val HEART = 2
+        const val FLOWER = 3
+        const val PENTAGON = 4
+        const val SIXTEENEDGE = 5
+        const val FORTYEDGE = 6
+        const val SNAIL = 7
+        private val SVGStyleArray = intArrayOf(
             CIRCLE,
             STAR,
             HEART,
@@ -76,109 +116,23 @@ public class TSVG extends TView {
             PENTAGON,
             SIXTEENEDGE,
             FORTYEDGE,
-            SNAIL,
-    };
-    private @SVGStyle
-    int svgStyle;
-
-    public TSVG(Context context) {
-        this(context, null);
+            SNAIL
+        )
     }
 
-    public TSVG(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public TSVG(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
-        tag = TSVG.class.getSimpleName();
+    init {
+        tag = TSVG::class.java.simpleName
 
         //
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSVG);
-
-        int SVGSrcId = typedArray.getResourceId(R.styleable.TSVG_SVGSrc, -1);
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TSVG)
+        val SVGSrcId = typedArray.getResourceId(R.styleable.TSVG_SVGSrc, -1)
         if (SVGSrcId != -1) {
-            srcBitmap = BitmapFactory.decodeResource(getResources(), SVGSrcId);
+            srcBitmap = BitmapFactory.decodeResource(resources, SVGSrcId)
         }
-
-        int SVGStyleIndex = typedArray.getInt(R.styleable.TSVG_SVGStyle, 0);
+        val SVGStyleIndex = typedArray.getInt(R.styleable.TSVG_SVGStyle, 0)
         if (SVGStyleIndex >= 0) {
-            svgStyle = SVGStyleArray[SVGStyleIndex];
+            svgStyle = SVGStyleArray[SVGStyleIndex]
         }
-
-        typedArray.recycle();
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        //
-        int specSizeWidth = View.MeasureSpec.getSize(widthMeasureSpec);
-        int specModeHeight = View.MeasureSpec.getMode(heightMeasureSpec);
-        int specSizeHeight = View.MeasureSpec.getSize(heightMeasureSpec);
-
-        int measuredWidth = specSizeWidth;
-        int measuredHeight = specSizeWidth;
-
-        if (specModeHeight == View.MeasureSpec.AT_MOST) {//wrap_content
-            measuredHeight = measuredWidth;
-        } else if (specModeHeight == View.MeasureSpec.EXACTLY) {// match_parent
-            measuredHeight = specSizeHeight;
-        } else if (specModeHeight == View.MeasureSpec.UNSPECIFIED) {// unspecified
-            measuredHeight = measuredWidth;
-        }
-        setMeasuredDimension(measuredWidth, measuredHeight);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        scaleSx = width * 1f / srcBitmap.getWidth();
-        scaleSy = height * 1f / srcBitmap.getHeight();
-        matrixNormal = initMatrix(matrixNormal, scaleSx, scaleSy);
-
-        int shortSide = width >= height ? height : width;
-        initSVGMatrix(width * 1f / shortSide, height * 1f / shortSide);
-
-        switch (svgStyle) {
-            case CIRCLE:
-                SVGSrc = getCircleBitmap(shortSide);
-                break;
-            case STAR:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_star);
-                break;
-            case HEART:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_heart);
-                break;
-            case FLOWER:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_flower);
-                break;
-            case PENTAGON:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_pentagon);
-                break;
-            case SIXTEENEDGE:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_sixteenedge);
-                break;
-            case FORTYEDGE:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_fortyedge);
-                break;
-            case SNAIL:
-                SVGSrc = getSVGBitmap(getContext(), shortSide, shortSide, R.raw.svg_snail);
-                break;
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
-        //
-        canvas.drawBitmap(SVGSrc, SVGMatrix, initPaint());
-        //
-        paint.setXfermode(porterDuffXferStyle);
-        canvas.drawBitmap(srcBitmap, matrixNormal, paint);
-
-        paint.setXfermode(null);
+        typedArray.recycle()
     }
 }

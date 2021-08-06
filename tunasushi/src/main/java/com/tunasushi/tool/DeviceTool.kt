@@ -1,44 +1,36 @@
-package com.tunasushi.tool;
+package com.tunasushi.tool
 
-import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import com.tunasushi.R;
-import com.tunasushi.view.TPicker;
-import com.tunasushi.view.TPickerDialog;
-import com.tunasushi.view.TView;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import static com.tunasushi.tool.ConvertTool.dpToPx;
-import static com.tunasushi.tool.ConvertTool.pxToDp;
+import com.tunasushi.tool.ConvertTool.pxToDp
+import com.tunasushi.tool.ConvertTool.dpToPx
+import android.util.DisplayMetrics
+import android.telephony.TelephonyManager
+import com.tunasushi.tool.DeviceTool
+import android.os.Build
+import com.tunasushi.tool.DeviceTool.DeviceInfo
+import android.text.TextUtils
+import android.net.wifi.WifiManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.app.ActivityManager
+import android.os.Environment
+import android.os.StatFs
+import com.tunasushi.view.TView
+import android.view.LayoutInflater
+import com.tunasushi.R
+import com.tunasushi.view.TPickerDialog
+import com.tunasushi.view.TPicker.PickerSelectListener
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.content.res.Resources
+import android.graphics.Color
+import android.provider.Settings
+import android.view.View
+import android.widget.*
+import java.io.BufferedReader
+import java.io.FileReader
+import java.io.IOException
+import java.util.*
 
 /**
  * @author TunaSashimi
@@ -46,685 +38,696 @@ import static com.tunasushi.tool.ConvertTool.pxToDp;
  * @Copyright 2019 TunaSashimi. All rights reserved.
  * @Description
  */
-public class DeviceTool {
+object DeviceTool {
     //
-    public static DisplayMetrics displayMetrics;
-    public static TelephonyManager telephonyManager;
+    var displayMetrics: DisplayMetrics? = null
+    var telephonyManager: TelephonyManager? = null
 
     //
-    public static int displayWidth, displayHeight;
-    public static float displayDensity, displayScaledDensity, displayXdpi, displayYdpi;
+    var displayWidth = 0
+    var displayHeight = 0
+    var displayDensity = 0f
+    var displayScaledDensity = 0f
+    var displayXdpi = 0f
+    var displayYdpi = 0f
 
     //
-    public static StringBuffer stringBuffer;
-    public static final int stringBufferCapacity = 288;
+    var stringBuffer: StringBuffer? = null
+    val stringBufferCapacity = 288
 
     //
-    public static void initDisplayMetrics() {
+    @JvmStatic
+    fun initDisplayMetrics() {
         if (displayMetrics == null) {
-            displayMetrics = Resources.getSystem().getDisplayMetrics();
-            displayWidth = displayMetrics.widthPixels;
-            displayHeight = displayMetrics.heightPixels;
-            displayDensity = displayMetrics.density;
-            displayScaledDensity = displayMetrics.scaledDensity;
-            displayXdpi = displayMetrics.xdpi;
-            displayYdpi = displayMetrics.ydpi;
-
-            stringBuffer = new StringBuffer(stringBufferCapacity);
-            stringBuffer.append("设备厂商 : ");
-            stringBuffer.append(Build.BRAND);
-            stringBuffer.append(" , ");
-            stringBuffer.append("设备型号 : ");
-            stringBuffer.append(Build.MODEL);
-            stringBuffer.append(" , ");
-            stringBuffer.append("系统版本 : ");
-            stringBuffer.append(Build.VERSION.RELEASE);
-            stringBuffer.append(" , ");
-            stringBuffer.append("API等级 : ");
-            stringBuffer.append(Build.VERSION.SDK);
-            stringBuffer.append(" , ");
-            stringBuffer.append("系统语言 : ");
-            stringBuffer.append(Locale.getDefault().getLanguage());
-            stringBuffer.append(" , ");
-            stringBuffer.append("屏幕分辨率 : ");
-            stringBuffer.append(displayWidth);
-            stringBuffer.append(" * ");
-            stringBuffer.append(displayHeight);
-            stringBuffer.append(" ( ");
-            stringBuffer.append(displayWidth / displayDensity);
-            stringBuffer.append("dp * ");
-            stringBuffer.append(displayHeight / displayDensity);
-            stringBuffer.append("dp ) ");
-            stringBuffer.append(" , 屏幕密度 : ");
-            stringBuffer.append(displayDensity);
-            stringBuffer.append(" , 伸缩密度 : ");
-            stringBuffer.append(displayScaledDensity);
-            stringBuffer.append(" , X维 : ");
-            stringBuffer.append(displayXdpi);
-            stringBuffer.append(" 像素点 / 英寸 , Y维 : ");
-            stringBuffer.append(displayYdpi);
-            stringBuffer.append(" 像素点 / 英寸 。 ");
+            displayMetrics = Resources.getSystem().displayMetrics
+            displayWidth = displayMetrics!!.widthPixels
+            displayHeight = displayMetrics!!.heightPixels
+            displayDensity = displayMetrics!!.density
+            displayScaledDensity = displayMetrics!!.scaledDensity
+            displayXdpi = displayMetrics!!.xdpi
+            displayYdpi = displayMetrics!!.ydpi
+            stringBuffer = StringBuffer(stringBufferCapacity)
+            stringBuffer!!.append("设备厂商 : ")
+            stringBuffer!!.append(Build.BRAND)
+            stringBuffer!!.append(" , ")
+            stringBuffer!!.append("设备型号 : ")
+            stringBuffer!!.append(Build.MODEL)
+            stringBuffer!!.append(" , ")
+            stringBuffer!!.append("系统版本 : ")
+            stringBuffer!!.append(Build.VERSION.RELEASE)
+            stringBuffer!!.append(" , ")
+            stringBuffer!!.append("API等级 : ")
+            stringBuffer!!.append(Build.VERSION.SDK)
+            stringBuffer!!.append(" , ")
+            stringBuffer!!.append("系统语言 : ")
+            stringBuffer!!.append(Locale.getDefault().language)
+            stringBuffer!!.append(" , ")
+            stringBuffer!!.append("屏幕分辨率 : ")
+            stringBuffer!!.append(displayWidth)
+            stringBuffer!!.append(" * ")
+            stringBuffer!!.append(displayHeight)
+            stringBuffer!!.append(" ( ")
+            stringBuffer!!.append(displayWidth / displayDensity)
+            stringBuffer!!.append("dp * ")
+            stringBuffer!!.append(displayHeight / displayDensity)
+            stringBuffer!!.append("dp ) ")
+            stringBuffer!!.append(" , 屏幕密度 : ")
+            stringBuffer!!.append(displayDensity)
+            stringBuffer!!.append(" , 伸缩密度 : ")
+            stringBuffer!!.append(displayScaledDensity)
+            stringBuffer!!.append(" , X维 : ")
+            stringBuffer!!.append(displayXdpi)
+            stringBuffer!!.append(" 像素点 / 英寸 , Y维 : ")
+            stringBuffer!!.append(displayYdpi)
+            stringBuffer!!.append(" 像素点 / 英寸 。 ")
         }
     }
 
-    public static DeviceInfo getDeviceInfo(Context context) {
-        DeviceInfo deviceInfo = new DeviceInfo();
-
-        deviceInfo.deviceId = getDeviceId(context);
-        deviceInfo.deviceMac = getDeviceMac(context);
-        deviceInfo.deviceManufacturer = getDeviceManufacturer(context);
-        deviceInfo.deviceModel = getDeviceModel();
-        deviceInfo.deviceRelease = getDeviceRelease();
-        deviceInfo.deviceSDK = getDeviceSDK();
-        deviceInfo.deviceWidth = getDeviceWidth(context);
-        deviceInfo.deviceHeight = getDeviceHeight(context);
-        deviceInfo.deviceDensity = getDeviceDensity(context);
-        deviceInfo.deviceScaledDensity = getDeviceScaledDensity(context);
-        deviceInfo.deviceXdpi = getDeviceXdpi(context);
-        deviceInfo.deviceYdpi = getDeviceYdpi(context);
-        deviceInfo.IMSI = getIMSI(context);
-        deviceInfo.operators = getOperators(deviceInfo.IMSI);
-        deviceInfo.line1Number = getLine1Number(context);
-        deviceInfo.networkOperatorName = getNetworkOperatorName(context);
-        deviceInfo.networkOperator = getNetworkOperator(context);
-        deviceInfo.networkCountryIso = getNetworkCountryIso(context);
-        deviceInfo.simCountryIso = getSimCountryIso(context);
-        deviceInfo.simOperator = getSimOperator(context);
-        deviceInfo.simOperatorName = getSimOperatorName(context);
-        deviceInfo.simSerialNumber = getSimSerialNumber(context);
-        deviceInfo.subscriberId = getSubscriberId(context);
-        deviceInfo.neighboringCellInfo = getNeighboringCellInfo(context);
-        deviceInfo.phoneType = getPhoneType(context);
-        deviceInfo.networkType = getNetworkType(context);
-
-        return deviceInfo;
+    fun getDeviceInfo(context: Context): DeviceInfo {
+        val deviceInfo = DeviceInfo()
+        deviceInfo.deviceId = getDeviceId(context)
+        deviceInfo.deviceMac = getDeviceMac(context)
+        deviceInfo.deviceManufacturer = getDeviceManufacturer(context)
+        deviceInfo.deviceModel = deviceModel
+        deviceInfo.deviceRelease = deviceRelease
+        deviceInfo.deviceSDK = deviceSDK
+        deviceInfo.deviceWidth = getDeviceWidth(context)
+        deviceInfo.deviceHeight = getDeviceHeight(context)
+        deviceInfo.deviceDensity = getDeviceDensity(context)
+        deviceInfo.deviceScaledDensity = getDeviceScaledDensity(context)
+        deviceInfo.deviceXdpi = getDeviceXdpi(context)
+        deviceInfo.deviceYdpi = getDeviceYdpi(context)
+        deviceInfo.IMSI = getIMSI(context)
+        deviceInfo.operators = getOperators(deviceInfo.IMSI)
+        deviceInfo.line1Number = getLine1Number(context)
+        deviceInfo.networkOperatorName = getNetworkOperatorName(context)
+        deviceInfo.networkOperator = getNetworkOperator(context)
+        deviceInfo.networkCountryIso = getNetworkCountryIso(context)
+        deviceInfo.simCountryIso = getSimCountryIso(context)
+        deviceInfo.simOperator = getSimOperator(context)
+        deviceInfo.simOperatorName = getSimOperatorName(context)
+        deviceInfo.simSerialNumber = getSimSerialNumber(context)
+        deviceInfo.subscriberId = getSubscriberId(context)
+        deviceInfo.neighboringCellInfo = getNeighboringCellInfo(context)
+        deviceInfo.phoneType = getPhoneType(context)
+        deviceInfo.networkType = getNetworkType(context)
+        return deviceInfo
     }
 
     //getDeviceId , Requires android.permission.READ_PHONE_STATE.
-    public static String getDeviceId(Context context) {
+    fun getDeviceId(context: Context): String? {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        String deviceId = telephonyManager.getDeviceId();
-        String deviceId = "";
+        //        String deviceId = telephonyManager.getDeviceId();
+        var deviceId: String? = ""
         if (TextUtils.isEmpty(deviceId)) {
-            deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            deviceId =
+                Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
         }
-        return deviceId;
+        return deviceId
     }
 
     //getDeviceMac , Requires android.permission.ACCESS_WIFI_STATE.
-    public static String getDeviceMac(Context context) {
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        return wifi.getConnectionInfo().getMacAddress();
+    fun getDeviceMac(context: Context): String {
+        val wifi = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        return wifi.connectionInfo.macAddress
     }
 
     //getDeviceManufacturer
-    public static String getDeviceManufacturer(Context context) {
-        return android.os.Build.MANUFACTURER;
+    fun getDeviceManufacturer(context: Context?): String {
+        return Build.MANUFACTURER
     }
 
     //getDeviceModel
-    public static String getDeviceModel() {
-        return Build.MODEL;
-    }
+    val deviceModel: String
+        get() = Build.MODEL
 
     //getDeviceRelease
-    public static String getDeviceRelease() {
-        return Build.VERSION.RELEASE;
-    }
+    val deviceRelease: String
+        get() = Build.VERSION.RELEASE
 
     //getDeviceReSDK
-    public static String getDeviceSDK() {
-        return Build.VERSION.SDK;
-    }
+    val deviceSDK: String
+        get() = Build.VERSION.SDK
 
     //getDeviceWidth
-    public static int getDeviceWidth(Context context) {
+    fun getDeviceWidth(context: Context): Int {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.widthPixels;
+        return displayMetrics!!.widthPixels
     }
 
     //getDeviceHeight
-    public static int getDeviceHeight(Context context) {
+    fun getDeviceHeight(context: Context): Int {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.heightPixels;
+        return displayMetrics!!.heightPixels
     }
 
     //getDeviceDensity
-    public static float getDeviceDensity(Context context) {
+    fun getDeviceDensity(context: Context): Float {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.density;
+        return displayMetrics!!.density
     }
 
     //getDeviceScaledDensity
-    public static float getDeviceScaledDensity(Context context) {
+    fun getDeviceScaledDensity(context: Context): Float {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.scaledDensity;
+        return displayMetrics!!.scaledDensity
     }
 
     //getDeviceXdpi
-    public static float getDeviceXdpi(Context context) {
+    fun getDeviceXdpi(context: Context): Float {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.xdpi;
+        return displayMetrics!!.xdpi
     }
 
     //getDeviceYdpi
-    public static float getDeviceYdpi(Context context) {
+    fun getDeviceYdpi(context: Context): Float {
         if (displayMetrics == null) {
-            displayMetrics = context.getResources().getDisplayMetrics();
+            displayMetrics = context.resources.displayMetrics
         }
-        return displayMetrics.ydpi;
+        return displayMetrics!!.ydpi
     }
 
     //getIMSI
-    public static String getIMSI(Context context) {
+    fun getIMSI(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        return telephonyManager.getSubscriberId();
-        return "";
+        //        return telephonyManager.getSubscriberId();
+        return ""
     }
 
     //getOperators
-    public static String getOperators(String string) {
+    fun getOperators(string: String?): String? {
         if (string != null) {
             if (string.startsWith("46000") || string.startsWith("46002")) {
                 //Because the mobile network under the IMSI number 46,000 has been exhausted, so a virtual number 46002, 134/159 number section uses this number
-                return "中国移动";
+                return "中国移动"
             } else if (string.startsWith("46001")) {
-                return "中国联通";
+                return "中国联通"
             } else if (string.startsWith("46003")) {
-                return "中国电信";
+                return "中国电信"
             }
         }
-        return null;
+        return null
     }
 
     //getLine1Number
-    public static String getLine1Number(Context context) {
+    fun getLine1Number(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        return telephonyManager.getLine1Number();
-        return "";
+        //        return telephonyManager.getLine1Number();
+        return ""
     }
 
     //getNetworkOperatorName
-    public static String getNetworkOperatorName(Context context) {
+    fun getNetworkOperatorName(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getNetworkOperatorName();
+        return telephonyManager!!.networkOperatorName
     }
 
     //getNetworkOperator
-    public static String getNetworkOperator(Context context) {
+    fun getNetworkOperator(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getNetworkOperator();
+        return telephonyManager!!.networkOperator
     }
 
     //getNetworkCountryIso
-    public static String getNetworkCountryIso(Context context) {
+    fun getNetworkCountryIso(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getNetworkCountryIso();
+        return telephonyManager!!.networkCountryIso
     }
 
     //getSimCountryIso
-    public static String getSimCountryIso(Context context) {
+    fun getSimCountryIso(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getSimCountryIso();
+        return telephonyManager!!.simCountryIso
     }
 
     //getSimOperator
-    public static String getSimOperator(Context context) {
+    fun getSimOperator(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getSimOperator();
+        return telephonyManager!!.simOperator
     }
 
     //getSimOperatorName
-    public static String getSimOperatorName(Context context) {
+    fun getSimOperatorName(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getSimOperatorName();
+        return telephonyManager!!.simOperatorName
     }
 
     //getSimSerialNumber
-    public static String getSimSerialNumber(Context context) {
+    fun getSimSerialNumber(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        return telephonyManager.getSimSerialNumber();
-        return "";
+        //        return telephonyManager.getSimSerialNumber();
+        return ""
     }
 
     //getSubscriberId
-    public static String getSubscriberId(Context context) {
+    fun getSubscriberId(context: Context): String {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        return telephonyManager.getSubscriberId();
-        return "";
+        //        return telephonyManager.getSubscriberId();
+        return ""
     }
 
     //getNeighboringCellInfo
-    public static List getNeighboringCellInfo(Context context) {
+    fun getNeighboringCellInfo(context: Context): List<*> {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-//        return telephonyManager.getNeighboringCellInfo();
-        return new ArrayList();
+        //        return telephonyManager.getNeighboringCellInfo();
+        return ArrayList<Any?>()
     }
 
     //phoneType
-    public static int getPhoneType(Context context) {
+    fun getPhoneType(context: Context): Int {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         }
-        return telephonyManager.getPhoneType();
+        return telephonyManager!!.phoneType
     }
 
     //getNetworkType
-    public static String getNetworkType(Context context) {
-        String strNetworkType = "null";
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                strNetworkType = "WIFI";
-            } else if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                String subTypeName = networkInfo.getSubtypeName();
+    fun getNetworkType(context: Context): String {
+        var strNetworkType = "null"
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected) {
+            if (networkInfo.type == ConnectivityManager.TYPE_WIFI) {
+                strNetworkType = "WIFI"
+            } else if (networkInfo.type == ConnectivityManager.TYPE_MOBILE) {
+                val subTypeName = networkInfo.subtypeName
                 // TD-SCDMA networkType is 17
-                int networkType = networkInfo.getSubtype();
-                switch (networkType) {
-                    case TelephonyManager.NETWORK_TYPE_GPRS:
-                    case TelephonyManager.NETWORK_TYPE_EDGE:
-                    case TelephonyManager.NETWORK_TYPE_CDMA:
-                    case TelephonyManager.NETWORK_TYPE_1xRTT:
-                    case TelephonyManager.NETWORK_TYPE_IDEN: // api < 8 : replace by 11
-                        strNetworkType = "2G";
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_UMTS:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_0:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
-                    case TelephonyManager.NETWORK_TYPE_HSDPA:
-                    case TelephonyManager.NETWORK_TYPE_HSUPA:
-                    case TelephonyManager.NETWORK_TYPE_HSPA:
-                    case TelephonyManager.NETWORK_TYPE_EVDO_B: // api < 9 :  replace by 14
-                    case TelephonyManager.NETWORK_TYPE_EHRPD: // api < 11 : replace by 12
-                    case TelephonyManager.NETWORK_TYPE_HSPAP: // api < 13 : replace by 15
-                        strNetworkType = "3G";
-                        break;
-                    case TelephonyManager.NETWORK_TYPE_LTE: // api < 11 : replace by 13
-                        strNetworkType = "4G";
-                        break;
-                    default:
-                        if (subTypeName.equalsIgnoreCase("TD-SCDMA") || subTypeName.equalsIgnoreCase("WCDMA") || subTypeName.equalsIgnoreCase("CDMA2000")) {
-                            strNetworkType = "3G";
-                        } else {
-                            strNetworkType = subTypeName;
-                        }
-                        break;
+                val networkType = networkInfo.subtype
+                when (networkType) {
+                    TelephonyManager.NETWORK_TYPE_GPRS, TelephonyManager.NETWORK_TYPE_EDGE, TelephonyManager.NETWORK_TYPE_CDMA, TelephonyManager.NETWORK_TYPE_1xRTT, TelephonyManager.NETWORK_TYPE_IDEN -> strNetworkType =
+                        "2G"
+                    TelephonyManager.NETWORK_TYPE_UMTS, TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyManager.NETWORK_TYPE_EVDO_A, TelephonyManager.NETWORK_TYPE_HSDPA, TelephonyManager.NETWORK_TYPE_HSUPA, TelephonyManager.NETWORK_TYPE_HSPA, TelephonyManager.NETWORK_TYPE_EVDO_B, TelephonyManager.NETWORK_TYPE_EHRPD, TelephonyManager.NETWORK_TYPE_HSPAP -> strNetworkType =
+                        "3G"
+                    TelephonyManager.NETWORK_TYPE_LTE -> strNetworkType = "4G"
+                    else -> if (subTypeName.equals(
+                            "TD-SCDMA",
+                            ignoreCase = true
+                        ) || subTypeName.equals(
+                            "WCDMA",
+                            ignoreCase = true
+                        ) || subTypeName.equals("CDMA2000", ignoreCase = true)
+                    ) {
+                        strNetworkType = "3G"
+                    } else {
+                        strNetworkType = subTypeName
+                    }
                 }
             }
         }
-        return strNetworkType;
+        return strNetworkType
     }
 
     //getMemory
-    public static String getMemoryInfo() {
-        String str1 = "/proc/meminfo";
-        String str2 = "";
-        StringBuffer stringBuffer = new StringBuffer(28);
-        try {
-            FileReader fr = new FileReader(str1);
-            BufferedReader localBufferedReader = new BufferedReader(fr, 8192);
-            while ((str2 = localBufferedReader.readLine()) != null) {
-                stringBuffer.append(str2 + "\n");
+    val memoryInfo: String
+        get() {
+            val str1 = "/proc/meminfo"
+            var str2 = ""
+            val stringBuffer = StringBuffer(28)
+            try {
+                val fr = FileReader(str1)
+                val localBufferedReader = BufferedReader(fr, 8192)
+                while ((localBufferedReader.readLine().also { str2 = it }) != null) {
+                    stringBuffer.append(str2 + "\n")
+                }
+                localBufferedReader.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-            localBufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return stringBuffer.toString()
         }
-        return stringBuffer.toString();
-    }
 
     //getRAM
-    public static long getAvailMemory(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        am.getMemoryInfo(mi);
-        return mi.availMem;
+    fun getAvailMemory(context: Context): Long {
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val mi = ActivityManager.MemoryInfo()
+        am.getMemoryInfo(mi)
+        return mi.availMem
     }
 
-    public static long getTotalInternalStorgeSize() {
-        File path = Environment.getDataDirectory();
-        StatFs mStatFs = new StatFs(path.getPath());
-        long blockSize = mStatFs.getBlockSize();
-        long totalBlocks = mStatFs.getBlockCount();
-        return totalBlocks * blockSize;
-    }
-
-    public static long getAvailableInternalStorgeSize() {
-        File path = Environment.getDataDirectory();
-        StatFs mStatFs = new StatFs(path.getPath());
-        long blockSize = mStatFs.getBlockSize();
-        long availableBlocks = mStatFs.getAvailableBlocks();
-        return availableBlocks * blockSize;
-    }
-
-    public static boolean getExternalMemoryAvailable() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
-
-    public static long getTotalExternalStorgeSize() {
-        if (getExternalMemoryAvailable()) {
-            File path = Environment.getExternalStorageDirectory();
-            StatFs mStatFs = new StatFs(path.getPath());
-            long blockSize = mStatFs.getBlockSize();
-            long totalBlocks = mStatFs.getBlockCount();
-            return totalBlocks * blockSize;
+    val totalInternalStorgeSize: Long
+        get() {
+            val path = Environment.getDataDirectory()
+            val mStatFs = StatFs(path.path)
+            val blockSize = mStatFs.blockSize.toLong()
+            val totalBlocks = mStatFs.blockCount.toLong()
+            return totalBlocks * blockSize
         }
-        return 0;
-    }
-
-    public static long getAvailableExternalStorgeSize() {
-        if (getExternalMemoryAvailable()) {
-            File path = Environment.getExternalStorageDirectory();
-            StatFs mStatFs = new StatFs(path.getPath());
-            long blockSize = mStatFs.getBlockSize();
-            long availableBlocks = mStatFs.getAvailableBlocks();
-            return availableBlocks * blockSize;
+    val availableInternalStorgeSize: Long
+        get() {
+            val path = Environment.getDataDirectory()
+            val mStatFs = StatFs(path.path)
+            val blockSize = mStatFs.blockSize.toLong()
+            val availableBlocks = mStatFs.availableBlocks.toLong()
+            return availableBlocks * blockSize
         }
-        return 0;
-    }
-
-
-    public static class DeviceInfo {
-        public String deviceId;//863077025146139
-        public String deviceMac;//f8:a4:5f:50:a6:a3
-        public String deviceManufacturer;//Xiaomi
-        public String deviceModel;//MI 2S
-        public String deviceRelease;//4.1.1
-        public String deviceSDK;//16
-        public int deviceWidth;//720
-        public int deviceHeight;//1280
-        public float deviceDensity;//2.0
-        public float deviceScaledDensity;//2.0
-        public float deviceXdpi;//345.0566
-        public float deviceYdpi;//342.23157
-        public String IMSI;//460010783794229
-        public String operators;//中国联通
-        public String line1Number;//
-        public String networkOperatorName;//China Unicom
-        public String networkOperator;//46001
-        public String networkCountryIso;//cn
-        public String simCountryIso;//cn
-        public String simOperator;//46001
-        public String simOperatorName;//
-        public String simSerialNumber;//89860114733102699519
-        public String subscriberId;//460010783794229
-        public List neighboringCellInfo;//[[116@-84]]
-        public int phoneType;//1
-        public String networkType;//WIFI
-
-        @Override
-        public String toString() {
-            StringBuffer sb = new StringBuffer();
-            sb
-                    .append("DeviceInfo[")//
-                    .append("\ndeviceId[").append(deviceId + "]")//
-                    .append("\ndeviceMac[").append(deviceMac + "]")//
-                    .append("\ndeviceManufacturer[").append(deviceManufacturer + "]")//
-                    .append("\ndeviceModel[").append(deviceModel + "]")//
-                    .append("\ndeviceRelease[").append(deviceRelease + "]")//
-                    .append("\ndeviceSDK[").append(deviceSDK + "]")//
-                    .append("\ndeviceWidth[").append(deviceWidth + "]")//
-                    .append("\ndeviceHeight[").append(deviceHeight + "]")//
-                    .append("\ndeviceDensity[").append(deviceDensity + "]")//
-                    .append("\ndeviceScaledDensity[").append(deviceScaledDensity + "]")//
-                    .append("\ndeviceXdpi[").append(deviceXdpi + "]")//
-                    .append("\ndeviceYdpi[").append(deviceYdpi + "]")//
-                    .append("\nIMSI[").append(IMSI + "]")//
-                    .append("\noperators[").append(operators + "]")//
-                    .append("\nline1Number[").append(line1Number + "]")//
-                    .append("\nnetworkOperatorName[").append(networkOperatorName + "]")//
-                    .append("\nnetworkOperator[").append(networkOperator + "]")//
-                    .append("\nnetworkCountryIso[").append(networkCountryIso + "]")//
-                    .append("\nsimCountryIso[").append(simCountryIso + "]")//
-                    .append("\nsimOperator[").append(simOperator + "]")//
-                    .append("\nsimOperatorName[").append(simOperatorName + "]")//
-                    .append("\nsimSerialNumber[").append(simSerialNumber + "]")//
-                    .append("\nsubscriberId[").append(subscriberId + "]")//
-                    .append("\nneighboringCellInfo[").append(neighboringCellInfo + "]")//
-                    .append("\nphoneType[").append(phoneType + "]")//
-                    .append("\nnetworkType[").append(networkType + "]")//
-            ;
-            return sb.toString();
-        }
-    }
-
-    public static void showProperties(final TView t) {
-        View propertiesView = LayoutInflater.from(t.getContext()).inflate(R.layout.properties, null);
-
-        final TextView text_display = propertiesView.findViewById(R.id.text_display);
-
-        final EditText edit_width = propertiesView.findViewById(R.id.edit_width);
-        final EditText edit_height = propertiesView.findViewById(R.id.edit_height);
-
-        final EditText edit_backgroundNormal = propertiesView.findViewById(R.id.edit_backgroundNormal);
-        final EditText edit_backgroundPress = propertiesView.findViewById(R.id.edit_backgroundPress);
-        final EditText edit_backgroundSelect = propertiesView.findViewById(R.id.edit_backgroundSelect);
-
-        final EditText edit_textSize = propertiesView.findViewById(R.id.edit_textSize);
-        final EditText edit_textColorNormal = propertiesView.findViewById(R.id.edit_textColorNormal);
-
-        final EditText edit_strokeWidth = propertiesView.findViewById(R.id.edit_strokeWidth);
-        final EditText edit_strokeColor = propertiesView.findViewById(R.id.edit_strokeColor);
-
-        final Button btn_width_pius = propertiesView.findViewById(R.id.btn_width_pius);
-        final Button btn_width_minus = propertiesView.findViewById(R.id.btn_width_minus);
-        final Button btn_height_pius = propertiesView.findViewById(R.id.btn_height_pius);
-        final Button btn_height_minus = propertiesView.findViewById(R.id.btn_height_minus);
-
-        final Button btn_textSize_pius = propertiesView.findViewById(R.id.btn_textSize_pius);
-        final Button btn_textSize_minus = propertiesView.findViewById(R.id.btn_textSize_minus);
-
-        final Button btn_strokeWidth_pius = propertiesView.findViewById(R.id.btn_strokeWidth_pius);
-        final Button btn_strokeWidth_minus = propertiesView.findViewById(R.id.btn_strokeWidth_minus);
-
-        final Button btn_backgroundNormal = propertiesView.findViewById(R.id.btn_backgroundNormal);
-        final Button btn_backgroundPress = propertiesView.findViewById(R.id.btn_backgroundPress);
-        final Button btn_backgroundSelect = propertiesView.findViewById(R.id.btn_backgroundSelect);
-
-        final Button btn_textColorNormal = propertiesView.findViewById(R.id.btn_textColorNormal);
-
-        final Button btn_strokeColor = propertiesView.findViewById(R.id.btn_strokeColor);
-
-        final ToggleButton toogle_mark = propertiesView.findViewById(R.id.toogle_mark);
-        final TextView text_mark = propertiesView.findViewById(R.id.text_mark);
-
-        final ToggleButton toogle_thisHardwareAccelerated = propertiesView.findViewById(R.id.toogle_thisHardwareAccelerated);
-        final TextView text_thisHardwareAccelerated = propertiesView.findViewById(R.id.text_thisHardwareAccelerated);
-
-        final ToggleButton toogle_canvasHardwareAccelerated = propertiesView.findViewById(R.id.toogle_canvasHardwareAccelerated);
-        final TextView text_canvasHardwareAccelerated = propertiesView.findViewById(R.id.text_canvasHardwareAccelerated);
-
-
-        DeviceTool.initDisplayMetrics();
-        text_display.setText(DeviceTool.stringBuffer);
-
-        edit_width.setText(String.valueOf(pxToDp(t.width)));
-        edit_height.setText(String.valueOf(pxToDp(t.height)));
-
-        edit_backgroundNormal.setText(t.getBackgroundNormal() != 0 ? Integer.toHexString(t.getBackgroundNormal()) : "00000000");
-        edit_backgroundPress.setText(t.getBackgroundPress() != 0 ? Integer.toHexString(t.getBackgroundPress()) : "00000000");
-        edit_backgroundSelect.setText(t.getBackgroundSelect() != 0 ? Integer.toHexString(t.getBackgroundSelect()) : "00000000");
-
-        edit_textSize.setText(String.valueOf(pxToDp(t.getTextSize())));
-        edit_textColorNormal.setText(t.getTextColorNormal() != 0 ? Integer.toHexString(t.getTextColorNormal()) : "00000000");
-
-        edit_strokeWidth.setText(String.valueOf(pxToDp(t.getStrokeColorNormal())));
-        edit_strokeColor.setText(t.getStrokeColorNormal() != 0 ? Integer.toHexString(t.getStrokeColorNormal()) : "00000000");
-
-        //
-        edit_backgroundNormal.setTextColor(t.getBackgroundNormal());
-        edit_backgroundPress.setTextColor(t.getBackgroundPress());
-        edit_backgroundSelect.setTextColor(t.getBackgroundSelect());
-        edit_strokeColor.setTextColor(t.getStrokeColorNormal());
-        edit_textColorNormal.setTextColor(t.getTextColorNormal());
-
-        btn_backgroundNormal.setBackgroundColor(t.getBackgroundNormal());
-        btn_backgroundPress.setBackgroundColor(t.getBackgroundPress());
-        btn_backgroundSelect.setBackgroundColor(t.getBackgroundSelect());
-        btn_strokeColor.setBackgroundColor(t.getStrokeColorNormal());
-        btn_textColorNormal.setBackgroundColor(t.getTextColorNormal());
-
-        toogle_mark.setChecked(t.isTextMark());
-        text_mark.setText(String.valueOf(t.isTextMark()));
-
-        toogle_thisHardwareAccelerated.setChecked(t.isHardwareAccelerated());
-        text_thisHardwareAccelerated.setText(String.valueOf(t.isHardwareAccelerated()));
-
-        toogle_canvasHardwareAccelerated.setChecked(t.isHardwareAccelerated());
-        text_canvasHardwareAccelerated.setText(String.valueOf(t.isHardwareAccelerated()));
-
-        //
-        toogle_mark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                text_mark.setText(String.valueOf(isChecked));
+    val externalMemoryAvailable: Boolean
+        get() = (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
+    val totalExternalStorgeSize: Long
+        get() {
+            if (externalMemoryAvailable) {
+                val path = Environment.getExternalStorageDirectory()
+                val mStatFs = StatFs(path.path)
+                val blockSize = mStatFs.blockSize.toLong()
+                val totalBlocks = mStatFs.blockCount.toLong()
+                return totalBlocks * blockSize
             }
-        });
+            return 0
+        }
+    val availableExternalStorgeSize: Long
+        get() {
+            if (externalMemoryAvailable) {
+                val path = Environment.getExternalStorageDirectory()
+                val mStatFs = StatFs(path.path)
+                val blockSize = mStatFs.blockSize.toLong()
+                val availableBlocks = mStatFs.availableBlocks.toLong()
+                return availableBlocks * blockSize
+            }
+            return 0
+        }
+
+    @JvmStatic
+    fun showProperties(t: TView) {
+        val propertiesView = LayoutInflater.from(t.context).inflate(R.layout.properties, null)
+        val text_display = propertiesView.findViewById<TextView>(R.id.text_display)
+        val edit_width = propertiesView.findViewById<EditText>(R.id.edit_width)
+        val edit_height = propertiesView.findViewById<EditText>(R.id.edit_height)
+        val edit_backgroundNormal =
+            propertiesView.findViewById<EditText>(R.id.edit_backgroundNormal)
+        val edit_backgroundPress = propertiesView.findViewById<EditText>(R.id.edit_backgroundPress)
+        val edit_backgroundSelect =
+            propertiesView.findViewById<EditText>(R.id.edit_backgroundSelect)
+        val edit_textSize = propertiesView.findViewById<EditText>(R.id.edit_textSize)
+        val edit_textColorNormal = propertiesView.findViewById<EditText>(R.id.edit_textColorNormal)
+        val edit_strokeWidth = propertiesView.findViewById<EditText>(R.id.edit_strokeWidth)
+        val edit_strokeColor = propertiesView.findViewById<EditText>(R.id.edit_strokeColor)
+        val btn_width_pius = propertiesView.findViewById<Button>(R.id.btn_width_pius)
+        val btn_width_minus = propertiesView.findViewById<Button>(R.id.btn_width_minus)
+        val btn_height_pius = propertiesView.findViewById<Button>(R.id.btn_height_pius)
+        val btn_height_minus = propertiesView.findViewById<Button>(R.id.btn_height_minus)
+        val btn_textSize_pius = propertiesView.findViewById<Button>(R.id.btn_textSize_pius)
+        val btn_textSize_minus = propertiesView.findViewById<Button>(R.id.btn_textSize_minus)
+        val btn_strokeWidth_pius = propertiesView.findViewById<Button>(R.id.btn_strokeWidth_pius)
+        val btn_strokeWidth_minus = propertiesView.findViewById<Button>(R.id.btn_strokeWidth_minus)
+        val btn_backgroundNormal = propertiesView.findViewById<Button>(R.id.btn_backgroundNormal)
+        val btn_backgroundPress = propertiesView.findViewById<Button>(R.id.btn_backgroundPress)
+        val btn_backgroundSelect = propertiesView.findViewById<Button>(R.id.btn_backgroundSelect)
+        val btn_textColorNormal = propertiesView.findViewById<Button>(R.id.btn_textColorNormal)
+        val btn_strokeColor = propertiesView.findViewById<Button>(R.id.btn_strokeColor)
+        val toogle_mark = propertiesView.findViewById<ToggleButton>(R.id.toogle_mark)
+        val text_mark = propertiesView.findViewById<TextView>(R.id.text_mark)
+        val toogle_thisHardwareAccelerated =
+            propertiesView.findViewById<ToggleButton>(R.id.toogle_thisHardwareAccelerated)
+        val text_thisHardwareAccelerated =
+            propertiesView.findViewById<TextView>(R.id.text_thisHardwareAccelerated)
+        val toogle_canvasHardwareAccelerated =
+            propertiesView.findViewById<ToggleButton>(R.id.toogle_canvasHardwareAccelerated)
+        val text_canvasHardwareAccelerated =
+            propertiesView.findViewById<TextView>(R.id.text_canvasHardwareAccelerated)
+        initDisplayMetrics()
+        text_display.text = stringBuffer
+        edit_width.setText(pxToDp(t.width.toFloat()).toString())
+        edit_height.setText(pxToDp(t.height.toFloat()).toString())
+        edit_backgroundNormal.setText(if (t.backgroundNormal != 0) Integer.toHexString(t.backgroundNormal) else "00000000")
+        edit_backgroundPress.setText(if (t.backgroundPress != 0) Integer.toHexString(t.backgroundPress) else "00000000")
+        edit_backgroundSelect.setText(if (t.backgroundSelect != 0) Integer.toHexString(t.backgroundSelect) else "00000000")
+        edit_textSize.setText(pxToDp(t.textSize).toString())
+        edit_textColorNormal.setText(if (t.textColorNormal != 0) Integer.toHexString(t.textColorNormal) else "00000000")
+        edit_strokeWidth.setText(pxToDp(t.strokeColorNormal.toFloat()).toString())
+        edit_strokeColor.setText(if (t.strokeColorNormal != 0) Integer.toHexString(t.strokeColorNormal) else "00000000")
 
         //
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        edit_backgroundNormal.setTextColor(t.backgroundNormal)
+        edit_backgroundPress.setTextColor(t.backgroundPress)
+        edit_backgroundSelect.setTextColor(t.backgroundSelect)
+        edit_strokeColor.setTextColor(t.strokeColorNormal)
+        edit_textColorNormal.setTextColor(t.textColorNormal)
+        btn_backgroundNormal.setBackgroundColor(t.backgroundNormal)
+        btn_backgroundPress.setBackgroundColor(t.backgroundPress)
+        btn_backgroundSelect.setBackgroundColor(t.backgroundSelect)
+        btn_strokeColor.setBackgroundColor(t.strokeColorNormal)
+        btn_textColorNormal.setBackgroundColor(t.textColorNormal)
+        toogle_mark.isChecked = t.isTextMark
+        text_mark.text = t.isTextMark.toString()
+        toogle_thisHardwareAccelerated.isChecked = t.isHardwareAccelerated
+        text_thisHardwareAccelerated.text = t.isHardwareAccelerated.toString()
+        toogle_canvasHardwareAccelerated.isChecked = t.isHardwareAccelerated
+        text_canvasHardwareAccelerated.text = t.isHardwareAccelerated.toString()
+
+        //
+        toogle_mark.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            text_mark.text = isChecked.toString()
+        })
+
+        //
+        val onClickListener: View.OnClickListener = object : View.OnClickListener {
+            override fun onClick(view: View) {
                 /**
                  * adt14 will lib where R in the file ID to the final tag removed All you want to set library package, which the switch ... case statement can only be changed if ... else for the job
                  */
-                int viewId = view.getId();
+                val viewId = view.id
                 if (viewId == R.id.btn_width_pius) {
-                    edit_width.setText(String.valueOf(Float.parseFloat(edit_width.getText().toString().trim()) + 1));
+                    edit_width.setText((edit_width.text.toString().trim { it <= ' ' }
+                        .toFloat() + 1).toString())
                 } else if (viewId == R.id.btn_width_minus) {
-                    edit_width.setText(String.valueOf(Float.parseFloat(edit_width.getText().toString().trim()) - 1));
+                    edit_width.setText((edit_width.text.toString().trim { it <= ' ' }
+                        .toFloat() - 1).toString())
                 } else if (viewId == R.id.btn_height_pius) {
-                    edit_height.setText(String.valueOf(Float.parseFloat(edit_height.getText().toString().trim()) + 1));
+                    edit_height.setText((edit_height.text.toString().trim { it <= ' ' }
+                        .toFloat() + 1).toString())
                 } else if (viewId == R.id.btn_height_minus) {
-                    edit_height.setText(String.valueOf(Float.parseFloat(edit_height.getText().toString().trim()) - 1));
+                    edit_height.setText((edit_height.text.toString().trim { it <= ' ' }
+                        .toFloat() - 1).toString())
                 } else if (viewId == R.id.btn_textSize_pius) {
-                    edit_textSize.setText(String.valueOf(Float.parseFloat(edit_textSize.getText().toString().trim()) + 1));
+                    edit_textSize.setText((edit_textSize.text.toString().trim { it <= ' ' }
+                        .toFloat() + 1).toString())
                 } else if (viewId == R.id.btn_textSize_minus) {
-                    edit_textSize.setText(String.valueOf(Float.parseFloat(edit_textSize.getText().toString().trim()) - 1));
+                    edit_textSize.setText((edit_textSize.text.toString().trim { it <= ' ' }
+                        .toFloat() - 1).toString())
                 } else if (viewId == R.id.btn_strokeWidth_pius) {
-                    edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) + 1));
+                    edit_strokeWidth.setText((edit_strokeWidth.text.toString().trim { it <= ' ' }
+                        .toFloat() + 1).toString())
                 } else if (viewId == R.id.btn_strokeWidth_minus) {
-                    edit_strokeWidth.setText(String.valueOf(Float.parseFloat(edit_strokeWidth.getText().toString().trim()) - 1));
+                    edit_strokeWidth.setText((edit_strokeWidth.text.toString().trim { it <= ' ' }
+                        .toFloat() - 1).toString())
                 } else if (viewId == R.id.btn_backgroundNormal) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundNormal(), new TPicker.PickerSelectListener() {
-                        @Override
-                        public void pickerSelect(int color) {
-                            btn_backgroundNormal.setBackgroundColor(color);
-                            edit_backgroundNormal.setTextColor(color);
-                            edit_backgroundNormal.setText(Integer.toHexString(color));
+                    TPickerDialog(t.context, t.backgroundNormal, object : PickerSelectListener {
+                        override fun pickerSelect(color: Int) {
+                            btn_backgroundNormal.setBackgroundColor(color)
+                            edit_backgroundNormal.setTextColor(color)
+                            edit_backgroundNormal.setText(Integer.toHexString(color))
                         }
-                    }).show();
+                    }).show()
                 } else if (viewId == R.id.btn_backgroundPress) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundPress(), new TPicker.PickerSelectListener() {
-                        @Override
-                        public void pickerSelect(int color) {
-                            btn_backgroundPress.setBackgroundColor(color);
-                            edit_backgroundPress.setTextColor(color);
-                            edit_backgroundPress.setText(Integer.toHexString(color));
+                    TPickerDialog(t.context, t.backgroundPress, object : PickerSelectListener {
+                        override fun pickerSelect(color: Int) {
+                            btn_backgroundPress.setBackgroundColor(color)
+                            edit_backgroundPress.setTextColor(color)
+                            edit_backgroundPress.setText(Integer.toHexString(color))
                         }
-                    }).show();
+                    }).show()
                 } else if (viewId == R.id.btn_backgroundSelect) {
-                    new TPickerDialog(t.getContext(), t.getBackgroundSelect(), new TPicker.PickerSelectListener() {
-                        @Override
-                        public void pickerSelect(int color) {
-                            btn_backgroundSelect.setBackgroundColor(color);
-                            edit_backgroundSelect.setTextColor(color);
-                            edit_backgroundSelect.setText(Integer.toHexString(color));
+                    TPickerDialog(t.context, t.backgroundSelect, object : PickerSelectListener {
+                        override fun pickerSelect(color: Int) {
+                            btn_backgroundSelect.setBackgroundColor(color)
+                            edit_backgroundSelect.setTextColor(color)
+                            edit_backgroundSelect.setText(Integer.toHexString(color))
                         }
-                    }).show();
+                    }).show()
                 } else if (viewId == R.id.btn_textColorNormal) {
-                    new TPickerDialog(t.getContext(), t.getTextColorNormal(), new TPicker.PickerSelectListener() {
-                        @Override
-                        public void pickerSelect(int color) {
-                            btn_textColorNormal.setBackgroundColor(color);
-                            edit_textColorNormal.setTextColor(color);
-                            edit_textColorNormal.setText(Integer.toHexString(color));
+                    TPickerDialog(t.context, t.textColorNormal, object : PickerSelectListener {
+                        override fun pickerSelect(color: Int) {
+                            btn_textColorNormal.setBackgroundColor(color)
+                            edit_textColorNormal.setTextColor(color)
+                            edit_textColorNormal.setText(Integer.toHexString(color))
                         }
-                    }).show();
+                    }).show()
                 } else if (viewId == R.id.btn_strokeColor) {
-                    new TPickerDialog(t.getContext(), t.getStrokeColorNormal(), new TPicker.PickerSelectListener() {
-                        @Override
-                        public void pickerSelect(int color) {
-                            btn_strokeColor.setBackgroundColor(color);
-                            edit_strokeColor.setTextColor(color);
-                            edit_strokeColor.setText(Integer.toHexString(color));
+                    TPickerDialog(t.context, t.strokeColorNormal, object : PickerSelectListener {
+                        override fun pickerSelect(color: Int) {
+                            btn_strokeColor.setBackgroundColor(color)
+                            edit_strokeColor.setTextColor(color)
+                            edit_strokeColor.setText(Integer.toHexString(color))
                         }
-                    }).show();
+                    }).show()
                 }
             }
-        };
+        }
+        btn_width_pius.setOnClickListener(onClickListener)
+        btn_width_minus.setOnClickListener(onClickListener)
+        btn_height_pius.setOnClickListener(onClickListener)
+        btn_height_minus.setOnClickListener(onClickListener)
+        btn_textSize_pius.setOnClickListener(onClickListener)
+        btn_textSize_minus.setOnClickListener(onClickListener)
+        btn_strokeWidth_pius.setOnClickListener(onClickListener)
+        btn_strokeWidth_minus.setOnClickListener(onClickListener)
+        btn_backgroundNormal.setOnClickListener(onClickListener)
+        btn_backgroundPress.setOnClickListener(onClickListener)
+        btn_backgroundSelect.setOnClickListener(onClickListener)
+        btn_textColorNormal.setOnClickListener(onClickListener)
+        btn_strokeColor.setOnClickListener(onClickListener)
+        AlertDialog.Builder(t.context, android.R.style.Theme_Holo_Light)
+            .setIconAttribute(android.R.attr.alertDialogIcon)
+            .setView(propertiesView)
+            .setPositiveButton("OK", object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface, whichButton: Int) {
+                    //
+                    t.backgroundNormal = Color.parseColor(
+                        "#" + edit_backgroundNormal.text.toString().trim { it <= ' ' })
+                    t.backgroundPress = Color.parseColor(
+                        "#" + edit_backgroundPress.text.toString().trim { it <= ' ' })
+                    t.backgroundSelect = Color.parseColor(
+                        "#" + edit_backgroundSelect.text.toString().trim { it <= ' ' })
+                    t.strokeColorNormal =
+                        Color.parseColor("#" + edit_strokeColor.text.toString().trim { it <= ' ' })
+                    t.textColorNormal = Color.parseColor(
+                        "#" + edit_textColorNormal.text.toString().trim { it <= ' ' })
+                    t.textSize =
+                        dpToPx(edit_textSize.text.toString().trim { it <= ' ' }.toFloat()).toFloat()
+                    t.strokeWidthNormal = dpToPx(edit_strokeWidth.text.toString().trim { it <= ' ' }
+                        .toFloat()).toFloat()
+                    t.isTextMark = if ((text_mark.text.toString()
+                            .trim { it <= ' ' } == "true")
+                    ) true else false
+                    t.setLayout(dpToPx(edit_width.text.toString().trim { it <= ' ' }
+                        .toFloat()),
+                        dpToPx(edit_height.text.toString().trim { it <= ' ' }.toFloat()))
+                }
+            }).setNegativeButton("Cancel", null).create().show()
+    }
 
-        btn_width_pius.setOnClickListener(onClickListener);
-        btn_width_minus.setOnClickListener(onClickListener);
-        btn_height_pius.setOnClickListener(onClickListener);
-        btn_height_minus.setOnClickListener(onClickListener);
-        btn_textSize_pius.setOnClickListener(onClickListener);
-        btn_textSize_minus.setOnClickListener(onClickListener);
-        btn_strokeWidth_pius.setOnClickListener(onClickListener);
-        btn_strokeWidth_minus.setOnClickListener(onClickListener);
+    class DeviceInfo() {
+        var deviceId //863077025146139
+                : String? = null
+        var deviceMac //f8:a4:5f:50:a6:a3
+                : String? = null
+        var deviceManufacturer //Xiaomi
+                : String? = null
+        var deviceModel //MI 2S
+                : String? = null
+        var deviceRelease //4.1.1
+                : String? = null
+        var deviceSDK //16
+                : String? = null
+        var deviceWidth //720
+                = 0
+        var deviceHeight //1280
+                = 0
+        var deviceDensity //2.0
+                = 0f
+        var deviceScaledDensity //2.0
+                = 0f
+        var deviceXdpi //345.0566
+                = 0f
+        var deviceYdpi //342.23157
+                = 0f
+        var IMSI //460010783794229
+                : String? = null
+        var operators //中国联通
+                : String? = null
+        var line1Number //
+                : String? = null
+        var networkOperatorName //China Unicom
+                : String? = null
+        var networkOperator //46001
+                : String? = null
+        var networkCountryIso //cn
+                : String? = null
+        var simCountryIso //cn
+                : String? = null
+        var simOperator //46001
+                : String? = null
+        var simOperatorName //
+                : String? = null
+        var simSerialNumber //89860114733102699519
+                : String? = null
+        var subscriberId //460010783794229
+                : String? = null
+        var neighboringCellInfo //[[116@-84]]
+                : List<*>? = null
+        var phoneType //1
+                = 0
+        var networkType //WIFI
+                : String? = null
 
-        btn_backgroundNormal.setOnClickListener(onClickListener);
-        btn_backgroundPress.setOnClickListener(onClickListener);
-        btn_backgroundSelect.setOnClickListener(onClickListener);
-
-        btn_textColorNormal.setOnClickListener(onClickListener);
-        btn_strokeColor.setOnClickListener(onClickListener);
-
-        new AlertDialog.Builder(t.getContext(), android.R.style.Theme_Holo_Light)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setView(propertiesView)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //
-                        t.setBackgroundNormal(Color.parseColor("#" + edit_backgroundNormal.getText().toString().trim()));
-                        t.setBackgroundPress(Color.parseColor("#" + edit_backgroundPress.getText().toString().trim()));
-                        t.setBackgroundSelect(Color.parseColor("#" + edit_backgroundSelect.getText().toString().trim()));
-                        t.setStrokeColorNormal(Color.parseColor("#" + edit_strokeColor.getText().toString().trim()));
-                        t.setTextColorNormal(Color.parseColor("#" + edit_textColorNormal.getText().toString().trim()));
-
-                        t.setTextSize(dpToPx(Float.parseFloat(edit_textSize.getText().toString().trim())));
-
-                        t.setStrokeWidthNormal(dpToPx(Float.parseFloat(edit_strokeWidth.getText().toString().trim())));
-
-                        t.setTextMark(text_mark.getText().toString().trim().equals("true") ? true : false);
-
-                        t.setLayout(dpToPx(Float.parseFloat(edit_width.getText().toString().trim())), dpToPx(Float.parseFloat(edit_height.getText().toString().trim())));
-                    }
-                }).setNegativeButton("Cancel", null).create().show();
+        override fun toString(): String {
+            val sb = StringBuffer()
+            sb
+                .append("DeviceInfo[") //
+                .append("\ndeviceId[").append("$deviceId]") //
+                .append("\ndeviceMac[").append("$deviceMac]") //
+                .append("\ndeviceManufacturer[").append("$deviceManufacturer]") //
+                .append("\ndeviceModel[").append("$deviceModel]") //
+                .append("\ndeviceRelease[").append("$deviceRelease]") //
+                .append("\ndeviceSDK[").append("$deviceSDK]") //
+                .append("\ndeviceWidth[").append("$deviceWidth]") //
+                .append("\ndeviceHeight[").append("$deviceHeight]") //
+                .append("\ndeviceDensity[").append("$deviceDensity]") //
+                .append("\ndeviceScaledDensity[").append("$deviceScaledDensity]") //
+                .append("\ndeviceXdpi[").append("$deviceXdpi]") //
+                .append("\ndeviceYdpi[").append("$deviceYdpi]") //
+                .append("\nIMSI[").append("$IMSI]") //
+                .append("\noperators[").append("$operators]") //
+                .append("\nline1Number[").append("$line1Number]") //
+                .append("\nnetworkOperatorName[").append("$networkOperatorName]") //
+                .append("\nnetworkOperator[").append("$networkOperator]") //
+                .append("\nnetworkCountryIso[").append("$networkCountryIso]") //
+                .append("\nsimCountryIso[").append("$simCountryIso]") //
+                .append("\nsimOperator[").append("$simOperator]") //
+                .append("\nsimOperatorName[").append("$simOperatorName]") //
+                .append("\nsimSerialNumber[").append("$simSerialNumber]") //
+                .append("\nsubscriberId[").append("$subscriberId]") //
+                .append("\nneighboringCellInfo[").append(neighboringCellInfo.toString() + "]") //
+                .append("\nphoneType[").append("$phoneType]") //
+                .append("\nnetworkType[").append("$networkType]") //
+            return sb.toString()
+        }
     }
 }

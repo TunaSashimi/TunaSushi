@@ -1,11 +1,14 @@
-package com.tunasushi.view;
+package com.tunasushi.view
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.util.AttributeSet
+import kotlin.jvm.JvmOverloads
+import com.tunasushi.view.TView
+import android.view.MotionEvent
+import com.tunasushi.view.TTrack
 
 /**
  * @author TunaSashimi
@@ -13,75 +16,60 @@ import android.view.MotionEvent;
  * @Copyright 2015 TunaSashimi. All rights reserved.
  * @Description
  */
-public class TTrack extends TView {
-    private float trackX, trackY;
-    private float trackDistanceX, trackDistanceY;
-    private float trackIntervalX, trackIntervalY;
-
-    private int trackIntervalTime;
-    private boolean trackisIntervalTime;
-
-    private Paint trackPaint;
-
-    public TTrack(Context context) {
-        this(context, null);
-    }
-
-    public TTrack(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public TTrack(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
-        tag = TTrack.class.getSimpleName();
-
-        trackPaint = new Paint();
-        trackPaint.setColor(Color.CYAN);
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                trackDistanceX = event.getX() - trackX;
-                trackDistanceY = event.getY() - trackY;
-
-                trackIntervalX = trackDistanceX / 5;
-                trackIntervalY = trackDistanceY / 5;
-
-                trackIntervalTime = 5;
-                trackisIntervalTime = true;
-
-                invalidate();
-
-                break;
-            case MotionEvent.ACTION_MOVE:
-            case MotionEvent.ACTION_UP:
+class TTrack @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : TView(context, attrs, defStyle) {
+    private var trackX = 0f
+    private var trackY = 0f
+    private var trackDistanceX = 0f
+    private var trackDistanceY = 0f
+    private var trackIntervalX = 0f
+    private var trackIntervalY = 0f
+    private var trackIntervalTime = 0
+    private var trackisIntervalTime = false
+    private val trackPaint: Paint
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                trackDistanceX = event.x - trackX
+                trackDistanceY = event.y - trackY
+                trackIntervalX = trackDistanceX / 5
+                trackIntervalY = trackDistanceY / 5
+                trackIntervalTime = 5
+                trackisIntervalTime = true
+                invalidate()
+            }
+            MotionEvent.ACTION_MOVE, MotionEvent.ACTION_UP -> {
                 if (trackisIntervalTime) {
-                    return true;
+                    return true
                 }
-                trackX = event.getX();
-                trackY = event.getY();
-                invalidate();
-                break;
-            default:
-                break;
+                trackX = event.x
+                trackY = event.y
+                invalidate()
+            }
+            else -> {
+            }
         }
-        return true;
+        return true
     }
 
-    @Override
-    public void onDraw(Canvas canvas) {
-        canvas.drawCircle(trackX, trackY, 80, trackPaint);
-
+    public override fun onDraw(canvas: Canvas) {
+        canvas.drawCircle(trackX, trackY, 80f, trackPaint)
         if (trackIntervalTime > 0) {
-            trackIntervalTime--;
-            trackX = trackX + trackIntervalX;
-            trackY = trackY + trackIntervalY;
-            postInvalidateDelayed(20);
+            trackIntervalTime--
+            trackX = trackX + trackIntervalX
+            trackY = trackY + trackIntervalY
+            postInvalidateDelayed(20)
         } else {
-            trackisIntervalTime = false;
+            trackisIntervalTime = false
         }
+    }
+
+    init {
+        tag = TTrack::class.java.simpleName
+        trackPaint = Paint()
+        trackPaint.color = Color.CYAN
     }
 }
