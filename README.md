@@ -38,7 +38,7 @@ For example, The content attribute in TView in the TunaSushi library is string, 
 
 When the types of attributes with the same name are inconsistent, you can configure a single content in the project, and the attribute is the union of the two.such as below.
 
-```java
+```xml
 	<attr name="content" format="reference|string" />
 ```
 
