@@ -6,7 +6,7 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name='Tunasushi'
+rootProject.name='TunaSushi'
 include ':app', ':tunasushi'
 
 
