@@ -15,6 +15,7 @@ import java.util.ArrayList
  * @Copyright 2020 TunaSashimi. All rights reserved.
  * @Description
  */
+
 class EntryActivity : Activity() {
     private val cla = arrayOf<Class<*>>(
         TViewActivity::class.java,
